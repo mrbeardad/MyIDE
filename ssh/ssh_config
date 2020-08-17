@@ -1,0 +1,12 @@
+Host github.com
+    HostName github.com
+    Port 22
+    User git
+    IdentitiesOnly yes
+    IdentityFile ~/.ssh/id_rsa
+Host gitee.com
+    HostName gitee.com
+    Port 22
+    User git
+    IdentitiesOnly yes
+    IdentityFile ~/.ssh/id_ecdsa

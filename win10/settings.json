@@ -1,0 +1,165 @@
+// Official Documents: https://aka.ms/terminal-documentation
+{
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+
+    //"disabledProfileSources": "Windows.Terminal.Azure"
+
+    //"wordDelimiters": "/\()\"'-:,.;<>~!@#$%^&*|+=[]{}~?│",
+
+    "theme": "system",
+
+    "alwaysShowTabs": false,
+
+    "tabWidthMode": "equal",
+
+    "confirmCloseAllTabs": true,
+
+    "startOnUserLogin": false,
+
+    "launchMode": "default",
+
+    "initialPosition": ",",
+
+    "alwaysOnTop": false,
+
+    "showTabsInTitlebar": true,
+
+    "showTerminalTitleInTitlebar": true,
+
+    "copyOnSelect": true,
+
+    "copyFormatting": false,
+
+    "largePasteWarning": true,
+
+    "multiLinePasteWarning": true,
+
+    "rowsToScroll": "system",
+
+    "snapToGridOnResize": true,
+
+    "defaultProfile": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+
+    "profiles":
+    {
+        "defaults":
+        {
+            "fontFace": "SauceCodePro Nerd Font Mono",
+            //"fontWeight": "bold",
+            "fontSize": 10,
+            "antialiasingMode": "grayscale",
+            "padding": "0, 0, 0, 0",
+            "cursorShape": "filledBox",
+            //"cursorColor":"#00dfd7",
+            "useAcrylic": true,
+            "acrylicOpacity": 0.3,
+            "scrollbarState": "hidden",
+            "colorScheme": "AdventureTime"
+            //"selectionBackground": "#efefef",
+            //"backgroundImage": "%LOCALAPPDATA%\\Packages\\Microsoft.WindowsTerminal_8wekyb3d8bbwe\\RoamingState\\DNA.png",
+            //"backgroundImageStretchMode": "",
+            //"backgroundImageAlignment": "",
+            //"backgroundImageOpacity": 0.6
+        },
+        "list":
+        [
+            {
+                "name": "Windows PowerShell",
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "commandline": "powershell.exe",
+                "hidden": false
+            },
+            {
+                "name": "Azure Cloud Shell",
+                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+                "source": "Windows.Terminal.Azure",
+                "hidden": false
+            },
+            {
+                "name": "熊海成爸爸的Ubuntu-20.04",
+                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+                "source": "Windows.Terminal.Wsl",
+                "commandline": "wsl ~ -- terminal-tmux.sh WinTerm",
+                "icon": "%LOCALAPPDATA%\\Packages\\Microsoft.WindowsTerminal_8wekyb3d8bbwe\\RoamingState\\cof_orange_hex.png",
+                "hidden": false,
+            }
+        ]
+    },
+
+   //https://github.com/mbadolato/iTerm2-Color-Schemes
+   "schemes":
+   [
+        {
+            "name": "BlueBerryPie",
+            "black": "#0a4c62",
+            "red": "#99246e",
+            "green": "#5cb1b3",
+            "yellow": "#eab9a8",
+            "blue": "#90a5bd",
+            "purple": "#9d54a7",
+            "cyan": "#7e83cc",
+            "white": "#f0e8d6",
+            "brightBlack": "#201637",
+            "brightRed": "#c87272",
+            "brightGreen": "#0a6c7e",
+            "brightYellow": "#7a3188",
+            "brightBlue": "#39173d",
+            "brightPurple": "#bc94b7",
+            "brightCyan": "#5e6071",
+            "brightWhite": "#0a6c7e",
+            "background": "#1c0c28",
+            "foreground": "#babab9"
+        },
+        {
+            "name": "AdventureTime",
+            "black": "#050404",
+            "red": "#bd0013",
+            "green": "#4ab118",
+            "yellow": "#e7741e",
+            "blue": "#0f4ac6",
+            "purple": "#665993",
+            "cyan": "#70a598",
+            "white": "#f8dcc0",
+            "brightBlack": "#4e7cbf",
+            "brightRed": "#fc5f5a",
+            "brightGreen": "#9eff6e",
+            "brightYellow": "#efc11a",
+            "brightBlue": "#1997c6",
+            "brightPurple": "#9b5953",
+            "brightCyan": "#c8faf4",
+            "brightWhite": "#f6f5fb",
+            "background": "#1f1d45",
+            "foreground": "#f8dcc0"
+        },
+        {
+            "name": "Atom",
+            "black": "#000000",
+            "red": "#fd5ff1",
+            "green": "#87c38a",
+            "yellow": "#ffd7b1",
+            "blue": "#85befd",
+            "purple": "#b9b6fc",
+            "cyan": "#85befd",
+            "white": "#e0e0e0",
+            "brightBlack": "#000000",
+            "brightRed": "#fd5ff1",
+            "brightGreen": "#94fa36",
+            "brightYellow": "#f5ffa8",
+            "brightBlue": "#96cbfe",
+            "brightPurple": "#b9b6fc",
+            "brightCyan": "#85befd",
+            "brightWhite": "#ffffff",
+            "background": "#161719",
+            "foreground": "#c5c8c6"
+        }
+    ],
+
+    "keybindings":
+    [
+        { "command": {"action": "copy", "singleLine": false }, "keys": "ctrl+shift+c" },
+        { "command": "paste", "keys": "ctrl+shift+v" },
+        { "command": "find", "keys": "ctrl+shift+f" },
+        { "command": "unbound", "keys": "ctrl+shift+down"},
+        { "command": "unbound", "keys": "ctrl+shift+up"}
+    ]
+}
