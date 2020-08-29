@@ -1,16 +1,18 @@
-// Official Documents: https://aka.ms/terminal-documentation
+// Official Documents: https://docs.microsoft.com/en-us/windows/terminal/customize-settings
 {
     "$schema": "https://aka.ms/terminal-profiles-schema",
 
-    //"disabledProfileSources": "Windows.Terminal.Azure"
+    "defaultProfile": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
 
-    //"wordDelimiters": "/\()\"'-:,.;<>~!@#$%^&*|+=[]{}~?│",
+    "disabledProfileSources": [],
 
     "theme": "system",
 
+    "useTabSwitcher": false,
+
     "alwaysShowTabs": false,
 
-    "tabWidthMode": "equal",
+    "tabWidthMode": "compact",
 
     "confirmCloseAllTabs": true,
 
@@ -19,6 +21,10 @@
     "launchMode": "default",
 
     "initialPosition": ",",
+
+    "initialCols": 120,
+
+    "initialRows": 30,
 
     "alwaysOnTop": false,
 
@@ -30,6 +36,8 @@
 
     "copyFormatting": false,
 
+    "wordDelimiters": " /\\()\"'-.,:;<>~!@#$%^&*|+=[]{}~?\u2502",
+
     "largePasteWarning": true,
 
     "multiLinePasteWarning": true,
@@ -38,27 +46,33 @@
 
     "snapToGridOnResize": true,
 
-    "defaultProfile": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+    "experimental.rendering.forceFullRepaint": false,
+
+    "experimental.rendering.software": false,
 
     "profiles":
     {
         "defaults":
         {
             "fontFace": "SauceCodePro Nerd Font Mono",
-            //"fontWeight": "bold",
+            "fontWeight": "normal",
             "fontSize": 10,
-            "antialiasingMode": "grayscale",
             "padding": "0, 0, 0, 0",
+            "antialiasingMode": "grayscale",
             "cursorShape": "filledBox",
-            //"cursorColor":"#00dfd7",
+            "altGrAliasing": true,
+            "colorScheme": "Atom",
             "useAcrylic": true,
             "acrylicOpacity": 0.3,
+            "selectionBackground": "#00dfd7",
             "scrollbarState": "hidden",
-            "colorScheme": "AdventureTime"
-            //"selectionBackground": "#efefef",
+            "snapOnInput": true,
+            "historySize": 9001,
+            "closeOnExit": "graceful",
+            "experimental.retroTerminalEffect": false
             //"backgroundImage": "%LOCALAPPDATA%\\Packages\\Microsoft.WindowsTerminal_8wekyb3d8bbwe\\RoamingState\\DNA.png",
-            //"backgroundImageStretchMode": "",
-            //"backgroundImageAlignment": "",
+            //"backgroundImageStretchMode": "uniformToFill",
+            //"backgroundImageAlignment": "center",
             //"backgroundImageOpacity": 0.6
         },
         "list":
@@ -148,7 +162,7 @@
             "brightBlue": "#96cbfe",
             "brightPurple": "#b9b6fc",
             "brightCyan": "#85befd",
-            "brightWhite": "#ffffff",
+            "brightWhite": "#e0e0e0",
             "background": "#161719",
             "foreground": "#c5c8c6"
         }
@@ -159,7 +173,13 @@
         { "command": {"action": "copy", "singleLine": false }, "keys": "ctrl+shift+c" },
         { "command": "paste", "keys": "ctrl+shift+v" },
         { "command": "find", "keys": "ctrl+shift+f" },
+        { "command": "openNewTabDropdown", "keys": "ctrl+shift+space" },
+        { "command": "openSettings", "keys": "ctrl+," },
+        { "command": { "action": "openSettings", "target": "defaultsFile" }, "keys": "ctrl+alt+," },
+        { "command": "toggleFullscreen", "keys": "alt+enter" },
+        { "command": "toggleFullscreen", "keys": "f11" },
         { "command": "unbound", "keys": "ctrl+shift+down"},
-        { "command": "unbound", "keys": "ctrl+shift+up"}
+        { "command": "unbound", "keys": "ctrl+shift+up"},
+        { "command": "toggleFocusMode", "keys": "ctrl+t"}
     ]
 }

@@ -152,7 +152,7 @@
             "after": ["\\\\", "\\\\", "2", "s"]
         },
         {
-            "before": ["<space>", "l", "c"],
+            "before": ["<space>", "c", "l"],
             "after": ["g", "c", "c"]
         },
         {
@@ -175,5 +175,13 @@
         }
     ],
     "vim.easymotionMarkerForegroundColorOneChar": "#ff0000",
-    "vim.easymotionMarkerForegroundColorTwoChar": "#ff0000"
+    "vim.easymotionMarkerForegroundColorTwoChar": "#ff0000",
+    "launch": {
+    
+        "configurations": [],
+        "compounds": []
+    },
+    "editor.renderLineHighlightOnlyWhenFocus": true,
+    "vim.highlightedyank.color": "rgb(250, 215, 0)",
+    "vim.searchHighlightTextColor": "rgb(250, 215, 0)"
 }
