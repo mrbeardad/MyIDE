@@ -89,7 +89,7 @@ prompt_end() {
 # Context: user@hostname (who am I and where am I)
 prompt_context() {
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-    prompt_segment black default "%(!.%{%F{yellow}%}.)$FG[104]%n $FG[111]%{$fg_bold[red]%}%D{%H}%{$fg_bold[cyan]%}:%{$fg_bold[green]%}%D{%M}%{$fg_bold[blue]%}:%{$fg_bold[yellow]%}%D{%S}"
+    prompt_segment black default "%(!.%{%F{yellow}%}.)$FG[104]%n $FG[111] %{$fg_bold[red]%}%D{%H}%{$fg_bold[cyan]%}:%{$fg_bold[green]%}%D{%M}%{$fg_bold[blue]%}:%{$fg_bold[yellow]%}%D{%S}"
   fi
 }
 

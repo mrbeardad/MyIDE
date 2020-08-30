@@ -44,7 +44,7 @@ sudo apt upgrade
 # download tools
 sudo apt install \
     neovim python3-pynvim xsel vim cmake ctags global silversearcher-ag ripgrep \
-    npm php gcc clang clang-tidy cppcheck shellcheck 
+    npm php gcc clang clang-tidy cppcheck shellcheck zip
 sudo apt install gdb cgdb \
     libboost-dev mariadb-client mariadb-server libmysql++-dev mycli \
     zsh zsh-syntax-highlighting zsh-autosuggestions autojump \
@@ -68,6 +68,11 @@ cp -v ~/.SpaceVim/mode/init.toml ~/.SpaceVim.d
 makedir ~/.local/bin
 g++ -O3 -std=c++17 -o ~/.local/bin/quickrun_time ~/.SpaceVim/custom/quickrun_time.cpp
 cp -v ~/.SpaceVim/custom/vim-quickrun.sh ~/.local/bin
+
+curl -sLo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
+unzip -p /tmp/win32yank.zip win32yank.exe > /tmp/win32yank.exe
+chmod +x /tmp/win32yank.exe
+mv /tmp/win32yank.exe ~/.local/bin
 
 # zsh config
 echo '=========> Installing configuration for zsh ...'

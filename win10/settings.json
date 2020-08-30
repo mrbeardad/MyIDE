@@ -30,7 +30,7 @@
 
     "showTabsInTitlebar": true,
 
-    "showTerminalTitleInTitlebar": true,
+    "showTerminalTitleInTitlebar": false,
 
     "copyOnSelect": true,
 
@@ -54,9 +54,9 @@
     {
         "defaults":
         {
-            "fontFace": "SauceCodePro Nerd Font Mono",
+            "fontFace": "SauceCodePro NF",
             "fontWeight": "normal",
-            "fontSize": 10,
+            "fontSize": 9,
             "padding": "0, 0, 0, 0",
             "antialiasingMode": "grayscale",
             "cursorShape": "filledBox",
@@ -180,6 +180,6 @@
         { "command": "toggleFullscreen", "keys": "f11" },
         { "command": "unbound", "keys": "ctrl+shift+down"},
         { "command": "unbound", "keys": "ctrl+shift+up"},
-        { "command": "toggleFocusMode", "keys": "ctrl+t"}
+        { "command": "toggleFocusMode", "keys": "Alt+t"}
     ]
 }
