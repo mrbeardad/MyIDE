@@ -68,7 +68,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(git cp extract autojump)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git cp history extract autojump tmux vi-mode)
+plugins=(git cp history extract autojump tmux vi-mode docker)
 
 
 # User configuration
@@ -119,12 +119,13 @@ alias pstree='pstree -Uup'
 alias free='free -wh'
 alias vmstat='vmstat -w'
 alias ip='ip -c'
-alias expactf='expac --timefmt="%Y-%m-%d %T" "%l\t%n" | sort'
 alias cgdb='cgdb -- -q'
 alias gdb='gdb --tui'
 alias dif='diff -Naur'
 alias ra='ranger'
 alias apt='sudo apt'
+alias expactf='expac --timefmt="%Y-%m-%d %T" "%l\t%n" | sort'
+
 function f() {
     if [[ -n "$1" ]] ;then
         cd $1
@@ -155,8 +156,6 @@ alias gpt='git push --tags'
 alias gfp='git format-patch'
 alias gmc='git merge --continue'
 
-function egdb() { emacs --eval "(gdb \"gdb --annotate=3 -i=mi $*\")" &;}
-
 function man() {
         LESS_TERMCAP_md=$'\e[01;34m' \
         LESS_TERMCAP_me=$'\e[0m' \
@@ -168,19 +167,21 @@ function man() {
 }
 
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#808080"
 
 MODE_INDICATOR="%{$fg_bold[red]%}<%{$fg[yellow]%}<%{$fg[green]%}<%{$fg[cyan]%}<%{$fg[blue]%}<%{$reset_color%}"
 bindkey -M vicmd '^a' beginning-of-line
 bindkey -M vicmd '^e' end-of-line
-bindkey -M vicmd "^[[1;5C" forward-word
-bindkey -M vicmd "^[[1;5D" backward-word
-bindkey "^[[1;5C" forward-word
-bindkey "^[[1;5D" backward-word
-bindkey '^U' kill-whole-line
+bindkey -M vicmd "^[[1;2C" forward-word
+bindkey -M vicmd "^[[1;2D" backward-word
+bindkey -r "^[[1;5C"
+bindkey -r "^[[1;5D"
+bindkey "^[[1;2C" forward-word
+bindkey "^[[1;2D" backward-word
+bindkey '^U' backward-kill-line
 bindkey '^K' kill-line
 bindkey '^Y' yank
 bindkey '^[OA' up-line-or-beginning-search

@@ -42,15 +42,13 @@ sudo apt update
 sudo apt upgrade
 
 # download tools
-sudo apt install \
-    neovim python3-pynvim xsel vim cmake ctags global silversearcher-ag ripgrep \
-    npm php gcc clang clang-tidy cppcheck shellcheck zip
-sudo apt install gdb cgdb \
-    libboost-dev mariadb-client mariadb-server libmysql++-dev mycli \
-    zsh zsh-syntax-highlighting zsh-autosuggestions autojump \
-    fzf ranger ncdu htop iotop dstat cloc screenfetch figlet cmatrix python3-pip 
+sudo apt install python3-pynvim neovim vim cmake ctags global silversearcher-ag ripgrep
+sudo apt install npm php shellcheck zip
+sudo apt install gcc clang clang-tidy cppcheck gdb cgdb libboost-dev mariadb-client mariadb-server libmysql++-dev mycli
+sudo apt install tmux zsh zsh-syntax-highlighting zsh-autosuggestions autojump
+sudo apt install thefuck fzf ranger ncdu htop iotop dstat cloc screenfetch figlet cmatrix python3-pip 
 pip3 config set global.index-url https://mirrors.aliyun.com/pypi/simple
-pip3 install cppman gdbgui thefuck
+pip3 install cppman gdbgui
 
 # vim config
 echo '=========> Installing configuration for vim/nvim ...'
@@ -99,12 +97,12 @@ cp .gitconfig ~
 sudo cp -v ssh/sshd_config /etc/ssh/sshd_config
 
 # cli config
-cp -v bin/{say,see} ~/.local/bin
 sudo cp -v bin/terminal-tmux.sh /usr/local/bin
 backup ~/.cheat
 dotfiles_dir=$PWD
 export dotfiles_dir
 git clone https://gitee.com/mrbeardad/learning-notes-and-cheat-sheets ~/.cheat
+g++ -O3 -std=c++17 -o ~/.local/bin/see ~/.cheat/see.cpp 
 makedir ~/.cache/cppman/cplusplus.com
 (
     cd /tmp || exit 1
@@ -126,4 +124,5 @@ for inUserDir in $(find /mnt/c/Users -maxdepth 1 -not -iregex '/mnt/c/Users/\(al
     fi
 done
 ln -vs "$Dir" ~/WindowsHome
-#ln -vs "$Dir/AppData/Roaming/alacritty/alacritty.yml" ~/.config/alacritty.yml
+ln -vs "$Dir/Documents" ~/Documents
+ln -vs "$Dir/Downloads" ~/Downloads

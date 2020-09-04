@@ -22,25 +22,21 @@
 
 * 登录Windows、edge、chrome和chrome各插件
 
-## 输入法
-* RIME小狼毫：[下载软件](https://rime.im/download/)，
-[下载配置与词库](https://gitee.com/mrbeardad/Windows10/blob/master/rime/)
-并安装到`C:\Users\mrbea\AppData\Roaming\Rime`
+## 应用软件
+* [Bandizip 压缩包工具](https://www.bandizip.com/)
 
-## 桌面软件
+* [RIME输入法](https://rime.im/download/)，
+[下载配置与词库](https://gitee.com/mrbeardad/rime-dict)并安装到`C:\Users\mrbea\AppData\Roaming\Rime`
+
 * [TIM 通讯](https://tim.qq.com)
 
 * [百度网盘](https://pan.baidu.com/downloads)
 
-* [Listen1 音乐](https://lanzous.com/b05g8wl9c)：密码`4srb`，[或](https://www.zhyong.cn/posts/64cd/)
+* [Listen1 音乐](https://www.zhyong.cn/posts/64cd/)
 
 * [万彩办公大师](http://www.wofficebox.com/)
 
 * [CHFS 文件共享服务器](http://iscute.cn/chfs)
-
-* [GIMP 图片处理器](https://pc.qq.com/detail/10/detail_750.html)
-
-* [Bandizip 压缩包工具](https://www.bandizip.com/)
 
 * [Dism++ 系统清理与优化](https://www.chuyu.me/zh-Hans/)
 
@@ -50,16 +46,15 @@
 
 * [PowerToys 工具集](https://github.com/microsoft/PowerToys/releases)
 
-* [TrafficMonotor 资源检测器](https://pan.baidu.com/share/init?surl=5PMt7s-ASpyDwtS__4cUhg)：密码`ou0m`
-，[或](https://github.com/zhongyang219/TrafficMonitor)
-
 * [TranslucentTB 任务栏美化](https://www.microsoft.com/zh-cn/p/translucenttb/9pf4kz2vn4w9?activetab=pivot:overviewtab)
+
+* [TrafficMonotor 资源检测器](https://github.com/zhongyang219/TrafficMonitor)
 
 * [Rainmeter 桌面美化](https://www.rainmeter.net/)与[Elegance-2皮肤](https://visualskins.com/skin/elegance-2)
 
 * [noMeiryoUI 字体设置](https://github.com/Tatsu-syo/noMeiryoUI/releases)
 
-* [MacType字体渲染](https://github.com/snowie2000/mactype/releases)
+* [MacType 字体渲染](https://github.com/snowie2000/mactype/releases)
 
 ## 个性化设置
 * 夜间暖色模式
@@ -98,12 +93,11 @@
 
 * 安装字体
     > Settings -> Personalization -> Fonts  
-    > [思源黑体](https://mirrors.cloud.tencent.com/archlinuxcn/x86_64/adobe-source-han-mono-cn-fonts-1.002-6-any.pkg.tar.zst)、
     > [Source Code Pro Nerd字体](https://mirrors.cloud.tencent.com/archlinuxcn/x86_64/nerd-fonts-source-code-pro-2.1.0-4-any.pkg.tar.zst)、
     > [Space Mono Nerd字体](https://mirrors.cloud.tencent.com/archlinuxcn/x86_64/nerd-fonts-space-mono-2.1.0-4-any.pkg.tar.zst)、
     > [IBM Plex Mono Nerd字体](https://mirrors.cloud.tencent.com/archlinuxcn/x86_64/nerd-fonts-ibm-plex-mono-2.1.0-4-any.pkg.tar.zst)、
-    > [NerdCode字体](https://gitee.com/mrbeardad/DotFiles/raw/master/fonts/NerdCode.tar.xz)  
-    > 注意Windows下的应用一般无法选择style，故只安装好看的style而不全装
+    > 注意：Windows下的应用一般无法选择style，故只安装好看的style而不全装  
+    > 注意：Windows Terminal字体不要使用Mono版本，会导致图标字体太小
 
 * 设置StartMenu
     > Settings -> Personalization -> Start -> Choose which folders appear on Start
@@ -128,7 +122,8 @@
     > Settings -> Time & Language -> Region
 
 * 关闭或卸载不必要的应用
-    > Settings -> Apps -> Apps & features
+    > Settings -> Apps -> Apps & features  
+    > 可以用Geek卸载
 
 * 设置打开文件的默认应用
     > Settings -> Apps -> Default apps
@@ -140,10 +135,10 @@
     > Settings -> Apps -> Video playback
 
 ## 开发工具：
-* WindowsTerminal终端，[下载](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)
-    [配置](https://github.com/mrbeardad/Windows10/blob/master/win10/settings.json)
+* WindowsTerminal终端，[下载](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)，
+[配置](https://github.com/mrbeardad/Windows10/blob/master/win10/settings.json)
 
-* WSL2，[下载](https://www.microsoft.com/zh-cn/p/ubuntu-2004-lts/9n6svws3rx71?activetab=pivot:overviewtab)
+* WSL，[下载](https://www.microsoft.com/zh-cn/p/ubuntu-2004-lts/9n6svws3rx71?activetab=pivot:overviewtab)
     1. 管理员权限运行`wt`：
         * `dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart`
         * `dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart`
@@ -153,7 +148,7 @@
         1. 下载[升级包](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
         2. 执行`wsl --set-version <Distro> 2`
 
-* VSCode编辑器，[下载](https://code.visualstudio.com/download)
+* VSCode编辑器，[下载](https://code.visualstudio.com/download)，[配置](vscode/settings.json)
     * Remote-WSL
     * Vim
     * C/C++
@@ -165,6 +160,8 @@
     > ![path](PATH.png)  
     > ![lib](LIB.png)  
     > ![include](INCLUDE.png)
+
+* Docker，[下载](https://links.jianshu.com/go?to=https%3A%2F%2Fwww.docker.com%2Fproducts%2Fdocker-desktop)
 
 > * [mingw编译套件下载](https://pan.baidu.com/s/17JPRFzeZEhqxceWUTXTAog)，密码`c8uc`  
 >
@@ -195,7 +192,7 @@
 | <kbd>Win</kbd>+<kbd>I</kbd>                  | 设置中心          |
 | <kbd>Win</kbd>+<kbd>A</kbd>                  | 通知与操作中心    |
 | <kbd>Win</kbd>+<kbd>G</kbd>                  | 游戏与多媒体中心  |
-| <kbd>Win</kbd>+<kbd>;</kbd>                  | emoji面板         |
+| <kbd>Win</kbd>+<kbd>.</kbd>                  | emoji面板         |
 | <kbd>Win</kbd>+<kbd>V</kbd>                  | 粘贴板            |
 | <kbd>Win</kbd>+<kbd>+</kbd>                  | 放大镜            |
 | <kbd>Win</kbd>+<kbd>shift</kbd>+<kbd>c</kbd> | 捕色器            |

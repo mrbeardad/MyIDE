@@ -32,7 +32,7 @@
         "editor.suggest.insertMode": "replace"
     },
     "editor.fontSize": 12,
-    "editor.fontFamily": "SauceCodePro Nerd Font Mono",
+    "editor.fontFamily": "SauceCodePro NF",
     "editor.renderWhitespace": "all",
     "editor.cursorSmoothCaretAnimation": true,
     "editor.lineNumbers": "relative",

@@ -686,12 +686,10 @@ end
 
 define s
 step
-i locals
 end
 
 define n
 next
-i locals
 end
 
 define v
