@@ -551,13 +551,14 @@
 ```
 </details>
 
-* 下载[VS](https://visualstudio.microsoft.com/downloads/#other)
+* 下载[VS](https://visualstudio.microsoft.com/downloads/#other)并设置工具链的环境变量
     > 控制面板》系统与安全》系统》高级系统设置》环境变量》PATH、LIB、INCLUDE  
-    > ![path](PATH.png)  
-    > ![lib](LIB.png)  
-    > ![include](INCLUDE.png)
+    * PATH： ![path](PATH.png)  
+    * LIB： ![lib](LIB.png)  
+    * INCLUDE： ![include](INCLUDE.png)
 
-* 下载[Docker下载](https://links.jianshu.com/go?to=https%3A%2F%2Fwww.docker.com%2Fproducts%2Fdocker-desktop)
+* 下载[Docker](https://links.jianshu.com/go?to=https%3A%2F%2Fwww.docker.com%2Fproducts%2Fdocker-desktop)
+并更换docker源为`http://hub-mirror.c.163.com`，然后设置**WSL集成**
 
 > * [mingw编译套件下载](https://pan.baidu.com/s/17JPRFzeZEhqxceWUTXTAog)，密码`c8uc`  
 >
@@ -565,6 +566,13 @@
 >     [配置](https://github.com/mrbeardad/Windows10/blob/master/alacritty/alacritty.yml)
 >     安装到`C:\Users\mrbea\AppData\Roaming\alacritty\alacritty.yml`
 
+## WSL
+启动WSL，然后安装Linux环境配置
+```sh
+git clone https://gitee.com/mrbeardad/Windows10/ ~/.Windows10
+cd ~/.Windows10
+./init.sh
+```
 
 # 快捷键
 
