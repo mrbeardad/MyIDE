@@ -553,9 +553,15 @@
 
 * 下载[VS](https://visualstudio.microsoft.com/downloads/#other)并设置工具链的环境变量
     > 控制面板》系统与安全》系统》高级系统设置》环境变量》PATH、LIB、INCLUDE  
-    * PATH： ![path](PATH.png)  
-    * LIB： ![lib](LIB.png)  
-    * INCLUDE： ![include](INCLUDE.png)
+    * PATH：
+        > `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\bin\Hostx64\x64`
+    * LIB：   
+        > `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\lib\x64`  
+        > `C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\ucrt\x64`  
+        > `C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\um\x64`
+    * INCLUDE：   
+        > `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include`  
+        > `C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt`
 
 * 下载[Docker](https://links.jianshu.com/go?to=https%3A%2F%2Fwww.docker.com%2Fproducts%2Fdocker-desktop)
 并更换docker源为`http://hub-mirror.c.163.com`，然后设置**WSL集成**
