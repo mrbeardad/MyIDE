@@ -32,7 +32,7 @@
         "editor.suggest.insertMode": "replace"
     },
     "editor.fontSize": 12,
-    "editor.fontFamily": "SauceCodePro NF",
+    "editor.fontFamily": "SauceCodePro Nerd Font",
     "editor.renderWhitespace": "all",
     "editor.cursorSmoothCaretAnimation": true,
     "editor.lineNumbers": "relative",
@@ -89,7 +89,6 @@
     },
     "C_Cpp.inactiveRegionOpacity": null,
     "code-runner.clearPreviousOutput": true,
-    "code-runner.runInTerminal": false,
     "vim.easymotion": true,
     "vim.statusBarColorControl": true,
     "vim.statusBarColors.normal": ["#8FBCBB", "#434C5E"],
@@ -177,7 +176,7 @@
     "vim.easymotionMarkerForegroundColorOneChar": "#ff0000",
     "vim.easymotionMarkerForegroundColorTwoChar": "#ff0000",
     "launch": {
-    
+
         "configurations": [],
         "compounds": []
     },

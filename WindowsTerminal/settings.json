@@ -2,7 +2,7 @@
 {
     "$schema": "https://aka.ms/terminal-profiles-schema",
 
-    "defaultProfile": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+    "defaultProfile": "{96be24fd-152c-5812-90bb-b4bd046f9785}",
 
     "disabledProfileSources": [],
 
@@ -54,7 +54,7 @@
     {
         "defaults":
         {
-            "fontFace": "SauceCodePro NF",
+            "fontFace": "SauceCodePro Nerd Font",
             "fontWeight": "normal",
             "fontSize": 9,
             "padding": "0, 0, 0, 0",
@@ -93,9 +93,17 @@
                 "name": "熊海成爸爸的Ubuntu-20.04",
                 "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
                 "source": "Windows.Terminal.Wsl",
-                "commandline": "wsl ~ -- terminal-tmux.sh WinTerm",
-                "icon": "%LOCALAPPDATA%\\Packages\\Microsoft.WindowsTerminal_8wekyb3d8bbwe\\RoamingState\\cof_orange_hex.png",
-                "hidden": false,
+                "commandline": "wsl ~ -d Ubuntu-20.04",
+                "icon": "%USERPROFILE%\\OneDrive\\图片\\Saved Pictures\\ubuntu.png",
+                "hidden": false
+            },
+            {
+                "name": "熊海成爸爸的ArchLinux2",
+                "guid": "{96be24fd-152c-5812-90bb-b4bd046f9785}",
+                "source": "Windows.Terminal.Wsl",
+                "commandline": "wsl ~ -d Arch2 -- tmux -S /tmp/tmux-socket new-session -d -s ArchWSL2 ; tmux -S /tmp/tmux-socket attach -t ArchWSL2",
+                "icon": "%USERPROFILE%\\OneDrive\\图片\\Saved Pictures\\arch.webp",
+                "hidden": false
             }
         ]
     },

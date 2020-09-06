@@ -1760,3 +1760,472 @@ neovimç¼ƒ¶è¾ƒ±åƒ¹¨
 : 1595913269:0;gp gitee master
 : 1595913276:0;j do
 : 1595913310:0;cp ~/.zsh_history zsh/zsh_history
+: 1599311313:0;h
+: 1599311318:0;tree
+: 1599311345:0;rm hosts
+: 1599311370:0;rm *.png
+: 1599311407:0;git submodule update --init
+: 1599311439:0;nvim .gitmodules
+: 1599311456:0;git submodule update --init
+: 1599311465:0;gaa
+: 1599311477:0;see git\ sub
+: 1599311498:0;g submodule summary
+: 1599311507:0;g submodule status
+: 1599311523:0;g submodule update --init 
+: 1599311568:0;see ssh
+: 1599311589:0;ssh-keygen -t ecdsa -b 512 -C "gitee.com"
+: 1599311596:0;ssh-keygen -t ecdsa -b 521 -C "gitee.com"
+: 1599311615:0;nvim ~/.cheat/notes/devtool.md
+: 1599311674:0;ssh-keygen -t rsa -b 4096 -C "github.com"
+: 1599311694:0;cat ~/.ssh/ssh_config
+: 1599311713:0;cat ~/.ssh/id_ecdsa.pub
+: 1599311864:0;cat ~/.ssh/id_rsa.pub
+: 1599311914:0;tree
+: 1599311938:0;rm win10/cof_orange_hex.png
+: 1599312003:0;nvim check_update.sh
+: 1599312053:0;nvim README.md
+: 1599312206:0;yay -S xdg-utils
+: 1599312218:0;xdg-open .
+: 1599312342:0;yay -Ss www
+: 1599312347:0;yay -Ss www-b
+: 1599312352:0;yay -Ss browser
+: 1599312405:0;xdg-open .
+: 1599312417:0;yay -Ss links2
+: 1599312506:0;yay -Ss x11
+: 1599312735:0;nvim README.md
+: 1599345006:0;j 1
+: 1599345008:0;gst
+: 1599345024:0;yay -
+: 1599345049:0;yay -S networkmanager
+: 1599345095:0;sys enable --now NetworkManager
+: 1599345108:0;l
+: 1599345135:0;cp ~/Documents/ZFILES/init.sh ./install.sh
+: 1599345143:0;nvim install.sh
+: 1599345610:0;yay -S xorg-server
+: 1599345643:0;yay -Syu
+: 1599345670:0;nvim /etc/pacman.conf
+: 1599345688:0;ping baidu.com
+: 1599345703:0;nvim /etc/resolv.conf
+: 1599345748:0;ping www.baidu.com
+: 1599345756:0;ip a
+: 1599345777:0;sys disable --now NetworkManager
+: 1599345788:0;ip a
+: 1599345791:0;ping www.baidu.com
+: 1599345844:0;sys enable --now NetworkManager
+: 1599345855:0;nmtui
+: 1599345874:0;sys disable --now NetworkManager
+: 1599345880:0;ip a
+: 1599345949:0;fg
+: 1599346038:0;ip a
+: 1599346045:0;j 1
+: 1599346051:0;nvim install.sh
+: 1599346081:0;xdg-open . .
+: 1599346084:0;xdg-open . 
+: 1599346147:0;yay -S gnome 
+: 1599346610:0;yay -Syu
+: 1599346632:0;yay -S gnome 
+: 1599346710:0;xdg-open .
+: 1599346860:0;nvim install.sh
+: 1599346866:0;fg
+: 1599347028:0;xdg-open . 
+: 1599347454:0;l /mnt/wsl
+: 1599347537:0;mkdir ~/Public
+: 1599347546:0;mv ~/xdg-open ~/Public
+: 1599347563:0;nvim -d /bin/xdg-open ~/Public/xdg-open
+: 1599347669:0;~/Public/xdg-open .
+: 1599347693:0;l ~/Public/xdg-open 
+: 1599347706:0;chmod 755 ~/Public/xdg-open
+: 1599347709:0;~/Public/xdg-open .
+: 1599347811:0;explorer.exe .
+: 1599347830:0;explorer.exe .gitconfig
+: 1599347874:0;ip a
+: 1599347894:0;explorer.exe 172.21.59.54
+: 1599348068:0;xdg-open . 
+: 1599348659:0;yay -S wslu
+: 1599348742:0;xdg-open . 
+: 1599348757:0;yay -Ss wsl
+: 1599348843:0;/bin/wslview .
+: 1599348999:0;sudo ln -vs /bin/wslview /bin/www-browser
+: 1599349002:0;xdg-open . 
+: 1599349082:0;see systemctl
+: 1599349098:0;sys get-default
+: 1599349111:0;yay -R gnome
+: 1599349114:0;yay -Rg gnome
+: 1599349157:0;yay -R gnome-online-miners xdg-desktop-portal
+: 1599349183:0;yay -Rc gnome
+: 1599349200:0;sys get-default
+: 1599349228:0;sys list-dependencies graphical.target
+: 1599349281:0;yay -Ru
+: 1599349296:0;sys set-default multi-user.target
+: 1599349305:0;xdg-open . 
+: 1599349339:0;yay -Rcs gnome
+: 1599349475:0;l /bin/www-browser
+: 1599349740:0;cp ~/Downloads/GoogleChrome-Downloads/Breeze-Cursors-for-Windows-master.zip ~/Public
+: 1599349747:0;cd ~/Public
+: 1599349748:0;l
+: 1599349753:0;x Breeze-Cursors-for-Windows-master.zip
+: 1599349754:0;l
+: 1599349757:0;cd Breeze-Cursors-for-Windows-master
+: 1599349759:0;l
+: 1599349763:0;l Breeze-Cursors-for-Windows-master
+: 1599349771:0;l Breeze-Cursors-for-Windows-master/Final
+: 1599349828:0;mkdir Breeze-Cursor
+: 1599349838:0;cp Breeze-Cursors-for-Windows-master/Final/* Breeze-Cursor
+: 1599349842:0;l Breeze-Cursor
+: 1599349853:0;zip Breeze-Cursor.zip Breeze-Cursor
+: 1599349854:0;l
+: 1599349869:0;cp Breeze-Cursor.zip ~/.Windows10/win10
+: 1599349878:0;j 1
+: 1599349881:0;l win10
+: 1599349903:0;chmod 644 win10/settings.json win10/å½©èƒ©²åƒ¥ƒ©æƒ€ƒ§.zip
+: 1599349906:0;l win10
+: 1599349943:0;mkdir win10/cursor
+: 1599349966:0;gmv win10/å½©èƒ©²åƒ¥ƒ©æƒ€ƒ§.zip win10/cursor
+: 1599349976:0;mv win10/Breeze-Cursor.zip win10/cursor
+: 1599349979:0;gaa
+: 1599349981:0;tree
+: 1599350044:0;rm ssh/{config.note}
+: 1599350050:0;rm ssh/config.note 
+: 1599350091:0;mkdir cursor
+: 1599350112:0;gmv win10/cursor/{Breeze-Cursor.zip,å½©èƒ©²åƒ¥ƒ©æƒ€ƒ§.zip} cursor
+: 1599350119:0;l win10
+: 1599350123:0;rmdir win10/cursor
+: 1599350143:0;gmv win10/ WindowsTerminal
+: 1599350146:0;gst
+: 1599350149:0;gaa
+: 1599350158:0;l
+: 1599350162:0;tree
+: 1599350179:0;chmod 644 vscode/settings.json
+: 1599350181:0;gaa
+: 1599350201:0;nvim check_update.sh
+: 1599351055:0;gaa
+: 1599351056:0;gst
+: 1599351064:0;cd
+: 1599351097:0;g clone https://gitee.com/mrbeardad/Practices Practices
+: 1599351102:0;j 1
+: 1599351104:0;j sp
+: 1599351110:0;cd ~/.SpaceVim
+: 1599351113:0;gst
+: 1599351119:0;nvim init.vim
+: 1599351219:0;gst
+: 1599351222:0;j sp
+: 1599351223:0;gst
+: 1599351229:0;nvim init.vim
+: 1599351261:0;nvim README.md
+: 1599352457:0;win32yank.exe -o
+: 1599352463:0;echo fuck | win32yank.exe -i
+: 1599352465:0;win32yank.exe -o
+: 1599352504:0;win32yank.exe 
+: 1599352507:0;win32yank.exe --help
+: 1599352681:0;_ mv ~/.local/bin/win32yank.exe /usr/local/bin
+: 1599352713:0;nvim README.md
+: 1599354101:0;win32yank.exe -o
+: 1599354136:0;clippaste
+: 1599354166:0;clip.exe
+: 1599354173:0;echo 1 | clip.exe
+: 1599354197:0;clip.exe /?
+: 1599354200:0;clip.exe /\?
+: 1599354220:0;cliip.exe <<< fuck
+: 1599354227:0;clip.exe <<< fuck
+: 1599354231:0;fuck
+: 1599354292:0;nvim README.md
+: 1599354653:0;win32yank.exe -o --lf
+: 1599354658:0;gst
+: 1599354802:0;nvim README.md
+: 1599355168:0;win32yank.exe -o 
+: 1599355177:0;win32yank.exe -i
+: 1599355221:0;cp /usr/local/bin/win32yank.exe ~/WindowsHome/Documents/ZFILES
+: 1599355291:0;file /usr/local/bin/win32yank.exe
+: 1599355911:0;whereis win32yank
+: 1599355924:0;win32yank.exe -o
+: 1599356285:0;l /usr/local/bin
+: 1599356296:0;l /tmp
+: 1599356338:0;curl -o /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
+: 1599356386:0;unzip --help
+: 1599356417:0;_ unzip -p /tmp/win32yank.zip > /usr/local/bin/win32yank.exe
+: 1599356444:0;l /tmp/win32yank.zip
+: 1599356450:0;unzip /tmp/win32yank.zip
+: 1599356467:0;gst
+: 1599356478:0;file /tmp/win32yank.zip
+: 1599356485:0;cat /tmp/win32yank.zip
+: 1599356509:0;curl -o /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
+: 1599356521:0;_ unzip -p /tmp/win32yank.zip > /usr/local/bin/win32yank.exe
+: 1599356536:0;file /tmp/win32yank.zip
+: 1599356739:0;curl -h
+: 1599356779:0;curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
+: 1599357002:0;_ unzip -p /tmp/win32yank.zip > /usr/local/bin/win32yank.exe
+: 1599357013:0;l /usr/local/bin
+: 1599357028:0;win32yank.exe -o
+: 1599357053:0;echo | win32yank.exe -i
+: 1599357066:0;win32yank.exe -o --lf
+: 1599357078:0;nvim README.md
+: 1599357181:0;unzip -p /tmp/win32yank.zip win32yank.exe > /tmp/win32yank.exe
+: 1599357196:0;chmod +x /tmp/win32yank.exe
+: 1599357213:0;mv /tmp/win32yank.exe ~/.local/bin
+: 1599357221:0;_ rm /usr/local/bin/win32yank.exe
+: 1599357225:0;win32yank.exe -o 
+: 1599357247:0;nvim README.md
+: 1599357350:0;unzip --help
+: 1599357426:0;unzip -p /tmp/win32yank.zip 
+: 1599357441:0;unzip -p /tmp/win32yank.zip win32yank.exe 
+: 1599357449:0;unzip -p /tmp/win32yank.zip win32yank.exe | head
+: 1599357455:0;unzip -p /tmp/win32yank.zip  | head
+: 1599357546:0;unzip -p /tmp/win32yank.zip  | less
+: 1599357689:0;see ansi
+: 1599357697:0;nvim init.vim
+: 1599357739:0;tmux show-options
+: 1599358288:0;tksv
+: 1599358376:0;l /tmp
+: 1599358398:0;journalctl -r
+: 1599359130:0;yay -Qd
+: 1599359133:0;yay -Qgd
+: 1599359164:0;sys
+: 1599359246:0;yay -Sg gnome
+: 1599359304:0;yay -Qt
+: 1599359317:0;yay -Qe
+: 1599359509:0;nvim ~/.tmux.conf
+: 1599359634:0;fg
+: 1599359704:0;man tmux
+: 1599359723:0;echo $PATH
+: 1599359756:0;yay -S man
+: 1599359768:0;man tmux
+: 1599359898:0;j 
+: 1599359907:0;nvim install.sh
+: 1599360186:0;echo '\a'
+: 1599362863:0;tksv
+: 1599362908:0;tl
+: 1599362920:0;htop
+: 1599362982:0;nvim ~/.tmux.conf
+: 1599363355:0;htop
+: 1599363389:0;nvim ~/.tmux.conf
+: 1599363435:0;tl
+: 1599363442:0;tmux
+: 1599363537:0;tl
+: 1599363568:0;j 1
+: 1599363595:0;nvim ~/.local/bin/vim-quickrun.sh
+: 1599363610:0;nvim bin/terminal-tmux.sh
+: 1599363780:0;cp bin/terminal-tmux.sh /usr/local/bin
+: 1599363786:0;_ cp bin/terminal-tmux.sh /usr/local/bin
+: 1599363792:0;gaa
+: 1599363802:0;nvim bin/terminal-tmux.sh
+: 1599363871:0;tl
+: 1599363874:0;j 1
+: 1599363882:0;nvim install.sh
+: 1599363966:0;awk 'BEGIN{\
+    s="/\\/\\/\\/\\/\\"; s=s s s s s s s s;\
+    for (colnum = 0; colnum<77; colnum++) {\
+        r = 255-(colnum*255/76);\
+        g = (colnum*510/76);\
+        b = (colnum*255/76);\
+        if (g>255) g = 510-g;\
+        printf "\033[48;2;%d;%d;%dm", r,g,b;\
+        printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;\
+        printf "%s\033[0m", substr(s,colnum+1,1);\
+    }\
+    printf "\n";\
+}'
+: 1599364000:0;tl
+: 1599364014:0;l /tmp
+: 1599364027:0;nvim .tmux.conf
+: 1599364213:0;awk 'BEGIN{\
+    s="/\\/\\/\\/\\/\\"; s=s s s s s s s s;\
+    for (colnum = 0; colnum<77; colnum++) {\
+        r = 255-(colnum*255/76);\
+        g = (colnum*510/76);\
+        b = (colnum*255/76);\
+        if (g>255) g = 510-g;\
+        printf "\033[48;2;%d;%d;%dm", r,g,b;\
+        printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;\
+        printf "%s\033[0m", substr(s,colnum+1,1);\
+    }\
+    printf "\n";\
+}'
+: 1599364222:0;tl
+: 1599364235:0;tmux
+: 1599364258:0;nvim .tmux.conf
+: 1599364385:0;awk 'BEGIN{\
+    s="/\\/\\/\\/\\/\\"; s=s s s s s s s s;\
+    for (colnum = 0; colnum<77; colnum++) {\
+        r = 255-(colnum*255/76);\
+        g = (colnum*510/76);\
+        b = (colnum*255/76);\
+        if (g>255) g = 510-g;\
+        printf "\033[48;2;%d;%d;%dm", r,g,b;\
+        printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;\
+        printf "%s\033[0m", substr(s,colnum+1,1);\
+    }\
+    printf "\n";\
+}'
+: 1599364389:0;tl
+: 1599364411:0;j 1
+: 1599364416:0;nvim bin/terminal-tmux.sh
+: 1599364428:0;_ cp bin/terminal-tmux.sh /usr/local/bin
+: 1599364431:0;gaa
+: 1599364439:0;:q
+: 1599364459:0;tksv
+: 1599364463:0;tmux
+: 1599364468:0;awk 'BEGIN{\
+    s="/\\/\\/\\/\\/\\"; s=s s s s s s s s;\
+    for (colnum = 0; colnum<77; colnum++) {\
+        r = 255-(colnum*255/76);\
+        g = (colnum*510/76);\
+        b = (colnum*255/76);\
+        if (g>255) g = 510-g;\
+        printf "\033[48;2;%d;%d;%dm", r,g,b;\
+        printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;\
+        printf "%s\033[0m", substr(s,colnum+1,1);\
+    }\
+    printf "\n";\
+}'
+: 1599364475:0;nvim
+: 1599364489:0;nvim ~/.tmux.conf
+: 1599364627:0;man tmux
+: 1599364667:0;tksv
+: 1599364670:0;tmux
+: 1599364673:0;awk 'BEGIN{\
+    s="/\\/\\/\\/\\/\\"; s=s s s s s s s s;\
+    for (colnum = 0; colnum<77; colnum++) {\
+        r = 255-(colnum*255/76);\
+        g = (colnum*510/76);\
+        b = (colnum*255/76);\
+        if (g>255) g = 510-g;\
+        printf "\033[48;2;%d;%d;%dm", r,g,b;\
+        printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;\
+        printf "%s\033[0m", substr(s,colnum+1,1);\
+    }\
+    printf "\n";\
+}'
+: 1599364677:0;nvim ~/.tmux.conf
+: 1599364706:0;tksv
+: 1599364708:0;tmux
+: 1599364711:0;awk 'BEGIN{\
+    s="/\\/\\/\\/\\/\\"; s=s s s s s s s s;\
+    for (colnum = 0; colnum<77; colnum++) {\
+        r = 255-(colnum*255/76);\
+        g = (colnum*510/76);\
+        b = (colnum*255/76);\
+        if (g>255) g = 510-g;\
+        printf "\033[48;2;%d;%d;%dm", r,g,b;\
+        printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;\
+        printf "%s\033[0m", substr(s,colnum+1,1);\
+    }\
+    printf "\n";\
+}'
+: 1599364724:0;nvim ~/.tmux.conf
+: 1599365234:0;cd Public
+: 1599365239:0;g clone https://github.com/just3ws/nerd-font-cheatsheets
+: 1599365261:0;nvim nerd-font-cheatsheets/font-awesome-extensions.md
+: 1599365409:0;tl
+: 1599365607:0;see tmux
+: 1599365636:0;tmux new-session -s ArchWSL2
+: 1599365640:0;tl
+: 1599365647:0;tmux new-session -s ArchWSL2
+: 1599365706:0;tl
+: 1599365724:0;nvim
+: 1599365733:0;tl
+: 1599365742:0;l /tmp
+: 1599365817:0;tmux new-session -d -s test
+: 1599365914:0;nvim
+: 1599365965:0;alias | grep tmux
+: 1599365986:0;tmux new-session -d -s test
+: 1599365992:0;ta test
+: 1599365999:0;nvim
+: 1599366006:0;tmux new-session -d -s test
+: 1599366024:0;ta test
+: 1599366048:0;DARKBG=1 nvim 
+: 1599366177:0;tl
+: 1599366234:0;DARKBG=1 nvim 
+: 1599366268:0;tl
+: 1599366348:0;tmux attach 
+: 1599366431:0;tmux
+: 1599366549:0;tl
+: 1599366598:0;l /tmp/tmux-1000
+: 1599366608:0;man tmux
+: 1599366810:0;see tmux
+: 1599366890:0;tl
+: 1599366895:0;ts Guake
+: 1599366904:0;l /tmp/tmux-socket
+: 1599366910:0;ta
+: 1599366915:0;ta Guake
+: 1599366960:0;ts Guake -S /tmp/tmux-socket
+: 1599366986:0;tksv
+: 1599367035:0;l /tmp
+: 1599367060:0;htop
+: 1599369072:0;tl
+: 1599369096:0;pkill -USR1 tmux:\ server
+: 1599369098:0;l /tmp
+: 1599369142:0;psa
+: 1599369266:0;l /tmp
+: 1599369274:0;man tmux
+: 1599369552:0;htop
+: 1599369566:0;tl
+: 1599369571:0;l /tmp
+: 1599369576:0;tl
+: 1599369619:0;l /tmp
+: 1599369704:0;tksv
+: 1599369731:0;htop
+: 1599369887:0;l /tmp
+: 1599369905:0;pkill -USR1 tmux:\ server
+: 1599369909:0;l /tmp
+: 1599369913:0;ta
+: 1599369950:0;tmux -S /tmp/tmux-socket attach
+: 1599370022:0;l /tmp
+: 1599370123:0;tksv
+: 1599370155:0;l /tmp
+: 1599370160:0;pkill -USR1 tmux:\ server
+: 1599370162:0;l /tmp
+: 1599370175:0;echo $TMPPREFIX
+: 1599370187:0;man tmux
+: 1599370224:0;nvim ~/.zshrc
+: 1599370304:0;l /tmp
+: 1599370310:0;pkill -USR1 tmux:\ server
+: 1599370312:0;l /tmp
+: 1599370328:0;f
+: 1599370389:0;id
+: 1599370590:0;ta
+: 1599370622:0;l /tmp
+: 1599370686:0;nvim ~/.zshrc
+: 1599370716:0;l /tmp
+: 1599370721:0;pkill -USR1 tmux:\ server
+: 1599370722:0;l /tmp
+: 1599370782:0;pkill -USR1 tmux:\ server
+: 1599370784:0;l /tmp
+: 1599370861:0;man tmux
+: 1599371139:0;nvim ~/.zshrc
+: 1599371197:0;l /tmp
+: 1599371247:0;j 1
+: 1599371254:0;nvim README.md
+: 1599373971:0;j 1
+: 1599373974:0;nvim README.md
+: 1599373989:0;nvim ~/.SpaceVim/README.md
+: 1599374941:0;gst
+: 1599374946:0;gdt
+: 1599374954:0;gaa
+: 1599374955:0;j sp
+: 1599374956:0;gst
+: 1599374958:0;gaa
+: 1599374970:0;-
+: 1599374973:0;nvim README.md
+: 1599375662:0;gst
+: 1599375666:0;tree
+: 1599375685:0;nvim check_update.sh
+: 1599375935:0;gaa
+: 1599375937:0;gst
+: 1599375969:0;./check_update.sh
+: 1599376219:0;nvim ~/.tmux.conf
+: 1599376243:0;man tmux
+: 1599376390:0;gst
+: 1599376393:0;gaa
+: 1599376398:0;cd rime
+: 1599376399:0;gst
+: 1599376415:0;l
+: 1599376439:0;..
+: 1599376440:0;gst
+: 1599376459:0;nvim install.sh
+: 1599376503:0;cp gdb/gdbinit ~/.gdbinit
+: 1599376513:0;mkdir ~/.cgdb
+: 1599376524:0;cp gdb/cgdbrc ~/.cgdb
+: 1599376673:0;gc
+: 1599376715:0;gra gitee git@gitee.com:mrbeardad/Windows10
+: 1599376735:0;gra github git@github.com:mrbeardad/Windows10
+: 1599376745:0;cp ~/.zsh_history zsh/zsh_history

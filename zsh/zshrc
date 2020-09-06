@@ -2,7 +2,7 @@
 export PATH=$HOME/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME"/.oh-my-zsh/"
+export ZSH="/usr/share/oh-my-zsh/"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -125,6 +125,7 @@ alias dif='diff -Naur'
 alias ra='ranger'
 alias apt='sudo apt'
 alias expactf='expac --timefmt="%Y-%m-%d %T" "%l\t%n" | sort'
+alias sys='sudo systemctl'
 
 function f() {
     if [[ -n "$1" ]] ;then
@@ -166,10 +167,10 @@ function man() {
         command man "$@"
 }
 
-source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#808080"
 
 MODE_INDICATOR="%{$fg_bold[red]%}<%{$fg[yellow]%}<%{$fg[green]%}<%{$fg[cyan]%}<%{$fg[blue]%}<%{$reset_color%}"
@@ -188,3 +189,5 @@ bindkey '^[OA' up-line-or-beginning-search
 bindkey '^[OB' down-line-or-beginning-search
 
 eval $(thefuck --alias)
+
+pkill -USR1 tmux:\ server

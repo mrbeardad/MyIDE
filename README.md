@@ -37,7 +37,7 @@
 * [Microsoft Edge](https://www.microsoft.com/zh-cn/edge)
 
 * [RIME输入法](https://rime.im/download/)，
-[下载配置与词库](https://gitee.com/mrbeardad/rime-dict)并解压后安装到`C:\Users\mrbea\AppData\Roaming\Rime`
+下载[配置与词库](https://gitee.com/mrbeardad/rime-dict)并解压后安装到`C:\Users\mrbea\AppData\Roaming\Rime`
 
 * [TIM 通讯](https://tim.qq.com)
 
@@ -90,7 +90,7 @@
 
 * 更改鼠标主题
     > Settings -> Personalization -> Themes -> Mouse cursor  
-    > 需要将[鼠标主题](win10/cursor)解压并安装到`C:\Windows\Cursors`
+    > 需要将[鼠标主题](cursor)解压并安装到`C:\Windows\Cursors`
 
 * 安装字体
     > Settings -> Personalization -> Fonts  
@@ -140,7 +140,7 @@
 * 下载[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)，
 并安装配置：
 <details>
-    <summary><b>setting.json</b></summary>
+    <summary><b>setting.json for WindowsTerminal</b></summary>
 
 ```json
 // Official Documents: https://docs.microsoft.com/en-us/windows/terminal/customize-settings
@@ -235,18 +235,18 @@
                 "hidden": false
             },
             {
-                "name": "熊海成爸爸的Ubuntu-20.04",
+                "name": "Ubuntu-20.04",
                 "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
                 "source": "Windows.Terminal.Wsl",
-                "commandline": "wsl ~ ",
+                "commandline": "wsl ~ -d Ubuntu-20.04",
                 "icon": "%USERPROFILE%\\OneDrive\\图片\\Saved Pictures\\ubuntu.png",
                 "hidden": false
             },
             {
-                "name": "熊海成爸爸的ArchLinux2",
+                "name": "ArchLinux2",
                 "guid": "{96be24fd-152c-5812-90bb-b4bd046f9785}",
                 "source": "Windows.Terminal.Wsl",
-                "commandline": "wsl -d Arch2",
+                "commandline": "wsl ~ -d Arch2 -- tmux -S /tmp/tmux-socket new-session -d -s ArchWSL2 ; tmux -S /tmp/tmux-socket attach -t ArchWSL2",
                 "icon": "%USERPROFILE%\\OneDrive\\图片\\Saved Pictures\\arch.webp",
                 "hidden": false
             }
@@ -339,17 +339,18 @@
 ```
 </details>
 
+<br>
+
 * 下载[WSL](https://www.microsoft.com/zh-cn/p/ubuntu-2004-lts/9n6svws3rx71?activetab=pivot:overviewtab)
     1. 管理员权限运行`wt`：
         * `dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart`
         * `dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart`
         * `Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux`
     2. 上述最后一步重启后，再启动WSL进行初始化
-    3. 升级WSL2：
-        1. 下载[WSL2升级包](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
-        2. 执行`wsl --set-version <Distro> 2`
+    3. 升级WSL2：下载[WSL2升级包](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
 
-* 下载并安装[ArchWSL2](https://github.com/yuk7/ArchWSL2/releases/)
+* 下载并安装[ArchWSL2](https://github.com/yuk7/ArchWSL2/releases/)，
+    执行`wsl --set-version <Distro> 2`
 
 * 下载[VSCode](https://code.visualstudio.com/download)，并安装插件与配置
     * Remote-WSL
@@ -358,7 +359,7 @@
     * C++ Intellisense
     * Code Runner
 <details>
-    <summary><b>setting.json</b></summary>
+    <summary><b>setting.json for vscode</b></summary>
 
 ```json
 {
@@ -483,7 +484,7 @@
         {
             "before": ["<c-y>"],
             "after": ["\"", "\"", "p"]
-        },
+        }
     ],
     "vim.normalModeKeyBindingsNonRecursive": [
         {
@@ -525,7 +526,7 @@
         {
             "before": [">"],
             "after": [">", ">"]
-        },
+        }
     ],
     "vim.visualModeKeyBindingsNonRecursive": [
         {
@@ -551,8 +552,10 @@
 ```
 </details>
 
+<br>
+
 * 下载[VS](https://visualstudio.microsoft.com/downloads/#other)并设置工具链的环境变量
-    > 控制面板》系统与安全》系统》高级系统设置》环境变量》PATH、LIB、INCLUDE  
+    > 控制面板》系统与安全》系统》高级系统设置》环境变量》PATH、LIB、INCLUDE
     * PATH：
         > `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\bin\Hostx64\x64`
     * LIB：   
@@ -577,7 +580,8 @@
 ```sh
 git clone https://gitee.com/mrbeardad/Windows10/ ~/.Windows10
 cd ~/.Windows10
-./init.sh
+./init.sh # for ubuntu
+./install.sh # for arch
 ```
 
 # 快捷键

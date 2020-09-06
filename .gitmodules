@@ -1,3 +1,3 @@
 [submodule "rime"]
 	path = rime
-	url = git@gitee.com:mrbeardad/rime-dict
+	url = https://gitee.com/mrbeardad/rime-dict
