@@ -106,9 +106,12 @@ fi
 source $ZSH/oh-my-zsh.sh
 
 # 实用的别名
-alias l='ls -lah  --time-style="+%Y %m-%d %H:%M:%S "'
-alias l.='ls -ladh  --time-style="+%Y %m-%d %H:%M:%S " .*'
-alias ll='ls -lh  --time-style="+%Y %m-%d %H:%M:%S "'
+# alias l='ls -lah  --time-style="+%Y %m-%d %H:%M:%S "'
+# alias l.='ls -ladh  --time-style="+%Y %m-%d %H:%M:%S " .*'
+# alias ll='ls -lh  --time-style="+%Y %m-%d %H:%M:%S "'
+alias l='lsd -lah'
+alias l.='lsd -lah .*'
+alias ll='lsd -lh'
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
@@ -125,7 +128,13 @@ alias dif='diff -Naur'
 alias ra='ranger'
 alias apt='sudo apt'
 alias expactf='expac --timefmt="%Y-%m-%d %T" "%l\t%n" | sort'
-alias sys='sudo systemctl'
+alias stl='sudo systemctl'
+alias dk='docker'
+alias dki='docker image'
+alias dkc='docker container'
+alias dkn='docker network'
+alias vi='nvim'
+alias vim='DARKBG=1 nvim'
 
 function f() {
     if [[ -n "$1" ]] ;then
@@ -176,12 +185,8 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#808080"
 MODE_INDICATOR="%{$fg_bold[red]%}<%{$fg[yellow]%}<%{$fg[green]%}<%{$fg[cyan]%}<%{$fg[blue]%}<%{$reset_color%}"
 bindkey -M vicmd '^a' beginning-of-line
 bindkey -M vicmd '^e' end-of-line
-bindkey -M vicmd "^[[1;2C" forward-word
-bindkey -M vicmd "^[[1;2D" backward-word
-bindkey -r "^[[1;5C"
-bindkey -r "^[[1;5D"
-bindkey "^[[1;2C" forward-word
-bindkey "^[[1;2D" backward-word
+bindkey -M vicmd "^[[1;5C" forward-word
+bindkey -M vicmd "^[[1;5D" backward-word
 bindkey '^U' backward-kill-line
 bindkey '^K' kill-line
 bindkey '^Y' yank

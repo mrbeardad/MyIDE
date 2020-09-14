@@ -101,7 +101,7 @@
                 "name": "熊海成爸爸的ArchLinux2",
                 "guid": "{96be24fd-152c-5812-90bb-b4bd046f9785}",
                 "source": "Windows.Terminal.Wsl",
-                "commandline": "wsl ~ -d Arch2 -- tmux -S /tmp/tmux-socket new-session -d -s ArchWSL2 ; tmux -S /tmp/tmux-socket attach -t ArchWSL2",
+                "commandline": "wsl ~ -d Arch2 -- tmux -S /tmp/tmux-socket new-session -s ArchWSL2 || tmux -S /tmp/tmux-socket attach -t ArchWSL2",
                 "icon": "%USERPROFILE%\\OneDrive\\图片\\Saved Pictures\\arch.webp",
                 "hidden": false
             }

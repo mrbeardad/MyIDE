@@ -566,9 +566,9 @@
         > `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include`  
         > `C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt`
 
-* 下载[Docker](https://links.jianshu.com/go?to=https%3A%2F%2Fwww.docker.com%2Fproducts%2Fdocker-desktop)
-并更换docker源为`http://hub-mirror.c.163.com`，然后设置**WSL集成**
-
+> * 下载[Docker](https://links.jianshu.com/go?to=https%3A%2F%2Fwww.docker.com%2Fproducts%2Fdocker-desktop)
+> 并更换docker源为`http://hub-mirror.c.163.com`，然后设置**WSL集成**
+> 
 > * [mingw编译套件下载](https://pan.baidu.com/s/17JPRFzeZEhqxceWUTXTAog)，密码`c8uc`  
 >
 > * Alacritty终端，[下载](https://github.com/alacritty/alacritty/releases)，

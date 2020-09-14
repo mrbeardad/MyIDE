@@ -28,24 +28,31 @@ sudo pacman -S yay expac pacman-contrib
 sudo systemctl enable --now paccache.timer
 
 # 搭建开发环境
-yay -S base-devel neovim python-pynvim cmake ctags global silver-searcher-git ripgrep \
-    npm php shellcheck cppcheck clang gdb cgdb boost mariadb mysql++
+yay -S base-devel neovim python-pynvim nodejs-neovim cmake ctags global silver-searcher-git ripgrep \
+    npm php shellcheck cppcheck clang gdb cgdb boost mariadb mysql++ docker
 
+    # 初始化Mariadb
+sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+    # 更改Docker源
+echo -e "{\n    "registry-mirrors": ["http://hub-mirror.c.163.com"]\n}" | sudo tee /etc/docker/daemon.json
+    # 安装SpaceVim
 git clone https://gitee.com/mrbeardad/SpaceVim ~/.SpaceVim
+if [[ ! -e ~/.config ]]
+    mkdir ~/.config
+fi
 ln -sfv ~/.SpaceVim ~/.config/nvim
 mkdir ~/.SpaceVim.d
 cp -v ~/.SpaceVim/mode/init.toml ~/.SpaceVim.d
 
 mkdir -p ~/.local/bin
 g++ -O3 -DNDEBUG -std=c++17 -o ~/.local/bin/quickrun_time ~/.SpaceVim/custom/quickrun_time.cpp
-cp -v ~/.SpaceVim/custom/vim-quickrun.sh ~/.local/bin/
 
 curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
 yay -S zip unzip
 unzip -p /tmp/win32yank.zip win32yank.exe > /tmp/win32yank.exe
 chmod +x /tmp/win32yank.exe
 mv -v /tmp/win32yank.exe ~/.local/bin
-
+    # 安装gdb配置
 cp -v gdb/gdbinit ~/.gdbinit
 mkdir ~/.cgdb/
 cp -v gdb/cgdbrc ~/.cgdb
@@ -70,10 +77,12 @@ yay -S tmux tmux-resurrect-git
 cp -v tmux/tmux.conf ~/.tmux.conf
 
 # 其他CLI工具
-yay -S man tree fzf ranger ncdu gtop htop iotop dstat cloc screenfetch figlet cmatrix python-pip
+yay -S nmap strace lsof man tree lsd fzf ranger ncdu gtop htop iotop iftop dstat cloc screenfetch figlet cmatrix python-pip
 pip config set global.index-url https://mirrors.cloud.tencent.com/pypi/simple
 pip install cppman gdbgui thefuck mycli
 cp -vr ranger ~/.config/
+mkdir ~/.config/htop
+cp -v htop/htoprc ~/.config/htop
 
 # Cheat Sheets
 git clone https://gitee.com/mrbeardad/learning-notes-and-cheat-sheets ~/.cheat
