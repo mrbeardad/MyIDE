@@ -133,8 +133,8 @@ alias dk='docker'
 alias dki='docker image'
 alias dkc='docker container'
 alias dkn='docker network'
-alias vi='nvim'
-alias vim='DARKBG=1 nvim'
+alias v='nvim'
+alias vi='DARKBG=1 nvim'
 
 function f() {
     if [[ -n "$1" ]] ;then

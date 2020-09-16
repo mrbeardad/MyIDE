@@ -29,7 +29,7 @@ sudo systemctl enable --now paccache.timer
 
 # 搭建开发环境
 yay -S base-devel neovim python-pynvim nodejs-neovim cmake ctags global silver-searcher-git ripgrep \
-    npm php shellcheck cppcheck clang gdb cgdb boost mariadb mysql++ docker
+    npm php shellcheck cppcheck clang gdb cgdb boost nlohmann-json mariadb mysql++ docker
 
     # 初始化Mariadb
 sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
