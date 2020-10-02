@@ -117,7 +117,7 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias jobs='jobs -l'
 alias df='df -hT'
-alias psa='ps axo stat,euid,ruid,tty,tpgid,sess,pgrp,ppid,pid,pcpu,pmem,comm'
+alias psa='ps axo stat,euid,ruid,tty,sess,tpgid,pgrp,ppid,pid,pcpu,pmem,comm'
 alias pstree='pstree -Uup'
 alias free='free -wh'
 alias vmstat='vmstat -w'
@@ -132,7 +132,6 @@ alias stl='sudo systemctl'
 alias dk='docker'
 alias dki='docker image'
 alias dkc='docker container'
-alias dkn='docker network'
 alias v='nvim'
 alias vi='DARKBG=1 nvim'
 
@@ -195,4 +194,3 @@ bindkey '^[OB' down-line-or-beginning-search
 
 eval $(thefuck --alias)
 
-pkill -USR1 tmux:\ server

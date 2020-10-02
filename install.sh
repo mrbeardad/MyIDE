@@ -29,10 +29,8 @@ sudo systemctl enable --now paccache.timer
 
 # 搭建开发环境
 yay -S base-devel neovim python-pynvim nodejs-neovim cmake ctags global silver-searcher-git ripgrep \
-    npm php shellcheck cppcheck clang gdb cgdb boost nlohmann-json mariadb mysql++ docker
+    npm php shellcheck cppcheck clang gdb cgdb boost nlohmann-json mysql++ docker
 
-    # 初始化Mariadb
-sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
     # 更改Docker源
 echo -e "{\n    "registry-mirrors": ["http://hub-mirror.c.163.com"]\n}" | sudo tee /etc/docker/daemon.json
     # 安装SpaceVim
@@ -41,8 +39,7 @@ if [[ ! -e ~/.config ]]
     mkdir ~/.config
 fi
 ln -sfv ~/.SpaceVim ~/.config/nvim
-mkdir ~/.SpaceVim.d
-cp -v ~/.SpaceVim/mode/init.toml ~/.SpaceVim.d
+ln -sfv ~/.SpaceVim/mode ~/.SpaceVim.d
 
 mkdir -p ~/.local/bin
 g++ -O3 -DNDEBUG -std=c++17 -o ~/.local/bin/quickrun_time ~/.SpaceVim/custom/quickrun_time.cpp
@@ -75,9 +72,13 @@ chsh -s /bin/zsh
 # TMUX
 yay -S tmux tmux-resurrect-git
 cp -v tmux/tmux.conf ~/.tmux.conf
+sudo cp -v tmux/tmux.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl set-default multi-user.target
+sudo systemctl enable --now tmux.service
 
 # 其他CLI工具
-yay -S nmap strace lsof man tree lsd fzf ranger ncdu gtop htop iotop iftop dstat cloc screenfetch figlet cmatrix python-pip
+yay -S nmap strace lsof man man-pages tree lsd fzf ranger ncdu gtop htop iotop iftop dstat cloc screenfetch figlet cmatrix python-pip
 pip config set global.index-url https://mirrors.cloud.tencent.com/pypi/simple
 pip install cppman gdbgui thefuck mycli
 cp -vr ranger ~/.config/
