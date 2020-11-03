@@ -75,7 +75,7 @@ cp -v tmux/tmux.conf ~/.tmux.conf
 sudo cp -v tmux/tmux.service /etc/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl set-default multi-user.target
-sudo systemctl enable --now tmux.service
+# sudo systemctl enable --now tmux.service
 
 # 其他CLI工具
 yay -S nmap strace lsof man man-pages tree lsd fzf ranger ncdu gtop htop iotop iftop dstat cloc screenfetch figlet cmatrix python-pip
@@ -86,7 +86,7 @@ mkdir ~/.config/htop
 cp -v htop/htoprc ~/.config/htop
 
 # Cheat Sheets
-git clone https://gitee.com/mrbeardad/learning-notes-and-cheat-sheets ~/.cheat
+git clone https://gitee.com/mrbeardad/SeeCheatSheets ~/.cheat
 g++ -O3 -DNDEBUG -std=c++17 -o ~/.local/bin/see ~/.cheat/see.cpp
 
 # xdg-open

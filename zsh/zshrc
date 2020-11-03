@@ -194,3 +194,6 @@ bindkey '^[OB' down-line-or-beginning-search
 
 eval $(thefuck --alias)
 
+if [[ ! -e ${TMUX%,*,*} ]] ;then
+    pkill -USR1 tmux:\ server
+fi

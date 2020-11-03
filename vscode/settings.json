@@ -182,5 +182,6 @@
     },
     "editor.renderLineHighlightOnlyWhenFocus": true,
     "vim.highlightedyank.color": "rgb(250, 215, 0)",
-    "vim.searchHighlightTextColor": "rgb(250, 215, 0)"
+    "vim.searchHighlightTextColor": "rgb(250, 215, 0)",
+    "window.zoomLevel": 0
 }

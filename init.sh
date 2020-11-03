@@ -101,7 +101,7 @@ sudo cp -v bin/terminal-tmux.sh /usr/local/bin
 backup ~/.cheat
 dotfiles_dir=$PWD
 export dotfiles_dir
-git clone https://gitee.com/mrbeardad/learning-notes-and-cheat-sheets ~/.cheat
+git clone https://gitee.com/mrbeardad/SeeCheatSheets ~/.cheat
 g++ -O3 -std=c++17 -o ~/.local/bin/see ~/.cheat/see.cpp 
 makedir ~/.cache/cppman/cplusplus.com
 (
