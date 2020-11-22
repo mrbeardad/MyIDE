@@ -24,20 +24,33 @@
 * 修改`C:\Windows\System32\drivers\etc\hosts`解决DNS污染
 ```txt
 104.77.75.97        aka.ms
+3.216.57.144        gitter.im
+74.114.90.46        en.cppreference.com
+74.114.90.46        zh.cppreference.com
+151.101.1.69        stackoverflow.com
+52.74.223.119       gist.github.com
 13.250.177.223      github.com
 151.101.76.133      raw.githubusercontent.com
+151.101.108.133     camo.githubusercontent.com
 185.199.108.154     github.githubassets.com
 31.13.82.52         github.global.ssl.fastly.net
 203.208.39.104      assets-cdn.github.com
 243.185.187.39      gist.github.com
 151.101.108.133     gist.githubusercontent.com
+151.101.228.133     user-images.githubusercontent.com
+151.101.108.133     avatars1.githubusercontent.com
+151.101.108.133     avatars2.githubusercontent.com
+151.101.108.133     avatars3.githubusercontent.com
+151.101.108.133     avatars4.githubusercontent.com
+151.101.108.133     avatars5.githubusercontent.com
+151.101.108.133     avatars6.githubusercontent.com
 ```
 
 ## 下载软件
 * [Microsoft Edge](https://www.microsoft.com/zh-cn/edge)
 
-* [RIME输入法](https://rime.im/download/)，
-下载[配置与词库](https://gitee.com/mrbeardad/rime-dict)并解压后安装到`C:\Users\mrbea\AppData\Roaming\Rime`
+> * [RIME输入法](https://rime.im/download/)，
+> 下载[配置与词库](https://gitee.com/mrbeardad/rime-dict)并解压后安装到`C:\Users\mrbea\AppData\Roaming\Rime`
 
 * [TIM 通讯](https://tim.qq.com)
 
@@ -135,6 +148,14 @@
 
 * 设置输入法按键
     > Settings -> Devices -> Typing -> Advanced Keyboard Settings -> Input Language hot keys
+
+* 下载中文包
+    > Setting -> Time&Language -> Language
+
+* 设置微软拼音小鹤双拼
+    > 右键点击任务栏语言图标
+
+    ![flypy](https://imgsa.baidu.com/forum/pic/item/424c410fd9f9d72a858cdfdedd2a2834359bbb0e.jpg)
 
 ## 开发工具：
 * 下载[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)，
@@ -586,23 +607,24 @@ cd ~/.Windows10
 
 # 快捷键
 
-| 文件管理器或文件编辑器快捷键                  | 功能      |
-|-----------------------------------------------|-----------|
-| <kbd>Ctrl</kbd>+<kbd>A</kbd>                  | 全选      |
-| <kbd>Ctrl</kbd>+<kbd>C</kbd>                  | 复制      |
-| <kbd>Ctrl</kbd>+<kbd>X</kbd>                  | 剪切      |
-| <kbd>Del</kbd>                                | 删除      |
-| <kbd>Ctrl</kbd>+<kbd>V</kbd>                  | 粘贴      |
-| <kbd>Ctrl</kbd>+<kbd>Z</kbd>                  | 撤销      |
-| <kbd>Ctrl</kbd>+<kbd>F</kbd>                  | 搜索      |
-| <kbd>Ctrl</kbd>+<kbd>O</kbd>                  | 打开      |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd> | 新建目录  |
-| <kbd>BackSpace</kbd>                          | 返回/删除 |
+| 文件管理器或文件编辑器快捷键                  | 功能                     |
+|-----------------------------------------------|--------------------------|
+| <kbd>Ctrl</kbd>+<kbd>A</kbd>                  | 全选                     |
+| <kbd>Ctrl</kbd>+<kbd>C</kbd>                  | 复制                     |
+| <kbd>Ctrl</kbd>+<kbd>X</kbd>                  | 剪切                     |
+| <kbd>Del</kbd>                                | 删除(跳过回收站，慎用！) |
+| <kbd>Ctrl</kbd>+<kbd>V</kbd>                  | 粘贴                     |
+| <kbd>Ctrl</kbd>+<kbd>Z</kbd>                  | 撤销                     |
+| <kbd>Ctrl</kbd>+<kbd>F</kbd>                  | 搜索                     |
+| <kbd>Ctrl</kbd>+<kbd>O</kbd>                  | 打开                     |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd> | 新建目录                 |
+| <kbd>BackSpace</kbd>                          | 返回/删除                |
 
 | Win快捷键                                    | 功能              |
 |----------------------------------------------|-------------------|
 | <kbd>Win</kbd>+<kbd>num</kbd>                | 任务栏第num个软件 |
 | <kbd>Win</kbd>+<kbd>E</kbd>                  | 文件管理器        |
+| <kbd>Win</kbd>+<kbd>R</kbd>                  | 运行对话框        |
 | <kbd>Win</kbd>+<kbd>I</kbd>                  | 设置中心          |
 | <kbd>Win</kbd>+<kbd>A</kbd>                  | 通知与操作中心    |
 | <kbd>Win</kbd>+<kbd>G</kbd>                  | 游戏与多媒体中心  |
@@ -617,7 +639,6 @@ cd ~/.Windows10
 | <kbd>Win</kbd>+<kbd>,</kbd>                   | 预览桌面       |
 | <kbd>Win</kbd>+<kbd>M</kbd>                   | 最小化所有桌面 |
 | <kbd>Win</kbd>+<kbd>L</kbd>                   | 锁定桌面       |
-| <kbd>Win</kbd>+<kbd>R</kbd>                   | 运行对话框     |
 | <kbd>Ctrl</kbd>+<kbd>Win</kbd>+<kbd>D</kbd>   | 新建虚拟桌面   |
 | <kbd>Ctrl</kbd>+<kbd>Win</kbd>+<kbd>F4</kbd>  | 关闭虚拟桌面   |
 | <kbd>Ctrl</kbd>+<kbd>Win</kbd>+<kbd>←/→</kbd> | 切换虚拟桌面   |
@@ -629,3 +650,11 @@ cd ~/.Windows10
 | <kbd>Alt</kbd>+<kbd>Tab</kbd>     | 切换窗口               |
 | <kbd>Alt</kbd>+<kbd>F4</kbd>      | 关闭窗口               |
 
+| 输入法相关                                    | 功能           |
+|-----------------------------------------------|----------------|
+| <kbd>Win</kbd>+<kbd>Space</kbd>               | 顺序切换输入法 |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>              | 来回切换输入法 |
+| <kbd>Ctrl</kbd>+<kbd>.</kbd>                  | 切换全角半角   |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd> | 切换繁简       |
+| <kbd>Win</kbd>+<kbd>V</kbd>                   | 剪切板         |
+| <kbd>Win</kbd>+<kbd>.</kbd>                   | emoji表情      |
