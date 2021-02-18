@@ -28,7 +28,7 @@ sudo pacman -S yay expac pacman-contrib
 sudo systemctl enable --now paccache.timer
 
 # 搭建开发环境
-yay -S base-devel neovim python-pynvim nodejs-neovim cmake ctags global silver-searcher-git ripgrep \
+yay -S base-devel neovim python-pynvim python-pygccxml castxml nodejs-neovim cmake ctags global silver-searcher-git ripgrep \
     npm php shellcheck cppcheck clang gdb cgdb boost nlohmann-json mysql++ docker
 
     # 更改Docker源

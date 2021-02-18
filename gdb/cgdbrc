@@ -10,5 +10,4 @@ set ignorecase          " 搜索时忽略大小写
 set showmarks           " 显示书签
 
 map a i
-
 imap <c-c> <esc>

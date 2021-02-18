@@ -189,6 +189,7 @@
         { "command": "toggleFullscreen", "keys": "f11" },
         { "command": "unbound", "keys": "ctrl+shift+down"},
         { "command": "unbound", "keys": "ctrl+shift+up"},
+        { "command": "unbound", "keys": "Alt+p"},
         { "command": "toggleFocusMode", "keys": "Alt+t"}
     ]
 }
