@@ -35,7 +35,7 @@ yay -S base-devel neovim python-pynvim python-pygccxml castxml nodejs-neovim cma
 echo -e "{\n    "registry-mirrors": ["http://hub-mirror.c.163.com"]\n}" | sudo tee /etc/docker/daemon.json
     # 安装SpaceVim
 git clone https://gitee.com/mrbeardad/SpaceVim ~/.SpaceVim
-if [[ ! -e ~/.config ]]
+if [[ ! -e ~/.config ]] ;then
     mkdir ~/.config
 fi
 ln -sfv ~/.SpaceVim ~/.config/nvim
@@ -87,7 +87,10 @@ cp -v htop/htoprc ~/.config/htop
 
 # Cheat Sheets
 git clone https://gitee.com/mrbeardad/SeeCheatSheets ~/.cheat
-g++ -O3 -DNDEBUG -std=c++17 -o ~/.local/bin/see ~/.cheat/see.cpp
+(
+    cd ~/.cheat || exit 1
+    ./src/install.sh
+)
 
 # xdg-open
 yay -S xdg-utils wslu
