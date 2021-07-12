@@ -1,0 +1,145 @@
+// Official Documents: https://docs.microsoft.com/en-us/windows/terminal/customize-settings
+{
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+
+    // Startup
+    "defaultProfile": "{96be24fd-152c-5812-90bb-b4bd046f9785}",
+    "startOnUserLogin": false,
+    "launchMode": "default",
+    "windowingBehavior": "useNew",
+    "initialCols": 120,
+    "initialRows": 30,
+    "initialPosition": ",",
+    "centerOnLaunch": true,
+    "disabledProfileSources": [],
+    "startupActions": "",
+
+    // Interaction
+    "copyOnSelect": true,
+    "copyFormatting": false,
+    "trimBlockSelection": true,
+    "wordDelimiters": " /\\()\"'-:,.;<>~!@#$%^&*|+=[]{}~?│",
+    "snapToGridOnResize": true,
+    "minimizeToTray": false,
+    "alwaysShowTrayIcon": false,
+    "tabSwitcherMode": "mru",
+    "focusFollowMouse": false,
+    "experimental.detectURLs": true,
+    "largePasteWarning": true,
+    "multiLinePasteWarning": false,
+
+    // Appearance
+    "theme": "system",
+    "alwaysShowTabs": false,
+    "showTabsInTitlebar": true,
+    "showTerminalTitleInTitlebar": false,
+    "alwaysOnTop": false,
+    "tabWidthMode": "compact",
+    "disableAnimations": false,
+    "confirmCloseAllTabs": true,
+
+    // Rendering
+    "experimental.rendering.forceFullRepaint": false,
+    "experimental.rendering.software": false,
+
+    // Color: https://github.com/mbadolato/iTerm2-Color-Schemes
+    "schemes":
+    [
+        {
+            "name": "Atom",
+            "cursorColor": "#FFFFFF",
+            "selectionBackground": "#00dfd7",
+            "background": "#161719",
+            "foreground": "#c5c8c6",
+            "black": "#000000",
+            "red": "#fd5ff1",
+            "green": "#87c38a",
+            "yellow": "#ffd7b1",
+            "blue": "#85befd",
+            "purple": "#b9b6fc",
+            "cyan": "#85befd",
+            "white": "#e0e0e0",
+            "brightBlack": "#000000",
+            "brightRed": "#fd5ff1",
+            "brightGreen": "#94fa36",
+            "brightYellow": "#f5ffa8",
+            "brightBlue": "#96cbfe",
+            "brightPurple": "#b9b6fc",
+            "brightCyan": "#85befd",
+            "brightWhite": "#e0e0e0"
+        }
+    ],
+
+    // Actions
+    "keybindings":
+    [
+        { "command": "copy", "keys": "ctrl+shift+c" },
+        { "command": "paste", "keys": "ctrl+shift+v" },
+        { "command": "find", "keys": "ctrl+shift+f" },
+        { "command": { "action": "openSettings", "target": "settingsUI" }, "keys": "ctrl+," },
+        { "command": { "action": "openSettings", "target": "settingsFile" }, "keys": "ctrl+shift+," },
+        { "command": { "action": "openSettings", "target": "defaultsFile" }, "keys": "ctrl+alt+," },
+        { "command": "toggleFullscreen", "keys": "alt+enter" },
+        { "command": "toggleFullscreen", "keys": "f11" },
+        { "command": "unbound", "keys": "ctrl+shift+down"},
+        { "command": "unbound", "keys": "ctrl+shift+up"},
+        { "command": "unbound", "keys": "alt+p"},
+        { "command": "unbound", "keys": "alt+t"}
+    ],
+
+
+    "profiles":
+    {
+        "defaults":
+        {
+            "colorScheme": "Atom",
+            "fontFace": "SauceCodePro Nerd Font",
+            "fontWeight": "normal",
+            "fontSize": 9,
+            "cursorShape": "filledBox",
+            "useAcrylic": true,
+            "acrylicOpacity": 0.5,
+            "padding": "0, 0, 0, 0",
+            "scrollbarState": "hidden",
+            "experimental.retroTerminalEffect": false,
+            "antialiasingMode": "grayscale",
+            "altGrAliasing": true,
+            "snapOnInput": true,
+            "historySize": 9001,
+            "closeOnExit": "graceful",
+            "bellStyle": "audible"
+        },
+        "list":
+        [
+            {
+                "name": "Windows PowerShell",
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "commandline": "powershell.exe",
+                "startingDirectory": "%USERPROFILE%",
+                "hidden": false
+            },
+            {
+                "name": "Azure Cloud Shell",
+                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+                "source": "Windows.Terminal.Azure",
+                "hidden": false
+            },
+            {
+                "name": "熊海成爸爸的Ubuntu-20.04",
+                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+                "source": "Windows.Terminal.Wsl",
+                "commandline": "wsl ~ -d Ubuntu-20.04",
+                "icon": "%USERPROFILE%\\Pictures\\ubuntu.png",
+                "hidden": false
+            },
+            {
+                "name": "熊海成爸爸的Manjaro Linux",
+                "guid": "{96be24fd-152c-5812-90bb-b4bd046f9785}",
+                "source": "Windows.Terminal.Wsl",
+                "commandline": "wsl ~ -d Manjaro -- tmux new-session -s ManjaroWSL || tmux attach -t ManjaroWSL",
+                "icon": "%USERPROFILE%\\Pictures\\arch.webp",
+                "hidden": false
+            }
+        ]
+    }
+}

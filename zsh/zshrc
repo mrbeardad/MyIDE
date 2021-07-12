@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.local/bin:$PATH
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/usr/share/oh-my-zsh/"
@@ -8,7 +8,10 @@ export ZSH="/usr/share/oh-my-zsh/"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="agnoster-time"
+# ZSH_THEME="agnoster-time"
+# source ~/.zsh/agnoster.zsh-theme
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+[[ ! -f /usr/share/zsh/p10k.zsh ]] || source /usr/share/zsh/p10k.zsh
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -108,12 +111,11 @@ source $ZSH/oh-my-zsh.sh
 # 实用的别名
 # alias l='ls -lah  --time-style="+%Y %m-%d %H:%M:%S "'
 # alias l.='ls -ladh  --time-style="+%Y %m-%d %H:%M:%S " .*'
-alias l='lsd -lah'
-alias l.='lsd -lah .*'
+alias l='lsd -lah --group-dirs first'
+alias l.='lsd -lhd --group-dirs first .*'
 alias ll='ls -lah  --time-style="+%Y %m-%d %H:%M:%S "'
 alias cp='cp -i'
 alias mv='mv -i'
-alias rm='rm -i'
 alias jobs='jobs -l'
 alias df='df -hT'
 alias psa='ps axo stat,euid,ruid,tty,sess,tpgid,pgrp,ppid,pid,pcpu,pmem,comm'
@@ -121,16 +123,13 @@ alias pstree='pstree -Uup'
 alias free='free -wh'
 alias vmstat='vmstat -w'
 alias ip='ip -c'
-alias cgdb='cgdb -- -q'
-alias gdb='gdb --tui'
-alias dif='diff -Naur'
+alias dif='diff -Naur --color'
 alias ra='ranger'
-alias apt='sudo apt'
 alias expactf='expac --timefmt="%Y-%m-%d %T" "%l\t%n" | sort'
 alias stl='sudo systemctl'
-alias dok='docker'
-alias doki='docker image'
-alias dokc='docker container'
+alias dk='sudo docker'
+alias dki='sudo docker image'
+alias dkc='sudo docker container'
 alias v='nvim'
 alias vi='DARKBG=1 nvim'
 
@@ -141,15 +140,32 @@ function f() {
     export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
     FZF_FILESS=$(fzf)
     if [[ -n "$FZF_FILESS" ]] ;then
-        ranger --selectfile=$FZF_FILESS
+        cd ${FZF_FILESS%/*}
     fi
     if [[ -n "$1" ]] ;then
         cd -
     fi
 }
 
+function o() {
+    if [[ -z "$1" ]] ;then
+        xdg-open .
+    else
+        xdg-open "$1"
+    fi
+}
+
+function db() {
+    if [[ "$(eval 'file $1')" =~ 'Python script' ]] ;then
+        pudb3 "$@"
+    else
+        cgdb "$@"
+    fi
+}
+
 # zsh中git插件的补充
 alias gmv='git mv'
+alias grms='git rm --cached'
 alias grst='git restore --staged'
 alias gdtre='git diff-tree'
 alias gdi='git diff-index'
@@ -176,23 +192,24 @@ function man() {
 
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#a8a8a8"
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#808080"
 
 MODE_INDICATOR="%{$fg_bold[red]%}<%{$fg[yellow]%}<%{$fg[green]%}<%{$fg[cyan]%}<%{$fg[blue]%}<%{$reset_color%}"
 bindkey -M vicmd '^a' beginning-of-line
 bindkey -M vicmd '^e' end-of-line
 bindkey -M vicmd "^[[1;5C" forward-word
 bindkey -M vicmd "^[[1;5D" backward-word
+#bindkey "^[[1;5C" forward-word
+#bindkey "^[[1;5D" backward-word
 bindkey '^U' backward-kill-line
 bindkey '^K' kill-line
 bindkey '^Y' yank
 bindkey '^[OA' up-line-or-beginning-search
 bindkey '^[OB' down-line-or-beginning-search
 
-eval $(thefuck --alias)
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
-if [[ ! -e ${TMUX%,*,*} ]] ;then
-    pkill -USR1 tmux:\ server
-fi
+eval $(thefuck --alias)

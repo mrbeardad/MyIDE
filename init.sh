@@ -1,128 +1,102 @@
 #!/bin/bash
 
-function backup() {
-    if [[ -z "$1" ]] ;then
-        echo -e "\033[31mError: backup() required one parameter\033[m"
-        exit 1
-    elif [[ -e "$1" ]] ;then
-        mv "$1" "$1".bak
-    fi
-}
+# 设置为WSL2（PowerShell）
+#wsl --set-version Manjaro 2
+#wsl --set-default Manjaro
 
-function makedir() {
-    if [[ -z "$1" ]] ;then
-        echo -e "\033[31mError: makedir() required one parameter\033[m"
-        exit 1
-    elif [[ ! -d "$1" ]] ;then
-        if [[ -e "$1" ]] ;then
-            mv "$1" "$1".bak
-        fi
-        mkdir -p "$1"
-    fi
-}
+# 添加普通用户（WSL）
+#useradd -m beardad -G wheel
+#passwd beardad
+#visudo
 
-# sudoers
-echo '=========> Modifing /etc/sudoers ...'
-echo '%sudo   ALL=(ALL:ALL) NOPASSWD:ALL' | sudo tee -a /etc/sudoers
+# 设置默认用户（PowerShell）
+#.\Arch.exe config --default-user beardad
 
-# apt repo
-echo '=========> Modifing /etc/apt/sources.list ...'
-echo 'deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
-#deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
-#deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
-#deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
-#deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse' | sudo tee /etc/apt/sources.list
-sudo apt clean
-sudo apt update
-sudo apt upgrade
 
-# download tools
-sudo apt install python3-pynvim neovim vim cmake ctags global silversearcher-ag ripgrep
-sudo apt install npm php shellcheck zip
-sudo apt install gcc clang clang-tidy cppcheck gdb cgdb libboost-dev mariadb-client mariadb-server libmysql++-dev mycli
-sudo apt install tmux zsh zsh-syntax-highlighting zsh-autosuggestions autojump
-sudo apt install thefuck fzf ranger ncdu htop iotop dstat cloc screenfetch figlet cmatrix python3-pip 
-pip3 config set global.index-url https://mirrors.aliyun.com/pypi/simple
-pip3 install cppman gdbgui
+# 修改pacman源为腾讯源，直接改/etc/pacman.conf而非/etc/pacman.d/mirrorlist，因为有时更新系统会覆盖后者
+sudo sed -i '/^Include = /s/^.*$/Server = https:\/\/mirrors.cloud.tencent.com\/manjaro\/stable\/$repo\/$arch/' /etc/pacman.conf
 
-# vim config
-echo '=========> Installing configuration for vim/nvim ...'
-backup ~/.SpaceVim
-git clone https://gitee.com/mrbeardad/SpaceVim ~/.SpaceVim
+# 添加腾讯云的archlinuxcn源
+echo -e '[archlinuxcn]\nServer = https://mirrors.cloud.tencent.com/archlinuxcn/$arch' |
+    sudo tee -a /etc/pacman.conf
 
-makedir ~/.config
-backup ~/.config/nvim
-ln -s ~/.SpaceVim ~/.config/nvim
+# pacman配置彩色输出与使用系统日志
+sudo sed -i "/^#Color$/s/#//; /^#UseSyslog$/s/#//; /^#TotalDownload/s/#//" /etc/pacman.conf
 
-makedir ~/.SpaceVim.d
-backup ~/.SpaceVim.d/init.toml
-cp -v ~/.SpaceVim/mode/init.toml ~/.SpaceVim.d
+# 更新系统，并准备下载软件包
+sudo pacman -Syyu
+sudo pacman -S archlinuxcn-keyring yay expac
 
-makedir ~/.local/bin
-g++ -O3 -std=c++17 -o ~/.local/bin/quickrun_time ~/.SpaceVim/custom/quickrun_time.cpp
-cp -v ~/.SpaceVim/custom/vim-quickrun.sh ~/.local/bin
+# 提供了git对github与gitee的ssh配置
+if [[ "$USER" == beardad ]] ;then
+    cp -v .gitconfig ~
+    cat ssh/ssh_config >> ~/.ssh/ssh_config
+    #################################
+    ## 然后安装我自己的ssh公私钥对 ##
+    #################################
+fi
 
-curl -sLo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
-unzip -p /tmp/win32yank.zip win32yank.exe > /tmp/win32yank.exe
-chmod +x /tmp/win32yank.exe
-mv /tmp/win32yank.exe ~/.local/bin
+# 配置tmux
+yay -S tmux tmux-resurrect-git
+cp -v tmux/tmux.conf ~/.tmux.conf
 
-# zsh config
-echo '=========> Installing configuration for zsh ...'
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-cp zsh/*theme ~/.oh-my-zsh/themes
-backup ~/.zshrc
+# 配置zsh
+yay -S oh-my-zsh zsh-syntax-highlighting zsh-autosuggestions autojump
 cp -v zsh/zshrc ~/.zshrc
 
-# tmux config
-echo '=========> Installing configuration for tmux ...'
-git clone https://github.com/tmux-plugins/tmux-resurrect ~/.config/tmux-resurrect
-backup ~/.tmux.conf
-cp -v tmux/tmux ~/.tmux.conf
+# 配置vim
+yay -S base-devel zip unzip \
+    vim neovim python-pynvim \
+    ripgrep global ctags \
+    npm php \
+    vim-language-server vint \
+    bash-language-server shellcheck \
+    go \
+    clang cmake cmake-language-server
+git clone https://github.com/mrbeardad/SpaceVim ~/.SpaceVim
+ln -sv ~/.SpaceVim/mode ~/.SpaceVim.d
+ln -sv ~/.SpaceVim ~/.config/nvim
+g++ -O3 -DNDEBUG -std=c++11 -o ~/.local/bin/quickrun_time ~/.SpaceVim/custom/quickrun_time.cpp
+curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
+unzip -p /tmp/win32yank.zip win32yank.exe > ~/.local/bin/win32yank.exe
+chmod +x ~/.local/bin/win32yank.exe
 
-# ranger config
-echo '=========> Installing configuration for ranger ...'
-backup ~/.config/ranger
-cp -rv ranger ~/.config/ranger
-
-# ssh config
-makedir ~/.ssh
-cat ssh/ssh_config >> ~/.ssh/ssh_config
-cp .gitconfig ~
-sudo cp -v ssh/sshd_config /etc/ssh/sshd_config
-
-# cli config
-sudo cp -v bin/terminal-tmux.sh /usr/local/bin
-backup ~/.cheat
-dotfiles_dir=$PWD
-export dotfiles_dir
-git clone https://gitee.com/mrbeardad/SeeCheatSheets ~/.cheat
-g++ -O3 -std=c++17 -o ~/.local/bin/see ~/.cheat/see.cpp 
-makedir ~/.cache/cppman/cplusplus.com
+# 安装SeeCheatSheets
+git clone https://github.com/mrbeardad/SeeCheatSheets ~/.cheat
 (
-    cd /tmp || exit 1
-    tar -zxf "$dotfiles_dir"/cppman/cppman_db.tar.gz
-    cp -vn cplusplus.com/* ~/.cache/cppman/cplusplus.com
+    mkdir ~/.cheat/build
+    cd ~/.cheat/build || exit 1
+    cmake -D CMAKE_BUILD_TYPE=Release ..
+    cmake --build . -t see
+    cmake --install .
 )
-backup ~/.gdbinit
-cp -v gdb/gdbinit ~/.gdbinit
-makedir ~/.cgdb
-backup ~/.cgdb/cgdbrc
-cp -v gdb/cgdbrc ~/.cgdb
 
-# links
-echo '=========> Creating links to access Windows easily ...'
-for inUserDir in $(find /mnt/c/Users -maxdepth 1 -not -iregex '/mnt/c/Users/\(all users\|default\|default user\|public\)' | sed '1d') ;do
-    if [[ -d "$inUserDir" ]] ;then
-        Dir=$inUserDir
-        break;
-    fi
-done
-ln -vs "$Dir" ~/WindowsHome
-ln -vs "$Dir/Documents" ~/Documents
-ln -vs "$Dir/Downloads" ~/Downloads
+# 安装命令行工具
+yay -S strace lsof socat nmap tcpdump gist docker \
+    delve gdb cgdb conan graphviz cppcheck boost asio gtest gmock \
+    tree lsd fzf ranger htop bashtop iotop iftop dstat cloc \
+    neofetch toilet cowfortune cmatrix sl asciiquarium
+go env -w GOPATH="$HOME"/.local/go/
+go env -w GOBIN="$HOME"/.local/bin/
+go env -w GOPROXY=https://mirrors.cloud.tencent.com/go/,direct
+go get -u github.com/google/pprof
+npm config set registry http://mirrors.cloud.tencent.com/npm/
+pip config set global.index-url https://mirrors.cloud.tencent.com/pypi/simple
+pip install cppman gdbgui thefuck mycli pylint flake8 bandit pudb ipython
+# pudb配置
+cp -rv pudb ~/.config
+# gdb与cgdb配置
+mkdir -v ~/.cgdb
+cp -v gdb/cgdbrc ~/.cgdb
+cp -v gdb/gdbinit ~/.gdbinit
+
+# docker配置
+sudo mkdir /etc/docker
+echo -e "{\n    \"registry-mirrors\": [\"http://hub-mirror.c.163.com\"]\n}" | sudo tee /etc/docker/daemon.json
+sudo systemctl enable --now docker.socket
+sudo docker pull mysql
+sudo docker pull nginx
+sudo gpasswd -a "$USER" docker
+
+# GUI工具配置
+

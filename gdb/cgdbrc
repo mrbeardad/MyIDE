@@ -1,13 +1,20 @@
 " vim: filetype=vim
-set autosourcereload    " 自动加载源文件，当更改并重新编译时
-set debugwincolor       " 当程序输出ANSI escape code for color，原样输出颜色，而非escape code
-set wso=vertical        " 设置布局方向，竖直
-set winsplit=src_big    " 两个窗口的比例
-set eld='highlight'     " 高亮当前正在执行的行
+set autosourcereload    " 当更改并重新编译时，自动加载源文件
+set cgdbmodekey=<esc>   " 进入CGDB窗口模式快捷键
+set color               " 启用颜色语法高亮
+set syntax=on           " 自动检测语法类型
+set debugwincolor       " 当程序输出ANSI escape时，原样输出颜色而非escape code
+set nodisam             " 是否显示汇编代码
+set eld='longarrow'     " 高亮当前正在执行的行
 set sld='highlight'     " 高亮当前选择的行
 set hlsearch            " 高亮搜索
 set ignorecase          " 搜索时忽略大小写
+set nowrapscan          " 搜索不回绕
 set showmarks           " 显示书签
+set wso=vertical        " 设置布局方向，竖直
+set winsplit=src_big    " 两个窗口的比例
+set winminwidth=100     " GDB窗口宽度
 
 map a i
+
 imap <c-c> <esc>
