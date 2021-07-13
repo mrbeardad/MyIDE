@@ -87,13 +87,13 @@
         { "command": "unbound", "keys": "alt+t"}
     ],
 
-
+    // Profiles
     "profiles":
     {
         "defaults":
         {
             "colorScheme": "Atom",
-            "fontFace": "SauceCodePro Nerd Font",
+            "fontFace": "NerdCodePro Font",
             "fontWeight": "normal",
             "fontSize": 9,
             "cursorShape": "filledBox",

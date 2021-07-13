@@ -1,9 +1,8 @@
 # Windows10配置
-
-这篇文档做为个我的个人日志，方便下次重装。读者请酌情参考。
+这篇文档做为个我的个人日志，方便下次重装，读者请酌情参考。
 
 ## 首先
-* 登录Windows账户
+* 登录Windows个人账户
 
 ## 驱动程序
 * 下载并安装[MyASUS](https://www.microsoft.com/zh-cn/p/myasus/9n7r5s6b0zzh?activetab=pivot:overviewtab)
@@ -15,42 +14,59 @@
 
 * 下载并安装[Bandizip压缩包工具](https://www.bandizip.com/)
 
-* 下载并安装[Google Access Helper](https://gitee.com/mrbeardad/DotFiles/tree/master/chrome)
-
 * 登录Google账户并同步Chrome配置（包括手动同步TampMonkey脚本）
-
-* 设置Chrome语言与字体，以及设置Google搜索引擎的语言
 
 * 修改`C:\Windows\System32\drivers\etc\hosts`解决DNS污染
 ```txt
-104.77.75.97        aka.ms
-3.216.57.144        gitter.im
-74.114.90.46        en.cppreference.com
-74.114.90.46        zh.cppreference.com
-151.101.1.69        stackoverflow.com
-52.74.223.119       gist.github.com
-13.250.177.223      github.com
-151.101.76.133      raw.githubusercontent.com
-151.101.108.133     camo.githubusercontent.com
-185.199.108.154     github.githubassets.com
-31.13.82.52         github.global.ssl.fastly.net
-203.208.39.104      assets-cdn.github.com
-243.185.187.39      gist.github.com
-151.101.108.133     gist.githubusercontent.com
-151.101.228.133     user-images.githubusercontent.com
-151.101.108.133     avatars1.githubusercontent.com
-151.101.108.133     avatars2.githubusercontent.com
-151.101.108.133     avatars3.githubusercontent.com
-151.101.108.133     avatars4.githubusercontent.com
-151.101.108.133     avatars5.githubusercontent.com
-151.101.108.133     avatars6.githubusercontent.com
+#*********************github 2021-07-12 update********************
+#******* get latest hosts: http://blog.yoqi.me/lyq/16489.html
+151.101.65.194	github.global.ssl.fastly.net
+185.199.108.153	assets-cdn.github.com
+185.199.108.153	documentcloud.github.com
+140.82.112.4	gist.github.com
+185.199.108.133	gist.githubusercontent.com
+185.199.108.154	github.githubassets.com
+185.199.111.154	help.github.com
+140.82.112.10	nodeload.github.com
+185.199.108.133	raw.github.com
+140.82.113.18	status.github.com
+185.199.110.153	training.github.com
+185.199.111.133	avatars.githubusercontent.com
+185.199.109.133	avatars0.githubusercontent.com
+185.199.108.133	avatars1.githubusercontent.com
+185.199.108.133	avatars2.githubusercontent.com
+185.199.108.133	avatars3.githubusercontent.com
+185.199.109.133	avatars4.githubusercontent.com
+185.199.108.133	avatars5.githubusercontent.com
+185.199.108.133	avatars6.githubusercontent.com
+185.199.110.133	avatars7.githubusercontent.com
+185.199.109.133	avatars8.githubusercontent.com
+185.199.108.133	favicons.githubusercontent.com
+140.82.114.10	codeload.github.com
+52.217.91.132	github-cloud.s3.amazonaws.com
+52.216.28.148	github-com.s3.amazonaws.com
+52.217.64.68	github-production-release-asset-2e65be.s3.amazonaws.com
+52.217.87.164	github-production-user-asset-6210df.s3.amazonaws.com
+52.216.97.155	github-production-repository-file-5c1aeb.s3.amazonaws.com
+185.199.111.153	githubstatus.com
+64.71.168.201	github.community
+185.199.111.133	media.githubusercontent.com
+185.199.108.133	camo.githubusercontent.com
+185.199.111.133	raw.githubusercontent.com
+185.199.111.133	cloud.githubusercontent.com
+185.199.109.133	user-images.githubusercontent.com
+185.199.109.153	customer-stories-feed.github.com
+185.199.110.153	pages.github.com
+140.82.112.6	api.github.com
+140.82.112.26	live.github.com
+140.82.114.29	githubapp.com
+140.82.113.3	github.com
 ```
 
 ## 下载软件
 * [Microsoft Edge](https://www.microsoft.com/zh-cn/edge)
 
-> * [RIME输入法](https://rime.im/download/)，
-> 下载[配置与词库](https://gitee.com/mrbeardad/rime-dict)并解压后安装到`C:\Users\mrbea\AppData\Roaming\Rime`
+* [QQ输入法](http://qq.pinyin.cn/)
 
 * [TIM 通讯](https://tim.qq.com)
 
@@ -74,13 +90,12 @@
 
 * [XMeters 资源监测器](https://entropy6.com/xmeters/)
 
-* [Rainmeter 桌面美化](https://www.rainmeter.net/)与[Elegance-2皮肤](https://visualskins.com/skin/elegance-2)
-
 * [noMeiryoUI 字体设置](https://github.com/Tatsu-syo/noMeiryoUI/releases)
 
 * [MacType 字体渲染](https://github.com/snowie2000/mactype/releases)
 
 * Office 办公套件
+
 
 ## 个性化设置
 * 夜间暖色模式
@@ -107,11 +122,7 @@
 
 * 安装字体
     > Settings -> Personalization -> Fonts  
-    > [Source Code Pro Nerd字体](https://mirrors.cloud.tencent.com/archlinuxcn/x86_64/nerd-fonts-source-code-pro-2.1.0-4-any.pkg.tar.zst)、
-    > [Space Mono Nerd字体](https://mirrors.cloud.tencent.com/archlinuxcn/x86_64/nerd-fonts-space-mono-2.1.0-4-any.pkg.tar.zst)、
-    > [IBM Plex Mono Nerd字体](https://mirrors.cloud.tencent.com/archlinuxcn/x86_64/nerd-fonts-ibm-plex-mono-2.1.0-4-any.pkg.tar.zst)  
-    > 注意：Windows下的应用一般无法选择style，故只安装好看的style而不全装  
-    > 注意：Windows Terminal字体不要使用Mono版本，会导致图标字体太小
+    > [NerdCodePro Font](windows10/fonts/)
 
 * 设置StartMenu
     > Settings -> Personalization -> Start -> Choose which folders appear on Start
@@ -122,7 +133,7 @@
     > * 侧栏文件夹快速访问
 
 * 设置TaskBar
-    > Settings -> Personalization -> Taskbar  
+    > Settings -> Personalization -> Taskbar
     > * 任务栏位置
     > * 任务栏图标位置
     > * 任务栏图标大小
@@ -152,226 +163,24 @@
 * 下载中文包
     > Setting -> Time&Language -> Language
 
-* 设置微软拼音小鹤双拼
-    > 右键点击任务栏语言图标
-
-    ![flypy](https://imgsa.baidu.com/forum/pic/item/424c410fd9f9d72a858cdfdedd2a2834359bbb0e.jpg)
 
 ## 开发工具：
 * 下载[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)，
-并安装配置：
-<details>
-    <summary><b>setting.json for WindowsTerminal</b></summary>
-
-```json
-// Official Documents: https://docs.microsoft.com/en-us/windows/terminal/customize-settings
-{
-    "$schema": "https://aka.ms/terminal-profiles-schema",
-
-    "defaultProfile": "{96be24fd-152c-5812-90bb-b4bd046f9785}",
-
-    "disabledProfileSources": [],
-
-    "theme": "system",
-
-    "useTabSwitcher": false,
-
-    "alwaysShowTabs": false,
-
-    "tabWidthMode": "compact",
-
-    "confirmCloseAllTabs": true,
-
-    "startOnUserLogin": false,
-
-    "launchMode": "default",
-
-    "initialPosition": ",",
-
-    "initialCols": 120,
-
-    "initialRows": 30,
-
-    "alwaysOnTop": false,
-
-    "showTabsInTitlebar": true,
-
-    "showTerminalTitleInTitlebar": false,
-
-    "copyOnSelect": true,
-
-    "copyFormatting": false,
-
-    "wordDelimiters": " /\\()\"'-.,:;<>~!@#$%^&*|+=[]{}~?\u2502",
-
-    "largePasteWarning": true,
-
-    "multiLinePasteWarning": true,
-
-    "rowsToScroll": "system",
-
-    "snapToGridOnResize": true,
-
-    "experimental.rendering.forceFullRepaint": false,
-
-    "experimental.rendering.software": false,
-
-    "profiles":
-    {
-        "defaults":
-        {
-            "fontFace": "SauceCodePro Nerd Font",
-            "fontWeight": "normal",
-            "fontSize": 9,
-            "padding": "0, 0, 0, 0",
-            "antialiasingMode": "grayscale",
-            "cursorShape": "filledBox",
-            "altGrAliasing": true,
-            "colorScheme": "Atom",
-            "useAcrylic": true,
-            "acrylicOpacity": 0.3,
-            "selectionBackground": "#00dfd7",
-            "scrollbarState": "hidden",
-            "snapOnInput": true,
-            "historySize": 9001,
-            "closeOnExit": "graceful",
-            "experimental.retroTerminalEffect": false
-            //"backgroundImage": "%LOCALAPPDATA%\\Packages\\Microsoft.WindowsTerminal_8wekyb3d8bbwe\\RoamingState\\DNA.png",
-            //"backgroundImageStretchMode": "uniformToFill",
-            //"backgroundImageAlignment": "center",
-            //"backgroundImageOpacity": 0.6
-        },
-        "list":
-        [
-            {
-                "name": "Windows PowerShell",
-                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-                "commandline": "powershell.exe",
-                "hidden": false
-            },
-            {
-                "name": "Azure Cloud Shell",
-                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
-                "source": "Windows.Terminal.Azure",
-                "hidden": false
-            },
-            {
-                "name": "Ubuntu-20.04",
-                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
-                "source": "Windows.Terminal.Wsl",
-                "commandline": "wsl ~ -d Ubuntu-20.04",
-                "icon": "%USERPROFILE%\\OneDrive\\图片\\Saved Pictures\\ubuntu.png",
-                "hidden": false
-            },
-            {
-                "name": "ArchLinux2",
-                "guid": "{96be24fd-152c-5812-90bb-b4bd046f9785}",
-                "source": "Windows.Terminal.Wsl",
-                "commandline": "wsl ~ -d Arch2 -- tmux -S /tmp/tmux-socket new-session -d -s ArchWSL2 ; tmux -S /tmp/tmux-socket attach -t ArchWSL2",
-                "icon": "%USERPROFILE%\\OneDrive\\图片\\Saved Pictures\\arch.webp",
-                "hidden": false
-            }
-        ]
-    },
-
-   //https://github.com/mbadolato/iTerm2-Color-Schemes
-   "schemes":
-   [
-        {
-            "name": "BlueBerryPie",
-            "black": "#0a4c62",
-            "red": "#99246e",
-            "green": "#5cb1b3",
-            "yellow": "#eab9a8",
-            "blue": "#90a5bd",
-            "purple": "#9d54a7",
-            "cyan": "#7e83cc",
-            "white": "#f0e8d6",
-            "brightBlack": "#201637",
-            "brightRed": "#c87272",
-            "brightGreen": "#0a6c7e",
-            "brightYellow": "#7a3188",
-            "brightBlue": "#39173d",
-            "brightPurple": "#bc94b7",
-            "brightCyan": "#5e6071",
-            "brightWhite": "#0a6c7e",
-            "background": "#1c0c28",
-            "foreground": "#babab9"
-        },
-        {
-            "name": "AdventureTime",
-            "black": "#050404",
-            "red": "#bd0013",
-            "green": "#4ab118",
-            "yellow": "#e7741e",
-            "blue": "#0f4ac6",
-            "purple": "#665993",
-            "cyan": "#70a598",
-            "white": "#f8dcc0",
-            "brightBlack": "#4e7cbf",
-            "brightRed": "#fc5f5a",
-            "brightGreen": "#9eff6e",
-            "brightYellow": "#efc11a",
-            "brightBlue": "#1997c6",
-            "brightPurple": "#9b5953",
-            "brightCyan": "#c8faf4",
-            "brightWhite": "#f6f5fb",
-            "background": "#1f1d45",
-            "foreground": "#f8dcc0"
-        },
-        {
-            "name": "Atom",
-            "black": "#000000",
-            "red": "#fd5ff1",
-            "green": "#87c38a",
-            "yellow": "#ffd7b1",
-            "blue": "#85befd",
-            "purple": "#b9b6fc",
-            "cyan": "#85befd",
-            "white": "#e0e0e0",
-            "brightBlack": "#000000",
-            "brightRed": "#fd5ff1",
-            "brightGreen": "#94fa36",
-            "brightYellow": "#f5ffa8",
-            "brightBlue": "#96cbfe",
-            "brightPurple": "#b9b6fc",
-            "brightCyan": "#85befd",
-            "brightWhite": "#e0e0e0",
-            "background": "#161719",
-            "foreground": "#c5c8c6"
-        }
-    ],
-
-    "keybindings":
-    [
-        { "command": {"action": "copy", "singleLine": false }, "keys": "ctrl+shift+c" },
-        { "command": "paste", "keys": "ctrl+shift+v" },
-        { "command": "find", "keys": "ctrl+shift+f" },
-        { "command": "openNewTabDropdown", "keys": "ctrl+shift+space" },
-        { "command": "openSettings", "keys": "ctrl+," },
-        { "command": { "action": "openSettings", "target": "defaultsFile" }, "keys": "ctrl+alt+," },
-        { "command": "toggleFullscreen", "keys": "alt+enter" },
-        { "command": "toggleFullscreen", "keys": "f11" },
-        { "command": "unbound", "keys": "ctrl+shift+down"},
-        { "command": "unbound", "keys": "ctrl+shift+up"},
-        { "command": "toggleFocusMode", "keys": "Alt+t"}
-    ]
-}
-```
-</details>
-
-<br>
+    并安装配置[settings.json](windows10/wt/settings.json)
 
 * 下载[WSL](https://www.microsoft.com/zh-cn/p/ubuntu-2004-lts/9n6svws3rx71?activetab=pivot:overviewtab)
     1. 管理员权限运行`wt`：
-        * `dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart`
-        * `dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart`
-        * `Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux`
-    2. 上述最后一步重启后，再启动WSL进行初始化
+        ```sh
+        dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+        dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+        Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+        ```
+    2. 重启后，再启动WSL与Ubuntu进行初始化
     3. 升级WSL2：下载[WSL2升级包](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
 
-* 下载并安装[ArchWSL2](https://github.com/yuk7/ArchWSL2/releases/)，
-    执行`wsl --set-version <Distro> 2`
+* 下载[ManjaroWSL](https://github.com/sileshn/ManjaroWSL)，
+* 执行`wsl --set-version Manjaro 2`与`wsl --set-default Manjaro`
+* 进入ManjaroWSL并克隆该仓库然后执行`init.sh`
 
 * 下载[VSCode](https://code.visualstudio.com/download)，并安装插件与配置
     * Remote-WSL
@@ -579,46 +388,27 @@
     > 控制面板》系统与安全》系统》高级系统设置》环境变量》PATH、LIB、INCLUDE
     * PATH：
         > `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\bin\Hostx64\x64`
-    * LIB：   
+    * LIB：
         > `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\lib\x64`  
         > `C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\ucrt\x64`  
         > `C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\um\x64`
-    * INCLUDE：   
+    * INCLUDE：
         > `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include`  
         > `C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt`
 
-> * 下载[Docker](https://links.jianshu.com/go?to=https%3A%2F%2Fwww.docker.com%2Fproducts%2Fdocker-desktop)
-> 并更换docker源为`http://hub-mirror.c.163.com`，然后设置**WSL集成**
-> 
-> * [mingw编译套件下载](https://pan.baidu.com/s/17JPRFzeZEhqxceWUTXTAog)，密码`c8uc`  
->
-> * Alacritty终端，[下载](https://github.com/alacritty/alacritty/releases)，
->     [配置](https://github.com/mrbeardad/Windows10/blob/master/alacritty/alacritty.yml)
->     安装到`C:\Users\mrbea\AppData\Roaming\alacritty\alacritty.yml`
-
-## WSL
-启动WSL，然后安装Linux环境配置
-```sh
-git clone https://gitee.com/mrbeardad/Windows10/ ~/.Windows10
-cd ~/.Windows10
-./init.sh # for ubuntu
-./install.sh # for arch
-```
 
 # 快捷键
 
-| 文件管理器或文件编辑器快捷键                  | 功能                     |
-|-----------------------------------------------|--------------------------|
-| <kbd>Ctrl</kbd>+<kbd>A</kbd>                  | 全选                     |
-| <kbd>Ctrl</kbd>+<kbd>C</kbd>                  | 复制                     |
-| <kbd>Ctrl</kbd>+<kbd>X</kbd>                  | 剪切                     |
-| <kbd>Del</kbd>                                | 删除(跳过回收站，慎用！) |
-| <kbd>Ctrl</kbd>+<kbd>V</kbd>                  | 粘贴                     |
-| <kbd>Ctrl</kbd>+<kbd>Z</kbd>                  | 撤销                     |
-| <kbd>Ctrl</kbd>+<kbd>F</kbd>                  | 搜索                     |
-| <kbd>Ctrl</kbd>+<kbd>O</kbd>                  | 打开                     |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd> | 新建目录                 |
-| <kbd>BackSpace</kbd>                          | 返回/删除                |
+| 文件管理器或文件编辑器快捷键                  | 功能      |
+|-----------------------------------------------|-----------|
+| <kbd>Ctrl</kbd>+<kbd>A</kbd>                  | 全选      |
+| <kbd>Ctrl</kbd>+<kbd>C</kbd>                  | 复制      |
+| <kbd>Ctrl</kbd>+<kbd>X</kbd>                  | 剪切      |
+| <kbd>Ctrl</kbd>+<kbd>V</kbd>                  | 粘贴      |
+| <kbd>Ctrl</kbd>+<kbd>Z</kbd>                  | 撤销      |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | 撤销      |
+| <kbd>Ctrl</kbd>+<kbd>F</kbd>                  | 搜索      |
+| <kbd>Ctrl</kbd>+<kbd>O</kbd>                  | 打开      |
 
 | Win快捷键                                    | 功能              |
 |----------------------------------------------|-------------------|
@@ -628,8 +418,6 @@ cd ~/.Windows10
 | <kbd>Win</kbd>+<kbd>I</kbd>                  | 设置中心          |
 | <kbd>Win</kbd>+<kbd>A</kbd>                  | 通知与操作中心    |
 | <kbd>Win</kbd>+<kbd>G</kbd>                  | 游戏与多媒体中心  |
-| <kbd>Win</kbd>+<kbd>.</kbd>                  | emoji面板         |
-| <kbd>Win</kbd>+<kbd>V</kbd>                  | 粘贴板            |
 | <kbd>Win</kbd>+<kbd>+</kbd>                  | 放大镜            |
 | <kbd>Win</kbd>+<kbd>shift</kbd>+<kbd>c</kbd> | 捕色器            |
 
@@ -648,13 +436,13 @@ cd ~/.Windows10
 |-----------------------------------|------------------------|
 | <kbd>Win</kbd>+<kbd>↑/↓/←/→</kbd> | 最大化/最小化/左右分屏 |
 | <kbd>Alt</kbd>+<kbd>Tab</kbd>     | 切换窗口               |
-| <kbd>Alt</kbd>+<kbd>F4</kbd>      | 关闭窗口               |
+| <kbd>Win</kbd>+<kbd>Q</kbd>       | 关闭窗口               |
 
-| 输入法相关                                    | 功能           |
-|-----------------------------------------------|----------------|
-| <kbd>Win</kbd>+<kbd>Space</kbd>               | 顺序切换输入法 |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>              | 来回切换输入法 |
-| <kbd>Ctrl</kbd>+<kbd>.</kbd>                  | 切换全角半角   |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd> | 切换繁简       |
-| <kbd>Win</kbd>+<kbd>V</kbd>                   | 剪切板         |
-| <kbd>Win</kbd>+<kbd>.</kbd>                   | emoji表情      |
+| 输入法相关                                    | 功能         |
+|-----------------------------------------------|--------------|
+| <kbd>Ctrl</kbd>+<kbd>.</kbd>                  | 切换全角半角 |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd> | 切换繁/简体  |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd> | 切换中/英文  |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> | 切换全/双拼  |
+| <kbd>Win</kbd>+<kbd>V</kbd>                   | 系统剪切板   |
+| <kbd>Win</kbd>+<kbd>.</kbd>                   | emoji表情    |
