@@ -30,6 +30,7 @@ sudo pacman -S archlinuxcn-keyring yay expac
 # 提供了git对github与gitee的ssh配置
 if [[ "$USER" == beardad ]] ;then
     cp -v .gitconfig ~
+    mkdir ~/.ssh
     cat ssh/ssh_config >> ~/.ssh/ssh_config
     #################################
     ## 然后安装我自己的ssh公私钥对 ##
@@ -72,8 +73,8 @@ git clone https://github.com/mrbeardad/SeeCheatSheets ~/.cheat
 )
 
 # 安装命令行工具
-yay -S strace lsof socat nmap tcpdump gist docker \
-    delve gdb cgdb conan graphviz cppcheck boost asio gtest gmock \
+yay -S delve gdb cgdb conan graphviz cppcheck boost asio gtest gmock \
+    openssh strace lsof socat nmap tcpdump gist docker \
     tree lsd fzf ranger htop bashtop iotop iftop dstat cloc \
     neofetch toilet cowfortune cmatrix sl asciiquarium
 go env -w GOPATH="$HOME"/.local/go/
@@ -93,10 +94,9 @@ cp -v gdb/gdbinit ~/.gdbinit
 # docker配置
 sudo mkdir /etc/docker
 echo -e "{\n    \"registry-mirrors\": [\"http://hub-mirror.c.163.com\"]\n}" | sudo tee /etc/docker/daemon.json
-sudo systemctl enable --now docker.socket
+sudo gpasswd -a "$USER" docker
 sudo docker pull mysql
 sudo docker pull nginx
-sudo gpasswd -a "$USER" docker
 
 # GUI工具配置
 
