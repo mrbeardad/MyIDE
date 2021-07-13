@@ -178,9 +178,9 @@
     2. 重启后，再启动WSL与Ubuntu进行初始化
     3. 升级WSL2：下载[WSL2升级包](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
 
-* 下载[ManjaroWSL](https://github.com/sileshn/ManjaroWSL)，
-* 执行`wsl --set-version Manjaro 2`与`wsl --set-default Manjaro`
-* 进入ManjaroWSL并克隆该仓库然后执行`init.sh`
+* 下载[ArchWSL](https://github.com/yuk7/ArchWSL)或[ManjaroWSL](https://github.com/sileshn/ManjaroWSL)，
+* 执行`wsl --set-version <Distro> 2`与`wsl --set-default <Distro>`
+* 进入WSL并克隆该仓库然后执行`init.sh`
 
 * 下载[VSCode](https://code.visualstudio.com/download)，并安装插件与配置
     * Remote-WSL

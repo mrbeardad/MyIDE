@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # 设置为WSL2（PowerShell）
-#wsl --set-version Manjaro 2
-#wsl --set-default Manjaro
+#wsl --set-version Arch 2
+#wsl --set-default Arch
 
 # 添加普通用户（WSL）
 #useradd -m beardad -G wheel
@@ -41,7 +41,7 @@ yay -S tmux tmux-resurrect-git
 cp -v tmux/tmux.conf ~/.tmux.conf
 
 # 配置zsh
-yay -S oh-my-zsh zsh-syntax-highlighting zsh-autosuggestions autojump
+yay -S oh-my-zsh manjaro-zsh-config autojump
 cp -v zsh/zshrc ~/.zshrc
 
 # 配置vim

@@ -133,10 +133,10 @@
                 "hidden": false
             },
             {
-                "name": "熊海成爸爸的Manjaro Linux",
+                "name": "熊海成爸爸的ArchLinux",
                 "guid": "{96be24fd-152c-5812-90bb-b4bd046f9785}",
                 "source": "Windows.Terminal.Wsl",
-                "commandline": "wsl ~ -d Manjaro -- tmux new-session -s ManjaroWSL || tmux attach -t ManjaroWSL",
+                "commandline": "wsl ~ -d Manjaro -- genie -i; tmux new-session -s ArchWSL || tmux attach -t ArchWSL",
                 "icon": "%USERPROFILE%\\Pictures\\arch.webp",
                 "hidden": false
             }
