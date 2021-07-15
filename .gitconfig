@@ -1,9 +1,9 @@
 [user]
     email = mrbeardad@qq.com
     name = Heache Bear
-[core]
-    editor = nvim
-[merge]
-    tool = vimdiff
-[mergetool "vimdiff"]
-    path = nvim
+; [core]
+    ; editor = nvim
+; [merge]
+    ; tool = vimdiff
+; [mergetool "vimdiff"]
+    ; path = nvim
