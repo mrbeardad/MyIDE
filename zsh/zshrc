@@ -132,6 +132,7 @@ alias dki='sudo docker image'
 alias dkc='sudo docker container'
 alias v='nvim'
 alias vi='DARKBG=1 nvim'
+alias vim='DARKBG=1 vim'
 
 function f() {
     if [[ -n "$1" ]] ;then
