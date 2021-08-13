@@ -1,0 +1,59 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+    {
+        "key": "ctrl+a",
+        "command": "cursorLineStart"
+    },
+    {
+        "key": "ctrl+e",
+        "command": "cursorLineEnd"
+    },
+    {
+        "key": "shift+left",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.mode == insert",
+        "args": "<C-D>"
+    },
+    {
+        "key": "shift+right",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.mode == insert",
+        "args": "<C-T>"
+    },
+    {
+        "key": "ctrl+shift+up",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus",
+        "args": "<C-S-Up>"
+    },
+    {
+        "key": "ctrl+shift+down",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus",
+        "args": "<C-S-Down>"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.mode == insert",
+        "args": "<C-l>"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.mode == insert",
+        "args": "<C-k>"
+    },
+    {
+        "key": "n",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus",
+        "args": "n"
+    },
+    {
+        "key": "N",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus",
+        "args": "N"
+    }
+]

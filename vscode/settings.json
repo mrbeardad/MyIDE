@@ -1,0 +1,20 @@
+{
+    "editor.cursorSmoothCaretAnimation": true,
+    "editor.renderControlCharacters": true,
+    "editor.fontFamily": "NerdCodePro Font",
+    "terminal.integrated.fontFamily": "NerdCodePro Font",
+    "go.toolsManagement.autoUpdate": true,
+    "vscode-neovim.useWSL": true,
+    "vscode-neovim.mouseSelectionStartVisualMode": true,
+    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+    "vscode-neovim.neovimInitVimPaths.linux": "/home/beardad/.init-vscode.vim",
+    "workbench.productIconTheme": "fluent-icons",
+    "workbench.colorTheme": "Better Solarized Dark",
+    "workbench.settings.openDefaultKeybindings": true,
+    "workbench.sideBar.location": "right",
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#005f5f"
+    },
+}
