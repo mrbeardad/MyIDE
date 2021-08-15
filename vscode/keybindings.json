@@ -1,59 +1,263 @@
 // Place your key bindings in this file to override the defaultsauto[]
 [
+    // 行首与行首
     {
         "key": "ctrl+a",
-        "command": "cursorLineStart"
+        "command": "cursorLineStart",
+        "when": "editorTextFocus",
     },
     {
         "key": "ctrl+e",
-        "command": "cursorLineEnd"
+        "command": "cursorLineEnd",
+        "when": "editorTextFocus",
     },
+    // 左移右移
     {
         "key": "shift+left",
-        "command": "vscode-neovim.send",
+        "command": "editor.action.outdentLines",
         "when": "editorTextFocus && neovim.mode == insert",
-        "args": "<C-D>"
     },
     {
         "key": "shift+right",
-        "command": "vscode-neovim.send",
+        "command": "editor.action.indentLines",
         "when": "editorTextFocus && neovim.mode == insert",
-        "args": "<C-T>"
+    },
+    // 上移下移
+    {
+        "key": "shift+down",
+        "command": "editor.action.moveLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
     },
     {
-        "key": "ctrl+shift+up",
-        "command": "vscode-neovim.send",
-        "when": "editorTextFocus",
-        "args": "<C-S-Up>"
+        "key": "shift+up",
+        "command": "editor.action.moveLinesUpAction",
+        "when": "editorTextFocus && !editorReadonly"
     },
-    {
-        "key": "ctrl+shift+down",
-        "command": "vscode-neovim.send",
-        "when": "editorTextFocus",
-        "args": "<C-S-Down>"
-    },
+    // 后向删除
     {
         "key": "ctrl+l",
-        "command": "vscode-neovim.send",
+        "command": "deleteRight",
         "when": "editorTextFocus && neovim.mode == insert",
-        "args": "<C-l>"
     },
     {
         "key": "ctrl+k",
-        "command": "vscode-neovim.send",
+        "command": "deleteAllRight",
         "when": "editorTextFocus && neovim.mode == insert",
-        "args": "<C-k>"
+    },
+    // Editor切换
+    {
+        "key": "tab",
+        "command": "workbench.action.focusNextGroup",
+        "when": "editorTextFocus && neovim.mode != insert"
     },
     {
-        "key": "n",
+        "key": "shift+tab",
+        "command": "workbench.action.focusPreviousGroup",
+        "when": "editorTextFocus && neovim.mode != insert"
+    },
+    // 快速添加空行
+    {
+        "key": "oem_6 Space",
         "command": "vscode-neovim.send",
-        "when": "editorTextFocus",
-        "args": "n"
+        "when": "editorTextFocus && neovim.mode != insert",
+        "args": "]<Space>"
     },
     {
-        "key": "N",
+        "key": "oem_4 Space",
         "command": "vscode-neovim.send",
-        "when": "editorTextFocus",
-        "args": "N"
-    }
+        "when": "editorTextFocus && neovim.mode != insert",
+        "args": "[<Space>"
+    },
+    // diff跳转
+    {
+        "key": "oem_6 c",
+        "command": "workbench.action.compareEditor.nextChange",
+        "when": "textCompareEditorVisible && neovim.mode != insert"
+    },
+    {
+        "key": "oem_4 c",
+        "command": "workbench.action.compareEditor.previousChange",
+        "when": "textCompareEditorVisible && neovim.mode != insert"
+    },
+    // 错误跳转
+    {
+        "key": "oem_6 e",
+        "command": "editor.action.marker.nextInFiles",
+        "when": "editorFocus && neovim.mode != insert"
+    },
+    {
+        "key": "oem_4 e",
+        "command": "editor.action.marker.prevInFiles",
+        "when": "editorFocus && neovim.mode != insert"
+    },
+    // 使用vscode的撤销可跨越session
+    {
+        "key": "u",
+        "command": "undo",
+        "when": "editorTextFocus && neovim.mode != insert",
+    },
+    {
+        "key": "ctrl+r",
+        "command": "redo",
+        "when": "editorTextFocus && neovim.mode != insert",
+    },
+    // 折叠
+    {
+        "key": "ctrl+z z",
+        "command": "editor.toggleFold",
+        "when": "editorTextFocus && foldingEnabled && neovim.mode != insert"
+    },
+    {
+        "key": "ctrl+z r",
+        "command": "editor.unfoldAll",
+        "when": "editorTextFocus && foldingEnabled && neovim.mode != insert"
+    },
+    {
+        "key": "ctrl+mctrl+z m",
+        "command": "editor.foldAll",
+        "when": "editorTextFocus && foldingEnabled && neovim.mode != insert"
+    },
+    {
+        "key": "ctrl+z n",
+        "command": "editor.gotoNextFold",
+        "when": "editorTextFocus && neovim.mode != insert"
+    },
+    {
+        "key": "ctrl+z b",
+        "command": "editor.gotoPreviousFold",
+        "when": "editorTextFocus && neovim.mode != insert"
+    },
+    {
+        "key": "ctrl+z p",
+        "command": "editor.gotoParentFold",
+        "when": "editorTextFocus && neovim.mode != insert"
+    },
+    // 补全
+    {
+        "key": "tab",
+        "command": "acceptSelectedSuggestion",
+        "when": "suggestWidgetVisible && textInputFocus"
+    },
+    {
+        "key": "shift+tab",
+        "command": "acceptSelectedSuggestion",
+        "when": "suggestWidgetVisible && textInputFocus"
+    },
+    {
+        "key": "tab",
+        "command": "selectNextSuggestion",
+        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
+    },
+    {
+        "key": "shift+tab",
+        "command": "selectPrevSuggestion",
+        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
+    },
+    // 书签
+    {
+        "key": "ctrl+m m",
+        "command": "bookmarks.toggle",
+        "when": "editorTextFocus && neovim.mode != insert"
+    },
+    {
+        "key": "ctrl+m i",
+        "command": "bookmarks.toggleLabeled",
+        "when": "editorTextFocus && neovim.mode != insert"
+    },
+    {
+        "key": "ctrl+m l",
+        "command": "bookmarks.list",
+        "when": "editorTextFocus && neovim.mode != insert"
+    },
+    {
+        "key": "ctrl+m shift+l",
+        "command": "bookmarks.listFromAllFiles",
+        "when": "editorTextFocus && neovim.mode != insert"
+    },
+    {
+        "key": "ctrl+m c",
+        "command": "bookmarks.clear",
+        "when": "editorTextFocus && neovim.mode != insert"
+    },
+    {
+        "key": "ctrl+m shift+c",
+        "command": "bookmarks.clearFromAllFiles",
+        "when": "editorTextFocus && neovim.mode != insert"
+    },
+    {
+        "key": "ctrl+m n",
+        "command": "bookmarks.jumpToNext",
+        "when": "editorTextFocus && neovim.mode != insert"
+    },
+    {
+        "key": "ctrl+m b",
+        "command": "bookmarks.jumpToPrevious",
+        "when": "editorTextFocus && neovim.mode != insert"
+    },
+    // 取消Ctrl+W的按键绑定，不然老是按错
+    {
+        "key": "ctrl+w",
+        "command": "-workbench.action.closeGroup",
+        "when": "activeEditorGroupEmpty && multipleEditorGroups"
+    },
+    {
+        "key": "ctrl+w",
+        "command": "-workbench.action.closeActiveEditor"
+    },
+    // 还原vim <c-g>
+    {
+        "key": "ctrl+g",
+        "command": "-workbench.action.gotoLine"
+    },
+    {
+        "key": "ctrl+g",
+        "command": "vscode-neovim.send",
+        "when": "editorTextFocus && neovim.mode != insert",
+        "args": "<C-G>"
+    },
+    // 查询snippet
+    {
+        "key": "alt+oem_2",
+        "command": "editor.action.insertSnippet",
+        "when": "editorTextFocus"
+    },
+    // Markdown Preview按键优化
+    {
+        "key": "ctrl+shift+v",
+        "command": "-markdown.showPreview",
+        "when": "!notebookEditorFocused && editorLangId == 'markdown'"
+    },
+    {
+        "key": "ctrl+shift+v",
+        "command": "-markdown.extension.togglePreview",
+        "when": "!terminalFocus"
+    },
+    // 代码统计
+    {
+        "key": "shift+alt+c",
+        "command": "extension.vscode-counter.countInWorkspace"
+    },
+    // 文件头部
+    {
+        "key": "shift+alt+h",
+        "command": "psi-header.insertFileHeader"
+    },
+    // 多光标
+    {
+        "key": "ctrl+n",
+        "command": "editor.action.addSelectionToNextFindMatch",
+        "when": "editorFocus"
+    },
+    // 开启文件树
+    {
+        "key": "f1",
+        "command": "workbench.view.explorer",
+        "when": "viewContainer.workbench.view.explorer.enabled"
+    },
+    // 关闭sidebar
+    {
+        "key": "f2",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
 ]
+

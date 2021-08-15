@@ -3,7 +3,7 @@
     "$schema": "https://aka.ms/terminal-profiles-schema",
 
     // Startup
-    "defaultProfile": "{96be24fd-152c-5812-90bb-b4bd046f9785}",
+    "defaultProfile": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
     "startOnUserLogin": false,
     "launchMode": "default",
     "windowingBehavior": "useNew",
@@ -87,13 +87,13 @@
         { "command": "unbound", "keys": "alt+t"}
     ],
 
-    // Profiles
+
     "profiles":
     {
         "defaults":
         {
             "colorScheme": "Atom",
-            "fontFace": "NerdCodePro Font",
+            "fontFace": "SauceCodePro Nerd Font",
             "fontWeight": "normal",
             "fontSize": 9,
             "cursorShape": "filledBox",
@@ -115,7 +115,6 @@
                 "name": "Windows PowerShell",
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "commandline": "powershell.exe",
-                "startingDirectory": "%USERPROFILE%",
                 "hidden": false
             },
             {
@@ -129,17 +128,18 @@
                 "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
                 "source": "Windows.Terminal.Wsl",
                 "commandline": "wsl ~ -d Ubuntu-20.04",
-                "icon": "%USERPROFILE%\\Pictures\\ubuntu.png",
+                "icon": "%USERPROFILE%\\OneDrive\\图片\\Saved Pictures\\ubuntu.png",
                 "hidden": false
             },
             {
                 "name": "熊海成爸爸的ArchLinux",
-                "guid": "{96be24fd-152c-5812-90bb-b4bd046f9785}",
+                "guid": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
                 "source": "Windows.Terminal.Wsl",
-                "commandline": "wsl ~ -d Arch -- sudo daemonize /bin/dockerd; tmux new-session -s ArchWSL || tmux attach -t ArchWSL",
-                "icon": "%USERPROFILE%\\Pictures\\arch.webp",
+                "commandline": "wsl ~ -d Arch -- sudo daemonize dockerd; tmux new-session -s Arch || tmux attach -t Arch",
+                "icon": "%USERPROFILE%\\OneDrive\\图片\\Saved Pictures\\arch.webp",
                 "hidden": false
             }
         ]
     }
 }
+

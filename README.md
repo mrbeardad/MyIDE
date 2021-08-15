@@ -2,7 +2,7 @@
 这篇文档做为个我的个人日志，方便下次重装，读者请酌情参考。
 
 ## 首先
-* 登录Windows个人账户
+* 登录MicroSoft Windows个人账户
 
 ## 驱动程序
 * 下载并安装[MyASUS](https://www.microsoft.com/zh-cn/p/myasus/9n7r5s6b0zzh?activetab=pivot:overviewtab)
@@ -10,13 +10,14 @@
 ## 下载准备
 * 下载并安装[Google Chrome](https://www.google.cn/chrome/)
 
-* 设置Chrome的下载目录为`C:\Users\UserName\Downloads\GoogleChrome-Downloads`
-
 * 下载并安装[Bandizip压缩包工具](https://www.bandizip.com/)
 
 * 登录Google账户并同步Chrome配置（包括手动同步TampMonkey脚本）
 
 * 修改`C:\Windows\System32\drivers\etc\hosts`解决DNS污染
+<details>
+    <summary><b>github hosts</b></summary>
+
 ```txt
 #*********************github 2021-07-12 update********************
 #******* get latest hosts: http://blog.yoqi.me/lyq/16489.html
@@ -62,13 +63,12 @@
 140.82.114.29	githubapp.com
 140.82.113.3	github.com
 ```
+</details>
 
 ## 下载软件
-* [Microsoft Edge](https://www.microsoft.com/zh-cn/edge)
+* [QQ 输入法](http://qq.pinyin.cn/)
 
-* [QQ输入法](http://qq.pinyin.cn/)
-
-* [TIM 通讯](https://tim.qq.com)
+* [TIM 即时通讯](https://tim.qq.com)
 
 * [百度网盘](https://pan.baidu.com/downloads)
 
@@ -76,13 +76,53 @@
 
 * [万彩办公大师](http://www.wofficebox.com/)
 
-* [CHFS 文件共享服务器](http://iscute.cn/chfs)
-
-* [Dism++ 系统清理与优化](https://www.chuyu.me/zh-Hans/)
+* [CHFS 局域网Http服务器](http://iscute.cn/chfs)
 
 * [Geek 卸载工具](https://geekuninstaller.com/)
 
 * [Listary 搜索工具](https://www.listarypro.com/download)
+<details>
+    <summary><b>github hosts</b></summary>
+
+```txt
+产  品：Listary授权信息
+姓  名：准女婿
+邮  箱：welcome5201311@163.com
+注册码：
+DR6QRNJBSYB344AJ7NJA3EKZC9B2PMWV
+KF2HP9CAQSJMBZCJXM8KSH4H3XYPAKNS
+WRR6ZBJ3HQPPZGF8FL88VQSNZ27EAW8S
+AAV6TVFGLQZTHGJCAEMAKG74573ZTDDG
+8NMLXAMZVJ6546QZLE7VTYZRNFKMHUBB
+JNWC2T2FR3EKVUDA2JEL85RDHLVFBC4Q
+复制代码
+ 
+
+复制代码
+姓  名：准女婿
+邮  箱：welcome5201311@163.com
+注册码：
+AQUTK8NRYKGREDZMS68GPG9NPDYSYJJK
+FGQ2ZL8B6Z3STGXEST27EAS67F77HR6M
+CW7Y6YA85T75AQUX7W3CYBNJLCJE7GY9
+WA3HSDTA8YLT2FPF8YMXWWWFLT4NQK4F
+C3LUGRGZR5R29CYAUPZ4XUEXDLGFZNGV
+JNWC2T2FR3EKULSBLMG9NLPJWRW29WYH
+复制代码
+ 
+
+复制代码
+姓  名：准女婿
+邮  箱：welcome5201311@znx_52pojie.com
+注册码：
+JRWX9QN8GJYF9J3S27KYKY2F7UGCW9QD
+VUHQL8ZBERXM9KMY8UM8P23QKYDXHTCW
+VHD2WNSSP8CV755UFGALVG34XYEENR76
+YSKTDDH29DEVTYD9V5TV8HLMRVGEUVC5
+XKE62QZA7YH97CBBA5V7V53MC6XC89N6
+4YA4DWA2TZ4VU8VT8S3R89W6HBKG3J42
+```
+</details>
 
 * [PowerToys 工具集](https://github.com/microsoft/PowerToys/releases)
 
@@ -117,11 +157,11 @@
     > Settings -> Personalization -> Colors
 
 * 更改鼠标主题
-    > Settings -> Personalization -> Themes -> Mouse cursor  
+    > Settings -> Personalization -> Themes -> Mouse cursor
     > 需要将[鼠标主题](cursor)解压并安装到`C:\Windows\Cursors`
 
 * 安装字体
-    > Settings -> Personalization -> Fonts  
+    > Settings -> Personalization -> Fonts
     > [NerdCodePro Font](windows10/fonts/)
 
 * 设置StartMenu
@@ -148,7 +188,7 @@
     > Settings -> Time & Language -> Region
 
 * 关闭或卸载不必要的应用
-    > Settings -> Apps -> Apps & features  
+    > Settings -> Apps -> Apps & features
     > 可以用Geek卸载
 
 * 设置打开文件的默认应用
@@ -165,11 +205,11 @@
 
 
 ## 开发工具：
-* 下载[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)，
+* 安装[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)，
     并安装配置[settings.json](windows10/wt/settings.json)
 
-* 下载[WSL](https://www.microsoft.com/zh-cn/p/ubuntu-2004-lts/9n6svws3rx71?activetab=pivot:overviewtab)
-    1. 管理员权限运行`wt`：
+* 安装[WSL](https://www.microsoft.com/zh-cn/p/ubuntu-2004-lts/9n6svws3rx71?activetab=pivot:overviewtab)
+    1. 管理员权限运行`wt`并执行：
         ```sh
         dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
@@ -177,10 +217,31 @@
         ```
     2. 重启后，再启动WSL与Ubuntu进行初始化
     3. 升级WSL2：下载[WSL2升级包](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
-
-* 下载[ArchWSL](https://github.com/yuk7/ArchWSL)或[ManjaroWSL](https://github.com/sileshn/ManjaroWSL)，
-* 执行`wsl --set-version <Distro> 2`与`wsl --set-default <Distro>`
-* 进入WSL并克隆该仓库然后执行`init.sh`
+    4. 下载[ArchWSL](https://github.com/yuk7/ArchWSL)
+    5. 执行：
+        ```sh
+        wsl --set-version <Distro> 2
+        wsl --set-default <Distro>
+        wsl # 进入wsl
+        ```
+    6. 进入WSL后执行（可选）：
+        ```sh
+        # 添加普通用户
+        useradd -m username -G wheel
+        passwd username
+        nano /etc/sudoers
+        ```
+    7. 退出WSL后在Windows PowerShell中执行：
+        ```sh
+        .\Arch.exe config -default-user username
+        ```
+    7. 安装本仓库配置
+        ```sh
+        mkdir ~/.local
+        git clone https://github.com/mrbeardad/Windows10 .local/Windows10
+        cd .local/Windows10 && ./init.sh
+        ```
+    8. 若试图在WSL中使用Windows代理，需要先修改Windows防火墙规则允许WSL所在域访问
 
 * 下载[VSCode](https://code.visualstudio.com/download)，并安装插件与配置
     * Remote-WSL
