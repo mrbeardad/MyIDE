@@ -35,8 +35,8 @@ chsh -s /bin/zsh
 
 # 配置vim
 yay -S zip unzip \
-    vim neovim python-pynvim \
-    ripgrep global ctags \
+    vim neovim python-pynvim neovim-plug \
+    ripgrep silver-searcher-git global ctags \
     npm php python-pip \
     vim-language-server vint \
     bash-language-server shellcheck \
@@ -50,7 +50,7 @@ g++ -O3 -DNDEBUG -std=c++11 -o ~/.local/bin/quickrun_time ~/.SpaceVim/custom/qui
 curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
 unzip -p /tmp/win32yank.zip win32yank.exe > ~/.local/bin/win32yank.exe
 chmod +x ~/.local/bin/win32yank.exe
-cp -v vscode/.init-vscode.vim ~
+cp -rv vscode/.vscode-neovim ~/
 
 # 安装SeeCheatSheets
 git clone https://github.com/mrbeardad/SeeCheatSheets ~/.cheat
@@ -64,7 +64,7 @@ git clone https://github.com/mrbeardad/SeeCheatSheets ~/.cheat
 
 # 安装命令行工具
 yay -S delve gdb cgdb conan graphviz cppcheck boost asio gtest gmock \
-    openssh strace lsof socat nmap tcpdump gist daemonize docker \
+    openssh strace lsof socat nmap tcpdump gist daemonize docker nginx \
     tree lsd fzf ranger htop bashtop iotop iftop dstat cloc \
     neofetch toilet cowfortune cmatrix sl asciiquarium
 go env -w GOPATH="$HOME"/.local/go/
@@ -77,8 +77,6 @@ pip config set global.index-url https://mirrors.cloud.tencent.com/pypi/simple
 pip install cppman thefuck mycli pylint flake8 bandit pudb ipython
 # htop配置
 cp -v htop/htoprc ~/.config/htop/htoprc
-# pudb配置
-cp -rv pudb ~/.config
 # gdb与cgdb配置
 mkdir -v ~/.cgdb
 cp -v gdb/cgdbrc ~/.cgdb
