@@ -1,15 +1,9 @@
-" 插入模式
-inoremap <C-Return> <C-O>o
-
 " 普通模式
 nnoremap <S-Left> <<
 nnoremap <S-Right> >>
-nnoremap <silent>[<Space> :<C-U>put! =repeat(nr2char(10), v:count1)<CR>
-nnoremap <silent>]<Space> :<C-U>put =repeat(nr2char(10), v:count1)<CR>
 
 " 复制粘贴
-set clipboard+=unnamedplus
-let $PATH=$HOME.'/.local/bin/:'.$PATH   " win32yank.exe在~/.local/bin下
+let $PATH=$HOME.'/.local/bin/:'.$PATH   " 将win32yank.exe解压到~/.local/bin下
 inoremap <c-y> <c-r>"
 nnoremap  , yl
 nnoremap  Y y$
@@ -80,7 +74,7 @@ func! AutoPairsFastWrap()
   let @" = c
   return ""
 endf
-inoremap <silent><M-e> <Esc>a<C-R>=AutoPairsFastWrap()<CR>
+inoremap <silent><M-e> <C-R>=AutoPairsFastWrap()<CR>
 
 set ignorecase
 set smartcase

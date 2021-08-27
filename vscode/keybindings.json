@@ -1,5 +1,19 @@
 // Place your key bindings in this file to override the defaultsauto[]
 [
+    // 取消一些默认的按键绑定
+    {
+        "key": "ctrl+w",
+        "command": "-workbench.action.closeGroup",
+        "when": "activeEditorGroupEmpty && multipleEditorGroups"
+    },
+    {
+        "key": "ctrl+w",
+        "command": "-workbench.action.closeActiveEditor"
+    },
+    {
+        "key": "ctrl+e",
+        "command": "-workbench.action.quickOpen"
+    },
     // 行首与行首
     {
         "key": "ctrl+a",
@@ -44,53 +58,7 @@
         "command": "deleteAllRight",
         "when": "editorTextFocus && neovim.mode == insert",
     },
-    // Editor切换
-    {
-        "key": "tab",
-        "command": "workbench.action.focusNextGroup",
-        "when": "editorTextFocus && neovim.mode != insert"
-    },
-    {
-        "key": "shift+tab",
-        "command": "workbench.action.focusPreviousGroup",
-        "when": "editorTextFocus && neovim.mode != insert"
-    },
-    // 快速添加空行
-    {
-        "key": "oem_6 Space",
-        "command": "vscode-neovim.send",
-        "when": "editorTextFocus && neovim.mode != insert",
-        "args": "]<Space>"
-    },
-    {
-        "key": "oem_4 Space",
-        "command": "vscode-neovim.send",
-        "when": "editorTextFocus && neovim.mode != insert",
-        "args": "[<Space>"
-    },
-    // diff跳转
-    {
-        "key": "oem_6 c",
-        "command": "workbench.action.compareEditor.nextChange",
-        "when": "textCompareEditorVisible && neovim.mode != insert"
-    },
-    {
-        "key": "oem_4 c",
-        "command": "workbench.action.compareEditor.previousChange",
-        "when": "textCompareEditorVisible && neovim.mode != insert"
-    },
-    // 错误跳转
-    {
-        "key": "oem_6 e",
-        "command": "editor.action.marker.nextInFiles",
-        "when": "editorFocus && neovim.mode != insert"
-    },
-    {
-        "key": "oem_4 e",
-        "command": "editor.action.marker.prevInFiles",
-        "when": "editorFocus && neovim.mode != insert"
-    },
-    // 使用vscode的撤销可跨越session
+    // 使用vscode原生undo stack
     {
         "key": "u",
         "command": "undo",
@@ -100,6 +68,39 @@
         "key": "ctrl+r",
         "command": "redo",
         "when": "editorTextFocus && neovim.mode != insert",
+    },
+    // Diff跳转
+    {
+        "key": "ctrl+oem_6 c",
+        "command": "workbench.action.compareEditor.nextChange",
+        "when": "textCompareEditorVisible && neovim.mode != insert"
+    },
+    {
+        "key": "ctrl+oem_4 c",
+        "command": "workbench.action.compareEditor.previousChange",
+        "when": "textCompareEditorVisible && neovim.mode != insert"
+    },
+    // Problem跳转
+    {
+        "key": "ctrl+oem_6 e",
+        "command": "editor.action.marker.nextInFiles",
+        "when": "editorFocus && neovim.mode != insert"
+    },
+    {
+        "key": "ctrl+oem_4 e",
+        "command": "editor.action.marker.prevInFiles",
+        "when": "editorFocus && neovim.mode != insert"
+    },
+    // Editor Group切换
+    {
+        "key": "tab",
+        "command": "workbench.action.focusNextGroup",
+        "when": "editorTextFocus && neovim.mode != insert"
+    },
+    {
+        "key": "shift+tab",
+        "command": "workbench.action.focusPreviousGroup",
+        "when": "editorTextFocus && neovim.mode != insert"
     },
     // 折叠
     {
@@ -113,7 +114,7 @@
         "when": "editorTextFocus && foldingEnabled && neovim.mode != insert"
     },
     {
-        "key": "ctrl+mctrl+z m",
+        "key": "ctrl+z m",
         "command": "editor.foldAll",
         "when": "editorTextFocus && foldingEnabled && neovim.mode != insert"
     },
@@ -131,27 +132,6 @@
         "key": "ctrl+z p",
         "command": "editor.gotoParentFold",
         "when": "editorTextFocus && neovim.mode != insert"
-    },
-    // 补全
-    {
-        "key": "tab",
-        "command": "acceptSelectedSuggestion",
-        "when": "suggestWidgetVisible && textInputFocus"
-    },
-    {
-        "key": "shift+tab",
-        "command": "acceptSelectedSuggestion",
-        "when": "suggestWidgetVisible && textInputFocus"
-    },
-    {
-        "key": "tab",
-        "command": "selectNextSuggestion",
-        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
-    },
-    {
-        "key": "shift+tab",
-        "command": "selectPrevSuggestion",
-        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
     },
     // 书签
     {
@@ -194,43 +174,61 @@
         "command": "bookmarks.jumpToPrevious",
         "when": "editorTextFocus && neovim.mode != insert"
     },
-    // 取消Ctrl+W的按键绑定，不然老是按错
+    // Tab键选择补全
     {
-        "key": "ctrl+w",
-        "command": "-workbench.action.closeGroup",
-        "when": "activeEditorGroupEmpty && multipleEditorGroups"
+        "key": "tab",
+        "command": "acceptSelectedSuggestion",
+        "when": "suggestWidgetVisible && textInputFocus"
     },
     {
-        "key": "ctrl+w",
-        "command": "-workbench.action.closeActiveEditor"
-    },
-    // 还原vim <c-g>
-    {
-        "key": "ctrl+g",
-        "command": "-workbench.action.gotoLine"
+        "key": "shift+tab",
+        "command": "acceptSelectedSuggestion",
+        "when": "suggestWidgetVisible && textInputFocus"
     },
     {
-        "key": "ctrl+g",
-        "command": "vscode-neovim.send",
-        "when": "editorTextFocus && neovim.mode != insert",
-        "args": "<C-G>"
+        "key": "tab",
+        "command": "selectNextSuggestion",
+        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
     },
-    // 查询snippet
     {
-        "key": "alt+oem_2",
+        "key": "shift+tab",
+        "command": "selectPrevSuggestion",
+        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
+    },
+    // 手动触发补全列表
+    {
+        "key": "ctrl+oem_5",
+        "command": "editor.action.triggerSuggest",
+        "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
+    },
+    // 手动查询snippets
+    {
+        "key": "alt+oem_5",
         "command": "editor.action.insertSnippet",
         "when": "editorTextFocus"
     },
-    // Markdown Preview按键优化
+    // 快速包围：我他娘的是个天才
     {
-        "key": "ctrl+shift+v",
-        "command": "-markdown.showPreview",
-        "when": "!notebookEditorFocused && editorLangId == 'markdown'"
+        "key": "alt+e",
+        "command": "extension.multiCommand.execute",
+        "args": {
+            "sequence": [
+                "vscode-neovim.escape",
+                { "command": "vscode-neovim.send", "args": "a"},
+                { "command": "vscode-neovim.send", "args": "<M-e>"}
+            ]
+        },
+        "when": "editorTextFocus && neovim.mode == insert",
+    },
+    // 多光标
+    {
+        "key": "ctrl+n",
+        "command": "editor.action.addSelectionToNextFindMatch",
+        "when": "editorFocus"
     },
     {
-        "key": "ctrl+shift+v",
-        "command": "-markdown.extension.togglePreview",
-        "when": "!terminalFocus"
+        "key": "ctrl+shift+n",
+        "command": "editor.action.addSelectionToPreviousFindMatch"
     },
     // 代码统计
     {
@@ -240,24 +238,28 @@
     // 文件头部
     {
         "key": "shift+alt+h",
-        "command": "psi-header.insertFileHeader"
+        "command": "extension.fileheader",
+        "when": "editorTextFocus"
     },
-    // 多光标
+    // markdown预览
     {
-        "key": "ctrl+n",
-        "command": "editor.action.addSelectionToNextFindMatch",
-        "when": "editorFocus"
+        "key": "ctrl+shift+v",
+        "command": "-markdown-preview-enhanced.openPreview",
+        "when": "editorLangId == 'markdown'"
     },
-    // 开启文件树
     {
-        "key": "f1",
-        "command": "workbench.view.explorer",
-        "when": "viewContainer.workbench.view.explorer.enabled"
+        "key": "ctrl+shift+v",
+        "command": "-markdown.showPreview",
+        "when": "!notebookEditorFocused && editorLangId == 'markdown'"
     },
-    // 关闭sidebar
     {
-        "key": "f2",
-        "command": "workbench.action.toggleSidebarVisibility"
+        "key": "ctrl+shift+v",
+        "command": "markdown-preview-enhanced.openPreviewToTheSide",
+        "when": "editorLangId == 'markdown'"
+    },
+    // 翻译替换
+    {
+        "key": "shift+alt+t",
+        "command": "translator.replaceWithTranslation"
     },
 ]
-

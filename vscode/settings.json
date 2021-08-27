@@ -1,5 +1,6 @@
 {
     "security.workspace.trust.untrustedFiles": "open",
+    "security.workspace.trust.enabled": false,
     "files.trimTrailingWhitespace": true,
     "editor.wordWrap": "off",
     "editor.wordWrapColumn": 100,
@@ -8,7 +9,6 @@
     "editor.renderWhitespace": "all",
     "editor.fontFamily": "NerdCodePro Font",
     "terminal.integrated.fontFamily": "NerdCodePro Font",
-    "window.zoomLevel": -1,
     "workbench.productIconTheme": "fluent-icons",
     "workbench.colorTheme": "Better Solarized Dark",
     "workbench.settings.openDefaultKeybindings": true,
@@ -51,15 +51,12 @@
     "editor.multiCursorModifier": "ctrlCmd",
     "gitlens.codeLens.enabled": false,
     "editor.rulers": [
-        90
+        100
     ],
     "editor.tabCompletion": "onlySnippets",
-    "workbench.sideBar.location": "right",
     "bookmarks.sideBar.expanded": true,
-    "window.menuBarVisibility": "compact",
     "editor.suggest.showStatusBar": true,
     "problems.showCurrentInStatus": true,
-    "git.enableStatusBarSync": false,
     "todo-tree.general.showIconsInsteadOfTagsInStatusBar": true,
     "todo-tree.general.statusBar": "top three",
     "VSCodeCounter.exclude": [
@@ -1500,39 +1497,45 @@
             "blockStrings": []
         }
     },
-    "commentTranslate.source": "Baidu",
-    "psi-header.config": {
-        "forceToTop": true,
-        "blankLinesAfter": 2,
-        "author": "Heache Bear",
-        "authorEmail": "mrbeardad@qq.com",
-        "copyrightHolder": "Heachen Bear & Contributors",
-        "creationDateZero": "asIs",
+    "fileheader.customMade": {
+        "FilePath": "Do not edit",
+        "Description": "",
+        "Author": "Heache Bear <mrbeardad@qq.com>",
+        "Date": "Do not edit",
+        "LastEditTime": "Do not edit",
+        "LastEditors": "Heache Bear <mrbeardad@qq.com>",
+        "custom_string_obkoro1": "Copyright (c) 2018 - 2022 Heachen Bear & Contributors"
     },
-    "psi-header.templates": [
-        {
-            "language": "*",
-            "template": [
-                "File: <<filename>>",
-                "Project: <<projectname>>",
-                "Author: <<author>> (<<authoremail>>)",
-                "-----",
-                "Created Date: <<filecreated('YYYY-MM-DD HH:MM:ss')>>",
-                "Last Modified: <<dateformat('YYYY/MM/DD HH:MM:ss dddd')>>",
-                "Modified By: <<author>> (<<authoremail>>)",
-                "-----",
-                "Copyright (c) <<projectCreationYear>> - <<year>> <<copyrightholder>>",
-            ]
-        }
-    ],
-    "psi-header.changes-tracking": {
-        "isActive": true,
-        "modAuthor": "Modified By:",
-        "modDate": "Last Modified:",
-        "autoHeader": "autoSave",
-        "enforceHeader": true,
-        "updateLicenseVariables": false
+    "fileheader.configObj": {
+        "autoAdd": false, // 检测文件没有头部注释，自动添加文件头部注释
     },
     "editor.minimap.enabled": false,
+    "translation.youdao.appId": "67d12c034d0d15cb",
+    "translation.youdao.appKey": "jJFHJKvWlY479nZgnEbYh4N3nOYmVaI0",
+    "todo-tree.highlights.useColourScheme": true,
+    "bracket-pair-colorizer-2.colors": [
+        "Red",
+        "Gold",
+        "LightGreen",
+        "Orchid",
+        "LightSkyBlue"
+    ],
+    "git.enableStatusBarSync": false,
+    "window.customMenuBarAltFocus": false,
+    "window.enableMenuBarMnemonics": false,
+    "editor.inlineSuggest.enabled": true,
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": true,
+        "strings": true
+    },
+    "editor.suggest.insertMode": "replace",
+    "remote.SSH.remotePlatform": {
+        "9.134.13.22": "linux"
+    },
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "go.lintFlags": [
+        "-checks",
+        "inherit,-ST1006"
+    ],
 }
-
