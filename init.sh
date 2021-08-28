@@ -35,8 +35,8 @@ chsh -s /bin/zsh
 
 # 配置vim
 yay -S zip unzip \
-    vim neovim python-pynvim \
-    ripgrep global ctags \
+    vim neovim python-pynvim neovim-plug \
+    ripgrep silver-searcher-git global ctags \
     npm php python-pip \
     vim-language-server vint \
     bash-language-server shellcheck \
@@ -63,17 +63,17 @@ git clone https://github.com/mrbeardad/SeeCheatSheets ~/.cheat
 )
 
 # 安装命令行工具
-yay -S delve gdb cgdb conan graphviz cppcheck boost asio gtest gmock \
+yay -S delve gdb cgdb conan graphviz cppcheck boost asio gtest gmock google-glog \
     openssh strace lsof socat nmap tcpdump gist daemonize docker \
     tree lsd fzf ranger htop bashtop iotop iftop dstat cloc \
     neofetch toilet cowfortune cmatrix sl asciiquarium
 go env -w GOPATH="$HOME"/.local/go/
 go env -w GOBIN="$HOME"/.local/bin/
-go env -w GOPROXY=https://mirrors.cloud.tencent.com/go/,direct
+go env -w GOPROXY=https://mirrors.tencent.com/go/
 go get -u github.com/google/pprof
 go get -u github.com/juntaki/gogtags
-npm config set registry http://mirrors.cloud.tencent.com/npm/
-pip config set global.index-url https://mirrors.cloud.tencent.com/pypi/simple
+npm config set registry http://mirrors.tencent.com/npm/
+pip config set global.index-url https://mirrors.tencent.com/pypi/simple
 pip install cppman thefuck mycli pylint flake8 bandit pudb ipython
 # htop配置
 cp -v htop/htoprc ~/.config/htop/htoprc
