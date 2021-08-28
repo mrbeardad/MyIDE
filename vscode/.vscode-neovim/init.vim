@@ -1,15 +1,9 @@
-" 插入模式
-inoremap <C-Return> <C-O>o
-
 " 普通模式
 nnoremap <S-Left> <<
 nnoremap <S-Right> >>
-nnoremap <silent>[<Space> :<C-U>put! =repeat(nr2char(10), v:count1)<CR>
-nnoremap <silent>]<Space> :<C-U>put =repeat(nr2char(10), v:count1)<CR>
 
 " 复制粘贴
-set clipboard+=unnamedplus
-let $PATH=$HOME.'/.local/bin/:'.$PATH   " win32yank.exe在~/.local/bin下
+let $PATH=$HOME.'/.local/bin/:'.$PATH   " 将win32yank.exe解压到~/.local/bin下
 inoremap <c-y> <c-r>"
 nnoremap  , yl
 nnoremap  Y y$
@@ -17,16 +11,70 @@ nnoremap <Leader>, "+yl
 nnoremap <Leader>Y "+y$
 nnoremap <Leader>y "+y
 vnoremap <Leader>y "+y
+nnoremap <Space>y "+yae<C-O>
 nnoremap <Leader>p "+p
 nnoremap <Leader>P "+P
 vnoremap <Leader>p "+p
 nnoremap <silent><leader>o :<C-U>put =@+<CR>
 nnoremap <silent><leader>O :<C-U>put! =@+<CR>
+nnoremap <Space>p ggdG"+P
 nnoremap =p "0p
 nnoremap =P "0P
 vnoremap =p "0p
 nnoremap <silent>=o :<C-U>put =@0<CR>
 nnoremap <silent>=O :<C-U>put! =@0<CR>
+
+" fast wrap
+func! s:getline()
+  let line = getline('.')
+  let pos = col('.') - 1
+  let before = strpart(line, 0, pos)
+  let after = strpart(line, pos)
+  let afterline = after
+  if 1
+    let n = line('$')
+    let i = line('.')+1
+    while i <= n
+      let line = getline(i)
+      let after = after.' '.line
+      if !(line =~ '\v^\s*$')
+        break
+      end
+      let i = i+1
+    endwhile
+  end
+  return [before, after, afterline]
+endf
+func! AutoPairsFastWrap()
+  let c = @"
+  normal! x
+  let [before, after, ig] = s:getline()
+  if after[0] =~ '\v[\{\[\(\<]'
+    normal! %
+    normal! p
+  else
+    for [open, close, opt] in [['\v^\s*\zs"', '', {'key': '', 'mapclose': 1, 'multiline': 1}], ['```', '```', {'key': '`', 'mapclose': 1, 'multiline': 0}], ['''''''', '''''''', {'key': '''', 'mapclose': 1, 'multiline': 0}], ['"""', '"""', {'key': '"', 'mapclose': 1, 'multiline': 0}], ['`', '`', {'key': '`', 'mapclose': 1, 'multiline': 0}], ['"', '"', {'key': '"', 'mapclose': 1, 'multiline': 0}], ['[', ']', {'key': ']', 'mapclose': 1, 'multiline': 1}], ['\v(^|\W)\zs''', '''', {'key': '''', 'mapclose': 1, 'multiline': 0}], ['(', ')', {'key': ')', 'mapclose': 1, 'multiline': 1}], ['{', '}', {'key': '}', 'mapclose': 1, 'multiline': 1}]]
+      if close == ''
+        continue
+      end
+      if after =~ '^\s*\V'.open
+        call search(close, 'We')
+        normal! p
+        let @" = c
+        return ""
+      end
+    endfor
+    if after[1:1] =~ '\v\w'
+      normal! e
+      normal! p
+    else
+      normal! p
+    end
+  end
+  let @" = c
+  return ""
+endf
+inoremap <silent><M-e> <C-R>=AutoPairsFastWrap()<CR>
 
 set ignorecase
 set smartcase
@@ -44,8 +92,8 @@ Plug 'rhysd/clever-f.vim'
 "==================================================================================================
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_do_mapping = 0
-Plug 'asvetliakov/vim-easymotion'
-nmap ; <Plug>(easymotion-overwin-f2)
+Plug 'asvetliakov/vim-easymotion', { 'as': 'vsc-easymotion' }
+nmap ; <Plug>(easymotion-bd-f)
 "==================================================================================================
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'

@@ -79,7 +79,7 @@
         { "command": { "action": "openSettings", "target": "settingsUI" }, "keys": "ctrl+," },
         { "command": { "action": "openSettings", "target": "settingsFile" }, "keys": "ctrl+shift+," },
         { "command": { "action": "openSettings", "target": "defaultsFile" }, "keys": "ctrl+alt+," },
-        { "command": "toggleFullscreen", "keys": "alt+enter" },
+        { "command": "quakeMode", "keys": "alt+enter" },
         { "command": "toggleFullscreen", "keys": "f11" },
         { "command": "unbound", "keys": "ctrl+shift+down"},
         { "command": "unbound", "keys": "ctrl+shift+up"},
