@@ -96,7 +96,7 @@ AAV6TVFGLQZTHGJCAEMAKG74573ZTDDG
 8NMLXAMZVJ6546QZLE7VTYZRNFKMHUBB
 JNWC2T2FR3EKVUDA2JEL85RDHLVFBC4Q
 复制代码
- 
+
 
 复制代码
 姓  名：准女婿
@@ -109,7 +109,7 @@ WA3HSDTA8YLT2FPF8YMXWWWFLT4NQK4F
 C3LUGRGZR5R29CYAUPZ4XUEXDLGFZNGV
 JNWC2T2FR3EKULSBLMG9NLPJWRW29WYH
 复制代码
- 
+
 
 复制代码
 姓  名：准女婿
@@ -134,7 +134,7 @@ XKE62QZA7YH97CBBA5V7V53MC6XC89N6
 
 * [MacType 字体渲染](https://github.com/snowie2000/mactype/releases)
 
-* Office 办公套件
+* [Office 办公套件](https://www.office.com/)
 
 
 ## 个性化设置
@@ -206,36 +206,36 @@ XKE62QZA7YH97CBBA5V7V53MC6XC89N6
 
 ## 开发工具：
 * 安装[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)，
-    并安装配置[settings.json](windows10/wt/settings.json)
+并安装配置[settings.json](WindowsTerminal/settings.json)
 
 * 安装[WSL](https://www.microsoft.com/zh-cn/p/ubuntu-2004-lts/9n6svws3rx71?activetab=pivot:overviewtab)
-    1. 管理员权限运行`wt`并执行：
-        ```sh
+    1. 管理员权限执行(Windows)：
+        ```ps1
         dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
         Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
         ```
-    2. 重启后，再启动WSL与Ubuntu进行初始化
+    2. 重启后，再启动Ubuntu进行初始化
     3. 升级WSL2：下载[WSL2升级包](https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi)
-    4. 下载[ArchWSL](https://github.com/yuk7/ArchWSL)
-    5. 执行：
+    4. 下载并安装[ArchWSL](https://github.com/yuk7/ArchWSL)
+    5. 执行(Windows)：
         ```sh
         wsl --set-version <Distro> 2
         wsl --set-default <Distro>
         wsl # 进入wsl
         ```
-    6. 进入WSL后执行（可选）：
+    6. 进入WSL后执行（可选）(Linux)：
         ```sh
         # 添加普通用户
         useradd -m username -G wheel
         passwd username
         nano /etc/sudoers
         ```
-    7. 退出WSL后在Windows PowerShell中执行：
-        ```sh
+    7. 退出WSL后在Windows PowerShell中执行(Windows)：
+        ```ps1
         .\Arch.exe config -default-user username
         ```
-    7. 安装本仓库配置
+    7. 再次进入WSL后安装本仓库配置(Linux)
         ```sh
         mkdir ~/.local
         git clone https://github.com/mrbeardad/Windows10 .local/Windows10
@@ -243,236 +243,48 @@ XKE62QZA7YH97CBBA5V7V53MC6XC89N6
         ```
     8. 若试图在WSL中使用Windows代理，需要先修改Windows防火墙规则允许WSL所在域访问
 
-* 下载[VSCode](https://code.visualstudio.com/download)，并安装插件与配置
-    * Remote-WSL
-    * Vim
-    * C/C++
-    * C++ Intellisense
-    * Code Runner
-<details>
-    <summary><b>setting.json for vscode</b></summary>
+* 下载并安装[VSCode](https://code.visualstudio.com/download)，并同步配置。
+[vscode使用手册](vscode/README.md)
 
-```json
-{
-    "workbench.colorCustomizations": {
-        "terminal.foreground": "#c5c8c6",
-        "terminal.background": "#161719",
-        "terminal.ansiBlack": "#000000",
-        "terminal.ansiBlue": "#85befd",
-        "terminal.ansiCyan": "#85befd",
-        "terminal.ansiGreen": "#87c38a",
-        "terminal.ansiMagenta": "#b9b6fc",
-        "terminal.ansiRed": "#fd5ff1",
-        "terminal.ansiWhite": "#e0e0e0",
-        "terminal.ansiYellow": "#ffd7b1",
-        "terminal.ansiBrightBlack": "#000000",
-        "terminal.ansiBrightBlue": "#96cbfe",
-        "terminal.ansiBrightCyan": "#85befd",
-        "terminal.ansiBrightGreen": "#94fa36",
-        "terminal.ansiBrightMagenta": "#b9b6fc",
-        "terminal.ansiBrightRed": "#fd5ff1",
-        "terminal.ansiBrightWhite": "#e0e0e0",
-        "terminal.ansiBrightYellow": "#f5ffa8",
-        "statusBar.background": "#8FBCBB",
-        "statusBar.noFolderBackground": "#8FBCBB",
-        "statusBar.debuggingBackground": "#8FBCBB",
-        "statusBar.foreground": "#434C5E"
-    },
-    "C_Cpp.updateChannel": "Insiders",
-    "http.proxySupport": "off",
-    "[jsonc]": {
-        "editor.quickSuggestions": {
-            "strings": true
-        },
-        "editor.suggest.insertMode": "replace"
-    },
-    "editor.fontSize": 12,
-    "editor.fontFamily": "SauceCodePro NF",
-    "editor.renderWhitespace": "all",
-    "editor.cursorSmoothCaretAnimation": true,
-    "editor.lineNumbers": "relative",
-    "code-runner.temporaryFileName": "${fileBasenameNoExtension}.exe",
-    "code-runner.saveFileBeforeRun": true,
-    "code-runner.executorMap": {
+* 下载并安装[git](https://git-scm.com/downloads)
 
-        "javascript": "node",
-        "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
-        "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-        "cpp": "cd $dir && cl /nologo $fileName > $null && $dir$fileNameWithoutExt",
-        "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-        "php": "php",
-        "python": "python -u",
-        "perl": "perl",
-        "perl6": "perl6",
-        "ruby": "ruby",
-        "go": "go run",
-        "lua": "lua",
-        "groovy": "groovy",
-        "powershell": "powershell -ExecutionPolicy ByPass -File",
-        "bat": "cmd /c",
-        "shellscript": "bash",
-        "fsharp": "fsi",
-        "csharp": "scriptcs",
-        "vbscript": "cscript //Nologo",
-        "typescript": "ts-node",
-        "coffeescript": "coffee",
-        "scala": "scala",
-        "swift": "swift",
-        "julia": "julia",
-        "crystal": "crystal",
-        "ocaml": "ocaml",
-        "r": "Rscript",
-        "applescript": "osascript",
-        "clojure": "lein exec",
-        "haxe": "haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt",
-        "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
-        "racket": "racket",
-        "scheme": "csi -script",
-        "ahk": "autohotkey",
-        "autoit": "autoit3",
-        "dart": "dart",
-        "pascal": "cd $dir && fpc $fileName && $dir$fileNameWithoutExt",
-        "d": "cd $dir && dmd $fileName && $dir$fileNameWithoutExt",
-        "haskell": "runhaskell",
-        "nim": "nim compile --verbosity:0 --hints:off --run",
-        "lisp": "sbcl --script",
-        "kit": "kitc --run",
-        "v": "v run",
-        "sass": "sass --style expanded",
-        "scss": "scss --style expanded",
-        "less": "cd $dir && lessc $fileName $fileNameWithoutExt.css"
-    },
-    "C_Cpp.inactiveRegionOpacity": null,
-    "code-runner.clearPreviousOutput": true,
-    "code-runner.runInTerminal": false,
-    "vim.easymotion": true,
-    "vim.statusBarColorControl": true,
-    "vim.statusBarColors.normal": ["#8FBCBB", "#434C5E"],
-    "vim.statusBarColors.insert": "#BF616A",
-    "vim.statusBarColors.visual": "#B48EAD",
-    "vim.statusBarColors.visualline": "#B48EAD",
-    "vim.statusBarColors.visualblock": "#A3BE8C",
-    "vim.statusBarColors.replace": "#D08770",
-    "vim.statusBarColors.commandlineinprogress": "#007ACC",
-    "vim.statusBarColors.searchinprogressmode": "#007ACC",
-    "vim.statusBarColors.easymotionmode": "#007ACC",
-    "vim.statusBarColors.easymotioninputmode": "#007ACC",
-    "vim.statusBarColors.surroundinputmode": "#007ACC",
-    "vim.leader": "<space>",
-    "vim.insertModeKeyBindingsNonRecursive": [
-        {
-            "before": ["<c-a>"],
-            "after": ["<esc>", "0", "i"]
-        },
-        {
-            "before": ["<c-e>"],
-            "after": ["<esc>", "$", "a"]
-        },
-        {
-            "before": ["<c-k>"],
-            "after": ["<esc>", "d", "$", "a"]
-        },
-        {
-            "before": ["<c-y>"],
-            "after": ["\"", "\"", "p"]
-        }
-    ],
-    "vim.normalModeKeyBindingsNonRecursive": [
-        {
-            "before": ["<c-a>"],
-            "after": ["0"]
-        },
-        {
-            "before": ["<c-e>"],
-            "after": ["$"]
-        },
-        {
-            "before": ["\\\\", "y"],
-            "after": ["\"", "+", "y"]
-        },
-        {
-            "before": ["Y"],
-            "after": ["y", "$"]
-        },
-        {
-            "before": ["\\\\", "Y"],
-            "after": ["\"", "+", "y", "$"]
-        },
-        {
-            "before": ["\\\\", "p"],
-            "after": ["\"", "+", "p"]
-        },
-        {
-            "before": [";"],
-            "after": ["\\\\", "\\\\", "2", "s"]
-        },
-        {
-            "before": ["<space>", "c", "l"],
-            "after": ["g", "c", "c"]
-        },
-        {
-            "before": ["<"],
-            "after": ["<", "<"]
-        },
-        {
-            "before": [">"],
-            "after": [">", ">"]
-        }
-    ],
-    "vim.visualModeKeyBindingsNonRecursive": [
-        {
-            "before": ["\\\\", "y"],
-            "after": ["\"", "+", "y"]
-        },
-        {
-            "before": ["\\\\", "p"],
-            "after": ["\"", "+", "p"]
-        }
-    ],
-    "vim.easymotionMarkerForegroundColorOneChar": "#ff0000",
-    "vim.easymotionMarkerForegroundColorTwoChar": "#ff0000",
-    "launch": {
-    
-        "configurations": [],
-        "compounds": []
-    },
-    "editor.renderLineHighlightOnlyWhenFocus": true,
-    "vim.highlightedyank.color": "rgb(250, 215, 0)",
-    "vim.searchHighlightTextColor": "rgb(250, 215, 0)"
-}
-```
-</details>
+* 下载并安装[go](https://git-scm.com/downloads)
 
-<br>
+* 下载并安装[python](https://www.python.org/downloads/)
 
-* 下载[VS](https://visualstudio.microsoft.com/downloads/#other)并设置工具链的环境变量
+* 下载并安装[VS for c++](https://visualstudio.microsoft.com/downloads/#other)并设置工具链的环境变量
     > 控制面板》系统与安全》系统》高级系统设置》环境变量》PATH、LIB、INCLUDE
     * PATH：
         > `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\bin\Hostx64\x64`
     * LIB：
-        > `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\lib\x64`  
-        > `C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\ucrt\x64`  
+        > `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\lib\x64`
+        > `C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\ucrt\x64`
         > `C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\um\x64`
     * INCLUDE：
-        > `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include`  
+        > `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include`
         > `C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt`
 
+* 下载并安装[postman](https://www.postman.com/downloads/)
+
+* 下载并安装[dbeaver](https://dbeaver.io/download/)
+
+* 下载并安装[ARDM](https://github.com/qishibo/AnotherRedisDesktopManager/releases)
 
 # 快捷键
 
-| 文件管理器或文件编辑器快捷键                  | 功能      |
-|-----------------------------------------------|-----------|
-| <kbd>Ctrl</kbd>+<kbd>A</kbd>                  | 全选      |
-| <kbd>Ctrl</kbd>+<kbd>C</kbd>                  | 复制      |
-| <kbd>Ctrl</kbd>+<kbd>X</kbd>                  | 剪切      |
-| <kbd>Ctrl</kbd>+<kbd>V</kbd>                  | 粘贴      |
-| <kbd>Ctrl</kbd>+<kbd>Z</kbd>                  | 撤销      |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | 撤销      |
-| <kbd>Ctrl</kbd>+<kbd>F</kbd>                  | 搜索      |
-| <kbd>Ctrl</kbd>+<kbd>O</kbd>                  | 打开      |
+| 文件管理器或文件编辑器快捷键                  | 功能 |
+| --------------------------------------------- | ---- |
+| <kbd>Ctrl</kbd>+<kbd>A</kbd>                  | 全选 |
+| <kbd>Ctrl</kbd>+<kbd>C</kbd>                  | 复制 |
+| <kbd>Ctrl</kbd>+<kbd>X</kbd>                  | 剪切 |
+| <kbd>Ctrl</kbd>+<kbd>V</kbd>                  | 粘贴 |
+| <kbd>Ctrl</kbd>+<kbd>Z</kbd>                  | 撤销 |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | 撤销 |
+| <kbd>Ctrl</kbd>+<kbd>F</kbd>                  | 搜索 |
+| <kbd>Ctrl</kbd>+<kbd>O</kbd>                  | 打开 |
 
 | Win快捷键                                    | 功能              |
-|----------------------------------------------|-------------------|
+| -------------------------------------------- | ----------------- |
 | <kbd>Win</kbd>+<kbd>num</kbd>                | 任务栏第num个软件 |
 | <kbd>Win</kbd>+<kbd>E</kbd>                  | 文件管理器        |
 | <kbd>Win</kbd>+<kbd>R</kbd>                  | 运行对话框        |
@@ -483,7 +295,7 @@ XKE62QZA7YH97CBBA5V7V53MC6XC89N6
 | <kbd>Win</kbd>+<kbd>shift</kbd>+<kbd>c</kbd> | 捕色器            |
 
 | 桌面快捷键                                    | 功能           |
-|-----------------------------------------------|----------------|
+| --------------------------------------------- | -------------- |
 | <kbd>Win</kbd>+<kbd>D</kbd>                   | 显示桌面       |
 | <kbd>Win</kbd>+<kbd>,</kbd>                   | 预览桌面       |
 | <kbd>Win</kbd>+<kbd>M</kbd>                   | 最小化所有桌面 |
@@ -494,13 +306,13 @@ XKE62QZA7YH97CBBA5V7V53MC6XC89N6
 | <kbd>Win</kbd>+<kbd>Tab</kbd>                 | 多任务视图     |
 
 | 窗口快捷键                        | 功能                   |
-|-----------------------------------|------------------------|
+| --------------------------------- | ---------------------- |
 | <kbd>Win</kbd>+<kbd>↑/↓/←/→</kbd> | 最大化/最小化/左右分屏 |
 | <kbd>Alt</kbd>+<kbd>Tab</kbd>     | 切换窗口               |
 | <kbd>Win</kbd>+<kbd>Q</kbd>       | 关闭窗口               |
 
 | 输入法相关                                    | 功能         |
-|-----------------------------------------------|--------------|
+| --------------------------------------------- | ------------ |
 | <kbd>Ctrl</kbd>+<kbd>.</kbd>                  | 切换全角半角 |
 | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd> | 切换繁/简体  |
 | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd> | 切换中/英文  |

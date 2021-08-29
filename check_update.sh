@@ -8,9 +8,10 @@ else
     option="-i"
 fi
 
+cp $option -vu ~/.gdbinit gdb/gdbinit
+cp $option -vu ~/.cgdb/cgdbrc gdb/cgdbrc
+cp $option -vu ~/.config/htop/htoprc htop/htoprc
+cp $option -vu ~/.ssh/ssh_config ssh/ssh_config
 cp $option -vu ~/.tmux.conf tmux/tmux.conf
 cp $option -vu ~/.zshrc zsh/zshrc
-cp $option -vu ~/.gdbinit gdb/gdbinit
-cp $option -vu ~/.cgdb/cgdbrc gdb
-cp $option -vu ~/.config/htop/htoprc htop/htoprc
-
+cp $option -vu ~/.vscode-neovim/init.vim vscode/vscode-neovim/init.vim

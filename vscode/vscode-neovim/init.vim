@@ -1,3 +1,6 @@
+" 插入模式
+inoremap <C-C> <Esc>
+
 " 普通模式
 nnoremap <S-Left> <<
 nnoremap <S-Right> >>
@@ -11,7 +14,7 @@ nnoremap <Leader>, "+yl
 nnoremap <Leader>Y "+y$
 nnoremap <Leader>y "+y
 vnoremap <Leader>y "+y
-nnoremap <Space>y "+yae<C-O>
+nnoremap <Space>y ggVG"+y''
 nnoremap <Leader>p "+p
 nnoremap <Leader>P "+P
 vnoremap <Leader>p "+p
