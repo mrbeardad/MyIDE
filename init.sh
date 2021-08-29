@@ -64,7 +64,7 @@ git clone https://github.com/mrbeardad/SeeCheatSheets ~/.cheat
 
 # 安装命令行工具
 yay -S delve gdb cgdb conan graphviz cppcheck boost asio gtest gmock google-glog \
-    openssh strace lsof socat nmap tcpdump gist daemonize docker nginx \
+    tig openssh strace lsof socat nmap tcpdump gist daemonize docker nginx \
     tree lsd fzf ranger htop bashtop iotop iftop dstat cloc \
     neofetch toilet cowfortune cmatrix sl asciiquarium
 go env -w GOPATH="$HOME"/.local/go/
