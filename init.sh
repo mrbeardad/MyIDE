@@ -63,7 +63,7 @@ git clone https://github.com/mrbeardad/SeeCheatSheets ~/.cheat
 )
 
 # 安装命令行工具
-yay -S delve gdb cgdb conan graphviz cppcheck boost asio gtest gmock google-glog \
+yay -S delve gdb conan graphviz cppcheck boost asio gtest gmock google-glog \
     tig openssh strace lsof socat nmap tcpdump gist daemonize docker nginx \
     tree lsd fzf ranger htop bashtop iotop iftop dstat cloc \
     neofetch toilet cowfortune cmatrix sl asciiquarium
@@ -77,9 +77,7 @@ pip config set global.index-url https://mirrors.tencent.com/pypi/simple
 pip install cppman thefuck mycli pylint flake8 bandit pudb ipython
 # htop配置
 cp -v htop/htoprc ~/.config/htop/htoprc
-# gdb与cgdb配置
-mkdir -v ~/.cgdb
-cp -v gdb/cgdbrc ~/.cgdb
+# gdb配置
 cp -v gdb/gdbinit ~/.gdbinit
 
 # docker配置

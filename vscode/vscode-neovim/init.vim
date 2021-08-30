@@ -1,9 +1,19 @@
 " 插入模式
-inoremap <C-C> <Esc>
+inoremap <C-A> <Home>
+inoremap <C-E> <End>
+imap <C-C> <Esc>
 
 " 普通模式
+nnoremap <C-A> <Home>
+nnoremap <C-E> <End>
 nnoremap <S-Left> <<
 nnoremap <S-Right> >>
+nnoremap <silent> [<Space>  :<c-u>put! =repeat(nr2char(10), v:count1)<cr>
+nnoremap <silent> ]<Space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
+
+" 可视模式
+vnoremap <C-A> <Home>
+vnoremap <C-E> <End>
 
 " 复制粘贴
 let $PATH=$HOME.'/.local/bin/:'.$PATH   " 将win32yank.exe解压到~/.local/bin下
@@ -14,7 +24,7 @@ nnoremap <Leader>, "+yl
 nnoremap <Leader>Y "+y$
 nnoremap <Leader>y "+y
 vnoremap <Leader>y "+y
-nnoremap <Space>y ggVG"+y''
+nnoremap <Space>y ggVG"+y<C-O>
 nnoremap <Leader>p "+p
 nnoremap <Leader>P "+P
 vnoremap <Leader>p "+p

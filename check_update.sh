@@ -9,7 +9,6 @@ else
 fi
 
 cp $option -vu ~/.gdbinit gdb/gdbinit
-cp $option -vu ~/.cgdb/cgdbrc gdb/cgdbrc
 cp $option -vu ~/.config/htop/htoprc htop/htoprc
 cp $option -vu ~/.ssh/ssh_config ssh/ssh_config
 cp $option -vu ~/.tmux.conf tmux/tmux.conf
