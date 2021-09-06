@@ -42,18 +42,19 @@ yay -S zip unzip \
     bash-language-server shellcheck \
     go \
     clang cmake cmake-language-server
-git clone https://github.com/mrbeardad/SpaceVim ~/.SpaceVim
+git clone https://gitee.com/mrbeardad/SpaceVim ~/.SpaceVim
 ln -sv ~/.SpaceVim/mode ~/.SpaceVim.d
+mkdir ~/.config/
 ln -sv ~/.SpaceVim ~/.config/nvim
 mkdir ~/.local/bin
 g++ -O3 -DNDEBUG -std=c++11 -o ~/.local/bin/quickrun_time ~/.SpaceVim/custom/quickrun_time.cpp
 curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
 unzip -p /tmp/win32yank.zip win32yank.exe > ~/.local/bin/win32yank.exe
 chmod +x ~/.local/bin/win32yank.exe
-cp -rv vscode/.vscode-neovim ~/
+cp -rv vscode/vscode-neovim/ ~/.vscode-neovim
 
 # 安装SeeCheatSheets
-git clone https://github.com/mrbeardad/SeeCheatSheets ~/.cheat
+git clone https://gitee.com/mrbeardad/SeeCheatSheets ~/.cheat
 (
     mkdir ~/.cheat/build
     cd ~/.cheat/build || exit 1

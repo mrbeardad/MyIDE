@@ -1,9 +1,8 @@
 // Official Documents: https://docs.microsoft.com/en-us/windows/terminal/customize-settings
 {
     "$schema": "https://aka.ms/terminal-profiles-schema",
-
     // Startup
-    "defaultProfile": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
+    "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
     "startOnUserLogin": false,
     "launchMode": "default",
     "windowingBehavior": "useNew",
@@ -13,12 +12,11 @@
     "centerOnLaunch": true,
     "disabledProfileSources": [],
     "startupActions": "",
-
     // Interaction
     "copyOnSelect": true,
     "copyFormatting": false,
     "trimBlockSelection": true,
-    "wordDelimiters": " /\\()\"'-:,.;<>~!@#$%^&*|+=[]{}~?│",
+    "wordDelimiters": " /\\()\"'-.,:;<>~!@#$%^&*|+=[]{}~?\u2502",
     "snapToGridOnResize": true,
     "minimizeToTray": false,
     "alwaysShowTrayIcon": false,
@@ -27,7 +25,6 @@
     "experimental.detectURLs": true,
     "largePasteWarning": true,
     "multiLinePasteWarning": false,
-
     // Appearance
     "theme": "system",
     "alwaysShowTabs": false,
@@ -37,14 +34,11 @@
     "tabWidthMode": "compact",
     "disableAnimations": false,
     "confirmCloseAllTabs": true,
-
     // Rendering
     "experimental.rendering.forceFullRepaint": false,
     "experimental.rendering.software": false,
-
     // Color: https://github.com/mbadolato/iTerm2-Color-Schemes
-    "schemes":
-    [
+    "schemes": [
         {
             "name": "Atom",
             "cursorColor": "#FFFFFF",
@@ -69,31 +63,70 @@
             "brightWhite": "#e0e0e0"
         }
     ],
-
     // Actions
-    "keybindings":
-    [
-        { "command": "copy", "keys": "ctrl+shift+c" },
-        { "command": "paste", "keys": "ctrl+shift+v" },
-        { "command": "find", "keys": "ctrl+shift+f" },
-        { "command": { "action": "openSettings", "target": "settingsUI" }, "keys": "ctrl+," },
-        { "command": { "action": "openSettings", "target": "settingsFile" }, "keys": "ctrl+shift+," },
-        { "command": { "action": "openSettings", "target": "defaultsFile" }, "keys": "ctrl+alt+," },
-        { "command": "quakeMode", "keys": "alt+enter" },
-        { "command": "toggleFullscreen", "keys": "f11" },
-        { "command": "unbound", "keys": "ctrl+shift+down"},
-        { "command": "unbound", "keys": "ctrl+shift+up"},
-        { "command": "unbound", "keys": "alt+p"},
-        { "command": "unbound", "keys": "alt+t"}
-    ],
-
-
-    "profiles":
-    {
-        "defaults":
+    "keybindings": [
         {
+            "command": "copy",
+            "keys": "ctrl+shift+c"
+        },
+        {
+            "command": "paste",
+            "keys": "ctrl+shift+v"
+        },
+        {
+            "command": "find",
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "command": {
+                "action": "openSettings",
+                "target": "settingsUI"
+            },
+            "keys": "ctrl+,"
+        },
+        {
+            "command": {
+                "action": "openSettings",
+                "target": "settingsFile"
+            },
+            "keys": "ctrl+shift+,"
+        },
+        {
+            "command": {
+                "action": "openSettings",
+                "target": "defaultsFile"
+            },
+            "keys": "ctrl+alt+,"
+        },
+        {
+            "command": "quakeMode",
+            "keys": "alt+enter"
+        },
+        {
+            "command": "toggleFullscreen",
+            "keys": "f11"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+shift+down"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+shift+up"
+        },
+        {
+            "command": "unbound",
+            "keys": "alt+p"
+        },
+        {
+            "command": "unbound",
+            "keys": "alt+t"
+        }
+    ],
+    "profiles": {
+        "defaults": {
             "colorScheme": "Atom",
-            "fontFace": "SauceCodePro Nerd Font",
+            "fontFace": "NerdCodePro Font",
             "fontWeight": "normal",
             "fontSize": 9,
             "cursorShape": "filledBox",
@@ -109,12 +142,19 @@
             "closeOnExit": "graceful",
             "bellStyle": "audible"
         },
-        "list":
-        [
+        "list": [
             {
                 "name": "Windows PowerShell",
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "commandline": "powershell.exe",
+                "hidden": false
+            },
+            {
+                "name": "熊海成爸爸的ArchLinux",
+                "guid": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
+                "source": "Windows.Terminal.Wsl",
+                "commandline": "wsl ~ -d Arch -- sudo daemonize dockerd; tmux new-session -s Arch || tmux attach -t Arch",
+                "icon": "C:\\Users\\mrbea\\OneDrive\\图片\\Saved Pictures\\archlinux.png",
                 "hidden": false
             },
             {
@@ -124,19 +164,9 @@
                 "hidden": false
             },
             {
-                "name": "熊海成爸爸的Ubuntu-20.04",
-                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
-                "source": "Windows.Terminal.Wsl",
-                "commandline": "wsl ~ -d Ubuntu-20.04",
-                "icon": "%USERPROFILE%\\OneDrive\\图片\\Saved Pictures\\ubuntu.png",
-                "hidden": false
-            },
-            {
-                "name": "熊海成爸爸的ArchLinux",
-                "guid": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
-                "source": "Windows.Terminal.Wsl",
-                "commandline": "wsl ~ -d Arch -- sudo daemonize dockerd; tmux new-session -s Arch || tmux attach -t Arch",
-                "icon": "%USERPROFILE%\\OneDrive\\图片\\Saved Pictures\\arch.webp",
+                "name": "Git Bash",
+                "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
+                "source": "Git",
                 "hidden": false
             }
         ]

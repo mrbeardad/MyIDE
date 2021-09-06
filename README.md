@@ -82,7 +82,7 @@
 
 * [Listary 搜索工具](https://www.listarypro.com/download)
 <details>
-    <summary><b>github hosts</b></summary>
+    <summary><b>...</b></summary>
 
 ```txt
 产  品：Listary授权信息
