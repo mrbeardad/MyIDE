@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # 修改pacman源为腾讯源，直接改/etc/pacman.conf而非/etc/pacman.d/mirrorlist，因为有时更新系统会覆盖后者
-sudo sed -i '/^Include = /s/^.*$/Server = https:\/\/mirrors.cloud.tencent.com\/manjaro\/stable\/$repo\/$arch/' /etc/pacman.conf
+sudo sed -i '/^Include = /s/^.*$/Server = https:\/\/mirrors.tencent.com\/manjaro\/stable\/$repo\/$arch/' /etc/pacman.conf
 
 # 添加腾讯云的archlinuxcn源
-echo -e '[archlinuxcn]\nServer = https://mirrors.cloud.tencent.com/archlinuxcn/$arch' |
+echo -e '[archlinuxcn]\nServer = https://mirrors.tencent.com/archlinuxcn/$arch' |
     sudo tee -a /etc/pacman.conf
 
 # pacman配置彩色输出与使用系统日志
