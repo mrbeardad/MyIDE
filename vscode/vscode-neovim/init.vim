@@ -17,7 +17,6 @@ vnoremap <C-E> <End>
 
 " 复制粘贴
 let $PATH=$HOME.'/.local/bin/:'.$PATH   " 将win32yank.exe解压到~/.local/bin下
-inoremap <c-y> <c-r>"
 nnoremap  , yl
 nnoremap  Y y$
 nnoremap <Leader>, "+yl

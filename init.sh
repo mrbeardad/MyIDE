@@ -77,6 +77,7 @@ npm config set registry http://mirrors.tencent.com/npm/
 pip config set global.index-url https://mirrors.tencent.com/pypi/simple
 pip install cppman thefuck mycli pylint flake8 bandit pudb ipython
 # htop配置
+mkdir ~/.config/htop
 cp -v htop/htoprc ~/.config/htop/htoprc
 # gdb配置
 cp -v gdb/gdbinit ~/.gdbinit
