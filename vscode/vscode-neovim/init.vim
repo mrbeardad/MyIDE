@@ -1,7 +1,6 @@
 " 插入模式
 inoremap <C-A> <Home>
 inoremap <C-E> <End>
-imap <C-C> <Esc>
 
 " 普通模式
 nnoremap <C-A> <Home>

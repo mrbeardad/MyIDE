@@ -74,6 +74,7 @@ go env -w GOPROXY=https://mirrors.tencent.com/go/
 go get -u github.com/google/pprof
 go get -u github.com/juntaki/gogtags
 npm config set registry http://mirrors.tencent.com/npm/
+sudo npm install -g eslint
 pip config set global.index-url https://mirrors.tencent.com/pypi/simple
 pip install cppman thefuck mycli pylint flake8 bandit pudb ipython
 # htop配置

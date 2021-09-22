@@ -104,8 +104,9 @@
 | `Ctrl`+`W` `=`         | 均布Editor Group窗口大小                |
 | `Ctrl`+`W` `v`         | 竖直切分                                |
 | `Ctrl`+`W` `s`         | 水平切分                                |
-| `Ctrl`+`W` `c`         | 关闭当前Editor                          |
 | `Ctrl`+`W` `o`         | 仅保留当前Editor                        |
+| `Ctrl`+`W` `c`         | 关闭当前Editor                          |
+| `Ctrl`+`Shift`+`W`     | 关闭当前Editor                          |
 | `Ctrl`+`Shift`+`T`     | 重开关闭的Editor                        |
 | `Alt`+`Shift`+`E`      | 在Explorer中打开文件目录                |
 
