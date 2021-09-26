@@ -1,0 +1,15 @@
+CompileFlags:
+    Add: [
+        -xc++,
+        -std=c++11,
+        -O2,
+        -Weverything,
+        -Wno-c++98-compat,
+        -Wno-c++98-compat-pedantic,
+        -Wno-pedantic,
+        -Wno-missing-prototypes,
+        -Wno-padded,
+        -Wno-old-style-cast,
+        -Wno-global-constructors,
+        -Wno-exit-time-destructors
+    ]

@@ -33,7 +33,7 @@ yay -S oh-my-zsh manjaro-zsh-config autojump
 cp -v zsh/zshrc ~/.zshrc
 chsh -s /bin/zsh
 
-# 配置vim
+# 配置集成开发环境vim+cpp+go+python+js+bash
 yay -S zip unzip \
     vim neovim python-pynvim neovim-plug \
     ripgrep silver-searcher-git global ctags \
@@ -52,6 +52,7 @@ curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/down
 unzip -p /tmp/win32yank.zip win32yank.exe > ~/.local/bin/win32yank.exe
 chmod +x ~/.local/bin/win32yank.exe
 cp -rv vscode/vscode-neovim/ ~/.vscode-neovim
+cp -v vscode/.clang-format ~/
 
 # 安装SeeCheatSheets
 git clone https://gitee.com/mrbeardad/SeeCheatSheets ~/.cheat

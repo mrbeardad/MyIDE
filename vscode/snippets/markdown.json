@@ -1,0 +1,52 @@
+{
+	"Horizontal line": {
+		"prefix": "hr",
+		"body": [
+			"* * * * * * * * *"
+		],
+	},
+	"Keyboard button": {
+		"prefix": "kbd",
+		"body": [
+			"<kdb>$1</kbd>"
+		],
+	},
+	"Underline": {
+		"prefix": "und",
+		"body": [
+			"<u>$1</u>"
+		]
+	},
+	"Strikethrough": {
+		"prefix": "del",
+		"body": [
+			"~~$1~~"
+		]
+	},
+	"Code Block": {
+		"prefix": "cd",
+		"body": [
+			"```${1:language}",
+			"$2",
+			"```"
+		]
+	},
+	"Tex Block": {
+		"prefix": "tx",
+		"body": [
+			"$$",
+			"$1",
+			"$$"
+		]
+	},
+	"Fold Message": {
+		"prefix": "fd",
+		"body": [
+			"<details>",
+			"  <summary><b>${1:Title}</b></summary>",
+			"",
+			"${2:content}",
+			"</details>"
+		]
+	}
+}
