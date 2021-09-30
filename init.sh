@@ -18,7 +18,7 @@ sudo pacman -S archlinuxcn-keyring yay expac base-devel
 if [[ "$USER" == beardad ]] ;then
     cp -v .gitconfig ~
     mkdir ~/.ssh
-    cat ssh/ssh_config >> ~/.ssh/ssh_config
+    cat ssh/config >> ~/.ssh/config
     #################################
     ## 然后安装我自己的ssh公私钥对 ##
     #################################
