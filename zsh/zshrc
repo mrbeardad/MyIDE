@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/usr/share/oh-my-zsh/"
@@ -82,7 +82,7 @@ plugins=(git cp history extract autojump tmux vi-mode docker golang)
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-export EDITOR='vim'
+export EDITOR='nvim'
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
@@ -108,7 +108,6 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-# 实用的别名
 # alias l='ls -lah  --time-style="+%Y %m-%d %H:%M:%S "'
 # alias l.='ls -ladh  --time-style="+%Y %m-%d %H:%M:%S " .*'
 alias l='lsd -lah --group-dirs first'
@@ -134,37 +133,6 @@ alias v='nvim'
 alias vi='DARKBG=1 nvim'
 alias vim='DARKBG=1 vim'
 
-function f() {
-    if [[ -n "$1" ]] ;then
-        cd $1
-    fi
-    export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
-    FZF_FILESS=$(fzf)
-    if [[ -n "$FZF_FILESS" ]] ;then
-        cd ${FZF_FILESS%/*}
-    fi
-    if [[ -n "$1" ]] ;then
-        cd -
-    fi
-}
-
-function o() {
-    if [[ -z "$1" ]] ;then
-        xdg-open .
-    else
-        xdg-open "$1"
-    fi
-}
-
-function db() {
-    if [[ "$(eval 'file $1')" =~ 'Python script' ]] ;then
-        pudb3 "$@"
-    else
-        cgdb "$@"
-    fi
-}
-
-# zsh中git插件的补充
 alias gmv='git mv'
 alias grms='git rm --cached'
 alias grst='git restore --staged'
@@ -181,14 +149,37 @@ alias gpt='git push --tags'
 alias gfp='git format-patch'
 alias gmc='git merge --continue'
 
+eval $(thefuck --alias)
+
+function f() {
+    if [[ -n "$1" ]] ;then
+        cd $1
+    fi
+    
+    FZF_RESULT=$(FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""' fzf)
+    if [[ -n "$FZF_RESULT" ]] ;then
+        cd ${FZF_RESULT%/*}
+    elif [[ -n "$1" ]] ;then
+        cd -
+    fi
+}
+
+function o() {
+    if [[ -z "$1" ]] ;then
+        xdg-open .
+    else
+        xdg-open "$1"
+    fi
+}
+
 function man() {
-        LESS_TERMCAP_md=$'\e[01;34m' \
-        LESS_TERMCAP_me=$'\e[0m' \
-        LESS_TERMCAP_se=$'\e[0m' \
-        LESS_TERMCAP_so=$'\e[01;46;30m' \
-        LESS_TERMCAP_ue=$'\e[0m' \
-        LESS_TERMCAP_us=$'\e[01;32m' \
-        command man "$@"
+    LESS_TERMCAP_md=$'\e[01;34m' \
+    LESS_TERMCAP_me=$'\e[0m' \
+    LESS_TERMCAP_se=$'\e[0m' \
+    LESS_TERMCAP_so=$'\e[01;46;30m' \
+    LESS_TERMCAP_ue=$'\e[0m' \
+    LESS_TERMCAP_us=$'\e[01;32m' \
+    command man "$@"
 }
 
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -213,4 +204,3 @@ bindkey '^[OB' down-line-or-beginning-search
 zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
-eval $(thefuck --alias)

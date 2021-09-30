@@ -3,7 +3,7 @@
 fields=2 45 48 6 5 7 4 0 3 109 110 46 47 20 49 1
 sort_key=46
 sort_direction=1
-tree_sort_key=0
+tree_sort_key=47
 tree_sort_direction=1
 hide_kernel_threads=1
 hide_userland_threads=1
