@@ -26,12 +26,14 @@ function readFileSlice() {
 cd
 
 # downloads
+curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
 sudo apt update
 sudo apt upgrade
 sudo apt install tmux \
   zsh zsh-syntax-highlighting zsh-autosuggestions autojump \
   fzf silversearcher-ag ripgrep ncdu ranger tig
-  docker mysql-server redis nginx \
+  docker-ce docker-ce-cli containerd.io mysql-server redis nginx \
   neovim \
   clang clangd clang-format clang-tidy cmake \
   golang \
@@ -2513,4 +2515,3 @@ right_meters=RightCPUs Tasks LoadAverage Uptime
 right_meter_modes=1 2 2 2
 hide_function_bar=0
 __HTOPRC_END
-
