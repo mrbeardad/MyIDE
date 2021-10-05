@@ -243,6 +243,12 @@ XKE62QZA7YH97CBBA5V7V53MC6XC89N6
         ```
     8. 若试图在WSL中使用Windows代理，需要先修改Windows防火墙规则允许WSL所在域访问
 
+* 或者购买云主机Ubuntu20.04代替WSL
+    * ssh连上后执行
+    ```sh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/mrbeardad/Windows10/master/init.ubuntu20.04.sh)"
+    ```
+
 * 下载并安装[VSCode](https://code.visualstudio.com/download)，并同步配置。
 [vscode使用手册](vscode/README.md)
 
