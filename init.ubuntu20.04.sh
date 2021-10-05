@@ -51,6 +51,16 @@ mkdir -v "${XDG_CACHE_HOME:-$HOME/.cache}"
 readFileSlice __P10K_INSTANT_PROMPT_BEGIN __P10K_INSTANT_PROMPT_END >"${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 
 # cli
+## git
+echo -e '[user]
+    email = mrbeardad@qq.com
+    name = Heache Bear
+[core]
+    editor = nvim
+[merge]
+    tool = vimdiff
+[mergetool "vimdiff"]
+    path = nvim' >~/.gitconfig
 ## lsd
 wget -O /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/0.20.1/lsd-musl_0.20.1_amd64.deb
 sudo dpkg -i /tmp/lsd.deb
