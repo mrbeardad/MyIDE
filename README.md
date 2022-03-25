@@ -1,20 +1,20 @@
-# Windows10配置
-这篇文档做为个我的个人日志，方便下次重装，读者请酌情参考。
+# 配置
+**这篇文档做为个我的个人日志，方便下次重装，读者请酌情参考。因为笔者对Windows并不熟悉，故Windows的安装与配置并未编写脚本。而WSL与VSC则有我自己的配置脚本**
 
 ## 首先
-* 登录MicroSoft Windows个人账户
+* 登录MicroSoft Windows个人账户，并同步系统配置
 
 ## 驱动程序
 * 下载并安装[MyASUS](https://www.microsoft.com/zh-cn/p/myasus/9n7r5s6b0zzh?activetab=pivot:overviewtab)
 
 ## 下载准备
-* 下载并安装[Google Chrome](https://www.google.cn/chrome/)
+* 下载并安装[Google Chrome浏览器](https://www.google.cn/chrome/)
 
 * 下载并安装[Bandizip压缩包工具](https://www.bandizip.com/)
 
 * 登录Google账户并同步Chrome配置（包括手动同步TampMonkey脚本）
 
-* 修改`C:\Windows\System32\drivers\etc\hosts`解决DNS污染
+* （可选）修改`C:\Windows\System32\drivers\etc\hosts`解决DNS污染
 <details>
     <summary><b>github hosts</b></summary>
 
@@ -68,7 +68,7 @@
 ## 下载软件
 * [QQ 输入法](http://qq.pinyin.cn/)
 
-* [TIM 即时通讯](https://tim.qq.com)
+* [TIM 聊天通讯](https://tim.qq.com)
 
 * [百度网盘](https://pan.baidu.com/downloads)
 
@@ -238,15 +238,15 @@ XKE62QZA7YH97CBBA5V7V53MC6XC89N6
     7. 再次进入WSL后安装本仓库配置(Linux)
         ```sh
         mkdir ~/.local
-        git clone https://github.com/mrbeardad/Windows10 .local/Windows10
-        cd .local/Windows10 && ./init.sh
+        git clone https://github.com/mrbeardad/My-IDE .local/My-IDE
+        cd .local/My-IDE && ./init.sh
         ```
     8. 若试图在WSL中使用Windows代理，需要先修改Windows防火墙规则允许WSL所在域访问
 
 * 或者购买云主机Ubuntu20.04代替WSL
     * ssh连上后执行
     ```sh
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/mrbeardad/Windows10/master/init.ubuntu20.04.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/mrbeardad/My-IDE/master/init.ubuntu20.04.sh)"
     ```
 
 * 下载并安装[VSCode](https://code.visualstudio.com/download)，并同步配置。
