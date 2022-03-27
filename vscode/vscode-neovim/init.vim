@@ -1,6 +1,7 @@
 " 插入模式
 inoremap <C-A> <Home>
 inoremap <C-E> <End>
+imap <C-C> <Esc>
 
 " 普通模式
 nnoremap <C-A> <Home>
@@ -16,11 +17,14 @@ vnoremap <C-E> <End>
 
 " 复制粘贴
 let $PATH=$HOME.'/.local/bin/:'.$PATH   " 将win32yank.exe解压到~/.local/bin下
-nnoremap  , yl
 nnoremap  Y y$
-nnoremap <Leader>, "+yl
-nnoremap <Leader>Y "+y$
+nnoremap =p "0p
+nnoremap =P "0P
+vnoremap =p "0p
+nnoremap <silent>=o :<C-U>put =@0<CR>
+nnoremap <silent>=O :<C-U>put! =@0<CR>
 nnoremap <Leader>y "+y
+nnoremap <Leader>Y "+y$
 vnoremap <Leader>y "+y
 nnoremap <Space>y ggVG"+y<C-O>
 nnoremap <Leader>p "+p
@@ -29,11 +33,6 @@ vnoremap <Leader>p "+p
 nnoremap <silent><leader>o :<C-U>put =@+<CR>
 nnoremap <silent><leader>O :<C-U>put! =@+<CR>
 nnoremap <Space>p ggdG"+P
-nnoremap =p "0p
-nnoremap =P "0P
-vnoremap =p "0p
-nnoremap <silent>=o :<C-U>put =@0<CR>
-nnoremap <silent>=O :<C-U>put! =@0<CR>
 
 " fast wrap
 func! s:getline()
@@ -95,7 +94,7 @@ nnoremap <expr> N  'nN'[v:searchforward]
 
 nnoremap <silent>g& :s/<up><cr>:nohl<cr>
 
-call plug#begin('~/.vscode-neovim/plugged/')
+call plug#begin('D:\Neovim\vscode-neovim\plugged')
 "==================================================================================================
 let g:clever_f_smart_case = 1
 let g:clever_f_fix_key_direction = 1
@@ -120,3 +119,4 @@ vmap v <Plug>(expand_region_expand)
 vmap V <Plug>(expand_region_shrink)
 "==================================================================================================
 call plug#end()
+
