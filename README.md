@@ -13,6 +13,7 @@
 5. 下载常用软件
     * [QQ 输入法](http://qq.pinyin.cn/)
     * [TIM 聊天通讯](https://tim.qq.com)
+    * [WeChat 微信](https://pc.weixin.qq.com/?lang=zh_CN)
     * [百度网盘](https://pan.baidu.com/downloads)
     * [Listen1 音乐](https://www.zhyong.cn/posts/64cd/)
     * [Office 办公套件](https://www.office.com/)
@@ -108,6 +109,29 @@
       * Keyboard: 键盘锁按键提示音
 </details>
 
+| 窗口与桌面                                    | 功能                   |
+| --------------------------------------------- | ---------------------- |
+| <kbd>Win</kbd>+<kbd>Q</kbd>                   | 关闭窗口               |
+| <kbd>Win</kbd>+<kbd>↑/↓/←/→</kbd>             | 最大化/最小化/左右分屏 |
+| <kbd>Alt</kbd>+<kbd>Tab</kbd>                 | 切换窗口               |
+| <kbd>Win</kbd>+<kbd>D</kbd>                   | 显示桌面               |
+| <kbd>Win</kbd>+<kbd>,</kbd>                   | 预览桌面               |
+| <kbd>Win</kbd>+<kbd>L</kbd>                   | 锁定桌面               |
+| <kbd>Win</kbd>+<kbd>Tab</kbd>                 | 多任务视图             |
+| <kbd>Ctrl</kbd>+<kbd>Win</kbd>+<kbd>D</kbd>   | 新建虚拟桌面           |
+| <kbd>Ctrl</kbd>+<kbd>Win</kbd>+<kbd>F4</kbd>  | 关闭虚拟桌面           |
+| <kbd>Ctrl</kbd>+<kbd>Win</kbd>+<kbd>←/→</kbd> | 切换虚拟桌面           |
+
+| 快速启动                                     | 功能              |
+| -------------------------------------------- | ----------------- |
+| <kbd>Win</kbd>+<kbd>num</kbd>                | 任务栏第num个软件 |
+| <kbd>Win</kbd>+<kbd>E</kbd>                  | 文件管理器        |
+| <kbd>Win</kbd>+<kbd>R</kbd>                  | 运行对话框        |
+| <kbd>Win</kbd>+<kbd>I</kbd>                  | 设置中心          |
+| <kbd>Win</kbd>+<kbd>A</kbd>                  | 通知中心          |
+| <kbd>Win</kbd>+<kbd>+</kbd>                  | 放大镜            |
+| <kbd>Win</kbd>+<kbd>shift</kbd>+<kbd>c</kbd> | 捕色器            |
+
 | 编辑快捷键                                    | 功能 |
 | --------------------------------------------- | ---- |
 | <kbd>Ctrl</kbd>+<kbd>A</kbd>                  | 全选 |
@@ -118,32 +142,6 @@
 | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | 重做 |
 | <kbd>Ctrl</kbd>+<kbd>F</kbd>                  | 搜索 |
 
-| Win快捷键                                    | 功能              |
-| -------------------------------------------- | ----------------- |
-| <kbd>Win</kbd>+<kbd>num</kbd>                | 任务栏第num个软件 |
-| <kbd>Win</kbd>+<kbd>E</kbd>                  | 文件管理器        |
-| <kbd>Win</kbd>+<kbd>R</kbd>                  | 运行对话框        |
-| <kbd>Win</kbd>+<kbd>I</kbd>                  | 设置中心          |
-| <kbd>Win</kbd>+<kbd>A</kbd>                  | 通知与操作中心    |
-| <kbd>Win</kbd>+<kbd>+</kbd>                  | 放大镜            |
-| <kbd>Win</kbd>+<kbd>shift</kbd>+<kbd>c</kbd> | 捕色器            |
-
-| 桌面快捷键                                    | 功能         |
-| --------------------------------------------- | ------------ |
-| <kbd>Win</kbd>+<kbd>D</kbd>                   | 显示桌面     |
-| <kbd>Win</kbd>+<kbd>,</kbd>                   | 预览桌面     |
-| <kbd>Win</kbd>+<kbd>L</kbd>                   | 锁定桌面     |
-| <kbd>Win</kbd>+<kbd>Tab</kbd>                 | 多任务视图   |
-| <kbd>Ctrl</kbd>+<kbd>Win</kbd>+<kbd>D</kbd>   | 新建虚拟桌面 |
-| <kbd>Ctrl</kbd>+<kbd>Win</kbd>+<kbd>F4</kbd>  | 关闭虚拟桌面 |
-| <kbd>Ctrl</kbd>+<kbd>Win</kbd>+<kbd>←/→</kbd> | 切换虚拟桌面 |
-
-| 窗口快捷键                        | 功能                   |
-| --------------------------------- | ---------------------- |
-| <kbd>Win</kbd>+<kbd>↑/↓/←/→</kbd> | 最大化/最小化/左右分屏 |
-| <kbd>Alt</kbd>+<kbd>Tab</kbd>     | 切换窗口               |
-| <kbd>Win</kbd>+<kbd>Q</kbd>       | 关闭窗口               |
-
 | 输入法相关                                    | 功能         |
 | --------------------------------------------- | ------------ |
 | <kbd>Ctrl</kbd>+<kbd>.</kbd>                  | 切换全角半角 |
@@ -153,13 +151,27 @@
 | <kbd>Win</kbd>+<kbd>V</kbd>                   | 系统剪切板   |
 | <kbd>Win</kbd>+<kbd>.</kbd>                   | emoji表情    |
 
+| TIM快捷键                                   | 功能         |
+| ------------------------------------------- | ------------ |
+| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> | 开关聊天界面 |
+| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>A</kbd> | 截屏         |
+| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd> | 录屏         |
+| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>O</kbd> | 识屏         |
+| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F</kbd> | 翻译         |
 
 # WSL
 1. 安装[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)
 2. 安装wt配置[settings.json](WindowsTerminal/settings.json)
 3. 安装[Ubuntu WSL](https://www.microsoft.com/zh-cn/p/ubuntu-2004-lts/9n6svws3rx71?activetab=pivot:overviewtab)
 4. 启用WSL2：控制面板》程序》开关Windows特性》开启"Virtual Machine Platform"与"Windows Subsystem for Linux"
-5. 设置WSL2为默认并初始化Ubuntu20.04
+5. 限制WSL2内存使用
+  ```conf
+  # %USERPROFILE%\.wslconfig
+  [wsl2]
+  memory=4GB
+  swap=0
+  ```
+6. 设置WSL2为默认并初始化Ubuntu20.04
     ```sh
     # in powershell
     wsl --list --all -v
@@ -167,7 +179,7 @@
     wsl --set-default Ubuntu20.04
     wsl # 进入wsl
     ```
-6. 配置Ubuntu20.04 WSL
+7. 配置Ubuntu20.04 WSL
     ```sh
     mkdir ~/.local
     git clone https://github.com/mrbeardad/My-IDE .local/My-IDE
@@ -234,11 +246,13 @@
         > `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include`
         > `C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt`
 
-[vscode使用手册](vscode/README.md)
+[**vscode使用手册**](vscode/README.md)
 
 # Others
-* 下载并安装[postman](https://www.postman.com/downloads/)
+* 下载并安装[SwitchHosts](https://github.com/oldj/SwitchHosts/releases)
 
-* 下载并安装[dbeaver](https://dbeaver.io/download/)
+* 下载并安装[Postman](https://www.postman.com/downloads/)
+
+* 下载并安装[DBeaver](https://dbeaver.io/download/)
 
 * 下载并安装[ARDM](https://github.com/qishibo/AnotherRedisDesktopManager/releases)

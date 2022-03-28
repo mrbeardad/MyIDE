@@ -229,8 +229,8 @@ bind m new-window  "cmatrix"
 
 # 其他按键
 ## 切换statusline
-unbind 't'
-bind t set-option status
+# unbind 't'
+# bind t set-option status
 
 ## 重载配置
 unbind 'R'
