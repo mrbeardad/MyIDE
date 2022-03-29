@@ -25,7 +25,7 @@ function readFileSlice() {
 }
 
 
-cd ~
+cd ~ || exit 1
 
 
 # 修改sudo配置免除密码
@@ -43,20 +43,21 @@ sudo apt update
 sudo apt upgrade
 
 # 下载所需软件
-sudo apt install docker-ce docker-ce-cli containerd.io daemonize \
+sudo apt install docker-ce docker-ce-cli containerd.io \
   tmux tmux-plugin-manager xsel \
   zsh zsh-syntax-highlighting zsh-autosuggestions autojump \
   neovim \
-  silversearcher-ag ripgrep fzf ranger ncdu tig unzip neofetch sl cmatrix \
-  clang-12 clangd-12 clang-format-12 clang-tidy-12 cmake \
+  tig ranger fzf silversearcher-ag ripgrep fd-find ncdu unzip neofetch sl cmatrix \
+  clang clangd clang-format clang-tidy cmake \
   golang \
   npm \
-  pip
+  python3-pip python-is-python3
 
 mkdir -p ~/.local/bin
 curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
 unzip -p /tmp/win32yank.zip win32yank.exe > ~/.local/bin/win32yank.exe
 chmod +x ~/.local/bin/win32yank.exe
+sudo cp -v ~/.local/bin/win32yank.exe /bin/
 
 wget -O /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/0.20.1/lsd-musl_0.20.1_amd64.deb
 sudo dpkg -i /tmp/lsd.deb
@@ -68,6 +69,23 @@ readFileSlice __TMUX_CONF_BEGIN __TMUX_CONF_END >~/.tmux.conf
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
 readFileSlice __ZSHRC_BEGIN __ZSHRC_END >~/.zshrc
+
+# 配置htop
+mkdir -p ~/.config/htop
+readFileSlice __HTOPRC_BEGIN __HTOPRC_END >~/.config/htop/htoprc
+
+# 配置ranger
+mkdir -p ~/.config/ranger
+readFileSlice __RANGER_BEGIN __RANGER_END >~/.config/ranger/commands.py
+echo 'map <C-f> fzf_select' >~/.config/ranger/rc.conf
+
+# 配置tig
+cat >~/.tigrc <<END
+set line-graphics = utf-8
+set main-view = date:default author:full id:yes,color \
+                line-number:no,interval=1 \
+                commit-title:graph=v2,refs=yes,overflow=no
+END
 
 # 配置vim
 git clone --depth=1 https://gitee.com/mrbeardad/SpaceVim ~/.SpaceVim
@@ -107,10 +125,6 @@ Host gitee.com
 END
 
 fi
-
-# 配置htop
-mkdir -p ~/.config/htop
-readFileSlice __HTOPRC_BEGIN __HTOPRC_END >~/.config/htop/htoprc
 
 # cpp
 # echo -e 'BasedOnStyle: Chromium\nIndentWidth: 4' >~/.clang-format
@@ -217,15 +231,15 @@ bind  < resizep -L 10
 bind  > resizep -R 10
 
 # 剪切板支持
-bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xsel -i -p && xsel -o -p | xsel -i -b"
-bind-key p run "xsel -o | tmux load-buffer - ; tmux paste-buffer"
+bind p run-shell -b "win32yank.exe -o --lf | tmux load-buffer - ; tmux paste-buffer"
 
 # 快速启动
-bind h new-window  htop
-bind g new-window  tig
-bind r new-window  -c "#{pane_current_path}" ranger
-bind f new-window   -c "#{pane_current_path}" 'sed -n "/export FZF_DEFAULT_COMMAND=/,/fi$/p" ~/.zshrc > /tmp/fzf-ranger && bash /tmp/fzf-ranger && : > /tmp/fzf-ranger'
-bind m new-window  "cmatrix"
+bind h new-window htop
+bind g new-window -c "#{pane_current_path}" tig
+bind r new-window -c "#{pane_current_path}" ranger
+bind f new-window -c "#{pane_current_path}" 'sed -n "/export FZF_DEFAULT_COMMAND=/,/fi$/p" ~/.zshrc > /tmp/fzf-ranger && bash /tmp/fzf-ranger && : > /tmp/fzf-ranger'
+bind m new-window "cmatrix"
+bind t new-window "sl"
 
 # 其他按键
 ## 切换statusline
@@ -253,6 +267,7 @@ bind-key -T root WheelDownPane \
 run '/usr/share/tmux-plugin-manager/tpm'
 __TMUX_CONF_END
 
+
 __ZSHRC_BEGIN
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -265,7 +280,7 @@ fi
 export PATH=$HOME/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/ubuntu/.oh-my-zsh"
+export ZSH="/home/beardad/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -334,7 +349,23 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git cp history extract autojump tmux vi-mode docker golang)
+plugins=(
+    aliases
+    autojump
+    colored-man-pages
+    common-aliases
+    docker
+    extract
+    git
+    gitignore
+    golang
+    history
+    nmap
+    shell-proxy
+    sudo
+    tmux
+    vi-mode
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -367,72 +398,35 @@ export EDITOR='nvim'
 
 alias l='lsd -lah --group-dirs first'
 alias l.='lsd -lhd --group-dirs first .*'
-alias ll='lsd -lhd --group-dirs first [^.]*'
-alias cp='cp -i'
-alias mv='mv -i'
+alias ll='lsd -lh --group-dirs first'
 alias jobs='jobs -l'
 alias df='df -hT'
-alias psa='ps axo stat,euid,ruid,tty,sess,tpgid,pgrp,ppid,pid,pcpu,pmem,comm'
-alias pstree='pstree -Uup'
 alias free='free -wh'
-alias vmstat='vmstat -w'
 alias ip='ip -c'
 alias dif='diff -Naur --color'
-alias ra='ranger'
-alias expactf='expac --timefmt="%Y-%m-%d %T" "%l\t%n" | sort'
 alias apt='sudo apt'
 alias stl='sudo systemctl'
 alias dk='sudo docker'
 alias dki='sudo docker image'
 alias dkc='sudo docker container'
-alias vi='DARKBG=1 nvim'
-alias vim='DARKBG=1 vim'
+alias vi='nvim'
 
 alias gmv='git mv'
 alias grms='git rm --cached'
-alias grst='git restore --staged'
-alias gdtre='git diff-tree'
-alias gdi='git diff-index'
+alias gdi='git diff-index --name-status'
 alias gdt='git difftool --tool=vimdiff'
 alias gdts='git difftool --staged --tool=vimdiff'
 alias gmt='git mergetool --tool=vimdiff'
-alias gt='git tag'
-alias gbav='git branch -a -vv'
-alias gct='git checkout --track'
-alias glr='git ls-remote'
-alias gpt='git push --tags'
-alias gfp='git format-patch'
 alias gmc='git merge --continue'
-
-function f() {
-    if [[ -n "$1" ]] ;then
-        cd $1
-    fi
-    export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
-    FZF_FILESS=$(fzf)
-    if [[ -n "$FZF_FILESS" ]] ;then
-        cd ${FZF_FILESS%/*}
-    fi
-    if [[ -n "$1" ]] ;then
-        cd -
-    fi
-}
-
-function man() {
-    LESS_TERMCAP_md=$'\e[01;34m' \
-    LESS_TERMCAP_me=$'\e[0m' \
-    LESS_TERMCAP_se=$'\e[0m' \
-    LESS_TERMCAP_so=$'\e[01;46;30m' \
-    LESS_TERMCAP_ue=$'\e[0m' \
-    LESS_TERMCAP_us=$'\e[01;32m' \
-    command man "$@"
-}
-
-source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-zstyle ':bracketed-paste-magic' active-widgets '.self-*'
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#a8a8a8"
+alias gt='git tag'
+alias gbv='git branch -a -vv'
+alias gbsup='git branch --set-upstream'
+alias gsa='git submodule add'
 
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#606060"
 
 MODE_INDICATOR="%{$fg_bold[red]%}<%{$fg[yellow]%}<%{$fg[green]%}<%{$fg[cyan]%}<%{$fg[blue]%}<%{$reset_color%}"
 bindkey -M vicmd '^a' beginning-of-line
@@ -450,9 +444,15 @@ bindkey '^[OB' down-line-or-beginning-search
 zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
+bindkey -M emacs '^S' sudo-command-line
+bindkey -M vicmd '^S' sudo-command-line
+bindkey -M viins '^S' sudo-command-line
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 __ZSHRC_END
+
 
 __HTOPRC_BEGIN
 # Beware! This file is rewritten by htop when settings are changed in the interface.
@@ -495,3 +495,52 @@ right_meters=RightCPUs Tasks LoadAverage Uptime
 right_meter_modes=1 2 2 2
 hide_function_bar=0
 __HTOPRC_END
+
+__RANGER_BEGIN
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from ranger.api.commands import Command
+
+class fzf_select(Command):
+    """
+    :fzf_select
+    Find a file using fzf.
+    With a prefix argument to select only directories.
+
+    See: https://github.com/junegunn/fzf
+    """
+
+    def execute(self):
+        import subprocess
+        import os
+
+        hidden = ('--hidden' if self.fm.settings.show_hidden else '')
+        exclude = "--no-ignore-vcs --exclude '.git' --exclude '*.py[co]' --exclude '__pycache__'"
+        only_directories = ('--type directory' if self.quantifier else '')
+        fzf_default_command = '{} --follow {} {} {} --color=always'.format(
+            'fdfind', hidden, exclude, only_directories
+        )
+
+        env = os.environ.copy()
+        env['FZF_DEFAULT_COMMAND'] = fzf_default_command
+        env['FZF_DEFAULT_OPTS'] = '--layout=reverse --ansi --preview="{}"'.format('''
+            (
+                batcat --color=always {} ||
+                bat --color=always {} ||
+                cat {} ||
+                tree -ahpCL 3 -I '.git' -I '*.py[co]' -I '__pycache__' {}
+            ) 2>/dev/null | head -n 100
+        ''')
+
+        fzf = self.fm.execute_command('fzf --no-multi', env=env,
+                                      universal_newlines=True, stdout=subprocess.PIPE)
+        stdout, _ = fzf.communicate()
+        if fzf.returncode == 0:
+            selected = os.path.abspath(stdout.strip())
+            if os.path.isdir(selected):
+                self.fm.cd(selected)
+            else:
+                self.fm.select_file(selected)
+
+__RANGER_END

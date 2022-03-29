@@ -109,55 +109,7 @@
       * Keyboard: 键盘锁按键提示音
 </details>
 
-| 窗口与桌面                                    | 功能                   |
-| --------------------------------------------- | ---------------------- |
-| <kbd>Win</kbd>+<kbd>Q</kbd>                   | 关闭窗口               |
-| <kbd>Win</kbd>+<kbd>↑/↓/←/→</kbd>             | 最大化/最小化/左右分屏 |
-| <kbd>Alt</kbd>+<kbd>Tab</kbd>                 | 切换窗口               |
-| <kbd>Win</kbd>+<kbd>D</kbd>                   | 显示桌面               |
-| <kbd>Win</kbd>+<kbd>,</kbd>                   | 预览桌面               |
-| <kbd>Win</kbd>+<kbd>L</kbd>                   | 锁定桌面               |
-| <kbd>Win</kbd>+<kbd>Tab</kbd>                 | 多任务视图             |
-| <kbd>Ctrl</kbd>+<kbd>Win</kbd>+<kbd>D</kbd>   | 新建虚拟桌面           |
-| <kbd>Ctrl</kbd>+<kbd>Win</kbd>+<kbd>F4</kbd>  | 关闭虚拟桌面           |
-| <kbd>Ctrl</kbd>+<kbd>Win</kbd>+<kbd>←/→</kbd> | 切换虚拟桌面           |
-
-| 快速启动                                     | 功能              |
-| -------------------------------------------- | ----------------- |
-| <kbd>Win</kbd>+<kbd>num</kbd>                | 任务栏第num个软件 |
-| <kbd>Win</kbd>+<kbd>E</kbd>                  | 文件管理器        |
-| <kbd>Win</kbd>+<kbd>R</kbd>                  | 运行对话框        |
-| <kbd>Win</kbd>+<kbd>I</kbd>                  | 设置中心          |
-| <kbd>Win</kbd>+<kbd>A</kbd>                  | 通知中心          |
-| <kbd>Win</kbd>+<kbd>+</kbd>                  | 放大镜            |
-| <kbd>Win</kbd>+<kbd>shift</kbd>+<kbd>c</kbd> | 捕色器            |
-
-| 编辑快捷键                                    | 功能 |
-| --------------------------------------------- | ---- |
-| <kbd>Ctrl</kbd>+<kbd>A</kbd>                  | 全选 |
-| <kbd>Ctrl</kbd>+<kbd>C</kbd>                  | 复制 |
-| <kbd>Ctrl</kbd>+<kbd>X</kbd>                  | 剪切 |
-| <kbd>Ctrl</kbd>+<kbd>V</kbd>                  | 粘贴 |
-| <kbd>Ctrl</kbd>+<kbd>Z</kbd>                  | 撤销 |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | 重做 |
-| <kbd>Ctrl</kbd>+<kbd>F</kbd>                  | 搜索 |
-
-| 输入法相关                                    | 功能         |
-| --------------------------------------------- | ------------ |
-| <kbd>Ctrl</kbd>+<kbd>.</kbd>                  | 切换全角半角 |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd> | 切换繁/简体  |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd> | 切换中/英文  |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> | 切换全/双拼  |
-| <kbd>Win</kbd>+<kbd>V</kbd>                   | 系统剪切板   |
-| <kbd>Win</kbd>+<kbd>.</kbd>                   | emoji表情    |
-
-| TIM快捷键                                   | 功能         |
-| ------------------------------------------- | ------------ |
-| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Z</kbd> | 开关聊天界面 |
-| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>A</kbd> | 截屏         |
-| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd> | 录屏         |
-| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>O</kbd> | 识屏         |
-| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>F</kbd> | 翻译         |
+[**Windows使用手册**](windows.md)
 
 # WSL
 1. 安装[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)
@@ -185,57 +137,20 @@
     git clone https://github.com/mrbeardad/My-IDE .local/My-IDE
     cd .local/My-IDE && ./init.ubuntu20.04.wsl.sh
     ```
-
-| WindwosTerminal快捷键                           | 功能               |
-| ----------------------------------------------- | ------------------ |
-| <kbd>Win</kbd>+<kbd>`</kbd>                     | 开关下拉式终端     |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>num</kbd> | 启动第num个Profile |
-| <kbd>Ctrl</kbd>+<kbd>Tab</kbd>                  | 切换Tab            |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>W</kbd>   | 关闭当前Tab        |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd>   | 复制               |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd>   | 粘贴               |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd>   | 搜索               |
-| <kbd>Ctrl</kbd>+<kbd>,</kbd>                    | 打开设置面板       |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>,</kbd>   | 打开配置文件       |
-
-| tmux快捷键                   | 功能                       |
-| ---------------------------- | -------------------------- |
-| <kbd>Alt</kbd>+<kbd>W</kbd>  | **所有快捷键前缀**         |
-| <kbd>I</kbd>                 | 安装插件                   |
-| <kbd>R</kbd>                 | 重载配置                   |
-| <kbd>w</kbd>                 | 预览所有Session            |
-| <kbd>d</kbd>                 | 卸载当前Session            |
-| <kbd>Ctrl</kbd>+<kbd>S</kbd> | 保存当前Session            |
-| <kbd>Ctrl</kbd>+<kbd>R</kbd> | 恢复之前Session            |
-| <kbd>c</kbd>                 | 新建Window                 |
-| <kbd>&</kbd>                 | 关闭当前Window             |
-| <kbd>b</kbd>/<kbd>n</kbd>    | 切换上/下一个Window        |
-| <kbd>s</kbd>/<kbd>v</kbd>    | 水平/垂直新建Pane          |
-| <kbd>x</kbd>                 | 关闭当前Pane               |
-| <kbd>方向键</kbd>            | 切换该方向Pane             |
-| <kbd>Ctrl</kbd>+<kbd>O</kbd> | 逆时针交换Pane             |
-| <kbd>z</kbd>                 | 最大化/还原当前Pane        |
-| <kbd>!</kbd>                 | 将当前Pane移入新Window     |
-| <kbd>[</kbd>                 | 复制模式                   |
-| <kbd>/</kbd>/<kbd>?</kbd>    | 向下/上搜索（复制模式）    |
-| <kbd>Space</kbd>             | 选择模式（复制模式）       |
-| <kbd>Ctrl</kbd>+<kbd>V</kbd> | 切换块选区模式（选择模式） |
-| <kbd>Enter</kbd>             | 确认复制（选择模式）       |
-| <kbd>h</kbd>                 | 开启htop                   |
-| <kbd>g</kbd>                 | 开启tig                    |
-| <kbd>r</kbd>                 | 开启ranger                 |
-| <kbd>t</kbd>                 | 开启sl                     |
-| <kbd>m</kbd>                 | 开启cmatrix                |
+    
+[**wsl使用手册**](wsl.md)
 
 # VSCode
 1. 下载并安装[VSCode](https://code.visualstudio.com/download)，登录账户并同步配置。
 
 2. 下载并安装[git](https://git-scm.com/downloads)
 
-3. 下载并安装[neovim](https://github.com/neovim/neovim/releases/)，然后安装配置[vscode-neovim](vscode/vscode-neovim/)，记住修改[init.vim](vscode/vscode-neovim/init.vim)中第97行路径为[vscode-neovim/plugged](vscode/vscode-neovim/plugged/)安装路径
+3. 下载并安装[neovim](https://github.com/neovim/neovim/releases/)，然后安装配置[vscode-neovim](vscode/vscode-neovim/)
+   1. 修改[init.vim](vscode/vscode-neovim/init.vim)中第97行路径为[vscode-neovim/plugged](vscode/vscode-neovim/plugged/)安装路径
+   2. 修改vscode配置neoviim安装路径
 
 4. 下载并安装[VS for c++](https://visualstudio.microsoft.com/downloads/#other)并设置工具链的环境变量
-    > 控制面板》系统与安全》系统》高级系统设置》环境变量》PATH、LIB、INCLUDE
+    > Settings -> advanced system settings
     * PATH：
         > `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\bin\Hostx64\x64`
     * LIB：
@@ -246,13 +161,13 @@
         > `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include`
         > `C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt`
 
-[**vscode使用手册**](vscode/README.md)
+[**vscode使用手册**](vscode.md)
 
 # Others
 * 下载并安装[SwitchHosts](https://github.com/oldj/SwitchHosts/releases)
 
 * 下载并安装[Postman](https://www.postman.com/downloads/)
 
-* 下载并安装[DBeaver](https://dbeaver.io/download/)
+* 下载并安装[Navicat](# "太TM贵了")
 
 * 下载并安装[ARDM](https://github.com/qishibo/AnotherRedisDesktopManager/releases)

@@ -1,12 +1,3 @@
-<!--
- * @FilePath: /My-IDE/vscode/README.md
- * @Description: 
- * @Author: Heache Bear <mrbeardad@qq.com>
- * @Date: 2022-03-25 21:20:55
- * @LastEditTime: 2022-03-28 00:03:43
- * @LastEditors: Heache Bear <mrbeardad@qq.com>
- * Copyright (c) 2018 - 2022 Heachen Bear & Contributors
--->
 # 目录
 - [目录](#目录)
 - [插入模式](#插入模式)
@@ -194,9 +185,8 @@
 
 # 开发调试
 * 编译：
-   1. 编写tasks.json（`Ctrl`+`Shift`+`P`）
-   2. 搜索tasks（`Ctrl`+`P`输入`task `）
-   3. 执行tasks
+   1. 编写tasks.json（`Ctrl`+`Shift`+`P`搜索"task"）
+   2. 执行task（`Ctrl`+`P`输入`task `）
 
 * 调试：
    1. 编写launch.json（`Ctrl`+`Shift`+`D`）

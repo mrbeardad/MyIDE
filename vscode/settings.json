@@ -1,7 +1,6 @@
 {
     "security.workspace.trust.untrustedFiles": "open",
     "security.workspace.trust.enabled": false,
-    "files.trimTrailingWhitespace": true,
     "editor.wordWrap": "off",
     "editor.wordWrapColumn": 100,
     "editor.cursorSmoothCaretAnimation": true,
@@ -10,7 +9,6 @@
     "editor.fontFamily": "NerdCodePro Font",
     "terminal.integrated.fontFamily": "NerdCodePro Font",
     "workbench.productIconTheme": "fluent-icons",
-    "workbench.colorTheme": "Dracula Soft",
     "workbench.settings.openDefaultKeybindings": true,
     "workbench.colorCustomizations": {
         "statusBar.background": "#005f5f",
@@ -49,10 +47,10 @@
     "editor.multiCursorModifier": "ctrlCmd",
     "gitlens.codeLens.enabled": false,
     "editor.rulers": [
+        80,
         100
     ],
     "editor.tabCompletion": "onlySnippets",
-    "bookmarks.sideBar.expanded": true,
     "editor.suggest.showStatusBar": true,
     "problems.showCurrentInStatus": true,
     "todo-tree.general.showIconsInsteadOfTagsInStatusBar": true,
@@ -1506,7 +1504,8 @@
         "custom_string_obkoro1": "Copyright (c) 2018 - 2022 Heachen Bear & Contributors"
     },
     "fileheader.configObj": {
-        "autoAdd": false
+        "autoAdd": false,
+        "createHeader": false
     },
     "editor.minimap.enabled": false,
     "translation.youdao.appId": "67d12c034d0d15cb",
@@ -1529,7 +1528,9 @@
         "strings": true
     },
     "remote.SSH.remotePlatform": {
-        "9.134.13.22": "linux"
+        "9.134.13.22": "linux",
+        "152.136.188.178": "linux",
+        "beardad.top": "linux"
     },
     "terminal.integrated.defaultProfile.linux": "zsh",
     "go.lintFlags": [
@@ -1546,7 +1547,6 @@
     "git.autofetch": true,
     "terminal.integrated.copyOnSelection": true,
     "code-runner.runInTerminal": true,
-    "window.zoomLevel": -1,
     "cmake.configureOnOpen": false,
     "leetcode.endpoint": "leetcode-cn",
     "leetcode.workspaceFolder": "/home/beardad/.leetcode",
@@ -1559,9 +1559,7 @@
     "C_Cpp.loggingLevel": "Warning",
     "leetcode.hint.commentDescription": false,
     "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?·！￥…（）—【】｛｝、；：‘’“”，。？",
-    "eslint.format.enable": true,
     "cmake.statusbar.visibility": "icon",
-    "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Chromium, IndentWidth: 4}",
     "javascript.inlayHints.enumMemberValues.enabled": true,
     "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
     "clangd.arguments": [
@@ -1572,4 +1570,34 @@
     "C_Cpp.intelliSenseEngine": "Disabled",
     "C_Cpp.autocomplete": "Disabled",
     "C_Cpp.errorSquiggles": "Disabled",
+    "python.autoComplete.addBrackets": true,
+    "python.linting.banditEnabled": true,
+    "python.linting.pylintArgs": [
+        "--disable=C0103,C0301,C0112,C0115,C0116,C0114"
+    ],
+    "python.analysis.completeFunctionParens": true,
+    "javascript.format.enable": false,
+    "eslint.format.enable": true,
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "typescript.format.enable": false,
+    "files.watcherExclude": {
+        "**/build/**": true,
+        "**/node_modules/**": true,
+        "**/node_modules/*/**": false,
+        "**/vendor/**": true
+    },
+    "window.zoomLevel": -1,
+    "editor.tabSize": 2,
+    "C_Cpp.clang_format_fallbackStyle": "Chromium",
+    "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "markdown-preview-enhanced.breakOnSingleNewLine": false,
+    "clangd.path": "c:\\Users\\mrbea\\AppData\\Roaming\\Code\\User\\globalStorage\\llvm-vs-code-extensions.vscode-clangd\\install\\13.0.0\\clangd_13.0.0\\bin\\clangd.exe",
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+    "editor.accessibilitySupport": "off",
+    "workbench.colorTheme": "Dracula",
 }

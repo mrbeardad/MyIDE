@@ -35,6 +35,12 @@
         "command": "-vscode-neovim.escape",
         "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'"
     },
+    // 使普通模式下ctrl+z可撤销
+    {
+        "key": "ctrl+z",
+        "command": "-vscode-neovim.send",
+        "when": "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'"
+    },
     // 行首与行首
     {
         "key": "ctrl+a",
@@ -140,36 +146,36 @@
         "when": "editorTextFocus && neovim.mode != insert"
     },
     // 折叠
-    {
-        "key": "ctrl+z z",
-        "command": "editor.toggleFold",
-        "when": "editorTextFocus && foldingEnabled && neovim.mode != insert"
-    },
-    {
-        "key": "ctrl+z r",
-        "command": "editor.unfoldAll",
-        "when": "editorTextFocus && foldingEnabled && neovim.mode != insert"
-    },
-    {
-        "key": "ctrl+z m",
-        "command": "editor.foldAll",
-        "when": "editorTextFocus && foldingEnabled && neovim.mode != insert"
-    },
-    {
-        "key": "ctrl+z n",
-        "command": "editor.gotoNextFold",
-        "when": "editorTextFocus && neovim.mode != insert"
-    },
-    {
-        "key": "ctrl+z b",
-        "command": "editor.gotoPreviousFold",
-        "when": "editorTextFocus && neovim.mode != insert"
-    },
-    {
-        "key": "ctrl+z p",
-        "command": "editor.gotoParentFold",
-        "when": "editorTextFocus && neovim.mode != insert"
-    },
+    // {
+    //     "key": "ctrl+z z",
+    //     "command": "editor.toggleFold",
+    //     "when": "editorTextFocus && foldingEnabled && neovim.mode != insert"
+    // },
+    // {
+    //     "key": "ctrl+z r",
+    //     "command": "editor.unfoldAll",
+    //     "when": "editorTextFocus && foldingEnabled && neovim.mode != insert"
+    // },
+    // {
+    //     "key": "ctrl+z m",
+    //     "command": "editor.foldAll",
+    //     "when": "editorTextFocus && foldingEnabled && neovim.mode != insert"
+    // },
+    // {
+    //     "key": "ctrl+z n",
+    //     "command": "editor.gotoNextFold",
+    //     "when": "editorTextFocus && neovim.mode != insert"
+    // },
+    // {
+    //     "key": "ctrl+z b",
+    //     "command": "editor.gotoPreviousFold",
+    //     "when": "editorTextFocus && neovim.mode != insert"
+    // },
+    // {
+    //     "key": "ctrl+z p",
+    //     "command": "editor.gotoParentFold",
+    //     "when": "editorTextFocus && neovim.mode != insert"
+    // },
     // 书签
     {
         "key": "ctrl+m m",
