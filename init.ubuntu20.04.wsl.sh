@@ -241,7 +241,7 @@ bind p run-shell -b "win32yank.exe -o --lf | tmux load-buffer - ; tmux paste-buf
 
 # 快速启动
 bind h new-window htop
-bind g new-window -c "#{pane_current_path}" tig
+bind g new-window -c "#{pane_current_path}" tig --all
 bind r new-window -c "#{pane_current_path}" ranger
 bind f new-window -c "#{pane_current_path}" 'sed -n "/export FZF_DEFAULT_COMMAND=/,/fi$/p" ~/.zshrc > /tmp/fzf-ranger && bash /tmp/fzf-ranger && : > /tmp/fzf-ranger'
 bind m new-window "cmatrix"
