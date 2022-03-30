@@ -11,8 +11,8 @@
 - [开发调试](#开发调试)
 - [Markdown](#markdown)
 - [Cpp](#cpp)
-# 插入模式
 
+# 插入模式
 | 按键               | 作用           |
 | ------------------ | -------------- |
 | `Ctrl`+`A`         | 行首           |
@@ -132,21 +132,21 @@
 
 # 窗口操作
 
-| 按键                   | 作用                                    |
-| ---------------------- | --------------------------------------- |
-| `Ctrl`+`W` `↑`         | 跳转上方的Editor Group，`↓` `←` `→`同理 |
-| `Ctrl`+`W` `Shift`+`K` | 将Editor Group上移，`H` `J` `L`同理     |
-| `Ctrl`+`1`             | 跳转指定Editor Group，其他数字同理      |
-| `Ctrl`+`Tab`           | 快速切换Editor                          |
-| `Tab`                  | 跳转下个Editor Group                    |
-| `Shift`+`Tab`          | 跳转上个Editor Group                    |
-| `Ctrl`+`W` `=`         | 均布Editor Group窗口大小                |
-| `Ctrl`+`W` `v`         | 竖直切分                                |
-| `Ctrl`+`W` `s`         | 水平切分                                |
-| `Ctrl`+`W` `o`         | 仅保留当前Editor                        |
-| `Ctrl`+`W` `c`         | 关闭当前Editor                          |
-| `Ctrl`+`Shift`+`W`     | 关闭当前Editor                          |
-| `Ctrl`+`Shift`+`T`     | 重开关闭的Editor                        |
+| 按键                         | 作用                              |
+| ---------------------------- | --------------------------------- |
+| `Ctrl`+`Shift`+`W`           | 关闭当前Editor                    |
+| `Ctrl`+`Shift`+`T`           | 重开关闭的Editor                  |
+| `Tab`                        | 跳转下个Group                     |
+| `Shift`+`Tab`                | 跳转上个Group                     |
+| `Ctrl`+`1~8`                 | 跳转指定第1~8个Group              |
+| `Ctrl`+`W` `↑/↓/←/→`         | 跳转上/下/左/右方的Group          |
+| `Ctrl`+`W` `=`               | 均布Group窗口大小                 |
+| `Ctrl`+`W` `v`               | 竖直切分                          |
+| `Ctrl`+`W` `s`               | 水平切分                          |
+| `Ctrl`+`W` `o`               | 仅保留当前Group                   |
+| `Ctrl`+`W` `c`               | 关闭当前Group                     |
+| `Ctrl`+`W` `Shift`+`H/J/K/L` | 与/左/下/上/右方Group上移交换位置 |
+| `Ctrl`+`Tab`                 | 快速切换Editor                    |
 
 # 界面元素
 
@@ -177,11 +177,11 @@
 | `g8`              | 查看utf-8字符编码              |
 | `Alt`+`Z`         | 是否长行回绕                   |
 | `Alt`+`Shift`+`E` | 在Explorer中打开文件目录       |
+| `Alt`+`Shift`+`R` | 快速运行单个代码文件           |
+| `Alt`+`Shift`+`T` | 翻译并替换选择文本             |
 | `Alt`+`Shift`+`F` | 格式化文本                     |
 | `Alt`+`Shift`+`H` | 添加文件头部信息               |
 | `Alt`+`Shift`+`C` | 计算器                         |
-| `Alt`+`Shift`+`T` | 翻译并替换选择文本             |
-| `Alt`+`Shift`+`R` | 快速运行单个代码文件           |
 
 # 开发调试
 * 编译：
@@ -226,7 +226,7 @@ endif()
 ```
 2. cmake配置构建目录
 ```sh
-cd build && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS src_dir
+cd build && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS -DCMAKE_BUILD_TYPE=DEBUG src_dir
 ```
 
 3. 链接构建参数文件
