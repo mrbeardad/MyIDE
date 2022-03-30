@@ -133,6 +133,7 @@
     ```
 7. 配置Ubuntu20.04 WSL
     ```sh
+    # in wsl
     mkdir ~/.local
     git clone https://github.com/mrbeardad/My-IDE .local/My-IDE
     cd .local/My-IDE && ./init.ubuntu20.04.wsl.sh

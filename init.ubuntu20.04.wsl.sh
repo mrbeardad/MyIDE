@@ -62,6 +62,8 @@ sudo cp -v ~/.local/bin/win32yank.exe /bin/
 wget -O /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/0.20.1/lsd-musl_0.20.1_amd64.deb
 sudo dpkg -i /tmp/lsd.deb
 
+mkdir ~/.config
+
 # 配置tmux
 readFileSlice __TMUX_CONF_BEGIN __TMUX_CONF_END >~/.tmux.conf
 
@@ -69,6 +71,11 @@ readFileSlice __TMUX_CONF_BEGIN __TMUX_CONF_END >~/.tmux.conf
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
 readFileSlice __ZSHRC_BEGIN __ZSHRC_END >~/.zshrc
+cat >~/.config/proxy <<END
+#!/bin/bash
+sed -n '/^nameserver/{s/nameserver //;s/$/:7890/;p}' /etc/resolv.conf
+END
+chmod +x ~/.config/proxy
 
 # 配置htop
 mkdir -p ~/.config/htop
@@ -77,7 +84,7 @@ readFileSlice __HTOPRC_BEGIN __HTOPRC_END >~/.config/htop/htoprc
 # 配置ranger
 mkdir -p ~/.config/ranger
 readFileSlice __RANGER_BEGIN __RANGER_END >~/.config/ranger/commands.py
-echo 'map <C-f> fzf_select' >~/.config/ranger/rc.conf
+echo -e 'map <C-f> fzf_select\nset show_hidden true' >~/.config/ranger/rc.conf
 
 # 配置tig
 cat >~/.tigrc <<END
@@ -90,7 +97,6 @@ END
 # 配置vim
 git clone --depth=1 https://gitee.com/mrbeardad/SpaceVim ~/.SpaceVim
 ln -sv ~/.SpaceVim/mode ~/.SpaceVim.d
-mkdir ~/.config/
 ln -sv ~/.SpaceVim ~/.config/nvim
 
 # 配置git与ssh
@@ -420,7 +426,8 @@ alias gmt='git mergetool --tool=vimdiff'
 alias gmc='git merge --continue'
 alias gt='git tag'
 alias gbv='git branch -a -vv'
-alias gbsup='git branch --set-upstream'
+alias gbsup='git branch --set-upstream-to'
+alias glr='git pull --rebase'
 alias gsa='git submodule add'
 
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
