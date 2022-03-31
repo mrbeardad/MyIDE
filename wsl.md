@@ -92,7 +92,7 @@
 | reset/revert | `grh`/`grev`                      | 回溯至指定commit（变更保留在工作区）/中和指定commit |
 | tag          | `gt`/`gts`/`gtl`                  | 轻量标签/注释标签并签名/搜索标签                    |
 | branch       | `gb`/`gbv`/`gbsup`/`gbd`          | 新建分支/显示分支信息/设置上游远程分支/删除分支     |
-| checkout     | `gco`/`gcor`/`gcm`/`gcd`          | 切换分支/递归切换/切换master/切换develop            |
+| checkout     | `gco`/`gcm`/`gcd`                 | 切换分支/切换master/切换develop                     |
 | stash        | `gsta`/`gstl`/`gstp`              | 贮藏/列出/弹出                                      |
 | merge        | `gm`/`gmc`/`gma`                  | 合并分支/继续合并/终止合并                          |
 | rebase       | `grb`/`grbc`/`grba`               | 变基到指定分支/继续变基/终止变基                    |
@@ -100,7 +100,7 @@
 | push         | `gp`/`gpf`/`gpf!`                 | 推送本地分支到远程仓库（同名/指定）分支/强制/更强制 |
 | fetch/pull   | `gf`/`glr`                        | 抓取远程仓库数据/拉取上游分支并变基过去             |
 | clone        | `gcl`                             | 克隆仓库包括递归子模块，`--depth=1`仅使用           |
-| submodule    | `gsa`/`gsi`/`gsu`                 | 添加子模块/初始化子模块/更新子模块                  |
+| submodule    | `gsa`/`gsi`/`gsu`                 | 添加子模块/初始化子模块配置/拉取并更新子模块数据    |
 
 # zsh命令行界面
 | 快捷键     | 功能                       |
