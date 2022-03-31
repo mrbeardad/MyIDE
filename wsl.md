@@ -80,26 +80,27 @@
 | `r`       | refs视图  |
 | `y`       | stash视图 |
 
-| git子命令  | 别名                              | 功能                                                |
-| ---------- | --------------------------------- | --------------------------------------------------- |
-| add        | `ga`/`gau`/`gaa`                  | 添加更改到暂存区/仅已跟踪/所有                      |
-| remove     | `grm`                             | 从工作区与暂存区同时删除                            |
-| mv         | `gmv`                             | 同时移动工作区与暂存区的文件                        |
-| resotre    | `grs`/`grst`                      | 恢复工作区为暂存区/恢复暂存区为当前commit           |
-| status     | `gst`/`gss`                       | 查看工作区与暂存区状态/精简信息                     |
-| diff       | `gd`/`gds`/`gdi`                  | 比较工作区与暂存区/比较暂存区与当前commit/精简信息  |
-| commit     | `gc`/`gc!`                        | 提交暂存区/覆盖当前commit                           |
-| tag        | `gt`/`gts`/`gtl`                  | 轻量标签/注释标签并签名/搜索标签                    |
-| branch     | `gb`/`gbd`/`gbv`/`gbsup`          | 新建分支/删除分支/显示分支信息/设置上游远程分支     |
-| checkout   | `gco`/`gcor`/`gcm`/`gcd`          | 切换分支/递归切换/切换master/切换develop            |
-| stash      | `gsta`/`gstl`/`gstp`              | 贮藏/列出/弹出                                      |
-| merge      | `gm`/`gmc`/`gma`                  | 合并分支/继续合并/终止合并                          |
-| rebase     | `grb`/`grbc`/`grba`               | 变基到指定分支/继续变基/终止变基                    |
-| remote     | `gra`/`grv`/`grmv`/`grset`/`grrm` | 添加远程仓库/查看/修改仓库名/修改仓库URL/删除       |
-| push       | `gp`/`gpf`/`gpf!`                 | 推送本地分支到远程仓库（同名/指定）分支/强制/更强制 |
-| fetch/pull | `gf`/`glr`                        | 抓取远程仓库数据/拉取上游分支并变基过去             |
-| clone      | `gcl`                             | 克隆仓库包括递归子模块，`--depth=1`仅使用           |
-| submodule  | `gsa`/`gsi`/`gsu`                 | 添加子模块/初始化子模块/更新子模块                  |
+| git子命令    | 别名                              | 功能                                                |
+| ------------ | --------------------------------- | --------------------------------------------------- |
+| add          | `ga`/`gau`/`gaa`                  | 添加更改到暂存区/仅已跟踪/所有                      |
+| remove       | `grm`                             | 从工作区与暂存区同时删除                            |
+| mv           | `gmv`                             | 同时移动工作区与暂存区的文件                        |
+| resotre      | `grs`/`grst`                      | 恢复工作区为暂存区/恢复暂存区为当前commit           |
+| status       | `gst`/`gss`                       | 查看工作区与暂存区状态/精简信息                     |
+| diff         | `gd`/`gds`/`gdi`                  | 比较工作区与暂存区/比较暂存区与当前commit/精简信息  |
+| commit       | `gc`/`gc!`                        | 提交暂存区/覆盖当前commit                           |
+| reset/revert | `grh`/`grev`                      | 回溯至指定commit（变更保留在工作区）/中和指定commit |
+| tag          | `gt`/`gts`/`gtl`                  | 轻量标签/注释标签并签名/搜索标签                    |
+| branch       | `gb`/`gbv`/`gbsup`/`gbd`          | 新建分支/显示分支信息/设置上游远程分支/删除分支     |
+| checkout     | `gco`/`gcor`/`gcm`/`gcd`          | 切换分支/递归切换/切换master/切换develop            |
+| stash        | `gsta`/`gstl`/`gstp`              | 贮藏/列出/弹出                                      |
+| merge        | `gm`/`gmc`/`gma`                  | 合并分支/继续合并/终止合并                          |
+| rebase       | `grb`/`grbc`/`grba`               | 变基到指定分支/继续变基/终止变基                    |
+| remote       | `gra`/`grv`/`grmv`/`grset`/`grrm` | 添加远程仓库/查看/修改仓库名/修改仓库URL/删除       |
+| push         | `gp`/`gpf`/`gpf!`                 | 推送本地分支到远程仓库（同名/指定）分支/强制/更强制 |
+| fetch/pull   | `gf`/`glr`                        | 抓取远程仓库数据/拉取上游分支并变基过去             |
+| clone        | `gcl`                             | 克隆仓库包括递归子模块，`--depth=1`仅使用           |
+| submodule    | `gsa`/`gsi`/`gsu`                 | 添加子模块/初始化子模块/更新子模块                  |
 
 # zsh命令行界面
 | 快捷键     | 功能                       |
@@ -140,6 +141,7 @@
 | `NE`            | `2> /dev/null`                      |
 | `NUL`           | `> /dev/null 2>&1`                  |
 | `x`             | 解压各种压缩包                      |
+| `gi`            | 搜索.gitignore模板                  |
 | `proxy`         | 设置代理，配置文件`~/.config/proxy` |
 > 访问Windows宿主机的代理软件，需要：
 > 1. 添加防火墙规则，允许宿主机某端口可被访问
