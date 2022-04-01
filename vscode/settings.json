@@ -1547,6 +1547,10 @@
     "git.autofetch": true,
     "terminal.integrated.copyOnSelection": true,
     "code-runner.runInTerminal": true,
+    "code-runner.executorMap": {
+        "c": "cd $dir && clang -g $fileName -o $fileNameWithoutExt && quickrun_time $dir$fileNameWithoutExt.exe",
+        "cpp": "cd $dir && clang++ -g -D_GLIBCXX_DEBUG $fileName -o $fileNameWithoutExt && quickrun_time $dir$fileNameWithoutExt.exe"
+    },
     "cmake.configureOnOpen": false,
     "leetcode.endpoint": "leetcode-cn",
     "leetcode.workspaceFolder": "/home/beardad/.leetcode",
@@ -1595,9 +1599,10 @@
         "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     },
     "markdown-preview-enhanced.breakOnSingleNewLine": false,
-    "clangd.path": "c:\\Users\\mrbea\\AppData\\Roaming\\Code\\User\\globalStorage\\llvm-vs-code-extensions.vscode-clangd\\install\\13.0.0\\clangd_13.0.0\\bin\\clangd.exe",
+    "clangd.path": "/bin/clangd-12",
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": "active",
     "editor.accessibilitySupport": "off",
     "workbench.colorTheme": "Dracula",
+    "git.confirmSync": false,
 }

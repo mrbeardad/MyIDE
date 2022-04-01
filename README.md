@@ -114,6 +114,7 @@
 # WSL
 1. 安装[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)
 2. 安装wt配置[settings.json](WindowsTerminal/settings.json)
+3. 将[WindowsTerminalQuakeModeStartup.bat](WindowsTerminal/WindowsTerminalQuakeModeStartup.bat)复制到*%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup*
 3. 安装[Ubuntu WSL](https://www.microsoft.com/zh-cn/p/ubuntu-2004-lts/9n6svws3rx71?activetab=pivot:overviewtab)
 4. 启用WSL2：控制面板》程序》开关Windows特性》开启"Virtual Machine Platform"与"Windows Subsystem for Linux"
 5. 限制WSL2内存使用
