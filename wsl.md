@@ -40,7 +40,7 @@
 | `ts`     | 创建新会话       |
 | `ta`     | 连接会话         |
 | `tkss`   | 杀死目标会话     |
-| `tkss`   | 杀死tmux server  |
+| `tksv`   | 杀死tmux server  |
 
 # htop进程视察器
 | 快捷键  | 功能                     |
