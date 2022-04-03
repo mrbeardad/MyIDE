@@ -130,7 +130,8 @@ sudo apt install clang-format-14 clang-tidy-14
 # go
 go env -w GOPATH="$HOME"/.local/go/
 go env -w GOBIN="$HOME"/.local/bin/
-[[ "$use_tencent_cloud" == y ]] && go env -w GOPROXY=https://mirrors.tencent.com/go/
+go env -w GOSUMDB=sum.golang.google.cn
+[[ "$use_tencent_cloud" == y ]] && go env -w GOPROXY=https://mirrors.tencent.com/go/,direct
 
 # python
 [[ "$use_tencent_cloud" == y ]] && pip config set global.index-url https://mirrors.tencent.com/pypi/simple
