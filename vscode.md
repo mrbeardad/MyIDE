@@ -84,13 +84,13 @@
 | ----------- | ---------------------------- |
 | `y`         | 复制到0号寄存器              |
 | `Y`         | 复制光标后文本到0号寄存器    |
+| `\y`        | 复制到系统剪切板             |
+| `\Y`        | 复制标光后文本到系统剪切板   |
+| `Space` `y` | 复制整个文件到系统剪切板     |
 | `=p`        | 粘贴0号寄存器到光标后        |
 | `=P`        | 粘贴0号寄存器到光标钱        |
 | `=o`        | 粘贴0号寄存器到下行          |
 | `=O`        | 粘贴0号寄存器到上行          |
-| `\y`        | 复制到系统剪切板             |
-| `\Y`        | 复制标光后文本到系统剪切板   |
-| `Space` `y` | 复制整个文件到系统剪切板     |
 | `\p`        | 粘贴系统剪切板到光标后       |
 | `\P`        | 粘贴系统剪切板到光标钱       |
 | `\o`        | 粘贴系统剪切板到下行         |
@@ -203,14 +203,15 @@
    2. 启动调试（`F5`）
 
 ## Markdown
-| 按键               | 作用               |
-| ------------------ | ------------------ |
-| `Ctrl`+`K` `V`     | Markdown预览       |
-| `Ctrl`+`Shift`+`]` | 标题(uplevel)      |
-| `Ctrl`+`Shift`+`[` | 标题(downlevel)    |
-| `Ctrl`+`B`         | 粗体               |
-| `Ctrl`+`I`         | 斜体               |
-| `Alt`+`C`          | check/uncheck task |
+| 按键               | 作用                       |
+| ------------------ | -------------------------- |
+| `Ctrl`+`Shift`+`V` | Markdown预览（当前Editor） |
+| `Ctrl`+`K` `V`     | Markdown预览（切分Editor） |
+| `Ctrl`+`Shift`+`]` | 标题(uplevel)              |
+| `Ctrl`+`Shift`+`[` | 标题(downlevel)            |
+| `Ctrl`+`B`         | 粗体                       |
+| `Ctrl`+`I`         | 斜体                       |
+| `Alt`+`C`          | check/uncheck task         |
 
 ## Cpp
 1. 编写CMakeLists.txt文件
@@ -232,9 +233,9 @@ endif()
 ```
 2. cmake配置构建目录
 ```sh
-cd build && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS -DCMAKE_BUILD_TYPE=DEBUG src_dir
+mkdir build && cd build && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS -DCMAKE_BUILD_TYPE=DEBUG ..
 ```
 3. 链接构建参数文件
 ```sh
-cd src_dir && ln -s build/compile_commands.json .
+cd .. && ln -s build/compile_commands.json .
 ```

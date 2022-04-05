@@ -114,17 +114,17 @@
 # WSL
 1. 安装[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)
 2. 安装wt配置[settings.json](WindowsTerminal/settings.json)
-3. 将[WindowsTerminalQuakeModeStartup.bat](WindowsTerminal/WindowsTerminalQuakeModeStartup.bat)复制到*%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup*
-3. 安装[Ubuntu WSL](https://www.microsoft.com/zh-cn/p/ubuntu-2004-lts/9n6svws3rx71?activetab=pivot:overviewtab)
-4. 启用WSL2：控制面板》程序》开关Windows特性》开启"Virtual Machine Platform"与"Windows Subsystem for Linux"
-5. 限制WSL2内存使用
-  ```conf
-  # %USERPROFILE%\.wslconfig
-  [wsl2]
-  memory=4GB
-  swap=0
-  ```
-6. 设置WSL2为默认并初始化Ubuntu20.04
+3. 将[WindowsTerminalQuakeModeStartup.bat](WindowsTerminal/WindowsTerminalQuakeModeStartup.bat)复制到<i>%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup</i>
+4. 安装[Ubuntu WSL](https://www.microsoft.com/zh-cn/p/ubuntu-2004-lts/9n6svws3rx71?activetab=pivot:overviewtab)
+5. 启用WSL2：控制面板》程序》开关Windows特性》开启"Virtual Machine Platform"与"Windows Subsystem for Linux"
+6. 限制WSL2内存使用
+    ```conf
+    # %USERPROFILE%\.wslconfig
+    [wsl2]
+    memory=4GB
+    swap=0
+    ```
+7. 设置WSL2为默认并初始化Ubuntu20.04
     ```sh
     # in powershell
     wsl --list --all -v
@@ -132,7 +132,7 @@
     wsl --set-default Ubuntu20.04
     wsl # 进入wsl
     ```
-7. 配置Ubuntu20.04 WSL
+8. 配置Ubuntu20.04 WSL
     ```sh
     # in wsl
     mkdir ~/.local
@@ -147,21 +147,21 @@
 
 2. 下载并安装[git](https://git-scm.com/downloads)
 
-3. 下载并安装[neovim](https://github.com/neovim/neovim/releases/)，然后安装配置[vscode-neovim](vscode/vscode-neovim/)
-   1. 修改[init.vim](vscode/vscode-neovim/init.vim)中第97行路径为[vscode-neovim/plugged](vscode/vscode-neovim/plugged/)安装路径
-   2. 修改vscode配置neoviim安装路径
+3. 下载并安装[neovim](https://github.com/neovim/neovim/releases/)，然后安装配置[vscode-neovim](vscode/vscode-neovim/)到neovim安装目录下
+   1. 修改vscode配置neovim安装路径
+   2. 修改[init.vim](vscode/vscode-neovim/init.vim)中第41行路径为[vscode-neovim/plugged](vscode/vscode-neovim/plugged/)安装路径
 
-4. 下载并安装[VS for c++](https://visualstudio.microsoft.com/downloads/#other)并设置工具链的环境变量
+4. 下载并安装[VS for c++](https://visualstudio.microsoft.com/downloads/#other)，然后设置工具链的环境变量
     > Settings -> advanced system settings
     * PATH：
-        > `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\bin\Hostx64\x64`
+        * `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\bin\Hostx64\x64`
     * LIB：
-        > `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\lib\x64`
-        > `C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\ucrt\x64`
-        > `C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\um\x64`
+        * `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\lib\x64`
+        * `C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\ucrt\x64`
+        * `C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\um\x64`
     * INCLUDE：
-        > `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include`
-        > `C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt`
+        * `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include`
+        * `C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt`
 
 [**vscode使用手册**](vscode.md)
 

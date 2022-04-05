@@ -47,9 +47,9 @@ sudo apt install docker-ce docker-ce-cli containerd.io \
 
 mkdir -p ~/.local/bin/
 curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip &&
-  unzip -p /tmp/win32yank.zip win32yank.exe > ~/.local/bin/win32yank.exe &&
-  chmod +x ~/.local/bin/win32yank.exe &&
-  sudo cp -v ~/.local/bin/win32yank.exe /bin/
+  unzip -p /tmp/win32yank.zip win32yank.exe > ./win32yank.exe &&
+  chmod +x win32yank.exe &&
+  sudo cp -v win32yank.exe /bin/
 
 wget -O /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/0.20.1/lsd-musl_0.20.1_amd64.deb &&
   sudo dpkg -i /tmp/lsd.deb
@@ -87,12 +87,7 @@ EOF
 
 # 配置tig
 [[ -e ~/.tigrc ]] && mv ~/.tigrc{,.backup}
-cat >~/.tigrc <<END
-set line-graphics = utf-8
-set main-view = date:default author:full id:yes,color \
-                line-number:no,interval=1 \
-                commit-title:graph=v2,refs=yes,overflow=no
-END
+get_config __TIGRC >~/.tigrc
 
 # 配置vim
 sudo add-apt-repository ppa:neovim-ppa/stable
@@ -536,6 +531,11 @@ sudo npm install -g eslint
 #                 self.fm.select_file(selected)
 # 
 
+# __TIGRC
+# set line-graphics = utf-8
+# set main-view = date:default author:full id:yes,color \
+#                 line-number:no,interval=1 \
+#                 commit-title:graph=v2,refs=yes,overflow=no
 
 # __GITCONFIG
 # [user]
