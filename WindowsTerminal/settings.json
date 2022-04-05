@@ -82,7 +82,7 @@
             "brightWhite": "#ffffff",
             "background": "#1f2430",
             "foreground": "#cbccc6",
-            "cursorColor": "#ffcc66",
+            "cursorColor": "#ffcccc",
             "selectionBackground": "#33415e"
         },
         {
@@ -167,7 +167,7 @@
     ],
     "profiles": {
         "defaults": {
-            "colorScheme": "Blazer",
+            "colorScheme": "Ayu Mirage",
             "fontFace": "NerdCodePro Font",
             "fontWeight": "normal",
             "fontSize": 10,
