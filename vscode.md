@@ -223,9 +223,6 @@ if(DEFINED CMAKE_EXPORT_COMPILE_COMMANDS)
         -Wno-c++98-compat
         -Wno-c++98-compat-pedantic
         -Wno-pedantic
-        -Wno-missing-prototypes
-        -Wno-padded
-        -Wno-old-style-cast
         -Wno-global-constructors
         -Wno-exit-time-destructors
     )
