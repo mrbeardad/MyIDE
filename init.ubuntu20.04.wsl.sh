@@ -16,8 +16,8 @@ fi
 cd ~ || exit 1
 
 # 修改sudo配置免除密码
-read -n 1 -p "do you want to execute sudo without password? (Y/n): " is_sudo_nopasswd
-[[ "${is_sudo_nopasswd,}" == "y" ]] &&
+read -n 1 -p "do you want to execute sudo without password? (Y/n): " sudo_without_passwd
+[[ "${sudo_without_passwd,}" == "y" ]] &&
   sudo sed -i '/^%sudo\s*ALL=\(ALL:ALL\)\s*ALL/s/ALL$/NOPASSWD: ALL/' /etc/sudoers
 
 # 配置apt镜像源
@@ -32,18 +32,39 @@ read -n 1 -p "do you want to use the apt source mirrors on tencent cloud? (Y/n):
 
 # 更新软件包
 sudo apt update
-sudo apt upgrade
+sudo apt -y upgrade
 
 # 下载所需软件
-sudo apt install docker-ce docker-ce-cli containerd.io \
+sudo apt -y install docker-ce docker-ce-cli containerd.io \
   tmux tmux-plugin-manager xsel \
   zsh zsh-syntax-highlighting zsh-autosuggestions autojump \
   neovim \
   tig ranger fzf silversearcher-ag ripgrep fd-find ncdu unzip neofetch sl cmatrix \
-  clang clangd clang-format clang-tidy cmake \
+  cmake \
   golang \
   npm \
   python3-pip python-is-python3
+
+read -n 1 -p "do you want to install clang-14 from llvm-repository or clang-10 default from apt? (Y/n)" install_clang_14
+if [[ "${install_clang_14,}" == "y" ]]; then
+  bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
+  sudo apt -y install clang-format-14 clang-tidy-14
+  (
+    cd /bin || exit
+    sudo ln -sf clang-14 clang
+    sudo ln -sf clang++-14 clang++
+    sudo ln -sf clangd-14 clangd
+    sudo ln -sf clang-format-14 clang-format
+    sudo ln -sf clang-tidy-14 clang-tidy
+    sudo ln -sf lldb-14 lldb
+    sudo ln -sf lldb-argdumper-14 lldb-argdumper
+    sudo ln -sf lldb-instr-14 lldb-instr
+    sudo ln -sf lldb-server-14 lldb-server
+    sudo ln -sf lldb-vscode-14 lldb-vscode
+  )
+else
+  sudo apt -y install clang lldb lld clangd clang-format clang-tidy
+fi
 
 mkdir -p ~/.local/bin/
 curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip &&
@@ -92,7 +113,7 @@ get_config __TIGRC >~/.tigrc
 # 配置vim
 sudo add-apt-repository ppa:neovim-ppa/stable
 sudo apt update
-sudo apt install neovim
+sudo apt -y install neovim
 git clone --depth=1 https://gitee.com/mrbeardad/SpaceVim ~/.SpaceVim
 ln -sv ~/.SpaceVim/mode/ ~/.SpaceVim.d/
 [[ -e ~/.config/nvim ]] && mv ~/.config/nvim{,-bcakup}
@@ -106,21 +127,10 @@ if [[ "$USER" == beardad ]] ;then
 fi
 
 # cpp
-bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
-sudo apt install clang-format-14 clang-tidy-14
-(
-  cd /bin || exit
-  sudo ln -sf clang-14 clang
-  sudo ln -sf clang++-14 clang++
-  sudo ln -sf clangd-14 clangd
-  sudo ln -sf clang-format-14 clang-format
-  sudo ln -sf clang-tidy-14 clang-tidy
-  sudo ln -sf lldb-14 lldb
-  sudo ln -sf lldb-argdumper-14 lldb-argdumper
-  sudo ln -sf lldb-instr-14 lldb-instr
-  sudo ln -sf lldb-server-14 lldb-server
-  sudo ln -sf lldb-vscode-14 lldb-vscode
-)
+cat >~/.clang-format <<EOF
+BasedOnStyle: Chromium
+IndentWidth: 4
+EOF
 
 # go
 go env -w GOPATH="$HOME"/.local/go/
