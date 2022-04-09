@@ -52,7 +52,7 @@ tmux tmux-plugin-manager \
 zsh zsh-syntax-highlighting zsh-autosuggestions autojump \
 ranger fzf fd-find \
 tig \
-neovim silversearcher-ag ripgrep universal-ctags php \
+neovim ripgrep universal-ctags php \
 cmake doxygen google-perftools libboost-all-dev libgtest-dev libsource-highlight-dev \
 golang \
 npm \
@@ -521,6 +521,7 @@ EOF
 # set main-view = date:default author:full id:yes,color \
 #                 line-number:no,interval=1 \
 #                 commit-title:graph=v2,refs=yes,overflow=no
+# bind main c @git checkout %(commit)
 
 # __GITCONFIG
 # [user]
