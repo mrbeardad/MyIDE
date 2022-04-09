@@ -1,82 +1,106 @@
 #!/bin/bash
 
 get_config() {
-  if [[ $# -lt 1 ]]; then
-    echo -e "\e[31mget_config()\e[m: usage: get_config CONFIG_BEGIN" >&2
-    return 1
-  fi
-  sed -n "/^# $1$/,/^$/{s/^# //;p}" "$0" | sed -n '2,$p'
+    if [[ $# -lt 1 ]]; then
+        echo -e "\e[31mget_config()\e[m: usage: get_config CONFIG_BEGIN" >&2
+        return 1
+    fi
+    sed -n "/^# $1$/,/^$/{s/^# //;p}" "$0" | sed -n '2,$p'
 }
 
 if ! lsb_release -a | grep -qi 'ubuntu 20.04'; then
-  echo -e "\e[31mError\e[m: this script requires ubuntu 20.04"
-  exit 1
+    echo -e "\e[31mError\e[m: this script requires ubuntu 20.04"
+    exit 1
 fi
 
 cd ~ || exit 1
 
 # 修改sudo配置免除密码
-read -n 1 -p "do you want to execute sudo without password? (Y/n): " sudo_without_passwd
-[[ "${sudo_without_passwd,}" == "y" ]] &&
-  sudo sed -i '/^%sudo\s*ALL=\(ALL:ALL\)\s*ALL/s/ALL$/NOPASSWD: ALL/' /etc/sudoers
+read -n 1 -p "do you want to execute sudo without password? (Y/n): " SUDO_WITHOUT_PASSWD
+[[ "${SUDO_WITHOUT_PASSWD,}" == "y" ]] &&
+sudo sed -i '/^%sudo\s*ALL=\(ALL:ALL\)\s*ALL/s/ALL$/NOPASSWD: ALL/' /etc/sudoers
 
 # 配置apt镜像源
-read -n 1 -p "do you want to use the apt source mirrors on tencent cloud? (Y/n): " use_tencent_cloud
-[[ "${use_tencent_cloud,}" == "y" ]] &&
-  sudo wget -O /etc/apt/sources.list http://mirrors.cloud.tencent.com/repo/ubuntu20_sources.list
+read -n 1 -p "do you want to use the mirrors on tencent cloud? (Y/n): " USE_TENCENT_CLOUD_REPO
+[[ "${USE_TENCENT_CLOUD_REPO,}" == "y" ]] &&
+sudo wget -O /etc/apt/sources.list http://mirrors.cloud.tencent.com/repo/ubuntu20_sources.list
 
 # 配置docker镜像仓库
-[[ "${use_tencent_cloud,}" == "y" ]] &&
-  curl -fsSL https://mirrors.cloud.tencent.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add - &&
-  sudo add-apt-repository "deb [arch=amd64] https://mirrors.cloud.tencent.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
+[[ "${USE_TENCENT_CLOUD_REPO,}" == "y" ]] &&
+curl -fsSL https://mirrors.cloud.tencent.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add - &&
+sudo add-apt-repository "deb [arch=amd64] https://mirrors.cloud.tencent.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
+
+# 配置go仓库
+go env -w GOPATH="$HOME"/.local/go/ GOBIN="$HOME"/.local/bin/ GOSUMDB=sum.golang.google.cn
+[[ "$USE_TENCENT_CLOUD_REPO" == y ]] && go env -w GOPROXY=https://mirrors.tencent.com/go/,direct
+
+# 配置pip仓库
+[[ "$USE_TENCENT_CLOUD_REPO" == y ]] && pip config set global.index-url https://mirrors.tencent.com/pypi/simple
+
+# 配置npm仓库
+[[ "$USE_TENCENT_CLOUD_REPO" == y ]] && npm config set registry http://mirrors.tencent.com/npm/
 
 # 更新软件包
 sudo apt update
 sudo apt -y upgrade
 
+mkdir -p ~/.local/bin/
 # 下载所需软件
-sudo apt -y install docker-ce docker-ce-cli containerd.io \
-  tmux tmux-plugin-manager xsel \
-  zsh zsh-syntax-highlighting zsh-autosuggestions autojump \
-  neovim \
-  tig ranger fzf silversearcher-ag ripgrep fd-find ncdu unzip neofetch sl cmatrix \
-  cmake \
-  golang \
-  npm \
-  python3-pip python-is-python3
+sudo apt -y install neofetch sl cmatrix ncdu cloc gnupg unzip nmap \
+docker-ce docker-ce-cli containerd.io \
+tmux tmux-plugin-manager \
+zsh zsh-syntax-highlighting zsh-autosuggestions autojump \
+ranger fzf fd-find \
+tig \
+neovim silversearcher-ag ripgrep universal-ctags php \
+cmake doxygen google-perftools libboost-all-dev libgtest-dev libsource-highlight-dev \
+golang \
+npm \
+python3-pip python-is-python3
 
-read -n 1 -p "do you want to install clang-14 from llvm-repository or clang-10 default from apt? (Y/n)" install_clang_14
-if [[ "${install_clang_14,}" == "y" ]]; then
-  bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
-  sudo apt -y install clang-format-14 clang-tidy-14
-  (
-    cd /bin || exit
-    sudo ln -sf clang-14 clang
-    sudo ln -sf clang++-14 clang++
-    sudo ln -sf clangd-14 clangd
-    sudo ln -sf clang-format-14 clang-format
-    sudo ln -sf clang-tidy-14 clang-tidy
-    sudo ln -sf lldb-14 lldb
-    sudo ln -sf lldb-argdumper-14 lldb-argdumper
-    sudo ln -sf lldb-instr-14 lldb-instr
-    sudo ln -sf lldb-server-14 lldb-server
-    sudo ln -sf lldb-vscode-14 lldb-vscode
-  )
+# clang-14
+read -n 1 -p "do you want to install clang-14 from llvm-repository instead of default clang-10? (Y/n)" INSTLL_CLANG_14
+if [[ "${INSTLL_CLANG_14,}" == "y" ]]; then
+    bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
+    sudo apt -y install clang-format-14 clang-tidy-14
+    (
+        cd /bin || exit
+        sudo ln -sf clang-14 clang
+        sudo ln -sf clang++-14 clang++
+        sudo ln -sf clangd-14 clangd
+        sudo ln -sf clang-format-14 clang-format
+        sudo ln -sf clang-tidy-14 clang-tidy
+        sudo ln -sf lldb-14 lldb
+        sudo ln -sf lldb-argdumper-14 lldb-argdumper
+        sudo ln -sf lldb-instr-14 lldb-instr
+        sudo ln -sf lldb-server-14 lldb-server
+        sudo ln -sf lldb-vscode-14 lldb-vscode
+    )
 else
-  sudo apt -y install clang lldb lld clangd clang-format clang-tidy
+    sudo apt -y install clang lldb lld clangd clang-format clang-tidy
 fi
 
-mkdir -p ~/.local/bin/
+# win32yank.exe
 curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip &&
-  unzip -p /tmp/win32yank.zip win32yank.exe > ./win32yank.exe &&
-  chmod +x win32yank.exe &&
-  sudo cp -v win32yank.exe /bin/
+unzip -p /tmp/win32yank.zip win32yank.exe > ./win32yank.exe &&
+chmod +x win32yank.exe &&
+sudo cp -v win32yank.exe /bin/
 
+# lsd
 wget -O /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/0.20.1/lsd-musl_0.20.1_amd64.deb &&
-  sudo dpkg -i /tmp/lsd.deb
+sudo dpkg -i /tmp/lsd.deb
+
+# SeeCheatSheets
+git clone https://github.com/mrbeardad/SeeCheatSheets ~/.cheat
+mkdir ~/.cheat/build
+(
+    cd ~/.cheat/build || exit 1
+    cmake -D CMAKE_BUILD_TYPE=Release ..
+    cmake --build . -t see
+    cmake --install .
+)
 
 mkdir ~/.config/
-
 # 配置tmux
 [[ -e ~/.tmux.conf ]] && mv ~/.tmux.conf{,.backup}
 get_config __TMUX_CONF >~/.tmux.conf
@@ -121,9 +145,9 @@ ln -sv ~/.SpaceVim/ ~/.config/nvim/
 
 # 配置git与ssh
 if [[ "$USER" == beardad ]] ;then
-  get_config __GITCONFIG >~/.gitconfig
-  mkdir ~/.ssh/
-  get_config __SSH_CONFIG >~/.ssh/config
+    get_config __GITCONFIG >~/.gitconfig
+    mkdir ~/.ssh/
+    get_config __SSH_CONFIG >~/.ssh/config
 fi
 
 # cpp
@@ -132,24 +156,8 @@ BasedOnStyle: Chromium
 IndentWidth: 4
 EOF
 
-# go
-go env -w GOPATH="$HOME"/.local/go/
-go env -w GOBIN="$HOME"/.local/bin/
-go env -w GOSUMDB=sum.golang.google.cn
-[[ "$use_tencent_cloud" == y ]] && go env -w GOPROXY=https://mirrors.tencent.com/go/,direct
-
-# python
-[[ "$use_tencent_cloud" == y ]] && pip config set global.index-url https://mirrors.tencent.com/pypi/simple
-
-# nodejs
-[[ "$use_tencent_cloud" == y ]] && npm config set registry http://mirrors.tencent.com/npm/
-sudo npm install -g eslint
-
-
 # __TMUX_CONF
-# ##################################################################################################
 # # 全局选项
-# ##################################################################################################
 # set -g set-titles off                   # 不更改terminal title
 # set -g default-terminal "xterm-256color" # 设置$TERM环境变量
 # set -g xterm-keys on                    # 支持xterm按键序列
@@ -164,44 +172,22 @@ sudo npm install -g eslint
 # setw -g automatic-rename off            # 禁止自动更名window
 # set-option -g status off                # 不显示status line
 # set-option -sa terminal-overrides ",xterm-256color:Tc"
-# # set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
 # set -as terminal-overrides '*:Smulx=\E[4::%p1%dm,*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
-# 
-# 
-# ##################################################################################################
-# # 状态栏配置
-# ##################################################################################################
-# set -g status-interval 1                        # 状态栏刷新时间
-# set -g status-justify left                      # 状态栏列表左对齐
-# set -g message-style "bg=#202529, fg=#91A8BA"   # 指定消息通知的前景、后景色
-# set -g status-left "#[fg=cyan]  #S \ue0b2"     # 状态栏左侧内容
-# set -g status-right '#[fg=cyan]Continuum status: #{continuum_status}' # 状态栏右侧内容
-# set -g status-left-length 300                   # 状态栏左边长度300
-# set -g status-right-length 500                  # 状态栏右边长度500
-# set -wg window-status-format " #I #W "          # 状态栏窗口名称格式
-# set -wg window-status-current-format " #I:#W#F #[fg=green]#[bg=black]\ue0b0" # 状态栏当前窗口名称格式(#I：序号，#w：窗口名称，#F：间隔符)
-# set -wg window-status-separator ""              # 状态栏窗口名称之间的间隔
-# set -wg window-status-current-style "fg=white, bg=green" # 状态栏当前窗口名称的样式
-# set -wg window-status-last-style "fg=blue"      # 状态栏最后一个窗口名称的样式
-# 
-# ##################################################################################################
-# # 插件
-# ##################################################################################################
-# # 保存会话插件
-# set -g @plugin 'tmux-plugins/tmux-resurrect'
-# 
-# ##################################################################################################
-# # 快捷键
-# ##################################################################################################
+#
+#
 # # 更改快捷键前缀
 # unbind C-Z
 # unbind C-B
 # set -g prefix M-w
-# 
+#
+# # 重载配置
+# unbind 'R'
+# bind R source-file ~/.tmux.conf \; display-message "Config reloaded.."
+#
 # # Window跳转
 # unbind 'b'
 # bind b previous-window
-# 
+#
 # # Pane跳转
 # unbind-key M-Left
 # unbind-key M-Right
@@ -211,13 +197,13 @@ sudo npm install -g eslint
 # bind Down   selectp -D
 # bind Left   selectp -L
 # bind Right  selectp -R
-# 
+#
 # # Pane分割
 # unbind '%'
 # unbind '"'
 # bind s splitw -v -c '#{pane_current_path}'
 # bind v splitw -h -c '#{pane_current_path}'
-# 
+#
 # # Pane大小调整
 # unbind-key C-Right
 # unbind-key C-Left
@@ -227,29 +213,18 @@ sudo npm install -g eslint
 # bind  - resizep -D 10
 # bind  < resizep -L 10
 # bind  > resizep -R 10
-# 
+#
 # # 剪切板支持
 # bind p run-shell -b "win32yank.exe -o --lf | tmux load-buffer - ; tmux paste-buffer"
-# 
+#
 # # 快速启动
 # bind h new-window htop
 # bind g new-window -c "#{pane_current_path}" tig --all
 # bind r new-window -c "#{pane_current_path}" ranger
-# bind f new-window -c "#{pane_current_path}" 'sed -n "/export FZF_DEFAULT_COMMAND=/,/fi$/p" ~/.zshrc > /tmp/fzf-ranger && bash /tmp/fzf-ranger && : > /tmp/fzf-ranger'
 # bind m new-window "cmatrix"
 # bind t new-window "sl"
-# 
-# # 其他按键
-# ## 切换statusline
-# # unbind 't'
-# # bind t set-option status
-# 
-# ## 重载配置
-# unbind 'R'
-# bind R source-file ~/.tmux.conf \; display-message "Config reloaded.."
-# 
-# ## 鼠标滚轮模拟
-# # Emulate scrolling by sending up and down keys if these commands are running in the pane
+#
+# # 鼠标滚轮模拟
 # tmux_commands_with_legacy_scroll="nano less more man"
 # bind-key -T root WheelUpPane \
 #     if-shell -Ft= '#{?mouse_any_flag,1,#{pane_in_mode}}' \
@@ -261,9 +236,11 @@ sudo npm install -g eslint
 #         'send -Mt=' \
 #         'if-shell -t= "#{?alternate_on,true,false} || echo \"#{tmux_commands_with_legacy_scroll}\" | grep -q \"#{pane_current_command}\"" \
 #             "send -t= Down Down Down" "send -Mt="'
-# 
-# run '/usr/share/tmux-plugin-manager/tpm'
-
+#
+# # 插件
+# run '/usr/share/tmux-plugin-manager/tpm'        # 插件管理器
+# set -g @plugin 'tmux-plugins/tmux-resurrect'    # 会话保存与恢复插件
+#
 
 # __ZSHRC
 # # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -272,64 +249,64 @@ sudo npm install -g eslint
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
-# 
+#
 # # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/.local/bin:$PATH
-# 
+#
 # # Path to your oh-my-zsh installation.
 # export ZSH="/home/beardad/.oh-my-zsh"
-# 
+#
 # # Set name of the theme to load --- if set to "random", it will
 # # load a random theme each time oh-my-zsh is loaded, in which case,
 # # to know which specific one was loaded, run: echo $RANDOM_THEME
 # # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="powerlevel10k/powerlevel10k"
-# 
+#
 # # Set list of themes to pick from when loading at random
 # # Setting this variable when ZSH_THEME=random will cause zsh to load
 # # a theme from this variable instead of looking in $ZSH/themes/
 # # If set to an empty array, this variable will have no effect.
 # # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-# 
+#
 # # Uncomment the following line to use case-sensitive completion.
 # # CASE_SENSITIVE="true"
-# 
+#
 # # Uncomment the following line to use hyphen-insensitive completion.
 # # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
-# 
+#
 # # Uncomment the following line to disable bi-weekly auto-update checks.
 # # DISABLE_AUTO_UPDATE="true"
-# 
+#
 # # Uncomment the following line to automatically update without prompting.
 # # DISABLE_UPDATE_PROMPT="true"
-# 
+#
 # # Uncomment the following line to change how often to auto-update (in days).
 # # export UPDATE_ZSH_DAYS=13
-# 
+#
 # # Uncomment the following line if pasting URLs and other text is messed up.
 # # DISABLE_MAGIC_FUNCTIONS="true"
-# 
+#
 # # Uncomment the following line to disable colors in ls.
 # # DISABLE_LS_COLORS="true"
-# 
+#
 # # Uncomment the following line to disable auto-setting terminal title.
 # # DISABLE_AUTO_TITLE="true"
-# 
+#
 # # Uncomment the following line to enable command auto-correction.
 # # ENABLE_CORRECTION="true"
-# 
+#
 # # Uncomment the following line to display red dots whilst waiting for completion.
 # # You can also set it to another string to have that shown instead of the default red dots.
 # # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
-# 
+#
 # # Uncomment the following line if you want to disable marking untracked files
 # # under VCS as dirty. This makes repository status check for large repositories
 # # much, much faster.
 # # DISABLE_UNTRACKED_FILES_DIRTY="true"
-# 
+#
 # # Uncomment the following line if you want to change the command execution time
 # # stamp shown in the history command output.
 # # You can set one of the optional three formats:
@@ -337,10 +314,10 @@ sudo npm install -g eslint
 # # or set a custom format using the strftime function format specifications,
 # # see 'man strftime' for details.
 # HIST_STAMPS="yyyy-mm-dd"
-# 
+#
 # # Would you like to use another custom folder than $ZSH/custom?
 # # ZSH_CUSTOM=/path/to/new-custom-folder
-# 
+#
 # # Which plugins would you like to load?
 # # Standard plugins can be found in $ZSH/plugins/
 # # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -363,16 +340,16 @@ sudo npm install -g eslint
 #     tmux
 #     vi-mode
 # )
-# 
+#
 # source $ZSH/oh-my-zsh.sh
-# 
+#
 # # User configuration
-# 
+#
 # # export MANPATH="/usr/local/man:$MANPATH"
-# 
+#
 # # You may need to manually set your language environment
 # # export LANG=en_US.UTF-8
-# 
+#
 # # Preferred editor for local and remote sessions
 # export EDITOR='nvim'
 # # if [[ -n $SSH_CONNECTION ]]; then
@@ -380,10 +357,10 @@ sudo npm install -g eslint
 # # else
 # #   export EDITOR='mvim'
 # # fi
-# 
+#
 # # Compilation flags
 # # export ARCHFLAGS="-arch x86_64"
-# 
+#
 # # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -392,7 +369,7 @@ sudo npm install -g eslint
 # # Example aliases
 # # alias zshconfig="mate ~/.zshrc"
 # # alias ohmyzsh="mate ~/.oh-my-zsh"
-# 
+#
 # alias l='lsd -lah --group-dirs first'
 # alias l.='lsd -lhd --group-dirs first .*'
 # alias ll='lsd -lh --group-dirs first'
@@ -407,7 +384,7 @@ sudo npm install -g eslint
 # alias dki='sudo docker image'
 # alias dkc='sudo docker container'
 # alias vi='nvim'
-# 
+#
 # alias gmv='git mv'
 # alias grms='git rm --cached'
 # alias gdi='git diff-index --name-status'
@@ -421,12 +398,12 @@ sudo npm install -g eslint
 # alias gco='git checkout --recurse-submodules'
 # alias glr='git pull --rebase'
 # alias gsa='git submodule add'
-# 
+#
 # source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#606060"
-# 
+#
 # MODE_INDICATOR="%{$fg_bold[red]%}<%{$fg[yellow]%}<%{$fg[green]%}<%{$fg[cyan]%}<%{$fg[blue]%}<%{$reset_color%}"
 # bindkey -M vicmd '^a' beginning-of-line
 # bindkey -M vicmd '^e' end-of-line
@@ -439,17 +416,16 @@ sudo npm install -g eslint
 # bindkey '^Y' yank
 # bindkey '^[OA' up-line-or-beginning-search
 # bindkey '^[OB' down-line-or-beginning-search
-# 
+#
 # zstyle ':completion:*:*:docker:*' option-stacking yes
 # zstyle ':completion:*:*:docker-*:*' option-stacking yes
-# 
+#
 # bindkey -M emacs '^S' sudo-command-line
 # bindkey -M vicmd '^S' sudo-command-line
 # bindkey -M viins '^S' sudo-command-line
-# 
+#
 # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 
 # __HTOPRC
 # # Beware! This file is rewritten by htop when settings are changed in the interface.
@@ -492,33 +468,32 @@ sudo npm install -g eslint
 # right_meter_modes=1 2 2 2
 # hide_function_bar=0
 
-
 # __RANGER
 # #!/usr/bin/env python
 # # -*- coding: utf-8 -*-
-# 
+#
 # from ranger.api.commands import Command
-# 
+#
 # class fzf_select(Command):
 #     """
 #     :fzf_select
 #     Find a file using fzf.
 #     With a prefix argument to select only directories.
-# 
+#
 #     See: https://github.com/junegunn/fzf
 #     """
-# 
+#
 #     def execute(self):
 #         import subprocess
 #         import os
-# 
+#
 #         hidden = ('--hidden' if self.fm.settings.show_hidden else '')
 #         exclude = "--no-ignore-vcs --exclude '.git' --exclude '*.py[co]' --exclude '__pycache__'"
 #         only_directories = ('--type directory' if self.quantifier else '')
 #         fzf_default_command = '{} --follow {} {} {} --color=always'.format(
 #             'fdfind', hidden, exclude, only_directories
 #         )
-# 
+#
 #         env = os.environ.copy()
 #         env['FZF_DEFAULT_COMMAND'] = fzf_default_command
 #         env['FZF_DEFAULT_OPTS'] = '--layout=reverse --ansi --preview="{}"'.format('''
@@ -529,7 +504,7 @@ sudo npm install -g eslint
 #                 tree -ahpCL 3 -I '.git' -I '*.py[co]' -I '__pycache__' {}
 #             ) 2>/dev/null | head -n 100
 #         ''')
-# 
+#
 #         fzf = self.fm.execute_command('fzf --no-multi', env=env,
 #                                       universal_newlines=True, stdout=subprocess.PIPE)
 #         stdout, _ = fzf.communicate()
@@ -539,7 +514,7 @@ sudo npm install -g eslint
 #                 self.fm.cd(selected)
 #             else:
 #                 self.fm.select_file(selected)
-# 
+#
 
 # __TIGRC
 # set line-graphics = utf-8
@@ -558,7 +533,6 @@ sudo npm install -g eslint
 # [mergetool "vimdiff"]
 #   path = nvim
 
-
 # __SSH_CONFIG
 # Host github.com
 #     HostName github.com
@@ -566,7 +540,7 @@ sudo npm install -g eslint
 #     User git
 #     IdentitiesOnly yes
 #     IdentityFile ~/.ssh/github.key
-# 
+#
 # Host gitee.com
 #     HostName gitee.com
 #     Port 22
