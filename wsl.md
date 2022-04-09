@@ -90,7 +90,7 @@
 | reset/revert | `grh`/`grev`                      | 回溯至指定commit（变更保留在工作区）/中和指定commit |
 | tag          | `gt`/`gts`/`gtl`                  | 轻量标签/注释标签并签名/搜索标签                    |
 | branch       | `gb`/`gbv`/`gbsup`/`gbd`          | 新建分支/显示分支信息/设置上游远程分支/删除分支     |
-| checkout     | `gco`/`gcm`/`gcd`                 | 切换分支/切换master/切换develop                     |
+| checkout     | `gco`/`gcb`/`gcm`/`gcd`           | 切换分支/创建并切换分支/切换master/切换develop      |
 | stash        | `gsta`/`gstl`/`gstp`              | 贮藏/列出/弹出                                      |
 | merge        | `gm`/`gmc`/`gma`                  | 合并分支/继续合并/终止合并                          |
 | rebase       | `grb`/`grbc`/`grba`               | 变基到指定分支/继续变基/终止变基                    |
