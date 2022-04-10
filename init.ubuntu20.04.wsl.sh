@@ -52,7 +52,7 @@ tmux tmux-plugin-manager \
 zsh zsh-syntax-highlighting zsh-autosuggestions autojump \
 ranger fzf fd-find \
 tig \
-neovim ripgrep universal-ctags php \
+neovim ripgrep universal-ctags global php \
 cmake doxygen google-perftools libboost-all-dev libgtest-dev libsource-highlight-dev \
 golang \
 npm \
@@ -79,6 +79,9 @@ if [[ "${INSTLL_CLANG_14,}" == "y" ]]; then
 else
     sudo apt -y install clang lldb lld clangd clang-format clang-tidy
 fi
+
+# pygments
+pip install pygments
 
 # win32yank.exe
 curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip &&
@@ -111,7 +114,7 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-
 get_config __ZSHRC >~/.zshrc
 cat >~/.config/proxy <<END
 #!/bin/bash
-sed -n '/^nameserver/{s/nameserver //;s/$/:7890/;p}' /etc/resolv.conf
+sed -n '/^nameserver/{s/nameserver //; s/$/:7890/; p}' /etc/resolv.conf
 END
 chmod +x ~/.config/proxy
 
