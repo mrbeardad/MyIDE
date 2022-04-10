@@ -151,18 +151,6 @@
    1. 修改vscode配置neovim安装路径
    2. 修改[init.vim](vscode/vscode-neovim/init.vim)中第41行路径为[vscode-neovim/plugged](vscode/vscode-neovim/plugged/)安装路径
 
-4. 下载并安装[VS for c++](https://visualstudio.microsoft.com/downloads/#other)，然后设置工具链的环境变量
-    > Settings -> advanced system settings
-    * PATH：
-        * `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\bin\Hostx64\x64`
-    * LIB：
-        * `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\lib\x64`
-        * `C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\ucrt\x64`
-        * `C:\Program Files (x86)\Windows Kits\10\Lib\10.0.18362.0\um\x64`
-    * INCLUDE：
-        * `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.27.29110\include`
-        * `C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt`
-
 [**vscode使用手册**](vscode.md)
 
 # Others
