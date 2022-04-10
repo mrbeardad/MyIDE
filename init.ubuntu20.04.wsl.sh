@@ -141,7 +141,7 @@ get_config __TIGRC >~/.tigrc
 sudo add-apt-repository ppa:neovim-ppa/stable
 sudo apt update
 sudo apt -y install neovim
-git clone --depth=1 https://gitee.com/mrbeardad/SpaceVim ~/.SpaceVim
+git clone --depth=1 -b vscode https://gitee.com/mrbeardad/SpaceVim ~/.SpaceVim
 ln -sv ~/.SpaceVim/mode/ ~/.SpaceVim.d/
 [[ -e ~/.config/nvim ]] && mv ~/.config/nvim{,-bcakup}
 ln -sv ~/.SpaceVim/ ~/.config/nvim/
