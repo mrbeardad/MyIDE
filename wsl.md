@@ -149,28 +149,28 @@ sed -n '/^nameserver/{s/nameserver //;s/$/:7890/;p}' /etc/resolv.conf
 | `r`       | refs视图 |
 | `c`       | checkout |
 
-| git子命令    | 别名                              | 功能                                                 |
-| ------------ | --------------------------------- | ---------------------------------------------------- |
-| add          | `ga`/`gau`/`gaa`                  | 添加更改到暂存区/仅已跟踪/所有                       |
-| remove       | `grm`                             | 从工作区与暂存区同时删除                             |
-| mv           | `gmv`                             | 同时移动工作区与暂存区的文件                         |
-| resotre      | `grs`/`grst`                      | 恢复工作区为暂存区/恢复暂存区为当前commit            |
-| status       | `gst`/`gss`                       | 查看工作区与暂存区状态/精简信息                      |
-| diff         | `gd`/`gds`/`gdi`                  | 比较工作区与暂存区/比较暂存区与当前commit/精简信息   |
-| commit       | `gc`/`gc!`                        | 提交暂存区/覆盖当前commit                            |
-| reset/revert | `grh`/`grev`                      | 回溯至指定commit（变更保留在工作区）/中和指定commit  |
-| tag          | `gt`/`gts`/`gtl`                  | 轻量标签/注释标签并签名/搜索标签                     |
-| branch       | `gb`/`gbv`/`gbsup`/`gbd`          | 新建分支/显示分支信息/设置上游远程分支/删除分支      |
-| checkout     | `gco`/`gcb`/`gcm`/`gcd`           | 切换分支/创建并切换分支/切换master/切换develop       |
-| stash        | `gsta`/`gstl`/`gstp`              | 贮藏/列出/弹出                                       |
-| merge        | `gm`/`gmc`/`gma`                  | 合并分支/继续合并/终止合并                           |
-| rebase       | `grb`/`grbc`/`grba`               | 变基到指定分支/继续变基/终止变基                     |
-| remote       | `gra`/`grv`/`grmv`/`grset`/`grrm` | 添加远程仓库/查看/修改仓库名/修改仓库URL/删除        |
-| push         | `gp`/`gpf`/`gpf!`                 | 推送本地分支到远程仓库（同名/指定）分支/强制/更强制  |
-| fetch/pull   | `gf`/`gupa`                       | 抓取远程仓库数据/拉取上游分支并变基过去（自动stash） |
-| clone        | `gcl`                             | 克隆仓库包括递归子模块，`--depth=1`仅使用            |
-| submodule    | `gsa`/`gsi`/`gsu`                 | 添加子模块/初始化子模块配置/拉取并更新子模块数据     |
-|              | `gi` `project-language`           | 搜索.gitignore模板                                   |
+| git子命令    | 别名                              | 功能                                                |
+| ------------ | --------------------------------- | --------------------------------------------------- |
+| add          | `ga`/`gau`/`gaa`                  | 添加更改到暂存区/仅已跟踪/所有                      |
+| remove       | `grm`                             | 从工作区与暂存区同时删除                            |
+| mv           | `gmv`                             | 同时移动工作区与暂存区的文件                        |
+| resotre      | `grs`/`grst`                      | 恢复工作区为暂存区/恢复暂存区为当前commit           |
+| status       | `gst`/`gss`                       | 查看工作区与暂存区状态/精简信息                     |
+| diff         | `gd`/`gds`/`gdi`                  | 比较工作区与暂存区/比较暂存区与当前commit/精简信息  |
+| commit       | `gc`/`gc!`                        | 提交暂存区/覆盖当前commit                           |
+| reset/revert | `grh`/`grev`                      | 回溯至指定commit（变更保留在工作区）/中和指定commit |
+| tag          | `gt`/`gts`/`gtl`                  | 轻量标签/注释标签并签名/搜索标签                    |
+| branch       | `gb`/`gbv`/`gbsup`/`gbd`          | 新建分支/显示分支信息/设置上游远程分支/删除分支     |
+| checkout     | `gco`/`gcb`/`gcm`/`gcd`           | 切换分支/创建并切换分支/切换master/切换develop      |
+| stash        | `gsta`/`gstl`/`gstp`              | 贮藏/列出/弹出                                      |
+| merge        | `gm`/`gmc`/`gma`                  | 合并分支/继续合并/终止合并                          |
+| rebase       | `grb`/`grbc`/`grba`               | 变基到指定分支/继续变基/终止变基                    |
+| remote       | `gra`/`grv`/`grmv`/`grset`/`grrm` | 添加远程仓库/查看/修改仓库名/修改仓库URL/删除       |
+| push         | `gp`/`gpf`/`gpf!`                 | 推送本地分支到远程仓库（同名/指定）分支/强制/更强制 |
+| fetch/pull   | `gf`/`glr`/`glra`                 | fetch远程仓库数据/pull上游分支并变基过去/自动stash  |
+| clone        | `gcl`                             | 克隆仓库包括递归子模块，`--depth=1`仅使用           |
+| submodule    | `gsa`/`gsd`/`gsu`                 | 添加子模块/删除子模块/初始化并更新所有子模块        |
+|              | `gi` `project-language`           | 搜索.gitignore模板                                  |
 
 # vim文本编辑器
 ## 光标移动
@@ -235,7 +235,6 @@ sed -n '/^nameserver/{s/nameserver //;s/$/:7890/;p}' /etc/resolv.conf
 | `dd`                      | 删除当前行               |
 | `cc`                      | 删除当前行并进入insert   |
 | `ys` `{textobj}` `{char}` | 添加包围符               |
-| `yss` `{char}`            | 为改行添加包围符         |
 | `ds` `{char}` `{char}`    | 删除包围符               |
 | `cs` `{char}` `{char}`    | 替换包围符               |
 | `.`                       | 重复上次操作             |

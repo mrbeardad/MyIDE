@@ -400,7 +400,10 @@ EOF
 # alias gbsup='git branch --set-upstream-to'
 # alias gco='git checkout --recurse-submodules'
 # alias glr='git pull --rebase'
+# alias glra='git pull --rebase --auto-stash'
 # alias gsa='git submodule add'
+# alias gsd='git submodule deinit'
+# alias gsu='git submodule update --init --recursive'
 #
 # source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
