@@ -19,7 +19,7 @@
     "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
     "vscode-neovim.neovimExecutablePaths.win32": "D:\\Neovim\\bin\\nvim.exe",
     "vscode-neovim.neovimInitVimPaths.linux": "/home/beardad/.vscode-neovim/init.vim",
-    "vscode-neovim.neovimInitVimPaths.win32": "D:\\Neovim\\vscode-neovim\\init.vim",
+    "vscode-neovim.neovimInitVimPaths.win32": "C:\\Users\\mrbea\\AppData\\Local\\vscode-neovim\\init.vim",
     "vscode-neovim.textDecorationsAtTop": true,
     "markdown-preview-enhanced.enableExtendedTableSyntax": true,
     "markdown-preview-enhanced.revealjsTheme": "solarized.css",
