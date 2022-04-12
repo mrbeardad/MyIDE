@@ -60,28 +60,28 @@
         {
             "command": {
                 "action": "sendInput",
-                "input": "\u001b[9"
+                "input": "\u001bN"
             },
             "keys": "ctrl+enter"
         },
         {
             "command": {
                 "action": "sendInput",
-                "input": "\u001b[8"
+                "input": "\u001bS"
             },
             "keys": "ctrl+shift+s"
         },
         {
             "command": {
                 "action": "sendInput",
-                "input": "\u001b[7"
+                "input": "\u001bO"
             },
             "keys": "ctrl+shift+o"
         },
         {
             "command": {
                 "action": "sendInput",
-                "input": "\u001b[6"
+                "input": "\u001bP"
             },
             "keys": "ctrl+shift+p"
         }
