@@ -156,6 +156,7 @@
 | `Ctrl`+`K` `s`        | 保存所有               |
 | `Ctrl`+`Shift`+`W`    | 关闭当前文件           |
 | `Ctrl`+`K` `u`        | 关闭已保存文件         |
+| `Ctrl`+`K` `w`        | 关闭其他文件           |
 | `Ctrl`+`Shift`+`T`    | 重开关闭的Editor       |
 
 # Group操作
@@ -164,12 +165,11 @@
 | `Tab`/`Shift`+`Tab`          | 跳转下/上个Group                  |
 | `Ctrl`+`1~8`                 | 跳转指定第1~8个Group              |
 | `Ctrl`+`W` `↑/↓/←/→`         | 跳转上/下/左/右方的Group          |
+| `Ctrl`+`W` `Shift`+`H/J/K/L` | 与/左/下/上/右方Group上移交换位置 |
 | `Ctrl`+`W` `=`               | 均布Group窗口大小                 |
 | `Ctrl`+`W` `v`               | 竖直切分                          |
 | `Ctrl`+`W` `s`               | 水平切分                          |
 | `Ctrl`+`W` `o`               | 仅保留当前Group                   |
-| `Ctrl`+`W` `c`               | 关闭当前Group                     |
-| `Ctrl`+`W` `Shift`+`H/J/K/L` | 与/左/下/上/右方Group上移交换位置 |
 
 # 界面元素
 | 按键                   | 作用               |

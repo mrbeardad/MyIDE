@@ -108,10 +108,10 @@
 > 1. 添加防火墙规则，允许宿主机某端口可被访问
 > 2. 设置代理软件可接受局域网代理请求
 > 3. 编写~/.config/proxy脚本动态获取Windows IP:Port
-```sh
-#!/bin/bash
-sed -n '/^nameserver/{s/nameserver //;s/$/:7890/;p}' /etc/resolv.conf
-```
+> ```sh
+> #!/bin/bash
+> sed -n '/^nameserver/{s/nameserver //;s/$/:7890/;p}' /etc/resolv.conf
+> ```
 
 # htop进程监视器
 | 快捷键  | 功能                     |
@@ -257,7 +257,6 @@ sed -n '/^nameserver/{s/nameserver //;s/$/:7890/;p}' /etc/resolv.conf
 | `Tab`          | 下个补全项                            |
 | `Shift`+`Tab`  | 上个补全项                            |
 | `Enter`        | 选中补全项                            |
-| `Alt`+`\`      | 手动搜索snippet                       |
 | `Tab`          | 根据snippet前缀补全代码片段或下个锚点 |
 | `Shift`+`Tab`  | 上个代码片段锚点                      |
 | `Ctrl`+`/`     | 注释代码                              |
@@ -265,19 +264,18 @@ sed -n '/^nameserver/{s/nameserver //;s/$/:7890/;p}' /etc/resolv.conf
 | `Space s E`    | 多光标编辑（单选）                    |
 
 ## 搜索导航
-| 按键               | 作用                       |
-| ------------------ | -------------------------- |
-| `Ctrl`+`F`         | 搜索目录所有文件内容       |
-| `Ctrl`+`H`         | 替換目录所有文件內容       |
-| `Ctrl`+`P`         | 搜索文件                   |
-| `Ctrl`+`Shift`+`P` | 搜索命令                   |
-| `Ctrl`+`Shift`+`O` | 搜索本地标签               |
-| `Ctrl`+`T`         | 搜索全局标签（光标下字符） |
-| `Ctrl`+`G`         | 搜索全局标签               |
-| `F12`              | 跳转定义或声明             |
-| `Shift`+`F12`      | 跳转引用                   |
-| `Ctrl`+`O`         | 后向跳转                   |
-| `Ctrl`+`I`         | 前向跳转                   |
+| 按键               | 作用                 |
+| ------------------ | -------------------- |
+| `Ctrl`+`F`         | 搜索目录所有文件内容 |
+| `Ctrl`+`H`         | 替換目录所有文件內容 |
+| `Ctrl`+`P`         | 搜索文件             |
+| `Ctrl`+`Shift`+`P` | 搜索命令             |
+| `Ctrl`+`Shift`+`O` | 搜索本地标签         |
+| `Ctrl`+`T`         | 搜索全局标签         |
+| `F12`              | 跳转定义或声明       |
+| `Shift`+`F12`      | 跳转引用             |
+| `Ctrl`+`O`         | 后向跳转             |
+| `Ctrl`+`I`         | 前向跳转             |
 
 ## 书签标记
 | 按键          | 作用                  |
@@ -296,30 +294,34 @@ sed -n '/^nameserver/{s/nameserver //;s/$/:7890/;p}' /etc/resolv.conf
 ## Buffer操作
 | 按键               | 作用                   |
 | ------------------ | ---------------------- |
-| `\` `Tab`          | 快速切换               |
 | `\` `n`            | 下个buffer             |
 | `\` `b`            | 上个buffer             |
+| `Space` `Tab`      | 快速切换               |
 | `Ctrl`+`K` `n`     | 新建文件               |
 | `Ctrl`+`K` `o`     | 打开文件               |
 | `Ctrl`+`K` `r`     | 打开最近访问文件或目录 |
 | `Ctrl`+`S`         | 保存                   |
+| `Alt`+`S`          | Sudo权限保存           |
 | `Ctrl`+`Shift`+`S` | 另存为                 |
 | `Ctrl`+`K` `s`     | 保存所有               |
-| `Ctrl`+`W`+`x`     | 关闭当前文件           |
+| `Ctrl`+`W` `w`     | 关闭当前文件           |
 | `Ctrl`+`K` `u`     | 关闭已保存文件         |
+| `Ctrl`+`K` `w`     | 关闭其他文件           |
 
 ## Window操作
-| 按键                         | 作用                              |
-| ---------------------------- | --------------------------------- |
-| `Tab`/`Shift`+`Tab`          | 跳转下/上个Windows                |
-| `Space`+`1~8`                | 跳转指定第1~8个Window             |
-| `Ctrl`+`W` `↑/↓/←/→`         | 跳转上/下/左/右方的Window         |
-| `Ctrl`+`W` `=`               | 均布Group窗口大小                 |
-| `Ctrl`+`W` `v`               | 竖直切分                          |
-| `Ctrl`+`W` `s`               | 水平切分                          |
-| `Ctrl`+`W` `o`               | 仅保留当前Group                   |
-| `Ctrl`+`W` `c`               | 关闭当前Group                     |
-| `Ctrl`+`W` `Shift`+`H/J/K/L` | 与/左/下/上/右方Group上移交换位置 |
+| 按键                         | 作用                               |
+| ---------------------------- | ---------------------------------- |
+| `Tab`/`Shift`+`Tab`          | 跳转下/上个Window                  |
+| `Space`+`1~8`                | 跳转指定第1~8个Window              |
+| `Ctrl`+`W` `↑/↓/←/→`         | 跳转上/下/左/右方的Window          |
+| `Ctrl`+`W` `Shift`+`H/J/K/L` | 与/左/下/上/右方Window上移交换位置 |
+| `Ctrl`+`W` `=`               | 均布Window窗口大小                 |
+| `Ctrl`+`W` `v`               | 竖直切分                           |
+| `Ctrl`+`W` `s`               | 水平切分                           |
+| `Ctrl`+`W` `o`               | 仅保留当前Window                   |
+| `q`                          | 关闭当前window或tab                |
+| `Ctrl`+`Q`                   | 关闭vim                            |
+| `Ctrl`+`W` `Z`               | 暂停vim                            |
 
 ## 界面元素
 | 按键          | 作用         |
@@ -335,7 +337,7 @@ sed -n '/^nameserver/{s/nameserver //;s/$/:7890/;p}' /etc/resolv.conf
 | ----------------- | ------------------------------ |
 | `:s/pat/rep/g`    | 替换命令                       |
 | `g&`              | 当前行重复上次替换命令         |
-| `q` `Reg`         | 宏录制                         |
+| `Q` `Reg`         | 宏录制                         |
 | `@` `Reg`         | 应用宏                         |
 | `@@`              | 应用上次宏                     |
 | `ga`              | 查看ascii字符编码或unicode码点 |
