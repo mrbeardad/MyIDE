@@ -60,6 +60,13 @@
         {
             "command": {
                 "action": "sendInput",
+                "input": "\u001bI"
+            },
+            "keys": "ctrl+i"
+        },
+        {
+            "command": {
+                "action": "sendInput",
                 "input": "\u001bN"
             },
             "keys": "ctrl+enter"
