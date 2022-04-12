@@ -10,11 +10,6 @@
     "terminal.integrated.fontFamily": "NerdCodePro Font",
     "workbench.productIconTheme": "fluent-icons",
     "workbench.settings.openDefaultKeybindings": true,
-    "workbench.colorCustomizations": {
-        "statusBar.background": "#005f5f",
-        "statusBar.noFolderBackground": "#005f5f",
-        "statusBar.debuggingBackground": "#005f5f"
-    },
     "vscode-neovim.mouseSelectionStartVisualMode": true,
     "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
     "vscode-neovim.neovimExecutablePaths.win32": "D:\\Neovim\\bin\\nvim.exe",
@@ -31,7 +26,7 @@
     "[markdown]": {
         "editor.defaultFormatter": "yzhang.markdown-all-in-one"
     },
-    "workbench.iconTheme": "vscode-icons",
+    "workbench.iconTheme": "material-icon-theme",
     "todo-tree.general.tags": [
         "BUG",
         "HACK",
@@ -1577,7 +1572,6 @@
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": "active",
     "editor.accessibilitySupport": "off",
-    "workbench.colorTheme": "Dracula",
     "git.confirmSync": false,
     "gitlens.codeLens.enabled": false,
     "window.zoomLevel": -1,
@@ -1588,4 +1582,33 @@
     "doxdocgen.generic.useGitUserName": true,
     "bashIde.highlightParsingErrors": true,
     "terminal.integrated.defaultProfile.linux": "bash",
+    "workbench.colorTheme": "Noctis Sereno",
+    "workbench.colorCustomizations": {
+        "statusBar.foreground": "#b6e1e7",
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#2e5f00",
+        "statusBarItem.hoverBackground": "#007d7d",
+        "editorWidget.background": "#083d44dd",
+        "activityBar.inactiveForeground": "#169fb199",
+        "editor.findMatchBackground": "#40bf6a99",
+        "editor.findMatchHighlightBackground": "#0e6671ee",
+    },
+    "editor.semanticTokenColorCustomizations": {
+        "[Dracula]": {
+            "enabled": true,
+            "rules": {
+                "namespace": "#9999ff",
+                "function": "#44ffaa",
+                "method": "#44ffaa",
+            }
+        },
+        "[Noctis Sereno]": {
+            "enabled": true,
+            "rules": {
+                "namespace": "#49e9c9",
+                "variable": "#cdcdcd",
+            }
+        }
+    },
 }
