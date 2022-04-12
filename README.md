@@ -147,7 +147,7 @@
 
 2. 下载并安装[git](https://git-scm.com/downloads)
 
-3. 下载并安装[neovim](https://github.com/neovim/neovim/releases/)，然后安装配置[vscode-neovim](vscode/vscode-neovim/)到neovim安装目录下
+3. 下载并安装[neovim](https://github.com/neovim/neovim/releases/)，然后安装配置[vscode-neovim](vscode/vscode-neovim/)到目录下
    1. 修改vscode配置neovim安装路径
    2. 修改[init.vim](vscode/vscode-neovim/init.vim)中第41行路径为[vscode-neovim/plugged](vscode/vscode-neovim/plugged/)安装路径
 

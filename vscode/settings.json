@@ -45,7 +45,6 @@
     "php.validate.run": "onType",
     "typescript.suggest.paths": false,
     "editor.multiCursorModifier": "ctrlCmd",
-    "gitlens.codeLens.enabled": false,
     "editor.rulers": [
         80,
         100
@@ -54,7 +53,7 @@
     "editor.suggest.showStatusBar": true,
     "problems.showCurrentInStatus": true,
     "todo-tree.general.showIconsInsteadOfTagsInStatusBar": true,
-    "todo-tree.general.statusBar": "top three",
+    "todo-tree.general.statusBar": "tags",
     "VSCodeCounter.exclude": [
         "**/.gitignore",
         "**/.vscode/**",
@@ -1494,19 +1493,6 @@
             "blockStrings": []
         }
     },
-    "fileheader.customMade": {
-        "FilePath": "Do not edit",
-        "Description": "",
-        "Author": "Heache Bear <mrbeardad@qq.com>",
-        "Date": "Do not edit",
-        "LastEditTime": "Do not edit",
-        "LastEditors": "Heache Bear <mrbeardad@qq.com>",
-        "custom_string_obkoro1": "Copyright (c) 2018 - 2022 Heachen Bear & Contributors"
-    },
-    "fileheader.configObj": {
-        "autoAdd": false,
-        "createHeader": false
-    },
     "editor.minimap.enabled": false,
     "translation.youdao.appId": "67d12c034d0d15cb",
     "translation.youdao.appKey": "jJFHJKvWlY479nZgnEbYh4N3nOYmVaI0",
@@ -1518,7 +1504,6 @@
         "Orchid",
         "LightSkyBlue"
     ],
-    "git.enableStatusBarSync": false,
     "window.customMenuBarAltFocus": false,
     "window.enableMenuBarMnemonics": false,
     "editor.inlineSuggest.enabled": true,
@@ -1532,14 +1517,13 @@
         "152.136.188.178": "linux",
         "beardad.top": "linux"
     },
-    "terminal.integrated.defaultProfile.linux": "zsh",
     "go.lintFlags": [
         "-checks",
         "inherit,-ST1006"
     ],
     "editor.inlineSuggest.mode": "prefix",
     "editor.formatOnSave": true,
-    "translator.captureWord": true,
+    "translator.captureWord": false,
     "code-runner.saveFileBeforeRun": true,
     "code-runner.fileDirectoryAsCwd": true,
     "path-intellisense.autoSlashAfterDirectory": true,
@@ -1557,20 +1541,13 @@
     "leetcode.hint.configWebviewMarkdown": false,
     "leetcode.defaultLanguage": "cpp",
     "leetcode.hint.commandShortcut": false,
-    "C_Cpp.autocompleteAddParentheses": true,
     "C_Cpp.default.cppStandard": "c++20",
     "C_Cpp.default.cStandard": "c11",
     "C_Cpp.loggingLevel": "Warning",
     "leetcode.hint.commentDescription": false,
     "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?·！￥…（）—【】｛｝、；：‘’“”，。？",
-    "cmake.statusbar.visibility": "icon",
     "javascript.inlayHints.enumMemberValues.enabled": true,
     "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
-    "clangd.arguments": [
-        "-clang-tidy",
-        "-limit-results=500",
-        "-header-insertion-decorators=0"
-    ],
     "C_Cpp.intelliSenseEngine": "Disabled",
     "C_Cpp.autocomplete": "Disabled",
     "C_Cpp.errorSquiggles": "Disabled",
@@ -1592,17 +1569,23 @@
         "**/node_modules/*/**": false,
         "**/vendor/**": true
     },
-    "window.zoomLevel": -1,
-    "editor.tabSize": 2,
-    "C_Cpp.clang_format_fallbackStyle": "Chromium",
     "[javascript]": {
         "editor.defaultFormatter": "dbaeumer.vscode-eslint"
     },
     "markdown-preview-enhanced.breakOnSingleNewLine": false,
-    "clangd.path": "/bin/clangd-12",
+    "clangd.path": "c:\\Users\\mrbea\\AppData\\Roaming\\Code\\User\\globalStorage\\llvm-vs-code-extensions.vscode-clangd\\install\\14.0.0\\clangd_14.0.0\\bin\\clangd.exe",
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": "active",
     "editor.accessibilitySupport": "off",
     "workbench.colorTheme": "Dracula",
     "git.confirmSync": false,
+    "gitlens.codeLens.enabled": false,
+    "window.zoomLevel": -1,
+    "cmake.statusbar.visibility": "compact",
+    "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Chromium, IndentWidth: 4}",
+    "C_Cpp.autocompleteAddParentheses": true,
+    "doxdocgen.generic.useGitUserEmail": true,
+    "doxdocgen.generic.useGitUserName": true,
+    "bashIde.highlightParsingErrors": true,
+    "terminal.integrated.defaultProfile.linux": "bash",
 }

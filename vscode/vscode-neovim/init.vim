@@ -38,7 +38,7 @@ nnoremap <expr> N  'nN'[v:searchforward]
 
 nnoremap <silent>g& :s/<up><cr>:nohl<cr>
 
-call plug#begin('D:\Neovim\vscode-neovim\plugged')
+call plug#begin('C:\Users\mrbea\AppData\Local\vscode-neovim\plugged')
 "==================================================================================================
 let g:clever_f_smart_case = 1
 let g:clever_f_fix_key_direction = 1
