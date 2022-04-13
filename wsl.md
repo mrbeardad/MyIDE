@@ -320,8 +320,7 @@
 | `Ctrl`+`W` `v`               | 竖直切分                           |
 | `Ctrl`+`W` `s`               | 水平切分                           |
 | `Ctrl`+`W` `o`               | 仅保留当前Window                   |
-| `q`                          | 关闭当前window或tab                |
-| `Ctrl`+`Q`                   | 关闭vim                            |
+| `q`                          | 只能关闭Window                     |
 | `Ctrl`+`W` `Z`               | 暂停vim                            |
 
 ## 界面元素
@@ -343,6 +342,7 @@
 | `ga`              | 查看ascii字符编码或unicode码点 |
 | `g8`              | 查看utf-8字符编码              |
 | `K`               | 查看帮助文档                   |
+| `Ctrl`+`G`        | 显示文件路径                   |
 | `Alt`+`Z`         | 是否长行回绕                   |
 | `Alt`+`Shift`+`E` | 在Explorer中打开文件目录       |
 | `Alt`+`Shift`+`R` | 快速运行单个代码文件           |
