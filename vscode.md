@@ -194,8 +194,8 @@
 | `Alt`+`Z`         | 是否长行回绕                   |
 | `Alt`+`Shift`+`E` | 在Explorer中打开文件目录       |
 | `Alt`+`Shift`+`R` | 快速运行单个代码文件           |
-| `Alt`+`Shift`+`T` | 翻译选择文本                   |
 | `Alt`+`T`         | 切换鼠标悬停翻译               |
+| `Alt`+`Shift`+`T` | 翻译选择文本                   |
 | `Alt`+`Shift`+`F` | 格式化文本                     |
 | `Alt`+`Shift`+`C` | 计算器                         |
 | `:VSCodeCounter`  | 项目代码统计                   |

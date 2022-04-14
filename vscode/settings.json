@@ -1527,8 +1527,8 @@
     "terminal.integrated.copyOnSelection": true,
     "code-runner.runInTerminal": true,
     "code-runner.executorMap": {
-        "c": "cd $dir && clang -g $fileName -o $fileNameWithoutExt && quickrun_time $dir$fileNameWithoutExt.exe",
-        "cpp": "cd $dir && clang++ -g -D_GLIBCXX_DEBUG $fileName -o $fileNameWithoutExt && quickrun_time $dir$fileNameWithoutExt.exe"
+        // "c": "cd $dir && clang -g $fileName -o $fileNameWithoutExt && quickrun_time $dir$fileNameWithoutExt.exe",
+        // "cpp": "cd $dir && clang++ -g -D_GLIBCXX_DEBUG $fileName -o $fileNameWithoutExt && quickrun_time $dir$fileNameWithoutExt.exe"
     },
     "cmake.configureOnOpen": false,
     "leetcode.endpoint": "leetcode-cn",

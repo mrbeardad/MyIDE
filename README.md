@@ -139,7 +139,12 @@
     git clone https://github.com/mrbeardad/My-IDE .local/My-IDE
     cd .local/My-IDE && ./init.ubuntu20.04.wsl.sh
     ```
-    
+
+> WSL2访问Windows宿主机的代理软件，需要：
+> 1. 添加防火墙规则，允许宿主机某端口可被访问
+> 2. 设置代理软件可接受局域网代理请求
+> 3. Windows IP由/etc/resolv.conf可知
+
 [**wsl使用手册**](wsl.md)
 
 # VSCode

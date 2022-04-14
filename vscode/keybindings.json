@@ -311,6 +311,11 @@
         "key": "ctrl+r",
         "command": "-workbench.action.openRecent"
     },
+    // ctrl+k w: close other editors
+    {
+        "key": "ctrl+k w",
+        "command": "workbench.action.closeOtherEditors"
+    },
     // ctrl+k n: new file
     {
         "key": "ctrl+k n",
@@ -387,9 +392,5 @@
         "key": "shift+enter",
         "command": "-markdown-preview-enhanced.runCodeChunk",
         "when": "editorLangId == 'markdown'"
-    },
-    {
-        "key": "ctrl+k w",
-        "command": "workbench.action.closeOtherEditors"
     },
 ]
