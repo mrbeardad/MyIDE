@@ -52,7 +52,7 @@ tmux tmux-plugin-manager \
 zsh zsh-syntax-highlighting zsh-autosuggestions autojump \
 ranger fzf fd-find \
 tig \
-neovim ripgrep universal-ctags global php \
+neovim ripgrep universal-ctags global php libpython2-dev \
 cmake doxygen google-perftools libboost-all-dev libgtest-dev libsource-highlight-dev \
 golang \
 npm \
@@ -82,6 +82,7 @@ fi
 
 # pygments
 pip install pygments
+pip install --upgrade pynvim
 
 # win32yank.exe
 curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip &&
@@ -404,6 +405,9 @@ EOF
 # alias gsa='git submodule add'
 # alias gsd='git submodule deinit'
 # alias gsu='git submodule update --init --recursive'
+#
+# source /usr/share/doc/fzf/examples/key-bindings.zsh
+# source /usr/share/doc/fzf/examples/completion.zsh
 #
 # source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
