@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# get configuration from end of this script
 get_config() {
     if [[ $# -lt 1 ]]; then
         echo -e "\e[31mget_config()\e[m: usage: get_config CONFIG_BEGIN" >&2
@@ -8,110 +9,67 @@ get_config() {
     sed -n "/^# $1$/,/^$/{s/^# //;p}" "$0" | sed -n '2,$p'
 }
 
+# applies only to ubuntu20.04
 if ! lsb_release -a | grep -qi 'ubuntu 20.04'; then
-    echo -e "\e[31mError\e[m: this script requires ubuntu 20.04"
+    echo -e "\e[31mError\e[m: this script applies only to ubuntu 20.04"
     exit 1
 fi
 
+# the default cwd after enter wsl maybe windows home
 cd ~ || exit 1
+mkdir -p ~/.local/bin/
+mkdir -p ~/.config/
 
-# 修改sudo配置免除密码
-read -n 1 -p "do you want to execute sudo without password? (Y/n): " SUDO_WITHOUT_PASSWD
+# sudo without password
+read -rn 1 -p "do you want to execute 'sudo' without password? (Y/n): " SUDO_WITHOUT_PASSWD
 [[ "${SUDO_WITHOUT_PASSWD,}" == "y" ]] &&
-sudo sed -i '/^%sudo\s*ALL=\(ALL:ALL\)\s*ALL/s/ALL$/NOPASSWD: ALL/' /etc/sudoers
+    sudo sed -i '/^%sudo\s*ALL=\(ALL:ALL\)\s*ALL/s/ALL$/NOPASSWD: ALL/' /etc/sudoers
 
-# 配置apt镜像源
-read -n 1 -p "do you want to use the mirrors on tencent cloud? (Y/n): " USE_TENCENT_CLOUD_REPO
+# mirrors.could.tencent.com
+read -rn 1 -p "do you want to use the mirrors on tencent cloud? (Y/n): " USE_TENCENT_CLOUD_REPO
+
+# apt mirror source
 [[ "${USE_TENCENT_CLOUD_REPO,}" == "y" ]] &&
-sudo wget -O /etc/apt/sources.list http://mirrors.cloud.tencent.com/repo/ubuntu20_sources.list
-
-# 配置docker镜像仓库
-[[ "${USE_TENCENT_CLOUD_REPO,}" == "y" ]] &&
-curl -fsSL https://mirrors.cloud.tencent.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add - &&
-sudo add-apt-repository "deb [arch=amd64] https://mirrors.cloud.tencent.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
-
-# 配置go仓库
-go env -w GOPATH="$HOME"/.local/go/ GOBIN="$HOME"/.local/bin/ GOSUMDB=sum.golang.google.cn
-[[ "$USE_TENCENT_CLOUD_REPO" == y ]] && go env -w GOPROXY=https://mirrors.tencent.com/go/,direct
-
-# 配置pip仓库
-[[ "$USE_TENCENT_CLOUD_REPO" == y ]] && pip config set global.index-url https://mirrors.tencent.com/pypi/simple
-
-# 配置npm仓库
-[[ "$USE_TENCENT_CLOUD_REPO" == y ]] && npm config set registry http://mirrors.tencent.com/npm/
-
-# 更新软件包
+    sudo wget -O /etc/apt/sources.list http://mirrors.cloud.tencent.com/repo/ubuntu20_sources.list
 sudo apt update
 sudo apt -y upgrade
 
-mkdir -p ~/.local/bin/
-# 下载所需软件
-sudo apt -y install neofetch sl cmatrix ncdu cloc gnupg unzip nmap \
-docker-ce docker-ce-cli containerd.io \
-tmux tmux-plugin-manager \
-zsh zsh-syntax-highlighting zsh-autosuggestions autojump \
-ranger fzf fd-find \
-tig \
-neovim ripgrep universal-ctags global php libpython2-dev \
-cmake doxygen google-perftools libboost-all-dev libgtest-dev libsource-highlight-dev \
-golang \
-npm \
-python3-pip python-is-python3
+# language package managers
+sudo apt -y install golang npm python3-pip python-is-python3 composer
 
-# clang-14
-read -n 1 -p "do you want to install clang-14 from llvm-repository instead of default clang-10? (Y/n)" INSTLL_CLANG_14
-if [[ "${INSTLL_CLANG_14,}" == "y" ]]; then
-    bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
-    sudo apt -y install clang-format-14 clang-tidy-14
-    (
-        cd /bin || exit
-        sudo ln -sf clang-14 clang
-        sudo ln -sf clang++-14 clang++
-        sudo ln -sf clangd-14 clangd
-        sudo ln -sf clang-format-14 clang-format
-        sudo ln -sf clang-tidy-14 clang-tidy
-        sudo ln -sf lldb-14 lldb
-        sudo ln -sf lldb-argdumper-14 lldb-argdumper
-        sudo ln -sf lldb-instr-14 lldb-instr
-        sudo ln -sf lldb-server-14 lldb-server
-        sudo ln -sf lldb-vscode-14 lldb-vscode
-    )
-else
-    sudo apt -y install clang lldb lld clangd clang-format clang-tidy
+go env -w GOPATH="$HOME"/.local/go/ GOBIN="$HOME"/.local/bin/ GOSUMDB=sum.golang.google.cn
+[[ "$USE_TENCENT_CLOUD_REPO" == y ]] && go env -w GOPROXY=https://mirrors.tencent.com/go/,direct
+
+[[ "$USE_TENCENT_CLOUD_REPO" == y ]] && npm config set registry http://mirrors.tencent.com/npm/
+
+[[ "$USE_TENCENT_CLOUD_REPO" == y ]] && pip config set global.index-url https://mirrors.tencent.com/pypi/simple
+
+[[ "$USE_TENCENT_CLOUD_REPO" == y ]] && composer config -g repos.packagist composer https://mirrors.cloud.tencent.com/composer/
+
+# ssh
+if [[ "$USER" == beardad ]]; then
+    get_config __GITCONFIG >~/.gitconfig
+    mkdir ~/.ssh/
+    get_config __SSH_CONFIG >~/.ssh/config
 fi
 
-# pygments
-pip install pygments
-pip install --upgrade pynvim
+# docker
+[[ "${USE_TENCENT_CLOUD_REPO,}" == "y" ]] &&
+    curl -fsSL https://mirrors.cloud.tencent.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add - &&
+    sudo add-apt-repository "deb [arch=amd64] https://mirrors.cloud.tencent.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt update
+sudo apt -y install docker-ce docker-ce-cli containerd.io
 
-# win32yank.exe
-curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip &&
-unzip -p /tmp/win32yank.zip win32yank.exe > ./win32yank.exe &&
-chmod +x win32yank.exe &&
-sudo cp -v win32yank.exe /bin/
-
-# lsd
-wget -O /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/0.20.1/lsd-musl_0.20.1_amd64.deb &&
-sudo dpkg -i /tmp/lsd.deb
-
-# SeeCheatSheets
-git clone https://github.com/mrbeardad/SeeCheatSheets ~/.cheat
-mkdir ~/.cheat/build
-(
-    cd ~/.cheat/build || exit 1
-    cmake -D CMAKE_BUILD_TYPE=Release ..
-    cmake --build . -t see
-    cmake --install .
-)
-
-mkdir ~/.config/
-# 配置tmux
+# tmux
+sudo apt -y install tmux tmux-plugin-manager sl cmatrix
 [[ -e ~/.tmux.conf ]] && mv ~/.tmux.conf{,.backup}
 get_config __TMUX_CONF >~/.tmux.conf
 
-# 配置zsh
+# zsh
+sudo apt -y install zsh zsh-syntax-highlighting zsh-autosuggestions autojump fzf
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+[[ -e ~/.zshrc ]] && mv ~/.zshrc{,.backup}
 get_config __ZSHRC >~/.zshrc
 cat >~/.config/proxy <<END
 #!/bin/bash
@@ -119,12 +77,8 @@ sed -n '/^nameserver/{s/nameserver //; s/$/:7890/; p}' /etc/resolv.conf
 END
 chmod +x ~/.config/proxy
 
-# 配置htop
-mkdir -p ~/.config/htop/
-[[ -e ~/.config/htop/htoprc ]] && mv ~/.config/htop/htoprc{,.backup}
-get_config __HTOPRC >~/.config/htop/htoprc
-
-# 配置ranger
+# ranger
+sudo apt -y install ranger fzf fd-find
 mkdir -p ~/.config/ranger/
 [[ -e ~/.config/ranger/commands.py ]] && mv ~/.config/ranger/commands.py{,.backup}
 get_config __RANGER >~/.config/ranger/commands.py
@@ -134,31 +88,86 @@ map <C-f> fzf_select
 set show_hidden true
 EOF
 
-# 配置tig
+# htop
+sudo apt -y install htop
+mkdir -p ~/.config/htop/
+[[ -e ~/.config/htop/htoprc ]] && mv ~/.config/htop/htoprc{,.backup}
+get_config __HTOPRC >~/.config/htop/htoprc
+
+# tig
+sudo apt -y install git tig
 [[ -e ~/.tigrc ]] && mv ~/.tigrc{,.backup}
 get_config __TIGRC >~/.tigrc
 
-# 配置vim
+# vim
 sudo add-apt-repository ppa:neovim-ppa/stable
 sudo apt update
-sudo apt -y install neovim
-git clone --depth=1 -b vscode https://gitee.com/mrbeardad/SpaceVim ~/.SpaceVim
-ln -sv ~/.SpaceVim/mode/ ~/.SpaceVim.d/
+sudo apt -y install neovim ripgrep libpython2-dev universal-ctags global cloc
+pip install --upgrade pynvim pygments vim-vint
+sudo npm install -g vim-language-server
+gzip -dc /usr/share/doc/global/examples/gtags.conf.gz >~/.globalrc
+
+curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip &&
+    unzip -p /tmp/win32yank.zip win32yank.exe >./win32yank.exe &&
+    chmod +x win32yank.exe &&
+    sudo cp -v win32yank.exe /bin/
+
+git clone -b vscode https://gitee.com/mrbeardad/SpaceVim ~/.SpaceVim
+[[ -e ~/.SpaceVim.d ]] && mv ~/.SpaceVim.d{,.backup}
+ln -sv ~/.SpaceVim/mode/ ~/.SpaceVim.d
 [[ -e ~/.config/nvim ]] && mv ~/.config/nvim{,-bcakup}
 ln -sv ~/.SpaceVim/ ~/.config/nvim/
 
-# 配置git与ssh
-if [[ "$USER" == beardad ]] ;then
-    get_config __GITCONFIG >~/.gitconfig
-    mkdir ~/.ssh/
-    get_config __SSH_CONFIG >~/.ssh/config
-fi
+# shell
+sudo apt -y install shellcheck
+curl -OLC - https://github.com/mvdan/sh/releases/download/v3.4.3/shfmt_v3.4.3_linux_amd64
+chmod +x shfmt_v3.4.3_linux_amd64
+mv -v shfmt_v3.4.3_linux_amd64 ~/.local/bin/
 
-# cpp
+# c++
+wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
+add-apt-repository "deb http://apt.llvm.org/focal/     llvm-toolchain-focal-14   main"
+apt update
+sudo apt -y install clang lld clangd-14 clang-tidy-14 clang-format-14 cppcheck cmake doxygen google-perftools \
+    libboost-all-dev libgtest-dev libsource-highlight-dev
+(
+    cd /bin || exit
+    sudo ln -sf clangd-14 clangd
+    sudo ln -sf clang-tidy-14 clang-tidy
+    sudo ln -sf clang-format-14 clang-format
+)
+go get -u github.com/google/pprof
 cat >~/.clang-format <<EOF
 BasedOnStyle: Chromium
 IndentWidth: 4
 EOF
+
+# go
+go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
+
+# python
+pip install frosted pylama yapf
+
+# js
+curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+sudo apt-get install -y nodejs
+sudo npm install -g jshint eslint eslint_d htmlhint csslint stylelint js-beautify
+
+# markdown
+sudo npm install -g prettier
+
+# other cli tools
+sudo apt -y install neofetch ncdu gnupg nmap
+wget -O /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/0.20.1/lsd-musl_0.20.1_amd64.deb &&
+    sudo dpkg -i /tmp/lsd.deb
+git clone https://github.com/mrbeardad/SeeCheatSheets ~/.cheat
+mkdir ~/.cheat/build
+(
+    cd ~/.cheat/build || exit 1
+    cmake -D CMAKE_BUILD_TYPE=Release ..
+    cmake --build . -t see
+    cmake --install .
+)
 
 # __TMUX_CONF
 # # 全局选项
