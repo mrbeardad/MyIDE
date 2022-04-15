@@ -143,7 +143,8 @@ IndentWidth: 4
 EOF
 
 # go
-go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
+go get -u github.com/golangci/golangci-lint/cmd/golangci-lint ||
+    curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b "$(go env GOBIN)" v1.45.2
 
 # python
 pip install frosted pylama yapf
