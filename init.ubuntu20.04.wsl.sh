@@ -152,10 +152,10 @@ pip install frosted pylama yapf
 # js
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt-get install -y nodejs
-sudo npm install -g jshint eslint eslint_d htmlhint csslint stylelint js-beautify
+sudo npm install -g eslint eslint_d htmlhint csslint prettier
 
 # markdown
-sudo npm install -g prettier
+sudo npm install -g markdownlint
 
 # other cli tools
 sudo apt -y install neofetch ncdu gnupg nmap
