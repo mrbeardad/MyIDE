@@ -148,7 +148,7 @@
                 "source": "Windows.Terminal.Wsl"
             },
             {
-                "commandline": "ssh -t -o ServerAliveInterval=60 -i C:\\Users\\mrbea\\Documents\\tencent_cloud_beardad ubuntu@152.136.188.178 sh -c 'tmux new-session -s ASUS || tmux attach -t ASUS'",
+                "commandline": "ssh -t -o ServerAliveInterval=60 -i C:\\Users\\mrbea\\.ssh\\tencent_cloud_beardad ubuntu@152.136.188.178 sh -c 'tmux new-session -s ASUS || tmux attach -t ASUS'",
                 "guid": "{a453ae62-4e3d-5e58-b989-0a998ec441b8}",
                 "hidden": false,
                 "icon": "C:\\Users\\mrbea\\OneDrive\\\u56fe\u7247\\Saved Pictures\\\u817e\u8baf\u4e91.png",
