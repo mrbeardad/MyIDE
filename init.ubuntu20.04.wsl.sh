@@ -155,7 +155,7 @@ sudo apt-get install -y nodejs
 sudo npm install -g eslint eslint_d htmlhint csslint prettier
 
 # markdown
-sudo npm install -g markdownlint
+sudo npm install -g markdownlint-cli
 
 # other cli tools
 sudo apt -y install neofetch ncdu gnupg nmap
