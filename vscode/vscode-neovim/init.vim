@@ -1,4 +1,6 @@
 " 光标移动
+nnoremap <Up> gk
+nnoremap <Down> gj
 inoremap <C-A> <Home>
 inoremap <C-E> <End>
 nnoremap <C-A> <Home>

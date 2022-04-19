@@ -17,7 +17,6 @@
   "vscode-neovim.neovimInitVimPaths.win32": "C:\\Users\\mrbea\\AppData\\Local\\vscode-neovim\\init.vim",
   "vscode-neovim.textDecorationsAtTop": true,
   "markdown-preview-enhanced.enableExtendedTableSyntax": true,
-  "markdown-preview-enhanced.revealjsTheme": "solarized.css",
   "markdown-preview-enhanced.previewTheme": "solarized-dark.css",
   "go.toolsManagement.autoUpdate": true,
   "editor.lineNumbers": "relative",
@@ -829,7 +828,7 @@
   "go.lintFlags": ["-checks", "inherit,-ST1006"],
   "editor.inlineSuggest.mode": "prefix",
   "editor.formatOnSave": true,
-  "translator.captureWord": true,
+  "translator.captureWord": false,
   "code-runner.saveFileBeforeRun": true,
   "code-runner.fileDirectoryAsCwd": true,
   "path-intellisense.autoSlashAfterDirectory": true,
@@ -881,7 +880,6 @@
   "editor.accessibilitySupport": "off",
   "git.confirmSync": false,
   "gitlens.codeLens.enabled": false,
-  "window.zoomLevel": -1,
   "cmake.statusbar.visibility": "compact",
   "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: Chromium, IndentWidth: 4}",
   "C_Cpp.autocompleteAddParentheses": true,
@@ -936,5 +934,6 @@
   "css.format.enable": false,
   "less.format.enable": false,
   "scss.format.enable": false,
-  "python.linting.flake8Enabled": true
+  "python.linting.flake8Enabled": true,
+  "window.zoomLevel": -1
 }
