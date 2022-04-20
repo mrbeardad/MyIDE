@@ -1,10 +1,13 @@
-# Best IDE Strategy
+# The Best IDE Strategy
 
-- [Best IDE Strategy](#best-ide-strategy)
-  - [Windows](#windows)
-  - [WSL](#wsl)
-  - [VSCode](#vscode)
-  - [Others](#others)
+<!-- vim-markdown-toc GFM -->
+
+* [Windows](#windows)
+* [WSL](#wsl)
+* [VSCode](#vscode)
+* [Others](#others)
+
+<!-- vim-markdown-toc -->
 
 ## Windows
 
