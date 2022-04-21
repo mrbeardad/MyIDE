@@ -1,8 +1,8 @@
-# The Best IDE Strategy
+# The Best IDE Strategy for Myself
 
 <!-- vim-markdown-toc GFM -->
 
-- [The Best IDE Strategy](#the-best-ide-strategy)
+- [The Best IDE Strategy for Myself](#the-best-ide-strategy-for-myself)
   - [Windows](#windows)
   - [WSL](#wsl)
   - [VSCode](#vscode)
@@ -135,6 +135,7 @@
    ```
 
 7. 设置 WSL2 为默认并初始化 Ubuntu20.04
+
    ```sh
    # in powershell
    wsl --list --all -v
@@ -142,7 +143,9 @@
    wsl --set-default Ubuntu20.04
    wsl # 进入wsl
    ```
+
 8. 配置 Ubuntu20.04 WSL
+
    ```sh
    # in wsl
    mkdir ~/.local
