@@ -2,10 +2,11 @@
 
 <!-- vim-markdown-toc GFM -->
 
-* [Windows](#windows)
-* [WSL](#wsl)
-* [VSCode](#vscode)
-* [Others](#others)
+- [The Best IDE Strategy](#the-best-ide-strategy)
+  - [Windows](#windows)
+  - [WSL](#wsl)
+  - [VSCode](#vscode)
+  - [Others](#others)
 
 <!-- vim-markdown-toc -->
 
