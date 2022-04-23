@@ -232,28 +232,89 @@
 
 ### Cpp
 
-1. 编写 CMakeLists.txt 文件
+1. 编写 CMakeLists.txt 文件并添加
 
 ```cmake
-if(DEFINED CMAKE_EXPORT_COMPILE_COMMANDS)
+if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
     add_compile_options(
-        -O2
-        -Weverything
-        -Wno-c++98-compat
-        -Wno-c++98-compat-pedantic
-        -Wno-pedantic
+        -g3
+        -Wall
+        -Wextra
+        -Wpedantic
+        -Wcast-align
+        -Wcast-qual
+        -Wconversion
+        -Wdouble-promotion
+        -Wduplicated-branches
+        -Wduplicated-cond
+        -Weffc++
+        -Wextra-semi
+        -Wfloat-equal
+        -Wformat=2
+        -Wformat-overflow
+        -Wformat-truncation
+        -Wimplicit-fallthrough=5
+        -Wlifetime
+        -Wlogical-op
+        -Wmisleading-indentation
+        -Wnon-virtual-dtor
+        -Wnull-dereference
+        -Wold-style-cast
+        -Woverloaded-virtual
+        -Wshadow
+        -Wsign-conversion
+        -Wstrict-null-sentinel
+        -Wsuggest-final-methods
+        -Wsuggest-final-types
+        -Wsuggest-override
+        -Wundef
+        -Wunused
+        -Wuseless-cast
+        -Wzero-as-null-pointer-constant
+        -fno-common
     )
 endif()
 ```
 
-2. cmake 配置构建目录
+2. cmake 配置构建目录并导出 compile_commands.json
 
 ```sh
-mkdir build && cd build && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS -DCMAKE_BUILD_TYPE=DEBUG ..
+mkdir build
+(
+    cd build || exit 1
+    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=DEBUG ..
+)
+ln -sfv build/compile_commands.json . # clangd 不会监听软链接
 ```
 
-3. 链接构建参数文件
+3. 编写.clangd
 
-```sh
-cd .. && ln -s build/compile_commands.json .
+```yaml
+CompileFlags:
+  CompilationDatabase: build
+Completion:
+  AllScopes: yes
+Hover:
+  ShowAKA: yes
+```
+
+4. 编写.clang-tidy
+
+```yaml
+Checks: "-*,bugprone-*,cert-dcl21-cpp,cert-dcl50-cpp,cert-env33-c,cert-err34-c,cert-err52-cpp,cert-err60-cpp,cert-flp30-c,cert-msc50-cpp,cert-msc51-cpp,cppcoreguidelines-*,-cppcoreguidelines-macro-usage,-cppcoreguidelines-pro-type-reinterpret-cast,-cppcoreguidelines-pro-type-union-access,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-cppcoreguidelines-pro-type-vararg,google-build-using-namespace,google-explicit-constructor,google-global-names-in-headers,google-readability-casting,google-runtime-int,google-runtime-operator,hicpp-*,-hicpp-vararg,misc-*,modernize-*,performance-*,readability-*,-readability-named-parameter"
+CheckOptions:
+  - key: bugprone-argument-comment.StrictMode
+    value: 1
+  - key: bugprone-exception-escape.FunctionsThatShouldNotThrow
+    value: WinMain,SDL_main
+  - key: misc-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic
+    value: 1
+FormatStyle: "file"
+```
+
+5. 编写.clang-format
+
+```yaml
+BasedOnStyle: Chromium
+IndentWidth: 4
 ```

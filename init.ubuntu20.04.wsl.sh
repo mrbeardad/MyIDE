@@ -128,15 +128,42 @@ mv -v shfmt_v3.4.3_linux_amd64 ~/.local/bin/
 wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
 add-apt-repository "deb http://apt.llvm.org/focal/     llvm-toolchain-focal-14   main"
 apt update
-sudo apt -y install clang lld clangd-14 clang-tidy-14 clang-format-14 cppcheck cmake doxygen google-perftools \
+sudo apt -y install clang-14 lld-14 clangd-14 clang-tidy-14 clang-format-14 cppcheck cmake doxygen google-perftools \
     libboost-all-dev libgtest-dev libsource-highlight-dev
 (
     cd /bin || exit
+    sudo ln -sf clang-14 clang
+    sudo ln -sf clang++-14 clang++
+    sudo ln -sf ld.lld-14 ld.lld
+    sudo ln -sf ld64.lld-14 ld64.lld
+    sudo ln -sf lld-14 lld
+    sudo ln -sf lld-link-14 lld-link
+    sudo ln -sf wasm-ld-14 wasm-ld
     sudo ln -sf clangd-14 clangd
     sudo ln -sf clang-tidy-14 clang-tidy
     sudo ln -sf clang-format-14 clang-format
 )
 go get -u github.com/google/pprof
+mkdir -p ~/.config/clangd/
+cat >~/.config/clangd/config.yaml <<EOF
+# CompileFlags:
+#   CompilationDatabase: build
+Completion:
+  AllScopes: yes
+Hover:
+  ShowAKA: Yes
+EOF
+cat >~/.clang-tidy <<EOF
+Checks: "-*,bugprone-*,cert-dcl21-cpp,cert-dcl50-cpp,cert-env33-c,cert-err34-c,cert-err52-cpp,cert-err60-cpp,cert-flp30-c,cert-msc50-cpp,cert-msc51-cpp,cppcoreguidelines-*,-cppcoreguidelines-macro-usage,-cppcoreguidelines-pro-type-reinterpret-cast,-cppcoreguidelines-pro-type-union-access,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-cppcoreguidelines-pro-type-vararg,google-build-using-namespace,google-explicit-constructor,google-global-names-in-headers,google-readability-casting,google-runtime-int,google-runtime-operator,hicpp-*,-hicpp-vararg,misc-*,modernize-*,performance-*,readability-*,-readability-named-parameter"
+CheckOptions:
+  - key: bugprone-argument-comment.StrictMode
+    value: 1
+  - key: bugprone-exception-escape.FunctionsThatShouldNotThrow
+    value: WinMain,SDL_main
+  - key: misc-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic
+    value: 1
+FormatStyle: "file"
+EOF
 cat >~/.clang-format <<EOF
 BasedOnStyle: Chromium
 IndentWidth: 4

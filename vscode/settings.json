@@ -39,11 +39,10 @@
     "comments": true,
     "strings": true
   },
-  "editor.suggest.preview": true,
 
   "files.insertFinalNewline": true,
   "files.watcherExclude": {
-    "**/build/**": true,
+    "**/build/*/**": true,
     "**/vendor/*/**": true
   },
 
@@ -99,7 +98,11 @@
   "vscode-neovim.textDecorationsAtTop": true,
 
   "clangd.path": "c:\\Users\\mrbea\\AppData\\Roaming\\Code\\User\\globalStorage\\llvm-vs-code-extensions.vscode-clangd\\install\\14.0.0\\clangd_14.0.0\\bin\\clangd.exe",
-  "clangd.arguments": ["--clang-tidy"],
+  "clangd.arguments": [
+    "--enable-config",
+    "--clang-tidy",
+    "--function-arg-placeholders=0"
+  ],
   "c-cpp-flylint.clang.enable": false,
   "c-cpp-flylint.flexelint.enable": false,
   "c-cpp-flylint.lizard.enable": false,
@@ -109,7 +112,7 @@
     "--enable=warning,style,performance,portability"
   ],
   "cmake.configureOnOpen": false,
-  "cmake.statusbar.visibility": "compact",
+  "cmake.statusbar.visibility": "icon",
   "doxdocgen.generic.useGitUserEmail": true,
   "doxdocgen.generic.useGitUserName": true,
 
@@ -167,7 +170,7 @@
     "beardad.top": "linux"
   },
 
-  "translator.captureWord": true,
+  "translator.captureWord": false,
 
   "todo-tree.general.showIconsInsteadOfTagsInStatusBar": true,
   "todo-tree.general.statusBar": "tags",

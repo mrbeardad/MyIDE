@@ -13,7 +13,7 @@ Plug 'asvetliakov/vim-easymotion', { 'as': 'vsc-easymotion' }
 nmap ; <Plug>(easymotion-bd-f)
 vmap ; <Plug>(easymotion-bd-f)
 
-let g:matchup_surround_enabled = 1
+let g:matchup_matchparen_enabled = 0
 Plug 'andymass/vim-matchup'
 
 " 快速编辑
@@ -68,4 +68,5 @@ nnoremap <silent>g& :s/<up><cr>:nohl<cr>
 vnoremap <Leader>t <Cmd>call VSCodeNotifyVisual('translator.replaceWithTranslation', 1)<CR>
 
 call plug#end()
+
 

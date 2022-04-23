@@ -6,20 +6,6 @@
   // do not map character in insert mode,
   // remap character in non-insert mode by neovim init.vim.
 
-  // up: display line up
-  {
-    "key": "up",
-    "command": "vscode-neovim.send",
-    "args": "gk",
-    "when": "editorTextFocus && neovim.mode != insert"
-  },
-  // down: display line down
-  {
-    "key": "down",
-    "command": "vscode-neovim.send",
-    "args": "gj",
-    "when": "editorTextFocus && neovim.mode != insert"
-  },
   // ctrl+a: move the cursor to start of the line
   {
     "key": "ctrl+a",
@@ -54,8 +40,9 @@
   {
     "key": "ctrl+b",
     "command": "scrollPageUp",
-    "when": "textInputFocus"
+    "when": "textInputFocus && editorLangId != markdown"
   },
+
   // ctrl+up: scroll content up
   {
     "key": "ctrl+up",
@@ -108,12 +95,6 @@
   {
     "key": "ctrl+u",
     "command": "deleteAllLeft",
-    "when": "editorTextFocus && neovim.mode == insert"
-  },
-  // ctrl+k: delete all char to the right of the cursor
-  {
-    "key": "ctrl+k",
-    "command": "deleteAllRight",
     "when": "editorTextFocus && neovim.mode == insert"
   },
   // ctrl+w: delete word left
@@ -214,8 +195,13 @@
   // ctrl+c: copy in normal mode
   {
     "key": "ctrl+c",
+    "command": "vscode-neovim.escape",
+    "when": "editorTextFocus && neovim.init"
+  },
+  {
+    "key": "ctrl+c",
     "command": "editor.action.clipboardCopyAction",
-    "when": "editorTextFocus && neovim.mode != insert"
+    "when": "editorTextFocus && haseditorHasSelection"
   },
   // ctrl+f: find content
   {
@@ -357,5 +343,11 @@
   {
     "key": "shift+alt+c",
     "command": "calculator.showInput"
+  },
+  // ctrl+k: delete all char to the right of the cursor
+  {
+    "key": "ctrl+k", // define after all ctrl+k prefix keybinds
+    "command": "deleteAllRight",
+    "when": "editorTextFocus && neovim.mode == insert"
   }
 ]
