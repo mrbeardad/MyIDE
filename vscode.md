@@ -235,13 +235,7 @@
 1. 编写 CMakeLists.txt 文件并添加
 
 ```cmake
-if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
-    add_compile_options(
-        -g3
-        -Wall
-        -Wextra
-    )
-endif()
+set(CMAKE_CXX_FLAGS_DEBUG "-g3 -Wall -Wextra")
 ```
 
 2. cmake 配置构建目录并导出 compile_commands.json
