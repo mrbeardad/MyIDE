@@ -17,7 +17,7 @@
 
 ## 光标移动
 
-**不要在插入模式下任何光标移动操作！**
+**不要在插入模式下执行任何光标移动操作！**
 
 | 按键               | 作用                         |
 | ------------------ | ---------------------------- |
@@ -42,33 +42,33 @@
 
 ## 快速编辑
 
-| 按键               | 作用                                    |
-| ------------------ | --------------------------------------- |
-| `Shift`+`←`        | 左移本行                                |
-| `Shift`+`→`        | 右移本行                                |
-| `Shift`+`↓`        | 下移本行                                |
-| `Shift`+`↑`        | 上移本行                                |
-| `Ctrl`+`Enter`     | 下行插入                                |
-| `Ctrl`+`W`         | 删除光标前单词                          |
-| `Ctrl`+`U`         | 删除光标前文本                          |
-| `Ctrl`+`K`         | 删除光标后文本                          |
-| `Ctrl`+`L`         | 删除光标后单词                          |
-| `Ctrl`+`Z`         | 撤销                                    |
-| `Ctrl`+`R`         | 重做                                    |
-| `F2`               | 重构变量名                              |
-| `Ctrl`+`\`         | 手动触发补全列表                        |
-| `Tab`              | 下个补全项                              |
-| `Shift`+`Tab`      | 上个补全项                              |
-| `Enter`            | 选中补全项                              |
-| `Alt`+`\`          | 手动搜索 snippet                        |
-| `Tab`              | 根据 snippet 前缀补全代码片段或下个锚点 |
-| `Shift`+`Tab`      | 上个代码片段锚点                        |
-| `Ctrl`+`/`         | 注释代码                                |
-| `mi`\|`ma`         | 多光标插入                              |
-| `Ctrl`+`N`         | 选中下个匹配单词并添加光标              |
-| `Ctrl`+`Shift`+`N` | 选中上个匹配单词并添加光标              |
-| `Ctrl`+`Shift`+`L` | 所有匹配当前单词的地方添加光标          |
-| `Ctrl`+`LeftMouse` | 添加多光标                              |
+| 按键                   | 作用                                    |
+| ---------------------- | --------------------------------------- |
+| `Shift`+`←`/`Ctrl`+`D` | 左移本行                                |
+| `Shift`+`→`/`Ctrl`+`T` | 右移本行                                |
+| `Shift`+`↓`            | 下移本行                                |
+| `Shift`+`↑`            | 上移本行                                |
+| `Ctrl`+`Enter`         | 下行插入                                |
+| `Ctrl`+`W`             | 删除光标前单词                          |
+| `Ctrl`+`U`             | 删除光标前文本                          |
+| `Ctrl`+`K`             | 删除光标后文本                          |
+| `Ctrl`+`L`             | 删除光标后单词                          |
+| `Ctrl`+`Z`             | 撤销                                    |
+| `Ctrl`+`R`             | 重做                                    |
+| `F2`                   | 重构变量名                              |
+| `Ctrl`+`\`             | 手动触发补全列表                        |
+| `Tab`                  | 下个补全项                              |
+| `Shift`+`Tab`          | 上个补全项                              |
+| `Enter`                | 选中补全项                              |
+| `Alt`+`\`              | 手动搜索 snippet                        |
+| `Tab`                  | 根据 snippet 前缀补全代码片段或下个锚点 |
+| `Shift`+`Tab`          | 上个代码片段锚点                        |
+| `Ctrl`+`/`             | 注释代码                                |
+| `mi`\|`ma`             | 多光标插入（visual 模式）               |
+| `Ctrl`+`N`             | 选中下个匹配单词并添加光标              |
+| `Ctrl`+`Shift`+`N`     | 选中上个匹配单词并添加光标              |
+| `Ctrl`+`Shift`+`L`     | 所有匹配当前单词的地方添加光标          |
+| `Ctrl`+`LeftMouse`     | 添加多光标                              |
 
 ## 普通模式
 
@@ -240,38 +240,6 @@ if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
         -g3
         -Wall
         -Wextra
-        -Wpedantic
-        -Wcast-align
-        -Wcast-qual
-        -Wconversion
-        -Wdouble-promotion
-        -Wduplicated-branches
-        -Wduplicated-cond
-        -Weffc++
-        -Wextra-semi
-        -Wfloat-equal
-        -Wformat=2
-        -Wformat-overflow
-        -Wformat-truncation
-        -Wimplicit-fallthrough=5
-        -Wlifetime
-        -Wlogical-op
-        -Wmisleading-indentation
-        -Wnon-virtual-dtor
-        -Wnull-dereference
-        -Wold-style-cast
-        -Woverloaded-virtual
-        -Wshadow
-        -Wsign-conversion
-        -Wstrict-null-sentinel
-        -Wsuggest-final-methods
-        -Wsuggest-final-types
-        -Wsuggest-override
-        -Wundef
-        -Wunused
-        -Wuseless-cast
-        -Wzero-as-null-pointer-constant
-        -fno-common
     )
 endif()
 ```
@@ -280,11 +248,8 @@ endif()
 
 ```sh
 mkdir build
-(
-    cd build || exit 1
-    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=DEBUG ..
-)
-ln -sfv build/compile_commands.json . # clangd 不会监听软链接
+cd build
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=DEBUG ..
 ```
 
 3. 编写.clangd

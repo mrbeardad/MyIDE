@@ -143,33 +143,9 @@ sudo apt -y install clang-14 lld-14 clangd-14 clang-tidy-14 clang-format-14 cppc
     sudo ln -sf clang-tidy-14 clang-tidy
     sudo ln -sf clang-format-14 clang-format
 )
-go get -u github.com/google/pprof
-mkdir -p ~/.config/clangd/
-cat >~/.config/clangd/config.yaml <<EOF
-# CompileFlags:
-#   CompilationDatabase: build
-Completion:
-  AllScopes: yes
-Hover:
-  ShowAKA: Yes
-EOF
-cat >~/.clang-tidy <<EOF
-Checks: "-*,bugprone-*,cert-dcl21-cpp,cert-dcl50-cpp,cert-env33-c,cert-err34-c,cert-err52-cpp,cert-err60-cpp,cert-flp30-c,cert-msc50-cpp,cert-msc51-cpp,cppcoreguidelines-*,-cppcoreguidelines-macro-usage,-cppcoreguidelines-pro-type-reinterpret-cast,-cppcoreguidelines-pro-type-union-access,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-cppcoreguidelines-pro-type-vararg,google-build-using-namespace,google-explicit-constructor,google-global-names-in-headers,google-readability-casting,google-runtime-int,google-runtime-operator,hicpp-*,-hicpp-vararg,misc-*,modernize-*,performance-*,readability-*,-readability-named-parameter,-readability-implicit-bool-conversion"
-CheckOptions:
-  - key: bugprone-argument-comment.StrictMode
-    value: 1
-  - key: bugprone-exception-escape.FunctionsThatShouldNotThrow
-    value: WinMain,SDL_main
-  - key: misc-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic
-    value: 1
-FormatStyle: "file"
-EOF
-cat >~/.clang-format <<EOF
-BasedOnStyle: Chromium
-IndentWidth: 4
-EOF
 
 # go
+go get -u github.com/google/pprof
 go get -u github.com/golangci/golangci-lint/cmd/golangci-lint ||
     curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b "$(go env GOBIN)" v1.45.2
 
@@ -421,9 +397,6 @@ mkdir ~/.cheat/build
 # alias dif='diff -Naur --color'
 # alias apt='sudo apt'
 # alias stl='sudo systemctl'
-# alias dk='sudo docker'
-# alias dki='sudo docker image'
-# alias dkc='sudo docker container'
 # alias vi='nvim'
 #
 # alias gmv='git mv'
