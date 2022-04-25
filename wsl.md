@@ -2,13 +2,12 @@
 
 <!-- vim-markdown-toc GFM -->
 
-- [Windows Subsystem for Linux](#windows-subsystem-for-linux)
-  - [tmux 终端复用器](#tmux-终端复用器)
-  - [zsh 命令行界面](#zsh-命令行界面)
-  - [ranger 文件预览器](#ranger-文件预览器)
-  - [htop 进程监视器](#htop-进程监视器)
-  - [git 版本管理器](#git-版本管理器)
-  - [vim 文本编辑器](#vim-文本编辑器)
+* [tmux 终端复用器](#tmux-终端复用器)
+* [zsh 命令行界面](#zsh-命令行界面)
+* [ranger 文件预览器](#ranger-文件预览器)
+* [htop 进程监视器](#htop-进程监视器)
+* [git 版本管理器](#git-版本管理器)
+* [vim 文本编辑器](#vim-文本编辑器)
 
 <!-- vim-markdown-toc -->
 
@@ -156,7 +155,7 @@
 | git 子命令   | 别名                                  | 功能                                                  |
 | ------------ | ------------------------------------- | ----------------------------------------------------- |
 | add          | `ga`\|`gau`\|`gaa`                    | 添加更改到暂存区/仅已跟踪/所有                        |
-| remove       | `grm`                                 | 从工作区与暂存区同时删除                              |
+| remove       | `grm`\|`grms`                         | 从工作区与暂存区同时删除/仅暂存区                     |
 | mv           | `gmv`                                 | 同时移动工作区与暂存区的文件                          |
 | resotre      | `grs`\|`grst`                         | 恢复工作区为暂存区/恢复暂存区为当前 commit            |
 | status       | `gst`\|`gss`                          | 查看工作区与暂存区状态/精简信息                       |
