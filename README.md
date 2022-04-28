@@ -72,50 +72,51 @@
        </details>
 
 6. <details>
-       <summary><b>系统设置</b></summary>
-       
-       * Acount
-          * Your info: 登录账户
-          * Sync your srttings: 同步配置
-       * System
-         * Display: 夜间暖色
-         * Clipboard: 启用剪切板
-         * About: 更改主机名
-       * Devices
-         * Bluetooth & other devices: 关闭蓝牙
-         * Touchpad: 设置触摸板手势
-         * Typing
-           * Advanced Keyboard Settings
-             * Input Language hot keys: 设置系统输入法热键
-       * Personalization
-         * Theme
-           * Background: 设置桌面壁纸
-           * Colors: 设置主题颜色
-           * Mouse Cursor: 设置[鼠标主题](https://zhutix.com/tag/cursors/)
-         * Fonts: 设置字体
-           1. 安装[noMeiryoUI 字体设置](https://github.com/Tatsu-syo/noMeiryoUI/releases)
-           2. 安装[MacType 字体渲染](https://github.com/snowie2000/mactype/releases)
-           3. 安装[NerdCodePro字体](fonts/)
-         * Start: 设置开始界面
-           1. 开启所有选项
-           2. 排版磁条
-         * Taskbar: 设置任务栏界面
-           1. 安装[TranslucentTB 透明任务栏](https://www.microsoft.com/zh-cn/p/translucenttb/9pf4kz2vn4w9?activetab=pivot:overviewtab)
-           2. 安装[XMeters 资源监测器](https://entropy6.com/xmeters/)
-           3. 居中任务栏图标
-           4. 隐藏桌面图标
-       * Apps
-         * Apps & features: 卸载多余软件
-         * Startup: 管理开机自启软件
-       * Time & Language: 自动同步时间与时区，并显示农历
-       * Region: 设置所在地区与日期时间显示格式
-       * Language: 设置系统显示语言为英语，并下载中文包
-         * Administrative language settings
-           * Change system locale: 选择中文语系并取消勾选Beta设置
-       * Ease of Access
-         * Mouse pointer: 更改鼠标大小
-         * Keyboard: 键盘锁按键提示音
-   </details>
+    <summary><b>系统设置</b></summary>
+
+   - Acount
+     - Your info: 登录账户
+     - Your info: 登录账户
+     - Sync your srttings: 同步配置
+   - System
+     - Display: 夜间暖色
+     - Clipboard: 启用剪切板
+     - About: 更改主机名
+   - Devices
+     - Bluetooth & other devices: 关闭蓝牙
+     - Touchpad: 设置触摸板手势
+     - Typing
+       - Advanced Keyboard Settings
+         - Input Language hot keys: 设置系统输入法热键
+   - Personalization
+     - Theme
+       - Background: 设置桌面壁纸
+       - Colors: 设置主题颜色
+       - Mouse Cursor: 设置[鼠标主题](https://zhutix.com/tag/cursors/)
+     - Fonts: 设置字体
+       1. 安装[noMeiryoUI 字体设置](https://github.com/Tatsu-syo/noMeiryoUI/releases)
+       2. 安装[MacType 字体渲染](https://github.com/snowie2000/mactype/releases)
+       3. 安装[NerdCodePro 字体](fonts/)
+     - Start: 设置开始界面
+       1. 开启所有选项
+       2. 排版磁条
+     - Taskbar: 设置任务栏界面
+       1. 安装[TranslucentTB 透明任务栏](https://www.microsoft.com/zh-cn/p/translucenttb/9pf4kz2vn4w9?activetab=pivot:overviewtab)
+       2. 安装[XMeters 资源监测器](https://entropy6.com/xmeters/)
+       3. 居中任务栏图标
+       4. 隐藏桌面图标
+   - Apps
+     - Apps & features: 卸载多余软件
+     - Startup: 管理开机自启软件
+   - Time & Language: 自动同步时间与时区，并显示农历
+   - Region: 设置所在地区与日期时间显示格式
+   - Language: 设置系统显示语言为英语，并下载中文包
+     - Administrative language settings
+       - Change system locale: 选择中文语系并取消勾选 Beta 设置
+   - Ease of Access
+     - Mouse pointer: 更改鼠标大小
+
+  </details>
 
 [**Windows 使用手册**](windows.md)
 
