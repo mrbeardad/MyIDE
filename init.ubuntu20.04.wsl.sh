@@ -128,7 +128,7 @@ mv -v shfmt_v3.4.3_linux_amd64 ~/.local/bin/
 wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
 add-apt-repository "deb http://apt.llvm.org/focal/     llvm-toolchain-focal-14   main"
 apt update
-sudo apt -y install clang-14 lld-14 clangd-14 clang-tidy-14 clang-format-14 cppcheck cmake doxygen google-perftools \
+sudo apt -y install libc++-14-dev clang-14 lld-14 clangd-14 clang-tidy-14 clang-format-14 cppcheck cmake doxygen graphviz plantuml google-perftools \
     libboost-all-dev libgtest-dev libsource-highlight-dev
 (
     cd /bin || exit
@@ -143,6 +143,7 @@ sudo apt -y install clang-14 lld-14 clangd-14 clang-tidy-14 clang-format-14 cppc
     sudo ln -sf clang-tidy-14 clang-tidy
     sudo ln -sf clang-format-14 clang-format
 )
+pip install cmake_format
 
 # go
 go get -u github.com/google/pprof

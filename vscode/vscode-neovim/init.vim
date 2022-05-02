@@ -2,28 +2,34 @@ scriptencoding utf-8
 
 call plug#begin('C:\Users\mrbea\AppData\Local\vscode-neovim\plugged')
 
-" 光标移动
+" f/F/t/T: smart f
 let g:clever_f_smart_case = 1
 let g:clever_f_fix_key_direction = 1
 Plug 'rhysd/clever-f.vim'
 
+" ;: easymotion
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_do_mapping = 0
 Plug 'asvetliakov/vim-easymotion', { 'as': 'vsc-easymotion' }
 nmap ; <Plug>(easymotion-bd-f)
 vmap ; <Plug>(easymotion-bd-f)
 
+" %: match up
 let g:matchup_matchparen_enabled = 0
 Plug 'andymass/vim-matchup'
 
-" 快速编辑
-nnoremap <silent> [<Space>  :<C-u>put! =repeat(nr2char(10), v:count1)<cr>
-nnoremap <silent> ]<Space>  :<C-U>put =repeat(nr2char(10), v:count1)<cr>
-vnoremap <C-N> <Cmd>call VSCodeNotifyVisual('editor.action.addSelectionToNextFindMatch', 0)<CR>
-vnoremap <C-S-N> <Cmd>call VSCodeNotifyVisual('editor.action.addSelectionToPreviousFindMatch', 0)<CR>
-vnoremap <C-S-L> <Cmd>call VSCodeNotifyVisual('addCursorsAtSearchResults', 1)<CR>
+" <: outdent line
+nnoremap < <<
 
-" 普通模式
+" >: indent line
+nnoremap > >>
+
+" ctrl+n/ctrl+shift+n/ctrl+shift+l: multi cursor edit
+vnoremap <C-N> <Cmd>call VSCodeNotifyVisual('editor.action.addSelectionToNextFindMatch', 1)<CR><Esc>
+vnoremap <C-S-N> <Cmd>call VSCodeNotifyVisual('editor.action.addSelectionToPreviousFindMatch', 1)<CR><Esc>
+vnoremap <C-S-L> <Cmd>call VSCodeNotifyVisual('addCursorsAtSearchResults', 1)<CR><Esc>
+
+" normal mode
 Plug 'terryma/vim-expand-region'
 vmap v <Plug>(expand_region_expand)
 vmap V <Plug>(expand_region_shrink)
@@ -34,38 +40,58 @@ Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-line'
 Plug 'sgur/vim-textobj-parameter'
 Plug 'tpope/vim-surround'
+
+" yank to 0
 nnoremap  Y y$
-nnoremap <Leader>y "+y
-nnoremap <Leader>Y "+y$
-vnoremap <Leader>y "+y
-nnoremap <Space>y gg"+yG''
 nnoremap =p "0p
-nnoremap =P "0P
 vnoremap =p "0p
+nnoremap =P "0P
 nnoremap <silent>=o :<C-U>put =@0<Cr>
 nnoremap <silent>=O :<C-U>put! =@0<Cr>
-nnoremap <Leader>p "+p
-nnoremap <Leader>P "+P
-vnoremap <Leader>p "+p
-nnoremap <silent><Leader>o :<C-U>put =@+<Cr>
-nnoremap <silent><Leader>O :<C-U>put! =@+<Cr>
+
+" yank to +
+nnoremap , "+y
+nnoremap ,, "+yy
+vnoremap , "+y
+nnoremap <silent>,. :<C-U>let @+ = @0<Cr>
+nnoremap ,p "+p
+vnoremap ,p "+p
+nnoremap ,P "+P
+nnoremap <silent>,o :<C-U>put =@+<Cr>
+nnoremap <silent>,O :<C-U>put! =@+<Cr>
+
+" yank all to +
+nnoremap <Space>y gg"+yG''
 nnoremap <Space>p ggdG"+P
 
-" 搜索导航
+" fulltext search
 set ignorecase
 set smartcase
-nnoremap <expr> n  'Nn'[v:searchforward]
-nnoremap <expr> N  'nN'[v:searchforward]
-nnoremap <silent><C-L> :nohlsearch<CR><C-L>
-vnoremap <C-F> <Cmd>call VSCodeNotifyVisual('actions.find', 1)<CR>
+Plug 'bronson/vim-visual-star-search'
+Plug 'romainl/vim-cool'
+nnoremap <expr> n 'Nn'[v:searchforward]
+nnoremap <expr> N 'nN'[v:searchforward]
+nnoremap <silent><Bs> :nohlsearch<CR>
+nnoremap <silent><C-L> :nohlsearch<CR>
+vnoremap <C-F> <Cmd>call VSCodeNotifyVisual('actions.find', 1)<CR><Esc>
 
-" Editor
-nnoremap <Leader>n <Cmd>call VSCodeNotify('workbench.action.previousEditorInGroup', 1)<CR>
-nnoremap <Leader>b <Cmd>call VSCodeNotify('workbench.action.nextEditorInGroup', 1)<CR>
+" file editor change
+nnoremap [b <Cmd>call VSCodeNotify('workbench.action.previousEditorInGroup')<CR>
+nnoremap ]b <Cmd>call VSCodeNotify('workbench.action.nextEditorInGroup')<CR>
+
+" goto reference
+nnoremap gr <Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>
+nnoremap [c <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
+nnoremap ]c <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
+nnoremap [d <Cmd>call VSCodeNotify('editor.action.diffReview.prev')<CR>
+nnoremap ]d <Cmd>call VSCodeNotify('editor.action.diffReview.next')<CR>
+nnoremap [e <Cmd>call VSCodeNotify('editor.action.marker.prevInFiles')<CR>
+nnoremap ]e <Cmd>call VSCodeNotify('editor.action.marker.nextInFiles')<CR>
 
 " Other
-nnoremap <silent>g& :s/<up><cr>:nohl<cr>
-vnoremap <Leader>t <Cmd>call VSCodeNotifyVisual('translator.replaceWithTranslation', 1)<CR>
+nnoremap za <Cmd>call VSCodeNotify('editor.toggleFold')<CR>
+vnoremap <Space>t <Cmd>call VSCodeNotifyVisual('translator.translate', 1)<CR>
+vnoremap <Space>T <Cmd>call VSCodeNotifyVisual('translator.replaceWithTranslation', 1)<CR>
 
 call plug#end()
 

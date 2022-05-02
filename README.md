@@ -7,6 +7,7 @@
   - [WSL](#wsl)
   - [VSCode](#vscode)
   - [Others](#others)
+  - [C++](#c)
 
 <!-- vim-markdown-toc -->
 
@@ -181,3 +182,120 @@
 - 下载并安装[Navicat](## "太TM贵了")
 
 - 下载并安装[ARDM](https://github.com/qishibo/AnotherRedisDesktopManager/releases)
+
+## C++
+
+1. 编写 CMakeLists.txt 文件 (Test&Prof&Doc)
+
+```cmake
+cmake_minimum_required(VERSION 3.12)
+project(ProjectName VERSION 0.1 DESCRIPTION "Project description")
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    add_compile_options(-fstandalone-debug)
+  elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    add_compile_options(-g3)
+  endif()
+endif()
+include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+  set(DOXYGEN_EXCLUDE_PATTERNS */build/* */third_party/* */test/*)
+  set(DOXYGEN_USE_MDFILE_AS_MAINPAGE README.md)
+  set(DOXYGEN_HTML_OUTPUT ${CMAKE_BINARY_DIR}/doc)
+  set(DOXYGEN_REFERENCED_BY_RELATION YES)
+  set(DOXYGEN_REFERENCES_RELATION YES)
+  set(DOXYGEN_CALL_GRAPH YES)
+  set(DOXYGEN_CALLER_GRAPH YES)
+  set(DOXYGEN_DOT_IMAGE_FORMAT png:cairo:cairo)
+  set(DOXYGEN_UML_LOOK YES)
+  set(DOXYGEN_EXTRACT_ALL YES)
+  set(DOXYGEN_EXTRACT_STATIC YES)
+  set(DOXYGEN_EXTRACT_PRIVATE YES)
+  set(DOXYGEN_SOURCE_BROWSER YES)
+  set(DOXYGEN_STRIP_CODE_COMMENTS NO)
+  set(DOXYGEN_SORT_MEMBER_DOCS NO)
+  doxygen_add_docs(doc ${PROJECT_SOURCE_DIR} ALL)
+endif()
+```
+
+2. cmake 配置构建目录并导出 compile_commands.json
+
+```sh
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_BUILD_TYPE:STRING=Debug -DCMAKE_C_COMPILER:FILEPATH=/usr/bin/clang -DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/clang++ -S/path/to/source_dir -B/path/to/build_dir
+```
+
+3. 编写.clangd (Lsp)
+
+```yaml
+# command-line-args: --enable-config --clang-tidy --function-arg-placeholders=0
+CompileFlags:
+  Add: [-Wall, -Wextra]
+  CompilationDatabase: build
+Diagnostics:
+  UnusedIncludes: Strict
+Completion:
+  AllScopes: yes
+InlayHints:
+  Enabled: Yes
+  DeducedTypes: Yes
+  ParameterNames: No
+Hover:
+  ShowAKA: yes
+```
+
+4. 编写.clang-tidy (Lint)
+
+```yaml
+Checks: "-*,bugprone-*,cert-dcl21-cpp,cert-dcl50-cpp,cert-env33-c,cert-err34-c,cert-err52-cpp,cert-err60-cpp,cert-flp30-c,cert-msc50-cpp,cert-msc51-cpp,cppcoreguidelines-*,-cppcoreguidelines-macro-usage,-cppcoreguidelines-pro-type-reinterpret-cast,-cppcoreguidelines-pro-type-union-access,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-cppcoreguidelines-pro-type-vararg,google-build-using-namespace,google-explicit-constructor,google-global-names-in-headers,google-readability-casting,google-runtime-int,google-runtime-operator,hicpp-*,-hicpp-vararg,misc-*,modernize-*,performance-*,readability-*,-readability-named-parameter,-readability-implicit-bool-conversion"
+CheckOptions:
+  - key: bugprone-argument-comment.StrictMode
+    value: 1
+  - key: bugprone-exception-escape.FunctionsThatShouldNotThrow
+    value: WinMain,SDL_main
+  - key: misc-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic
+    value: 1
+FormatStyle: "file"
+```
+
+```cpp
+// NOLINTNEXTLINE: Suppress warning in nextline
+```
+
+5. 编写.clang-format (Format)
+
+```yaml
+BasedOnStyle: Chromium
+IndentWidth: 4
+ColumnLimit: 100
+BreakBeforeBinaryOperators: All
+BreakBeforeTernaryOperators: true
+AlignConsecutiveMacros: AcrossEmptyLines
+SeparateDefinitionBlocks: Always
+```
+
+```cpp
+// clang-format off
+// do not format next line
+```
+
+6. 编写.vscode/.launch.json (Debug)
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug Test",
+      "program": "${workspaceFolder}/build/test_bin",
+      "args": [],
+      "env": {},
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}
+```

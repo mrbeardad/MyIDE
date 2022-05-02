@@ -43,7 +43,8 @@
   "files.insertFinalNewline": true,
   "files.watcherExclude": {
     "**/build/*/**": true,
-    "**/vendor/*/**": true
+    "**/vendor/*/**": true,
+    "**/third_party/*/**": true
   },
 
   "workbench.list.automaticKeyboardNavigation": false,
@@ -75,7 +76,8 @@
 
   "search.exclude": {
     "**/build": true,
-    "**/vendor": true
+    "**/vendor": true,
+    "**/third_party": true
   },
   "search.showLineNumbers": true,
   "search.smartCase": true,
@@ -89,8 +91,6 @@
   "problems.showCurrentInStatus": true,
 
   "security.workspace.trust.enabled": false,
-
-  "vscode-neovim.mouseSelectionStartVisualMode": true,
   "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
   "vscode-neovim.neovimExecutablePaths.win32": "D:\\Neovim\\bin\\nvim.exe",
   "vscode-neovim.neovimInitVimPaths.linux": "/home/beardad/.vscode-neovim/init.vim",
@@ -192,7 +192,9 @@
     "**/.git/**",
     "**/.vscode/**",
     "**/node_modules/**",
-    "**/vendor/**"
+    "**/build/**",
+    "**/vendor/**",
+    "**/third_party/**"
   ],
   "VSCodeCounter.languages": {
     "bat": {

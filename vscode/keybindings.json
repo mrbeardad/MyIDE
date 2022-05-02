@@ -1,107 +1,63 @@
-// Place your key bindings in this file to override the defaultsauto[]
 [
-  // You shoud:
-  // remap control keys in insert mode by vscode keybind and do not send keys to neovim,
-  // remap control keys in other mode by vscode keybind and could be able to send keys to neovim,
-  // do not map character in insert mode,
-  // remap character in non-insert mode by neovim init.vim.
+  // https://github.com/vscode-neovim/vscode-neovim#-how-it-works
+  // In insert mode, map control keys to vscode-command by vscode-keybind,
+  // and map normal keys to vscode-command by also vscode keybind.
+  // In other mode, map control keys to neovim-map(vscode-neovim.send) or vscode-command by vscode keybind,
+  // and map normal keys to neovim-map or vscode-command(VSCodeNotify) by neovim init.vim
 
-  // ctrl+a: move the cursor to start of the line
-  {
-    "key": "ctrl+a",
-    "command": "cursorLineStart",
-    "when": "editorTextFocus && neovim.mode == insert"
-  },
-  {
-    "key": "ctrl+a",
-    "command": "vscode-neovim.send",
-    "args": "0",
-    "when": "editorTextFocus && neovim.mode != insert"
-  },
-  // ctrl+e: move the cursor to end of the line
-  {
-    "key": "ctrl+e",
-    "command": "cursorLineEnd",
-    "when": "editorTextFocus && neovim.mode == insert"
-  },
-  {
-    "key": "ctrl+e",
-    "command": "vscode-neovim.send",
-    "args": "$",
-    "when": "editorTextFocus && neovim.mode != insert"
-  },
   // ctrl+d: scroll page down
   {
     "key": "ctrl+d",
     "command": "scrollPageDown",
-    "when": "textInputFocus"
+    "when": "textInputFocus && neovim.mode != insert"
   },
   // ctrl+b: scroll page up
   {
     "key": "ctrl+b",
     "command": "scrollPageUp",
-    "when": "textInputFocus && editorLangId != markdown"
+    "when": "textInputFocus && neovim.mode != insert"
   },
-
-  // ctrl+up: scroll content up
   {
-    "key": "ctrl+up",
-    "command": "scrollLineDown",
-    "when": "textInputFocus"
+    "key": "ctrl+b",
+    "command": "list.focusPageUp",
+    "when": "listFocus && !inputFocus"
   },
-  // ctrl+down: scroll content down
+  // jj/jk: escape
   {
-    "key": "ctrl+down",
-    "command": "scrollLineUp",
-    "when": "textInputFocus"
+    "key": "j",
+    "command": "vscode-neovim.compositeEscape1",
+    "when": "editorTextFocus && neovim.mode == insert",
+    "args": "j"
   },
-  // shift+up: shift the line to the up
   {
-    "key": "shift+up",
-    "command": "editor.action.moveLinesUpAction",
-    "when": "editorTextFocus && !editorReadonly"
+    "command": "vscode-neovim.compositeEscape2",
+    "key": "k",
+    "when": "neovim.mode == insert && editorTextFocus",
+    "args": "k"
   },
-  // shift+down: shift the line to the down
+  // ctrl+shift+j: shift the line to the down
   {
-    "key": "shift+down",
+    "key": "ctrl+shift+j",
     "command": "editor.action.moveLinesDownAction",
     "when": "editorTextFocus && !editorReadonly"
   },
-  // shift+left: shift the line to the left
+  // ctrl+shift+k: shift the line to the up
   {
-    "key": "shift+left",
-    "command": "editor.action.outdentLines",
-    "when": "editorTextFocus && neovim.mode == insert"
+    "key": "ctrl+shift+k",
+    "command": "editor.action.moveLinesUpAction",
+    "when": "editorTextFocus && !editorReadonly"
   },
+  // ctrl+j: insert line below
   {
-    "key": "shift+left",
-    "command": "vscode-neovim.send",
-    "args": "<<",
-    "when": "editorTextFocus && neovim.mode != insert"
-  },
-  // shift+right: shift the line to the right
-  {
-    "key": "shift+right",
-    "command": "editor.action.indentLines",
-    "when": "editorTextFocus && neovim.mode == insert"
-  },
-  {
-    "key": "shift+right",
-    "command": "vscode-neovim.send",
-    "args": ">>",
-    "when": "editorTextFocus && neovim.mode != insert"
-  },
-  // ctrl+u: delete all char to the left of the cursor
-  {
-    "key": "ctrl+u",
-    "command": "deleteAllLeft",
-    "when": "editorTextFocus && neovim.mode == insert"
+    "key": "ctrl+j",
+    "command": "editor.action.insertLineAfter",
+    "when": "editorTextFocus && !editorReadonly"
   },
   // ctrl+w: delete word left
   {
     "key": "ctrl+w",
     "command": "cjkWordHandler.deleteWordStartLeft",
-    "when": "editorTextFocus && neovim.ctrlKeysInsert && !neovim.recording && neovim.mode == insert"
+    "when": "editorTextFocus && neovim.mode == insert"
   },
   {
     "key": "ctrl+w",
@@ -114,7 +70,7 @@
   // ctrl+l: delete one char to the right of the cursor
   {
     "key": "ctrl+l",
-    "command": "cjkWordHandler.deleteWordEndRight",
+    "command": "deleteRight",
     "when": "editorTextFocus && neovim.mode == insert"
   },
   // ctrl+z: undo
@@ -125,53 +81,29 @@
   // ctrl+r: redo
   {
     "key": "ctrl+r",
-    "command": "redo"
-  },
-  // ctrl+\: trigger suggestion
-  {
-    "key": "ctrl+oem_5",
-    "command": "editor.action.triggerSuggest",
-    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
-  },
-  // tab: next suggestion item
-  {
-    "key": "tab",
-    "command": "selectNextSuggestion",
-    "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
+    "command": "redo",
+    "when": "editorTextFocus && neovim.mode != insert"
   },
   {
-    "key": "tab",
-    "command": "workbench.action.quickOpenSelectNext",
-    "when": "inQuickOpen"
-  },
-  // shift+tab: previous suggestion item
-  {
-    "key": "shift+tab",
-    "command": "selectPrevSuggestion",
-    "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
-  },
-  {
-    "key": "shift+tab",
-    "command": "workbench.action.quickOpenSelectPrevious",
-    "when": "inQuickOpen"
-  },
-  // alt+\: search snippet
-  {
-    "key": "alt+oem_5",
-    "command": "editor.action.insertSnippet",
-    "when": "editorTextFocus"
+    "key": "ctrl+r ctrl+r",
+    "command": "redo",
+    "when": "editorTextFocus && neovim.mode == insert"
   },
   // ctrl+n: add a cursor on the next word
   {
     "key": "ctrl+n",
     "command": "editor.action.addSelectionToNextFindMatch",
-    "when": "editorFocus"
+    "when": "editorFocus && !suggestWidgetVisible"
   },
   {
     "key": "ctrl+n",
     "command": "vscode-neovim.send",
     "args": "<C-N>",
     "when": "editorTextFocus && neovim.mode == visual"
+  },
+  {
+    "key": "ctrl+n",
+    "command": "-workbench.action.files.newUntitledFile"
   },
   // ctrl+shift+n: add a cursor on the previous word
   {
@@ -191,28 +123,6 @@
     "command": "vscode-neovim.send",
     "args": "<C-S-L>",
     "when": "editorTextFocus && neovim.mode == visual"
-  },
-  // ctrl+c: copy in normal mode
-  {
-    "key": "ctrl+c",
-    "command": "vscode-neovim.escape",
-    "when": "editorTextFocus && neovim.init"
-  },
-  {
-    "key": "ctrl+c",
-    "command": "editor.action.clipboardCopyAction",
-    "when": "editorTextFocus && haseditorHasSelection"
-  },
-  // ctrl+f: find content
-  {
-    "key": "ctrl+f",
-    "command": "-vscode-neovim.ctrl-f"
-  },
-  {
-    "key": "ctrl+f",
-    "command": "vscode-neovim.send",
-    "args": "<C-F>",
-    "when": "editorFocus && neovim.mode == visual"
   },
   // ctrl+m: bookmark key prefix
   {
@@ -255,16 +165,27 @@
     "command": "bookmarks.jumpToPrevious",
     "when": "editorTextFocus"
   },
-  // ctrl+k n: new file
+  // ctrl+f: find content
   {
-    "key": "ctrl+k n",
-    "command": "workbench.action.files.newUntitledFile"
+    "key": "ctrl+f",
+    "command": "vscode-neovim.send",
+    "args": "<C-F>",
+    "when": "editorFocus && neovim.mode == visual"
+  },
+  {
+    "key": "ctrl+f",
+    "command": "-vscode-neovim.ctrl-f"
   },
   // ctrl+k o: open file
   {
     "key": "ctrl+k o",
     "command": "workbench.action.files.openFile",
     "when": "true"
+  },
+  // ctrl+k n: new file
+  {
+    "key": "ctrl+k n",
+    "command": "workbench.action.files.newUntitledFile"
   },
   // ctrl+k r: open rencent file
   {
@@ -285,27 +206,23 @@
     "key": "ctrl+shift+w",
     "command": "-workbench.action.closeWindow"
   },
-  // ctrl+k w: close other editors
+  // ctrl+k: delete all char to the right of the cursor
+  // Define after all other ctrl+k prefix keybinds!
   {
-    "key": "ctrl+k w",
-    "command": "workbench.action.closeOtherEditors"
-  },
-  // tab: switch to next group
-  {
-    "key": "tab",
-    "command": "workbench.action.focusNextGroup",
-    "when": "editorTextFocus && neovim.mode != insert"
-  },
-  // shift+tab: switch to previous group
-  {
-    "key": "shift+tab",
-    "command": "workbench.action.focusPreviousGroup",
-    "when": "editorTextFocus && neovim.mode != insert"
+    "key": "ctrl+k",
+    "command": "deleteAllRight",
+    "when": "editorTextFocus && neovim.mode == insert"
   },
   // f1: toggle side bar
   {
     "key": "f1",
     "command": "workbench.action.toggleSidebarVisibility"
+  },
+  // ctrl+shift+g: vcs
+  {
+    "key": "ctrl+shift+g",
+    "command": "workbench.view.scm",
+    "when": "workbench.scm.active"
   },
   // alt+`: open terminal
   {
@@ -313,41 +230,37 @@
     "command": "workbench.action.terminal.toggleTerminal",
     "when": "terminal.active"
   },
-  // shift+alt+e: open active file in explorer
+  // tab: accept selected item in quick open
   {
-    "key": "shift+alt+e",
-    "command": "remote-wsl.revealInExplorer",
-    "when": "editorFocus && remoteName == 'wsl'"
+    "key": "tab",
+    "command": "workbench.action.acceptSelectedQuickOpenItem",
+    "when": "inQuickOpen"
   },
+  // alt+i: search snippet
   {
-    "key": "shift+alt+e",
+    "key": "alt+i",
+    "command": "editor.action.insertSnippet",
+    "when": "editorTextFocus"
+  },
+  // alt+e: open active file in explorer
+  {
+    "key": "alt+e",
     "command": "revealFileInOS",
     "when": "editorFocus"
   },
-  // shift+alt+r: run code
   {
-    "key": "shift+alt+r",
+    "key": "alt+e",
+    "command": "remote-wsl.revealInExplorer",
+    "when": "editorFocus && remoteName == 'wsl'"
+  },
+  // alt+r: run code
+  {
+    "key": "alt+r",
     "command": "code-runner.run"
   },
-  // alt+t: toggle capture word
+  // alt+t: toggle translator capture word
   {
     "key": "alt+t",
     "command": "translator.toggleCaptureWord"
-  },
-  // shift+alt+t: translate selected text
-  {
-    "key": "shift+alt+t",
-    "command": "translator.translate"
-  },
-  // shift+alt+c: caclulator
-  {
-    "key": "shift+alt+c",
-    "command": "calculator.showInput"
-  },
-  // ctrl+k: delete all char to the right of the cursor
-  {
-    "key": "ctrl+k", // define after all ctrl+k prefix keybinds
-    "command": "deleteAllRight",
-    "when": "editorTextFocus && neovim.mode == insert"
   }
 ]
