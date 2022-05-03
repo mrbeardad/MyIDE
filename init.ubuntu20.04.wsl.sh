@@ -468,6 +468,8 @@ mkdir ~/.cheat/build
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#606060"
 # 
 # export VI_MODE_SET_CURSOR=true
+# bindkey '^L' forward-word
+# bindkey '^H' vi-backward-char
 # bindkey '^U' backward-kill-line
 # bindkey '^K' kill-line
 # bindkey '^Y' yank

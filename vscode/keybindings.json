@@ -126,6 +126,12 @@
     "key": "ctrl+w",
     "command": "-workbench.action.closeActiveEditor"
   },
+  // ctrl+h: left move
+  {
+    "key": "ctrl+h",
+    "command": "cursorLeft",
+    "when": "editorTextFocus && neovim.mode == insert"
+  },
   // ctrl+l: right a word
   {
     "key": "ctrl+l",
@@ -206,6 +212,17 @@
   {
     "key": "ctrl+k r",
     "command": "workbench.action.openRecent"
+  },
+  // tab/shift+tab: switch file editor
+  {
+    "key": "tab",
+    "command": "workbench.action.previousEditorInGroup",
+    "when": "editorTextFocus && neovim.mode != insert"
+  },
+  {
+    "key": "shift+tab",
+    "command": "workbench.action.nextEditorInGroup",
+    "when": "editorTextFocus && neovim.mode != insert"
   },
   //  ctrl+shift+w: close file
   {
