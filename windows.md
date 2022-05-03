@@ -53,14 +53,14 @@
 | `Ctrl`+`Alt`+`O` | 识屏         |
 | `Ctrl`+`Alt`+`F` | 翻译         |
 
-| WindwosTerminal 快捷键 | 功能                  |
-| ---------------------- | --------------------- |
-| `Win`+`` ` ``          | 开关下拉式终端        |
-| `F11`\|`Alt`+`Enter`   | 全屏                  |
-| `Ctrl`+`Shift`+`num`   | 启动第 num 个 Profile |
-| `Ctrl`+`Tab`           | 切换 Tab              |
-| `Ctrl`+`Shift`+`W`     | 关闭当前 Tab          |
-| `Shift`+`MouseDrag`    | 复制                  |
-| `Ctrl`+`Shift`+`V`     | 粘贴                  |
-| `Ctrl`+`,`             | 打开设置面板          |
-| `Ctrl`+`Shift`+`,`     | 打开配置文件          |
+| WindwosTerminal 快捷键 | 功能                    |
+| ---------------------- | ----------------------- |
+| `Win`+`` ` ``          | 开关下拉式终端          |
+| `Alt`+`Enter`          | 全屏                    |
+| `Ctrl`+`Shift`+`{num}` | 启动第 {num} 个 Profile |
+| `Ctrl`+`Tab`           | 切换 Tab                |
+| `Ctrl`+`Shift`+`W`     | 关闭当前 Tab            |
+| `Shift`+`MouseDrag`    | 复制                    |
+| `Ctrl`+`Shift`+`V`     | 粘贴                    |
+| `Ctrl`+`,`             | 打开设置面板            |
+| `Ctrl`+`Shift`+`,`     | 打开配置文件            |

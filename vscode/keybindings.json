@@ -5,6 +5,7 @@
   // In other mode, map control keys to neovim-map(vscode-neovim.send) or vscode-command by vscode keybind,
   // and map normal keys to neovim-map or vscode-command(VSCodeNotify) by neovim init.vim
 
+  // 屏幕滚动
   // ctrl+d: scroll page down
   {
     "key": "ctrl+d",
@@ -22,6 +23,64 @@
     "command": "list.focusPageUp",
     "when": "listFocus && !inputFocus"
   },
+
+  // 全文搜索
+  // ctrl+f: find content
+  {
+    "key": "ctrl+f",
+    "command": "vscode-neovim.send",
+    "args": "<C-F>",
+    "when": "editorFocus && neovim.mode == visual"
+  },
+  {
+    "key": "ctrl+f",
+    "command": "-vscode-neovim.ctrl-f"
+  },
+
+  // 标签跳转
+  // ctrl+m: bookmark key prefix
+  {
+    "key": "ctrl+m m",
+    "command": "bookmarks.toggle",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+m i",
+    "command": "bookmarks.toggleLabeled",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+m l",
+    "command": "bookmarks.list",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+m shift+l",
+    "command": "bookmarks.listFromAllFiles",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+m c",
+    "command": "bookmarks.clear",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+m shift+c",
+    "command": "bookmarks.clearFromAllFiles",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+m n",
+    "command": "bookmarks.jumpToNext",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+m b",
+    "command": "bookmarks.jumpToPrevious",
+    "when": "editorTextFocus"
+  },
+
+  // 插入编辑
   // jj/jk: escape
   {
     "key": "j",
@@ -30,9 +89,9 @@
     "args": "j"
   },
   {
-    "command": "vscode-neovim.compositeEscape2",
     "key": "k",
-    "when": "neovim.mode == insert && editorTextFocus",
+    "command": "vscode-neovim.compositeEscape2",
+    "when": "editorTextFocus && neovim.mode == insert",
     "args": "k"
   },
   // ctrl+shift+j: shift the line to the down
@@ -67,11 +126,17 @@
     "key": "ctrl+w",
     "command": "-workbench.action.closeActiveEditor"
   },
-  // ctrl+l: delete one char to the right of the cursor
+  // ctrl+l: right a word
   {
     "key": "ctrl+l",
-    "command": "deleteRight",
+    "command": "cursorWordRight",
     "when": "editorTextFocus && neovim.mode == insert"
+  },
+  // ctrl+e: jump to line end
+  {
+    "key": "ctrl+e",
+    "command": "cursorLineEnd",
+    "when": "editorFocus && neovim.mode == insert"
   },
   // ctrl+z: undo
   {
@@ -124,58 +189,8 @@
     "args": "<C-S-L>",
     "when": "editorTextFocus && neovim.mode == visual"
   },
-  // ctrl+m: bookmark key prefix
-  {
-    "key": "ctrl+m m",
-    "command": "bookmarks.toggle",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "ctrl+m i",
-    "command": "bookmarks.toggleLabeled",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "ctrl+m l",
-    "command": "bookmarks.list",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "ctrl+m shift+l",
-    "command": "bookmarks.listFromAllFiles",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "ctrl+m c",
-    "command": "bookmarks.clear",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "ctrl+m shift+c",
-    "command": "bookmarks.clearFromAllFiles",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "ctrl+m n",
-    "command": "bookmarks.jumpToNext",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "ctrl+m b",
-    "command": "bookmarks.jumpToPrevious",
-    "when": "editorTextFocus"
-  },
-  // ctrl+f: find content
-  {
-    "key": "ctrl+f",
-    "command": "vscode-neovim.send",
-    "args": "<C-F>",
-    "when": "editorFocus && neovim.mode == visual"
-  },
-  {
-    "key": "ctrl+f",
-    "command": "-vscode-neovim.ctrl-f"
-  },
+
+  // 文件操作
   // ctrl+k o: open file
   {
     "key": "ctrl+k o",
@@ -213,6 +228,8 @@
     "command": "deleteAllRight",
     "when": "editorTextFocus && neovim.mode == insert"
   },
+
+  // 界面元素
   // f1: toggle side bar
   {
     "key": "f1",
@@ -230,6 +247,8 @@
     "command": "workbench.action.terminal.toggleTerminal",
     "when": "terminal.active"
   },
+
+  // 语言服务
   // tab: accept selected item in quick open
   {
     "key": "tab",
@@ -242,6 +261,8 @@
     "command": "editor.action.insertSnippet",
     "when": "editorTextFocus"
   },
+
+  // 其他按键
   // alt+e: open active file in explorer
   {
     "key": "alt+e",
