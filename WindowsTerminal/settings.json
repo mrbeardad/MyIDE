@@ -2,76 +2,46 @@
   "$help": "https://aka.ms/terminal-documentation",
   "actions": [
     {
-      "command": "unbound",
-      "keys": "ctrl+shift+down"
-    },
-    {
-      "command": "unbound",
-      "keys": "ctrl+shift+up"
-    },
-    {
-      "command": "unbound",
-      "keys": "alt+p"
-    },
-    {
-      "command": "unbound",
-      "keys": "alt+t"
-    },
-    {
+      "keys": "ctrl+shift+f",
       "command": {
-        "action": "copy"
-      },
-      "keys": "ctrl+shift+c"
+        "action": "sendInput",
+        "input": "\u001bf" // <M-f>
+      }
     },
     {
-      "command": "paste",
-      "keys": "ctrl+shift+v"
-    },
-    {
-      "command": "toggleFullscreen",
-      "keys": "f11"
-    },
-    {
+      "keys": "ctrl+shift+h",
       "command": {
-        "action": "openSettings",
-        "target": "defaultsFile"
-      },
-      "keys": "ctrl+alt+comma"
+        "action": "sendInput",
+        "input": "\u001bH" // <M-H>
+      }
     },
     {
+      "keys": "ctrl+alt+enter",
       "command": {
-        "action": "openSettings",
-        "target": "settingsUI"
-      },
-      "keys": "ctrl+comma"
-    },
-    {
-      "command": {
-        "action": "openSettings",
-        "target": "settingsFile"
-      },
-      "keys": "ctrl+shift+comma"
+        "action": "sendInput",
+        "input": "\u001b\u000d" // <M-CR>
+      }
     },
     {
       "command": {
         "action": "sendInput",
         "input": "\u001bI"
       },
-      "keys": "ctrl+i"
+      "keys": "ctrl+i" // <M-I>
     },
     {
+      "keys": "ctrl+shift+j",
       "command": {
         "action": "sendInput",
-        "input": "\u001bN"
-      },
-      "keys": "ctrl+enter"
+        "input": "\u001bJ"
+      }
     },
     {
+      "keys": "ctrl+shift+k",
       "command": {
         "action": "sendInput",
-        "input": "\u001bf"
-      },
-      "keys": "ctrl+shift+f"
+        "input": "\u001bK"
+      }
     },
     {
       "command": {

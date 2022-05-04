@@ -233,23 +233,23 @@ mkdir ~/.cheat/build
 # set-option -g default-terminal "screen-256color"
 # set-option -ag terminal-overrides ",xterm-256color:Tc"
 # set-option -ag terminal-overrides '*:Smulx=\E[4::%p1%dm,*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
-#
+# 
 # # 更改快捷键前缀
 # unbind C-Z
 # unbind C-B
 # set -g prefix M-w
-#
+# 
 # # 重载配置
 # unbind 'R'
 # bind R source-file ~/.tmux.conf \; display-message "Config reloaded.."
-#
+# 
 # # Window跳转
 # bind b previous-window
-#
+# 
 # # Pane分割
 # bind s splitw -v -c '#{pane_current_path}'
 # bind v splitw -h -c '#{pane_current_path}'
-#
+# 
 # # Pane跳转
 # #unbind-key M-Left
 # #unbind-key M-Right
@@ -259,7 +259,7 @@ mkdir ~/.cheat/build
 # bind j selectp -D
 # bind k selectp -U
 # bind l selectp -R
-#
+# 
 # # Pane大小调整
 # #unbind-key C-Right
 # #unbind-key C-Left
@@ -270,18 +270,18 @@ mkdir ~/.cheat/build
 # bind - resizep -D 10
 # bind < resizep -L 10
 # bind > resizep -R 10
-#
+# 
 # # 剪切板支持
 # bind-key -T copy-mode-vi v send-keys -X begin-selection
 # bind-key -T copy-mode-vi y send-keys -X copy-selection
 # bind ] run-shell -b "win32yank.exe -o --lf | tmux load-buffer - ; tmux paste-buffer"
-#
+# 
 # # 快速启动
 # bind t new-window htop
 # bind g new-window -c "#{pane_current_path}" tig --all
 # bind r new-window -c "#{pane_current_path}" ranger
 # bind m new-window "cmatrix"
-#
+# 
 # # 鼠标滚轮模拟
 # tmux_commands_with_legacy_scroll="nano less more man"
 # bind-key -T root WheelUpPane \
@@ -294,11 +294,11 @@ mkdir ~/.cheat/build
 #         'send -Mt=' \
 #         'if-shell -t= "#{?alternate_on,true,false} || echo \"#{tmux_commands_with_legacy_scroll}\" | grep -q \"#{pane_current_command}\"" \
 #             "send -t= Down Down Down" "send -Mt="'
-#
+# 
 # # 插件
 # run '/usr/share/tmux-plugin-manager/tpm'        # 插件管理器
 # set -g @plugin 'tmux-plugins/tmux-resurrect'    # 会话保存与恢复插件
-#
+# 
 # __TMUX_CONF_END
 
 # __ZSHRC
@@ -308,64 +308,64 @@ mkdir ~/.cheat/build
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
-#
+# 
 # # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/.local/bin:$PATH
-#
+# 
 # # Path to your oh-my-zsh installation.
 # export ZSH="/home/beardad/.oh-my-zsh"
-#
+# 
 # # Set name of the theme to load --- if set to "random", it will
 # # load a random theme each time oh-my-zsh is loaded, in which case,
 # # to know which specific one was loaded, run: echo $RANDOM_THEME
 # # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="powerlevel10k/powerlevel10k"
-#
+# 
 # # Set list of themes to pick from when loading at random
 # # Setting this variable when ZSH_THEME=random will cause zsh to load
 # # a theme from this variable instead of looking in $ZSH/themes/
 # # If set to an empty array, this variable will have no effect.
 # # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-#
+# 
 # # Uncomment the following line to use case-sensitive completion.
 # # CASE_SENSITIVE="true"
-#
+# 
 # # Uncomment the following line to use hyphen-insensitive completion.
 # # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
-#
+# 
 # # Uncomment the following line to disable bi-weekly auto-update checks.
 # # DISABLE_AUTO_UPDATE="true"
-#
+# 
 # # Uncomment the following line to automatically update without prompting.
 # # DISABLE_UPDATE_PROMPT="true"
-#
+# 
 # # Uncomment the following line to change how often to auto-update (in days).
 # # export UPDATE_ZSH_DAYS=13
-#
+# 
 # # Uncomment the following line if pasting URLs and other text is messed up.
 # # DISABLE_MAGIC_FUNCTIONS="true"
-#
+# 
 # # Uncomment the following line to disable colors in ls.
 # # DISABLE_LS_COLORS="true"
-#
+# 
 # # Uncomment the following line to disable auto-setting terminal title.
 # # DISABLE_AUTO_TITLE="true"
-#
+# 
 # # Uncomment the following line to enable command auto-correction.
 # # ENABLE_CORRECTION="true"
-#
+# 
 # # Uncomment the following line to display red dots whilst waiting for completion.
 # # You can also set it to another string to have that shown instead of the default red dots.
 # # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
-#
+# 
 # # Uncomment the following line if you want to disable marking untracked files
 # # under VCS as dirty. This makes repository status check for large repositories
 # # much, much faster.
 # # DISABLE_UNTRACKED_FILES_DIRTY="true"
-#
+# 
 # # Uncomment the following line if you want to change the command execution time
 # # stamp shown in the history command output.
 # # You can set one of the optional three formats:
@@ -373,10 +373,10 @@ mkdir ~/.cheat/build
 # # or set a custom format using the strftime function format specifications,
 # # see 'man strftime' for details.
 # HIST_STAMPS="yyyy-mm-dd"
-#
+# 
 # # Would you like to use another custom folder than $ZSH/custom?
 # # ZSH_CUSTOM=/path/to/new-custom-folder
-#
+# 
 # # Which plugins would you like to load?
 # # Standard plugins can be found in $ZSH/plugins/
 # # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -399,16 +399,16 @@ mkdir ~/.cheat/build
 #     tmux
 #     vi-mode
 # )
-#
+# 
 # source $ZSH/oh-my-zsh.sh
-#
+# 
 # # User configuration
-#
+# 
 # # export MANPATH="/usr/local/man:$MANPATH"
-#
+# 
 # # You may need to manually set your language environment
 # # export LANG=en_US.UTF-8
-#
+# 
 # # Preferred editor for local and remote sessions
 # export EDITOR='nvim'
 # # if [[ -n $SSH_CONNECTION ]]; then
@@ -416,10 +416,10 @@ mkdir ~/.cheat/build
 # # else
 # #   export EDITOR='mvim'
 # # fi
-#
+# 
 # # Compilation flags
 # # export ARCHFLAGS="-arch x86_64"
-#
+# 
 # # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -428,7 +428,7 @@ mkdir ~/.cheat/build
 # # Example aliases
 # # alias zshconfig="mate ~/.zshrc"
 # # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
+# 
 # alias l='lsd -lah --group-dirs first'
 # alias l.='lsd -lhd --group-dirs first .*'
 # alias ll='lsd -lh --group-dirs first'
@@ -440,7 +440,7 @@ mkdir ~/.cheat/build
 # alias apt='sudo apt'
 # alias stl='sudo systemctl'
 # alias vi='nvim'
-#
+# 
 # alias gmv='git mv'
 # alias grms='git rm --cached'
 # alias gdi='git diff-index --name-status'
@@ -457,62 +457,62 @@ mkdir ~/.cheat/build
 # alias gsa='git submodule add'
 # alias gsd='git submodule deinit'
 # alias gsu='git submodule update --init --recursive'
-#
+# 
 # source /usr/share/doc/fzf/examples/key-bindings.zsh
 # source /usr/share/doc/fzf/examples/completion.zsh
-#
+# 
 # source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#606060"
-#
+# 
 # export VI_MODE_SET_CURSOR=true
 # bindkey '^L' forward-word
 # bindkey '^H' vi-backward-char
 # bindkey '^U' backward-kill-line
 # bindkey '^K' kill-line
 # bindkey '^Y' yank
-# bindkey '^P' up-line-or-beginning-search
-# bindkey '^N' down-line-or-beginning-search
-#
+# # bindkey '^P' up-line-or-beginning-search
+# # bindkey '^N' down-line-or-beginning-search
+# 
 # zstyle ':completion:*:*:docker:*' option-stacking yes
 # zstyle ':completion:*:*:docker-*:*' option-stacking yes
-#
+# 
 # bindkey -M emacs '^[s' sudo-command-line
 # bindkey -M vicmd '^[s' sudo-command-line
 # bindkey -M viins '^[s' sudo-command-line
-#
+# 
 # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-#
+# 
 # __ZSHRC_END
 
 # __RANGER
 # #!/usr/bin/env python
 # # -*- coding: utf-8 -*-
-#
+# 
 # from ranger.api.commands import Command
-#
+# 
 # class fzf_select(Command):
 #     """
 #     :fzf_select
 #     Find a file using fzf.
 #     With a prefix argument to select only directories.
-#
+# 
 #     See: https://github.com/junegunn/fzf
 #     """
-#
+# 
 #     def execute(self):
 #         import subprocess
 #         import os
-#
+# 
 #         hidden = ('--hidden' if self.fm.settings.show_hidden else '')
 #         exclude = "--no-ignore-vcs --exclude '.git' --exclude '*.py[co]' --exclude '__pycache__'"
 #         only_directories = ('--type directory' if self.quantifier else '')
 #         fzf_default_command = '{} --follow {} {} {} --color=always'.format(
 #             'fdfind', hidden, exclude, only_directories
 #         )
-#
+# 
 #         env = os.environ.copy()
 #         env['FZF_DEFAULT_COMMAND'] = fzf_default_command
 #         env['FZF_DEFAULT_OPTS'] = '--layout=reverse --ansi --preview="{}"'.format('''
@@ -523,7 +523,7 @@ mkdir ~/.cheat/build
 #                 tree -ahpCL 3 -I '.git' -I '*.py[co]' -I '__pycache__' {}
 #             ) 2>/dev/null | head -n 100
 #         ''')
-#
+# 
 #         fzf = self.fm.execute_command('fzf --no-multi', env=env,
 #                                       universal_newlines=True, stdout=subprocess.PIPE)
 #         stdout, _ = fzf.communicate()
@@ -533,14 +533,14 @@ mkdir ~/.cheat/build
 #                 self.fm.cd(selected)
 #             else:
 #                 self.fm.select_file(selected)
-#
+# 
 # __RANGER_END
 
 # __HTOPRC
 # # Beware! This file is rewritten by htop when settings are changed in the interface.
 # # The parser is also very primitive, and not human-friendly.
 # fields=2 45 48 6 5 7 4 0 3 109 110 46 47 20 49 1
-# sort_key=47
+# sort_key=46
 # sort_direction=1
 # hide_threads=1
 # hide_kernel_threads=1
@@ -570,17 +570,17 @@ mkdir ~/.cheat/build
 # set main-view = date:default author:full id:yes,color \
 #                 line-number:no,interval=1 \
 #                 commit-title:graph=v2,refs=yes,overflow=no
-#
+# 
 # bind main c @git checkout %(commit)
 # bind main d >git difftool --tool=vimdiff %(commit)
 # bind diff d >git difftool --tool=vimdiff %(commit)^! -- %(file)
-#
+# 
 # # Vim-style keybindings for Tig
 # bind generic h scroll-left
 # bind generic j move-down
 # bind generic k move-up
 # bind generic l scroll-right
-#
+# 
 # bind generic g  none
 # bind generic gg move-first-line
 # bind generic gj next
@@ -588,13 +588,13 @@ mkdir ~/.cheat/build
 # bind generic gp parent
 # bind generic gP back
 # bind generic gn view-next
-#
+# 
 # bind main    G move-last-line
 # bind generic G move-last-line
-#
+# 
 # bind generic <C-f> move-page-down
 # bind generic <C-b> move-page-up
-#
+# 
 # bind generic v  none
 # bind generic vm view-main
 # bind generic vd view-diff
@@ -609,7 +609,7 @@ mkdir ~/.cheat/build
 # bind generic vg view-grep
 # bind generic vp view-pager
 # bind generic vh view-help
-#
+# 
 # bind generic o  none
 # bind generic oo :toggle sort-order
 # bind generic os :toggle sort-field
@@ -623,13 +623,13 @@ mkdir ~/.cheat/build
 # bind generic ot :toggle commit-title-overflow
 # bind generic oF :toggle file-filter
 # bind generic or :toggle commit-title-refs
-#
+# 
 # bind generic @  none
 # bind generic @j :/^@@
 # bind generic @k :?^@@
 # bind generic @- :toggle diff-context -1
 # bind generic @+ :toggle diff-context +1
-#
+# 
 # bind status  u  none
 # bind stage   u  none
 # bind generic uu status-update
@@ -638,11 +638,11 @@ mkdir ~/.cheat/build
 # bind generic ul stage-update-line
 # bind generic up stage-update-part
 # bind generic us stage-split-chunk
-#
+# 
 # bind generic c  none
 # bind generic cc !git commit
 # bind generic ca !?@git commit --amend --no-edit
-#
+# 
 # bind generic K view-help
 # bind generic <C-w><C-w> view-next
 # __TIGRC_END
@@ -666,7 +666,7 @@ mkdir ~/.cheat/build
 #     User git
 #     IdentitiesOnly yes
 #     IdentityFile ~/.ssh/github.key
-#
+# 
 # Host gitee.com
 #     HostName gitee.com
 #     Port 22

@@ -29,7 +29,7 @@
   "editor.tabCompletion": "onlySnippets",
   "editor.unfoldOnClickAfterEndOfLine": true,
   "editor.cursorSmoothCaretAnimation": true,
-  "editor.cursorSurroundingLines": 2,
+  "editor.cursorSurroundingLines": 7,
   "editor.fontFamily": "NerdCodePro Font",
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
