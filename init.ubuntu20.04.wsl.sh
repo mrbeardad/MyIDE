@@ -150,7 +150,7 @@ curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/down
     chmod +x win32yank.exe &&
     sudo cp -v win32yank.exe /bin/
 
-LV_BRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
 
 mkdir -p ~/.config/lvim/
 get_config __INIT_LUA >~/.config/lvim/init.lua
