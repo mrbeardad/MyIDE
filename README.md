@@ -7,22 +7,22 @@
   - [WSL](#wsl)
   - [VSCode](#vscode)
   - [Others](#others)
+  - [Language](#language)
   - [C++](#c)
 
 <!-- vim-markdown-toc -->
 
 ## Windows
 
-1. 下载并安装[MyASUS 华硕管家](https://www.microsoft.com/zh-cn/p/myasus/9n7r5s6b0zzh?activetab=pivot:overviewtab)，自动安装驱动
-2. 下载并安装[Google Chrome 浏览器](https://www.google.cn/chrome/)
+1. 安装[MyASUS 华硕管家](https://www.microsoft.com/zh-cn/p/myasus/9n7r5s6b0zzh?activetab=pivot:overviewtab)，自动安装驱动
+2. 安装[Google Chrome 浏览器](https://www.google.cn/chrome/)
 3. 登录 Google Chrome 账户，自动同步 Chrome 配置并手动同步 TampMonkey 配置
-4. 下载并安装[Bandizip 压缩包工具](https://www.bandizip.com/)
-5. 下载常用软件
+4. 安装[Bandizip 压缩包工具](https://www.bandizip.com/)
+5. 安装常用软件
 
    - [QQ 输入法](http://qq.pinyin.cn/)
    - [TIM 聊天通讯](https://tim.qq.com)
    - [WeChat 微信](https://pc.weixin.qq.com/?lang=zh_CN)
-   - [百度网盘](https://pan.baidu.com/downloads)
    - [Listen1 音乐](https://www.zhyong.cn/posts/64cd/)
    - [Office 办公套件](https://www.office.com/)
    - [CHFS 局域网 Http 服务器](http://iscute.cn/chfs)
@@ -165,41 +165,51 @@
 
 ## VSCode
 
-1. 下载并安装[VSCode](https://code.visualstudio.com/download)，登录账户并同步配置。
+1. 下载并安装[VSCode](https://code.visualstudio.com/download)，登录账户并同步[配置](vscode/)。
 
-2. 下载并安装[git](https://git-scm.com/downloads)
+2. 下载并安装[Git](https://git-scm.com/downloads)
 
-3. 下载并安装[neovim](https://github.com/neovim/neovim/releases/)，然后安装配置[vscode-neovim](vscode/vscode-neovim/)到`%USERPROFILE%\AppData\Local\vscode-neovim`，最后记得配置 vscode 中`nvim.exe`安装路径，且配置 init.vim 路径为`%USERPROFILE%\AppData\Local\vscode-neovim\init.vim`
+3. 下载并安装[NeoVim](https://github.com/neovim/neovim/releases/)，然后
+   1. 安装配置目录[vscode-neovim](vscode/vscode-neovim/)到`%USERPROFILE%\AppData\Local\vscode-neovim`
+   2. vscode 配置 init.vim 路径为`%USERPROFILE%\AppData\Local\vscode-neovim\init.vim`
+   3. 配置 vscode 中`nvim.exe`安装路径，
 
 [**vscode 使用手册**](vscode.md)
 
 ## Others
 
-- 下载并安装[SwitchHosts](https://github.com/oldj/SwitchHosts/releases)
+- 安装[SwitchHosts](https://github.com/oldj/SwitchHosts/releases)
 
-- 下载并安装[Postman](https://www.postman.com/downloads/)
+- 安装[Postman](https://www.postman.com/downloads/)
 
-- 下载并安装[Navicat](## "太TM贵了")
+- 安装[Navicat](## "祖安人自有祖安的方法搞到手")
 
-- 下载并安装[ARDM](https://github.com/qishibo/AnotherRedisDesktopManager/releases)
+- 安装[ARDM](https://github.com/qishibo/AnotherRedisDesktopManager/releases)
+
+## Language
+
+- [Language Server](https://microsoft.github.io/language-server-protocol/implementors/servers/)
+- [Awesome Linters](https://github.com/caramelomartins/awesome-linters)
 
 ## C++
 
-1. 编写 CMakeLists.txt 文件 (Test&Prof&Doc)
+1. 编写 CMakeLists.txt 文件
 
 ```cmake
 cmake_minimum_required(VERSION 3.12)
 project(ProjectName VERSION 0.1 DESCRIPTION "Project description")
 
+# 构建附带调试信息的可执行文件
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    add_compile_options(-fstandalone-debug)
+    add_compile_options(-fstandalone-debug -rdynamic)
   elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-    add_compile_options(-g3)
+    add_compile_options(-g3 -rdynamic)
   endif()
 endif()
 include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 
+# 构建Doxygen API文档系统
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
   set(DOXYGEN_EXCLUDE_PATTERNS */build/* */third_party/* */test/*)
@@ -221,7 +231,7 @@ if(DOXYGEN_FOUND)
 endif()
 ```
 
-2. cmake 配置构建目录并导出 compile_commands.json
+2. cmake 配置构建目录并导出 compile_commands.json 为 clangd 提供编译参数
 
 ```sh
 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_BUILD_TYPE:STRING=Debug -DCMAKE_C_COMPILER:FILEPATH=/usr/bin/clang -DCMAKE_CXX_COMPILER:FILEPATH=/usr/bin/clang++ -S/path/to/source_dir -B/path/to/build_dir
@@ -262,6 +272,7 @@ FormatStyle: "file"
 
 ```cpp
 // NOLINTNEXTLINE: Suppress warning in nextline
+do not lint this line
 ```
 
 5. 编写.clang-format (Format)
@@ -278,7 +289,7 @@ SeparateDefinitionBlocks: Always
 
 ```cpp
 // clang-format off
-// do not format next line
+do not format this line
 ```
 
 6. 编写.vscode/.launch.json (Debug)

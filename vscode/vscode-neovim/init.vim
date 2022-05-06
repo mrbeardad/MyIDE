@@ -1,6 +1,6 @@
 scriptencoding utf-8
 
-call plug#begin('C:\Users\mrbea\AppData\Local\vscode-neovim\plugged')
+call plug#begin(expand('~').'\AppData\Local\vscode-neovim\plugged')
 
 " 光标移动
 " f/F/t/T: smart f

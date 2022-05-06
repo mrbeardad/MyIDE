@@ -52,29 +52,25 @@ get_config() {
     sed -n "/^# $1$/,/^# $1_END$/{s/^# //;p}" "$0" | sed -e'1d' -e'$d'
 }
 
-prepare() {
-    # applies only to ubuntu20.04
-    if ! lsb_release -a | grep -qi 'ubuntu 20.04'; then
-        echo -e "\e[31mError\e[m: this script applies only to ubuntu 20.04"
-        exit 1
-    fi
+# applies only to ubuntu20.04
+if ! lsb_release -a | grep -qi 'ubuntu 20.04'; then
+    echo -e "\e[31mError\e[m: this script applies only to ubuntu 20.04"
+    exit 1
+fi
 
-    # the default cwd after enter wsl maybe windows home
-    cd ~ || exit 1
-    mkdir -p ~/.local/bin/
-    mkdir -p ~/.config/
-}
+# the default cwd after enter wsl may be windows home
+cd ~ || exit 1
+mkdir -p ~/.local/bin/
+mkdir -p ~/.config/
 
 # sudo without password
-read -rn 1 -p "do you want to execute 'sudo' without password? (Y/n): " SUDO_WITHOUT_PASSWD
+read -rn 1 -p "Do you want to execute 'sudo' without password? (Y/n): " SUDO_WITHOUT_PASSWD
 [[ "${SUDO_WITHOUT_PASSWD,}" == "y" ]] &&
     sudo sed -i '/^%sudo\s*ALL=\(ALL:ALL\)\s*ALL/s/ALL$/NOPASSWD: ALL/' /etc/sudoers
 
-# mirrors.could.tencent.com
-read -rn 1 -p "do you want to use the mirrors on tencent cloud? (Y/n): " USE_TENCENT_CLOUD_REPO
-
 # apt mirror source
-[[ "${USE_TENCENT_CLOUD_REPO,}" == "y" ]] &&
+read -rn 1 -p "Do you want to change apt mirror source to tencent cloud? (Y/n): " USE_TENCENT_CLOUD_APT
+[[ "${USE_TENCENT_CLOUD_APT,}" == "y" ]] &&
     sudo wget -O /etc/apt/sources.list http://mirrors.cloud.tencent.com/repo/ubuntu20_sources.list
 sudo apt update
 sudo apt -y upgrade
@@ -144,24 +140,20 @@ sudo apt -y install git tig
 [[ -e ~/.tigrc ]] && mv ~/.tigrc{,.backup}
 get_config __TIGRC >~/.tigrc
 
-# vim
+# neovim
 sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt update
-sudo apt -y install neovim ripgrep libpython2-dev universal-ctags global cloc
-pip install --upgrade pynvim pygments vim-vint
-sudo npm install -g vim-language-server
-gzip -dc /usr/share/doc/global/examples/gtags.conf.gz >~/.globalrc
+sudo apt -y install neovim ripgrep
 
 curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip &&
     unzip -p /tmp/win32yank.zip win32yank.exe >./win32yank.exe &&
     chmod +x win32yank.exe &&
     sudo cp -v win32yank.exe /bin/
 
-git clone -b vscode https://gitee.com/mrbeardad/SpaceVim ~/.SpaceVim
-[[ -e ~/.SpaceVim.d ]] && mv ~/.SpaceVim.d{,.backup}
-ln -sv ~/.SpaceVim/mode/ ~/.SpaceVim.d
-[[ -e ~/.config/nvim ]] && mv ~/.config/nvim{,-bcakup}
-ln -sv ~/.SpaceVim/ ~/.config/nvim/
+LV_BRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
+
+mkdir -p ~/.config/lvim/
+get_config __INIT_LUA >~/.config/lvim/init.lua
 
 # shell
 sudo apt -y install shellcheck
@@ -207,7 +199,7 @@ sudo npm install -g eslint eslint_d htmlhint csslint prettier
 sudo npm install -g markdownlint-cli
 
 # other cli tools
-sudo apt -y install neofetch ncdu gnupg nmap
+sudo apt -y install neofetch cloc ncdu gnupg nmap
 wget -O /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/0.20.1/lsd-musl_0.20.1_amd64.deb &&
     sudo dpkg -i /tmp/lsd.deb
 git clone https://github.com/mrbeardad/SeeCheatSheets ~/.cheat
@@ -233,8 +225,9 @@ mkdir ~/.cheat/build
 # set-option -g focus-events on    # 开启聚焦事件
 # set-option -g xterm-keys on      # 支持xterm按键序列
 # set-option -g default-terminal "screen-256color"
-# set-option -ag terminal-overrides ",xterm-256color:Tc"
-# set-option -ag terminal-overrides '*:Smulx=\E[4::%p1%dm,*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
+# set-option -ga terminal-overrides ",*256col*:Tc" # true color support
+# set-option -ga terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
+# set-option -ga terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours - needs tmux-3.0
 # 
 # # 更改快捷键前缀
 # unbind C-Z
@@ -660,6 +653,7 @@ mkdir ~/.cheat/build
 # -- GENERAL
 # ----------------------------------------
 # vim.opt.timeoutlen = 350
+# vim.opt.guicursor = 'n:block-blinkon10,i-ci:ver25-blinkon10,c:hor20-blinkon10,v-sm:block,ve:ver25,r-cr-o:hor20'
 # vim.opt.relativenumber = true
 # vim.opt.list = true
 # vim.opt.listchars = 'tab:→ ,eol:↵,trail:·,extends:↷,precedes:↶'
