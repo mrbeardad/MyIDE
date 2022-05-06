@@ -9,13 +9,25 @@
   // ctrl+d: scroll page down
   {
     "key": "ctrl+d",
-    "command": "scrollPageDown",
+    "command": "editorScroll",
+    "args": {
+      "to": "down",
+      "by": "halfPage",
+      "revealCursor": false,
+      "value": 1
+    },
     "when": "textInputFocus && neovim.mode != insert"
   },
   // ctrl+b: scroll page up
   {
     "key": "ctrl+b",
-    "command": "scrollPageUp",
+    "command": "editorScroll",
+    "args": {
+      "to": "up",
+      "by": "halfPage",
+      "revealCursor": false,
+      "value": 1
+    },
     "when": "textInputFocus && neovim.mode != insert"
   },
   {
@@ -25,18 +37,6 @@
   },
 
   // 光标移动
-  // ctrl+a: move to line begin
-  {
-    "key": "ctrl+a",
-    "command": "cursorLineStart",
-    "when": "editorFocus && neovim.mode == insert"
-  },
-  // {
-  //   "key": "ctrl+a",
-  //   "command": "vscode-neovim.send",
-  //   "args": "0",
-  //   "when": "editorFocus && neovim.mode != insert"
-  // },
   // ctrl+e: move to line end
   {
     "key": "ctrl+e",
@@ -155,13 +155,13 @@
   // ctrl+h: left move
   {
     "key": "ctrl+h",
-    "command": "cursorLeft",
+    "command": "cursorWordLeft",
     "when": "editorTextFocus && neovim.mode == insert"
   },
   // ctrl+l: right a word
   {
     "key": "ctrl+l",
-    "command": "cursorWordRight",
+    "command": "cursorRight",
     "when": "editorTextFocus && neovim.mode == insert"
   },
   // ctrl+z: undo
@@ -192,10 +192,6 @@
     "args": "<C-N>",
     "when": "editorTextFocus && neovim.mode == visual"
   },
-  {
-    "key": "ctrl+n",
-    "command": "-workbench.action.files.newUntitledFile"
-  },
   // ctrl+shift+n: add a cursor on the previous word
   {
     "key": "ctrl+shift+n",
@@ -223,15 +219,33 @@
     "command": "workbench.action.files.openFile",
     "when": "true"
   },
+  {
+    "key": "ctrl+o",
+    "command": "-workbench.action.files.openFile",
+    "when": "true"
+  },
   // ctrl+k n: new file
   {
     "key": "ctrl+k n",
     "command": "workbench.action.files.newUntitledFile"
   },
+  {
+    "key": "ctrl+n",
+    "command": "-workbench.action.files.newUntitledFile"
+  },
   // ctrl+k r: open rencent file
   {
     "key": "ctrl+k r",
     "command": "workbench.action.openRecent"
+  },
+  {
+    "key": "ctrl+r",
+    "command": "-workbench.action.openRecent"
+  },
+  {
+    "key": "ctrl+r",
+    "command": "-workbench.action.reloadWindow",
+    "when": "isDevelopment"
   },
   // tab/shift+tab: switch file editor
   {

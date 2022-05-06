@@ -33,36 +33,64 @@
       "keys": "ctrl+shift+j",
       "command": {
         "action": "sendInput",
-        "input": "\u001bJ"
+        "input": "\u001bJ" // <M-J>
       }
     },
     {
       "keys": "ctrl+shift+k",
       "command": {
         "action": "sendInput",
-        "input": "\u001bK"
+        "input": "\u001bK" // <M-K>
       }
     },
     {
+      "keys": "ctrl+shift+l",
       "command": {
         "action": "sendInput",
-        "input": "\u001bS"
-      },
-      "keys": "ctrl+shift+s"
+        "input": "\u001bL" // <M-L>
+      }
     },
     {
+      "keys": "ctrl+shift+s",
       "command": {
         "action": "sendInput",
-        "input": "\u001bO"
-      },
-      "keys": "ctrl+shift+o"
+        "input": "\u001bS" // <M-S>
+      }
     },
     {
+      "keys": "ctrl+shift+o",
       "command": {
         "action": "sendInput",
-        "input": "\u001bP"
-      },
-      "keys": "ctrl+shift+p"
+        "input": "\u001bO" // <M-O>
+      }
+    },
+    {
+      "keys": "ctrl+shift+u",
+      "command": {
+        "action": "sendInput",
+        "input": "\u001bU" // <M-U>
+      }
+    },
+    {
+      "keys": "ctrl+shift+m",
+      "command": {
+        "action": "sendInput",
+        "input": "\u001bM" // <M-M>
+      }
+    },
+    {
+      "keys": "ctrl+.",
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b." // <M-.>
+      }
+    },
+    {
+      "keys": "ctrl+shift+p",
+      "command": {
+        "action": "sendInput",
+        "input": "\u001bP" // <M-P>
+      }
     }
   ],
   "alwaysOnTop": false,
