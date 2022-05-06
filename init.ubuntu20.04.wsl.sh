@@ -468,7 +468,7 @@ mkdir ~/.cheat/build
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#606060"
 # 
 # export VI_MODE_SET_CURSOR=true
-# bindkey '^L' vi-forward-char
+# # bindkey '^L' vi-forward-char
 # bindkey '^H' backward-word
 # bindkey '^U' backward-kill-line
 # bindkey '^K' kill-line
@@ -1135,7 +1135,7 @@ mkdir ~/.cheat/build
 #   },
 #   {
 #     "lambdalisue/suda.vim",
-#     fn = { "SudaRead", "SudaWrite" },
+#     cmd = { "SudaRead", "SudaWrite" },
 #     setup = function()
 #       vim.api.nvim_set_keymap('n', '<M-s>', '<Cmd>SudaWrite<Cr>', { noremap = true })
 #     end
