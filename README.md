@@ -188,6 +188,13 @@
 
 ## Language
 
+| Lang | Language Server | Linter        | Formatter    | Syntax | Snippets | Debugger | Build    | Doc     | Test    | Prof       |
+| ---- | --------------- | ------------- | ------------ | ------ | -------- | -------- | -------- | ------- | ------- | ---------- |
+| C++  | clangd          | clang-tidy    | clang-format | -      | -        | lldb     | CMake    | Doxygen | gtest   | gperftools |
+| Go   | gopls           | golangci-lint | gofmt        | -      | -        | delve    | go-build | swag    | testify | go-prof    |
+
+Other references:
+
 - [Language Server](https://microsoft.github.io/language-server-protocol/implementors/servers/)
 - [Awesome Linters](https://github.com/caramelomartins/awesome-linters)
 
