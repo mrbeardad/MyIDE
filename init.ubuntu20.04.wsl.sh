@@ -1,215 +1,301 @@
-#!/bin/bash
+#!/bin/env bash
 
-update_vsc_and_wt() {
-    if [[ -d /winhome/ ]]; then
-        cp -uv /winhome/AppData/Roaming/Code/User/{settings.json,keybindings.json} ./vscode/
-        cp -uv /winhome/AppData/Roaming/Code/User/sync/extensions/lastSyncextensions.json ./vscode/
-        cp -uv /winhome/AppData/Local/vscode-neovim/init.vim ./vscode/vscode-neovim/init.vim
-        cp -uv /mnt/c/Users/mrbea/AppData/Local/Packages/Microsoft.WindowsTerminal_*/LocalState/settings.json WindowsTerminal/settings.json
-    fi
+set -eo pipefail
+
+CONFIG_FILE=${CONFIG_FILE:-"$0"}
+WIN_HOME=${WIN_HOME:-"/winhome"}
+OPTION_UPDATE_CONFIG=
+OPTION_AUTO_YES=
+PROMPT_INFORMATION=
+
+usage() {
+  echo "Usage: init.sh [-h|-u|-y]"
+  echo ""
+  echo "Options:"
+  echo "  -h    Print this help message"
+  echo "  -u    Update configuration segements in this script file"
+  echo "  -y    Automatically answer yes to all questions"
+}
+
+parse_arguments() {
+  declare option
+  while getopts "huy" option; do
+    case "$option" in
+    "h")
+      usage
+      exit 0
+      ;;
+    "u")
+      OPTION_UPDATE_CONFIG=1
+      ;;
+    "y")
+      OPTION_AUTO_YES=1
+      ;;
+    "?")
+      usage
+      exit 1
+      ;;
+    esac
+  done
+}
+
+get_config() {
+  if [[ $# -ne 1 ]]; then
+    echo -e "\e[31mget_config()\e[m: usage: get_config CONFIG_LABEL" >&2
+    return 1
+  fi
+
+  sed -n "/^#\s*$1$/,/^#\s*$1_END$/p" "$CONFIG_FILE" | sed -e'1d' -e'$d' -e's/^# \?//'
 }
 
 set_config() {
-    if [[ $# -ne 3 ]]; then
-        echo -e "\e[31mset_config()\e[m: usage: set_config CONFIG_BEGIN config_file init.sh" >&2
-        return 1
-    fi
+  if [[ $# -ne 2 ]]; then
+    echo -e "\e[31mset_config()\e[m: usage: set_config CONFIG_LABEL /path/to/config_file" >&2
+    return 1
+  fi
 
-    CONTENT=$(sed "/^#\s*$1$/,/^#\s*$1_END$/c# $1\n# $1_END" "$3" |
-        sed "/^#\s*$1$/r$2" |
-        sed "/^#\s*$1$/,/^#\s*$1_END$/s/^/# /" |
-        sed -e"/^# # $1$/s/^# //" -e"/^# # $1_END$/s/^# //")
-    # Redirect operation execute before simple command,
-    # so bash will truncate file before read it
-    echo "$CONTENT" >"$3"
+  if [[ "$(get_config "$1")" == "$(<"$2")" ]]; then
+    return
+  fi
+
+  echo "update configuration segement $1"
+
+  # HACK: Redirect operation execute before simple command, so bash will truncate file before read it
+  CONTENT=$(sed "/^#\s*$1$/,/^#\s*$1_END$/c# $1\n# $1_END" "$CONFIG_FILE" |
+    sed "/^#\s*$1$/r$2" |
+    sed "/^#\s*$1$/,/^#\s*$1_END$/s/^/# /" |
+    sed -e"/^# # $1$/s/^# //" -e"/^# # $1_END$/s/^# //")
+  echo "$CONTENT" >"$CONFIG_FILE"
 }
 
-update_config_in_init_sh() {
-    INIT_SH="./init.sh"
+ask_user() {
+  if [[ $# -ne 1 ]]; then
+    echo -e "\e[31mask_user()\e[m: usage: ask_user 'prompt message'" >&2
+    return 1
+  fi
 
-    set_config __TMUX_CONF ~/.tmux.conf "$INIT_SH"
-    set_config __ZSHRC ~/.zshrc "$INIT_SH"
-    set_config __RANGER ~/.config/ranger/commands.py "$INIT_SH"
-    set_config __HTOPRC ~/.config/htop/htoprc "$INIT_SH"
-    set_config __TIGRC ~/.tigrc "$INIT_SH"
-    set_config __CONFIG_LUA ~/.config/lvim/config.lua "$INIT_SH"
-    set_config __GITCONFIG ~/.gitconfig "$INIT_SH"
-    set_config __SSH_CONFIG ~/.ssh/config "$INIT_SH"
+  if [[ "$OPTION_AUTO_YES" = 1 ]]; then
+    return 0
+  fi
+
+  declare USER_ANSWER
+  read -rn 1 -p "$1 (Y/n): " USER_ANSWER
+
+  if [[ "${USER_ANSWER,}" == y ]]; then
+    return 0
+  else
+    return 1
+  fi
 }
 
-if [[ "$1" == "-u" ]]; then
-    update_vsc_and_wt
-    update_config_in_init_sh
-    exit 0
-fi
-
-# get configuration from this script
-get_config() {
-    if [[ $# -lt 1 ]]; then
-        echo -e "\e[31mget_config()\e[m: usage: get_config CONFIG_BEGIN" >&2
-        return 1
-    fi
-    sed -n "/^# $1$/,/^# $1_END$/{s/^# //;p}" "$0" | sed -e'1d' -e'$d'
+sudo_without_passwd() {
+  ask_user "Do you want to execute 'sudo' without password?" || return
+  sudo sed -i '/^%sudo\s*ALL=\(ALL:ALL\)\s*ALL/s/ALL$/NOPASSWD: ALL/' /etc/sudoers
 }
 
-# applies only to ubuntu20.04
-if ! lsb_release -a | grep -qi 'ubuntu 20.04'; then
-    echo -e "\e[31mError\e[m: this script applies only to ubuntu 20.04"
-    exit 1
-fi
+change_apt_mirror_source() {
+  ask_user "Do you want to change apt mirror source to tencent cloud?" || return
+  sudo wget -O /etc/apt/sources.list http://mirrors.cloud.tencent.com/repo/ubuntu20_sources.list
+  sudo apt update
+}
 
-# the default cwd after enter wsl may be windows home
-cd ~ || exit 1
-mkdir -p ~/.local/bin/
-mkdir -p ~/.config/
+upgrade_to_ubuntu22() {
+  ask_user "Do you want yo upgrade to ubuntu22.04 STL?" || return
+  sudo apt -y upgrade
+  sudo do-release-upgrade -d
+}
 
-# sudo without password
-read -rn 1 -p "Do you want to execute 'sudo' without password? (Y/n): " SUDO_WITHOUT_PASSWD
-[[ "${SUDO_WITHOUT_PASSWD,}" == "y" ]] &&
-    sudo sed -i '/^%sudo\s*ALL=\(ALL:ALL\)\s*ALL/s/ALL$/NOPASSWD: ALL/' /etc/sudoers
+prerequisites() {
+  sudo apt -y install golang cargo python3-pip python-is-python3
+  curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+  sudo apt -y install nodejs
 
-# apt mirror source
-read -rn 1 -p "Do you want to change apt mirror source to tencent cloud? (Y/n): " USE_TENCENT_CLOUD_APT
-[[ "${USE_TENCENT_CLOUD_APT,}" == "y" ]] &&
-    sudo wget -O /etc/apt/sources.list http://mirrors.cloud.tencent.com/repo/ubuntu20_sources.list
-sudo apt update
-sudo apt -y upgrade
+  go env -w GOPATH="$HOME"/.local/go/ GOBIN="$HOME"/.local/bin/ GOSUMDB=sum.golang.google.cn
+  ask_user "Do you want to set GOPROXY to tencent cloud mirror?" &&
+    go env -w GOPROXY=https://mirrors.tencent.com/go/,direct
 
-# language package managers
-sudo apt -y install golang cargo npm python3-pip python-is-python3 composer
+  ask_user "Do you want to config npm registry to tencent cloud mirror?" &&
+    npm config set registry http://mirrors.tencent.com/npm/ &&
+    sudo npm config set registry http://mirrors.tencent.com/npm/ -g &&
+    sudo npm install -g pnpm
 
-go env -w GOPATH="$HOME"/.local/go/ GOBIN="$HOME"/.local/bin/ GOSUMDB=sum.golang.google.cn
-[[ "$USE_TENCENT_CLOUD_REPO" == y ]] && go env -w GOPROXY=https://mirrors.tencent.com/go/,direct
+  ask_user "Do you want to config pip index-url to tencent cloud mirror?" &&
+    pip config set global.index-url https://mirrors.tencent.com/pypi/simple
+}
 
-[[ "$USE_TENCENT_CLOUD_REPO" == y ]] && npm config set registry http://mirrors.tencent.com/npm/
-
-[[ "$USE_TENCENT_CLOUD_REPO" == y ]] && pip config set global.index-url https://mirrors.tencent.com/pypi/simple
-
-[[ "$USE_TENCENT_CLOUD_REPO" == y ]] && composer config -g repos.packagist composer https://mirrors.cloud.tencent.com/composer/
-
-# ssh
-if [[ "$USER" == beardad ]]; then
+ssh_and_git_config() {
+  # only for myself
+  if [[ "$USER" == beardad ]]; then
     get_config __GITCONFIG >~/.gitconfig
     mkdir ~/.ssh/
     get_config __SSH_CONFIG >~/.ssh/config
-fi
+  fi
+}
 
-# docker
-[[ "${USE_TENCENT_CLOUD_REPO,}" == "y" ]] &&
-    curl -fsSL https://mirrors.cloud.tencent.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add - &&
-    sudo add-apt-repository "deb [arch=amd64] https://mirrors.cloud.tencent.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
-sudo apt update
-sudo apt -y install docker-ce docker-ce-cli containerd.io
+install_docker() {
+  ask_user "Do you want to install docker from tencent cloud mirror" || return
+  sudo curl -Lo /etc/apt/trusted.gpg.d/docker-ce.gpg https://mirrors.cloud.tencent.com/docker-ce/linux/ubuntu/gpg
+  sudo add-apt-repository "deb [arch=amd64] https://mirrors.cloud.tencent.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
+  sudo apt update
+  sudo apt -y install docker-ce docker-ce-cli containerd.io
+}
 
-# tmux
-sudo apt -y install tmux tmux-plugin-manager cmatrix
-[[ -e ~/.tmux.conf ]] && mv ~/.tmux.conf{,.backup}
-get_config __TMUX_CONF >~/.tmux.conf
+tmux_conf() {
+  sudo apt -y install tmux tmux-plugin-manager cmatrix
+  [[ -e ~/.tmux.conf ]] && mv ~/.tmux.conf{,.bak}
+  get_config __TMUX_CONF >~/.tmux.conf
+  PROMPT_INFORMATION="$PROMPT_INFORMATION$(echo -e "\e[32m======>\e[33m tmux:\e[m Don't forget to pressing 'Alt+W I' in tmux to install plugin")"
+}
 
-# zsh
-sudo apt -y install zsh zsh-syntax-highlighting zsh-autosuggestions autojump fzf
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
-[[ -e ~/.zshrc ]] && mv ~/.zshrc{,.backup}
-get_config __ZSHRC >~/.zshrc
-cat >~/.config/proxy <<END
+zsh_conf() {
+  sudo apt -y install zsh zsh-syntax-highlighting zsh-autosuggestions autojump fzf
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+  [[ -e ~/.zshrc ]] && mv ~/.zshrc{,.bak}
+  get_config __ZSHRC >~/.zshrc
+  cat >~/.config/proxy <<EOF
 #!/bin/bash
-sed -n '/^nameserver/{s/nameserver //; s/$/:7890/; p}' /etc/resolv.conf
-END
-chmod +x ~/.config/proxy
+sed -n '/^nameserver/{s/^nameserver\s*\([0-9.]*\)\s*$/\1:7890/; p}' /etc/resolv.conf
+EOF
+  chmod +x ~/.config/proxy
+}
 
-# ranger
-sudo apt -y install ranger fzf fd-find
-mkdir -p ~/.config/ranger/
-[[ -e ~/.config/ranger/commands.py ]] && mv ~/.config/ranger/commands.py{,.backup}
-get_config __RANGER >~/.config/ranger/commands.py
-[[ -e ~/.config/ranger/rc.conf ]] && mv ~/.config/ranger/rc.conf{,.backup}
-cat >~/.config/ranger/rc.conf <<EOF
+ranger_conf() {
+  sudo apt -y install ranger fzf fd-find
+  mkdir -p ~/.config/ranger/
+  [[ -e ~/.config/ranger/commands.py ]] && mv ~/.config/ranger/commands.py{,.bak}
+  get_config __RANGER >~/.config/ranger/commands.py
+  [[ -e ~/.config/ranger/rc.conf ]] && mv ~/.config/ranger/rc.conf{,.bak}
+  cat >~/.config/ranger/rc.conf <<EOF
 map <C-f> fzf_select
 set show_hidden true
 EOF
+}
 
-# htop
-sudo apt -y install htop
-mkdir -p ~/.config/htop/
-[[ -e ~/.config/htop/htoprc ]] && mv ~/.config/htop/htoprc{,.backup}
-get_config __HTOPRC >~/.config/htop/htoprc
+htop_conf() {
+  sudo apt -y install htop
+  mkdir -p ~/.config/htop/
+  [[ -e ~/.config/htop/htoprc ]] && mv ~/.config/htop/htoprc{,.bak}
+  get_config __HTOPRC >~/.config/htop/htoprc
+}
 
-# tig
-sudo apt -y install git tig
-[[ -e ~/.tigrc ]] && mv ~/.tigrc{,.backup}
-get_config __TIGRC >~/.tigrc
+tig_conf() {
+  sudo apt -y install git tig
+  [[ -e ~/.tigrc ]] && mv ~/.tigrc{,.bak}
+  get_config __TIGRC >~/.tigrc
+}
 
-# neovim
-sudo add-apt-repository ppa:neovim-ppa/unstable
-sudo apt update
-sudo apt -y install neovim ripgrep
+neovim_conf() {
+  sudo add-apt-repository ppa:neovim-ppa/unstable
+  sudo apt update
+  sudo apt -y install neovim ripgrep
+  pip install --upgrade pynvim
 
-curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip &&
-    unzip -p /tmp/win32yank.zip win32yank.exe >./win32yank.exe &&
-    chmod +x win32yank.exe &&
-    sudo cp -v win32yank.exe /bin/
+  curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
+  unzip -p /tmp/win32yank.zip win32yank.exe >./win32yank.exe
+  chmod +x win32yank.exe
+  # ~/.local/bin may not be in PATH when open neovim from ranger
+  sudo cp -v win32yank.exe /bin/
 
-bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
+  bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
+  mkdir -p ~/.config/lvim/
+  get_config __INIT_LUA >~/.config/lvim/init.lua
+}
 
-mkdir -p ~/.config/lvim/
-get_config __INIT_LUA >~/.config/lvim/init.lua
+lang_shell() {
+  sudo apt -y install shellcheck
+  go install mvdan.cc/sh/v3/cmd/shfmt@latest
+}
 
-# shell
-sudo apt -y install shellcheck
-curl -OLC - https://github.com/mvdan/sh/releases/download/v3.4.3/shfmt_v3.4.3_linux_amd64
-chmod +x shfmt_v3.4.3_linux_amd64
-mv -v shfmt_v3.4.3_linux_amd64 ~/.local/bin/
-
-# c++
-wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
-add-apt-repository "deb http://apt.llvm.org/focal/     llvm-toolchain-focal-14   main"
-apt update
-sudo apt -y install libc++-14-dev clang-14 lld-14 clangd-14 clang-tidy-14 clang-format-14 cppcheck cmake doxygen graphviz plantuml google-perftools \
+lang_cpp() {
+  sudo apt -y install libc++-dev clang lldb lld clangd clang-tidy clang-format cppcheck \
+    cmake doxygen graphviz plantuml google-perftools \
     libboost-all-dev libgtest-dev libsource-highlight-dev
-(
-    cd /bin || exit
-    sudo ln -sf clang-14 clang
-    sudo ln -sf clang++-14 clang++
-    sudo ln -sf ld.lld-14 ld.lld
-    sudo ln -sf ld64.lld-14 ld64.lld
-    sudo ln -sf lld-14 lld
-    sudo ln -sf lld-link-14 lld-link
-    sudo ln -sf wasm-ld-14 wasm-ld
-    sudo ln -sf clangd-14 clangd
-    sudo ln -sf clang-tidy-14 clang-tidy
-    sudo ln -sf clang-format-14 clang-format
-)
-pip install cmake_format
+  pip install cmake_format
+}
 
-# go
-go get -u github.com/google/pprof
-go get -u github.com/golangci/golangci-lint/cmd/golangci-lint ||
-    curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b "$(go env GOBIN)" v1.45.2
+lang_go() {
+  go install golang.org/x/tools/gopls@latest
+  go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+  go install github.com/google/pprof@latest
+}
 
-# python
-pip install frosted pylama yapf
+lang_py() {
+  pip install pylint flake8 yapf
+}
 
-# js
-curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-sudo apt-get install -y nodejs
-sudo npm install -g eslint eslint_d htmlhint csslint prettier
+lang_web() {
+  sudo npm install -g eslint htmlhint csslint prettier
+}
 
-# markdown
-sudo npm install -g markdownlint-cli
+lang_markdown() {
+  sudo npm install -g markdownlint-cli
+}
 
-# other cli tools
-sudo apt -y install neofetch cloc ncdu gnupg nmap
-wget -O /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/0.20.1/lsd-musl_0.20.1_amd64.deb &&
-    sudo dpkg -i /tmp/lsd.deb
-git clone https://github.com/mrbeardad/SeeCheatSheets ~/.cheat
-mkdir ~/.cheat/build
-(
-    cd ~/.cheat/build || exit 1
+other_cli_tools() {
+  sudo apt -y install neofetch cloc ncdu gnupg nmap
+  wget -O /tmp/lsd.deb https://github.com/Peltoche/lsd/releases/download/0.20.1/lsd-musl_0.20.1_amd64.deb
+  sudo dpkg -i /tmp/lsd.deb
+  git clone --recurse-submodules https://github.com/mrbeardad/SeeCheatSheets ~/.cheat
+  mkdir ~/.cheat/src/build
+  (
+    cd ~/.cheat/src/build
     cmake -D CMAKE_BUILD_TYPE=Release ..
     cmake --build . -t see
     cmake --install .
-)
+  )
+}
+
+main() {
+  parse_arguments "$@"
+  if [[ "$OPTION_UPDATE_CONFIG" == "1" ]]; then
+    if [[ -d "$WIN_HOME" ]]; then
+      cp -uv "$WIN_HOME"/AppData/Roaming/Code/User/{settings.json,keybindings.json} ./vscode/
+      cp -uv "$WIN_HOME"/AppData/Roaming/Code/User/sync/extensions/lastSyncextensions.json ./vscode/
+      cp -uv "$WIN_HOME"/AppData/Local/vscode-neovim/init.vim ./vscode/vscode-neovim/init.vim
+      cp -uv "$WIN_HOME"/AppData/Local/Packages/Microsoft.WindowsTerminal_*/LocalState/settings.json WindowsTerminal/settings.json
+    fi
+    set_config __TMUX_CONF ~/.tmux.conf
+    set_config __ZSHRC ~/.zshrc
+    set_config __RANGER ~/.config/ranger/commands.py
+    set_config __HTOPRC ~/.config/htop/htoprc
+    set_config __TIGRC ~/.tigrc
+    set_config __CONFIG_LUA ~/.config/lvim/config.lua
+    set_config __GITCONFIG ~/.gitconfig
+    set_config __SSH_CONFIG ~/.ssh/config
+  else
+    exit 0
+    # the default cwd after enter wsl may be windows home
+    cd ~
+    mkdir -p ~/.local/bin/
+    mkdir -p ~/.config/
+
+    sudo_without_passwd
+    change_apt_mirror_source
+    upgrade_to_ubuntu22
+    lpm
+    ssh_and_git_config
+    install_docker
+    tmux_conf
+    zsh_conf
+    ranger_conf
+    htop_conf
+    tig_conf
+    neovim_conf
+    lang_shell
+    lang_cpp
+    lang_go
+    lang_py
+    lang_web
+    lang_markdown
+    other_cli_tools
+    echo "$PROMPT_INFORMATION"
+  fi
+}
+
+main "$@"
+
+############################## CONFIG_SEGEMENTS ##############################
 
 # __TMUX_CONF
 # # 全局选项
@@ -224,27 +310,29 @@ mkdir ~/.cheat/build
 # set-option -g escape-time 50     # '<esc>'序列的延迟时间
 # set-option -g focus-events on    # 开启聚焦事件
 # set-option -g xterm-keys on      # 支持xterm按键序列
-# set-option -g default-terminal "screen-256color"
-# set-option -ga terminal-overrides ",*256col*:Tc" # true color support
+# set-option -g default-terminal "tmux-256color"
+# set-option -ga terminal-overrides ",*256color:RGB" # true color support
 # set-option -ga terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
-# set-option -ga terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours - needs tmux-3.0
-# 
+# set-option -ga terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours
+# set-option -ga terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[1 q' # cursor style
+# # set-option -ga terminal-overrides ',*:cnorm=\E[?12h\E[?25h'
+#
 # # 更改快捷键前缀
 # unbind C-Z
 # unbind C-B
 # set -g prefix M-w
-# 
+#
 # # 重载配置
 # unbind 'R'
 # bind R source-file ~/.tmux.conf \; display-message "Config reloaded.."
-# 
+#
 # # Window跳转
 # bind b previous-window
-# 
+#
 # # Pane分割
 # bind s splitw -v -c '#{pane_current_path}'
 # bind v splitw -h -c '#{pane_current_path}'
-# 
+#
 # # Pane跳转
 # #unbind-key M-Left
 # #unbind-key M-Right
@@ -254,7 +342,7 @@ mkdir ~/.cheat/build
 # bind j selectp -D
 # bind k selectp -U
 # bind l selectp -R
-# 
+#
 # # Pane大小调整
 # #unbind-key C-Right
 # #unbind-key C-Left
@@ -265,18 +353,18 @@ mkdir ~/.cheat/build
 # bind - resizep -D 10
 # bind < resizep -L 10
 # bind > resizep -R 10
-# 
+#
 # # 剪切板支持
 # bind-key -T copy-mode-vi v send-keys -X begin-selection
 # bind-key -T copy-mode-vi y send-keys -X copy-selection
 # bind ] run-shell -b "win32yank.exe -o --lf | tmux load-buffer - ; tmux paste-buffer"
-# 
+#
 # # 快速启动
 # bind t new-window htop
 # bind g new-window -c "#{pane_current_path}" tig --all
 # bind r new-window -c "#{pane_current_path}" ranger
 # bind m new-window "cmatrix"
-# 
+#
 # # 鼠标滚轮模拟
 # tmux_commands_with_legacy_scroll="nano less more man"
 # bind-key -T root WheelUpPane \
@@ -289,11 +377,11 @@ mkdir ~/.cheat/build
 #         'send -Mt=' \
 #         'if-shell -t= "#{?alternate_on,true,false} || echo \"#{tmux_commands_with_legacy_scroll}\" | grep -q \"#{pane_current_command}\"" \
 #             "send -t= Down Down Down" "send -Mt="'
-# 
+#
 # # 插件
 # run '/usr/share/tmux-plugin-manager/tpm'        # 插件管理器
 # set -g @plugin 'tmux-plugins/tmux-resurrect'    # 会话保存与恢复插件
-# 
+#
 # __TMUX_CONF_END
 
 # __ZSHRC
@@ -303,64 +391,64 @@ mkdir ~/.cheat/build
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
-# 
+#
 # # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/.local/bin:$PATH
-# 
+#
 # # Path to your oh-my-zsh installation.
 # export ZSH="/home/beardad/.oh-my-zsh"
-# 
+#
 # # Set name of the theme to load --- if set to "random", it will
 # # load a random theme each time oh-my-zsh is loaded, in which case,
 # # to know which specific one was loaded, run: echo $RANDOM_THEME
 # # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="powerlevel10k/powerlevel10k"
-# 
+#
 # # Set list of themes to pick from when loading at random
 # # Setting this variable when ZSH_THEME=random will cause zsh to load
 # # a theme from this variable instead of looking in $ZSH/themes/
 # # If set to an empty array, this variable will have no effect.
 # # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-# 
+#
 # # Uncomment the following line to use case-sensitive completion.
 # # CASE_SENSITIVE="true"
-# 
+#
 # # Uncomment the following line to use hyphen-insensitive completion.
 # # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
-# 
+#
 # # Uncomment the following line to disable bi-weekly auto-update checks.
 # # DISABLE_AUTO_UPDATE="true"
-# 
+#
 # # Uncomment the following line to automatically update without prompting.
 # # DISABLE_UPDATE_PROMPT="true"
-# 
+#
 # # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=30
-# 
+#
 # # Uncomment the following line if pasting URLs and other text is messed up.
 # # DISABLE_MAGIC_FUNCTIONS="true"
-# 
+#
 # # Uncomment the following line to disable colors in ls.
 # # DISABLE_LS_COLORS="true"
-# 
+#
 # # Uncomment the following line to disable auto-setting terminal title.
 # # DISABLE_AUTO_TITLE="true"
-# 
+#
 # # Uncomment the following line to enable command auto-correction.
 # # ENABLE_CORRECTION="true"
-# 
+#
 # # Uncomment the following line to display red dots whilst waiting for completion.
 # # You can also set it to another string to have that shown instead of the default red dots.
 # # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
-# 
+#
 # # Uncomment the following line if you want to disable marking untracked files
 # # under VCS as dirty. This makes repository status check for large repositories
 # # much, much faster.
 # # DISABLE_UNTRACKED_FILES_DIRTY="true"
-# 
+#
 # # Uncomment the following line if you want to change the command execution time
 # # stamp shown in the history command output.
 # # You can set one of the optional three formats:
@@ -368,10 +456,10 @@ mkdir ~/.cheat/build
 # # or set a custom format using the strftime function format specifications,
 # # see 'man strftime' for details.
 # HIST_STAMPS="yyyy-mm-dd"
-# 
+#
 # # Would you like to use another custom folder than $ZSH/custom?
 # # ZSH_CUSTOM=/path/to/new-custom-folder
-# 
+#
 # # Which plugins would you like to load?
 # # Standard plugins can be found in $ZSH/plugins/
 # # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -394,16 +482,16 @@ mkdir ~/.cheat/build
 #     tmux
 #     vi-mode
 # )
-# 
+#
 # source $ZSH/oh-my-zsh.sh
-# 
+#
 # # User configuration
-# 
+#
 # # export MANPATH="/usr/local/man:$MANPATH"
-# 
+#
 # # You may need to manually set your language environment
 # # export LANG=en_US.UTF-8
-# 
+#
 # # Preferred editor for local and remote sessions
 # if [[ -e ~/.local/bin/lvim ]]; then
 #     export EDITOR='lvim'
@@ -417,10 +505,10 @@ mkdir ~/.cheat/build
 # # else
 # #   export EDITOR='mvim'
 # # fi
-# 
+#
 # # Compilation flags
 # # export ARCHFLAGS="-arch x86_64"
-# 
+#
 # # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -429,7 +517,7 @@ mkdir ~/.cheat/build
 # # Example aliases
 # # alias zshconfig="mate ~/.zshrc"
 # # alias ohmyzsh="mate ~/.oh-my-zsh"
-# 
+#
 # alias l='lsd -lah --group-dirs first'
 # alias l.='lsd -lhd --group-dirs first .*'
 # alias ll='lsd -lh --group-dirs first'
@@ -441,7 +529,7 @@ mkdir ~/.cheat/build
 # alias apt='sudo apt'
 # alias stl='sudo systemctl'
 # alias vi="$EDITOR"
-# 
+#
 # alias gmv='git mv'
 # alias grms='git rm --cached'
 # alias gdi='git diff-index --name-status'
@@ -458,15 +546,15 @@ mkdir ~/.cheat/build
 # alias gsa='git submodule add'
 # alias gsd='git submodule deinit'
 # alias gsu='git submodule update --init --recursive'
-# 
+#
 # source /usr/share/doc/fzf/examples/key-bindings.zsh
 # source /usr/share/doc/fzf/examples/completion.zsh
-# 
+#
 # source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#606060"
-# 
+#
 # export VI_MODE_SET_CURSOR=true
 # # bindkey '^L' vi-forward-char
 # bindkey '^H' backward-word
@@ -475,45 +563,45 @@ mkdir ~/.cheat/build
 # bindkey '^Y' yank
 # bindkey '^P' up-line-or-beginning-search
 # bindkey '^N' down-line-or-beginning-search
-# 
+#
 # zstyle ':completion:*:*:docker:*' option-stacking yes
 # zstyle ':completion:*:*:docker-*:*' option-stacking yes
-# 
+#
 # bindkey -M emacs '^[s' sudo-command-line
 # bindkey -M vicmd '^[s' sudo-command-line
 # bindkey -M viins '^[s' sudo-command-line
-# 
+#
 # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# 
+#
 # __ZSHRC_END
 
 # __RANGER
 # #!/usr/bin/env python
 # # -*- coding: utf-8 -*-
-# 
+#
 # from ranger.api.commands import Command
-# 
+#
 # class fzf_select(Command):
 #     """
 #     :fzf_select
 #     Find a file using fzf.
 #     With a prefix argument to select only directories.
-# 
+#
 #     See: https://github.com/junegunn/fzf
 #     """
-# 
+#
 #     def execute(self):
 #         import subprocess
 #         import os
-# 
+#
 #         hidden = ('--hidden' if self.fm.settings.show_hidden else '')
 #         exclude = "--no-ignore-vcs --exclude '.git' --exclude '*.py[co]' --exclude '__pycache__'"
 #         only_directories = ('--type directory' if self.quantifier else '')
 #         fzf_default_command = '{} --follow {} {} {} --color=always'.format(
 #             'fdfind', hidden, exclude, only_directories
 #         )
-# 
+#
 #         env = os.environ.copy()
 #         env['FZF_DEFAULT_COMMAND'] = fzf_default_command
 #         env['FZF_DEFAULT_OPTS'] = '--layout=reverse --ansi --preview="{}"'.format('''
@@ -524,7 +612,7 @@ mkdir ~/.cheat/build
 #                 tree -ahpCL 3 -I '.git' -I '*.py[co]' -I '__pycache__' {}
 #             ) 2>/dev/null | head -n 100
 #         ''')
-# 
+#
 #         fzf = self.fm.execute_command('fzf --no-multi', env=env,
 #                                       universal_newlines=True, stdout=subprocess.PIPE)
 #         stdout, _ = fzf.communicate()
@@ -534,7 +622,7 @@ mkdir ~/.cheat/build
 #                 self.fm.cd(selected)
 #             else:
 #                 self.fm.select_file(selected)
-# 
+#
 # __RANGER_END
 
 # __HTOPRC
@@ -571,17 +659,17 @@ mkdir ~/.cheat/build
 # set main-view = date:default author:full id:yes,color \
 #                 line-number:no,interval=1 \
 #                 commit-title:graph=v2,refs=yes,overflow=no
-# 
+#
 # bind main c @git checkout %(commit)
 # bind main d >git difftool --tool=vimdiff %(commit)
 # bind diff d >git difftool --tool=vimdiff %(commit)^! -- %(file)
-# 
+#
 # # Vim-style keybindings for Tig
 # bind generic h scroll-left
 # bind generic j move-down
 # bind generic k move-up
 # bind generic l scroll-right
-# 
+#
 # bind generic g  none
 # bind generic gg move-first-line
 # bind generic gj next
@@ -589,13 +677,13 @@ mkdir ~/.cheat/build
 # bind generic gp parent
 # bind generic gP back
 # bind generic gn view-next
-# 
+#
 # bind main    G move-last-line
 # bind generic G move-last-line
-# 
+#
 # bind generic <C-f> move-page-down
 # bind generic <C-b> move-page-up
-# 
+#
 # bind generic v  none
 # bind generic vm view-main
 # bind generic vd view-diff
@@ -610,7 +698,7 @@ mkdir ~/.cheat/build
 # bind generic vg view-grep
 # bind generic vp view-pager
 # bind generic vh view-help
-# 
+#
 # bind generic o  none
 # bind generic oo :toggle sort-order
 # bind generic os :toggle sort-field
@@ -624,13 +712,13 @@ mkdir ~/.cheat/build
 # bind generic ot :toggle commit-title-overflow
 # bind generic oF :toggle file-filter
 # bind generic or :toggle commit-title-refs
-# 
+#
 # bind generic @  none
 # bind generic @j :/^@@
 # bind generic @k :?^@@
 # bind generic @- :toggle diff-context -1
 # bind generic @+ :toggle diff-context +1
-# 
+#
 # bind status  u  none
 # bind stage   u  none
 # bind generic uu status-update
@@ -639,11 +727,11 @@ mkdir ~/.cheat/build
 # bind generic ul stage-update-line
 # bind generic up stage-update-part
 # bind generic us stage-split-chunk
-# 
+#
 # bind generic c  none
 # bind generic cc !git commit
 # bind generic ca !?@git commit --amend --no-edit
-# 
+#
 # bind generic K view-help
 # bind generic <C-w><C-w> view-next
 # __TIGRC_END
@@ -663,7 +751,7 @@ mkdir ~/.cheat/build
 # lvim.log.level = "warn"
 # lvim.format_on_save = true
 # lvim.colorscheme = "onedarker"
-# 
+#
 # ----------------------------------------
 # -- KEYMAPPINGS
 # ----------------------------------------
@@ -845,8 +933,8 @@ mkdir ~/.cheat/build
 # }
 # -- Use which-key to add extra bindings with the leader-key prefix
 # -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-# 
-# 
+#
+#
 # ----------------------------------------
 # -- TODO: User Config for predefined plugins
 # ----------------------------------------
@@ -933,27 +1021,27 @@ mkdir ~/.cheat/build
 #   "json",
 #   "yaml",
 # }
-# 
-# 
+#
+#
 # ----------------------------------------
 # -- generic LSP settings
 # ----------------------------------------
-# 
+#
 # -- ---@usage disable automatic installation of servers
 # -- lvim.lsp.automatic_servers_installation = false
-# 
+#
 # -- ---configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
 # -- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
 # -- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
 # -- local opts = {} -- check the lspconfig documentation for a list of all possible options
 # -- require("lvim.lsp.manager").setup("pyright", opts)
-# 
+#
 # -- ---remove a server from the skipped list, e.g. eslint, or emmet_ls. !!Requires `:LvimCacheReset` to take effect!!
 # -- ---`:LvimInfo` lists which server(s) are skiipped for the current filetype
 # -- vim.tbl_map(function(server)
 # --   return server ~= "emmet_ls"
 # -- end, lvim.lsp.automatic_configuration.skipped_servers)
-# 
+#
 # -- -- you can set a custom on_attach function that will be used for all the language servers
 # -- -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
 # -- lvim.lsp.on_attach_callback = function(client, bufnr)
@@ -963,7 +1051,7 @@ mkdir ~/.cheat/build
 # --   --Enable completion triggered by <c-x><c-o>
 # --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 # -- end
-# 
+#
 # -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
 # -- local formatters = require "lvim.lsp.null-ls.formatters"
 # -- formatters.setup {
@@ -979,7 +1067,7 @@ mkdir ~/.cheat/build
 # --     filetypes = { "typescript", "typescriptreact" },
 # --   },
 # -- }
-# 
+#
 # -- -- set additional linters
 # -- local linters = require "lvim.lsp.null-ls.linters"
 # -- linters.setup {
@@ -997,7 +1085,7 @@ mkdir ~/.cheat/build
 # --     filetypes = { "javascript", "python" },
 # --   },
 # -- }
-# 
+#
 # ----------------------------------------
 # -- Additional Plugins
 # -- Tip 1. Don't use keys to lazy load an set key maps in setup, packer.nvim will unmap your keys
@@ -1252,22 +1340,21 @@ mkdir ~/.cheat/build
 #     end,
 #   },
 # }
-# 
+#
 # -- Autocommands (https://neovim.io/doc/user/autocmd.html)
-# vim.cmd [[
-#   function! AutoOpenAlpha()
-#     if empty(filter(tabpagebuflist(), '!buflisted(v:val)'))
-#       Alpha
-#       let bi = getbufinfo({'buflisted':1,'bufloaded':1})
-#       if len(bi) == 1
-#         exe 'bd '. bi[0].bufnr
-#       endif
-#     endif
-#   endf
-# ]]
-# lvim.autocommands.custom_groups = {
-#   { "BufDelete", "*", [[call AutoOpenAlpha()]] },
-# }
+# -- vim.cmd [[
+# --   function! AutoOpenAlpha()
+# --     let bufs = getbufinfo({'buflisted':1})
+# --     let g:fuck_bufs = bufs
+# --     let g:fuck_bufnr = bufnr()
+# --     if len(bufs) == 1 && bufnr() == bufs[0].bufnr
+# --       Alpha
+# --     endif
+# --   endf
+# -- ]]
+# -- lvim.autocommands.custom_groups = {
+# -- { "BufUnload", "*", [[call AutoOpenAlpha()]] },
+# -- }
 # __CONFIG_LUA_END
 
 # __GITCONFIG
@@ -1287,7 +1374,7 @@ mkdir ~/.cheat/build
 #     User git
 #     IdentitiesOnly yes
 #     IdentityFile ~/.ssh/github.key
-# 
+#
 # Host gitee.com
 #     HostName gitee.com
 #     Port 22
