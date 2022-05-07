@@ -86,12 +86,17 @@ nnoremap <silent><Space>O :<C-U>put! =@+<Cr>
 nnoremap <Space>by :%y +<Cr>
 nnoremap <Space>bp :%d<Cr>"+P
 
+" 文件操作
+nnoremap H <Cmd>call VSCodeNotify('workbench.action.previousEditorInGroup')<CR> 
+nnoremap L <Cmd>call VSCodeNotify('workbench.action.nextEditorInGroup')<CR> 
+
 " 语言服务
 nnoremap gr <Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>
-nnoremap [c <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
-nnoremap ]c <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
-nnoremap [d <Cmd>call VSCodeNotify('editor.action.diffReview.prev')<CR>
-nnoremap ]d <Cmd>call VSCodeNotify('editor.action.diffReview.next')<CR>
+nnoremap gI <Cmd>call VSCodeNotify('editor.action.goToImplementation')<CR>
+nnoremap [c <Cmd>call VSCodeNotify('editor.action.diffReview.prev')<CR>
+nnoremap ]c <Cmd>call VSCodeNotify('editor.action.diffReview.next')<CR>
+nnoremap [h <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
+nnoremap ]h <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
 nnoremap [e <Cmd>call VSCodeNotify('editor.action.marker.prevInFiles')<CR>
 nnoremap ]e <Cmd>call VSCodeNotify('editor.action.marker.nextInFiles')<CR>
 

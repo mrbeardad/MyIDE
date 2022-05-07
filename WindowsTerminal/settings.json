@@ -65,10 +65,10 @@
       }
     },
     {
-      "keys": "ctrl+shift+u",
+      "keys": "ctrl+shift+n",
       "command": {
         "action": "sendInput",
-        "input": "\u001bU" // <M-U>
+        "input": "\u001bN" // <M-N>
       }
     },
     {

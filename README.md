@@ -125,10 +125,15 @@
 
 1. 安装[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)
 2. 安装 wt 配置[settings.json](WindowsTerminal/settings.json)
-3. 将[WindowsTerminalQuakeModeStartup.bat](WindowsTerminal/WindowsTerminalQuakeModeStartup.bat)复制到`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
-4. 安装[Ubuntu WSL](https://www.microsoft.com/zh-cn/p/ubuntu-2004-lts/9n6svws3rx71?activetab=pivot:overviewtab)
-5. 启用 WSL2：控制面板》程序》开关 Windows 特性》开启"Virtual Machine Platform"与"Windows Subsystem for Linux"
-6. 限制 WSL2 内存使用，`%USERPROFILE%\.wslconfig`
+3. 将[启动脚本](WindowsTerminal/WindowsTerminalQuakeModeStartup.bat)复制到`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`实现开机自启 quake 模式
+4. 安装[WSL2](https://docs.microsoft.com/en-us/windows/wsl/install)
+
+   ```sh
+   # in windows cmd on administrator mode
+   wsl.exe --install
+   ```
+
+5. 限制 WSL2 [内存使用](https://github.com/microsoft/WSL/issues/4166#issuecomment-526725261)，`%USERPROFILE%\.wslconfig`
 
    ```ini
    [wsl2]
@@ -136,25 +141,15 @@
    swap=0
    ```
 
-7. 设置 WSL2 为默认并初始化 Ubuntu20.04
-
-   ```sh
-   # in powershell
-   wsl --list --all -v
-   wsl --set-version Ubuntu20.04 2
-   wsl --set-default Ubuntu20.04
-   wsl # 进入wsl
-   ```
-
-8. 配置 Ubuntu20.04 WSL
+6. 配置 Ubuntu20.04 WSL
 
    ```sh
    # in wsl
-   mkdir ~/.local
-   git clone https://github.com/mrbeardad/My-IDE .local/My-IDE
-   cd .local/My-IDE && ./init.ubuntu20.04.wsl.sh
+   curl -fsSL ./init.ubuntu20.04.wsl.sh | bash -
    ```
 
+> TIPS:
+>
 > WSL2 访问 Windows 宿主机的代理软件，需要：
 >
 > 1. 添加防火墙规则，允许宿主机某端口可被访问
@@ -188,10 +183,15 @@
 
 ## Language
 
-| Lang | Language Server | Linter        | Formatter    | Syntax | Snippets | Debugger | Build    | Doc     | Test    | Prof       |
-| ---- | --------------- | ------------- | ------------ | ------ | -------- | -------- | -------- | ------- | ------- | ---------- |
-| C++  | clangd          | clang-tidy    | clang-format | -      | -        | lldb     | CMake    | Doxygen | gtest   | gperftools |
-| Go   | gopls           | golangci-lint | gofmt        | -      | -        | delve    | go-build | swag    | testify | go-prof    |
+| Lang     | Language Server | Linter         | Formatter    | Syntax | Snippets | Debugger | Build    | Doc     | Test    | Prof       |
+| -------- | --------------- | -------------- | ------------ | ------ | -------- | -------- | -------- | ------- | ------- | ---------- |
+| C++      | clangd          | clang-tidy     | clang-format | -      | -        | lldb     | CMake    | Doxygen | gtest   | gperftools |
+| Go       | gopls           | golangci-lint  | gofmt        | -      | -        | delve    | go-build | swag    | testify | go-prof    |
+| Python   | pyright         | pylint, flake8 | yapf         | -      | -        | -        | -        | -       | -       | -          |
+| JS       | tsserver        | eslint         | eslint       | -      | -        | -        | -        | -       | -       | -          |
+| HTML     | -               | htmlhint       | prettier     | -      | -        | -        | -        | -       | -       | -          |
+| CSS      | -               | csslint        | prettier     | -      | -        | -        | -        | -       | -       | -          |
+| Markdown | -               | markdownlint   | prettier     | -      | -        | -        | -        | -       | -       | -          |
 
 Other references:
 

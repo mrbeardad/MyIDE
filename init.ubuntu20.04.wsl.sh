@@ -124,7 +124,7 @@ prerequisites() {
 
   ask_user "Do you want to config npm registry to tencent cloud mirror?" &&
     npm config set registry http://mirrors.tencent.com/npm/ &&
-    sudo npm config set registry http://mirrors.tencent.com/npm/ -g &&
+    npm config set global-bin-dir ~/.local/bin &&
     sudo npm install -g pnpm
 
   ask_user "Do you want to config pip index-url to tencent cloud mirror?" &&
@@ -166,6 +166,7 @@ zsh_conf() {
 sed -n '/^nameserver/{s/^nameserver\s*\([0-9.]*\)\s*$/\1:7890/; p}' /etc/resolv.conf
 EOF
   chmod +x ~/.config/proxy
+  PROMPT_INFORMATION="$PROMPT_INFORMATION$(echo -e "\e[32m======>\e[33m zsh:\e[m You may want to custom your zsh prompt theme in ~/.p10k.zsh")"
 }
 
 ranger_conf() {
@@ -206,13 +207,22 @@ neovim_conf() {
   sudo cp -v win32yank.exe /bin/
 
   bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
-  mkdir -p ~/.config/lvim/
-  get_config __INIT_LUA >~/.config/lvim/init.lua
+  mkdir -p ~/.config/lvim/after/ftplugin/
+  get_config __CONFIG_LUA >~/.config/lvim/config.lua
+  PROMPT_INFORMATION="$PROMPT_INFORMATION$(echo -e "\e[32m======>\e[33m neovim:\e[m Don't forget to run ':PackerSync' in lvim to install plugins")"
 }
 
 lang_shell() {
   sudo apt -y install shellcheck
   go install mvdan.cc/sh/v3/cmd/shfmt@latest
+  cat >~/.config/lvim/after/ftplugin/sh.lua <<EOF
+require "lvim.lsp.null-ls.linters".setup({
+  { filetypes = { "sh" }, command = "shellcheck" }
+})
+require "lvim.lsp.null-ls.formatters".setup({
+  { filetypes = { "sh" }, command = "shfmt", args = { "-i", "2" } }
+})
+EOF
 }
 
 lang_cpp() {
@@ -233,11 +243,7 @@ lang_py() {
 }
 
 lang_web() {
-  sudo npm install -g eslint htmlhint csslint prettier
-}
-
-lang_markdown() {
-  sudo npm install -g markdownlint-cli
+  pnpm install -g eslint htmlhint csslint markdownlint-cli prettier
 }
 
 other_cli_tools() {
@@ -294,8 +300,8 @@ main() {
     lang_go
     lang_py
     lang_web
-    lang_markdown
     other_cli_tools
+
     echo "$PROMPT_INFORMATION"
   fi
 }
@@ -773,6 +779,7 @@ main "$@"
 # vim.api.nvim_set_keymap('n', '<C-l>', '<Cmd>nohl<Cr><C-l>', { noremap = true })
 # vim.api.nvim_set_keymap('n', 'n', "'Nn'[v:searchforward]", { noremap = true, expr = true })
 # vim.api.nvim_set_keymap('n', 'N', "'nN'[v:searchforward]", { noremap = true, expr = true })
+# vim.api.nvim_set_keymap('c', '<M-c>', "\\<\\><Left><Left>", { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-f>', '<Cmd>Telescope current_buffer_fuzzy_find<Cr>', { noremap = true })
 # vim.cmd([[
 #   function! s:VSetSearch() abort
@@ -802,10 +809,8 @@ main "$@"
 # vim.api.nvim_set_keymap('n', '<C-j>', '<Cmd>put =repeat(nr2char(10), v:count1)<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('i', '<C-k>', "repeat('<Del>', strchars(getline('.')) - getcurpos()[2] + 1)", { noremap = true, expr = true })
 # vim.api.nvim_set_keymap('c', '<C-k>', "repeat('<Del>', strchars(getcmdline()) - getcmdpos() + 1)", { noremap = true, expr = true })
-# vim.api.nvim_set_keymap('i', '<C-h>', '<C-Left>', { noremap = true })
-# vim.api.nvim_set_keymap('c', '<C-h>', '<C-Left>', { noremap = true })
-# vim.api.nvim_set_keymap('i', '<C-l>', '<Right>', { noremap = true })
-# vim.api.nvim_set_keymap('c', '<C-l>', '<Right>', { noremap = true })
+# vim.api.nvim_set_keymap('i', '<C-l>', '<C-Right>', { noremap = true })
+# vim.api.nvim_set_keymap('c', '<C-l>', '<C-Right>', { noremap = true })
 # vim.api.nvim_set_keymap('i', '<C-z>', '<Cmd>undo<Cr>', { noremap = true })
 # vim.api.nvim_set_keymap('i', '<C-r><C-r>', '<Cmd>redo<Cr>', { noremap = true })
 # -- 复制粘贴
@@ -817,15 +822,15 @@ main "$@"
 # vim.api.nvim_set_keymap('n', '=O', '<Cmd>put! =@0<Cr>', { noremap = true })
 # vim.api.nvim_set_keymap('v', '<Space>y', '"+y', { noremap = true })
 # vim.api.nvim_set_keymap('v', '<Space>p', '"+p', { noremap = true })
-# lvim.builtin.which_key.mappings["<Space>"] = { "<Cmd>let @+ = @0<Cr>", "Copy register 0 to clipboard" }
-# lvim.builtin.which_key.mappings["y"] = { '"+y', "Yank to clipboard" }
-# lvim.builtin.which_key.mappings["Y"] = { '"+y$', "Yank all right to clipboard" }
-# lvim.builtin.which_key.mappings["p"] = { '"+p', "Paste clipboard after cursor" }
-# lvim.builtin.which_key.mappings["P"] = { '"+P', "Paste clipboard before cursor" }
-# lvim.builtin.which_key.mappings["o"] = { "<Cmd>put =@+<Cr>", "Paste clipboard to next line" }
-# lvim.builtin.which_key.mappings["O"] = { "<Cmd>put! =@+<Cr>", "Paste clipboard to previous line" }
-# lvim.builtin.which_key.mappings["by"] = { "<Cmd>%y +<Cr>", "Yank whole buffer to clipboard" }
-# lvim.builtin.which_key.mappings["bp"] = { "<Cmd>%d<Cr>\"+P", "Patse clipboard to whole buffer" }
+# lvim.builtin.which_key.mappings["<Space>"] = { "<Cmd>let @+ = @0<Cr>", "Copy Register 0 to Clipboard" }
+# lvim.builtin.which_key.mappings["y"] = { '"+y', "Yank to Clipboard" }
+# lvim.builtin.which_key.mappings["Y"] = { '"+y$', "Yank All Right to Clipboard" }
+# lvim.builtin.which_key.mappings["p"] = { '"+p', "Paste Clipboard After Cursor" }
+# lvim.builtin.which_key.mappings["P"] = { '"+P', "Paste Clipboard Before Cursor" }
+# lvim.builtin.which_key.mappings["o"] = { "<Cmd>put =@+<Cr>", "Paste Clipboard to Next Line" }
+# lvim.builtin.which_key.mappings["O"] = { "<Cmd>put! =@+<Cr>", "Paste Clipboard to Previous Line" }
+# lvim.builtin.which_key.mappings["by"] = { "<Cmd>%y +<Cr>", "Yank Whole Buffer to Clipboard" }
+# lvim.builtin.which_key.mappings["bp"] = { "<Cmd>%d<Cr>\"+P", "Patse Clipboard to Whole Buffer" }
 # -- 文件操作
 # lvim.keys.normal_mode["<C-k>"] = false
 # vim.api.nvim_set_keymap('n', '<C-k><C-o>', '<Cmd>Telescope projects<Cr>', { noremap = true })
@@ -833,9 +838,7 @@ main "$@"
 # vim.api.nvim_set_keymap('n', '<C-k>n', '<Cmd>enew<Cr>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-k>r', '<Cmd>Telescope oldfiles<Cr>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-p>', '<Cmd>Telescope find_files<Cr>', { noremap = true })
-# vim.api.nvim_set_keymap('n', '<Tab>', '<Cmd>BufferLineCycleNext<Cr>', { noremap = true })
-# vim.api.nvim_set_keymap('n', '<S-Tab>', '<Cmd>BufferLineCyclePrev<Cr>', { noremap = true })
-# lvim.builtin.which_key.mappings["<Tab>"] = { ":try | b# | catch | endtry<Cr>", "Switch to last buffer" }
+# lvim.builtin.which_key.mappings["<Tab>"] = { ":try | b# | catch | endtry<Cr>", "Switch Buffer" }
 # vim.api.nvim_set_keymap('n', '<C-s>', '<Cmd>w<Cr>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-k>s', '<Cmd>wa<Cr>', { noremap = true })
 # vim.cmd([[
@@ -867,15 +870,16 @@ main "$@"
 # endfunction
 # nnoremap <M-S> <Cmd>call <SID>save_as_new_file()<Cr>
 # ]])
-# vim.api.nvim_set_keymap('n', '<C-k>x', '<Cmd>bd<Cr>', { noremap = true })
+# vim.api.nvim_set_keymap('n', '<C-k>x', '<Cmd>BufferKill<Cr>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-k>u', ':try | %bd | catch | endtry<Cr>', { noremap = true, silent = true })
 # vim.api.nvim_set_keymap('n', '<C-k>w', '<Cmd>%bd<Cr>', { noremap = true })
+# vim.api.nvim_set_keymap('n', '<Tab>', '<Cmd>wincmd w<Cr>', { noremap = true })
+# vim.api.nvim_set_keymap('n', '<S-Tab>', '<Cmd>wincmd p<Cr>', { noremap = true })
 # -- 语言服务
 # lvim.builtin.cmp.mapping["<C-j>"] = nil
 # lvim.builtin.cmp.mapping["<C-k>"] = nil
 # lvim.builtin.cmp.mapping["<C-e>"] = nil
-# lvim.builtin.cmp.mapping["<Cr>"] = nil
-# -- lvim.builtin.cmp.confirm_opts.select = true
+# lvim.builtin.cmp.confirm_opts.select = true
 # local cmp = require("cmp")
 # local luasnip = require("luasnip")
 # local lccm = require("lvim.core.cmp").methods
@@ -899,17 +903,19 @@ main "$@"
 # )
 # vim.api.nvim_set_keymap('n', '<C-_>', 'gcc', {})
 # vim.api.nvim_set_keymap('i', '<C-_>', '<Cmd>normal gcc<Cr>', {})
-# -- terminal map: ctrl+. -> alt+.
 # vim.api.nvim_set_keymap('n', '<F2>', "<Cmd>lua require('which-key').execute(3)<CR>", { noremap = true })
+# -- terminal map: ctrl+. -> alt+.
 # vim.api.nvim_set_keymap('n', '<M-.>', '<Cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true })
-# vim.api.nvim_set_keymap('n', '<M-F>', '<Cmd>lua vim.lsp.buf.format()<Cr>', { noremap = true })
-# vim.api.nvim_set_keymap('i', '<M-F>', '<Cmd>lua vim.lsp.buf.format()<Cr>', { noremap = true })
+# vim.api.nvim_set_keymap('n', '<M-F>', '<Cmd>lua require("lvim.lsp.utils").format()<Cr>', { noremap = true })
+# vim.api.nvim_set_keymap('i', '<M-F>', '<Cmd>lua require("lvim.lsp.utils").format()<Cr>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-t>', '<Cmd>Telescope lsp_workspace_symbols<Cr>', { noremap = true })
-# vim.api.nvim_set_keymap('n', '[e', "<Cmd>lua require('which-key').execute(5)<CR>", { noremap = true })
-# vim.api.nvim_set_keymap('n', ']e', "<Cmd>lua require('which-key').execute(6)<CR>", { noremap = true })
+# vim.api.nvim_set_keymap('n', '[e', "<Cmd>lua vim.diagnostic.goto_prev()<CR>", { noremap = true })
+# vim.api.nvim_set_keymap('n', ']e', "<Cmd>lua vim.diagnostic.goto_next()<CR>", { noremap = true })
+# vim.api.nvim_set_keymap('n', '[h', "<Cmd>Gitsigns next_hunk<CR>", { noremap = true })
+# vim.api.nvim_set_keymap('n', ']h', "<Cmd>Gitsigns prev_hunk<CR>", { noremap = true })
 # -- 界面元素
-# -- terminal map: ctrl+shift+u -> alt+shift+u
-# vim.api.nvim_set_keymap('n', '<M-U>', "<Cmd>lua require('telescope').extensions.notify.notify()<Cr>", { noremap = true })
+# -- terminal map: ctrl+shift+n -> alt+shift+n
+# vim.api.nvim_set_keymap('n', '<M-N>', "<Cmd>lua require('telescope').extensions.notify.notify()<Cr>", { noremap = true })
 # -- terminal map: ctrl+shift+p -> alt+shift+p
 # vim.api.nvim_set_keymap('n', '<M-P>', "<Cmd>Telescope commands<Cr>", { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-k><C-s>', "<Cmd>Telescope keymaps<Cr>", { noremap = true })
@@ -948,7 +954,7 @@ main "$@"
 # -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 # lvim.builtin.alpha.active = true
 # lvim.builtin.alpha.mode = "dashboard"
-# lvim.builtin.alpha.dashboard.section.buttons.entries[1][1] = "n"
+# lvim.builtin.alpha.dashboard.section.buttons.entries[1][1] = "Ctrl+K n"
 # lvim.builtin.alpha.dashboard.section.buttons.entries[1][2] = "  New File"
 # lvim.builtin.alpha.dashboard.section.buttons.entries[1][3] = "<CMD>ene!<CR>"
 # lvim.builtin.alpha.dashboard.section.buttons.entries[2][1] = "Ctrl+P"
@@ -960,9 +966,9 @@ main "$@"
 # lvim.builtin.alpha.dashboard.section.buttons.entries[4][1] = "Ctrl+K r"
 # lvim.builtin.alpha.dashboard.section.buttons.entries[4][2] = "  Recently Used Files"
 # lvim.builtin.alpha.dashboard.section.buttons.entries[4][3] = "<CMD>Telescope oldfiles<CR>"
-# lvim.builtin.alpha.dashboard.section.buttons.entries[5][1] = "SPC S"
+# lvim.builtin.alpha.dashboard.section.buttons.entries[5][1] = "SPC S l"
 # lvim.builtin.alpha.dashboard.section.buttons.entries[5][2] = "  Restore Session"
-# lvim.builtin.alpha.dashboard.section.buttons.entries[5][3] = ""
+# lvim.builtin.alpha.dashboard.section.buttons.entries[5][3] = "<CMD>lua require('persistence').load({ last = true })<CR>"
 # lvim.builtin.notify.active = true
 # lvim.builtin.terminal.active = false
 # lvim.builtin.nvimtree.setup.view.side = "left"
@@ -1261,15 +1267,6 @@ main "$@"
 #     setup = function()
 #       -- terminal map: ctrl+shift+m -> alt+shift+m
 #       vim.api.nvim_set_keymap('n', '<M-M>', "<Cmd>TroubleToggle<Cr>", { noremap = true })
-#       lvim.builtin.which_key.mappings["t"] = {
-#         name = "+Trouble",
-#         r = { "<cmd>Trouble lsp_references<cr>", "References" },
-#         f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-#         d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
-#         q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-#         l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-#         w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
-#       }
 #     end
 #   }, {
 #     "folke/persistence.nvim",
@@ -1317,24 +1314,26 @@ main "$@"
 #       { "n", "<C-n>" },
 #       { "v", "<C-n>" },
 #       { "n", "<M-L>" },
-#       { "n", "<M-L>" }
+#       { "v", "<M-L>" },
+#       { "n", "ma" },
+#       { "v", "ma" }
 #     },
 #     setup = function()
 #       vim.cmd [[
 #         function! VM_Start()
-#           let b:autopairs_bs_map_number = substitute(execute('imap <bs>'),'.*autopairs_bs(\(\d\)).*','\1','')
 #           iunmap <buffer><Bs>
 #         endf
 #         function! VM_Exit()
-#           exe 'inoremap <buffer><expr><BS> v:lua.MPairs.autopairs_bs('.b:autopairs_bs_map_number.')'
-#           unlet b:autopairs_bs_map_number
+#           exe 'inoremap <buffer><expr><BS> v:lua.MPairs.autopairs_bs('.bufnr().')'
 #         endf
 #       ]]
 #     end,
 #     config = function()
 #       -- terminal map: ctrl+shift+l -> alt+shift+l
 #       vim.api.nvim_set_keymap('n', '<M-L>', '<Plug>(VM-Select-All)', {})
-#       vim.api.nvim_set_keymap('v', '<M-L>', '<Plug>(VM-Select-All)', {})
+#       vim.api.nvim_set_keymap('v', '<M-L>', '<Plug>(VM-Visual-All)', {})
+#       vim.api.nvim_set_keymap('n', 'ma', '<Plug>(VM-Add-Cursor-At-Pos)', {})
+#       vim.api.nvim_set_keymap('v', 'ma', '<Plug>(VM-Visual-Add)', {})
 #     end
 #   }, {
 #     "fedorenchik/VimCalc3",
