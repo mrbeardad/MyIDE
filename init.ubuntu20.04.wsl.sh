@@ -8,6 +8,14 @@ OPTION_UPDATE_CONFIG=
 OPTION_AUTO_YES=
 PROMPT_INFORMATION=
 
+sudo() {
+  if [[ -s "$DEBUG" ]]; then
+    echo "$@"
+  else
+    sudo "$@"
+  fi
+}
+
 usage() {
   echo "Usage: init.sh [-h|-u|-y]"
   echo ""
@@ -264,7 +272,6 @@ main() {
     set_config __GITCONFIG ~/.gitconfig
     set_config __SSH_CONFIG ~/.ssh/config
   else
-    exit 0
     # the default cwd after enter wsl may be windows home
     cd ~
     mkdir -p ~/.local/bin/
