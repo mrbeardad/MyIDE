@@ -174,4 +174,4 @@
 
 ## neovim 文本编辑器
 
-快捷键几乎同[vscode](vscode.md)
+快捷键几乎同[vscode](vscode.md), 按键依赖[windows terminal 配置](wt/settings.json)来重映射按键来实现`Ctrl`+`Shift`功能键

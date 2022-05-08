@@ -124,8 +124,8 @@
 ## WSL
 
 1. 安装[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)
-2. 安装 wt 配置[settings.json](WindowsTerminal/settings.json)
-3. 将[启动脚本](WindowsTerminal/WindowsTerminalQuakeModeStartup.bat)复制到`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`实现开机自启 quake 模式
+2. 安装 wt 配置[settings.json](wt/settings.json)
+3. 将[启动脚本](wt/WindowsTerminalQuakeModeStartup.bat)复制到`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`实现开机自启 quake 模式
 4. 安装[WSL2](https://docs.microsoft.com/en-us/windows/wsl/install)
 
    ```sh
