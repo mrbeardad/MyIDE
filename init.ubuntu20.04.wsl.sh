@@ -124,11 +124,20 @@ prerequisites() {
 
   ask_user "Do you want to config npm registry to tencent cloud mirror?" &&
     npm config set registry http://mirrors.tencent.com/npm/ &&
+    npm config set prefix ~/.local &&
     npm config set global-bin-dir ~/.local/bin &&
     sudo npm install -g pnpm
 
   ask_user "Do you want to config pip index-url to tencent cloud mirror?" &&
     pip config set global.index-url https://mirrors.tencent.com/pypi/simple
+
+  ask_user "Do you want to config cargo registry to utsc cloud mirror?" &&
+    mkdir ~/.cargo && cat >~/.cargo/config <<EOF
+[source.crates-io]
+replace-with = 'ustc'
+[source.ustc]
+registry = "git://mirrors.ustc.edu.cn/crates.io-index"
+EOF
 }
 
 ssh_and_git_config() {
@@ -207,11 +216,23 @@ neovim_conf() {
   sudo cp -v win32yank.exe /usr/local/bin/
 
   bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
-  mkdir -p ~/.config/lvim/after/ftplugin/
-  # get_config __CONFIG_LUA >~/.config/lvim/config.lua
-  [[ -d ~/.config/lvim ]] && mv -v ~/.config/lvim{,.bak}
-  cp -rfv ./lvim ~/.config/
-  sudo mv ~/.config/lvim/nvim /usr/local/bin/nvim
+  get_config __CONFIG_LUA >~/.config/lvim/config.lua
+  cp -rfv ./lvim/* ~/.config/lvim
+  cat <<EOF | sudo tee /usr/local/bin/nvim
+#!/bin/bash
+# used for neovide
+if [[ -s "\$LUNARVIM_RUNTIME_DIR" ]]; then
+  exec /bin/nvim "\$@"
+elif [[ -r ~/.local/share/lunarvim/lvim/init.lua ]]; then
+  export LUNARVIM_RUNTIME_DIR=\${LUNARVIM_RUNTIME_DIR:-~/.local/share/lunarvim}
+  export LUNARVIM_CONFIG_DIR=\${LUNARVIM_CONFIG_DIR:-~/.config/lvim}
+  export LUNARVIM_CACHE_DIR=\${LUNARVIM_CACHE_DIR:-~/.cache/lvim}
+  exec /bin/nvim -u "\$LUNARVIM_RUNTIME_DIR/lvim/init.lua" "\$@"
+else
+  exec /bin/nvim "\$@"
+fi
+EOF
+  sudo chmod +x /usr/local/bin/nvim
 
   PROMPT_INFORMATION="$PROMPT_INFORMATION$(echo -e "\e[32m======>\e[33m neovim:\e[m Don't forget to run ':PackerSync' in lvim to install plugins")"
 }
@@ -270,9 +291,8 @@ main() {
     set_config __RANGER ~/.config/ranger/commands.py
     set_config __HTOPRC ~/.config/htop/htoprc
     set_config __TIGRC ~/.tigrc
-    # set_config __CONFIG_LUA ~/.config/lvim/config.lua
-    cp -urv ~/.config/lvim/* ./lvim/
-    cp -uv /usr/local/bin/nvim ./lvim/
+    set_config __CONFIG_LUA ~/.config/lvim/config.lua
+    cp -urv ~/.config/lvim/{after,lsp-settings} ./lvim/
     set_config __GITCONFIG ~/.gitconfig
     set_config __SSH_CONFIG ~/.ssh/config
   else
@@ -504,9 +524,7 @@ main "$@"
 # # export LANG=en_US.UTF-8
 #
 # # Preferred editor for local and remote sessions
-# if [[ -e ~/.local/bin/lvim ]]; then
-#     export EDITOR='lvim'
-# elif [[ -e /bin/nvim ]]; then
+# if [[ -e /bin/nvim ]]; then
 #     export EDITOR='nvim'
 # else
 #     export EDITOR='vim'
@@ -757,13 +775,16 @@ main "$@"
 # vim.opt.list = true
 # vim.opt.listchars = 'tab:→ ,eol:↵,trail:·,extends:↷,precedes:↶'
 # vim.opt.clipboard = ''
+# vim.opt.wildignorecase = true
 # vim.opt.swapfile = true
 # vim.opt.directory = join_paths(get_cache_dir(), "swap")
 # vim.o.guifont = "NerdCodePro Font:h10"
+# vim.g.neovide_cursor_vfx_mode = "ripple"
+# vim.g.neovide_cursor_animation_length = 0.01
 # lvim.log.level = "warn"
 # lvim.format_on_save = true
 # lvim.colorscheme = "onedarker"
-#
+# 
 # ----------------------------------------
 # -- KEYMAPPINGS
 # ----------------------------------------
@@ -825,7 +846,7 @@ main "$@"
 # lvim.builtin.which_key.mappings["y"] = { '"+y', "Yank to Clipboard" }
 # lvim.builtin.which_key.mappings["Y"] = { '"+y$', "Yank All Right to Clipboard" }
 # lvim.builtin.which_key.mappings["p"] = { '"+p', "Paste Clipboard After Cursor" }
-# lvim.builtin.which_key.mappings["P"] = { '"+P', "Paste Clipboard Before Cursor" }
+# -- lvim.builtin.which_key.mappings["P"] = { '"+P', "Paste Clipboard Before Cursor" }
 # lvim.builtin.which_key.mappings["o"] = { "<Cmd>put =@+<Cr>", "Paste Clipboard to Next Line" }
 # lvim.builtin.which_key.mappings["O"] = { "<Cmd>put! =@+<Cr>", "Paste Clipboard to Previous Line" }
 # lvim.builtin.which_key.mappings["by"] = { "<Cmd>%y +<Cr>", "Yank Whole Buffer to Clipboard" }
@@ -878,6 +899,8 @@ main "$@"
 # lvim.builtin.cmp.mapping["<C-j>"] = nil
 # lvim.builtin.cmp.mapping["<C-k>"] = nil
 # lvim.builtin.cmp.mapping["<C-e>"] = nil
+# lvim.builtin.cmp.mapping["<C-d>"] = nil
+# lvim.builtin.cmp.mapping["<CR>"] = nil
 # lvim.builtin.cmp.confirm_opts.select = true
 # local cmp = require("cmp")
 # local luasnip = require("luasnip")
@@ -945,8 +968,8 @@ main "$@"
 # }
 # -- Use which-key to add extra bindings with the leader-key prefix
 # -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-#
-#
+# 
+# 
 # ----------------------------------------
 # -- TODO: User Config for predefined plugins
 # ----------------------------------------
@@ -969,48 +992,40 @@ main "$@"
 # lvim.builtin.alpha.dashboard.section.buttons.entries[5][2] = "  Restore Session"
 # lvim.builtin.alpha.dashboard.section.buttons.entries[5][3] = "<CMD>lua require('persistence').load({ last = true })<CR>"
 # lvim.builtin.notify.active = true
-# lvim.builtin.terminal.active = false
+# lvim.builtin.terminal.active = true
+# lvim.builtin.terminal.shell = "/bin/bash"
+# lvim.builtin.terminal.open_mapping = "<M-`>"
 # lvim.builtin.nvimtree.setup.view.side = "left"
 # lvim.builtin.nvimtree.show_icons.git = 1
 # lvim.builtin.bufferline.options.always_show_bufferline = true
 # local components = require("lvim.core.lualine.components")
-# lvim.builtin.lualine.options = { globalstatus = true }
+# lvim.builtin.lualine.options = {
+#   globalstatus       = true,
+#   section_separators = { left = '', right = ' ' },
+# }
 # lvim.builtin.lualine.sections.lualine_a = {
-#   {
-#     '',
-#     separator = { right = '' },
-#     type = 'stl'
-#   }
+#   { '', type = 'stl' }
 # }
 # lvim.builtin.lualine.sections.lualine_b = {
-#   function()
-#     return "  " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t") .. " "
-#   end,
 #   {
-#     'branch',
-#     separator = { right = ' ' }
+#     function()
+#       return "  " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+#     end,
 #   },
+#   components.branch
 # }
 # lvim.builtin.lualine.sections.lualine_x = {
 #   components.diagnostics,
-#   {
-#     function(msg)
-#       local lsp = components.lsp[1](msg)
-#       if lsp == 'LS Inactive' then
-#         return '[LS Inactive]'
-#       else
-#         return '  ' .. lsp:gsub("^%[(.-)%]$", "%1")
-#       end
-#     end,
-#     color = components.lsp.color,
-#     cond = components.lsp.cond,
-#   },
-#   components.treesitter,
-#   components.filetype,
-#   "fileformat"
 # }
 # lvim.builtin.lualine.sections.lualine_y = {
-#   { ' %l/%L  %c', type = 'stl' }
+#   components.treesitter,
+#   components.lsp,
+#   components.filetype,
+#   "fileformat",
+# }
+# lvim.builtin.lualine.sections.lualine_z = {
+#   { ' %l/%L  %c', type = 'stl' },
+#   components.scrollbar
 # }
 # -- if you don't want all the parsers change this to a table of the ones you want
 # lvim.builtin.treesitter.highlight.enabled = true
@@ -1033,27 +1048,27 @@ main "$@"
 #   "json",
 #   "yaml",
 # }
-#
-#
+# 
+# 
 # ----------------------------------------
 # -- generic LSP settings
 # ----------------------------------------
-#
+# 
 # -- ---@usage disable automatic installation of servers
 # -- lvim.lsp.automatic_servers_installation = false
-#
+# 
 # -- ---configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
 # -- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
 # -- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
 # -- local opts = {} -- check the lspconfig documentation for a list of all possible options
 # -- require("lvim.lsp.manager").setup("pyright", opts)
-#
+# 
 # -- ---remove a server from the skipped list, e.g. eslint, or emmet_ls. !!Requires `:LvimCacheReset` to take effect!!
 # -- ---`:LvimInfo` lists which server(s) are skiipped for the current filetype
 # -- vim.tbl_map(function(server)
 # --   return server ~= "emmet_ls"
 # -- end, lvim.lsp.automatic_configuration.skipped_servers)
-#
+# 
 # -- -- you can set a custom on_attach function that will be used for all the language servers
 # -- -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
 # -- lvim.lsp.on_attach_callback = function(client, bufnr)
@@ -1063,7 +1078,7 @@ main "$@"
 # --   --Enable completion triggered by <c-x><c-o>
 # --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 # -- end
-#
+# 
 # -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
 # -- local formatters = require "lvim.lsp.null-ls.formatters"
 # -- formatters.setup {
@@ -1079,7 +1094,7 @@ main "$@"
 # --     filetypes = { "typescript", "typescriptreact" },
 # --   },
 # -- }
-#
+# 
 # -- -- set additional linters
 # -- local linters = require "lvim.lsp.null-ls.linters"
 # -- linters.setup {
@@ -1097,7 +1112,7 @@ main "$@"
 # --     filetypes = { "javascript", "python" },
 # --   },
 # -- }
-#
+# 
 # ----------------------------------------
 # -- Additional Plugins
 # -- Tip 1. Don't use keys to lazy load an set key maps in setup, packer.nvim will unmap your keys
@@ -1123,8 +1138,8 @@ main "$@"
 #     setup = function()
 #       vim.g.indentLine_enabled = 1
 #       vim.g.indent_blankline_char = "▏"
-#       vim.g.indent_blankline_filetype_exclude = { "help", "terminal", "dashboard", "alpha" }
-#       vim.g.indent_blankline_buftype_exclude = { "terminal" }
+#       vim.g.indent_blankline_filetype_exclude = { "help", "terminal", "dashboard", "alpha", "packer" }
+#       vim.g.indent_blankline_buftype_exclude = { "terminal", "quickfix", "nofile", "help" }
 #       vim.g.indent_blankline_show_trailing_blankline_indent = false
 #       vim.g.indent_blankline_show_first_indent_level = false
 #     end
@@ -1197,7 +1212,8 @@ main "$@"
 #     setup = function()
 #       vim.g.bookmark_sign = ''
 #       vim.g.bookmark_annotation_sign = ''
-#       vim.g.bookmark_auto_save_file = join_paths(get_cache_dir(), "bookmark")
+#       vim.g.bookmark_display_annotation = 1
+#       vim.g.bookmark_auto_save_file = join_paths(get_cache_dir(), ".vim-bookmarks")
 #     end,
 #     config = function()
 #       vim.cmd [[hi link BookmarkSign SignColumn]]
@@ -1281,7 +1297,7 @@ main "$@"
 #     end,
 #     config = function()
 #       require("persistence").setup {
-#         dir = join_paths(get_cache_dir(), "session"),
+#         dir = join_paths(get_cache_dir(), "session/"),
 #         options = { "buffers", "curdir", "tabpages", "winsize" },
 #       }
 #     end,
@@ -1343,9 +1359,20 @@ main "$@"
 #     config = function()
 #       require("todo-comments").setup()
 #     end,
+#   }, {
+#     "p00f/nvim-ts-rainbow"
+#   }, {
+#     'wfxr/minimap.vim',
+#     run = "cargo install --locked code-minimap",
+#     -- cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
+#     config = function()
+#       vim.cmd("let g:minimap_width = 15")
+#       vim.cmd("let g:minimap_auto_start = 0")
+#       vim.cmd("let g:minimap_auto_start_win_enter = 0")
+#     end,
 #   },
 # }
-#
+# 
 # -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 # -- vim.cmd [[
 # --   function! AutoOpenAlpha()
@@ -1357,9 +1384,24 @@ main "$@"
 # --     endif
 # --   endf
 # -- ]]
-# -- lvim.autocommands.custom_groups = {
-# -- { "BufUnload", "*", [[call AutoOpenAlpha()]] },
-# -- }
+# vim.cmd [[
+#   function! AutoMap_q_ForClose()
+#     let g:fuck = bufnr()
+#     if &bt == 'nofile' || &bt == 'quickfix'
+#       nnoremap <buffer>q <CMD>close<CR>
+#     endif
+#   endf
+# 
+#   function! AutoOpenMinimap()
+#     if &diff == 0 && exists(':Minimap') == 2
+#       Minimap
+#     endif
+#   endf
+# ]]
+# lvim.autocommands.custom_groups = {
+#   { "BufRead", "*", [[call AutoMap_q_ForClose()]] },
+#   { "VimEnter", "*", [[call AutoOpenMinimap()]] }
+# }
 # __CONFIG_LUA_END
 
 # __GITCONFIG
@@ -1369,7 +1411,7 @@ main "$@"
 # [merge]
 #     tool = vimdiff
 # [mergetool "vimdiff"]
-#     path = lvim
+#     path = nvim
 # __GITCONFIG_END
 
 # __SSH_CONFIG
