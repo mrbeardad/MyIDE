@@ -204,25 +204,21 @@ neovim_conf() {
   unzip -p /tmp/win32yank.zip win32yank.exe >./win32yank.exe
   chmod +x win32yank.exe
   # ~/.local/bin may not be in PATH when open neovim from ranger
-  sudo cp -v win32yank.exe /bin/
+  sudo cp -v win32yank.exe /usr/local/bin/
 
   bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
   mkdir -p ~/.config/lvim/after/ftplugin/
-  get_config __CONFIG_LUA >~/.config/lvim/config.lua
+  # get_config __CONFIG_LUA >~/.config/lvim/config.lua
+  [[ -d ~/.config/lvim ]] && mv -v ~/.config/lvim{,.bak}
+  cp -rfv ./lvim ~/.config/
+  sudo mv ~/.config/lvim/nvim /usr/local/bin/nvim
+
   PROMPT_INFORMATION="$PROMPT_INFORMATION$(echo -e "\e[32m======>\e[33m neovim:\e[m Don't forget to run ':PackerSync' in lvim to install plugins")"
 }
 
 lang_shell() {
   sudo apt -y install shellcheck
   go install mvdan.cc/sh/v3/cmd/shfmt@latest
-  cat >~/.config/lvim/after/ftplugin/sh.lua <<EOF
-require "lvim.lsp.null-ls.linters".setup({
-  { filetypes = { "sh" }, command = "shellcheck" }
-})
-require "lvim.lsp.null-ls.formatters".setup({
-  { filetypes = { "sh" }, command = "shfmt", args = { "-i", "2" } }
-})
-EOF
 }
 
 lang_cpp() {
@@ -267,14 +263,16 @@ main() {
       cp -uv "$WIN_HOME"/AppData/Roaming/Code/User/{settings.json,keybindings.json} ./vscode/
       cp -uv "$WIN_HOME"/AppData/Roaming/Code/User/sync/extensions/lastSyncextensions.json ./vscode/
       cp -uv "$WIN_HOME"/AppData/Local/vscode-neovim/init.vim ./vscode/vscode-neovim/init.vim
-      cp -uv "$WIN_HOME"/AppData/Local/Packages/Microsoft.WindowsTerminal_*/LocalState/settings.json WindowsTerminal/settings.json
+      cp -uv "$WIN_HOME"/AppData/Local/Packages/Microsoft.WindowsTerminal_*/LocalState/settings.json wt/settings.json
     fi
     set_config __TMUX_CONF ~/.tmux.conf
     set_config __ZSHRC ~/.zshrc
     set_config __RANGER ~/.config/ranger/commands.py
     set_config __HTOPRC ~/.config/htop/htoprc
     set_config __TIGRC ~/.tigrc
-    set_config __CONFIG_LUA ~/.config/lvim/config.lua
+    # set_config __CONFIG_LUA ~/.config/lvim/config.lua
+    cp -urv ~/.config/lvim/* ./lvim/
+    cp -uv /usr/local/bin/nvim ./lvim/
     set_config __GITCONFIG ~/.gitconfig
     set_config __SSH_CONFIG ~/.ssh/config
   else
@@ -761,6 +759,7 @@ main "$@"
 # vim.opt.clipboard = ''
 # vim.opt.swapfile = true
 # vim.opt.directory = join_paths(get_cache_dir(), "swap")
+# vim.o.guifont = "NerdCodePro Font:h10"
 # lvim.log.level = "warn"
 # lvim.format_on_save = true
 # lvim.colorscheme = "onedarker"

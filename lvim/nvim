@@ -1,0 +1,7 @@
+#!/bin/env bash
+# used for neovide
+if [[ -s "$LUNARVIM_RUNTIME_DIR" ]]; then
+  exec /bin/nvim "$@"
+else
+  exec ~/.local/bin/lvim "$@"
+fi

@@ -8,6 +8,7 @@
   - [ranger 文件预览器](#ranger-文件预览器)
   - [htop 进程监视器](#htop-进程监视器)
   - [git 版本管理器](#git-版本管理器)
+  - [neovim 文本编辑器](#neovim-文本编辑器)
 
 <!-- vim-markdown-toc -->
 
@@ -170,3 +171,7 @@
 | clone        | `gcl`                                 | 克隆仓库包括递归子模块，`--depth=1`仅使用             |
 | submodule    | `gsa`\|`gsd`\|`gsu`                   | 添加子模块/删除子模块/初始化并更新所有子模块          |
 |              | `gi` `project-language`               | 搜索.gitignore 模板                                   |
+
+## neovim 文本编辑器
+
+快捷键几乎同[vscode](vscode.md)
