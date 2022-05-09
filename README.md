@@ -141,11 +141,11 @@
    swap=0
    ```
 
-6. 配置 WSL 开发环境
+6. 配置 WSL 开发环境, [init.sh](init.sh)中包含我 linux 开发环境全套配置, 可以很方便的进行分发
 
    ```sh
    # in wsl
-   curl -fsSL ./init.ubuntu20.04.wsl.sh | bash -
+   curl -fsSL ./init.sh | bash -
    ```
 
 > TIPS:
