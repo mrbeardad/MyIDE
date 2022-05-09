@@ -8,7 +8,6 @@
   - [ranger 文件预览器](#ranger-文件预览器)
   - [htop 进程监视器](#htop-进程监视器)
   - [git 版本管理器](#git-版本管理器)
-  - [neovim 文本编辑器](#neovim-文本编辑器)
 
 <!-- vim-markdown-toc -->
 
@@ -154,7 +153,7 @@
 | add          | `ga`\|`gau`\|`gaa`                    | 添加更改到暂存区/仅已跟踪/所有                        |
 | mv           | `gmv`                                 | 同时移动工作区与暂存区的文件                          |
 | remove       | `grm`\|`grms`                         | 从工作区与暂存区同时删除/仅暂存区                     |
-| resotre      | `grs`\|`grst`                         | 恢复工作区为暂存区/恢复暂存区为当前 commit            |
+| resotre      | `grs`\|`grss`                         | 恢复工作区为暂存区/恢复暂存区为当前 commit            |
 | status       | `gst`\|`gss`                          | 查看工作区与暂存区状态/精简信息                       |
 | diff         | `gd`\|`gds`\|`gdi`                    | 比较工作区与暂存区/比较暂存区与当前 commit/精简信息   |
 | commit       | `gc`\|`gc!`                           | 提交暂存区/覆盖当前 commit                            |
@@ -171,7 +170,3 @@
 | clone        | `gcl`                                 | 克隆仓库包括递归子模块，`--depth=1`仅使用             |
 | submodule    | `gsa`\|`gsd`\|`gsu`                   | 添加子模块/删除子模块/初始化并更新所有子模块          |
 |              | `gi` `project-language`               | 搜索.gitignore 模板                                   |
-
-## neovim 文本编辑器
-
-快捷键几乎同[vscode](vscode.md), 按键依赖[windows terminal 配置](wt/settings.json)来重映射按键来实现`Ctrl`+`Shift`功能键
