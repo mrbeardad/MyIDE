@@ -102,7 +102,7 @@ nnoremap ]e <Cmd>call VSCodeNotify('editor.action.marker.nextInFiles')<CR>
 
 " 其他按键
 nnoremap za <Cmd>call VSCodeNotify('editor.toggleFold')<CR>
-vnoremap <Space>t <Cmd>call VSCodeNotifyVisual('translator.translate', 1)<CR>
-vnoremap <Space>T <Cmd>call VSCodeNotifyVisual('translator.replaceWithTranslation', 1)<CR>
+vnoremap <Space>tt <Cmd>call VSCodeNotifyVisual('translator.translate', 1)<CR>
+vnoremap <Space>tr <Cmd>call VSCodeNotifyVisual('translator.replaceWithTranslation', 1)<CR>
 
 call plug#end()
