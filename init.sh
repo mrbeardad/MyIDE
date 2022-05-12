@@ -402,6 +402,7 @@ main "$@"
 # run '/usr/share/tmux-plugin-manager/tpm'        # 插件管理器
 # set -g @plugin 'tmux-plugins/tmux-resurrect'    # 会话保存与恢复插件
 # 
+# EDITOR=nvim
 # PATH=$HOME/.local/bin/:$PATH
 # __TMUX_CONF_END
 
@@ -412,64 +413,64 @@ main "$@"
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
-#
+# 
 # # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/.local/bin:$PATH
-#
+# 
 # # Path to your oh-my-zsh installation.
 # export ZSH="/home/beardad/.oh-my-zsh"
-#
+# 
 # # Set name of the theme to load --- if set to "random", it will
 # # load a random theme each time oh-my-zsh is loaded, in which case,
 # # to know which specific one was loaded, run: echo $RANDOM_THEME
 # # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="powerlevel10k/powerlevel10k"
-#
+# 
 # # Set list of themes to pick from when loading at random
 # # Setting this variable when ZSH_THEME=random will cause zsh to load
 # # a theme from this variable instead of looking in $ZSH/themes/
 # # If set to an empty array, this variable will have no effect.
 # # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-#
+# 
 # # Uncomment the following line to use case-sensitive completion.
 # # CASE_SENSITIVE="true"
-#
+# 
 # # Uncomment the following line to use hyphen-insensitive completion.
 # # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
-#
+# 
 # # Uncomment the following line to disable bi-weekly auto-update checks.
 # # DISABLE_AUTO_UPDATE="true"
-#
+# 
 # # Uncomment the following line to automatically update without prompting.
 # # DISABLE_UPDATE_PROMPT="true"
-#
+# 
 # # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=30
-#
+# 
 # # Uncomment the following line if pasting URLs and other text is messed up.
 # # DISABLE_MAGIC_FUNCTIONS="true"
-#
+# 
 # # Uncomment the following line to disable colors in ls.
 # # DISABLE_LS_COLORS="true"
-#
+# 
 # # Uncomment the following line to disable auto-setting terminal title.
 # # DISABLE_AUTO_TITLE="true"
-#
+# 
 # # Uncomment the following line to enable command auto-correction.
 # # ENABLE_CORRECTION="true"
-#
+# 
 # # Uncomment the following line to display red dots whilst waiting for completion.
 # # You can also set it to another string to have that shown instead of the default red dots.
 # # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
-#
+# 
 # # Uncomment the following line if you want to disable marking untracked files
 # # under VCS as dirty. This makes repository status check for large repositories
 # # much, much faster.
 # # DISABLE_UNTRACKED_FILES_DIRTY="true"
-#
+# 
 # # Uncomment the following line if you want to change the command execution time
 # # stamp shown in the history command output.
 # # You can set one of the optional three formats:
@@ -477,10 +478,10 @@ main "$@"
 # # or set a custom format using the strftime function format specifications,
 # # see 'man strftime' for details.
 # HIST_STAMPS="yyyy-mm-dd"
-#
+# 
 # # Would you like to use another custom folder than $ZSH/custom?
 # # ZSH_CUSTOM=/path/to/new-custom-folder
-#
+# 
 # # Which plugins would you like to load?
 # # Standard plugins can be found in $ZSH/plugins/
 # # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -503,31 +504,26 @@ main "$@"
 #     tmux
 #     vi-mode
 # )
-#
+# 
 # source $ZSH/oh-my-zsh.sh
-#
+# 
 # # User configuration
-#
+# 
 # # export MANPATH="/usr/local/man:$MANPATH"
-#
+# 
 # # You may need to manually set your language environment
 # # export LANG=en_US.UTF-8
-#
+# 
 # # Preferred editor for local and remote sessions
-# if [[ -e /bin/nvim ]]; then
-#     export EDITOR='nvim'
-# else
-#     export EDITOR='vim'
-# fi
 # # if [[ -n $SSH_CONNECTION ]]; then
 # #   export EDITOR='vim'
 # # else
 # #   export EDITOR='mvim'
 # # fi
-#
+# 
 # # Compilation flags
 # # export ARCHFLAGS="-arch x86_64"
-#
+# 
 # # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -536,7 +532,7 @@ main "$@"
 # # Example aliases
 # # alias zshconfig="mate ~/.zshrc"
 # # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
+# 
 # alias l='lsd -lah --group-dirs first'
 # alias l.='lsd -lhd --group-dirs first .*'
 # alias ll='lsd -lh --group-dirs first'
@@ -548,7 +544,7 @@ main "$@"
 # alias apt='sudo apt'
 # alias stl='sudo systemctl'
 # alias vi="$EDITOR"
-#
+# 
 # alias gmv='git mv'
 # alias grms='git rm --cached'
 # alias grss='git restore --staged'
@@ -566,34 +562,36 @@ main "$@"
 # alias gsa='git submodule add'
 # alias gsd='git submodule deinit'
 # alias gsu='git submodule update --init --recursive'
-#
+# 
 # source /usr/share/doc/fzf/examples/key-bindings.zsh
 # source /usr/share/doc/fzf/examples/completion.zsh
-#
+# 
 # source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#606060"
-#
+# 
 # export VI_MODE_SET_CURSOR=true
-# # bindkey '^L' vi-forward-char
-# bindkey '^H' backward-word
+# bindkey -M vicmd '^L' clear-screen
+# bindkey '^L' forward-word
+# bindkey 'jj' vi-cmd-mode
+# bindkey 'jk' vi-cmd-mode
 # bindkey '^U' backward-kill-line
 # bindkey '^K' kill-line
 # bindkey '^Y' yank
 # bindkey '^P' up-line-or-beginning-search
 # bindkey '^N' down-line-or-beginning-search
-#
+# 
 # zstyle ':completion:*:*:docker:*' option-stacking yes
 # zstyle ':completion:*:*:docker-*:*' option-stacking yes
-#
+# 
 # bindkey -M emacs '^[s' sudo-command-line
 # bindkey -M vicmd '^[s' sudo-command-line
 # bindkey -M viins '^[s' sudo-command-line
-#
+# 
 # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-#
+# 
 # __ZSHRC_END
 
 # __RANGER
@@ -905,7 +903,7 @@ main "$@"
 # vim.api.nvim_set_keymap('n', '<C-k>w', '<CMD>%bd<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<Tab>', '<CMD>wincmd w<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<S-Tab>', '<CMD>wincmd p<CR>', { noremap = true })
-# lvim.builtin.which_key.mappings["q"] = { "<CMD>call SmartClose<CR>", "Quit Cleverly" }
+# lvim.builtin.which_key.mappings["q"] = { "<CMD>call SmartClose()<CR>", "Quit Cleverly" }
 # 
 # ----------------------------------------
 # -- 语言服务
@@ -983,7 +981,7 @@ main "$@"
 # lvim.builtin.telescope.defaults.mappings = {
 #   -- for input mode
 #   i = {
-#     ["<Esc>"] = actions.close,
+#     -- ["<Esc>"] = actions.close,
 #     ["<C-b>"] = actions.preview_scrolling_up,
 #     ["<C-u>"] = nil
 #   },
@@ -1025,11 +1023,12 @@ main "$@"
 # 
 # lvim.builtin.bufferline.options.always_show_bufferline = true
 # 
-# local components = require("lvim.core.lualine.components")
+# lvim.builtin.lualine.options.theme = "material"
 # lvim.builtin.lualine.options = {
 #   globalstatus       = true,
 #   section_separators = { left = '', right = ' ' },
 # }
+# local components = require("lvim.core.lualine.components")
 # lvim.builtin.lualine.sections.lualine_a = {
 #   { '', type = 'stl' }
 # }
@@ -1038,17 +1037,20 @@ main "$@"
 #     function()
 #       return "  " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
 #     end,
+#     color = { bg = "#454c5a" },
+#     separator = { right = '' }
 #   },
 #   components.branch
 # }
 # lvim.builtin.lualine.sections.lualine_x = {
 #   components.diagnostics,
+#   { '', type = 'stl', color = { fg = "#454c5a" } }
 # }
 # lvim.builtin.lualine.sections.lualine_y = {
 #   components.treesitter,
 #   components.lsp,
 #   components.filetype,
-#   "fileformat",
+#   { "fileformat", color = { fg = "#bbbbbb" } },
 # }
 # lvim.builtin.lualine.sections.lualine_z = {
 #   { ' %l/%L  %c', type = 'stl' },
