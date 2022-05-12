@@ -19,7 +19,7 @@
 
 | 按键           | 作用                   |
 | -------------- | ---------------------- |
-| `Ctrl`+`D`/`B` | 向下/上翻页滚屏        |
+| `Ctrl`+`D`/`U` | 向下/上翻页滚屏        |
 | `zz`           | 移动视窗中央到光标位置 |
 | `M`            | 移动光标到视窗中央     |
 
@@ -68,9 +68,9 @@
 | `'` `{char}`   | 跳转 vim 标签(不支持大写字母全局跳转) |
 | `mm`           | 切换书签状态                          |
 | `mi`           | 为书签添加注释                        |
-| `mn`\|`mp`     | 跳转至下/上一个书签                   |
 | `ml`\|`mL`     | 列出当前/所有文件的书签               |
 | `mc`\|`mC`     | 删除当前/所有文件的书签               |
+| `mn`\|`mp`     | 跳转至下/上一个书签                   |
 | `[c`\|`]c`     | 跳转上/下个 change                    |
 | `[h`\|`]h`     | 跳转上/下个 hook                      |
 
@@ -184,9 +184,10 @@
 | `Ctrl`+`Shift`+`E` | Explorer-Outline-Todo-Timeline |
 | `Ctrl`+`Shift`+`G` | Git VCS                        |
 | `Ctrl`+`Shift`+`D` | Debugger                       |
-| `Ctrl`+`Shift`+`Y` | Debug Consol                   |
+| `Ctrl`+`Shift`+`M` | Problem                        |
 | `Ctrl`+`Shift`+`U` | Output                         |
-| `Alt`+`` ` ``      | Terminal                       |
+| `Ctrl`+`Shift`+`Y` | Debug Consol                   |
+| `Ctrl`+`` ` ``     | Terminal                       |
 
 ## 语言服务
 
@@ -209,7 +210,6 @@
 | `gr`               | 跳转引用                |
 | `gI`               | 跳转实现                |
 | `K`                | 触发悬停信息            |
-| `Ctrl`+`Shift`+`M` | Problem 窗口            |
 | `[e`\|`]e`         | 跳转上/下个 error       |
 
 ## 其他按键或命令

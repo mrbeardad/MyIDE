@@ -18,9 +18,9 @@
     },
     "when": "textInputFocus && neovim.mode != insert"
   },
-  // ctrl+b: scroll page up
+  // ctrl+u: scroll page up
   {
-    "key": "ctrl+b",
+    "key": "ctrl+u",
     "command": "editorScroll",
     "args": {
       "to": "up",
@@ -30,25 +30,6 @@
     },
     "when": "textInputFocus && neovim.mode != insert"
   },
-  {
-    "key": "ctrl+b",
-    "command": "list.focusPageUp",
-    "when": "listFocus && !inputFocus"
-  },
-
-  // 光标移动
-  // ctrl+e: move to line end
-  // {
-  //   "key": "ctrl+e",
-  //   "command": "cursorLineEnd",
-  //   "when": "editorFocus && neovim.mode == insert"
-  // },
-  // {
-  //   "key": "ctrl+e",
-  //   "command": "vscode-neovim.send",
-  //   "args": "$",
-  //   "when": "editorFocus && neovim.mode != insert"
-  // },
 
   // 全文搜索
   // ctrl+f: find content
@@ -280,6 +261,12 @@
   },
 
   // 界面元素
+  // ctrl+c: close quickopen
+  {
+    "key": "ctrl+c",
+    "command": "workbench.action.closeQuickOpen",
+    "when": "inQuickOpen"
+  },
   // f1: toggle side bar
   {
     "key": "f1",
@@ -290,12 +277,6 @@
     "key": "ctrl+shift+g",
     "command": "workbench.view.scm",
     "when": "workbench.scm.active"
-  },
-  // alt+`: open terminal
-  {
-    "key": "alt+oem_3",
-    "command": "workbench.action.terminal.toggleTerminal",
-    "when": "terminal.active"
   },
 
   // 语言服务

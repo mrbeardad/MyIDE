@@ -6,12 +6,13 @@ call plug#begin(expand('~').'\AppData\Local\vscode-neovim\plugged')
 " f/F/t/T: smart f
 let g:clever_f_smart_case = 1
 let g:clever_f_fix_key_direction = 1
+let g:clever_f_across_no_linew = 1
 Plug 'rhysd/clever-f.vim'
-" ;: easymotion
+" ;/,: easymotion
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_do_mapping = 0
 Plug 'asvetliakov/vim-easymotion', { 'as': 'vsc-easymotion' }
-map ; <Plug>(easymotion-bd-f2)
+map ; <Plug>(easymotion-bd-f)
 map , <Plug>(easymotion-bd-jk)
 " %: match up
 let g:matchup_matchparen_enabled = 0
@@ -63,6 +64,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 " u: vscode undo, must defined after load vim-repeat
 nnoremap u <Cmd>call VSCodeNotifyVisual('undo', 1)<CR><Esc>
+nnoremap S i<CR><Esc>
 
 " 复制粘贴
 " yank to 0

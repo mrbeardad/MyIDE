@@ -346,7 +346,7 @@ main "$@"
 # bind R source-file ~/.tmux.conf \; display-message "Config reloaded.."
 # 
 # # Window跳转
-# bind b previous-window
+# # bind b previous-window
 # 
 # # Pane分割
 # bind s splitw -v -c '#{pane_current_path}'
@@ -1152,13 +1152,10 @@ main "$@"
 #     event = "WinScrolled",
 #     config = function()
 #       require('neoscroll').setup({
-#         mappings = { '<C-d>', 'zz' },
+#         mappings = { '<C-d>', '<C-u>', 'zz' },
 #         respect_scrolloff = true,
 #         easing_function = "circular", -- quadratic, cubic, quartic, quintic, circular, sine
 #       })
-#       vim.api.nvim_set_keymap("n", "<C-b>", "<CMD>lua require('neoscroll').scroll(-vim.wo.scroll, true, 250)<CR>", { noremap = true })
-#       vim.api.nvim_set_keymap("v", "<C-b>", "<CMD>lua require('neoscroll').scroll(-vim.wo.scroll, true, 250)<CR>", { noremap = true })
-#       vim.api.nvim_set_keymap("s", "<C-b>", "<CMD>lua require('neoscroll').scroll(-vim.wo.scroll, true, 250)<CR>", { noremap = true })
 #     end
 #   }, {
 #     "lukas-reineke/indent-blankline.nvim",
