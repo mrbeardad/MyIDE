@@ -8,14 +8,6 @@ OPTION_UPDATE_CONFIG=
 OPTION_AUTO_YES=
 PROMPT_INFORMATION=
 
-sudo() {
-  if [[ -s "$DEBUG" ]]; then
-    echo "$@"
-  else
-    sudo "$@"
-  fi
-}
-
 usage() {
   echo "Usage: init.sh [-h|-u|-y]"
   echo ""
@@ -97,35 +89,34 @@ ask_user() {
 }
 
 sudo_without_passwd() {
-  ask_user "Do you want to execute 'sudo' without password?" || return
-  sudo sed -i '/^%sudo\s*ALL=\(ALL:ALL\)\s*ALL/s/ALL$/NOPASSWD: ALL/' /etc/sudoers
+  ask_user "Do you want to execute 'sudo' without password?" || return 0
+  sudo sed -i '/^%sudo\s*ALL=(ALL:ALL)\s*ALL$/s/ALL$/NOPASSWD: ALL/' /etc/sudoers
 }
 
 change_apt_mirror_source() {
   sudo apt -y install git curl gpg
-  ask_user "Do you want to change apt mirror source to tencent cloud?" || return
+  ask_user "Do you want to change apt mirror source to tencent cloud?" || return 0
   sudo curl -Lo /etc/apt/sources.list http://mirrors.cloud.tencent.com/repo/ubuntu20_sources.list
   sudo apt update
 }
 
 upgrade_to_ubuntu22() {
-  ask_user "Do you want yo upgrade to ubuntu22.04 STL?" || return
+  ask_user "Do you want yo upgrade to ubuntu22.04 STL?" || return 0
   sudo apt -y upgrade
   sudo do-release-upgrade -d
 }
 
 prerequisites() {
-  sudo apt -y install golang cargo python3-pip python-is-python3
   curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-  sudo apt -y install nodejs
+  sudo apt -y install golang cargo python3-pip python-is-python3 nodejs unzip
 
   ask_user "Do you want to set GOPROXY to tencent cloud mirror?" &&
     go env -w GOPROXY=https://mirrors.tencent.com/go/,direct
   go env -w GOBIN="$HOME"/.local/bin/ GOSUMDB=sum.golang.google.cn
 
   ask_user "Do you want to config npm registry to tencent cloud mirror?" &&
-    npm config set registry http://mirrors.tencent.com/npm/ &&
-    npm config set prefix ~/.local -g
+    npm config set registry http://mirrors.tencent.com/npm/
+  npm config set prefix ~/.local
   npm config set global-bin-dir ~/.local/bin
   npm install pnpm -g
 
@@ -133,7 +124,7 @@ prerequisites() {
     pip config set global.index-url https://mirrors.tencent.com/pypi/simple
 
   ask_user "Do you want to config cargo registry to utsc cloud mirror?" &&
-    mkdir ~/.cargo && cat >~/.cargo/config <<EOF
+    mkdir -p ~/.cargo && cat >~/.cargo/config <<EOF
 [source.crates-io]
 replace-with = 'ustc'
 [source.ustc]
@@ -145,7 +136,7 @@ ssh_and_git_config() {
   # only for myself
   if [[ "$USER" == beardad ]]; then
     get_config __GITCONFIG >~/.gitconfig
-    mkdir ~/.ssh/
+    mkdir -p ~/.ssh/
     get_config __SSH_CONFIG >~/.ssh/config
   fi
 }
@@ -257,7 +248,7 @@ other_cli_tools() {
   cargo install lsd
   mv ~/.cargo/bin/* ~/.local/bin/
   git clone --recurse-submodules https://github.com/mrbeardad/SeeCheatSheets ~/.cheat
-  mkdir ~/.cheat/src/build
+  mkdir -p ~/.cheat/src/build
   (
     cd ~/.cheat/src/build
     cmake -D CMAKE_BUILD_TYPE=Release ..
@@ -284,15 +275,14 @@ main() {
     set_config __GITCONFIG ~/.gitconfig
     set_config __SSH_CONFIG ~/.ssh/config
   else
-    # the default cwd after enter wsl may be windows home
-    cd ~
+    cd "$(dirname "$0")"
     mkdir -p ~/.local/bin/
     mkdir -p ~/.config/
 
     sudo_without_passwd
     change_apt_mirror_source
     upgrade_to_ubuntu22
-    lpm
+    prerequisites
     ssh_and_git_config
     install_docker
     tmux_conf
@@ -335,23 +325,23 @@ main "$@"
 # set-option -ga terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours
 # set-option -ga terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[1 q' # cursor style
 # # set-option -ga terminal-overrides ',*:cnorm=\E[?12h\E[?25h'
-# 
+#
 # # 更改快捷键前缀
 # unbind C-Z
 # unbind C-B
 # set -g prefix M-w
-# 
+#
 # # 重载配置
 # unbind 'R'
 # bind R source-file ~/.tmux.conf \; display-message "Config reloaded.."
-# 
+#
 # # Window跳转
 # # bind b previous-window
-# 
+#
 # # Pane分割
 # bind s splitw -v -c '#{pane_current_path}'
 # bind v splitw -h -c '#{pane_current_path}'
-# 
+#
 # # Pane跳转
 # #unbind-key M-Left
 # #unbind-key M-Right
@@ -361,7 +351,7 @@ main "$@"
 # bind j selectp -D
 # bind k selectp -U
 # bind l selectp -R
-# 
+#
 # # Pane大小调整
 # #unbind-key C-Right
 # #unbind-key C-Left
@@ -372,19 +362,19 @@ main "$@"
 # bind - resizep -D 10
 # bind < resizep -L 10
 # bind > resizep -R 10
-# 
+#
 # # 剪切板支持
 # bind-key -T copy-mode-vi v send-keys -X begin-selection
 # bind-key -T copy-mode-vi y send-keys -X copy-selection
 # bind ] run-shell -b "win32yank.exe -o --lf | tmux load-buffer - ; tmux paste-buffer"
-# 
+#
 # # 快速启动
 # bind t new-window htop
 # bind T new-window btop
 # bind g new-window -c "#{pane_current_path}" tig --all
 # bind r new-window -c "#{pane_current_path}" ranger
 # bind m new-window "cmatrix"
-# 
+#
 # # 鼠标滚轮模拟
 # tmux_commands_with_legacy_scroll="nano less more man"
 # bind-key -T root WheelUpPane \
@@ -397,11 +387,11 @@ main "$@"
 #         'send -Mt=' \
 #         'if-shell -t= "#{?alternate_on,true,false} || echo \"#{tmux_commands_with_legacy_scroll}\" | grep -q \"#{pane_current_command}\"" \
 #             "send -t= Down Down Down" "send -Mt="'
-# 
+#
 # # 插件
 # run '/usr/share/tmux-plugin-manager/tpm'        # 插件管理器
 # set -g @plugin 'tmux-plugins/tmux-resurrect'    # 会话保存与恢复插件
-# 
+#
 # EDITOR=nvim
 # PATH=$HOME/.local/bin/:$PATH
 # __TMUX_CONF_END
@@ -413,64 +403,64 @@ main "$@"
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
-# 
+#
 # # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/.local/bin:$PATH
-# 
+#
 # # Path to your oh-my-zsh installation.
 # export ZSH="/home/beardad/.oh-my-zsh"
-# 
+#
 # # Set name of the theme to load --- if set to "random", it will
 # # load a random theme each time oh-my-zsh is loaded, in which case,
 # # to know which specific one was loaded, run: echo $RANDOM_THEME
 # # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="powerlevel10k/powerlevel10k"
-# 
+#
 # # Set list of themes to pick from when loading at random
 # # Setting this variable when ZSH_THEME=random will cause zsh to load
 # # a theme from this variable instead of looking in $ZSH/themes/
 # # If set to an empty array, this variable will have no effect.
 # # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-# 
+#
 # # Uncomment the following line to use case-sensitive completion.
 # # CASE_SENSITIVE="true"
-# 
+#
 # # Uncomment the following line to use hyphen-insensitive completion.
 # # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
-# 
+#
 # # Uncomment the following line to disable bi-weekly auto-update checks.
 # # DISABLE_AUTO_UPDATE="true"
-# 
+#
 # # Uncomment the following line to automatically update without prompting.
 # # DISABLE_UPDATE_PROMPT="true"
-# 
+#
 # # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=30
-# 
+#
 # # Uncomment the following line if pasting URLs and other text is messed up.
 # # DISABLE_MAGIC_FUNCTIONS="true"
-# 
+#
 # # Uncomment the following line to disable colors in ls.
 # # DISABLE_LS_COLORS="true"
-# 
+#
 # # Uncomment the following line to disable auto-setting terminal title.
 # # DISABLE_AUTO_TITLE="true"
-# 
+#
 # # Uncomment the following line to enable command auto-correction.
 # # ENABLE_CORRECTION="true"
-# 
+#
 # # Uncomment the following line to display red dots whilst waiting for completion.
 # # You can also set it to another string to have that shown instead of the default red dots.
 # # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
-# 
+#
 # # Uncomment the following line if you want to disable marking untracked files
 # # under VCS as dirty. This makes repository status check for large repositories
 # # much, much faster.
 # # DISABLE_UNTRACKED_FILES_DIRTY="true"
-# 
+#
 # # Uncomment the following line if you want to change the command execution time
 # # stamp shown in the history command output.
 # # You can set one of the optional three formats:
@@ -478,10 +468,10 @@ main "$@"
 # # or set a custom format using the strftime function format specifications,
 # # see 'man strftime' for details.
 # HIST_STAMPS="yyyy-mm-dd"
-# 
+#
 # # Would you like to use another custom folder than $ZSH/custom?
 # # ZSH_CUSTOM=/path/to/new-custom-folder
-# 
+#
 # # Which plugins would you like to load?
 # # Standard plugins can be found in $ZSH/plugins/
 # # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -504,26 +494,26 @@ main "$@"
 #     tmux
 #     vi-mode
 # )
-# 
+#
 # source $ZSH/oh-my-zsh.sh
-# 
+#
 # # User configuration
-# 
+#
 # # export MANPATH="/usr/local/man:$MANPATH"
-# 
+#
 # # You may need to manually set your language environment
 # # export LANG=en_US.UTF-8
-# 
+#
 # # Preferred editor for local and remote sessions
 # # if [[ -n $SSH_CONNECTION ]]; then
 # #   export EDITOR='vim'
 # # else
 # #   export EDITOR='mvim'
 # # fi
-# 
+#
 # # Compilation flags
 # # export ARCHFLAGS="-arch x86_64"
-# 
+#
 # # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -532,7 +522,7 @@ main "$@"
 # # Example aliases
 # # alias zshconfig="mate ~/.zshrc"
 # # alias ohmyzsh="mate ~/.oh-my-zsh"
-# 
+#
 # alias l='lsd -lah --group-dirs first'
 # alias l.='lsd -lhd --group-dirs first .*'
 # alias ll='lsd -lh --group-dirs first'
@@ -544,7 +534,7 @@ main "$@"
 # alias apt='sudo apt'
 # alias stl='sudo systemctl'
 # alias vi="$EDITOR"
-# 
+#
 # alias gmv='git mv'
 # alias grms='git rm --cached'
 # alias grss='git restore --staged'
@@ -562,15 +552,15 @@ main "$@"
 # alias gsa='git submodule add'
 # alias gsd='git submodule deinit'
 # alias gsu='git submodule update --init --recursive'
-# 
+#
 # source /usr/share/doc/fzf/examples/key-bindings.zsh
 # source /usr/share/doc/fzf/examples/completion.zsh
-# 
+#
 # source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#606060"
-# 
+#
 # export VI_MODE_SET_CURSOR=true
 # bindkey -M vicmd '^L' clear-screen
 # bindkey '^L' forward-word
@@ -581,17 +571,17 @@ main "$@"
 # bindkey '^Y' yank
 # bindkey '^P' up-line-or-beginning-search
 # bindkey '^N' down-line-or-beginning-search
-# 
+#
 # zstyle ':completion:*:*:docker:*' option-stacking yes
 # zstyle ':completion:*:*:docker-*:*' option-stacking yes
-# 
+#
 # bindkey -M emacs '^[s' sudo-command-line
 # bindkey -M vicmd '^[s' sudo-command-line
 # bindkey -M viins '^[s' sudo-command-line
-# 
+#
 # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# 
+#
 # __ZSHRC_END
 
 # __RANGER
@@ -781,7 +771,7 @@ main "$@"
 # lvim.colorscheme = "onedarker"
 # lvim.log.level = "warn"
 # lvim.format_on_save = true
-# 
+#
 # ----------------------------------------
 # -- GUI
 # ----------------------------------------
@@ -789,17 +779,17 @@ main "$@"
 # vim.opt.guifont = "NerdCodePro Font:h10"
 # vim.g.neovide_cursor_vfx_mode = "ripple"
 # vim.g.neovide_cursor_animation_length = 0.01
-# 
+#
 # ----------------------------------------
 # -- KEYMAPPINGS
 # ----------------------------------------
 # vim.opt.timeoutlen = 350
 # lvim.leader = "space"
-# 
+#
 # ----------------------------------------
 # -- 屏幕滚动: neoscroll
 # ----------------------------------------
-# 
+#
 # ----------------------------------------
 # -- 光标移动: clever-f, hop, matchit
 # ----------------------------------------
@@ -808,7 +798,7 @@ main "$@"
 # -- vim.api.nvim_set_keymap('i', '<C-e>', '<End>', { noremap = true })
 # -- vim.api.nvim_set_keymap('v', '<C-e>', '$', { noremap = true })
 # -- vim.api.nvim_set_keymap('n', '<C-e>', '$', { noremap = true })
-# 
+#
 # ----------------------------------------
 # -- 全文搜索: vim-visual-star-search, vim-cool, telescope, nvim-spectre
 # ----------------------------------------
@@ -823,7 +813,7 @@ main "$@"
 # -- HACK: terminal map: ctrl+shift+f -> alt+f
 # vim.api.nvim_set_keymap('n', '<M-f>', '<CMD>Telescope live_grep<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-S-F>', '<CMD>Telescope live_grep<CR>', { noremap = true })
-# 
+#
 # ----------------------------------------
 # -- 标签跳转: vim-bookmarks, telescope-vim-bookmarks
 # ----------------------------------------
@@ -831,7 +821,7 @@ main "$@"
 # vim.api.nvim_set_keymap('n', '<M-I>', '<C-i>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '[h', "<CMD>Gitsigns next_hunk<CR>", { noremap = true })
 # vim.api.nvim_set_keymap('n', ']h', "<CMD>Gitsigns prev_hunk<CR>", { noremap = true })
-# 
+#
 # ----------------------------------------
 # -- 插入编辑
 # ----------------------------------------
@@ -855,12 +845,12 @@ main "$@"
 # vim.api.nvim_set_keymap('c', '<C-l>', '<C-Right>', { noremap = true })
 # vim.api.nvim_set_keymap('i', '<C-z>', '<CMD>undo<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('i', '<C-r><C-r>', '<CMD>redo<CR>', { noremap = true })
-# 
+#
 # ----------------------------------------
 # -- 普通模式
 # ----------------------------------------
 # vim.api.nvim_set_keymap('n', 'S', 'i<CR><Esc>', { noremap = true })
-# 
+#
 # ----------------------------------------
 # -- 复制粘贴
 # ----------------------------------------
@@ -882,7 +872,7 @@ main "$@"
 # lvim.builtin.which_key.mappings["O"] = { "<CMD>put! =@+<CR>", "Paste Clipboard to Previous Line" }
 # lvim.builtin.which_key.mappings["by"] = { "<CMD>%y +<CR>", "Yank Whole Buffer to Clipboard" }
 # lvim.builtin.which_key.mappings["bp"] = { "<CMD>%d<CR>\"+P", "Patse Clipboard to Whole Buffer" }
-# 
+#
 # ----------------------------------------
 # -- 文件操作: telescope
 # ----------------------------------------
@@ -904,7 +894,7 @@ main "$@"
 # vim.api.nvim_set_keymap('n', '<Tab>', '<CMD>wincmd w<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<S-Tab>', '<CMD>wincmd p<CR>', { noremap = true })
 # lvim.builtin.which_key.mappings["q"] = { "<CMD>call SmartClose()<CR>", "Quit Cleverly" }
-# 
+#
 # ----------------------------------------
 # -- 语言服务
 # ----------------------------------------
@@ -946,7 +936,7 @@ main "$@"
 # vim.api.nvim_set_keymap('n', '<C-t>', '<CMD>Telescope lsp_workspace_symbols<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '[e', "<CMD>lua vim.diagnostic.goto_prev()<CR>", { noremap = true })
 # vim.api.nvim_set_keymap('n', ']e', "<CMD>lua vim.diagnostic.goto_next()<CR>", { noremap = true })
-# 
+#
 # ----------------------------------------
 # -- 其它按键: vim-translator, Calc, ...
 # ----------------------------------------
@@ -971,7 +961,7 @@ main "$@"
 #   c = { "<CMD>Calc<CR>", "Calculator" },
 #   u = { "<CMD>UndotreeToggle<CR>", "UndoTree" },
 # }
-# 
+#
 # ----------------------------------------
 # -- Telescope
 # ----------------------------------------
@@ -989,7 +979,7 @@ main "$@"
 #   n = {
 #   },
 # }
-# 
+#
 # -- WARN: After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 # ----------------------------------------
 # -- User Config for predefined plugins
@@ -1011,18 +1001,18 @@ main "$@"
 # lvim.builtin.alpha.dashboard.section.buttons.entries[5][1] = "SPC S l"
 # lvim.builtin.alpha.dashboard.section.buttons.entries[5][2] = "  Restore Session"
 # lvim.builtin.alpha.dashboard.section.buttons.entries[5][3] = "<CMD>lua require('persistence').load({ last = true })<CR>"
-# 
+#
 # lvim.builtin.notify.active = true
-# 
+#
 # lvim.builtin.terminal.active = true
 # lvim.builtin.terminal.shell = "/bin/bash"
 # lvim.builtin.terminal.open_mapping = "<M-`>"
-# 
+#
 # lvim.builtin.nvimtree.setup.view.side = "left"
 # lvim.builtin.nvimtree.show_icons.git = 1
-# 
+#
 # lvim.builtin.bufferline.options.always_show_bufferline = true
-# 
+#
 # lvim.builtin.lualine.options.theme = "material"
 # lvim.builtin.lualine.options = {
 #   globalstatus       = true,
@@ -1056,7 +1046,7 @@ main "$@"
 #   { ' %l/%L  %c', type = 'stl' },
 #   components.scrollbar
 # }
-# 
+#
 # -- if you don't want all the parsers change this to a table of the ones you want
 # lvim.builtin.treesitter.highlight.enabled = true
 # lvim.builtin.treesitter.rainbow.enable = true
@@ -1078,27 +1068,27 @@ main "$@"
 #   "json",
 #   "yaml",
 # }
-# 
-# 
+#
+#
 # ----------------------------------------
 # -- generic LSP settings
 # ----------------------------------------
-# 
+#
 # -- ---@usage disable automatic installation of servers
 # -- lvim.lsp.automatic_servers_installation = false
-# 
+#
 # -- ---WARN: configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
 # -- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
 # -- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
 # -- local opts = {} -- check the lspconfig documentation for a list of all possible options
 # -- require("lvim.lsp.manager").setup("pyright", opts)
-# 
+#
 # -- ---WARN: remove a server from the skipped list, e.g. eslint, or emmet_ls. !!Requires `:LvimCacheReset` to take effect!!
 # -- ---`:LvimInfo` lists which server(s) are skiipped for the current filetype
 # -- vim.tbl_map(function(server)
 # --   return server ~= "emmet_ls"
 # -- end, lvim.lsp.automatic_configuration.skipped_servers)
-# 
+#
 # -- -- you can set a custom on_attach function that will be used for all the language servers
 # -- -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
 # -- lvim.lsp.on_attach_callback = function(client, bufnr)
@@ -1108,7 +1098,7 @@ main "$@"
 # --   --Enable completion triggered by <c-x><c-o>
 # --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 # -- end
-# 
+#
 # -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
 # -- local formatters = require "lvim.lsp.null-ls.formatters"
 # -- formatters.setup {
@@ -1124,7 +1114,7 @@ main "$@"
 # --     filetypes = { "typescript", "typescriptreact" },
 # --   },
 # -- }
-# 
+#
 # -- -- set additional linters
 # -- local linters = require "lvim.lsp.null-ls.linters"
 # -- linters.setup {
@@ -1142,7 +1132,7 @@ main "$@"
 # --     filetypes = { "javascript", "python" },
 # --   },
 # -- }
-# 
+#
 # ----------------------------------------
 # -- Additional Plugins
 # ----------------------------------------
@@ -1415,7 +1405,7 @@ main "$@"
 #     cmd = { "UndotreeToggle" }
 #   }
 # }
-# 
+#
 # -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 # -- vim.cmd [[
 # --   function! AutoOpenAlpha()
@@ -1467,7 +1457,7 @@ main "$@"
 #     quit
 #   endif
 # endf
-# 
+#
 # function! Open_file_in_explorer() abort
 #   if has('win32') || has('wsl')
 #     call jobstart('explorer.exe .')

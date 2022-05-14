@@ -1,5 +1,6 @@
 {
   "$help": "https://aka.ms/terminal-documentation",
+  "$schema": "https://aka.ms/terminal-profiles-schema",
   "actions": [
     {
       "keys": "ctrl+shift+f",
@@ -65,13 +66,6 @@
       }
     },
     {
-      "keys": "ctrl+shift+n",
-      "command": {
-        "action": "sendInput",
-        "input": "\u001bN" // <M-N>
-      }
-    },
-    {
       "keys": "ctrl+shift+m",
       "command": {
         "action": "sendInput",
@@ -93,150 +87,98 @@
       }
     }
   ],
-  "alwaysOnTop": false,
-  "alwaysShowTabs": false,
-  "centerOnLaunch": true,
-  "confirmCloseAllTabs": true,
   "copyFormatting": "none",
   "copyOnSelect": true,
-  "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-  "disableAnimations": false,
-  "disabledProfileSources": [],
-  "experimental.detectURLs": true,
-  "experimental.rendering.forceFullRepaint": false,
-  "experimental.rendering.software": false,
-  "focusFollowMouse": false,
-  "initialCols": 120,
-  "initialPosition": ",",
-  "initialRows": 30,
-  "largePasteWarning": true,
-  "launchMode": "default",
   "multiLinePasteWarning": false,
+  "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
   "profiles": {
     "defaults": {
-      "altGrAliasing": true,
-      "antialiasingMode": "grayscale",
-      "bellStyle": "audible",
-      "closeOnExit": "graceful",
-      "colorScheme": "Ayu Mirage",
-      "cursorShape": "filledBox",
-      "experimental.retroTerminalEffect": false,
       "font": {
         "face": "NerdCodePro Font",
         "size": 10,
         "weight": "normal"
       },
-      "historySize": 9001,
+      "colorScheme": "Blazer",
+      "useAcrylic": true,
       "opacity": 50,
       "padding": "0, 0, 0, 0",
-      "scrollbarState": "hidden",
-      "snapOnInput": true,
-      "useAcrylic": true
+      "scrollbarState": "hidden"
     },
     "list": [
       {
+        "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
         "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
         "hidden": false,
         "name": "Windows PowerShell"
       },
       {
         "commandline": "wsl ~ -d Ubuntu -- tmux new-session -s Default || tmux attach -t Default",
+        "icon": "C:\\Users\\Bear\\OneDrive\\图片\\Saved Pictures\\ubuntu.png",
         "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
         "hidden": false,
-        "icon": "C:\\Users\\mrbea\\OneDrive\\\u56fe\u7247\\Saved Pictures\\ubuntu.png",
-        "name": "Ubuntu in WSL",
+        "name": "Ubuntu",
         "source": "Windows.Terminal.Wsl"
       },
       {
-        "commandline": "ssh -t -o ServerAliveInterval=60 -i C:\\Users\\mrbea\\.ssh\\tencent_cloud_beardad ubuntu@152.136.188.178 sh -c 'tmux new-session -s ASUS || tmux attach -t ASUS'",
-        "guid": "{a453ae62-4e3d-5e58-b989-0a998ec441b8}",
+        "commandline": "%SystemRoot%\\System32\\cmd.exe",
+        "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
         "hidden": false,
-        "icon": "C:\\Users\\mrbea\\OneDrive\\\u56fe\u7247\\Saved Pictures\\\u817e\u8baf\u4e91.png",
-        "name": "Ubuntu on Cloud"
+        "name": "Command Prompt"
       },
       {
-        "guid": "{14df5b4e-28d6-569d-858a-206152666632}",
+        "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
         "hidden": false,
-        "name": "Developer Command Prompt for VS 2022 [Preview]",
-        "source": "Windows.Terminal.VisualStudio"
-      },
-      {
-        "guid": "{40ef9f41-9037-5c26-8b40-b3a5235ddcd6}",
-        "hidden": false,
-        "name": "Developer PowerShell for VS 2022 [Preview]",
-        "source": "Windows.Terminal.VisualStudio"
+        "name": "Azure Cloud Shell",
+        "source": "Windows.Terminal.Azure"
       }
     ]
   },
   "schemes": [
     {
-      "background": "#161719",
-      "black": "#000000",
-      "blue": "#85BEFD",
-      "brightBlack": "#000000",
-      "brightBlue": "#96CBFE",
-      "brightCyan": "#85BEFD",
-      "brightGreen": "#94FA36",
-      "brightPurple": "#B9B6FC",
-      "brightRed": "#FD5FF1",
-      "brightWhite": "#E0E0E0",
-      "brightYellow": "#F5FFA8",
-      "cursorColor": "#FFFFFF",
-      "cyan": "#85BEFD",
-      "foreground": "#C5C8C6",
-      "green": "#87C38A",
-      "name": "Atom",
-      "purple": "#B9B6FC",
-      "red": "#FD5FF1",
-      "selectionBackground": "#00DFD7",
-      "white": "#E0E0E0",
-      "yellow": "#FFD7B1"
+      "name": "Afterglow",
+      "black": "#151515",
+      "red": "#ac4142",
+      "green": "#7e8e50",
+      "yellow": "#e5b567",
+      "blue": "#6c99bb",
+      "purple": "#9f4e85",
+      "cyan": "#7dd6cf",
+      "white": "#d0d0d0",
+      "brightBlack": "#505050",
+      "brightRed": "#ac4142",
+      "brightGreen": "#7e8e50",
+      "brightYellow": "#e5b567",
+      "brightBlue": "#6c99bb",
+      "brightPurple": "#9f4e85",
+      "brightCyan": "#7dd6cf",
+      "brightWhite": "#f5f5f5",
+      "background": "#212121",
+      "foreground": "#d0d0d0",
+      "cursorColor": "#d0d0d0",
+      "selectionBackground": "#303030"
     },
     {
-      "background": "#1F2430",
-      "black": "#191E2A",
-      "blue": "#6DCBFA",
-      "brightBlack": "#686868",
-      "brightBlue": "#73D0FF",
-      "brightCyan": "#95E6CB",
-      "brightGreen": "#BAE67E",
-      "brightPurple": "#D4BFFF",
-      "brightRed": "#F28779",
-      "brightWhite": "#FFFFFF",
-      "brightYellow": "#FFD580",
-      "cursorColor": "#FFCCCC",
-      "cyan": "#90E1C6",
-      "foreground": "#CBCCC6",
-      "green": "#A6CC70",
-      "name": "Ayu Mirage",
-      "purple": "#CFBAFA",
-      "red": "#ED8274",
-      "selectionBackground": "#33415E",
-      "white": "#C7C7C7",
-      "yellow": "#FAD07B"
-    },
-    {
-      "background": "#0D1926",
-      "black": "#000000",
-      "blue": "#7A7AB8",
-      "brightBlack": "#262626",
-      "brightBlue": "#BDBDDB",
-      "brightCyan": "#BDDBDB",
-      "brightGreen": "#BDDBBD",
-      "brightPurple": "#DBBDDB",
-      "brightRed": "#DBBDBD",
-      "brightWhite": "#FFFFFF",
-      "brightYellow": "#DBDBBD",
-      "cursorColor": "#D9E6F2",
-      "cyan": "#7AB8B8",
-      "foreground": "#D9E6F2",
-      "green": "#7AB87A",
       "name": "Blazer",
-      "purple": "#B87AB8",
-      "red": "#B87A7A",
-      "selectionBackground": "#C1DDFF",
-      "white": "#D9D9D9",
-      "yellow": "#B8B87A"
+      "black": "#000000",
+      "red": "#b87a7a",
+      "green": "#7ab87a",
+      "yellow": "#b8b87a",
+      "blue": "#7a7ab8",
+      "purple": "#b87ab8",
+      "cyan": "#7ab8b8",
+      "white": "#d9d9d9",
+      "brightBlack": "#262626",
+      "brightRed": "#dbbdbd",
+      "brightGreen": "#bddbbd",
+      "brightYellow": "#dbdbbd",
+      "brightBlue": "#bdbddb",
+      "brightPurple": "#dbbddb",
+      "brightCyan": "#bddbdb",
+      "brightWhite": "#ffffff",
+      "background": "#0d1926",
+      "foreground": "#d9e6f2",
+      "cursorColor": "#d9e6f2",
+      "selectionBackground": "#c1ddff"
     },
     {
       "background": "#0C0C0C",
@@ -445,16 +387,5 @@
       "white": "#C0C0C0",
       "yellow": "#808000"
     }
-  ],
-  "showTabsInTitlebar": true,
-  "showTerminalTitleInTitlebar": false,
-  "snapToGridOnResize": true,
-  "startOnUserLogin": false,
-  "startupActions": null,
-  "tabSwitcherMode": "mru",
-  "tabWidthMode": "compact",
-  "theme": "system",
-  "trimBlockSelection": true,
-  "windowingBehavior": "useNew",
-  "wordDelimiters": " /\\()\"'-.,:;<>~!@#$%^&*|+=[]{}~?\u2502"
+  ]
 }

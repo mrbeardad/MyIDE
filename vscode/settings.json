@@ -92,15 +92,14 @@
 
   "security.workspace.trust.enabled": false,
   "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
-  "vscode-neovim.neovimExecutablePaths.win32": "D:\\Neovim\\bin\\nvim.exe",
+  "vscode-neovim.neovimExecutablePaths.win32": "C:\\Program Files\\Neovim\\bin\\nvim.exe",
   "vscode-neovim.neovimInitVimPaths.linux": "/home/beardad/.vscode-neovim/init.vim",
-  "vscode-neovim.neovimInitVimPaths.win32": "C:\\Users\\mrbea\\AppData\\Local\\vscode-neovim\\init.vim",
+  "vscode-neovim.neovimInitVimPaths.win32": "C:\\Users\\Bear\\AppData\\Local\\vscode-neovim\\init.vim",
   "vscode-neovim.textDecorationsAtTop": true,
 
   "path-intellisense.autoSlashAfterDirectory": true,
   "path-intellisense.showHiddenFiles": true,
 
-  "clangd.path": "c:\\Users\\mrbea\\AppData\\Roaming\\Code\\User\\globalStorage\\llvm-vs-code-extensions.vscode-clangd\\install\\14.0.0\\clangd_14.0.0\\bin\\clangd.exe",
   "clangd.arguments": [
     "--enable-config",
     "--clang-tidy",

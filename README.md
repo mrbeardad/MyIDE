@@ -16,16 +16,17 @@
 
 1. 安装[MyASUS 华硕管家](https://www.microsoft.com/zh-cn/p/myasus/9n7r5s6b0zzh?activetab=pivot:overviewtab)，自动安装驱动
 2. 安装[Google Chrome 浏览器](https://www.google.cn/chrome/)
-3. 登录 Google Chrome 账户，自动同步 Chrome 配置并手动同步 TampMonkey 配置
-4. 安装[Bandizip 压缩包工具](https://www.bandizip.com/)
+3. 登录 Google Chrome 账户并自动同步配置
+4. 安装[Bandizip 压缩包工具](http://www.bandisoft.com/bandizip/old/6/)
 5. 安装常用软件
 
-   - [QQ 输入法](http://qq.pinyin.cn/)
-   - [TIM 聊天通讯](https://tim.qq.com)
-   - [WeChat 微信](https://pc.weixin.qq.com/?lang=zh_CN)
+   - [搜狗输入法](https://pinyin.sogou.com/)
+   - [TIM](https://tim.qq.com)
+   - [微信](https://pc.weixin.qq.com/?lang=zh_CN)
+   - [腾讯会议](https://meeting.tencent.com/download-center.html)
    - [Listen1 音乐](https://www.zhyong.cn/posts/64cd/)
    - [Office 办公套件](https://www.office.com/)
-   - [CHFS 局域网 Http 服务器](http://iscute.cn/chfs)
+   - [局域网 Http 服务器](http://iscute.cn/chfs)
    - [PowerToys 工具集](https://github.com/microsoft/PowerToys/releases)
    - [Listary 搜索工具](https://www.listarypro.com/download)
        <details>
@@ -125,11 +126,12 @@
 
 1. 安装[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)
 2. 安装 wt 配置[settings.json](wt/settings.json)
-3. 将[启动脚本](wt/WindowsTerminalQuakeModeStartup.bat)复制到`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`实现开机自启 quake 模式
+3. 将[该启动脚本](wt/wt_quake.vbs)复制到`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`实现开机自启 quake 模式
 4. 安装[WSL2](https://docs.microsoft.com/en-us/windows/wsl/install)
 
    ```sh
    # in windows cmd on administrator mode
+   wsl.exe --update
    wsl.exe --install
    ```
 
@@ -145,7 +147,8 @@
 
    ```sh
    # in wsl
-   curl -fsSL ./init.sh | bash -
+   curl -Lo init.sh https://github.com/mrbeardad/MyIDE/raw/master/init.sh
+   ./init.sh # 直接执行，不要`bash init.sh`
    ```
 
 > TIPS:
@@ -162,12 +165,10 @@
 
 1. 下载并安装[VSCode](https://code.visualstudio.com/download)，登录账户并同步[配置](vscode/)。
 
-2. 下载并安装[Git](https://git-scm.com/downloads)
-
-3. 下载并安装[NeoVim](https://github.com/neovim/neovim/releases/)，然后
+2. 下载并安装[NeoVim](https://github.com/neovim/neovim/releases/)，然后
    1. 安装配置目录[vscode-neovim](vscode/vscode-neovim/)到`%USERPROFILE%\AppData\Local\vscode-neovim`
-   2. vscode 配置 init.vim 路径为`%USERPROFILE%\AppData\Local\vscode-neovim\init.vim`
-   3. 配置 vscode 中`nvim.exe`安装路径，
+   2. vscode 配置 `init.vim` 路径为`%USERPROFILE%\AppData\Local\vscode-neovim\init.vim`
+   3. vscode 配置 `nvim.exe` 安装路径
 
 [**vscode 使用手册**](vscode.md)
 
