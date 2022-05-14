@@ -98,6 +98,9 @@
   "vscode-neovim.neovimInitVimPaths.win32": "C:\\Users\\mrbea\\AppData\\Local\\vscode-neovim\\init.vim",
   "vscode-neovim.textDecorationsAtTop": true,
 
+  "path-intellisense.autoSlashAfterDirectory": true,
+  "path-intellisense.showHiddenFiles": true,
+
   "clangd.path": "c:\\Users\\mrbea\\AppData\\Roaming\\Code\\User\\globalStorage\\llvm-vs-code-extensions.vscode-clangd\\install\\14.0.0\\clangd_14.0.0\\bin\\clangd.exe",
   "clangd.arguments": [
     "--enable-config",
@@ -122,13 +125,12 @@
 
   "python.analysis.completeFunctionParens": true,
   "python.linting.flake8Enabled": true,
-  "python.linting.pylamaEnabled": true,
+  "python.linting.pylintEnabled": true,
   "python.formatting.provider": "yapf",
 
   "bashIde.highlightParsingErrors": true,
 
-  "path-intellisense.autoSlashAfterDirectory": true,
-  "path-intellisense.showHiddenFiles": true,
+  "eslint.format.enable": true,
   "javascript.inlayHints.enumMemberValues.enabled": true,
   "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
   "javascript.inlayHints.parameterTypes.enabled": true,
@@ -138,11 +140,15 @@
   "javascript.format.enable": false,
   "typescript.suggest.paths": false,
   "typescript.format.enable": false,
+
   "html.format.enable": false,
-  "json.format.enable": false,
+
+  "css.validate": false,
   "css.format.enable": false,
   "less.format.enable": false,
   "scss.format.enable": false,
+
+  "json.format.enable": false,
 
   "markdown-preview-enhanced.enableExtendedTableSyntax": true,
   "markdown-preview-enhanced.previewTheme": "solarized-dark.css",
