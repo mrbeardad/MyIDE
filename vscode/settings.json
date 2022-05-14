@@ -70,7 +70,6 @@
   "workbench.view.alwaysShowHeaderActions": true,
   "workbench.editor.pinnedTabSizing": "compact",
   "workbench.editor.revealIfOpen": true,
-  "workbench.settings.useSplitJSON": true,
 
   "window.customMenuBarAltFocus": false,
   "window.enableMenuBarMnemonics": false,
