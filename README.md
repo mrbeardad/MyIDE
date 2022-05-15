@@ -127,7 +127,11 @@
 1. 安装[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)
 2. 安装 wt 配置[settings.json](wt/settings.json)
 3. 将[该启动脚本](wt/wt_quake.vbs)复制到`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`实现开机自启 quake 模式
-4. 安装[WSL2](https://docs.microsoft.com/en-us/windows/wsl/install)
+4. 安装[dual-key-remap](https://github.com/ililim/dual-key-remap/releases)映射 CapsLock 键为“单击为 Esc，组合为 Ctrl”
+   1. 解压文件夹到`%USERPROFILE%\AppData\Local`
+   2. 在`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`下创建`%USERPROFILE%\AppData\Local\dual-key-remap\dual-key-remap.exe`的快捷方式
+   3. 手动启动即可，之后便开机自启
+5. 安装[WSL2](https://docs.microsoft.com/en-us/windows/wsl/install)
 
    ```sh
    # in windows cmd on administrator mode
@@ -135,7 +139,7 @@
    wsl.exe --install
    ```
 
-5. 限制 WSL2 [内存使用](https://github.com/microsoft/WSL/issues/4166#issuecomment-526725261)，`%USERPROFILE%\.wslconfig`
+6. 限制 WSL2 [内存使用](https://github.com/microsoft/WSL/issues/4166#issuecomment-526725261)，`%USERPROFILE%\.wslconfig`
 
    ```ini
    [wsl2]
@@ -143,7 +147,7 @@
    swap=0
    ```
 
-6. 配置 WSL 开发环境, [init.sh](init.sh)中包含我 linux 开发环境全套配置, 可以很方便的进行分发
+7. 配置 WSL 开发环境, [init.sh](init.sh)中包含我 linux 开发环境全套配置, 可以很方便的进行分发
 
    ```sh
    # in wsl
