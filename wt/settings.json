@@ -73,6 +73,13 @@
       }
     },
     {
+      "keys": "ctrl+shift+e",
+      "command": {
+        "action": "sendInput",
+        "input": "\u001bE" // <M-E>
+      }
+    },
+    {
       "keys": "ctrl+.",
       "command": {
         "action": "sendInput",

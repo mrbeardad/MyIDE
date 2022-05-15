@@ -642,6 +642,8 @@ main "$@"
 # __HTOPRC
 # # Beware! This file is rewritten by htop when settings are changed in the interface.
 # # The parser is also very primitive, and not human-friendly.
+# htop_version=3.1.1-dev
+# config_reader_min_version=2
 # fields=2 45 48 6 5 7 4 0 3 109 110 46 47 20 49 1
 # sort_key=46
 # sort_direction=1
@@ -653,6 +655,7 @@ main "$@"
 # show_thread_names=0
 # show_program_path=0
 # highlight_base_name=0
+# highlight_deleted_exe=1
 # highlight_megabytes=1
 # highlight_threads=1
 # highlight_changes=0
@@ -662,23 +665,23 @@ main "$@"
 # show_merged_command=0
 # tree_view=1
 # tree_view_always_by_pid=0
+# all_branches_collapsed=0
 # header_margin=1
 # detailed_cpu_time=0
 # cpu_count_from_one=1
 # show_cpu_usage=1
 # show_cpu_frequency=0
-# show_cpu_temperature=0
-# degree_fahrenheit=0
 # update_process_names=0
 # account_guest_in_cpu_meter=0
 # color_scheme=6
 # enable_mouse=1
 # delay=15
-# left_meters=LeftCPUs Memory Swap
-# left_meter_modes=1 1 1
-# right_meters=RightCPUs Tasks LoadAverage Uptime
-# right_meter_modes=1 2 2 2
 # hide_function_bar=0
+# header_layout=two_50_50
+# column_meters_0=LeftCPUs Memory Swap
+# column_meter_modes_0=1 1 1
+# column_meters_1=RightCPUs Tasks LoadAverage Uptime
+# column_meter_modes_1=1 2 2 2
 # __HTOPRC_END
 
 # __TIGRC
@@ -774,6 +777,7 @@ main "$@"
 # vim.opt.list = true
 # vim.opt.listchars = 'tab:→ ,eol:↵,trail:·,extends:↷,precedes:↶'
 # vim.opt.wildignorecase = true
+# vim.opt.colorcolumn = '100'
 # lvim.colorscheme = "onedarker"
 # lvim.log.level = "warn"
 # lvim.format_on_save = true
@@ -885,7 +889,7 @@ main "$@"
 # lvim.builtin.which_key.mappings["<Tab>"] = { ":try | b# | catch | endtry<CR>", "Switch Buffer" }
 # lvim.keys.normal_mode["<C-k>"] = false
 # vim.api.nvim_set_keymap('n', '<C-k><C-o>', '<CMD>Telescope projects<CR>', { noremap = true })
-# vim.api.nvim_set_keymap('n', '<C-k>o', ":e <C-r>=fnamemodify('.',':p')<CR>", { noremap = true })
+# vim.api.nvim_set_keymap('n', '<C-k>o', ":e <C-r>=fnamemodify(expand('%:p'), ':p:h')<CR>", { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-k>n', '<CMD>enew<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-k>r', '<CMD>Telescope oldfiles<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-p>', '<CMD>Telescope find_files<CR>', { noremap = true })
@@ -948,8 +952,12 @@ main "$@"
 # ----------------------------------------
 # -- 其它按键: vim-translator, Calc, ...
 # ----------------------------------------
-# vim.api.nvim_set_keymap('n', '<M-z>', "<CMD>let &wrap=!&wrap<CR>", { noremap = true })
+# -- HACK: terminal map: ctrl+shift+e -> alt+shift+e
+# vim.api.nvim_set_keymap('n', '<M-E>', "<CMD>NvimTreeToggle<CR>", { noremap = true })
+# vim.api.nvim_set_keymap('n', '<C-S-E>', "<CMD>NvimTreeToggle<CR>", { noremap = true })
 # vim.api.nvim_set_keymap('n', '<M-e>', "<CMD>call Open_file_in_explorer()<CR>", { noremap = true })
+# vim.api.nvim_set_keymap('n', '<M-z>', "<CMD>let &wrap=!&wrap<CR>", { noremap = true })
+# lvim.builtin.which_key.mappings["sn"] = { "<CMD>lua require('telescope').extensions.notify.notify(<opts>)<CR>", "Notifications" }
 # -- HACK: terminal map: ctrl+shift+p -> alt+shift+p
 # vim.api.nvim_set_keymap('n', '<M-P>', "<CMD>Telescope commands<CR>", { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-S-P>', "<CMD>Telescope commands<CR>", { noremap = true })
@@ -964,10 +972,11 @@ main "$@"
 # lvim.builtin.which_key.mappings["e"] = nil
 # lvim.builtin.which_key.mappings["a"] = {
 #   name = "Application",
-#   t = { "<CMD>TodoTrouble<CR>", "TODO" },
 #   e = { "<CMD>NvimTreeToggle<CR>", "Explorer" },
-#   c = { "<CMD>Calc<CR>", "Calculator" },
+#   o = { "<CMD>SymbolsOutline<CR>", "Outline" },
+#   t = { "<CMD>TodoTrouble<CR>", "TODO" },
 #   u = { "<CMD>UndotreeToggle<CR>", "UndoTree" },
+#   c = { "<CMD>Calc<CR>", "Calculator" },
 # }
 # 
 # ----------------------------------------
@@ -1087,7 +1096,7 @@ main "$@"
 # 
 # -- ---WARN: configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
 # -- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
-# -- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
+# vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
 # -- local opts = {} -- check the lspconfig documentation for a list of all possible options
 # -- require("lvim.lsp.manager").setup("pyright", opts)
 # 
@@ -1308,6 +1317,7 @@ main "$@"
 #     cmd = { "Trouble*" },
 #     setup = function()
 #       -- HACK: terminal map: ctrl+shift+m -> alt+shift+m
+#       vim.api.nvim_set_keymap('n', '<M-M>', "<CMD>TroubleToggle<CR>", { noremap = true })
 #       vim.api.nvim_set_keymap('n', '<C-S-M>', "<CMD>TroubleToggle<CR>", { noremap = true })
 #     end
 #   }, {
@@ -1411,6 +1421,16 @@ main "$@"
 #   }, {
 #     "mbbill/undotree",
 #     cmd = { "UndotreeToggle" }
+#   }, {
+#     "p00f/clangd_extensions.nvim",
+#     ft = { "c", "cpp" },
+#     config = function()
+#       require("clangd_extensions").setup({
+#         server = {
+#           cmd = { "clangd", "--clang-tidy", "--enable-config" }
+#         }
+#       })
+#     end
 #   }
 # }
 # 
