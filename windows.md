@@ -22,7 +22,7 @@
 | `Win`+`I`         | 设置中心            |
 | `Win`+`A`         | 通知中心            |
 | `Win`+`+`         | 放大镜              |
-| `Win`+`shift`+`c` | 捕色器              |
+| `Win`+`Shift`+`C` | 捕色器              |
 | `Ctrl`+`Ctrl`     | Listary 搜索器      |
 | `Alt`+`Space`     | PowerToy 运行器     |
 
@@ -33,19 +33,18 @@
 | `Ctrl`+`X`         | 剪切     |
 | `Ctrl`+`V`         | 粘贴     |
 | `Ctrl`+`Z`         | 撤销     |
-| `Ctrl`+`Shift`+`Z` | 重做     |
+| `Shift`+`Ctrl`+`Z` | 重做     |
 | `Ctrl`+`F`         | 搜索     |
+| `Ctrl`+`Click`     | 选择单项 |
 | `Shift`+`Click`    | 选择范围 |
-| `Shift`+`Click`    | 选择单项 |
 
-| 输入法相关         | 功能        |
-| ------------------ | ----------- |
-| `Ctrl`+`Shift`+`E` | 切换中/英文 |
-| `Ctrl`+`Shift`+`F` | 切换繁/简体 |
-| `Ctrl`+`Shift`+`P` | 切换全/双拼 |
-| `Ctrl`+`.`         | 切换全/半角 |
-| `Win`+`V`          | 系统剪切板  |
-| `Win`+`;`          | 表情与字符  |
+| 输入法相关         | 功能       |
+| ------------------ | ---------- |
+| `Shift`+`Ctrl`+`Y` | 英文输入法 |
+| `Shift`+`Ctrl`+`B` | 表情颜文字 |
+| `Shift`+`Ctrl`+`Z` | 符号大全   |
+| `Win`+`;`          | emoji      |
+| `Win`+`V`          | 系统剪切板 |
 
 | TIM 快捷键       | 功能         |
 | ---------------- | ------------ |
@@ -59,10 +58,10 @@
 | ---------------------- | ----------------------- |
 | `Win`+`` ` ``          | 开关下拉式终端          |
 | `Alt`+`Enter`          | 全屏                    |
-| `Ctrl`+`Shift`+`{num}` | 启动第 {num} 个 Profile |
+| `Shift`+`Ctrl`+`{num}` | 启动第 {num} 个 Profile |
 | `Ctrl`+`Tab`           | 切换 Tab                |
-| `Ctrl`+`Shift`+`W`     | 关闭当前 Tab            |
+| `Shift`+`Ctrl`+`W`     | 关闭当前 Tab            |
 | `Shift`+`MouseDrag`    | 复制                    |
-| `Ctrl`+`Shift`+`V`     | 粘贴                    |
+| `Shift`+`Ctrl`+`V`     | 粘贴                    |
 | `Ctrl`+`,`             | 打开设置面板            |
-| `Ctrl`+`Shift`+`,`     | 打开配置文件            |
+| `Shift`+`Ctrl`+`,`     | 打开配置文件            |

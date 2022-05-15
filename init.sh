@@ -183,7 +183,13 @@ EOF
 }
 
 htop_conf() {
-  sudo apt -y install htop btop
+  sudo apt -y install btop libncursesw5-dev
+  git clone --depth=1 https://github.com/KoffeinFlummi/htop-vim /tmp/htop-vim
+  (
+    cd /tmp/htop-vim
+    ./autogen.sh && ./configure && make
+    cp ./htop ~/.local/bin/
+  )
   mkdir -p ~/.config/htop/
   [[ -e ~/.config/htop/htoprc ]] && mv ~/.config/htop/htoprc{,.bak}
   get_config __HTOPRC >~/.config/htop/htoprc
@@ -771,25 +777,25 @@ main "$@"
 # lvim.colorscheme = "onedarker"
 # lvim.log.level = "warn"
 # lvim.format_on_save = true
-#
+# 
 # ----------------------------------------
 # -- GUI
 # ----------------------------------------
 # vim.opt.guicursor = 'n:block-blinkon10,i-ci:ver15-blinkon10,c:hor15-blinkon10,v-sm:block,ve:ver15,r-cr-o:hor10'
-# vim.opt.guifont = "NerdCodePro Font:h10"
+# vim.opt.guifont = "NerdCodePro Font:h13"
 # vim.g.neovide_cursor_vfx_mode = "ripple"
 # vim.g.neovide_cursor_animation_length = 0.01
-#
+# 
 # ----------------------------------------
 # -- KEYMAPPINGS
 # ----------------------------------------
 # vim.opt.timeoutlen = 350
 # lvim.leader = "space"
-#
+# 
 # ----------------------------------------
 # -- 屏幕滚动: neoscroll
 # ----------------------------------------
-#
+# 
 # ----------------------------------------
 # -- 光标移动: clever-f, hop, matchit
 # ----------------------------------------
@@ -798,7 +804,7 @@ main "$@"
 # -- vim.api.nvim_set_keymap('i', '<C-e>', '<End>', { noremap = true })
 # -- vim.api.nvim_set_keymap('v', '<C-e>', '$', { noremap = true })
 # -- vim.api.nvim_set_keymap('n', '<C-e>', '$', { noremap = true })
-#
+# 
 # ----------------------------------------
 # -- 全文搜索: vim-visual-star-search, vim-cool, telescope, nvim-spectre
 # ----------------------------------------
@@ -813,7 +819,7 @@ main "$@"
 # -- HACK: terminal map: ctrl+shift+f -> alt+f
 # vim.api.nvim_set_keymap('n', '<M-f>', '<CMD>Telescope live_grep<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-S-F>', '<CMD>Telescope live_grep<CR>', { noremap = true })
-#
+# 
 # ----------------------------------------
 # -- 标签跳转: vim-bookmarks, telescope-vim-bookmarks
 # ----------------------------------------
@@ -821,7 +827,7 @@ main "$@"
 # vim.api.nvim_set_keymap('n', '<M-I>', '<C-i>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '[h', "<CMD>Gitsigns next_hunk<CR>", { noremap = true })
 # vim.api.nvim_set_keymap('n', ']h', "<CMD>Gitsigns prev_hunk<CR>", { noremap = true })
-#
+# 
 # ----------------------------------------
 # -- 插入编辑
 # ----------------------------------------
@@ -845,12 +851,12 @@ main "$@"
 # vim.api.nvim_set_keymap('c', '<C-l>', '<C-Right>', { noremap = true })
 # vim.api.nvim_set_keymap('i', '<C-z>', '<CMD>undo<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('i', '<C-r><C-r>', '<CMD>redo<CR>', { noremap = true })
-#
+# 
 # ----------------------------------------
 # -- 普通模式
 # ----------------------------------------
 # vim.api.nvim_set_keymap('n', 'S', 'i<CR><Esc>', { noremap = true })
-#
+# 
 # ----------------------------------------
 # -- 复制粘贴
 # ----------------------------------------
@@ -872,7 +878,7 @@ main "$@"
 # lvim.builtin.which_key.mappings["O"] = { "<CMD>put! =@+<CR>", "Paste Clipboard to Previous Line" }
 # lvim.builtin.which_key.mappings["by"] = { "<CMD>%y +<CR>", "Yank Whole Buffer to Clipboard" }
 # lvim.builtin.which_key.mappings["bp"] = { "<CMD>%d<CR>\"+P", "Patse Clipboard to Whole Buffer" }
-#
+# 
 # ----------------------------------------
 # -- 文件操作: telescope
 # ----------------------------------------
@@ -894,7 +900,7 @@ main "$@"
 # vim.api.nvim_set_keymap('n', '<Tab>', '<CMD>wincmd w<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<S-Tab>', '<CMD>wincmd p<CR>', { noremap = true })
 # lvim.builtin.which_key.mappings["q"] = { "<CMD>call SmartClose()<CR>", "Quit Cleverly" }
-#
+# 
 # ----------------------------------------
 # -- 语言服务
 # ----------------------------------------
@@ -933,10 +939,12 @@ main "$@"
 # vim.api.nvim_set_keymap('n', '<C-.>', '<CMD>lua vim.lsp.buf.code_action()<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-_>', 'gcc', {})
 # vim.api.nvim_set_keymap('i', '<C-_>', '<CMD>normal gcc<CR>', {})
+# vim.api.nvim_set_keymap('n', '<C-/>', 'gcc', {})
+# vim.api.nvim_set_keymap('i', '<C-/>', '<CMD>normal gcc<CR>', {})
 # vim.api.nvim_set_keymap('n', '<C-t>', '<CMD>Telescope lsp_workspace_symbols<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '[e', "<CMD>lua vim.diagnostic.goto_prev()<CR>", { noremap = true })
 # vim.api.nvim_set_keymap('n', ']e', "<CMD>lua vim.diagnostic.goto_next()<CR>", { noremap = true })
-#
+# 
 # ----------------------------------------
 # -- 其它按键: vim-translator, Calc, ...
 # ----------------------------------------
@@ -961,7 +969,7 @@ main "$@"
 #   c = { "<CMD>Calc<CR>", "Calculator" },
 #   u = { "<CMD>UndotreeToggle<CR>", "UndoTree" },
 # }
-#
+# 
 # ----------------------------------------
 # -- Telescope
 # ----------------------------------------
@@ -979,7 +987,7 @@ main "$@"
 #   n = {
 #   },
 # }
-#
+# 
 # -- WARN: After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 # ----------------------------------------
 # -- User Config for predefined plugins
@@ -1001,18 +1009,18 @@ main "$@"
 # lvim.builtin.alpha.dashboard.section.buttons.entries[5][1] = "SPC S l"
 # lvim.builtin.alpha.dashboard.section.buttons.entries[5][2] = "  Restore Session"
 # lvim.builtin.alpha.dashboard.section.buttons.entries[5][3] = "<CMD>lua require('persistence').load({ last = true })<CR>"
-#
+# 
 # lvim.builtin.notify.active = true
-#
+# 
 # lvim.builtin.terminal.active = true
 # lvim.builtin.terminal.shell = "/bin/bash"
-# lvim.builtin.terminal.open_mapping = "<M-`>"
-#
+# lvim.builtin.terminal.open_mapping = "<C-Space>"
+# 
 # lvim.builtin.nvimtree.setup.view.side = "left"
 # lvim.builtin.nvimtree.show_icons.git = 1
-#
+# 
 # lvim.builtin.bufferline.options.always_show_bufferline = true
-#
+# 
 # lvim.builtin.lualine.options.theme = "material"
 # lvim.builtin.lualine.options = {
 #   globalstatus       = true,
@@ -1046,7 +1054,7 @@ main "$@"
 #   { ' %l/%L  %c', type = 'stl' },
 #   components.scrollbar
 # }
-#
+# 
 # -- if you don't want all the parsers change this to a table of the ones you want
 # lvim.builtin.treesitter.highlight.enabled = true
 # lvim.builtin.treesitter.rainbow.enable = true
@@ -1068,27 +1076,27 @@ main "$@"
 #   "json",
 #   "yaml",
 # }
-#
-#
+# 
+# 
 # ----------------------------------------
 # -- generic LSP settings
 # ----------------------------------------
-#
+# 
 # -- ---@usage disable automatic installation of servers
 # -- lvim.lsp.automatic_servers_installation = false
-#
+# 
 # -- ---WARN: configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
 # -- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
 # -- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
 # -- local opts = {} -- check the lspconfig documentation for a list of all possible options
 # -- require("lvim.lsp.manager").setup("pyright", opts)
-#
+# 
 # -- ---WARN: remove a server from the skipped list, e.g. eslint, or emmet_ls. !!Requires `:LvimCacheReset` to take effect!!
 # -- ---`:LvimInfo` lists which server(s) are skiipped for the current filetype
 # -- vim.tbl_map(function(server)
 # --   return server ~= "emmet_ls"
 # -- end, lvim.lsp.automatic_configuration.skipped_servers)
-#
+# 
 # -- -- you can set a custom on_attach function that will be used for all the language servers
 # -- -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
 # -- lvim.lsp.on_attach_callback = function(client, bufnr)
@@ -1098,7 +1106,7 @@ main "$@"
 # --   --Enable completion triggered by <c-x><c-o>
 # --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 # -- end
-#
+# 
 # -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
 # -- local formatters = require "lvim.lsp.null-ls.formatters"
 # -- formatters.setup {
@@ -1114,7 +1122,7 @@ main "$@"
 # --     filetypes = { "typescript", "typescriptreact" },
 # --   },
 # -- }
-#
+# 
 # -- -- set additional linters
 # -- local linters = require "lvim.lsp.null-ls.linters"
 # -- linters.setup {
@@ -1132,7 +1140,7 @@ main "$@"
 # --     filetypes = { "javascript", "python" },
 # --   },
 # -- }
-#
+# 
 # ----------------------------------------
 # -- Additional Plugins
 # ----------------------------------------
@@ -1405,7 +1413,7 @@ main "$@"
 #     cmd = { "UndotreeToggle" }
 #   }
 # }
-#
+# 
 # -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 # -- vim.cmd [[
 # --   function! AutoOpenAlpha()
@@ -1457,7 +1465,7 @@ main "$@"
 #     quit
 #   endif
 # endf
-#
+# 
 # function! Open_file_in_explorer() abort
 #   if has('win32') || has('wsl')
 #     call jobstart('explorer.exe .')
