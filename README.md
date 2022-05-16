@@ -126,11 +126,17 @@
 
 1. 安装[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)
 2. 安装 wt 配置[settings.json](wt/settings.json)
-3. 将[该启动脚本](wt/wt_quake.vbs)复制到`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`实现开机自启 quake 模式
+3. 创建启动脚本`wt_quake.vbs`于文件夹`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`实现开机自启 quake 模式
+
+   ```vbs
+   Set objShell = CreateObject("WScript.Shell")
+   objShell.Exec("wt -w _quake")
+   ```
+
 4. 安装[dual-key-remap](https://github.com/ililim/dual-key-remap/releases)映射 CapsLock 键为“单击为 Esc，组合为 Ctrl”
    1. 解压文件夹到`%USERPROFILE%\AppData\Local`
-   2. 在`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`下创建`%USERPROFILE%\AppData\Local\dual-key-remap\dual-key-remap.exe`的快捷方式
-   3. 手动启动即可，之后便开机自启
+   2. 按照[教程](https://winaero.com/create-elevated-shortcut-to-skip-uac-prompt-in-windows-10/)创建一个无 UAC 提示的应用程序快捷方式，并将快捷方式创建到 `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
+   3. 当前手动启动即可，之后便开机自启
 5. 安装[WSL2](https://docs.microsoft.com/en-us/windows/wsl/install)
 
    ```sh
