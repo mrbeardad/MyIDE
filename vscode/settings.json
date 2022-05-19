@@ -103,7 +103,11 @@
   "path-intellisense.showHiddenFiles": true,
 
   "C_Cpp.intelliSenseEngine": "Disabled",
-  "clangd.arguments": ["--enable-config", "--clang-tidy"],
+  "clangd.arguments": [
+    "--enable-config",
+    "--clang-tidy",
+    "--completion-style=detailed"
+  ],
   "c-cpp-flylint.clang.enable": false,
   "c-cpp-flylint.flexelint.enable": false,
   "c-cpp-flylint.lizard.enable": false,
@@ -140,7 +144,10 @@
 
   "html.format.enable": false,
 
+  "stylelint.packageManager": "pnpm",
   "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
   "css.format.enable": false,
   "less.format.enable": false,
   "scss.format.enable": false,

@@ -208,12 +208,11 @@
 | Go       | gopls           | golangci-lint  | gofmt        | -      | -        | delve    | go-build | swag    | testify | go-prof    |
 | Python   | pyright         | pylint, flake8 | yapf         | -      | -        | -        | -        | -       | -       | -          |
 | JS       | tsserver        | eslint         | eslint       | -      | -        | -        | -        | -       | -       | -          |
-| HTML     | -               | htmlhint       | prettier     | -      | -        | -        | -        | -       | -       | -          |
-| CSS      | -               | csslint        | prettier     | -      | -        | -        | -        | -       | -       | -          |
+| HTML     | -               | tidy           | prettier     | -      | -        | -        | -        | -       | -       | -          |
+| CSS      | -               | stylelint      | prettier     | -      | -        | -        | -        | -       | -       | -          |
 | Markdown | -               | markdownlint   | prettier     | -      | -        | -        | -        | -       | -       | -          |
 
 Other references:
 
 - [Language Server](https://microsoft.github.io/language-server-protocol/implementors/servers/)
 - [Awesome Linters](https://github.com/caramelomartins/awesome-linters)
-

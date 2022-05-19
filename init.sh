@@ -246,7 +246,8 @@ lang_py() {
 }
 
 lang_web() {
-  pnpm install -g eslint htmlhint csslint markdownlint-cli prettier
+  sudo apt install -y tidy
+  pnpm install -g eslint htmlhint stylelint markdownlint-cli prettier
 }
 
 other_cli_tools() {
@@ -269,7 +270,7 @@ main() {
     if [[ -d "$WIN_HOME" ]]; then
       cp -uv "$WIN_HOME"/AppData/Roaming/Code/User/{settings.json,keybindings.json} ./vscode/
       cp -uv "$WIN_HOME"/AppData/Roaming/Code/User/sync/extensions/lastSyncextensions.json ./vscode/
-      cp -ruv "$WIN_HOME"/AppData/Local/vscode-neovim/* ./vscode/vscode-neovim/
+      cp -uv "$WIN_HOME"/AppData/Local/vscode-neovim/init.vim ./vscode/vscode-neovim/
       cp -uv "$WIN_HOME"/AppData/Local/Packages/Microsoft.WindowsTerminal_*/LocalState/settings.json wt/settings.json
     fi
     set_config __TMUX_CONF ~/.tmux.conf
@@ -409,64 +410,64 @@ main "$@"
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
-# 
+#
 # # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/.local/bin:$PATH
-# 
+#
 # # Path to your oh-my-zsh installation.
 # export ZSH="/home/beardad/.oh-my-zsh"
-# 
+#
 # # Set name of the theme to load --- if set to "random", it will
 # # load a random theme each time oh-my-zsh is loaded, in which case,
 # # to know which specific one was loaded, run: echo $RANDOM_THEME
 # # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="powerlevel10k/powerlevel10k"
-# 
+#
 # # Set list of themes to pick from when loading at random
 # # Setting this variable when ZSH_THEME=random will cause zsh to load
 # # a theme from this variable instead of looking in $ZSH/themes/
 # # If set to an empty array, this variable will have no effect.
 # # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-# 
+#
 # # Uncomment the following line to use case-sensitive completion.
 # # CASE_SENSITIVE="true"
-# 
+#
 # # Uncomment the following line to use hyphen-insensitive completion.
 # # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
-# 
+#
 # # Uncomment the following line to disable bi-weekly auto-update checks.
 # # DISABLE_AUTO_UPDATE="true"
-# 
+#
 # # Uncomment the following line to automatically update without prompting.
 # # DISABLE_UPDATE_PROMPT="true"
-# 
+#
 # # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=30
-# 
+#
 # # Uncomment the following line if pasting URLs and other text is messed up.
 # # DISABLE_MAGIC_FUNCTIONS="true"
-# 
+#
 # # Uncomment the following line to disable colors in ls.
 # # DISABLE_LS_COLORS="true"
-# 
+#
 # # Uncomment the following line to disable auto-setting terminal title.
 # # DISABLE_AUTO_TITLE="true"
-# 
+#
 # # Uncomment the following line to enable command auto-correction.
 # # ENABLE_CORRECTION="true"
-# 
+#
 # # Uncomment the following line to display red dots whilst waiting for completion.
 # # You can also set it to another string to have that shown instead of the default red dots.
 # # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
-# 
+#
 # # Uncomment the following line if you want to disable marking untracked files
 # # under VCS as dirty. This makes repository status check for large repositories
 # # much, much faster.
 # # DISABLE_UNTRACKED_FILES_DIRTY="true"
-# 
+#
 # # Uncomment the following line if you want to change the command execution time
 # # stamp shown in the history command output.
 # # You can set one of the optional three formats:
@@ -474,10 +475,10 @@ main "$@"
 # # or set a custom format using the strftime function format specifications,
 # # see 'man strftime' for details.
 # HIST_STAMPS="yyyy-mm-dd"
-# 
+#
 # # Would you like to use another custom folder than $ZSH/custom?
 # # ZSH_CUSTOM=/path/to/new-custom-folder
-# 
+#
 # # Which plugins would you like to load?
 # # Standard plugins can be found in $ZSH/plugins/
 # # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -500,26 +501,26 @@ main "$@"
 #     tmux
 #     vi-mode
 # )
-# 
+#
 # source $ZSH/oh-my-zsh.sh
-# 
+#
 # # User configuration
-# 
+#
 # # export MANPATH="/usr/local/man:$MANPATH"
-# 
+#
 # # You may need to manually set your language environment
 # # export LANG=en_US.UTF-8
-# 
+#
 # # Preferred editor for local and remote sessions
 # # if [[ -n $SSH_CONNECTION ]]; then
 # #   export EDITOR='vim'
 # # else
 # #   export EDITOR='mvim'
 # # fi
-# 
+#
 # # Compilation flags
 # # export ARCHFLAGS="-arch x86_64"
-# 
+#
 # # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -528,7 +529,7 @@ main "$@"
 # # Example aliases
 # # alias zshconfig="mate ~/.zshrc"
 # # alias ohmyzsh="mate ~/.oh-my-zsh"
-# 
+#
 # alias l='lsd -lah --group-dirs first'
 # alias l.='lsd -lhd --group-dirs first .*'
 # alias ll='lsd -lh --group-dirs first'
@@ -540,7 +541,7 @@ main "$@"
 # alias apt='sudo apt'
 # alias stl='sudo systemctl'
 # alias vi="$EDITOR"
-# 
+#
 # alias gmv='git mv'
 # alias grms='git rm --cached'
 # alias grss='git restore --staged'
@@ -569,15 +570,15 @@ main "$@"
 #   rm -fr "$DOT_GIT"/modules/"$1"
 #   set +e
 # }
-# 
+#
 # source /usr/share/doc/fzf/examples/key-bindings.zsh
 # source /usr/share/doc/fzf/examples/completion.zsh
-# 
+#
 # source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#606060"
-# 
+#
 # export VI_MODE_SET_CURSOR=true
 # bindkey -M vicmd '^L' clear-screen
 # bindkey '^L' forward-word
@@ -588,13 +589,13 @@ main "$@"
 # bindkey '^Y' yank
 # bindkey '^P' up-line-or-beginning-search
 # bindkey '^N' down-line-or-beginning-search
-# 
+#
 # zstyle ':completion:*:*:docker:*' option-stacking yes
 # zstyle ':completion:*:*:docker-*:*' option-stacking yes
-# 
+#
 # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# 
+#
 # __ZSHRC_END
 
 # __RANGER
@@ -788,7 +789,7 @@ main "$@"
 # lvim.colorscheme = "onedarker"
 # lvim.log.level = "warn"
 # lvim.format_on_save = true
-# 
+#
 # ----------------------------------------
 # -- GUI
 # ----------------------------------------
@@ -796,17 +797,17 @@ main "$@"
 # vim.opt.guifont = "NerdCodePro Font:h13"
 # vim.g.neovide_cursor_vfx_mode = "ripple"
 # -- vim.g.neovide_cursor_animation_length = 0.01
-# 
+#
 # ----------------------------------------
 # -- KEYMAPPINGS
 # ----------------------------------------
 # vim.opt.timeoutlen = 350
 # lvim.leader = "space"
-# 
+#
 # ----------------------------------------
 # -- 屏幕滚动: neoscroll
 # ----------------------------------------
-# 
+#
 # ----------------------------------------
 # -- 光标移动: clever-f, hop, matchit
 # ----------------------------------------
@@ -815,7 +816,7 @@ main "$@"
 # -- vim.api.nvim_set_keymap('i', '<C-e>', '<End>', { noremap = true })
 # -- vim.api.nvim_set_keymap('v', '<C-e>', '$', { noremap = true })
 # -- vim.api.nvim_set_keymap('n', '<C-e>', '$', { noremap = true })
-# 
+#
 # ----------------------------------------
 # -- 全文搜索: vim-visual-star-search, vim-cool, telescope, nvim-spectre
 # ----------------------------------------
@@ -827,29 +828,29 @@ main "$@"
 # vim.api.nvim_set_keymap('c', '<M-r>', "\\v", { noremap = true })
 # vim.api.nvim_set_keymap('c', '<M-c>', "\\C", { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-f>', '<CMD>Telescope current_buffer_fuzzy_find<CR>', { noremap = true })
-# -- HACK: terminal map: ctrl+shift+f -> alt+f
+# -- NOTE: terminal map: ctrl+shift+f -> alt+f
 # vim.api.nvim_set_keymap('n', '<M-f>', '<CMD>Telescope live_grep<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-S-F>', '<CMD>Telescope live_grep<CR>', { noremap = true })
-# 
+#
 # ----------------------------------------
 # -- 标签跳转: vim-bookmarks, telescope-vim-bookmarks
 # ----------------------------------------
-# -- HACK: terminal map: ctrl+i -> alt+shift+i
+# -- NOTE: terminal map: ctrl+i -> alt+shift+i
 # vim.api.nvim_set_keymap('n', '<M-I>', '<C-i>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '[h', "<CMD>Gitsigns next_hunk<CR>", { noremap = true })
 # vim.api.nvim_set_keymap('n', ']h', "<CMD>Gitsigns prev_hunk<CR>", { noremap = true })
-# 
+#
 # ----------------------------------------
 # -- 插入编辑
 # ----------------------------------------
 # vim.api.nvim_set_keymap('n', '<', '<<', { noremap = true })
 # vim.api.nvim_set_keymap('n', '>', '>>', { noremap = true })
-# -- HACK: terminal map: ctrl+shift+j -> alt+shift+j
+# -- NOTE: terminal map: ctrl+shift+j -> alt+shift+j
 # vim.api.nvim_set_keymap('i', '<M-J>', '<CMD>m .+1<CR><Cmd>normal ==<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<M-J>', '<CMD>m .+1<CR><Cmd>normal ==<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('i', '<C-S-J>', '<CMD>m .+1<CR><Cmd>normal ==<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-S-J>', '<CMD>m .+1<CR><Cmd>normal ==<CR>', { noremap = true })
-# -- HACK: terminal map: ctrl+shift+k -> alt+shift+k
+# -- NOTE: terminal map: ctrl+shift+k -> alt+shift+k
 # vim.api.nvim_set_keymap('i', '<M-K>', '<CMD>m .-2<CR><Cmd>normal ==<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<M-K>', '<CMD>m .-2<CR><Cmd>normal ==<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('i', '<C-S-K>', '<CMD>m .-2<CR><Cmd>normal ==<CR>', { noremap = true })
@@ -862,12 +863,12 @@ main "$@"
 # vim.api.nvim_set_keymap('c', '<C-l>', '<C-Right>', { noremap = true })
 # vim.api.nvim_set_keymap('i', '<C-z>', '<CMD>undo<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('i', '<C-r><C-r>', '<CMD>redo<CR>', { noremap = true })
-# 
+#
 # ----------------------------------------
 # -- 普通模式
 # ----------------------------------------
 # vim.api.nvim_set_keymap('n', 'S', 'i<CR><Esc>', { noremap = true })
-# 
+#
 # ----------------------------------------
 # -- 复制粘贴
 # ----------------------------------------
@@ -889,7 +890,7 @@ main "$@"
 # lvim.builtin.which_key.mappings["O"] = { "<CMD>put! =@+<CR>", "Paste Clipboard to Previous Line" }
 # lvim.builtin.which_key.mappings["by"] = { "<CMD>%y +<CR>", "Yank Whole Buffer to Clipboard" }
 # lvim.builtin.which_key.mappings["bp"] = { "<CMD>%d<CR>\"+P", "Patse Clipboard to Whole Buffer" }
-# 
+#
 # ----------------------------------------
 # -- 文件操作: telescope
 # ----------------------------------------
@@ -901,7 +902,7 @@ main "$@"
 # vim.api.nvim_set_keymap('n', '<C-k>r', '<CMD>Telescope oldfiles<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-p>', '<CMD>Telescope find_files<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-s>', '<CMD>w<CR>', { noremap = true })
-# -- HACK: terminal map: ctrl+shift+s -> alt+shift+s
+# -- NOTE: terminal map: ctrl+shift+s -> alt+shift+s
 # vim.api.nvim_set_keymap('n', '<M-S>', ":saveas <C-r>=fnamemodify('.',':p')<CR>", { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-S-S>', ":saveas <C-r>=fnamemodify('.',':p')<CR>", { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-k>s', '<CMD>wa<CR>', { noremap = true })
@@ -911,7 +912,7 @@ main "$@"
 # vim.api.nvim_set_keymap('n', '<Tab>', '<CMD>wincmd w<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<S-Tab>', '<CMD>wincmd W<CR>', { noremap = true })
 # lvim.builtin.which_key.mappings["q"] = { "<CMD>call SmartClose()<CR>", "Quit Cleverly" }
-# 
+#
 # ----------------------------------------
 # -- 语言服务
 # ----------------------------------------
@@ -919,12 +920,12 @@ main "$@"
 # lvim.builtin.cmp.mapping["<C-k>"] = nil
 # lvim.builtin.cmp.mapping["<C-e>"] = nil
 # lvim.builtin.cmp.mapping["<C-d>"] = nil
-# lvim.builtin.cmp.mapping["<CR>"] = nil
+# -- lvim.builtin.cmp.mapping["<CR>"] = nil
 # lvim.builtin.cmp.confirm_opts.select = true
 # local cmp = require("cmp")
 # local luasnip = require("luasnip")
 # local lccm = require("lvim.core.cmp").methods
-# -- HACK: terminal map: ctrl+i -> alt+shift+i
+# -- NOTE: terminal map: ctrl+i -> alt+shift+i
 # lvim.builtin.cmp.mapping["<M-I>"] = cmp.mapping.complete()
 # lvim.builtin.cmp.mapping["<Tab>"] = cmp.mapping(function(fallback)
 #   if luasnip.expandable() then
@@ -946,7 +947,7 @@ main "$@"
 # vim.api.nvim_set_keymap('n', '<M-F>', '<CMD>lua require("lvim.lsp.utils").format()<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('i', '<M-F>', '<CMD>lua require("lvim.lsp.utils").format()<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<F2>', "<CMD>lua vim.lsp.buf.rename()<CR>", { noremap = true })
-# -- HACK: terminal map: ctrl+. -> alt+.
+# -- NOTE: terminal map: ctrl+. -> alt+.
 # vim.api.nvim_set_keymap('n', '<M-.>', '<CMD>lua vim.lsp.buf.code_action()<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-.>', '<CMD>lua vim.lsp.buf.code_action()<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-_>', 'gcc', {})
@@ -956,17 +957,17 @@ main "$@"
 # vim.api.nvim_set_keymap('n', '<C-t>', '<CMD>Telescope lsp_workspace_symbols<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '[e', "<CMD>lua vim.diagnostic.goto_prev()<CR>", { noremap = true })
 # vim.api.nvim_set_keymap('n', ']e', "<CMD>lua vim.diagnostic.goto_next()<CR>", { noremap = true })
-# 
+#
 # ----------------------------------------
 # -- 其它按键: vim-translator, Calc, ...
 # ----------------------------------------
-# -- HACK: terminal map: ctrl+shift+e -> alt+shift+e
+# -- NOTE: terminal map: ctrl+shift+e -> alt+shift+e
 # vim.api.nvim_set_keymap('n', '<M-E>', "<CMD>NvimTreeToggle<CR>", { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-S-E>', "<CMD>NvimTreeToggle<CR>", { noremap = true })
 # vim.api.nvim_set_keymap('n', '<M-e>', "<CMD>call Open_file_in_explorer()<CR>", { noremap = true })
 # vim.api.nvim_set_keymap('n', '<M-z>', "<CMD>let &wrap=!&wrap<CR>", { noremap = true })
-# lvim.builtin.which_key.mappings["sn"] = { "<CMD>lua require('telescope').extensions.notify.notify(<opts>)<CR>", "Notifications" }
-# -- HACK: terminal map: ctrl+shift+p -> alt+shift+p
+# lvim.builtin.which_key.mappings["sn"] = { "<CMD>lua require('telescope').extensions.notify.notify()<CR>", "Notifications" }
+# -- NOTE: terminal map: ctrl+shift+p -> alt+shift+p
 # vim.api.nvim_set_keymap('n', '<M-P>', "<CMD>Telescope commands<CR>", { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-S-P>', "<CMD>Telescope commands<CR>", { noremap = true })
 # vim.api.nvim_set_keymap('n', '<C-k><C-s>', "<CMD>Telescope keymaps<CR>", { noremap = true })
@@ -986,7 +987,7 @@ main "$@"
 #   u = { "<CMD>UndotreeToggle<CR>", "UndoTree" },
 #   c = { "<CMD>Calc<CR>", "Calculator" },
 # }
-# 
+#
 # ----------------------------------------
 # -- Telescope
 # ----------------------------------------
@@ -1004,7 +1005,7 @@ main "$@"
 #   n = {
 #   },
 # }
-# 
+#
 # -- WARN: After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 # ----------------------------------------
 # -- User Config for predefined plugins
@@ -1026,18 +1027,18 @@ main "$@"
 # lvim.builtin.alpha.dashboard.section.buttons.entries[5][1] = "SPC S l"
 # lvim.builtin.alpha.dashboard.section.buttons.entries[5][2] = "  Restore Session"
 # lvim.builtin.alpha.dashboard.section.buttons.entries[5][3] = "<CMD>lua require('persistence').load({ last = true })<CR>"
-# 
+#
 # lvim.builtin.notify.active = true
-# 
+#
 # lvim.builtin.terminal.active = true
 # lvim.builtin.terminal.shell = "/bin/bash"
 # lvim.builtin.terminal.open_mapping = "<C-Space>"
-# 
+#
 # lvim.builtin.nvimtree.setup.view.side = "left"
 # lvim.builtin.nvimtree.show_icons.git = 1
-# 
+#
 # lvim.builtin.bufferline.options.always_show_bufferline = true
-# 
+#
 # lvim.builtin.lualine.options.theme = "material"
 # lvim.builtin.lualine.options = {
 #   globalstatus       = true,
@@ -1071,7 +1072,7 @@ main "$@"
 #   { ' %l/%L  %c', type = 'stl' },
 #   components.scrollbar
 # }
-# 
+#
 # -- if you don't want all the parsers change this to a table of the ones you want
 # lvim.builtin.treesitter.highlight.enabled = true
 # lvim.builtin.treesitter.rainbow.enable = true
@@ -1093,27 +1094,27 @@ main "$@"
 #   "json",
 #   "yaml",
 # }
-# 
-# 
+#
+#
 # ----------------------------------------
 # -- generic LSP settings
 # ----------------------------------------
-# 
+#
 # -- ---@usage disable automatic installation of servers
 # -- lvim.lsp.automatic_servers_installation = false
-# 
+#
 # -- ---WARN: configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
 # -- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
 # vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
 # -- local opts = {} -- check the lspconfig documentation for a list of all possible options
 # -- require("lvim.lsp.manager").setup("pyright", opts)
-# 
+#
 # -- ---WARN: remove a server from the skipped list, e.g. eslint, or emmet_ls. !!Requires `:LvimCacheReset` to take effect!!
 # -- ---`:LvimInfo` lists which server(s) are skiipped for the current filetype
 # -- vim.tbl_map(function(server)
 # --   return server ~= "emmet_ls"
 # -- end, lvim.lsp.automatic_configuration.skipped_servers)
-# 
+#
 # -- -- you can set a custom on_attach function that will be used for all the language servers
 # -- -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
 # -- lvim.lsp.on_attach_callback = function(client, bufnr)
@@ -1123,7 +1124,7 @@ main "$@"
 # --   --Enable completion triggered by <c-x><c-o>
 # --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 # -- end
-# 
+#
 # -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
 # -- local formatters = require "lvim.lsp.null-ls.formatters"
 # -- formatters.setup {
@@ -1139,7 +1140,7 @@ main "$@"
 # --     filetypes = { "typescript", "typescriptreact" },
 # --   },
 # -- }
-# 
+#
 # -- -- set additional linters
 # -- local linters = require "lvim.lsp.null-ls.linters"
 # -- linters.setup {
@@ -1157,7 +1158,7 @@ main "$@"
 # --     filetypes = { "javascript", "python" },
 # --   },
 # -- }
-# 
+#
 # ----------------------------------------
 # -- Additional Plugins
 # ----------------------------------------
@@ -1316,7 +1317,7 @@ main "$@"
 #         position = 'right',
 #         width = 20,
 #       }
-#       -- HACK: terminal map: ctrl+shift+o -> alt+shift+o
+#       -- NOTE: terminal map: ctrl+shift+o -> alt+shift+o
 #       vim.api.nvim_set_keymap('n', '<M-O>', '<CMD>SymbolsOutline<CR>', { noremap = true })
 #       vim.api.nvim_set_keymap('n', '<C-S-O>', '<CMD>SymbolsOutline<CR>', { noremap = true })
 #     end
@@ -1324,7 +1325,7 @@ main "$@"
 #     "folke/trouble.nvim",
 #     cmd = { "Trouble*" },
 #     setup = function()
-#       -- HACK: terminal map: ctrl+shift+m -> alt+shift+m
+#       -- NOTE: terminal map: ctrl+shift+m -> alt+shift+m
 #       vim.api.nvim_set_keymap('n', '<M-M>', "<CMD>TroubleToggle<CR>", { noremap = true })
 #       vim.api.nvim_set_keymap('n', '<C-S-M>', "<CMD>TroubleToggle<CR>", { noremap = true })
 #     end
@@ -1402,7 +1403,7 @@ main "$@"
 #       ]]
 #     end,
 #     config = function()
-#       -- HACK: terminal map: ctrl+shift+l -> alt+shift+l
+#       -- NOTE: terminal map: ctrl+shift+l -> alt+shift+l
 #       vim.api.nvim_set_keymap('n', '<M-L>', '<Plug>(VM-Select-All)', {})
 #       vim.api.nvim_set_keymap('v', '<M-L>', '<Plug>(VM-Visual-All)', {})
 #       vim.api.nvim_set_keymap('n', '<C-S-L>', '<Plug>(VM-Select-All)', {})
@@ -1445,7 +1446,7 @@ main "$@"
 #     end
 #   }
 # }
-# 
+#
 # -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 # -- vim.cmd [[
 # --   function! AutoOpenAlpha()
@@ -1507,7 +1508,7 @@ main "$@"
 #     quit
 #   endif
 # endf
-# 
+#
 # function! Open_file_in_explorer() abort
 #   if has('win32') || has('wsl')
 #     call jobstart('explorer.exe .')
