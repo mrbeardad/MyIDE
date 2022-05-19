@@ -167,7 +167,7 @@ zsh_conf() {
 sed -n '/^nameserver/{s/^nameserver\s*\([0-9.]*\)\s*$/\1:7890/; p}' /etc/resolv.conf
 EOF
   chmod +x ~/.config/proxy
-  PROMPT_INFORMATION="$PROMPT_INFORMATION$(echo -e "\e[32m======>\e[33m zsh:\e[m You may want to custom your zsh prompt theme in ~/.p10k.zsh")"
+  PROMPT_INFORMATION="$PROMPT_INFORMATION$(echo -e "\e[32m======>\e[33m zsh:\e[m You may want to custom your zsh prompt theme and enable proxy prompt by modify ~/.p10k.zsh")"
 }
 
 ranger_conf() {
@@ -229,7 +229,7 @@ lang_shell() {
 }
 
 lang_cpp() {
-  sudo apt -y install libc++-dev clang lldb lld clangd clang-tidy clang-format cppcheck \
+  sudo apt -y install clang lldb lld clangd clang-tidy clang-format cppcheck \
     cmake doxygen graphviz plantuml google-perftools \
     libboost-all-dev libgtest-dev libsource-highlight-dev
   pip install cmake_format
@@ -269,7 +269,7 @@ main() {
     if [[ -d "$WIN_HOME" ]]; then
       cp -uv "$WIN_HOME"/AppData/Roaming/Code/User/{settings.json,keybindings.json} ./vscode/
       cp -uv "$WIN_HOME"/AppData/Roaming/Code/User/sync/extensions/lastSyncextensions.json ./vscode/
-      cp -uv "$WIN_HOME"/AppData/Local/vscode-neovim/init.vim ./vscode/vscode-neovim/init.vim
+      cp -ruv "$WIN_HOME"/AppData/Local/vscode-neovim/* ./vscode/vscode-neovim/
       cp -uv "$WIN_HOME"/AppData/Local/Packages/Microsoft.WindowsTerminal_*/LocalState/settings.json wt/settings.json
     fi
     set_config __TMUX_CONF ~/.tmux.conf
@@ -409,64 +409,64 @@ main "$@"
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
-#
+# 
 # # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/.local/bin:$PATH
-#
+# 
 # # Path to your oh-my-zsh installation.
 # export ZSH="/home/beardad/.oh-my-zsh"
-#
+# 
 # # Set name of the theme to load --- if set to "random", it will
 # # load a random theme each time oh-my-zsh is loaded, in which case,
 # # to know which specific one was loaded, run: echo $RANDOM_THEME
 # # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="powerlevel10k/powerlevel10k"
-#
+# 
 # # Set list of themes to pick from when loading at random
 # # Setting this variable when ZSH_THEME=random will cause zsh to load
 # # a theme from this variable instead of looking in $ZSH/themes/
 # # If set to an empty array, this variable will have no effect.
 # # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-#
+# 
 # # Uncomment the following line to use case-sensitive completion.
 # # CASE_SENSITIVE="true"
-#
+# 
 # # Uncomment the following line to use hyphen-insensitive completion.
 # # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
-#
+# 
 # # Uncomment the following line to disable bi-weekly auto-update checks.
 # # DISABLE_AUTO_UPDATE="true"
-#
+# 
 # # Uncomment the following line to automatically update without prompting.
 # # DISABLE_UPDATE_PROMPT="true"
-#
+# 
 # # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=30
-#
+# 
 # # Uncomment the following line if pasting URLs and other text is messed up.
 # # DISABLE_MAGIC_FUNCTIONS="true"
-#
+# 
 # # Uncomment the following line to disable colors in ls.
 # # DISABLE_LS_COLORS="true"
-#
+# 
 # # Uncomment the following line to disable auto-setting terminal title.
 # # DISABLE_AUTO_TITLE="true"
-#
+# 
 # # Uncomment the following line to enable command auto-correction.
 # # ENABLE_CORRECTION="true"
-#
+# 
 # # Uncomment the following line to display red dots whilst waiting for completion.
 # # You can also set it to another string to have that shown instead of the default red dots.
 # # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
-#
+# 
 # # Uncomment the following line if you want to disable marking untracked files
 # # under VCS as dirty. This makes repository status check for large repositories
 # # much, much faster.
 # # DISABLE_UNTRACKED_FILES_DIRTY="true"
-#
+# 
 # # Uncomment the following line if you want to change the command execution time
 # # stamp shown in the history command output.
 # # You can set one of the optional three formats:
@@ -474,10 +474,10 @@ main "$@"
 # # or set a custom format using the strftime function format specifications,
 # # see 'man strftime' for details.
 # HIST_STAMPS="yyyy-mm-dd"
-#
+# 
 # # Would you like to use another custom folder than $ZSH/custom?
 # # ZSH_CUSTOM=/path/to/new-custom-folder
-#
+# 
 # # Which plugins would you like to load?
 # # Standard plugins can be found in $ZSH/plugins/
 # # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -500,26 +500,26 @@ main "$@"
 #     tmux
 #     vi-mode
 # )
-#
+# 
 # source $ZSH/oh-my-zsh.sh
-#
+# 
 # # User configuration
-#
+# 
 # # export MANPATH="/usr/local/man:$MANPATH"
-#
+# 
 # # You may need to manually set your language environment
 # # export LANG=en_US.UTF-8
-#
+# 
 # # Preferred editor for local and remote sessions
 # # if [[ -n $SSH_CONNECTION ]]; then
 # #   export EDITOR='vim'
 # # else
 # #   export EDITOR='mvim'
 # # fi
-#
+# 
 # # Compilation flags
 # # export ARCHFLAGS="-arch x86_64"
-#
+# 
 # # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -528,7 +528,7 @@ main "$@"
 # # Example aliases
 # # alias zshconfig="mate ~/.zshrc"
 # # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
+# 
 # alias l='lsd -lah --group-dirs first'
 # alias l.='lsd -lhd --group-dirs first .*'
 # alias ll='lsd -lh --group-dirs first'
@@ -540,7 +540,7 @@ main "$@"
 # alias apt='sudo apt'
 # alias stl='sudo systemctl'
 # alias vi="$EDITOR"
-#
+# 
 # alias gmv='git mv'
 # alias grms='git rm --cached'
 # alias grss='git restore --staged'
@@ -556,17 +556,28 @@ main "$@"
 # alias glr='git pull --rebase'
 # alias glra='git pull --rebase --auto-stash'
 # alias gsa='git submodule add'
-# alias gsd='git submodule deinit'
 # alias gsu='git submodule update --init --recursive'
-#
+# gsrm() {
+#   set -e
+#   git submodule deinit -f "$1"
+#   git rm -f "$1"
+#   declare TOP_LEVEL="$(git rev-parse --show-toplevel)"
+#   declare DOT_GIT="$TOP_LEVEL"/.git
+#   if [[ -f "$DOT_GIT" ]]; then
+#     DOT_GIT="$TOP_LEVEL"/"$(sed '1s/^gitdir: //' "$DOT_GIT")"
+#   fi
+#   rm -fr "$DOT_GIT"/modules/"$1"
+#   set +e
+# }
+# 
 # source /usr/share/doc/fzf/examples/key-bindings.zsh
 # source /usr/share/doc/fzf/examples/completion.zsh
-#
+# 
 # source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#606060"
-#
+# 
 # export VI_MODE_SET_CURSOR=true
 # bindkey -M vicmd '^L' clear-screen
 # bindkey '^L' forward-word
@@ -577,17 +588,13 @@ main "$@"
 # bindkey '^Y' yank
 # bindkey '^P' up-line-or-beginning-search
 # bindkey '^N' down-line-or-beginning-search
-#
+# 
 # zstyle ':completion:*:*:docker:*' option-stacking yes
 # zstyle ':completion:*:*:docker-*:*' option-stacking yes
-#
-# bindkey -M emacs '^[s' sudo-command-line
-# bindkey -M vicmd '^[s' sudo-command-line
-# bindkey -M viins '^[s' sudo-command-line
-#
+# 
 # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-#
+# 
 # __ZSHRC_END
 
 # __RANGER
@@ -788,7 +795,7 @@ main "$@"
 # vim.opt.guicursor = 'n:block-blinkon10,i-ci:ver15-blinkon10,c:hor15-blinkon10,v-sm:block,ve:ver15,r-cr-o:hor10'
 # vim.opt.guifont = "NerdCodePro Font:h13"
 # vim.g.neovide_cursor_vfx_mode = "ripple"
-# vim.g.neovide_cursor_animation_length = 0.01
+# -- vim.g.neovide_cursor_animation_length = 0.01
 # 
 # ----------------------------------------
 # -- KEYMAPPINGS
@@ -851,7 +858,7 @@ main "$@"
 # vim.api.nvim_set_keymap('n', '<C-j>', '<CMD>put =repeat(nr2char(10), v:count1)<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('i', '<C-k>', "repeat('<Del>', strchars(getline('.')) - getcurpos()[2] + 1)", { noremap = true, expr = true })
 # vim.api.nvim_set_keymap('c', '<C-k>', "repeat('<Del>', strchars(getcmdline()) - getcmdpos() + 1)", { noremap = true, expr = true })
-# vim.api.nvim_set_keymap('i', '<C-l>', '<C-Right>', { noremap = true })
+# vim.api.nvim_set_keymap('i', '<C-l>', '<CMD>call C_Right()<CR><Right>', { noremap = true })
 # vim.api.nvim_set_keymap('c', '<C-l>', '<C-Right>', { noremap = true })
 # vim.api.nvim_set_keymap('i', '<C-z>', '<CMD>undo<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('i', '<C-r><C-r>', '<CMD>redo<CR>', { noremap = true })
@@ -902,7 +909,7 @@ main "$@"
 # vim.api.nvim_set_keymap('n', '<C-k>u', ':try | %bd | catch | endtry<CR>', { noremap = true, silent = true })
 # vim.api.nvim_set_keymap('n', '<C-k>w', '<CMD>%bd<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<Tab>', '<CMD>wincmd w<CR>', { noremap = true })
-# vim.api.nvim_set_keymap('n', '<S-Tab>', '<CMD>wincmd p<CR>', { noremap = true })
+# vim.api.nvim_set_keymap('n', '<S-Tab>', '<CMD>wincmd W<CR>', { noremap = true })
 # lvim.builtin.which_key.mappings["q"] = { "<CMD>call SmartClose()<CR>", "Quit Cleverly" }
 # 
 # ----------------------------------------
@@ -922,10 +929,10 @@ main "$@"
 # lvim.builtin.cmp.mapping["<Tab>"] = cmp.mapping(function(fallback)
 #   if luasnip.expandable() then
 #     luasnip.expand()
-#   elseif lccm.jumpable() then
-#     luasnip.jump(1)
 #   elseif cmp.visible() then
 #     cmp.confirm(lvim.builtin.cmp.confirm_opts)
+#   elseif lccm.jumpable() then
+#     luasnip.jump(1)
 #   elseif lccm.check_backspace() then
 #     fallback()
 #   elseif lccm.is_emmet_active() then
@@ -935,6 +942,7 @@ main "$@"
 #   end
 # end, { "i", "s", }
 # )
+# vim.api.nvim_set_keymap('n', '<M-LeftMouse>', '<CMD>lua vim.lsp.buf.definition()<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<M-F>', '<CMD>lua require("lvim.lsp.utils").format()<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('i', '<M-F>', '<CMD>lua require("lvim.lsp.utils").format()<CR>', { noremap = true })
 # vim.api.nvim_set_keymap('n', '<F2>', "<CMD>lua vim.lsp.buf.rename()<CR>", { noremap = true })
@@ -988,7 +996,7 @@ main "$@"
 # lvim.builtin.telescope.defaults.mappings = {
 #   -- for input mode
 #   i = {
-#     -- ["<Esc>"] = actions.close,
+#     ["<Esc>"] = actions.close,
 #     ["<C-b>"] = actions.preview_scrolling_up,
 #     ["<C-u>"] = nil
 #   },
@@ -1427,7 +1435,11 @@ main "$@"
 #     config = function()
 #       require("clangd_extensions").setup({
 #         server = {
-#           cmd = { "clangd", "--clang-tidy", "--enable-config" }
+#           cmd = { "clangd", "--clang-tidy", "--enable-config" },
+#           on_attach = require("lvim.lsp").common_on_attach,
+#           on_init = require("lvim.lsp").common_on_init,
+#           on_exit = require("lvim.lsp").common_on_exit,
+#           capabilities = require("lvim.lsp").common_capabilities(),
 #         }
 #       })
 #     end
@@ -1446,6 +1458,16 @@ main "$@"
 # --   endf
 # -- ]]
 # vim.cmd [[
+# function! C_Right() abort
+#   let left_text = getline('.')[getcurpos()[2]-1:]
+#   if left_text =~ '^\W*\s+$'
+#     normal $ge
+#   elseif left_text =~ '^\W*$'
+#     normal $
+#   else
+#     normal e
+#   endif
+# endf
 # function! SmartClose() abort
 #   if &bt ==# 'nofile' || &bt ==# 'quickfix'
 #     quit
@@ -1496,6 +1518,7 @@ main "$@"
 # ]]
 # lvim.autocommands.custom_groups = {
 #   -- { "WinEnter", "*", [[call AutoOpenMinimap()]] }
+#   { "FileType", "c,cpp", [[nnoremap <buffer><M-o> <CMD>ClangdSwitchSourceHeader<CR>]] }
 # }
 # __CONFIG_LUA_END
 

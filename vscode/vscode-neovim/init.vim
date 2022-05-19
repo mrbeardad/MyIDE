@@ -43,6 +43,7 @@ nnoremap mC <Cmd>call VSCodeNotify('bookmarks.clearFromAllFiles')<CR>
 
 
 " 插入编辑
+set shiftwidth=2
 " <: outdent line
 nnoremap < <<
 " >: indent line
@@ -64,7 +65,6 @@ call s:LoadPlugin('vim-textobj-line')
 call s:LoadPlugin('vim-textobj-parameter')
 call s:LoadPlugin('vim-surround')
 call s:LoadPlugin('vim-repeat')
-" u: vscode undo, must defined after load vim-repeat
 nnoremap u <Cmd>call VSCodeNotifyVisual('undo', 1)<CR><Esc>
 nnoremap S i<CR><Esc>
 
@@ -101,8 +101,8 @@ nnoremap [c <Cmd>call VSCodeNotify('editor.action.diffReview.prev')<CR>
 nnoremap ]c <Cmd>call VSCodeNotify('editor.action.diffReview.next')<CR>
 nnoremap [h <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
 nnoremap ]h <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
-nnoremap [e <Cmd>call VSCodeNotify('editor.action.marker.prevInFiles')<CR>
-nnoremap ]e <Cmd>call VSCodeNotify('editor.action.marker.nextInFiles')<CR>
+nnoremap [e <Cmd>call VSCodeNotify('editor.action.marker.prev')<CR>
+nnoremap ]e <Cmd>call VSCodeNotify('editor.action.marker.next')<CR>
 
 " 其他按键
 nnoremap za <Cmd>call VSCodeNotify('editor.toggleFold')<CR>

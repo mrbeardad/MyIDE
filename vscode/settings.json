@@ -6,6 +6,7 @@
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.renderControlCharacters": true,
   "editor.renderWhitespace": "all",
+  "editor.tabSize": 2,
   "editor.rulers": [80, 100],
   "editor.scrollBeyondLastLine": false,
   "editor.semanticTokenColorCustomizations": {
@@ -48,6 +49,7 @@
     "**/third_party/*/**": true
   },
 
+  "workbench.startupEditor": "none",
   "workbench.list.automaticKeyboardNavigation": false,
   "workbench.list.openMode": "doubleClick",
   "workbench.list.smoothScrolling": true,
@@ -100,11 +102,8 @@
   "path-intellisense.autoSlashAfterDirectory": true,
   "path-intellisense.showHiddenFiles": true,
 
-  "clangd.arguments": [
-    "--enable-config",
-    "--clang-tidy",
-    "--function-arg-placeholders=0"
-  ],
+  "C_Cpp.intelliSenseEngine": "Disabled",
+  "clangd.arguments": ["--enable-config", "--clang-tidy"],
   "c-cpp-flylint.clang.enable": false,
   "c-cpp-flylint.flexelint.enable": false,
   "c-cpp-flylint.lizard.enable": false,
@@ -157,6 +156,8 @@
 
   "git.autofetch": true,
   "gitlens.statusBar.enabled": false,
+  "gitlens.codeLens.authors.enabled": false,
+  "gitlens.codeLens.recentChange.enabled": false,
 
   "code-runner.saveFileBeforeRun": true,
   "code-runner.fileDirectoryAsCwd": true,
@@ -178,19 +179,57 @@
   "translator.captureWord": false,
 
   "todo-tree.general.showIconsInsteadOfTagsInStatusBar": true,
-  "todo-tree.general.statusBar": "tags",
+  "todo-tree.general.statusBar": "none",
   "todo-tree.highlights.useColourScheme": true,
   "todo-tree.filtering.useBuiltInExcludes": "file and search excludes",
   "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
   "todo-tree.general.tags": [
-    "BUG",
-    "HACK",
-    "FIXME",
     "TODO",
-    "XXX",
-    "[ ]",
-    "[x]"
+    "FIXME",
+    "BUG",
+    "NOTE",
+    "WARN",
+    "HACK",
+    "XXX"
   ],
+  "todo-tree.highlights.customHighlight": {
+    "TODO": {
+      "icon": "check-circle-fill",
+      "iconColour": "#0db9d7",
+      "rulerColour": "#0db9d7",
+      "background": "#0db9d7"
+    },
+    "FIXME": {
+      "icon": "flame",
+      "iconColour": "#e0af68",
+      "rulerColour": "#e0af68",
+      "background": "#e0af68"
+    },
+    "BUG": {
+      "icon": "bug",
+      "iconColour": "#db4b4b",
+      "rulerColour": "#db4b4b",
+      "background": "#db4b4b"
+    },
+    "NOTE": {
+      "icon": "note",
+      "iconColour": "#10b981",
+      "rulerColour": "#10b981",
+      "background": "#10b981"
+    },
+    "WARN": {
+      "icon": "alert",
+      "iconColour": "#ffff00",
+      "rulerColour": "#ffff00",
+      "background": "#ffff00"
+    },
+    "HACK": {
+      "icon": "tools"
+    },
+    "XXX": {
+      "icon": "$(close)"
+    }
+  },
 
   "VSCodeCounter.exclude": [
     "**/.gitignore",

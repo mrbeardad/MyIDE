@@ -134,9 +134,17 @@
    ```
 
 4. 安装[dual-key-remap](https://github.com/ililim/dual-key-remap/releases)映射 CapsLock 键为“单击为 Esc，组合为 Ctrl”
+
    1. 解压文件夹到`%USERPROFILE%\AppData\Local`
    2. 按照[教程](https://winaero.com/create-elevated-shortcut-to-skip-uac-prompt-in-windows-10/)创建一个无 UAC 提示的应用程序快捷方式，并将快捷方式创建到 `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
+
+      ```vbs
+      Set objShell = CreateObject("WScript.Shell")
+      objShell.Exec("schtasks /run /tn dual-key-remap-elevated")
+      ```
+
    3. 当前手动启动即可，之后便开机自启
+
 5. 安装[WSL2](https://docs.microsoft.com/en-us/windows/wsl/install)
 
    ```sh
@@ -220,7 +228,7 @@ Other references:
    # 构建附带调试信息的可执行文件
    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
      if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-       add_compile_options(-fstandalone-debug -rdynamic)
+       add_compile_options(-fstandalone-debug -O0 -rdynamic)
      elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
        add_compile_options(-g3 -rdynamic)
      endif()
@@ -258,9 +266,9 @@ Other references:
 3. 编写.clangd (Lsp)
 
    ```yaml
-   # command-line-args: --enable-config --clang-tidy --function-arg-placeholders=0
+   # command-line-args: --enable-config --clang-tidy
    CompileFlags:
-     Add: [-Wall, -Wextra]
+     Add: [-Wall, -Wextra, -O2]
      CompilationDatabase: build
    Diagnostics:
      UnusedIncludes: Strict
@@ -277,7 +285,7 @@ Other references:
 4. 编写.clang-tidy (Linter)
 
    ```yaml
-   Checks: "-*,bugprone-*,cert-dcl21-cpp,cert-dcl50-cpp,cert-env33-c,cert-err34-c,cert-err52-cpp,cert-err60-cpp,cert-flp30-c,cert-msc50-cpp,cert-msc51-cpp,cppcoreguidelines-*,-cppcoreguidelines-macro-usage,-cppcoreguidelines-pro-type-reinterpret-cast,-cppcoreguidelines-pro-type-union-access,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-cppcoreguidelines-pro-type-vararg,google-build-using-namespace,google-explicit-constructor,google-global-names-in-headers,google-readability-casting,google-runtime-int,google-runtime-operator,hicpp-*,-hicpp-vararg,misc-*,modernize-*,performance-*,readability-*,-readability-named-parameter,-readability-implicit-bool-conversion"
+   Checks: "-*,bugprone-*,cert-dcl21-cpp,cert-dcl50-cpp,cert-env33-c,cert-err34-c,cert-err52-cpp,cert-err60-cpp,cert-flp30-c,cert-msc50-cpp,cert-msc51-cpp,cppcoreguidelines-*,-cppcoreguidelines-macro-usage,-cppcoreguidelines-pro-type-reinterpret-cast,-cppcoreguidelines-pro-type-union-access,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-cppcoreguidelines-pro-type-vararg,google-build-using-namespace,google-explicit-constructor,google-global-names-in-headers,google-readability-casting,google-runtime-int,google-runtime-operator,hicpp-*,-hicpp-vararg,misc-*,modernize-*,performance-*,readability-*,-readability-named-parameter,-readability-implicit-bool-conversion,-readability-qualified-auto"
    CheckOptions:
      - key: bugprone-argument-comment.StrictMode
        value: 1
@@ -297,7 +305,7 @@ Other references:
 
    ```yaml
    BasedOnStyle: Chromium
-   IndentWidth: 4
+   #IndentWidth: 4
    ColumnLimit: 100
    BreakBeforeBinaryOperators: All
    BreakBeforeTernaryOperators: true
@@ -320,9 +328,34 @@ Other references:
          "type": "lldb",
          "request": "launch",
          "name": "Debug Test",
+         "expressions": "native",
+         "stdio": ["stdin.txt", "stdout.txt", null],
          "program": "${workspaceFolder}/build/test_bin",
          "args": [],
-         "env": {},
+         "env": { "NAME": "val" },
+         "cwd": "${workspaceFolder}"
+       },
+       {
+         "type": "cppdbg",
+         "request": "launch",
+         "name": "Debug CppTool",
+         "MIMode": "gdb",
+         "miDebuggerPath": "/usr/local/bin/gdb",
+         "setupCommands": [
+           {
+             "description": "Enable pretty-printing for gdb",
+             "text": "-enable-pretty-printing",
+             "ignoreFailures": false
+           }
+         ],
+         // "logging": {
+         //   "engineLogging": true,
+         //   "trace": true,
+         //   "traceResponse": true
+         // },
+         "program": "${workspaceFolder}/build/test_bin",
+         "environment": [{ "name": "MD_FILE", "value": "" }],
+         "args": [],
          "cwd": "${workspaceFolder}"
        }
      ]

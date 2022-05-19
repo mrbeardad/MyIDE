@@ -261,12 +261,6 @@
   },
 
   // 界面元素
-  // ctrl+c: close quickopen
-  {
-    "key": "ctrl+c",
-    "command": "workbench.action.closeQuickOpen",
-    "when": "inQuickOpen"
-  },
   // f1: toggle side bar
   {
     "key": "f1",
