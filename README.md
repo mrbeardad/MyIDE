@@ -8,7 +8,6 @@
   - [VSCode](#vscode)
   - [Others](#others)
   - [Language](#language)
-  - [C++](#c)
 
 <!-- vim-markdown-toc -->
 
@@ -129,8 +128,7 @@
 3. 创建启动脚本`wt_quake.vbs`于文件夹`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`实现开机自启 quake 模式
 
    ```vbs
-   Set objShell = CreateObject("WScript.Shell")
-   objShell.Exec("wt -w _quake")
+   CreateObject("Wscript.Shell").Run "wt -w _quake", 0, True
    ```
 
 4. 安装[dual-key-remap](https://github.com/ililim/dual-key-remap/releases)映射 CapsLock 键为“单击为 Esc，组合为 Ctrl”
@@ -139,8 +137,7 @@
    2. 按照[教程](https://winaero.com/create-elevated-shortcut-to-skip-uac-prompt-in-windows-10/)创建一个无 UAC 提示的应用程序快捷方式，并将快捷方式创建到 `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
 
       ```vbs
-      Set objShell = CreateObject("WScript.Shell")
-      objShell.Exec("schtasks /run /tn dual-key-remap-elevated")
+      CreateObject("Wscript.Shell").Run "schtasks /run /tn dual-key-remap-elevated", 0, True
       ```
 
    3. 当前手动启动即可，之后便开机自启
