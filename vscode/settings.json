@@ -31,7 +31,8 @@
   "editor.unfoldOnClickAfterEndOfLine": true,
   "editor.cursorSmoothCaretAnimation": true,
   "editor.cursorSurroundingLines": 7,
-  "editor.fontFamily": "NerdCodePro Font",
+  "editor.fontFamily": "NerdCodeProPlus",
+  // "editor.fontWeight": "bold",
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
   "editor.inlineSuggest.enabled": true,
@@ -87,7 +88,6 @@
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.defaultProfile.linux": "bash",
-  "terminal.integrated.fontFamily": "NerdCodePro Font",
   "terminal.integrated.sendKeybindingsToShell": true,
 
   "problems.showCurrentInStatus": true,

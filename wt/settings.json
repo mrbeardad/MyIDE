@@ -101,7 +101,7 @@
   "profiles": {
     "defaults": {
       "font": {
-        "face": "NerdCodePro Font",
+        "face": "NerdCodeProPlus",
         "size": 10,
         "weight": "normal"
       },
