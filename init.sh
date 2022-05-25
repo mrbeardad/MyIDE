@@ -1041,10 +1041,9 @@ main "$@"
 # 
 # lvim.builtin.bufferline.options.always_show_bufferline = true
 # 
-# lvim.builtin.lualine.options.theme = "material"
 # lvim.builtin.lualine.options = {
 #   globalstatus       = true,
-#   section_separators = { left = '', right = ' ' },
+#   section_separators = { left = ' ', right = ' ' },
 # }
 # local components = require("lvim.core.lualine.components")
 # lvim.builtin.lualine.sections.lualine_a = {
@@ -1056,9 +1055,10 @@ main "$@"
 #       return "  " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
 #     end,
 #     color = { bg = "#454c5a" },
-#     separator = { right = '' }
+#     separator = { right = ' ' }
 #   },
-#   components.branch
+#   components.branch,
+#   { '', type = 'stl', color = { fg = "#454c5a" } }
 # }
 # lvim.builtin.lualine.sections.lualine_x = {
 #   components.diagnostics,

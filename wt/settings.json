@@ -97,14 +97,18 @@
   "copyFormatting": "none",
   "copyOnSelect": true,
   "multiLinePasteWarning": false,
+  "tabWidthMode": "compact",
+  "confirmCloseAllTabs": false,
   "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
   "profiles": {
     "defaults": {
       "font": {
         "face": "NerdCodeProPlus",
+        // "face": "SpaceMono NF",
         "size": 10,
         "weight": "normal"
       },
+      "intenseTextStyle": "bold",
       "colorScheme": "Afterglow",
       "useAcrylic": true,
       "opacity": 50,
@@ -113,7 +117,7 @@
     },
     "list": [
       {
-        "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
         "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
         "hidden": false,
         "name": "Windows PowerShell"
