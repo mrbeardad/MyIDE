@@ -4,4 +4,3 @@ This font is a combination of three glyphs pathed fonts from [nerd-fonts](https:
 
 - Regular Style is `SauceCodePro Nerd Font SemiBold Italic`
 - _Italic_ Style is `IBMPlex Nerd Font SemiBold Italic`
-- **Bold** Style is `SpaceMono Nerd Font Bold Italic`
