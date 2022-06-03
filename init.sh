@@ -382,8 +382,8 @@ main "$@"
 # setw -g window-status-style fg="${thm_fg}",bg="${thm_bg}",none
 # 
 # # statusline
-# setw -g window-status-format "#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_bg] #W "
-# setw -g window-status-current-format "#[fg=$thm_bg,bg=$thm_orange] #I #[fg=$thm_fg,bg=$thm_black4] #W "
+# setw -g window-status-format "#[fg=$thm_blue,bg=$thm_bg]#[fg=$thm_bg,bg=$thm_blue,italics]#I #[fg=$thm_fg,bg=$thm_black4] #W#[fg=$thm_black4,bg=$thm_bg] "
+# setw -g window-status-current-format "#[fg=$thm_orange,bg=$thm_bg]#[fg=$thm_bg,bg=$thm_orange,italics]#I #[fg=$thm_fg,bg=$thm_black4] #W#[fg=$thm_black4,bg=$thm_bg] "
 # set -g status-left "#[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics]#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics] #S #[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics] #{?client_prefix,#[fg=$thm_red],#{?window_zoomed_flag,#[fg=$thm_yellow],#[fg=$thm_green]}}#[bg=$thm_gray]#{?client_prefix,#[bg=$thm_red],#{?window_zoomed_flag,#[bg=$thm_yellow],#[bg=$thm_green]}}#[fg=$thm_bg]ﱿ #{b:pane_current_path} #{?client_prefix,#[fg=$thm_red],#{?window_zoomed_flag,#[fg=$thm_yellow],#[fg=$thm_green]}}#[bg=$thm_gray]"
 # set -g status-right "#[fg=$thm_cyan,bg=$thm_bg,nobold,nounderscore,noitalics]#[fg=$thm_bg,bg=$thm_cyan,nobold,nounderscore,noitalics] %H:%M #[fg=$thm_cyan,bg=$thm_bg,nobold,nounderscore,noitalics] #[fg=$thm_magenta,bg=$thm_bg,nobold,nounderscore,noitalics]#[fg=$thm_bg,bg=$thm_magenta,nobold,nounderscore,noitalics] %F #[fg=$thm_magenta,bg=$thm_bg,nobold,nounderscore,noitalics]"
 # 
