@@ -6,7 +6,7 @@
       "keys": "ctrl+shift+f",
       "command": {
         "action": "sendInput",
-        "input": "\u001bf" // <M-f>
+        "input": "\u001b[70;6u" // <M-f>
       }
     },
     {
@@ -99,6 +99,7 @@
   "multiLinePasteWarning": false,
   "tabWidthMode": "compact",
   "confirmCloseAllTabs": false,
+  "tabSwitcherMode": "mru",
   "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
   "profiles": {
     "defaults": {
@@ -127,8 +128,15 @@
         "icon": "C:\\Users\\Bear\\OneDrive\\图片\\Saved Pictures\\ubuntu.png",
         "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
         "hidden": false,
-        "name": "Ubuntu",
+        "name": "Ubuntu on WSL",
         "source": "Windows.Terminal.Wsl"
+      },
+      {
+        "commandline": "ssh -t -o ServerAliveInterval=60 -i C:\\Users\\Bear\\.ssh\\tencent_cloud_beardad ubuntu@152.136.188.178 sh -c 'tmux new-session -s ASUS || tmux attach -t ASUS'",
+        "guid": "{a453ae62-4e3d-5e58-b989-0a998ec441b8}",
+        "hidden": false,
+        "icon": "C:\\Users\\mrbea\\OneDrive\\图片\\Saved Pictures\\腾讯云.png",
+        "name": "Ubuntu on Cloud"
       },
       {
         "commandline": "%SystemRoot%\\System32\\cmd.exe",

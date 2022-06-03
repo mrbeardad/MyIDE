@@ -60,7 +60,7 @@ set_config() {
 
   echo "update configuration segement $1"
 
-  # HACK: Redirect operation execute before simple command, so bash will truncate file before read it
+  # NOTE: Redirect operation execute before simple command, so bash will truncate file before read it
   CONTENT=$(sed "/^#\s*$1$/,/^#\s*$1_END$/c# $1\n# $1_END" "$CONFIG_FILE" |
     sed "/^#\s*$1$/r$2" |
     sed "/^#\s*$1$/,/^#\s*$1_END$/s/^/# /" |
@@ -184,9 +184,9 @@ EOF
 
 htop_conf() {
   sudo apt -y install btop libncursesw5-dev
-  git clone --depth=1 https://github.com/KoffeinFlummi/htop-vim /tmp/htop-vim
+  git clone --depth=1 https://github.com/KoffeinFlummi/htop-vim ~/.local/share/htop-vim
   (
-    cd /tmp/htop-vim
+    cd ~/.local/share/htop-vim
     ./autogen.sh && ./configure && make
     cp ./htop ~/.local/bin/
   )
@@ -211,7 +211,6 @@ neovim_conf() {
   chmod +x ~/.local/bin/win32yank.exe
 
   bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
-  mv ~/.cargo/bin/* ~/.local/bin/
 
   # get_config __CONFIG_LUA >~/.config/lvim/config.lua
   rm -fr ~/.config/lvim/
@@ -253,7 +252,6 @@ lang_web() {
 other_cli_tools() {
   sudo apt -y install neofetch cloc ncdu gnupg nmap
   cargo install lsd
-  mv ~/.cargo/bin/* ~/.local/bin/
   git clone --recurse-submodules https://github.com/mrbeardad/SeeCheatSheets ~/.cheat
   mkdir -p ~/.cheat/src/build
   (
@@ -284,6 +282,7 @@ main() {
   else
     cd "$(dirname "$0")"
     mkdir -p ~/.local/bin/
+    mkdir -p ~/.local/share/
     mkdir -p ~/.config/
 
     sudo_without_passwd
@@ -314,75 +313,121 @@ main "$@"
 ############################## CONFIG_SEGEMENTS ##############################
 
 # __TMUX_CONF
-# # 全局选项
-# set-option -g set-titles off     # 不更改terminal title
-# set-option -g status off         # 不显示status line
-# set-option -g base-index 1       # 设置窗口的起始下标为1
-# set-option -g pane-base-index 1  # 设置面板的起始下标为1
-# set-option -g visual-activity on # 非当前窗口有内容更新时提醒用户
-# set-option -g mouse on           # 开启鼠标支持
-# set-option -g set-clipboard on   # 开启系统剪切板支持
-# set-option -g mode-keys vi       # 支持vi模式
-# set-option -g escape-time 50     # '<esc>'序列的延迟时间
-# set-option -g focus-events on    # 开启聚焦事件
-# set-option -g xterm-keys on      # 支持xterm按键序列
-# set-option -g default-terminal "tmux-256color"
-# set-option -ga terminal-overrides ",*256color:RGB" # true color support
-# set-option -ga terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
-# set-option -ga terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'  # underscore colours
-# set-option -ga terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[1 q' # cursor style
-# # set-option -ga terminal-overrides ',*:cnorm=\E[?12h\E[?25h'
-#
-# # 更改快捷键前缀
+# # ----------------------------=== General ===--------------------------
+# set -g default-terminal "screen-256color"
+# if 'infocmp -x tmux-256color > /dev/null 2>&1' 'set -g default-terminal "tmux-256color"'
+# # true color support
+# set -ga terminal-overrides ",*256color:RGB"
+# # undercurl support
+# set -ga terminal-overrides ',*:Smulx=\E[4::%p1%dm'
+# # underscore colours support
+# set -ga terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
+# # cursor style support
+# set -ga terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[1 q'
+# 
+# set -g extended-keys always  # enable extended keys in escape sequence, for example, ctrl+shift+letter
+# set -g escape-time 10
+# set -g focus-events on
+# set -g mouse on
+# set -g set-clipboard on
+# set -g mode-keys vi
+# 
+# # ----------------------------=== Display ===--------------------------
+# set -g set-titles on          # set terminal title
+# set -g base-index 1           # start windows numbering at 1
+# set -g pane-base-index 1      # make pane numbering consistent with windows
+# set -g automatic-rename on    # rename window to reflect current program
+# set -g renumber-windows on    # renumber windows when a window is closed
+# set -g display-panes-time 800 # slightly longer pane indicators display time
+# set -g display-time 1000      # slightly longer status messages display time
+# set -g monitor-activity on    # monitor for activity in the window. 
+# set -g visual-activity off    # don't display a message instead of sending a bell when activity occurs in monitored window
+# set -g status-interval 10     # redraw status line every 10 seconds
+# 
+# # ----------------------------=== Theme ===--------------------------
+# # colors
+# thm_bg="#1e1e28"
+# thm_fg="#dadae8"
+# thm_cyan="#c2e7f0"
+# thm_black="#15121c"
+# thm_gray="#332e41"
+# thm_magenta="#c6aae8"
+# thm_pink="#e5b4e2"
+# thm_red="#e38c8f"
+# thm_green="#b1e3ad"
+# thm_yellow="#ebddaa"
+# thm_blue="#a4b9ef"
+# thm_orange="#f9c096"
+# thm_black4="#474258"
+# 
+# # status
+# set -g status on
+# set -g status-bg "${thm_bg}"
+# set -g status-position top
+# set -g status-justify "centre"
+# set -g status-left-length "100"
+# set -g status-right-length "100"
+# 
+# # messages
+# set -g message-style fg="${thm_cyan}",bg="${thm_gray}",align="centre"
+# set -g message-command-style fg="${thm_cyan}",bg="${thm_gray}",align="centre"
+# 
+# # panes
+# set -g pane-border-style fg="${thm_gray}"
+# set -g pane-active-border-style fg="${thm_blue}"
+# 
+# # windows
+# setw -g window-status-activity-style fg="${thm_fg}",bg="${thm_bg}",none
+# setw -g window-status-separator ""
+# setw -g window-status-style fg="${thm_fg}",bg="${thm_bg}",none
+# 
+# # statusline
+# setw -g window-status-format "#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_bg] #W "
+# setw -g window-status-current-format "#[fg=$thm_bg,bg=$thm_orange] #I #[fg=$thm_fg,bg=$thm_black4] #W "
+# set -g status-left "#[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics]#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics] #S #[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics] #{?client_prefix,#[fg=$thm_red],#{?window_zoomed_flag,#[fg=$thm_yellow],#[fg=$thm_green]}}#[bg=$thm_gray]#{?client_prefix,#[bg=$thm_red],#{?window_zoomed_flag,#[bg=$thm_yellow],#[bg=$thm_green]}}#[fg=$thm_bg]ﱿ #{b:pane_current_path} #{?client_prefix,#[fg=$thm_red],#{?window_zoomed_flag,#[fg=$thm_yellow],#[fg=$thm_green]}}#[bg=$thm_gray]"
+# set -g status-right "#[fg=$thm_cyan,bg=$thm_bg,nobold,nounderscore,noitalics]#[fg=$thm_bg,bg=$thm_cyan,nobold,nounderscore,noitalics] %H:%M #[fg=$thm_cyan,bg=$thm_bg,nobold,nounderscore,noitalics] #[fg=$thm_magenta,bg=$thm_bg,nobold,nounderscore,noitalics]#[fg=$thm_bg,bg=$thm_magenta,nobold,nounderscore,noitalics] %F #[fg=$thm_magenta,bg=$thm_bg,nobold,nounderscore,noitalics]"
+# 
+# # modes
+# setw -g clock-mode-colour "${thm_blue}"
+# setw -g mode-style "fg=${thm_pink} bg=${thm_black4} bold"
+# 
+# # ----------------------------=== Keybindings ===--------------------------
+# # prefix
 # unbind C-Z
 # unbind C-B
 # set -g prefix M-w
-#
-# # 重载配置
-# unbind 'R'
+# 
+# # clear both screen and history
+# bind -n C-l send-keys C-l \; run 'sleep 0.2' \; clear-history
+# 
+# # reload config file
 # bind R source-file ~/.tmux.conf \; display-message "Config reloaded.."
-#
-# # Window跳转
-# # bind b previous-window
-#
-# # Pane分割
+# 
+# # pane operator
 # bind s splitw -v -c '#{pane_current_path}'
 # bind v splitw -h -c '#{pane_current_path}'
-#
-# # Pane跳转
-# #unbind-key M-Left
-# #unbind-key M-Right
-# #unbind-key M-Down
-# #unbind-key M-Up
 # bind h selectp -L
 # bind j selectp -D
 # bind k selectp -U
 # bind l selectp -R
-#
-# # Pane大小调整
-# #unbind-key C-Right
-# #unbind-key C-Left
-# #unbind-key C-Up
-# #unbind-key C-Down
 # bind + resizep -U 10
-# bind = resizep -U 10
 # bind - resizep -D 10
 # bind < resizep -L 10
 # bind > resizep -R 10
-#
-# # 剪切板支持
+# 
+# # clipboard
 # bind-key -T copy-mode-vi v send-keys -X begin-selection
 # bind-key -T copy-mode-vi y send-keys -X copy-selection
 # bind ] run-shell -b "win32yank.exe -o --lf | tmux load-buffer - ; tmux paste-buffer"
-#
-# # 快速启动
+# 
+# # fast launch
 # bind t new-window htop
 # bind T new-window btop
 # bind g new-window -c "#{pane_current_path}" tig --all
 # bind r new-window -c "#{pane_current_path}" ranger
 # bind m new-window "cmatrix"
-#
-# # 鼠标滚轮模拟
+# 
+# # mouse wheel simulation
 # tmux_commands_with_legacy_scroll="nano less more man"
 # bind-key -T root WheelUpPane \
 #     if-shell -Ft= '#{?mouse_any_flag,1,#{pane_in_mode}}' \
@@ -394,13 +439,14 @@ main "$@"
 #         'send -Mt=' \
 #         'if-shell -t= "#{?alternate_on,true,false} || echo \"#{tmux_commands_with_legacy_scroll}\" | grep -q \"#{pane_current_command}\"" \
 #             "send -t= Down Down Down" "send -Mt="'
-#
-# # 插件
-# run '/usr/share/tmux-plugin-manager/tpm'        # 插件管理器
-# set -g @plugin 'tmux-plugins/tmux-resurrect'    # 会话保存与恢复插件
-#
+# 
+# # ----------------------------=== Plugins ===--------------------------
+# run '/usr/share/tmux-plugin-manager/tpm'        # plugin manager
+# set -g @plugin 'tmux-plugins/tmux-resurrect'    # store and restore session
+# 
+# # ----------------------------=== Env ===--------------------------
 # EDITOR=nvim
-# PATH=$HOME/.local/bin/:$PATH
+# PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 # __TMUX_CONF_END
 
 # __ZSHRC
@@ -412,7 +458,7 @@ main "$@"
 # fi
 # 
 # # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/.local/bin:$PATH
+# export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 # 
 # # Path to your oh-my-zsh installation.
 # export ZSH="/home/beardad/.oh-my-zsh"
@@ -512,6 +558,7 @@ main "$@"
 # # export LANG=en_US.UTF-8
 # 
 # # Preferred editor for local and remote sessions
+# export EDITOR='nvim'
 # # if [[ -n $SSH_CONNECTION ]]; then
 # #   export EDITOR='vim'
 # # else
@@ -662,7 +709,7 @@ main "$@"
 # hide_userland_threads=1
 # shadow_other_users=0
 # show_thread_names=0
-# show_program_path=0
+# show_program_path=1
 # highlight_base_name=0
 # highlight_deleted_exe=1
 # highlight_megabytes=1
@@ -813,7 +860,6 @@ main "$@"
 # -- 光标移动: clever-f, hop, matchit
 # ----------------------------------------
 # vim.opt.relativenumber = true
-# vim.api.nvim_set_keymap('c', '<C-a>', '<C-b>', { noremap = true })
 # -- vim.api.nvim_set_keymap('i', '<C-e>', '<End>', { noremap = true })
 # -- vim.api.nvim_set_keymap('v', '<C-e>', '$', { noremap = true })
 # -- vim.api.nvim_set_keymap('n', '<C-e>', '$', { noremap = true })
@@ -822,24 +868,13 @@ main "$@"
 # -- 全文搜索: vim-visual-star-search, vim-cool, telescope, nvim-spectre
 # ----------------------------------------
 # vim.api.nvim_set_keymap('n', '<BS>', '<CMD>nohl<CR>', { noremap = true })
-# vim.api.nvim_set_keymap('n', '<C-l>', '<CMD>nohl<CR><C-l>', { noremap = true })
-# vim.api.nvim_set_keymap('n', 'n', "'Nn'[v:searchforward]", { noremap = true, expr = true })
-# vim.api.nvim_set_keymap('n', 'N', "'nN'[v:searchforward]", { noremap = true, expr = true })
-# vim.api.nvim_set_keymap('c', '<M-W>', "\\<\\><Left><Left>", { noremap = true })
-# vim.api.nvim_set_keymap('c', '<M-r>', "\\v", { noremap = true })
-# vim.api.nvim_set_keymap('c', '<M-c>', "\\C", { noremap = true })
-# vim.api.nvim_set_keymap('n', '<C-f>', '<CMD>Telescope current_buffer_fuzzy_find<CR>', { noremap = true })
 # -- NOTE: terminal map: ctrl+shift+f -> alt+f
 # vim.api.nvim_set_keymap('n', '<M-f>', '<CMD>Telescope live_grep<CR>', { noremap = true })
-# vim.api.nvim_set_keymap('n', '<C-S-F>', '<CMD>Telescope live_grep<CR>', { noremap = true })
+# require("user.keybindings").map('n', '<C-S-F>', '<CMD>Telescope live_grep<CR>')
 # 
 # ----------------------------------------
 # -- 标签跳转: vim-bookmarks, telescope-vim-bookmarks
 # ----------------------------------------
-# -- NOTE: terminal map: ctrl+i -> alt+shift+i
-# vim.api.nvim_set_keymap('n', '<M-I>', '<C-i>', { noremap = true })
-# vim.api.nvim_set_keymap('n', '[h', "<CMD>Gitsigns next_hunk<CR>", { noremap = true })
-# vim.api.nvim_set_keymap('n', ']h', "<CMD>Gitsigns prev_hunk<CR>", { noremap = true })
 # 
 # ----------------------------------------
 # -- 插入编辑
@@ -1037,7 +1072,7 @@ main "$@"
 # lvim.builtin.terminal.open_mapping = "<C-Space>"
 # 
 # lvim.builtin.nvimtree.setup.view.side = "left"
-# lvim.builtin.nvimtree.show_icons.git = 1
+# -- lvim.builtin.nvimtree.show_icons.git = 1
 # 
 # lvim.builtin.bufferline.options.always_show_bufferline = true
 # 
@@ -1166,16 +1201,6 @@ main "$@"
 # ----------------------------------------
 # lvim.plugins = {
 #   {
-#     "karb94/neoscroll.nvim",
-#     event = "WinScrolled",
-#     config = function()
-#       require('neoscroll').setup({
-#         mappings = { '<C-d>', '<C-u>', 'zz' },
-#         respect_scrolloff = true,
-#         easing_function = "circular", -- quadratic, cubic, quartic, quintic, circular, sine
-#       })
-#     end
-#   }, {
 #     "lukas-reineke/indent-blankline.nvim",
 #     event = "BufRead",
 #     setup = function()
@@ -1186,33 +1211,6 @@ main "$@"
 #       vim.g.indent_blankline_show_trailing_blankline_indent = false
 #       vim.g.indent_blankline_show_first_indent_level = false
 #     end
-#   }, {
-#     "rhysd/clever-f.vim",
-#     keys = { "f", "F", "t", "T" },
-#     setup = function()
-#       vim.g.clever_f_across_no_linew = 1
-#       vim.g.clever_f_smart_case = 1
-#       vim.g.clever_f_fix_key_direction = 1
-#     end
-#   }, {
-#     'phaazon/hop.nvim',
-#     cmd = "Hop*",
-#     branch = 'v1', -- optional but strongly recommended
-#     setup = function()
-#       vim.api.nvim_set_keymap("", ";", "<CMD>HopChar1<CR>", { noremap = true })
-#       vim.api.nvim_set_keymap("", ",", "<CMD>HopLineStartMW<CR>", { noremap = true })
-#     end,
-#     config = function()
-#       require("hop").setup({
-#         char2_fallback_key = "<Esc>"
-#       })
-#     end
-#   }, {
-#     "bronson/vim-visual-star-search",
-#     keys = { { "v", "*" }, { "v", "#" }, { "v", "g*" }, { "v", "g#" } },
-#   }, {
-#     "romainl/vim-cool",
-#     event = "CursorMoved"
 #   }, {
 #     "windwp/nvim-spectre",
 #     -- terminal map: ctrl+shift+h -> alt+shift+h
@@ -1237,40 +1235,6 @@ main "$@"
 #         }
 #       })
 #       vim.api.nvim_set_keymap('n', '<M-H>', ":lua require('spectre').open_visual({select_word=true})<CR>", { noremap = true, silent = true })
-#     end
-#   }, {
-#     "ethanholz/nvim-lastplace",
-#     event = "BufRead",
-#     config = function()
-#       require("nvim-lastplace").setup({
-#         lastplace_ignore_buftype = { "quickfix", "nofile", "help" },
-#         lastplace_ignore_filetype = { "gitcommit", "gitrebase", "svn", "hgcommit", },
-#         lastplace_open_folds = true,
-#       })
-#     end,
-#   }, {
-#     "MattesGroeger/vim-bookmarks",
-#     event = "BufRead",
-#     setup = function()
-#       vim.g.bookmark_sign = ''
-#       vim.g.bookmark_annotation_sign = ''
-#       vim.g.bookmark_display_annotation = 1
-#       vim.g.bookmark_auto_save_file = join_paths(get_cache_dir(), ".vim-bookmarks")
-#     end,
-#     config = function()
-#       vim.cmd [[hi link BookmarkSign SignColumn]]
-#       vim.cmd [[hi link BookmarkAnnotationSign SignColumn]]
-#       vim.api.nvim_set_keymap('n', 'ma', '', {})
-#       vim.api.nvim_set_keymap('n', 'mx', '', {})
-#       vim.api.nvim_set_keymap('n', 'mC', '<CMD>BookmarkClearAll<CR>', { noremap = true })
-#     end
-#   }, {
-#     "tom-anders/telescope-vim-bookmarks.nvim",
-#     keys = { "ml", "mL" },
-#     config = function()
-#       require('telescope').load_extension('vim_bookmarks')
-#       vim.api.nvim_set_keymap('n', 'ml', '<CMD>lua require("telescope").extensions.vim_bookmarks.current_file()<CR>', { noremap = true })
-#       vim.api.nvim_set_keymap('n', 'mL', '<CMD>lua require("telescope").extensions.vim_bookmarks.all()<CR>', { noremap = true })
 #     end
 #   },
 #   { "terryma/vim-expand-region",
@@ -1519,10 +1483,9 @@ main "$@"
 #   endif
 # endf
 # ]]
-# lvim.autocommands.custom_groups = {
-#   -- { "WinEnter", "*", [[call AutoOpenMinimap()]] }
-#   { "BufWinEnter", "NvimTree_1", [[nunmap <buffer><Tab>]] },
-#   { "FileType", "c,cpp", [[nnoremap <buffer><M-o> <CMD>ClangdSwitchSourceHeader<CR>]] }
+# lvim.autocmds = {
+#   { "BufWinEnter", { pattern = "NvimTree_1", command = [[nunmap <buffer><Tab>]] } },
+#   { "FileType", { pattern = "c,cpp", command = [[nnoremap <buffer><M-o> <CMD>ClangdSwitchSourceHeader<CR>]] } }
 # }
 # __CONFIG_LUA_END
 

@@ -32,7 +32,6 @@
   "editor.cursorSmoothCaretAnimation": true,
   "editor.cursorSurroundingLines": 7,
   "editor.fontFamily": "NerdCodeProPlus",
-  // "editor.fontWeight": "bold",
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
   "editor.inlineSuggest.enabled": true,
@@ -103,19 +102,13 @@
   "path-intellisense.showHiddenFiles": true,
 
   "C_Cpp.intelliSenseEngine": "Disabled",
-  "clangd.arguments": [
-    "--enable-config",
-    "--clang-tidy",
-    "--completion-style=detailed"
-  ],
+  "clangd.arguments": ["--enable-config", "--clang-tidy", "--completion-style=detailed"],
   "c-cpp-flylint.clang.enable": false,
   "c-cpp-flylint.flexelint.enable": false,
   "c-cpp-flylint.lizard.enable": false,
   "c-cpp-flylint.flawfinder.enable": false,
   "c-cpp-flylint.cppcheck.standard": ["c++17"],
-  "c-cpp-flylint.cppcheck.extraArgs": [
-    "--enable=warning,style,performance,portability"
-  ],
+  "c-cpp-flylint.cppcheck.extraArgs": ["--enable=warning,style,performance,portability"],
   "cmake.configureOnOpen": false,
   "cmake.statusbar.visibility": "icon",
   "doxdocgen.generic.useGitUserEmail": true,
@@ -141,6 +134,8 @@
   "javascript.format.enable": false,
   "typescript.suggest.paths": false,
   "typescript.format.enable": false,
+
+  "prettier.printWidth": 100,
 
   "html.format.enable": false,
 
@@ -190,15 +185,7 @@
   "todo-tree.highlights.useColourScheme": true,
   "todo-tree.filtering.useBuiltInExcludes": "file and search excludes",
   "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
-  "todo-tree.general.tags": [
-    "TODO",
-    "FIXME",
-    "BUG",
-    "NOTE",
-    "WARN",
-    "HACK",
-    "XXX"
-  ],
+  "todo-tree.general.tags": ["TODO", "FIXME", "BUG", "NOTE", "WARN", "HACK", "XXX"],
   "todo-tree.highlights.customHighlight": {
     "TODO": {
       "icon": "check-circle-fill",
@@ -448,16 +435,7 @@
     "hlsl": {
       "aliases": ["HLSL", "hlsl"],
       "filenames": [],
-      "extensions": [
-        ".hlsl",
-        ".hlsli",
-        ".fx",
-        ".fxh",
-        ".vsh",
-        ".psh",
-        ".cginc",
-        ".compute"
-      ],
+      "extensions": [".hlsl", ".hlsli", ".fx", ".fxh", ".vsh", ".psh", ".cginc", ".compute"],
       "lineComments": ["//"],
       "blockComments": [["/*", "*/"]],
       "blockStrings": []
@@ -702,16 +680,7 @@
     "python": {
       "aliases": ["Python", "py"],
       "filenames": ["Snakefile", "SConstruct", "SConscript"],
-      "extensions": [
-        ".py",
-        ".rpy",
-        ".pyw",
-        ".cpy",
-        ".gyp",
-        ".gypi",
-        ".pyi",
-        ".ipy"
-      ],
+      "extensions": [".py", ".rpy", ".pyw", ".cpy", ".gyp", ".gypi", ".pyi", ".ipy"],
       "lineComments": ["#"],
       "blockComments": [["\"\"\"", "\"\"\""]],
       "blockStrings": []
@@ -759,17 +728,7 @@
         "snapfile",
         "gymfile"
       ],
-      "extensions": [
-        ".rb",
-        ".rbx",
-        ".rjs",
-        ".gemspec",
-        ".rake",
-        ".ru",
-        ".erb",
-        ".podspec",
-        ".rbi"
-      ],
+      "extensions": [".rb", ".rbx", ".rjs", ".gemspec", ".rake", ".ru", ".erb", ".podspec", ".rbi"],
       "lineComments": ["#"],
       "blockComments": [["=begin", "=end"]],
       "blockStrings": []
@@ -807,15 +766,7 @@
       "blockStrings": []
     },
     "shellscript": {
-      "aliases": [
-        "Shell Script",
-        "shellscript",
-        "bash",
-        "sh",
-        "zsh",
-        "ksh",
-        "csh"
-      ],
+      "aliases": ["Shell Script", "shellscript", "bash", "sh", "zsh", "ksh", "csh"],
       "filenames": [
         "APKBUILD",
         "PKGBUILD",
