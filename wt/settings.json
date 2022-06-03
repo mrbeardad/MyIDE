@@ -6,91 +6,91 @@
       "keys": "ctrl+shift+f",
       "command": {
         "action": "sendInput",
-        "input": "\u001b[70;6u" // <M-f>
+        "input": "\u001b[70;6u"
       }
     },
     {
       "keys": "ctrl+shift+h",
       "command": {
         "action": "sendInput",
-        "input": "\u001bH" // <M-H>
+        "input": "\u001b[72;6u"
       }
     },
     {
       "keys": "ctrl+alt+enter",
       "command": {
         "action": "sendInput",
-        "input": "\u001b\u000d" // <M-CR>
+        "input": "\u001b[13;6u"
       }
     },
     {
+      "keys": "ctrl+i",
       "command": {
         "action": "sendInput",
         "input": "\u001bI"
-      },
-      "keys": "ctrl+i" // <M-I>
+      }
     },
     {
       "keys": "ctrl+shift+j",
       "command": {
         "action": "sendInput",
-        "input": "\u001bJ" // <M-J>
+        "input": "\u001b[74;6u"
       }
     },
     {
       "keys": "ctrl+shift+k",
       "command": {
         "action": "sendInput",
-        "input": "\u001bK" // <M-K>
+        "input": "\u001b[75;6u"
       }
     },
     {
       "keys": "ctrl+shift+l",
       "command": {
         "action": "sendInput",
-        "input": "\u001bL" // <M-L>
+        "input": "\u001b[76;6u"
       }
     },
     {
       "keys": "ctrl+shift+s",
       "command": {
         "action": "sendInput",
-        "input": "\u001bS" // <M-S>
-      }
-    },
-    {
-      "keys": "ctrl+shift+o",
-      "command": {
-        "action": "sendInput",
-        "input": "\u001bO" // <M-O>
-      }
-    },
-    {
-      "keys": "ctrl+shift+m",
-      "command": {
-        "action": "sendInput",
-        "input": "\u001bM" // <M-M>
+        "input": "\u001b[83;6u"
       }
     },
     {
       "keys": "ctrl+shift+e",
       "command": {
         "action": "sendInput",
-        "input": "\u001bE" // <M-E>
+        "input": "\u001b[69;6u"
       }
     },
     {
-      "keys": "ctrl+.",
+      "keys": "ctrl+shift+o",
       "command": {
         "action": "sendInput",
-        "input": "\u001b." // <M-.>
+        "input": "\u001b[79;6u"
+      }
+    },
+    {
+      "keys": "ctrl+shift+t",
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[84;6u"
+      }
+    },
+    {
+      "keys": "ctrl+shift+m",
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[77;6u"
       }
     },
     {
       "keys": "ctrl+shift+p",
       "command": {
         "action": "sendInput",
-        "input": "\u001bP" // <M-P>
+        "input": "\u001b[80;6u"
       }
     }
   ],
