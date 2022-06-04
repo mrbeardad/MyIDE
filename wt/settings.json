@@ -20,7 +20,7 @@
       "keys": "ctrl+alt+enter",
       "command": {
         "action": "sendInput",
-        "input": "\u001b[13;6u"
+        "input": "\u001b[13;7u"
       }
     },
     {

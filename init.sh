@@ -112,7 +112,7 @@ prerequisites() {
 
   ask_user "Do you want to set GOPROXY to tencent cloud mirror?" &&
     go env -w GOPROXY=https://mirrors.tencent.com/go/,direct
-  go env -w GOBIN="$HOME"/.local/bin/ GOSUMDB=sum.golang.google.cn
+  go env -w GOPATH="$HOME"/.go/ GOBIN="$HOME"/.local/bin/ GOSUMDB=sum.golang.google.cn
 
   ask_user "Do you want to config npm registry to tencent cloud mirror?" &&
     npm config set registry http://mirrors.tencent.com/npm/
@@ -456,64 +456,64 @@ main "$@"
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
-# 
+#
 # # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
-# 
+#
 # # Path to your oh-my-zsh installation.
 # export ZSH="/home/beardad/.oh-my-zsh"
-# 
+#
 # # Set name of the theme to load --- if set to "random", it will
 # # load a random theme each time oh-my-zsh is loaded, in which case,
 # # to know which specific one was loaded, run: echo $RANDOM_THEME
 # # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="powerlevel10k/powerlevel10k"
-# 
+#
 # # Set list of themes to pick from when loading at random
 # # Setting this variable when ZSH_THEME=random will cause zsh to load
 # # a theme from this variable instead of looking in $ZSH/themes/
 # # If set to an empty array, this variable will have no effect.
 # # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-# 
+#
 # # Uncomment the following line to use case-sensitive completion.
 # # CASE_SENSITIVE="true"
-# 
+#
 # # Uncomment the following line to use hyphen-insensitive completion.
 # # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
-# 
+#
 # # Uncomment the following line to disable bi-weekly auto-update checks.
 # # DISABLE_AUTO_UPDATE="true"
-# 
+#
 # # Uncomment the following line to automatically update without prompting.
 # # DISABLE_UPDATE_PROMPT="true"
-# 
+#
 # # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=30
-# 
+#
 # # Uncomment the following line if pasting URLs and other text is messed up.
 # # DISABLE_MAGIC_FUNCTIONS="true"
-# 
+#
 # # Uncomment the following line to disable colors in ls.
 # # DISABLE_LS_COLORS="true"
-# 
+#
 # # Uncomment the following line to disable auto-setting terminal title.
 # # DISABLE_AUTO_TITLE="true"
-# 
+#
 # # Uncomment the following line to enable command auto-correction.
 # # ENABLE_CORRECTION="true"
-# 
+#
 # # Uncomment the following line to display red dots whilst waiting for completion.
 # # You can also set it to another string to have that shown instead of the default red dots.
 # # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
-# 
+#
 # # Uncomment the following line if you want to disable marking untracked files
 # # under VCS as dirty. This makes repository status check for large repositories
 # # much, much faster.
 # # DISABLE_UNTRACKED_FILES_DIRTY="true"
-# 
+#
 # # Uncomment the following line if you want to change the command execution time
 # # stamp shown in the history command output.
 # # You can set one of the optional three formats:
@@ -521,10 +521,10 @@ main "$@"
 # # or set a custom format using the strftime function format specifications,
 # # see 'man strftime' for details.
 # HIST_STAMPS="yyyy-mm-dd"
-# 
+#
 # # Would you like to use another custom folder than $ZSH/custom?
 # # ZSH_CUSTOM=/path/to/new-custom-folder
-# 
+#
 # # Which plugins would you like to load?
 # # Standard plugins can be found in $ZSH/plugins/
 # # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -547,16 +547,16 @@ main "$@"
 #     tmux
 #     vi-mode
 # )
-# 
+#
 # source $ZSH/oh-my-zsh.sh
-# 
+#
 # # User configuration
-# 
+#
 # # export MANPATH="/usr/local/man:$MANPATH"
-# 
+#
 # # You may need to manually set your language environment
 # # export LANG=en_US.UTF-8
-# 
+#
 # # Preferred editor for local and remote sessions
 # export EDITOR='nvim'
 # # if [[ -n $SSH_CONNECTION ]]; then
@@ -564,10 +564,10 @@ main "$@"
 # # else
 # #   export EDITOR='mvim'
 # # fi
-# 
+#
 # # Compilation flags
 # # export ARCHFLAGS="-arch x86_64"
-# 
+#
 # # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -576,7 +576,7 @@ main "$@"
 # # Example aliases
 # # alias zshconfig="mate ~/.zshrc"
 # # alias ohmyzsh="mate ~/.oh-my-zsh"
-# 
+#
 # alias l='lsd -lah --group-dirs first'
 # alias l.='lsd -lhd --group-dirs first .*'
 # alias ll='lsd -lh --group-dirs first'
@@ -588,7 +588,7 @@ main "$@"
 # alias apt='sudo apt'
 # alias stl='sudo systemctl'
 # alias vi="$EDITOR"
-# 
+#
 # alias gmv='git mv'
 # alias grms='git rm --cached'
 # alias grss='git restore --staged'
@@ -617,16 +617,16 @@ main "$@"
 #   rm -fr "$DOT_GIT"/modules/"$1"
 #   set +e
 # }
-# 
+#
 # source /usr/share/doc/fzf/examples/key-bindings.zsh
 # source /usr/share/doc/fzf/examples/completion.zsh
 # bindkey '^F' fzf-file-widget
-# 
+#
 # source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#606060"
-# 
+#
 # export VI_MODE_SET_CURSOR=true
 # bindkey -M vicmd '^L' clear-screen
 # bindkey '^L' forward-word
@@ -637,13 +637,13 @@ main "$@"
 # bindkey '^Y' yank
 # bindkey '^P' up-line-or-beginning-search
 # bindkey '^N' down-line-or-beginning-search
-# 
+#
 # zstyle ':completion:*:*:docker:*' option-stacking yes
 # zstyle ':completion:*:*:docker-*:*' option-stacking yes
-# 
+#
 # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# 
+#
 # __ZSHRC_END
 
 # __RANGER
@@ -825,17 +825,27 @@ main "$@"
 # __CONFIG_LUA
 # require("user.neovim").config()
 # 
+# -- In order to disable lunarvim's default colorscheme
 # lvim.colorscheme = "default"
-# 
-# require("user.plugins").config()
-# 
-# require("user.keybindings").config()
 # 
 # lvim.builtin.bufferline.options.always_show_bufferline = true
 # 
 # require("user.statusline").config()
 # 
 # require("user.alpha").config()
+# 
+# require("user.treesitter").config()
+# 
+# lvim.builtin.notify.active = true
+# lvim.builtin.terminal.active = true
+# lvim.builtin.terminal.shell = "/bin/bash"
+# lvim.builtin.terminal.open_mapping = "<C-Space>"
+# lvim.builtin.nvimtree.setup.view.mappings.list = {
+# 	{ key = { "<Tab>" }, action = nil },
+# 	{ key = { "l", "<CR>", "o" }, action = "edit", mode = "n" },
+# 	{ key = "h", action = "close_node" },
+# 	{ key = "v", action = "vsplit" },
+# }
 # 
 # ----------------------------------------
 # -- Telescope
@@ -847,79 +857,18 @@ main "$@"
 # 	-- for input mode
 # 	i = {
 # 		["<Esc>"] = actions.close,
-# 		["<C-u>"] = nil,
 # 	},
 # 	-- for normal mode
 # 	n = {},
 # }
 # 
-# lvim.builtin.notify.active = true
-# lvim.builtin.terminal.active = true
-# lvim.builtin.terminal.shell = "/bin/bash"
-# lvim.builtin.terminal.open_mapping = "<C-Space>"
-# 
-# ----------------------------------------
-# -- generic LSP settings
-# ----------------------------------------
-# 
-# -- ---@usage disable automatic installation of servers
-# -- lvim.lsp.automatic_servers_installation = false
-# 
 # -- ---WARN: configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
 # -- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
 # vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
-# -- local opts = {} -- check the lspconfig documentation for a list of all possible options
-# -- require("lvim.lsp.manager").setup("pyright", opts)
 # 
-# -- ---WARN: remove a server from the skipped list, e.g. eslint, or emmet_ls. !!Requires `:LvimCacheReset` to take effect!!
-# -- ---`:LvimInfo` lists which server(s) are skiipped for the current filetype
-# -- vim.tbl_map(function(server)
-# --   return server ~= "emmet_ls"
-# -- end, lvim.lsp.automatic_configuration.skipped_servers)
+# require("user.plugins").config()
 # 
-# -- -- you can set a custom on_attach function that will be used for all the language servers
-# -- -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
-# -- lvim.lsp.on_attach_callback = function(client, bufnr)
-# --   local function buf_set_option(...)
-# --     vim.api.nvim_buf_set_option(bufnr, ...)
-# --   end
-# --   --Enable completion triggered by <c-x><c-o>
-# --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-# -- end
-# 
-# -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
-# -- local formatters = require "lvim.lsp.null-ls.formatters"
-# -- formatters.setup {
-# --   { command = "black", filetypes = { "python" } },
-# --   { command = "isort", filetypes = { "python" } },
-# --   {
-# --     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
-# --     command = "prettier",
-# --     ---@usage arguments to pass to the formatter
-# --     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
-# --     extra_args = { "--print-with", "100" },
-# --     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-# --     filetypes = { "typescript", "typescriptreact" },
-# --   },
-# -- }
-# 
-# -- -- set additional linters
-# -- local linters = require "lvim.lsp.null-ls.linters"
-# -- linters.setup {
-# --   { command = "flake8", filetypes = { "python" } },
-# --   {
-# --     -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
-# --     command = "shellcheck",
-# --     ---@usage arguments to pass to the formatter
-# --     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
-# --     extra_args = { "--severity", "warning" },
-# --   },
-# --   {
-# --     command = "codespell",
-# --     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-# --     filetypes = { "javascript", "python" },
-# --   },
-# -- }
+# require("user.keybindings").config()
 # __CONFIG_LUA_END
 
 # __GITCONFIG

@@ -308,5 +308,11 @@
   {
     "key": "alt+t",
     "command": "translator.toggleCaptureWord"
+  },
+  {
+    "key": "alt+shift+t",
+    "command": "vscode-neovim.send",
+    "args": "<M-T>",
+    "when": "editorFocus && neovim.mode == visual"
   }
 ]

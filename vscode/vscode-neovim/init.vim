@@ -34,8 +34,8 @@ vnoremap <C-F> <Cmd>call VSCodeNotifyVisual('actions.find', 1)<CR><Esc>
 " 标签跳转
 nnoremap mm <Cmd>call VSCodeNotify('bookmarks.toggle')<CR>
 nnoremap mi <Cmd>call VSCodeNotify('bookmarks.toggleLabeled')<CR>
-nnoremap mn <Cmd>call VSCodeNotify('bookmarks.jumpToNext')<CR>
-nnoremap mp <Cmd>call VSCodeNotify('bookmarks.jumpToPrevious')<CR>
+nnoremap ]m <Cmd>call VSCodeNotify('bookmarks.jumpToNext')<CR>
+nnoremap [m <Cmd>call VSCodeNotify('bookmarks.jumpToPrevious')<CR>
 nnoremap ml <Cmd>call VSCodeNotify('bookmarks.list')<CR>
 nnoremap mL <Cmd>call VSCodeNotify('bookmarks.listFromAllFiles')<CR>
 nnoremap mc <Cmd>call VSCodeNotify('bookmarks.clear')<CR>
@@ -99,12 +99,11 @@ nnoremap gr <Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>
 nnoremap gI <Cmd>call VSCodeNotify('editor.action.goToImplementation')<CR>
 nnoremap [c <Cmd>call VSCodeNotify('editor.action.diffReview.prev')<CR>
 nnoremap ]c <Cmd>call VSCodeNotify('editor.action.diffReview.next')<CR>
-nnoremap [h <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
-nnoremap ]h <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
+nnoremap [g <Cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR>
+nnoremap ]g <Cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR>
 nnoremap [e <Cmd>call VSCodeNotify('editor.action.marker.prev')<CR>
 nnoremap ]e <Cmd>call VSCodeNotify('editor.action.marker.next')<CR>
 
 " 其他按键
 nnoremap za <Cmd>call VSCodeNotify('editor.toggleFold')<CR>
-vnoremap <Space>tt <Cmd>call VSCodeNotifyVisual('translator.translate', 1)<CR>
-vnoremap <Space>tr <Cmd>call VSCodeNotifyVisual('translator.replaceWithTranslation', 1)<CR>
+vnoremap <M-T> <Cmd>call VSCodeNotifyVisual('translator.replaceWithTranslation', 1)<CR>

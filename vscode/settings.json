@@ -102,7 +102,12 @@
   "path-intellisense.showHiddenFiles": true,
 
   "C_Cpp.intelliSenseEngine": "Disabled",
-  "clangd.arguments": ["--enable-config", "--clang-tidy", "--completion-style=detailed"],
+  "clangd.arguments": [
+    "--enable-config",
+    "--clang-tidy",
+    "--completion-style=detailed",
+    "--function-arg-placeholders=0"
+  ],
   "c-cpp-flylint.clang.enable": false,
   "c-cpp-flylint.flexelint.enable": false,
   "c-cpp-flylint.lizard.enable": false,
