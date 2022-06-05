@@ -21,7 +21,7 @@
 | `Ctrl`+`S`/`R`     | 保存/恢复当前 Session             |
 | `w`                | 预览所有 Session                  |
 | `d`                | 卸载当前 Session                  |
-| `c`\|`&`           | 新建/关闭 Window                  |
+| `c`\|`&`\|`,`      | 新建/关闭/重命名 Window           |
 | `n`\|`p`           | 切换下/上一个 Window              |
 | `s`\|`v`\|`x`      | 水平/垂直新建/关闭 Pane           |
 | `;`                | 快速切换 Pane                     |
