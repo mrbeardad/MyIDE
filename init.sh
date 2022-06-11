@@ -333,7 +333,7 @@ main "$@"
 # set -g mode-keys vi
 # 
 # # ----------------------------=== Display ===--------------------------
-# set -g set-titles on          # set terminal title
+# set -g set-titles off         # set terminal title
 # set -g base-index 1           # start windows numbering at 1
 # set -g pane-base-index 1      # make pane numbering consistent with windows
 # set -g automatic-rename on    # rename window to reflect current program
