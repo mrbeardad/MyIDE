@@ -44,50 +44,7 @@
     "command": "-vscode-neovim.ctrl-f"
   },
 
-  // 标签跳转
-  // ctrl+m: bookmark key prefix
-  {
-    "key": "ctrl+m m",
-    "command": "bookmarks.toggle",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "ctrl+m i",
-    "command": "bookmarks.toggleLabeled",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "ctrl+m l",
-    "command": "bookmarks.list",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "ctrl+m shift+l",
-    "command": "bookmarks.listFromAllFiles",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "ctrl+m c",
-    "command": "bookmarks.clear",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "ctrl+m shift+c",
-    "command": "bookmarks.clearFromAllFiles",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "ctrl+m n",
-    "command": "bookmarks.jumpToNext",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "ctrl+m b",
-    "command": "bookmarks.jumpToPrevious",
-    "when": "editorTextFocus"
-  },
-
-  // 插入编辑
+  // 快速编辑
   // jj/jk: escape
   {
     "key": "j",
@@ -272,14 +229,19 @@
     "command": "workbench.view.scm",
     "when": "workbench.scm.active"
   },
-  // alt+`: terminal
-  {
-    "key": "alt+oem_3",
-    "command": "workbench.action.terminal.toggleTerminal",
-    "when": "terminal.active"
-  },
 
   // 语言服务
+  // ctrl+i: toggle suggest widget
+  {
+    "key": "ctrl+i",
+    "command": "editor.action.triggerSuggest",
+    "when": "!suggestWidgetVisible && editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+i",
+    "command": "hideSuggestWidget",
+    "when": "suggestWidgetVisible && textInputFocus"
+  },
   // alt+i: search snippet
   {
     "key": "alt+i",
@@ -309,6 +271,7 @@
     "key": "alt+t",
     "command": "translator.toggleCaptureWord"
   },
+  // alt+shift+t: replace text with translation
   {
     "key": "alt+shift+t",
     "command": "vscode-neovim.send",

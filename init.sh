@@ -276,7 +276,7 @@ main() {
     set_config __RANGER ~/.config/ranger/commands.py
     set_config __HTOPRC ~/.config/htop/htoprc
     set_config __TIGRC ~/.tigrc
-    set_config __CONFIG_LUA ~/.config/lvim/config.lua
+    # set_config __CONFIG_LUA ~/.config/lvim/config.lua
     set_config __GITCONFIG ~/.gitconfig
     set_config __SSH_CONFIG ~/.ssh/config
   else
@@ -702,7 +702,7 @@ main "$@"
 # config_reader_min_version=2
 # fields=2 45 48 6 5 7 4 0 3 109 110 46 47 20 49 1
 # sort_key=46
-# sort_direction=1
+# sort_direction=-1
 # tree_sort_key=0
 # tree_sort_direction=1
 # hide_kernel_threads=1
@@ -824,18 +824,18 @@ main "$@"
 
 # __CONFIG_LUA
 # require("user.neovim").config()
-# 
+#
 # -- In order to disable lunarvim's default colorscheme
 # lvim.colorscheme = "default"
-# 
+#
 # lvim.builtin.bufferline.options.always_show_bufferline = true
-# 
+#
 # require("user.statusline").config()
-# 
+#
 # require("user.alpha").config()
-# 
+#
 # require("user.treesitter").config()
-# 
+#
 # lvim.builtin.notify.active = true
 # lvim.builtin.terminal.active = true
 # lvim.builtin.terminal.shell = "/bin/bash"
@@ -846,7 +846,7 @@ main "$@"
 # 	{ key = "h", action = "close_node" },
 # 	{ key = "v", action = "vsplit" },
 # }
-# 
+#
 # ----------------------------------------
 # -- Telescope
 # ----------------------------------------
@@ -861,13 +861,13 @@ main "$@"
 # 	-- for normal mode
 # 	n = {},
 # }
-# 
+#
 # -- ---WARN: configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
 # -- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
 # vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
-# 
+#
 # require("user.plugins").config()
-# 
+#
 # require("user.keybindings").config()
 # __CONFIG_LUA_END
 
