@@ -235,12 +235,12 @@
   {
     "key": "ctrl+i",
     "command": "editor.action.triggerSuggest",
-    "when": "!suggestWidgetVisible && editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
+    "when": "editorTextFocus && neovim.mode == insert && !suggestWidgetVisible && editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
   },
   {
     "key": "ctrl+i",
     "command": "hideSuggestWidget",
-    "when": "suggestWidgetVisible && textInputFocus"
+    "when": "editorTextFocus && neovim.mode == insert && suggestWidgetVisible && textInputFocus"
   },
   // alt+i: search snippet
   {

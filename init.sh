@@ -383,7 +383,7 @@ main "$@"
 # 
 # # statusline
 # setw -g window-status-format "#[fg=$thm_blue,bg=$thm_bg]#[fg=$thm_bg,bg=$thm_blue,italics]#I #[fg=$thm_fg,bg=$thm_gray] #W#[fg=$thm_gray,bg=$thm_bg] "
-# setw -g window-status-current-format "#{?client_prefix,#[fg=$thm_red],#{?window_zoomed_flag,#[fg=$thm_yellow],#[fg=$thm_orange]}}#[bg=$thm_bg]#[fg=$thm_bg,italics]#{?client_prefix,#[bg=$thm_red],#{?window_zoomed_flag,#[bg=$thm_yellow],#[bg=$thm_orange]}}#I #[fg=$thm_fg,bg=$thm_black4] #W#[fg=$thm_black4,bg=$thm_bg] "
+# setw -g window-status-current-format "#{?client_prefix,#[fg=$thm_red],#{?window_zoomed_flag,#[fg=$thm_yellow],#[fg=$thm_orange]}}#[bg=$thm_bg]#[fg=$thm_bg,italics]#{?client_prefix,#[bg=$thm_red],#{?window_zoomed_flag,#[bg=$thm_yellow],#[bg=$thm_orange]}}#I #{?client_prefix,#[fg=$thm_red],#{?window_zoomed_flag,#[fg=$thm_yellow],#[fg=$thm_fg]}}#[bg=$thm_black4] #W#[fg=$thm_black4,bg=$thm_bg] "
 # set -g status-left "#[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics]#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics] #S #[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics] #[fg=$thm_green,bg=$thm_gray]#[bg=$thm_green,fg=$thm_bg]ﱿ #{b:pane_current_path} #[fg=$thm_green,bg=$thm_bg]"
 # set -g status-right "#[fg=$thm_cyan,bg=$thm_bg,nobold,nounderscore,noitalics]#[fg=$thm_bg,bg=$thm_cyan,nobold,nounderscore,noitalics] %H:%M #[fg=$thm_cyan,bg=$thm_bg,nobold,nounderscore,noitalics] #[fg=$thm_magenta,bg=$thm_bg,nobold,nounderscore,noitalics]#[fg=$thm_bg,bg=$thm_magenta,nobold,nounderscore,noitalics] %F #[fg=$thm_magenta,bg=$thm_bg,nobold,nounderscore,noitalics]"
 # 
