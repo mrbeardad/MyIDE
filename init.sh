@@ -183,7 +183,7 @@ EOF
 }
 
 htop_conf() {
-  sudo apt -y install btop libncursesw5-dev
+  sudo apt -y install btop libncursesw5-dev autoconf automake libtool
   git clone --depth=1 https://github.com/KoffeinFlummi/htop-vim ~/.local/share/htop-vim
   (
     cd ~/.local/share/htop-vim
