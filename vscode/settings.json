@@ -43,7 +43,7 @@
 
   "workbench.startupEditor": "none",
   "workbench.list.automaticKeyboardNavigation": false,
-  "workbench.list.openMode": "doubleClick",
+  // "workbench.list.openMode": "doubleClick",
   "workbench.list.smoothScrolling": true,
   "workbench.productIconTheme": "fluent-icons",
   "workbench.colorCustomizations": {
@@ -78,7 +78,7 @@
 
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.cursorBlinking": true,
-  "terminal.integrated.defaultProfile.linux": "bash",
+  // "terminal.integrated.defaultProfile.linux": "bash",
   "terminal.integrated.sendKeybindingsToShell": true,
 
   "problems.showCurrentInStatus": true,
@@ -121,29 +121,22 @@
 
   "bashIde.highlightParsingErrors": true,
 
-  "eslint.format.enable": true,
+  "prettier.printWidth": 100,
+  "eslint.format.enable": false,
   "javascript.inlayHints.enumMemberValues.enabled": true,
   "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
-  "javascript.inlayHints.parameterTypes.enabled": true,
+  // "javascript.inlayHints.parameterTypes.enabled": true,
   "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
   "javascript.inlayHints.variableTypes.enabled": true,
   "javascript.suggest.paths": false,
   "javascript.format.enable": false,
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
   "typescript.inlayHints.enumMemberValues.enabled": true,
   "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
-  "typescript.inlayHints.parameterTypes.enabled": true,
+  // "typescript.inlayHints.parameterTypes.enabled": true,
   "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
   "typescript.inlayHints.variableTypes.enabled": true,
   "typescript.suggest.paths": false,
   "typescript.format.enable": false,
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  },
-
-  "prettier.printWidth": 100,
 
   "html.format.enable": false,
 
@@ -221,12 +214,16 @@
     },
     "WARN": {
       "icon": "alert",
-      "iconColour": "#ffff00",
-      "rulerColour": "#ffff00",
-      "background": "#ffff00"
+      "iconColour": "#eed49f",
+      "rulerColour": "#eed49f",
+      "background": "#eed49f"
     },
     "HACK": {
-      "icon": "tools"
+      "icon": "tools",
+      "iconColour": "#eed49f",
+      "rulerColour": "#eed49f",
+      "background": "#eed49f",
+      "foreground": "#000000"
     },
     "XXX": {
       "icon": "$(close)"
@@ -954,5 +951,6 @@
       "blockComments": [],
       "blockStrings": []
     }
-  }
+  },
+  "settingsSync.ignoredSettings": ["vscode-neovim.neovimInitVimPaths.win32"]
 }

@@ -144,6 +144,14 @@
     "when": "editorTextFocus && neovim.mode == visual"
   },
 
+  // 复制粘贴
+  // ctrl+c: copy text
+  {
+    "key": "ctrl+C",
+    "command": "editor.action.clipboardCopyAction",
+    "when": "editorHasSelection"
+  },
+
   // 文件操作
   // ctrl+k o: open file
   {

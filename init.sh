@@ -250,7 +250,7 @@ lang_web() {
 }
 
 other_cli_tools() {
-  sudo apt -y install neofetch cloc ncdu gnupg nmap
+  sudo apt -y install neofetch cloc ncdu gnupg nmap socat
   cargo install lsd
   git clone --recurse-submodules https://github.com/mrbeardad/SeeCheatSheets ~/.cheat
   mkdir -p ~/.cheat/src/build
@@ -701,7 +701,7 @@ main "$@"
 # htop_version=3.1.1-dev
 # config_reader_min_version=2
 # fields=2 45 48 6 5 7 4 0 3 109 110 46 47 20 49 1
-# sort_key=46
+# sort_key=47
 # sort_direction=-1
 # tree_sort_key=0
 # tree_sort_direction=1

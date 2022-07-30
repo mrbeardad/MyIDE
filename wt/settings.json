@@ -87,6 +87,13 @@
       }
     },
     {
+      "keys": "ctrl+shift+u",
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[85;6u"
+      }
+    },
+    {
       "keys": "ctrl+shift+p",
       "command": {
         "action": "sendInput",
