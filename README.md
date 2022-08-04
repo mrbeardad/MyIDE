@@ -188,6 +188,7 @@
 [**vscode 使用手册**](vscode.md)
 
 ## Others
+- 安装[GitKraken](https://release.axocdn.com/win64/GitKrakenSetup-6.5.1.exe)
 
 - 安装[SwitchHosts](https://github.com/oldj/SwitchHosts/releases)
 
