@@ -23,8 +23,7 @@
 | `Win`+`A`         | 通知中心            |
 | `Win`+`+`         | 放大镜              |
 | `Win`+`Shift`+`C` | 捕色器              |
-| `Ctrl`+`Ctrl`     | Listary 搜索器      |
-| `Alt`+`Space`     | PowerToy 运行器     |
+| `Ctrl`+`Ctrl`     | 全局搜索器          |
 
 | 编辑快捷键      | 功能     |
 | --------------- | -------- |
