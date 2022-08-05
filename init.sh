@@ -2,6 +2,8 @@
 
 set -eo pipefail
 
+PATH="$HOME"/.local/bin:"$PATH"
+
 CONFIG_FILE=${CONFIG_FILE:-"$0"}
 WIN_HOME=${WIN_HOME:-"/winhome"}
 OPTION_UPDATE_CONFIG=
@@ -219,7 +221,7 @@ neovim_conf() {
     -c 'autocmd User PackerComplete quitall' \
     -c 'PackerSync'
   ask_user "Do you want use lvim instead of nvim all the time? Means to copy ~/.config/lvim/bin/nvim to /usr/local/bin" &&
-    cp ~/.config/lvim/bin/nvim /usr/local/bin/nvim
+  sudo cp ~/.config/lvim/bin/nvim /usr/local/bin/nvim
 }
 
 lang_shell() {
