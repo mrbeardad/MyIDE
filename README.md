@@ -1,8 +1,8 @@
-# The Best IDE Strategy for Myself
+# 开发环境搭建
 
 <!-- vim-markdown-toc GFM -->
 
-- [The Best IDE Strategy for Myself](#the-best-ide-strategy-for-myself)
+- [开发环境搭建](#开发环境搭建)
   - [Windows](#windows)
   - [WSL](#wsl)
   - [VSCode](#vscode)
@@ -13,11 +13,10 @@
 
 ## Windows
 
-1. 安装[MyASUS 华硕管家](https://www.microsoft.com/zh-cn/p/myasus/9n7r5s6b0zzh?activetab=pivot:overviewtab)，自动安装驱动
-2. 安装[Google Chrome 浏览器](https://www.google.cn/chrome/)
-3. 登录 Google Chrome 账户并自动同步配置
-4. 安装[Bandizip 压缩包工具](http://www.bandisoft.com/bandizip/old/6/)
-5. 安装常用软件
+1. 安装[MyASUS 华硕管家](https://www.microsoft.com/zh-cn/p/myasus/9n7r5s6b0zzh?activetab=pivot:overviewtab)
+2. 安装[Chrome 浏览器](https://www.google.cn/chrome/)，并登录Google账户以同步配置
+3. 安装[Bandizip 压缩包工具](http://www.bandisoft.com/bandizip/old/6/)，下载旧版以免除广告
+4. 安装常用软件
 
    - [搜狗输入法](https://pinyin.sogou.com/)
    - [TIM](https://tim.qq.com)
@@ -124,23 +123,24 @@
 ## WSL
 
 1. 安装[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)
-2. 安装 wt 配置[settings.json](wt/settings.json)
-3. 创建启动脚本`wt_quake.vbs`于文件夹`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`实现开机自启 quake 模式
+2. 安装终端配置[settings.json](wt/settings.json)
+3. 创建启动脚本于`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\wt_quake.vbs`实现开机自启 quake 模式
 
    ```vbs
    CreateObject("Wscript.Shell").Run "wt -w _quake", 0, True
    ```
 
-4. 安装[dual-key-remap](https://github.com/ililim/dual-key-remap/releases)映射 CapsLock 键为“单击为 Esc，组合为 Ctrl”
+4. 安装[dual-key-remap](https://github.com/ililim/dual-key-remap/releases)以映射 CapsLock 键为“单击为 Esc，组合为 Ctrl”
 
    1. 解压文件夹到`%USERPROFILE%\AppData\Local`
-   2. 按照[教程](https://winaero.com/create-elevated-shortcut-to-skip-uac-prompt-in-windows-10/)创建一个无 UAC 提示的应用程序快捷方式，并将快捷方式创建到 `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
+   2. 按照[教程](https://winaero.com/create-elevated-shortcut-to-skip-uac-prompt-in-windows-10/)创建一个无 UAC 提示的应用程序快捷方式
+   3. 创建启动脚本于 `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\dual-key-remap.vbs`
 
       ```vbs
       CreateObject("Wscript.Shell").Run "schtasks /run /tn dual-key-remap-elevated", 0, True
       ```
 
-   3. 当前手动启动即可，之后便开机自启
+   4. 当前手动启动即可，之后便开机自启
 
 5. 安装[WSL2](https://docs.microsoft.com/en-us/windows/wsl/install)
 
