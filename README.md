@@ -11,7 +11,7 @@
 
 <!-- vim-markdown-toc -->
 
-## Windows
+## [Windows](windows.md)
 
 1. 安装[MyASUS 华硕管家](https://www.microsoft.com/zh-cn/p/myasus/9n7r5s6b0zzh?activetab=pivot:overviewtab)
 2. 安装[Chrome 浏览器](https://www.google.cn/chrome/)，并登录Google账户以同步配置
@@ -118,9 +118,7 @@
 
   </details>
 
-[**Windows 使用手册**](windows.md)
-
-## WSL
+## [WSL](wsl.md)
 
 1. 安装[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)
 2. 安装终端配置[settings.json](wt/settings.json)
@@ -174,9 +172,7 @@
 > 2. 设置代理软件可接受局域网代理请求
 > 3. Windows IP 由/etc/resolv.conf 可知
 
-[**wsl 使用手册**](wsl.md)
-
-## VSCode
+## [VSCode](vscode.md)
 
 1. 下载并安装[VSCode](https://code.visualstudio.com/download)，登录账户并同步[配置](vscode/)。
 
@@ -184,8 +180,6 @@
    1. 安装配置目录[vscode-neovim](vscode/vscode-neovim/)到`%USERPROFILE%\AppData\Local\vscode-neovim`
    2. vscode 配置 `init.vim` 路径为`%USERPROFILE%\AppData\Local\vscode-neovim\init.vim`
    3. vscode 配置 `nvim.exe` 安装路径
-
-[**vscode 使用手册**](vscode.md)
 
 ## Others
 - 安装[GitKraken](https://release.axocdn.com/win64/GitKrakenSetup-6.5.1.exe "破解工具GitCracken")
