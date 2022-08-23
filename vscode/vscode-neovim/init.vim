@@ -34,8 +34,8 @@ vnoremap <C-F> <Cmd>call VSCodeNotifyVisual('actions.find', 1)<CR><Esc>
 " 标签跳转
 nnoremap mm <Cmd>call VSCodeNotify('bookmarks.toggle')<CR>
 nnoremap mi <Cmd>call VSCodeNotify('bookmarks.toggleLabeled')<CR>
-nnoremap ]m <Cmd>call VSCodeNotify('bookmarks.jumpToNext')<CR>
-nnoremap [m <Cmd>call VSCodeNotify('bookmarks.jumpToPrevious')<CR>
+nnoremap mn <Cmd>call VSCodeNotify('bookmarks.jumpToNext')<CR>
+nnoremap mp <Cmd>call VSCodeNotify('bookmarks.jumpToPrevious')<CR>
 nnoremap ml <Cmd>call VSCodeNotify('bookmarks.list')<CR>
 nnoremap mL <Cmd>call VSCodeNotify('bookmarks.listFromAllFiles')<CR>
 nnoremap mc <Cmd>call VSCodeNotify('bookmarks.clear')<CR>
