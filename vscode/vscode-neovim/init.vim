@@ -1,7 +1,7 @@
 scriptencoding utf-8
 
 function! s:LoadPlugin(dir)
-  exe 'set rtp+='.expand('~').'\AppData\Local\vscode-neovim\plugged\'.a:dir
+  exe 'set rtp+=C:/Program\ Files/Neovim/vscode-neovim/plugged/'.a:dir
 endf
 
 " 光标移动
