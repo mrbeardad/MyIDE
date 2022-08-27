@@ -174,12 +174,12 @@
 
 ## [VSCode](vscode.md)
 
-1. 下载并安装[VSCode](https://code.visualstudio.com/download)，登录账户并同步[配置](vscode/)。
+1. 安装[VSCode](https://code.visualstudio.com/download)，登录账户并同步[配置](vscode/)。
 
-2. 下载并安装[NeoVim](https://github.com/neovim/neovim/releases/)，然后
-   1. 安装配置目录[vscode-neovim](vscode/vscode-neovim/)到`%USERPROFILE%\AppData\Local\vscode-neovim`
-   2. vscode 配置 `init.vim` 路径为`%USERPROFILE%\AppData\Local\vscode-neovim\init.vim`
-   3. vscode 配置 `nvim.exe` 安装路径
+2. 安装[NeoVim](https://github.com/neovim/neovim/releases/)到`C:\Program Files\Neovim\`，然后
+   1. 安装配置目录[vscode-neovim](vscode/vscode-neovim/)到`C:\Program Files\Neovim\vscode-neovim`
+   2. vscode 配置 `init.vim` 路径
+   3. vscode 配置 `nvim.exe` 路径
 
 ## Others
 - 安装[GitKraken](https://release.axocdn.com/win64/GitKrakenSetup-6.5.1.exe "破解工具GitCracken")
