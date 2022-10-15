@@ -207,6 +207,7 @@ neovim_conf() {
   sudo add-apt-repository ppa:neovim-ppa/unstable
   sudo apt update
   sudo apt -y install neovim
+  cargo install stylua
 
   curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
   unzip -p /tmp/win32yank.zip win32yank.exe >~/.local/bin/win32yank.exe
@@ -221,7 +222,7 @@ neovim_conf() {
     -c 'autocmd User PackerComplete quitall' \
     -c 'PackerSync'
   ask_user "Do you want use lvim instead of nvim all the time? Means to copy ~/.config/lvim/bin/nvim to /usr/local/bin" &&
-  sudo cp ~/.config/lvim/bin/nvim /usr/local/bin/nvim
+    sudo cp ~/.config/lvim/bin/nvim /usr/local/bin/nvim
 }
 
 lang_shell() {
@@ -326,14 +327,14 @@ main "$@"
 # set -ga terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
 # # cursor style support
 # set -ga terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[1 q'
-# 
+#
 # set -g extended-keys always  # enable extended keys in escape sequence, for example, ctrl+shift+letter
 # set -g escape-time 10
 # set -g focus-events on
 # set -g mouse on
 # set -g set-clipboard on
 # set -g mode-keys vi
-# 
+#
 # # ----------------------------=== Display ===--------------------------
 # set -g set-titles off         # set terminal title
 # set -g base-index 1           # start windows numbering at 1
@@ -342,10 +343,10 @@ main "$@"
 # set -g renumber-windows on    # renumber windows when a window is closed
 # set -g display-panes-time 800 # slightly longer pane indicators display time
 # set -g display-time 1000      # slightly longer status messages display time
-# set -g monitor-activity on    # monitor for activity in the window. 
+# set -g monitor-activity on    # monitor for activity in the window.
 # set -g visual-activity off    # don't display a message instead of sending a bell when activity occurs in monitored window
 # set -g status-interval 10     # redraw status line every 10 seconds
-# 
+#
 # # ----------------------------=== Theme ===--------------------------
 # # colors
 # thm_bg="#1e1e28"
@@ -361,7 +362,7 @@ main "$@"
 # thm_blue="#a4b9ef"
 # thm_orange="#ffba96"
 # thm_black4="#474258"
-# 
+#
 # # status
 # set -g status on
 # set -g status-bg "${thm_bg}"
@@ -369,42 +370,42 @@ main "$@"
 # set -g status-justify "centre"
 # set -g status-left-length "100"
 # set -g status-right-length "100"
-# 
+#
 # # messages
 # set -g message-style fg="${thm_cyan}",bg="${thm_gray}",align="centre"
 # set -g message-command-style fg="${thm_cyan}",bg="${thm_gray}",align="centre"
-# 
+#
 # # panes
 # set -g pane-border-style fg="${thm_gray}"
 # set -g pane-active-border-style fg="${thm_blue}"
-# 
+#
 # # windows
 # setw -g window-status-activity-style fg="${thm_fg}",bg="${thm_bg}",none
 # setw -g window-status-separator ""
 # setw -g window-status-style fg="${thm_fg}",bg="${thm_bg}",none
-# 
+#
 # # statusline
 # setw -g window-status-format "#[fg=$thm_blue,bg=$thm_bg]#[fg=$thm_bg,bg=$thm_blue,italics]#I #[fg=$thm_fg,bg=$thm_gray] #W#[fg=$thm_gray,bg=$thm_bg] "
 # setw -g window-status-current-format "#{?client_prefix,#[fg=$thm_red],#{?window_zoomed_flag,#[fg=$thm_yellow],#[fg=$thm_orange]}}#[bg=$thm_bg]#[fg=$thm_bg,italics]#{?client_prefix,#[bg=$thm_red],#{?window_zoomed_flag,#[bg=$thm_yellow],#[bg=$thm_orange]}}#I #{?client_prefix,#[fg=$thm_red],#{?window_zoomed_flag,#[fg=$thm_yellow],#[fg=$thm_fg]}}#[bg=$thm_black4] #W#[fg=$thm_black4,bg=$thm_bg] "
 # set -g status-left "#[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics]#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics] #S #[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics] #[fg=$thm_green,bg=$thm_gray]#[bg=$thm_green,fg=$thm_bg]ﱿ #{b:pane_current_path} #[fg=$thm_green,bg=$thm_bg]"
 # set -g status-right "#[fg=$thm_cyan,bg=$thm_bg,nobold,nounderscore,noitalics]#[fg=$thm_bg,bg=$thm_cyan,nobold,nounderscore,noitalics] %H:%M #[fg=$thm_cyan,bg=$thm_bg,nobold,nounderscore,noitalics] #[fg=$thm_magenta,bg=$thm_bg,nobold,nounderscore,noitalics]#[fg=$thm_bg,bg=$thm_magenta,nobold,nounderscore,noitalics] %F #[fg=$thm_magenta,bg=$thm_bg,nobold,nounderscore,noitalics]"
-# 
+#
 # # modes
 # setw -g clock-mode-colour "${thm_blue}"
 # setw -g mode-style "fg=${thm_pink} bg=${thm_black4} bold"
-# 
+#
 # # ----------------------------=== Keybindings ===--------------------------
 # # prefix
 # unbind C-Z
 # unbind C-B
 # set -g prefix M-w
-# 
+#
 # # clear both screen and history
 # bind -n C-l send-keys C-l \; run 'sleep 0.2' \; clear-history
-# 
+#
 # # reload config file
 # bind R source-file ~/.tmux.conf \; display-message "Config reloaded.."
-# 
+#
 # # pane operator
 # bind s splitw -v -c '#{pane_current_path}'
 # bind v splitw -h -c '#{pane_current_path}'
@@ -416,19 +417,19 @@ main "$@"
 # bind - resizep -D 10
 # bind < resizep -L 10
 # bind > resizep -R 10
-# 
+#
 # # clipboard
 # bind-key -T copy-mode-vi v send-keys -X begin-selection
 # bind-key -T copy-mode-vi y send-keys -X copy-selection
 # bind ] run-shell -b "win32yank.exe -o --lf | tmux load-buffer - ; tmux paste-buffer"
-# 
+#
 # # fast launch
 # bind t new-window htop
 # bind T new-window btop
 # bind g new-window -c "#{pane_current_path}" tig --all
 # bind r new-window -c "#{pane_current_path}" ranger
 # bind m new-window "cmatrix"
-# 
+#
 # # mouse wheel simulation
 # tmux_commands_with_legacy_scroll="nano less more man"
 # bind-key -T root WheelUpPane \
@@ -441,11 +442,11 @@ main "$@"
 #         'send -Mt=' \
 #         'if-shell -t= "#{?alternate_on,true,false} || echo \"#{tmux_commands_with_legacy_scroll}\" | grep -q \"#{pane_current_command}\"" \
 #             "send -t= Down Down Down" "send -Mt="'
-# 
+#
 # # ----------------------------=== Plugins ===--------------------------
 # run '/usr/share/tmux-plugin-manager/tpm'        # plugin manager
 # set -g @plugin 'tmux-plugins/tmux-resurrect'    # store and restore session
-# 
+#
 # # ----------------------------=== Env ===--------------------------
 # EDITOR=nvim
 # PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
@@ -700,18 +701,14 @@ main "$@"
 # __HTOPRC
 # # Beware! This file is rewritten by htop when settings are changed in the interface.
 # # The parser is also very primitive, and not human-friendly.
-# htop_version=3.1.1-dev
-# config_reader_min_version=2
+# htop_version=3.2.0
+# config_reader_min_version=3
 # fields=2 45 48 6 5 7 4 0 3 109 110 46 47 20 49 1
-# sort_key=47
-# sort_direction=-1
-# tree_sort_key=0
-# tree_sort_direction=1
 # hide_kernel_threads=1
 # hide_userland_threads=1
 # shadow_other_users=0
 # show_thread_names=0
-# show_program_path=1
+# show_program_path=0
 # highlight_base_name=0
 # highlight_deleted_exe=1
 # highlight_megabytes=1
@@ -721,10 +718,8 @@ main "$@"
 # find_comm_in_cmdline=1
 # strip_exe_from_cmdline=1
 # show_merged_command=0
-# tree_view=1
-# tree_view_always_by_pid=0
-# all_branches_collapsed=0
 # header_margin=1
+# screen_tabs=0
 # detailed_cpu_time=0
 # cpu_count_from_one=1
 # show_cpu_usage=1
@@ -740,6 +735,29 @@ main "$@"
 # column_meter_modes_0=1 1 1
 # column_meters_1=RightCPUs Tasks LoadAverage Uptime
 # column_meter_modes_1=1 2 2 2
+# tree_view=1
+# sort_key=49
+# tree_sort_key=0
+# sort_direction=-1
+# tree_sort_direction=1
+# tree_view_always_by_pid=0
+# all_branches_collapsed=0
+# screen:Main=STATE ST_UID USER TTY SESSION TPGID PGRP PID PPID IO_READ_RATE IO_WRITE_RATE PERCENT_CPU PERCENT_MEM STARTTIME TIME Command
+# .sort_key=TIME
+# .tree_sort_key=PID
+# .tree_view=1
+# .tree_view_always_by_pid=0
+# .sort_direction=-1
+# .tree_sort_direction=1
+# .all_branches_collapsed=0
+# screen:I/O=PID USER IO_PRIORITY IO_RATE IO_READ_RATE IO_WRITE_RATE
+# .sort_key=IO_RATE
+# .tree_sort_key=PID
+# .tree_view=0
+# .tree_view_always_by_pid=0
+# .sort_direction=-1
+# .tree_sort_direction=1
+# .all_branches_collapsed=0
 # __HTOPRC_END
 
 # __TIGRC

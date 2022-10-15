@@ -99,6 +99,13 @@
         "action": "sendInput",
         "input": "\u001b[80;6u"
       }
+    },
+    {
+      "keys": "ctrl+shift+z",
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[90;6u"
+      }
     }
   ],
   "copyFormatting": "none",
@@ -112,11 +119,9 @@
     "defaults": {
       "font": {
         "face": "NerdCodeProPlus",
-        // "face": "SpaceMono NF",
         "size": 10,
         "weight": "normal"
       },
-      "intenseTextStyle": "bold",
       "colorScheme": "Afterglow",
       "useAcrylic": true,
       "opacity": 50,
@@ -125,37 +130,41 @@
     },
     "list": [
       {
-        "commandline": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+        "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
         "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
         "hidden": false,
         "name": "Windows PowerShell"
       },
       {
         "commandline": "wsl ~ -d Ubuntu -- tmux new-session -s Default || tmux attach -t Default",
-        "icon": "C:\\Users\\Bear\\OneDrive\\图片\\Saved Pictures\\ubuntu.png",
         "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
         "hidden": false,
-        "name": "Ubuntu on WSL",
+        "name": "Ubuntu",
         "source": "Windows.Terminal.Wsl"
-      },
-      {
-        "commandline": "ssh -t -o ServerAliveInterval=60 -i C:\\Users\\Bear\\.ssh\\tencent_cloud_beardad ubuntu@152.136.188.178 sh -c 'tmux new-session -s ASUS || tmux attach -t ASUS'",
-        "guid": "{a453ae62-4e3d-5e58-b989-0a998ec441b8}",
-        "hidden": false,
-        "icon": "C:\\Users\\mrbea\\OneDrive\\图片\\Saved Pictures\\腾讯云.png",
-        "name": "Ubuntu on Cloud"
       },
       {
         "commandline": "%SystemRoot%\\System32\\cmd.exe",
         "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
         "hidden": false,
-        "name": "Command Prompt"
+        "name": "\u547d\u4ee4\u63d0\u793a\u7b26"
       },
       {
         "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
         "hidden": false,
         "name": "Azure Cloud Shell",
         "source": "Windows.Terminal.Azure"
+      },
+      {
+        "guid": "{e4bba8f6-3ae8-522b-9864-f1b2f82a8329}",
+        "hidden": false,
+        "name": "Developer Command Prompt for VS 2022",
+        "source": "Windows.Terminal.VisualStudio"
+      },
+      {
+        "guid": "{70164ad2-1faf-5225-9856-f3d3842c9fa7}",
+        "hidden": false,
+        "name": "Developer PowerShell for VS 2022",
+        "source": "Windows.Terminal.VisualStudio"
       }
     ]
   },
@@ -182,29 +191,6 @@
       "foreground": "#d0d0d0",
       "cursorColor": "#d0d0d0",
       "selectionBackground": "#303030"
-    },
-    {
-      "name": "Blazer",
-      "black": "#000000",
-      "red": "#b87a7a",
-      "green": "#7ab87a",
-      "yellow": "#b8b87a",
-      "blue": "#7a7ab8",
-      "purple": "#b87ab8",
-      "cyan": "#7ab8b8",
-      "white": "#d9d9d9",
-      "brightBlack": "#262626",
-      "brightRed": "#dbbdbd",
-      "brightGreen": "#bddbbd",
-      "brightYellow": "#dbdbbd",
-      "brightBlue": "#bdbddb",
-      "brightPurple": "#dbbddb",
-      "brightCyan": "#bddbdb",
-      "brightWhite": "#ffffff",
-      "background": "#0d1926",
-      "foreground": "#d9e6f2",
-      "cursorColor": "#d9e6f2",
-      "selectionBackground": "#c1ddff"
     },
     {
       "background": "#0C0C0C",
@@ -415,3 +401,5 @@
     }
   ]
 }
+
+

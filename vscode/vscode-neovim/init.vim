@@ -14,7 +14,7 @@ call s:LoadPlugin('clever-f.vim')
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_do_mapping = 0
 call s:LoadPlugin('vsc-easymotion' )
-map ; <Plug>(easymotion-bd-f)
+map ; <Plug>(easymotion-bd-f2)
 map , <Plug>(easymotion-bd-jk)
 " %: match up
 let g:matchup_matchparen_enabled = 0
@@ -34,8 +34,8 @@ vnoremap <C-F> <Cmd>call VSCodeNotifyVisual('actions.find', 1)<CR><Esc>
 " 标签跳转
 nnoremap mm <Cmd>call VSCodeNotify('bookmarks.toggle')<CR>
 nnoremap mi <Cmd>call VSCodeNotify('bookmarks.toggleLabeled')<CR>
-nnoremap mn <Cmd>call VSCodeNotify('bookmarks.jumpToNext')<CR>
-nnoremap mp <Cmd>call VSCodeNotify('bookmarks.jumpToPrevious')<CR>
+nnoremap ]m <Cmd>call VSCodeNotify('bookmarks.jumpToNext')<CR>
+nnoremap [m <Cmd>call VSCodeNotify('bookmarks.jumpToPrevious')<CR>
 nnoremap ml <Cmd>call VSCodeNotify('bookmarks.list')<CR>
 nnoremap mL <Cmd>call VSCodeNotify('bookmarks.listFromAllFiles')<CR>
 nnoremap mc <Cmd>call VSCodeNotify('bookmarks.clear')<CR>
@@ -107,3 +107,5 @@ nnoremap ]e <Cmd>call VSCodeNotify('editor.action.marker.next')<CR>
 " 其他按键
 nnoremap za <Cmd>call VSCodeNotify('editor.toggleFold')<CR>
 vnoremap <M-T> <Cmd>call VSCodeNotifyVisual('translator.replaceWithTranslation', 1)<CR>
+
+

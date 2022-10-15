@@ -59,7 +59,7 @@
 | `Shift`+`Ctrl`+`{num}` | 启动第 {num} 个 Profile |
 | `Ctrl`+`Tab`           | 切换 Tab                |
 | `Shift`+`Ctrl`+`W`     | 关闭当前 Tab            |
-| `Shift`+`MouseDrag`    | 复制                    |
+| `MouseDrag`            | 复制                    |
 | `Shift`+`Ctrl`+`V`     | 粘贴                    |
 | `Ctrl`+`,`             | 打开设置面板            |
 | `Shift`+`Ctrl`+`,`     | 打开配置文件            |

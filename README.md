@@ -182,7 +182,7 @@
    3. vscode 配置 `nvim.exe` 路径
 
 ## Others
-- 安装[GitKraken](https://release.axocdn.com/win64/GitKrakenSetup-6.5.1.exe "破解工具GitCracken")
+- 安装[Fork](https://git-fork.com/)
 
 - 安装[SwitchHosts](https://github.com/oldj/SwitchHosts/releases)
 
