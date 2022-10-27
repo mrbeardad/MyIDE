@@ -1,5 +1,9 @@
 scriptencoding utf-8
 
+set noswapfile
+set nobackup
+set shadafile=NONE
+
 function! s:LoadPlugin(dir)
   exe 'set rtp+=C:/Program\ Files/Neovim/vscode-neovim/plugged/'.a:dir
 endf
