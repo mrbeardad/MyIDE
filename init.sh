@@ -327,14 +327,14 @@ main "$@"
 # set -ga terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
 # # cursor style support
 # set -ga terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[1 q'
-#
+# 
 # set -g extended-keys always  # enable extended keys in escape sequence, for example, ctrl+shift+letter
 # set -g escape-time 10
 # set -g focus-events on
 # set -g mouse on
 # set -g set-clipboard on
 # set -g mode-keys vi
-#
+# 
 # # ----------------------------=== Display ===--------------------------
 # set -g set-titles off         # set terminal title
 # set -g base-index 1           # start windows numbering at 1
@@ -343,10 +343,10 @@ main "$@"
 # set -g renumber-windows on    # renumber windows when a window is closed
 # set -g display-panes-time 800 # slightly longer pane indicators display time
 # set -g display-time 1000      # slightly longer status messages display time
-# set -g monitor-activity on    # monitor for activity in the window.
+# set -g monitor-activity on    # monitor for activity in the window. 
 # set -g visual-activity off    # don't display a message instead of sending a bell when activity occurs in monitored window
 # set -g status-interval 10     # redraw status line every 10 seconds
-#
+# 
 # # ----------------------------=== Theme ===--------------------------
 # # colors
 # thm_bg="#1e1e28"
@@ -362,7 +362,7 @@ main "$@"
 # thm_blue="#a4b9ef"
 # thm_orange="#ffba96"
 # thm_black4="#474258"
-#
+# 
 # # status
 # set -g status on
 # set -g status-bg "${thm_bg}"
@@ -370,42 +370,42 @@ main "$@"
 # set -g status-justify "centre"
 # set -g status-left-length "100"
 # set -g status-right-length "100"
-#
+# 
 # # messages
 # set -g message-style fg="${thm_cyan}",bg="${thm_gray}",align="centre"
 # set -g message-command-style fg="${thm_cyan}",bg="${thm_gray}",align="centre"
-#
+# 
 # # panes
 # set -g pane-border-style fg="${thm_gray}"
 # set -g pane-active-border-style fg="${thm_blue}"
-#
+# 
 # # windows
 # setw -g window-status-activity-style fg="${thm_fg}",bg="${thm_bg}",none
 # setw -g window-status-separator ""
 # setw -g window-status-style fg="${thm_fg}",bg="${thm_bg}",none
-#
+# 
 # # statusline
 # setw -g window-status-format "#[fg=$thm_blue,bg=$thm_bg]#[fg=$thm_bg,bg=$thm_blue,italics]#I #[fg=$thm_fg,bg=$thm_gray] #W#[fg=$thm_gray,bg=$thm_bg] "
 # setw -g window-status-current-format "#{?client_prefix,#[fg=$thm_red],#{?window_zoomed_flag,#[fg=$thm_yellow],#[fg=$thm_orange]}}#[bg=$thm_bg]#[fg=$thm_bg,italics]#{?client_prefix,#[bg=$thm_red],#{?window_zoomed_flag,#[bg=$thm_yellow],#[bg=$thm_orange]}}#I #{?client_prefix,#[fg=$thm_red],#{?window_zoomed_flag,#[fg=$thm_yellow],#[fg=$thm_fg]}}#[bg=$thm_black4] #W#[fg=$thm_black4,bg=$thm_bg] "
 # set -g status-left "#[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics]#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics] #S #[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics] #[fg=$thm_green,bg=$thm_gray]#[bg=$thm_green,fg=$thm_bg]ﱿ #{b:pane_current_path} #[fg=$thm_green,bg=$thm_bg]"
 # set -g status-right "#[fg=$thm_cyan,bg=$thm_bg,nobold,nounderscore,noitalics]#[fg=$thm_bg,bg=$thm_cyan,nobold,nounderscore,noitalics] %H:%M #[fg=$thm_cyan,bg=$thm_bg,nobold,nounderscore,noitalics] #[fg=$thm_magenta,bg=$thm_bg,nobold,nounderscore,noitalics]#[fg=$thm_bg,bg=$thm_magenta,nobold,nounderscore,noitalics] %F #[fg=$thm_magenta,bg=$thm_bg,nobold,nounderscore,noitalics]"
-#
+# 
 # # modes
 # setw -g clock-mode-colour "${thm_blue}"
 # setw -g mode-style "fg=${thm_pink} bg=${thm_black4} bold"
-#
+# 
 # # ----------------------------=== Keybindings ===--------------------------
 # # prefix
 # unbind C-Z
 # unbind C-B
 # set -g prefix M-w
-#
+# 
 # # clear both screen and history
 # bind -n C-l send-keys C-l \; run 'sleep 0.2' \; clear-history
-#
+# 
 # # reload config file
 # bind R source-file ~/.tmux.conf \; display-message "Config reloaded.."
-#
+# 
 # # pane operator
 # bind s splitw -v -c '#{pane_current_path}'
 # bind v splitw -h -c '#{pane_current_path}'
@@ -417,19 +417,19 @@ main "$@"
 # bind - resizep -D 10
 # bind < resizep -L 10
 # bind > resizep -R 10
-#
+# 
 # # clipboard
 # bind-key -T copy-mode-vi v send-keys -X begin-selection
 # bind-key -T copy-mode-vi y send-keys -X copy-selection
 # bind ] run-shell -b "win32yank.exe -o --lf | tmux load-buffer - ; tmux paste-buffer"
-#
+# 
 # # fast launch
 # bind t new-window htop
 # bind T new-window btop
 # bind g new-window -c "#{pane_current_path}" tig --all
 # bind r new-window -c "#{pane_current_path}" ranger
 # bind m new-window "cmatrix"
-#
+# 
 # # mouse wheel simulation
 # tmux_commands_with_legacy_scroll="nano less more man"
 # bind-key -T root WheelUpPane \
@@ -442,11 +442,11 @@ main "$@"
 #         'send -Mt=' \
 #         'if-shell -t= "#{?alternate_on,true,false} || echo \"#{tmux_commands_with_legacy_scroll}\" | grep -q \"#{pane_current_command}\"" \
 #             "send -t= Down Down Down" "send -Mt="'
-#
+# 
 # # ----------------------------=== Plugins ===--------------------------
 # run '/usr/share/tmux-plugin-manager/tpm'        # plugin manager
 # set -g @plugin 'tmux-plugins/tmux-resurrect'    # store and restore session
-#
+# 
 # # ----------------------------=== Env ===--------------------------
 # EDITOR=nvim
 # PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
@@ -459,64 +459,64 @@ main "$@"
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
-#
+# 
 # # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
-#
+# 
 # # Path to your oh-my-zsh installation.
 # export ZSH="/home/beardad/.oh-my-zsh"
-#
+# 
 # # Set name of the theme to load --- if set to "random", it will
 # # load a random theme each time oh-my-zsh is loaded, in which case,
 # # to know which specific one was loaded, run: echo $RANDOM_THEME
 # # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="powerlevel10k/powerlevel10k"
-#
+# 
 # # Set list of themes to pick from when loading at random
 # # Setting this variable when ZSH_THEME=random will cause zsh to load
 # # a theme from this variable instead of looking in $ZSH/themes/
 # # If set to an empty array, this variable will have no effect.
 # # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-#
+# 
 # # Uncomment the following line to use case-sensitive completion.
 # # CASE_SENSITIVE="true"
-#
+# 
 # # Uncomment the following line to use hyphen-insensitive completion.
 # # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
-#
+# 
 # # Uncomment the following line to disable bi-weekly auto-update checks.
 # # DISABLE_AUTO_UPDATE="true"
-#
+# 
 # # Uncomment the following line to automatically update without prompting.
 # # DISABLE_UPDATE_PROMPT="true"
-#
+# 
 # # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=30
-#
+# 
 # # Uncomment the following line if pasting URLs and other text is messed up.
 # # DISABLE_MAGIC_FUNCTIONS="true"
-#
+# 
 # # Uncomment the following line to disable colors in ls.
 # # DISABLE_LS_COLORS="true"
-#
+# 
 # # Uncomment the following line to disable auto-setting terminal title.
 # # DISABLE_AUTO_TITLE="true"
-#
+# 
 # # Uncomment the following line to enable command auto-correction.
 # # ENABLE_CORRECTION="true"
-#
+# 
 # # Uncomment the following line to display red dots whilst waiting for completion.
 # # You can also set it to another string to have that shown instead of the default red dots.
 # # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
-#
+# 
 # # Uncomment the following line if you want to disable marking untracked files
 # # under VCS as dirty. This makes repository status check for large repositories
 # # much, much faster.
 # # DISABLE_UNTRACKED_FILES_DIRTY="true"
-#
+# 
 # # Uncomment the following line if you want to change the command execution time
 # # stamp shown in the history command output.
 # # You can set one of the optional three formats:
@@ -524,10 +524,10 @@ main "$@"
 # # or set a custom format using the strftime function format specifications,
 # # see 'man strftime' for details.
 # HIST_STAMPS="yyyy-mm-dd"
-#
+# 
 # # Would you like to use another custom folder than $ZSH/custom?
 # # ZSH_CUSTOM=/path/to/new-custom-folder
-#
+# 
 # # Which plugins would you like to load?
 # # Standard plugins can be found in $ZSH/plugins/
 # # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -550,16 +550,16 @@ main "$@"
 #     tmux
 #     vi-mode
 # )
-#
+# 
 # source $ZSH/oh-my-zsh.sh
-#
+# 
 # # User configuration
-#
+# 
 # # export MANPATH="/usr/local/man:$MANPATH"
-#
+# 
 # # You may need to manually set your language environment
 # # export LANG=en_US.UTF-8
-#
+# 
 # # Preferred editor for local and remote sessions
 # export EDITOR='nvim'
 # # if [[ -n $SSH_CONNECTION ]]; then
@@ -567,10 +567,10 @@ main "$@"
 # # else
 # #   export EDITOR='mvim'
 # # fi
-#
+# 
 # # Compilation flags
 # # export ARCHFLAGS="-arch x86_64"
-#
+# 
 # # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -579,7 +579,7 @@ main "$@"
 # # Example aliases
 # # alias zshconfig="mate ~/.zshrc"
 # # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
+# 
 # alias l='lsd -lah --group-dirs first'
 # alias l.='lsd -lhd --group-dirs first .*'
 # alias ll='lsd -lh --group-dirs first'
@@ -591,7 +591,7 @@ main "$@"
 # alias apt='sudo apt'
 # alias stl='sudo systemctl'
 # alias vi="$EDITOR"
-#
+# 
 # alias gmv='git mv'
 # alias grms='git rm --cached'
 # alias grss='git restore --staged'
@@ -620,19 +620,19 @@ main "$@"
 #   rm -fr "$DOT_GIT"/modules/"$1"
 #   set +e
 # }
-#
+# 
 # source /usr/share/doc/fzf/examples/key-bindings.zsh
 # source /usr/share/doc/fzf/examples/completion.zsh
 # bindkey '^F' fzf-file-widget
-#
+# 
 # source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#606060"
-#
+# 
 # export VI_MODE_SET_CURSOR=true
 # bindkey -M vicmd '^L' clear-screen
-# bindkey '^L' forward-word
+# # bindkey '^L' forward-word
 # bindkey 'jj' vi-cmd-mode
 # bindkey 'jk' vi-cmd-mode
 # bindkey '^U' backward-kill-line
@@ -640,13 +640,13 @@ main "$@"
 # bindkey '^Y' yank
 # bindkey '^P' up-line-or-beginning-search
 # bindkey '^N' down-line-or-beginning-search
-#
+# 
 # zstyle ':completion:*:*:docker:*' option-stacking yes
 # zstyle ':completion:*:*:docker-*:*' option-stacking yes
-#
+# 
 # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-#
+# 
 # __ZSHRC_END
 
 # __RANGER
