@@ -1,5 +1,6 @@
 {
   "editor.bracketPairColorization.enabled": true,
+  "editor.formatOnSave": true,
   "editor.guides.bracketPairs": "active",
   "editor.lineNumbers": "relative",
   "editor.linkedEditing": true,
@@ -24,7 +25,6 @@
   "editor.cursorSmoothCaretAnimation": true,
   "editor.cursorSurroundingLines": 7,
   "editor.fontFamily": "NerdCodeProPlus",
-  "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
   "editor.inlineSuggest.enabled": true,
   "editor.quickSuggestions": {
@@ -34,16 +34,32 @@
   },
   "editor.suggest.snippetsPreventQuickSuggestions": false,
 
+  "explorer.confirmDelete": false,
+  "explorer.excludeGitIgnore": true,
+
+  "files.hotExit": "off",
   "files.insertFinalNewline": true,
   "files.watcherExclude": {
-    "**/build/*/**": true,
-    "**/vendor/*/**": true,
-    "**/third_party/*/**": true
+    // "**/build/*/**": true,
+    "**/.next/*/**": true
   },
 
+  "search.showLineNumbers": true,
+  "search.smartCase": true,
+  "search.exclude": {
+    "**/third_party": true,
+    "**/3rd_party": true,
+    "**/vendor": true
+  },
+
+  "git.autofetch": true,
+  "gitlens.statusBar.enabled": false,
+  "gitlens.codeLens.authors.enabled": false,
+  "gitlens.codeLens.recentChange.enabled": false,
+  "gitlens.advanced.repositorySearchDepth": 1,
+  "gitlens.blame.ignoreWhitespace": true,
+
   "workbench.startupEditor": "none",
-  "workbench.list.automaticKeyboardNavigation": false,
-  // "workbench.list.openMode": "doubleClick",
   "workbench.list.smoothScrolling": true,
   "workbench.productIconTheme": "fluent-icons",
   "workbench.colorCustomizations": {
@@ -64,48 +80,33 @@
   "workbench.view.alwaysShowHeaderActions": true,
   "workbench.editor.pinnedTabSizing": "compact",
   "workbench.editor.revealIfOpen": true,
-
-  "window.customMenuBarAltFocus": false,
   "window.enableMenuBarMnemonics": false,
-
-  "search.exclude": {
-    "**/build": true,
-    "**/vendor": true,
-    "**/third_party": true
-  },
-  "search.showLineNumbers": true,
-  "search.smartCase": true,
 
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.cursorBlinking": true,
-  // "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.defaultProfile.linux": "bash",
   "terminal.integrated.sendKeybindingsToShell": true,
 
   "problems.showCurrentInStatus": true,
 
   "security.workspace.trust.enabled": false,
+
   "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
   "vscode-neovim.neovimExecutablePaths.win32": "C:\\Program Files\\Neovim\\bin\\nvim.exe",
   "vscode-neovim.neovimInitVimPaths.linux": "/home/beardad/.vscode-neovim/init.vim",
-  "vscode-neovim.neovimInitVimPaths.win32": "C:\\Users\\Bear\\AppData\\Local\\vscode-neovim\\init.vim",
-  "vscode-neovim.textDecorationsAtTop": true,
+  "vscode-neovim.neovimInitVimPaths.win32": "C:\\Program Files\\Neovim\\vscode-neovim\\init.vim",
 
   "path-intellisense.autoSlashAfterDirectory": true,
   "path-intellisense.showHiddenFiles": true,
 
   "C_Cpp.intelliSenseEngine": "Disabled",
+  "clangd.path": "c:\\Users\\heachxiong\\AppData\\Roaming\\Code\\User\\globalStorage\\llvm-vs-code-extensions.vscode-clangd\\install\\14.0.3\\clangd_14.0.3\\bin\\clangd.exe",
   "clangd.arguments": [
     "--enable-config",
     "--clang-tidy",
     "--completion-style=detailed",
     "--function-arg-placeholders=0"
   ],
-  "c-cpp-flylint.clang.enable": false,
-  "c-cpp-flylint.flexelint.enable": false,
-  "c-cpp-flylint.lizard.enable": false,
-  "c-cpp-flylint.flawfinder.enable": false,
-  "c-cpp-flylint.cppcheck.standard": ["c++17"],
-  "c-cpp-flylint.cppcheck.extraArgs": ["--enable=warning,style,performance,portability"],
   "cmake.configureOnOpen": false,
   "cmake.statusbar.visibility": "icon",
   "doxdocgen.generic.useGitUserEmail": true,
@@ -115,11 +116,8 @@
   "go.lintTool": "golangci-lint",
 
   "python.analysis.completeFunctionParens": true,
-  "python.linting.flake8Enabled": true,
   "python.linting.pylintEnabled": true,
   "python.formatting.provider": "yapf",
-
-  "bashIde.highlightParsingErrors": true,
 
   "prettier.printWidth": 100,
   "eslint.format.enable": false,
@@ -138,33 +136,20 @@
   "typescript.suggest.paths": false,
   "typescript.format.enable": false,
 
+  "json.format.enable": false,
   "html.format.enable": false,
-
-  "stylelint.packageManager": "pnpm",
   "css.validate": false,
   "less.validate": false,
   "scss.validate": false,
   "css.format.enable": false,
   "less.format.enable": false,
   "scss.format.enable": false,
-
-  "json.format.enable": false,
-
-  "markdown-preview-enhanced.enableExtendedTableSyntax": true,
-  "markdown-preview-enhanced.previewTheme": "solarized-dark.css",
-  "markdown-preview-enhanced.breakOnSingleNewLine": false,
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-
-  "git.autofetch": true,
-  "gitlens.statusBar.enabled": false,
-  "gitlens.codeLens.authors.enabled": false,
-  "gitlens.codeLens.recentChange.enabled": false,
-
-  "code-runner.saveFileBeforeRun": true,
-  "code-runner.fileDirectoryAsCwd": true,
-  "code-runner.runInTerminal": true,
+  "markdown-preview-enhanced.enableExtendedTableSyntax": true,
+  "markdown-preview-enhanced.previewTheme": "solarized-dark.css",
+  "markdown-preview-enhanced.breakOnSingleNewLine": false,
 
   "leetcode.endpoint": "leetcode-cn",
   "leetcode.workspaceFolder": "/home/beardad/.leetcode",
@@ -181,51 +166,52 @@
 
   "translator.captureWord": false,
 
+  "todo-tree.filtering.ignoreGitSubmodules": true,
+  "todo-tree.filtering.useBuiltInExcludes": "file and search excludes",
   "todo-tree.general.showIconsInsteadOfTagsInStatusBar": true,
   "todo-tree.general.statusBar": "none",
   "todo-tree.highlights.useColourScheme": true,
-  "todo-tree.filtering.useBuiltInExcludes": "file and search excludes",
   "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
-  "todo-tree.general.tags": ["TODO", "FIXME", "BUG", "NOTE", "WARN", "HACK", "XXX"],
+  "todo-tree.general.tags": ["TODO:", "FIXME:", "BUG:", "NOTE:", "WARN:", "HACK:", "XXX:"],
   "todo-tree.highlights.customHighlight": {
-    "TODO": {
+    "TODO:": {
       "icon": "check-circle-fill",
       "iconColour": "#0db9d7",
       "rulerColour": "#0db9d7",
       "background": "#0db9d7"
     },
-    "FIXME": {
+    "FIXME:": {
       "icon": "flame",
       "iconColour": "#e0af68",
       "rulerColour": "#e0af68",
       "background": "#e0af68"
     },
-    "BUG": {
+    "BUG:": {
       "icon": "bug",
       "iconColour": "#db4b4b",
       "rulerColour": "#db4b4b",
       "background": "#db4b4b"
     },
-    "NOTE": {
+    "NOTE:": {
       "icon": "note",
       "iconColour": "#10b981",
       "rulerColour": "#10b981",
       "background": "#10b981"
     },
-    "WARN": {
+    "WARN:": {
       "icon": "alert",
       "iconColour": "#eed49f",
       "rulerColour": "#eed49f",
       "background": "#eed49f"
     },
-    "HACK": {
+    "HACK:": {
       "icon": "tools",
       "iconColour": "#eed49f",
       "rulerColour": "#eed49f",
       "background": "#eed49f",
       "foreground": "#000000"
     },
-    "XXX": {
+    "XXX:": {
       "icon": "$(close)"
     }
   },
@@ -237,7 +223,8 @@
     "**/node_modules/**",
     "**/build/**",
     "**/vendor/**",
-    "**/third_party/**"
+    "**/third_party/**",
+    "**/3rd_party/**"
   ],
   "VSCodeCounter.languages": {
     "bat": {
@@ -952,5 +939,23 @@
       "blockStrings": []
     }
   },
-  "settingsSync.ignoredSettings": ["vscode-neovim.neovimInitVimPaths.win32"]
+  "git.detectSubmodules": false,
+  "window.commandCenter": true,
+  "redhat.telemetry.enabled": true,
+  "python.formatting.yapfArgs": [
+    "--style={based_on_style: google, column_limit: 120, indent_width: 4}"
+  ],
+  "explorer.sortOrderLexicographicOptions": "unicode",
+  "terminal.integrated.mouseWheelScrollSensitivity": 0.2,
+  "git.confirmSync": false,
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.rulers": [80],
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": false
+  }
 }

@@ -3,130 +3,128 @@
   "$schema": "https://aka.ms/terminal-profiles-schema",
   "actions": [
     {
-      "keys": "ctrl+shift+f",
-      "command": {
-        "action": "sendInput",
-        "input": "\u001b[70;6u"
-      }
-    },
-    {
-      "keys": "ctrl+shift+h",
-      "command": {
-        "action": "sendInput",
-        "input": "\u001b[72;6u"
-      }
-    },
-    {
-      "keys": "ctrl+alt+enter",
-      "command": {
-        "action": "sendInput",
-        "input": "\u001b[13;7u"
-      }
-    },
-    {
-      "keys": "ctrl+i",
-      "command": {
-        "action": "sendInput",
-        "input": "\u001bI"
-      }
-    },
-    {
-      "keys": "ctrl+shift+j",
       "command": {
         "action": "sendInput",
         "input": "\u001b[74;6u"
-      }
+      },
+      "keys": "ctrl+shift+j"
     },
     {
-      "keys": "ctrl+shift+k",
       "command": {
         "action": "sendInput",
-        "input": "\u001b[75;6u"
-      }
+        "input": "\u001b[70;6u"
+      },
+      "keys": "ctrl+shift+f"
     },
     {
-      "keys": "ctrl+shift+l",
       "command": {
         "action": "sendInput",
-        "input": "\u001b[76;6u"
-      }
+        "input": "\u001bI"
+      },
+      "keys": "ctrl+i"
     },
     {
-      "keys": "ctrl+shift+s",
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[72;6u"
+      },
+      "keys": "ctrl+shift+h"
+    },
+    {
       "command": {
         "action": "sendInput",
         "input": "\u001b[83;6u"
-      }
+      },
+      "keys": "ctrl+shift+s"
     },
     {
-      "keys": "ctrl+shift+e",
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[13;7u"
+      },
+      "keys": "ctrl+alt+enter"
+    },
+    {
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[75;6u"
+      },
+      "keys": "ctrl+shift+k"
+    },
+    {
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[76;6u"
+      },
+      "keys": "ctrl+shift+l"
+    },
+    {
       "command": {
         "action": "sendInput",
         "input": "\u001b[69;6u"
-      }
+      },
+      "keys": "ctrl+shift+e"
     },
     {
-      "keys": "ctrl+shift+o",
       "command": {
         "action": "sendInput",
         "input": "\u001b[79;6u"
-      }
+      },
+      "keys": "ctrl+shift+o"
     },
     {
-      "keys": "ctrl+shift+t",
       "command": {
         "action": "sendInput",
         "input": "\u001b[84;6u"
-      }
+      },
+      "keys": "ctrl+shift+t"
     },
     {
-      "keys": "ctrl+shift+m",
       "command": {
         "action": "sendInput",
         "input": "\u001b[77;6u"
-      }
+      },
+      "keys": "ctrl+shift+m"
     },
     {
-      "keys": "ctrl+shift+u",
       "command": {
         "action": "sendInput",
         "input": "\u001b[85;6u"
-      }
+      },
+      "keys": "ctrl+shift+u"
     },
     {
-      "keys": "ctrl+shift+p",
       "command": {
         "action": "sendInput",
         "input": "\u001b[80;6u"
-      }
+      },
+      "keys": "ctrl+shift+p"
     },
     {
-      "keys": "ctrl+shift+z",
       "command": {
         "action": "sendInput",
         "input": "\u001b[90;6u"
-      }
+      },
+      "keys": "ctrl+shift+z"
     }
   ],
+  "confirmCloseAllTabs": false,
   "copyFormatting": "none",
   "copyOnSelect": true,
-  "multiLinePasteWarning": false,
-  "tabWidthMode": "compact",
-  "confirmCloseAllTabs": false,
-  "tabSwitcherMode": "mru",
   "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+  "multiLinePasteWarning": false,
   "profiles": {
     "defaults": {
+      "colorScheme": "Afterglow",
       "font": {
         "face": "NerdCodeProPlus",
         "size": 10,
         "weight": "normal"
       },
-      "colorScheme": "Afterglow",
-      "useAcrylic": true,
       "opacity": 50,
       "padding": "0, 0, 0, 0",
-      "scrollbarState": "hidden"
+      "scrollbarState": "hidden",
+      "useAcrylic": true
     },
     "list": [
       {
@@ -136,11 +134,16 @@
         "name": "Windows PowerShell"
       },
       {
-        "commandline": "wsl ~ -d Ubuntu -- tmux new-session -s Default || tmux attach -t Default",
+        "commandline": "wsl ~ -d Arch -- tmux new-session -s WSL || tmux attach -t WSL",
         "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
         "hidden": false,
-        "name": "Ubuntu",
-        "source": "Windows.Terminal.Wsl"
+        "name": "WSL Arch Linux"
+      },
+      {
+        "commandline": "ssh -t -o ServerAliveInterval=60 -i C:\\Users\\heachxiong\\.ssh\\Ubuntu20HK.pem -p50000 ubuntu@43.134.204.157 sh -c 'tmux new-session -s CVM-HK || tmux attach -t CVM-HK'",
+        "guid": "{3c4de342-38b7-51cf-b940-2309a097f518}",
+        "hidden": false,
+        "name": "CVM Ubuntu"
       },
       {
         "commandline": "%SystemRoot%\\System32\\cmd.exe",
@@ -165,32 +168,38 @@
         "hidden": false,
         "name": "Developer PowerShell for VS 2022",
         "source": "Windows.Terminal.VisualStudio"
+      },
+      {
+        "guid": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
+        "hidden": false,
+        "name": "Arch",
+        "source": "Windows.Terminal.Wsl"
       }
     ]
   },
   "schemes": [
     {
-      "name": "Afterglow",
-      "black": "#151515",
-      "red": "#ac4142",
-      "green": "#7e8e50",
-      "yellow": "#e5b567",
-      "blue": "#6c99bb",
-      "purple": "#9f4e85",
-      "cyan": "#7dd6cf",
-      "white": "#d0d0d0",
-      "brightBlack": "#505050",
-      "brightRed": "#ac4142",
-      "brightGreen": "#7e8e50",
-      "brightYellow": "#e5b567",
-      "brightBlue": "#6c99bb",
-      "brightPurple": "#9f4e85",
-      "brightCyan": "#7dd6cf",
-      "brightWhite": "#f5f5f5",
       "background": "#212121",
-      "foreground": "#d0d0d0",
-      "cursorColor": "#d0d0d0",
-      "selectionBackground": "#303030"
+      "black": "#151515",
+      "blue": "#6C99BB",
+      "brightBlack": "#505050",
+      "brightBlue": "#6C99BB",
+      "brightCyan": "#7DD6CF",
+      "brightGreen": "#7E8E50",
+      "brightPurple": "#9F4E85",
+      "brightRed": "#AC4142",
+      "brightWhite": "#F5F5F5",
+      "brightYellow": "#E5B567",
+      "cursorColor": "#D0D0D0",
+      "cyan": "#7DD6CF",
+      "foreground": "#D0D0D0",
+      "green": "#7E8E50",
+      "name": "Afterglow",
+      "purple": "#9F4E85",
+      "red": "#AC4142",
+      "selectionBackground": "#303030",
+      "white": "#D0D0D0",
+      "yellow": "#E5B567"
     },
     {
       "background": "#0C0C0C",
@@ -399,7 +408,7 @@
       "white": "#C0C0C0",
       "yellow": "#808000"
     }
-  ]
+  ],
+  "tabSwitcherMode": "mru",
+  "tabWidthMode": "compact"
 }
-
-

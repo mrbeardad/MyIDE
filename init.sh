@@ -4,6 +4,7 @@ set -eo pipefail
 
 PATH="$HOME"/.local/bin:"$PATH"
 
+OS_RELEASE=
 CONFIG_FILE=${CONFIG_FILE:-"$0"}
 WIN_HOME=${WIN_HOME:-"/winhome"}
 OPTION_UPDATE_CONFIG=
@@ -62,7 +63,7 @@ set_config() {
 
   echo "update configuration segement $1"
 
-  # NOTE: Redirect operation execute before simple command, so bash will truncate file before read it
+  # Redirect operation execute before simple command, so bash will truncate file before read it
   CONTENT=$(sed "/^#\s*$1$/,/^#\s*$1_END$/c# $1\n# $1_END" "$CONFIG_FILE" |
     sed "/^#\s*$1$/r$2" |
     sed "/^#\s*$1$/,/^#\s*$1_END$/s/^/# /" |
@@ -92,46 +93,71 @@ ask_user() {
 
 sudo_without_passwd() {
   ask_user "Do you want to execute 'sudo' without password?" || return 0
-  sudo sed -i '/^%sudo\s*ALL=(ALL:ALL)\s*ALL$/s/ALL$/NOPASSWD: ALL/' /etc/sudoers
+  case "$OS_RELEASE" in
+  "Arch Linux")
+    echo echo "%wheel ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/wheel
+    ;;
+  "Ubuntu")
+    echo echo "%sudo ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/sudo
+    ;;
+  esac
 }
 
-change_apt_mirror_source() {
-  sudo apt -y install git curl gpg
-  ask_user "Do you want to change apt mirror source to tencent cloud?" || return 0
-  sudo curl -Lo /etc/apt/sources.list http://mirrors.cloud.tencent.com/repo/ubuntu20_sources.list
-  sudo apt update
-}
-
-upgrade_to_ubuntu22() {
-  ask_user "Do you want yo upgrade to ubuntu22.04 STL?" || return 0
-  sudo apt -y upgrade
-  sudo do-release-upgrade -d
+change_mirror_source() {
+  case "$OS_RELEASE" in
+  "Arch Linux")
+    sudo sed -i '/^Include = /s/^.*$/Server = https:\/\/mirrors.tencent.com\/archlinux\/$repo\/os\/$arch/' /etc/pacman.conf
+    echo -e '\n[archlinuxcn]\nServer = https://mirrors.tencent.com/archlinuxcn/$arch' |
+      sudo tee -a /etc/pacman.conf
+    sudo pacman-key --init
+    sudo pacman-key --populate
+    sudo pacman -Sy archlinux-keyring archlinuxcn-keyring
+    sudo pacman -Su yay base-devel openssh
+    ;;
+  "Ubuntu")
+    sudo apt -y install git curl gpg
+    ask_user "Do you want to change apt mirror source to tencent cloud?" || return 0
+    sudo curl -Lo /etc/apt/sources.list http://mirrors.cloud.tencent.com/repo/ubuntu20_sources.list
+    sudo apt update
+    sudo apt -y upgrade
+    ask_user "Do you want yo upgrade to ubuntu22.04 STL?" || return 0
+    sudo do-release-upgrade -d
+    ;;
+  esac
 }
 
 prerequisites() {
-  curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-  sudo apt -y install golang cargo python3-pip python-is-python3 nodejs unzip
+  case "$OS_RELEASE" in
+  "Arch Linux")
+    yay -S cargo go python-pip pnpm
+    ;;
+  "Ubuntu")
+    curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+    sudo apt -y install golang cargo python3-pip python-is-python3 nodejs
+    ;;
+  esac
+
+  ask_user "Do you want to config cargo registry to utsc cloud mirror?" &&
+    mkdir -p ~/.cargo && cat >~/.cargo/config <<EOF
+[source.crates-io]
+registry = "https://github.com/rust-lang/crates.io-index"
+replace-with = 'ustc'
+[source.ustc]
+registry = "git://mirrors.ustc.edu.cn/crates.io-index"
+EOF
 
   ask_user "Do you want to set GOPROXY to tencent cloud mirror?" &&
     go env -w GOPROXY=https://mirrors.tencent.com/go/,direct
   go env -w GOPATH="$HOME"/.go/ GOBIN="$HOME"/.local/bin/ GOSUMDB=sum.golang.google.cn
+
+  ask_user "Do you want to config pip index-url to tencent cloud mirror?" &&
+    pip config set global.index-url https://mirrors.tencent.com/pypi/simple
 
   ask_user "Do you want to config npm registry to tencent cloud mirror?" &&
     npm config set registry http://mirrors.tencent.com/npm/
   npm config set prefix ~/.local
   npm config set global-bin-dir ~/.local/bin
   npm install pnpm -g
-
-  ask_user "Do you want to config pip index-url to tencent cloud mirror?" &&
-    pip config set global.index-url https://mirrors.tencent.com/pypi/simple
-
-  ask_user "Do you want to config cargo registry to utsc cloud mirror?" &&
-    mkdir -p ~/.cargo && cat >~/.cargo/config <<EOF
-[source.crates-io]
-replace-with = 'ustc'
-[source.ustc]
-registry = "git://mirrors.ustc.edu.cn/crates.io-index"
-EOF
 }
 
 ssh_and_git_config() {
@@ -144,22 +170,53 @@ ssh_and_git_config() {
 }
 
 install_docker() {
-  ask_user "Do you want to install docker from tencent cloud mirror" || return
-  curl -fsSL https://mirrors.cloud.tencent.com/docker-ce/linux/ubuntu/gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/docker-ce-archive-keyring.gpg
-  echo "deb [arch=amd64] https://mirrors.cloud.tencent.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker-ce.list
-  sudo apt update
-  sudo apt -y install docker-ce docker-ce-cli containerd.io
+  case "$OS_RELEASE" in
+  "Arch Linux")
+    yay -S docker
+    ;;
+  "Ubuntu")
+    ask_user "Do you want to install docker from tencent cloud mirror" || return
+    curl -fsSL https://mirrors.cloud.tencent.com/docker-ce/linux/ubuntu/gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/docker-ce-archive-keyring.gpg
+    echo "deb [arch=amd64] https://mirrors.cloud.tencent.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker-ce.list
+    sudo apt update
+    sudo apt -y install docker-ce docker-ce-cli containerd.io
+    ;;
+  esac
+  sudo mkdir -p /etc/docker
+  cat <<EOF | sudo tee /etc/docker/daemon.json
+{
+  "registry-mirrors": [
+    "https://hub-mirror.c.163.com",
+    "https://mirror.baidubce.com"
+  ]
+}
+EOF
 }
 
 tmux_conf() {
-  sudo apt -y install tmux tmux-plugin-manager cmatrix
+  case "$OS_RELEASE" in
+  "Arch Linux")
+    yay -S tmux
+    ;;
+  "Ubuntu")
+    sudo apt -y install tmux tmux-plugin-manager
+    ;;
+  esac
   [[ -e ~/.tmux.conf ]] && mv ~/.tmux.conf{,.bak}
   get_config __TMUX_CONF >~/.tmux.conf
   PROMPT_INFORMATION="$PROMPT_INFORMATION$(echo -e "\e[32m======>\e[33m tmux:\e[m Don't forget to pressing 'Alt+W I' in tmux to install plugin")"
 }
 
 zsh_conf() {
-  sudo apt -y install zsh zsh-syntax-highlighting zsh-autosuggestions autojump fzf
+  case "$OS_RELEASE" in
+  "Arch Linux")
+    yay -S zsh zsh-syntax-highlighting zsh-autosuggestions autojump fzf fd
+    ;;
+  "Ubuntu")
+    sudo apt -y install zsh zsh-syntax-highlighting zsh-autosuggestions autojump fzf
+    cargo install fd
+    ;;
+  esac
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
   [[ -e ~/.zshrc ]] && mv ~/.zshrc{,.bak}
@@ -173,7 +230,14 @@ EOF
 }
 
 ranger_conf() {
-  sudo apt -y install ranger fzf fd-find
+  case "$OS_RELEASE" in
+  "Arch Linux")
+    yay -S ranger
+    ;;
+  "Ubuntu")
+    sudo apt -y install ranger
+    ;;
+  esac
   mkdir -p ~/.config/ranger/
   [[ -e ~/.config/ranger/commands.py ]] && mv ~/.config/ranger/commands.py{,.bak}
   get_config __RANGER >~/.config/ranger/commands.py
@@ -185,29 +249,50 @@ EOF
 }
 
 htop_conf() {
-  sudo apt -y install btop libncursesw5-dev autoconf automake libtool
-  git clone --depth=1 https://github.com/KoffeinFlummi/htop-vim ~/.local/share/htop-vim
-  (
-    cd ~/.local/share/htop-vim
-    ./autogen.sh && ./configure && make
-    cp ./htop ~/.local/bin/
-  )
+  case "$OS_RELEASE" in
+  "Arch Linux")
+    yay -S htop-vim
+    ;;
+  "Ubuntu")
+    sudo apt -y install btop libncursesw5-dev autoconf automake libtool
+    git clone --depth=1 https://github.com/KoffeinFlummi/htop-vim ~/.local/share/htop-vim
+    (
+      cd ~/.local/share/htop-vim
+      ./autogen.sh && ./configure && make
+      cp ./htop ~/.local/bin/
+    )
+    ;;
+  esac
   mkdir -p ~/.config/htop/
   [[ -e ~/.config/htop/htoprc ]] && mv ~/.config/htop/htoprc{,.bak}
   get_config __HTOPRC >~/.config/htop/htoprc
 }
 
 tig_conf() {
-  sudo apt -y install git tig
+  case "$OS_RELEASE" in
+  "Arch Linux")
+    yay -S tig
+    ;;
+  "Ubuntu")
+    sudo apt -y install git tig
+    ;;
+  esac
   [[ -e ~/.tigrc ]] && mv ~/.tigrc{,.bak}
   get_config __TIGRC >~/.tigrc
 }
 
 neovim_conf() {
-  sudo add-apt-repository ppa:neovim-ppa/unstable
-  sudo apt update
-  sudo apt -y install neovim
-  cargo install stylua
+  case "$OS_RELEASE" in
+  "Arch Linux")
+    yay -S neovim unzip stylua
+    ;;
+  "Ubuntu")
+    sudo add-apt-repository ppa:neovim-ppa/unstable
+    sudo apt update
+    sudo apt -y install neovim unzip
+    cargo install stylua
+    ;;
+  esac
 
   curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
   unzip -p /tmp/win32yank.zip win32yank.exe >~/.local/bin/win32yank.exe
@@ -226,35 +311,79 @@ neovim_conf() {
 }
 
 lang_shell() {
-  sudo apt -y install shellcheck
-  go install mvdan.cc/sh/v3/cmd/shfmt@latest
+  case "$OS_RELEASE" in
+  "Arch Linux")
+    yay -S shellcheck shfmt
+    ;;
+  "Ubuntu")
+    sudo apt -y install shellcheck
+    go install mvdan.cc/sh/v3/cmd/shfmt@latest
+    ;;
+  esac
 }
 
 lang_cpp() {
-  sudo apt -y install clang lldb lld clangd clang-tidy clang-format cppcheck \
-    cmake doxygen graphviz plantuml google-perftools \
-    libboost-all-dev libgtest-dev libsource-highlight-dev
-  pip install cmake_format
+  case "$OS_RELEASE" in
+  "Arch Linux")
+    yay -S clang lldb lld \
+      cmake cmake-format doxygen gtest gperftools graphviz plantuml \
+      boost source-highlight
+    ;;
+  "Ubuntu")
+    sudo apt -y install clang lldb lld clangd clang-tidy clang-format cppcheck \
+      cmake doxygen graphviz plantuml google-perftools \
+      libboost-all-dev libgtest-dev libsource-highlight-dev
+    pip install cmake_format
+    ;;
+  esac
 }
 
 lang_go() {
-  go install golang.org/x/tools/gopls@latest
-  go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+  case "$OS_RELEASE" in
+  "Arch Linux")
+    yay -S gopls golangci-lint
+    ;;
+  "Ubuntu")
+    go install golang.org/x/tools/gopls@latest
+    go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+    ;;
+  esac
   go install github.com/google/pprof@latest
 }
 
 lang_py() {
-  pip install pylint flake8 yapf
+  case "$OS_RELEASE" in
+  "Arch Linux")
+    yay -S python-pylint yapf
+    ;;
+  "Ubuntu")
+    pip install pylint yapf
+    ;;
+  esac
 }
 
 lang_web() {
-  sudo apt install -y tidy
-  pnpm install -g eslint htmlhint stylelint markdownlint-cli prettier
+  case "$OS_RELEASE" in
+  "Arch Linux")
+    yay -S eslint htmlhint stylelint nodejs-markdownlint-cli tidy prettier
+    ;;
+  "Ubuntu")
+    sudo apt install -y tidy
+    pnpm install -g eslint htmlhint stylelint markdownlint-cli prettier
+    ;;
+  esac
 }
 
 other_cli_tools() {
-  sudo apt -y install neofetch cloc ncdu gnupg nmap socat
-  cargo install lsd
+  case "$OS_RELEASE" in
+  "Arch Linux")
+    yay -S lsd neofetch cloc ncdu cmatrix socat
+    ;;
+  "Ubuntu")
+    sudo apt -y install neofetch cloc ncdu gnupg nmap socat cmatrix
+    cargo install lsd
+    ;;
+  esac
   git clone --recurse-submodules https://github.com/mrbeardad/SeeCheatSheets ~/.cheat
   mkdir -p ~/.cheat/src/build
   (
@@ -266,12 +395,13 @@ other_cli_tools() {
 }
 
 main() {
+  OS_RELEASE=$(sed -n 's/^NAME="\(.*\)"/\1/p' /etc/os-release)
   parse_arguments "$@"
   if [[ "$OPTION_UPDATE_CONFIG" == "1" ]]; then
     if [[ -d "$WIN_HOME" ]]; then
       cp -uv "$WIN_HOME"/AppData/Roaming/Code/User/{settings.json,keybindings.json} ./vscode/
       cp -uv "$WIN_HOME"/AppData/Roaming/Code/User/sync/extensions/lastSyncextensions.json ./vscode/
-      cp -uv "$WIN_HOME"/AppData/Local/vscode-neovim/init.vim ./vscode/vscode-neovim/
+      cp -uv "/mnt/c/Program Files/Neovim/vscode-neovim/init.vim" ./vscode/vscode-neovim/
       cp -uv "$WIN_HOME"/AppData/Local/Packages/Microsoft.WindowsTerminal_*/LocalState/settings.json wt/settings.json
     fi
     set_config __TMUX_CONF ~/.tmux.conf
@@ -289,8 +419,7 @@ main() {
     mkdir -p ~/.config/
 
     sudo_without_passwd
-    change_apt_mirror_source
-    upgrade_to_ubuntu22
+    change_mirror_source
     prerequisites
     ssh_and_git_config
     install_docker
@@ -459,64 +588,64 @@ main "$@"
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
-# 
+#
 # # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
-# 
+#
 # # Path to your oh-my-zsh installation.
 # export ZSH="/home/beardad/.oh-my-zsh"
-# 
+#
 # # Set name of the theme to load --- if set to "random", it will
 # # load a random theme each time oh-my-zsh is loaded, in which case,
 # # to know which specific one was loaded, run: echo $RANDOM_THEME
 # # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="powerlevel10k/powerlevel10k"
-# 
+#
 # # Set list of themes to pick from when loading at random
 # # Setting this variable when ZSH_THEME=random will cause zsh to load
 # # a theme from this variable instead of looking in $ZSH/themes/
 # # If set to an empty array, this variable will have no effect.
 # # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-# 
+#
 # # Uncomment the following line to use case-sensitive completion.
 # # CASE_SENSITIVE="true"
-# 
+#
 # # Uncomment the following line to use hyphen-insensitive completion.
 # # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
-# 
+#
 # # Uncomment the following line to disable bi-weekly auto-update checks.
 # # DISABLE_AUTO_UPDATE="true"
-# 
+#
 # # Uncomment the following line to automatically update without prompting.
 # # DISABLE_UPDATE_PROMPT="true"
-# 
+#
 # # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=30
-# 
+#
 # # Uncomment the following line if pasting URLs and other text is messed up.
 # # DISABLE_MAGIC_FUNCTIONS="true"
-# 
+#
 # # Uncomment the following line to disable colors in ls.
 # # DISABLE_LS_COLORS="true"
-# 
+#
 # # Uncomment the following line to disable auto-setting terminal title.
 # # DISABLE_AUTO_TITLE="true"
-# 
+#
 # # Uncomment the following line to enable command auto-correction.
 # # ENABLE_CORRECTION="true"
-# 
+#
 # # Uncomment the following line to display red dots whilst waiting for completion.
 # # You can also set it to another string to have that shown instead of the default red dots.
 # # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
-# 
+#
 # # Uncomment the following line if you want to disable marking untracked files
 # # under VCS as dirty. This makes repository status check for large repositories
 # # much, much faster.
 # # DISABLE_UNTRACKED_FILES_DIRTY="true"
-# 
+#
 # # Uncomment the following line if you want to change the command execution time
 # # stamp shown in the history command output.
 # # You can set one of the optional three formats:
@@ -524,10 +653,10 @@ main "$@"
 # # or set a custom format using the strftime function format specifications,
 # # see 'man strftime' for details.
 # HIST_STAMPS="yyyy-mm-dd"
-# 
+#
 # # Would you like to use another custom folder than $ZSH/custom?
 # # ZSH_CUSTOM=/path/to/new-custom-folder
-# 
+#
 # # Which plugins would you like to load?
 # # Standard plugins can be found in $ZSH/plugins/
 # # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -540,6 +669,7 @@ main "$@"
 #     common-aliases
 #     docker
 #     extract
+#     fzf
 #     git
 #     gitignore
 #     golang
@@ -550,16 +680,16 @@ main "$@"
 #     tmux
 #     vi-mode
 # )
-# 
+#
 # source $ZSH/oh-my-zsh.sh
-# 
+#
 # # User configuration
-# 
+#
 # # export MANPATH="/usr/local/man:$MANPATH"
-# 
+#
 # # You may need to manually set your language environment
 # # export LANG=en_US.UTF-8
-# 
+#
 # # Preferred editor for local and remote sessions
 # export EDITOR='nvim'
 # # if [[ -n $SSH_CONNECTION ]]; then
@@ -567,10 +697,10 @@ main "$@"
 # # else
 # #   export EDITOR='mvim'
 # # fi
-# 
+#
 # # Compilation flags
 # # export ARCHFLAGS="-arch x86_64"
-# 
+#
 # # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -579,7 +709,7 @@ main "$@"
 # # Example aliases
 # # alias zshconfig="mate ~/.zshrc"
 # # alias ohmyzsh="mate ~/.oh-my-zsh"
-# 
+#
 # alias l='lsd -lah --group-dirs first'
 # alias l.='lsd -lhd --group-dirs first .*'
 # alias ll='lsd -lh --group-dirs first'
@@ -591,7 +721,7 @@ main "$@"
 # alias apt='sudo apt'
 # alias stl='sudo systemctl'
 # alias vi="$EDITOR"
-# 
+#
 # alias gmv='git mv'
 # alias grms='git rm --cached'
 # alias grss='git restore --staged'
@@ -605,7 +735,7 @@ main "$@"
 # alias gbsup='git branch --set-upstream-to'
 # alias gco='git checkout --recurse-submodules'
 # alias glr='git pull --rebase'
-# alias glra='git pull --rebase --autostash'
+# alias glra='git pull --rebase --auto-stash'
 # alias gsa='git submodule add'
 # alias gsu='git submodule update --init --recursive'
 # gsrm() {
@@ -620,18 +750,23 @@ main "$@"
 #   rm -fr "$DOT_GIT"/modules/"$1"
 #   set +e
 # }
-# 
-# source /usr/share/doc/fzf/examples/key-bindings.zsh
-# source /usr/share/doc/fzf/examples/completion.zsh
-# bindkey '^F' fzf-file-widget
-# 
-# source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#
+# if [[ -d "/usr/share/zsh-syntax-highlighting/" ]]; then
+#   source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#   source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# elif [[ -d "/usr/share/zsh/plugins/" ]]; then
+#   source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#   source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+# fi
 # zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#606060"
-# 
+#
+# bindkey '^F' fzf-file-widget
+# bindkey '^R' fzf-history-widget
+# bindkey '\ec' fzf-cd-widget
+#
 # export VI_MODE_SET_CURSOR=true
-# bindkey -M vicmd '^L' clear-screen
+# # bindkey -M vicmd '^L' clear-screen
 # # bindkey '^L' forward-word
 # bindkey 'jj' vi-cmd-mode
 # bindkey 'jk' vi-cmd-mode
@@ -640,13 +775,13 @@ main "$@"
 # bindkey '^Y' yank
 # bindkey '^P' up-line-or-beginning-search
 # bindkey '^N' down-line-or-beginning-search
-# 
+#
 # zstyle ':completion:*:*:docker:*' option-stacking yes
 # zstyle ':completion:*:*:docker-*:*' option-stacking yes
-# 
+#
 # # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# 
+#
 # __ZSHRC_END
 
 # __RANGER
@@ -701,18 +836,14 @@ main "$@"
 # __HTOPRC
 # # Beware! This file is rewritten by htop when settings are changed in the interface.
 # # The parser is also very primitive, and not human-friendly.
-# htop_version=3.1.1-dev
-# config_reader_min_version=2
+# htop_version=3.2.1
+# config_reader_min_version=3
 # fields=2 45 48 6 5 7 4 0 3 109 110 46 47 20 49 1
-# sort_key=46
-# sort_direction=-1
-# tree_sort_key=0
-# tree_sort_direction=1
 # hide_kernel_threads=1
 # hide_userland_threads=1
 # shadow_other_users=0
 # show_thread_names=0
-# show_program_path=1
+# show_program_path=0
 # highlight_base_name=0
 # highlight_deleted_exe=1
 # highlight_megabytes=1
@@ -722,10 +853,8 @@ main "$@"
 # find_comm_in_cmdline=1
 # strip_exe_from_cmdline=1
 # show_merged_command=0
-# tree_view=1
-# tree_view_always_by_pid=0
-# all_branches_collapsed=0
 # header_margin=1
+# screen_tabs=0
 # detailed_cpu_time=0
 # cpu_count_from_one=1
 # show_cpu_usage=1
@@ -741,6 +870,29 @@ main "$@"
 # column_meter_modes_0=1 1 1
 # column_meters_1=RightCPUs Tasks LoadAverage Uptime
 # column_meter_modes_1=1 2 2 2
+# tree_view=1
+# sort_key=49
+# tree_sort_key=0
+# sort_direction=-1
+# tree_sort_direction=1
+# tree_view_always_by_pid=0
+# all_branches_collapsed=0
+# screen:Main=STATE ST_UID USER TTY SESSION TPGID PGRP PID PPID IO_READ_RATE IO_WRITE_RATE PERCENT_CPU PERCENT_MEM STARTTIME TIME Command
+# .sort_key=TIME
+# .tree_sort_key=PID
+# .tree_view=1
+# .tree_view_always_by_pid=0
+# .sort_direction=-1
+# .tree_sort_direction=1
+# .all_branches_collapsed=0
+# screen:I/O=PID USER IO_PRIORITY IO_RATE IO_READ_RATE IO_WRITE_RATE
+# .sort_key=IO_RATE
+# .tree_sort_key=PID
+# .tree_view=0
+# .tree_view_always_by_pid=0
+# .sort_direction=-1
+# .tree_sort_direction=1
+# .all_branches_collapsed=0
 # __HTOPRC_END
 
 # __TIGRC
@@ -824,55 +976,6 @@ main "$@"
 # bind generic K view-help
 # bind generic <C-w><C-w> view-next
 # __TIGRC_END
-
-# __CONFIG_LUA
-# require("user.neovim").config()
-#
-# -- In order to disable lunarvim's default colorscheme
-# lvim.colorscheme = "default"
-#
-# lvim.builtin.bufferline.options.always_show_bufferline = true
-#
-# require("user.statusline").config()
-#
-# require("user.alpha").config()
-#
-# require("user.treesitter").config()
-#
-# lvim.builtin.notify.active = true
-# lvim.builtin.terminal.active = true
-# lvim.builtin.terminal.shell = "/bin/bash"
-# lvim.builtin.terminal.open_mapping = "<C-Space>"
-# lvim.builtin.nvimtree.setup.view.mappings.list = {
-# 	{ key = { "<Tab>" }, action = nil },
-# 	{ key = { "l", "<CR>", "o" }, action = "edit", mode = "n" },
-# 	{ key = "h", action = "close_node" },
-# 	{ key = "v", action = "vsplit" },
-# }
-#
-# ----------------------------------------
-# -- Telescope
-# ----------------------------------------
-# -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
-# -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
-# local _, actions = pcall(require, "telescope.actions")
-# lvim.builtin.telescope.defaults.mappings = {
-# 	-- for input mode
-# 	i = {
-# 		["<Esc>"] = actions.close,
-# 	},
-# 	-- for normal mode
-# 	n = {},
-# }
-#
-# -- ---WARN: configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
-# -- ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
-# vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
-#
-# require("user.plugins").config()
-#
-# require("user.keybindings").config()
-# __CONFIG_LUA_END
 
 # __GITCONFIG
 # [user]

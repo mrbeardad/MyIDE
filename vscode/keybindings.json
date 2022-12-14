@@ -107,11 +107,6 @@
     "command": "redo",
     "when": "editorTextFocus && neovim.mode != insert"
   },
-  {
-    "key": "ctrl+r ctrl+r",
-    "command": "redo",
-    "when": "editorTextFocus && neovim.mode == insert"
-  },
   // ctrl+n: add a cursor on the next word
   {
     "key": "ctrl+n",
@@ -268,11 +263,6 @@
     "key": "alt+e",
     "command": "remote-wsl.revealInExplorer",
     "when": "editorFocus && remoteName == 'wsl'"
-  },
-  // alt+r: run code
-  {
-    "key": "alt+r",
-    "command": "code-runner.run"
   },
   // alt+t: toggle translator capture word
   {
