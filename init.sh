@@ -95,10 +95,10 @@ sudo_without_passwd() {
   ask_user "Do you want to execute 'sudo' without password?" || return 0
   case "$OS_RELEASE" in
   "Arch Linux")
-    echo echo "%wheel ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/wheel
+    echo "%wheel ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/wheel
     ;;
   "Ubuntu")
-    echo echo "%sudo ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/sudo
+    echo "%sudo ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/sudo
     ;;
   esac
 }
@@ -284,7 +284,7 @@ tig_conf() {
 neovim_conf() {
   case "$OS_RELEASE" in
   "Arch Linux")
-    yay -S neovim unzip stylua
+    yay -S neovim unzip stylua ripgrep
     ;;
   "Ubuntu")
     sudo add-apt-repository ppa:neovim-ppa/unstable
