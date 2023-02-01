@@ -13,16 +13,16 @@
 
 ## [Windows](windows.md)
 
-1. 安装[MyASUS 华硕管家](https://www.microsoft.com/zh-cn/p/myasus/9n7r5s6b0zzh?activetab=pivot:overviewtab)
-2. 安装[Chrome 浏览器](https://www.google.cn/chrome/)，并登录Google账户以同步配置
-3. 安装[Bandizip 压缩包工具](http://www.bandisoft.com/bandizip/old/6/)，下载旧版以免除广告
+1. 更新驱动程序
+2. 安装[Chrome 浏览器](https://www.google.cn/chrome/)，并登录 Google 账户以同步配置
+3. 安装[7-Zip 压缩包工具](https://www.7-zip.org/)
 4. 安装常用软件
 
    - [搜狗输入法](https://pinyin.sogou.com/)
    - [TIM](https://tim.qq.com)
    - [微信](https://pc.weixin.qq.com/?lang=zh_CN)
    - [腾讯会议](https://meeting.tencent.com/download-center.html)
-   - [Listen1 音乐](https://www.zhyong.cn/posts/64cd/)
+   - [QQ 音乐](https://y.qq.com/download/index.html)
    - [Office 办公套件](https://www.office.com/)
    - [局域网 Http 服务器](http://iscute.cn/chfs)
    - [PowerToys 工具集](https://github.com/microsoft/PowerToys/releases)
@@ -71,7 +71,7 @@
 
        </details>
 
-6. <details>
+5. <details>
     <summary><b>系统设置</b></summary>
 
    - Acount
@@ -94,9 +94,7 @@
        - Colors: 设置主题颜色
        - Mouse Cursor: 设置[鼠标主题](https://zhutix.com/tag/cursors/)
      - Fonts: 设置字体
-       1. 安装[noMeiryoUI 字体设置](https://github.com/Tatsu-syo/noMeiryoUI/releases)
-       2. 安装[MacType 字体渲染](https://github.com/snowie2000/mactype/releases)
-       3. 安装[NerdCodePro 字体](fonts/)
+       1. 安装[NerdCodePro 字体](fonts/)
      - Start: 设置开始界面
        1. 开启所有选项
        2. 排版磁条
@@ -115,32 +113,22 @@
        - Change system locale: 选择中文语系并取消勾选 Beta 设置
    - Ease of Access
      - Mouse pointer: 更改鼠标大小
+     - [鼠标主题](https://zhutix.com/tag/cursors/)
 
   </details>
 
 ## [WSL](wsl.md)
 
-1. 安装[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)
-2. 安装终端配置[settings.json](wt/settings.json)
-3. 创建启动脚本于`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\wt_quake.vbs`实现开机自启 quake 模式
+1. 安装[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)及其配置[settings.json](wt/settings.json)
+2. 创建启动脚本`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\wt_quake.vbs`从而开机即可使用快捷键`` win+` ``来开启或关闭终端
 
    ```vbs
-   CreateObject("Wscript.Shell").Run "wt -w _quake", 0, True
+   CreateObject("Wscript.Shell").Run "pwsh -c Start-Process wt.exe -WindowStyle Hidden", 0, True
    ```
 
-4. 安装[dual-key-remap](https://github.com/ililim/dual-key-remap/releases)以映射 CapsLock 键为“单击为 Esc，组合为 Ctrl”
+3. 安装[dual-key-remap](https://github.com/ililim/dual-key-remap/releases)以映射 CapsLock 键为“单击时为 Esc，组合时为 Ctrl”
 
-   1. 解压文件夹到`%USERPROFILE%\AppData\Local`
-   2. 按照[教程](https://winaero.com/create-elevated-shortcut-to-skip-uac-prompt-in-windows-10/)创建一个无 UAC 提示的应用程序快捷方式
-   3. 创建启动脚本于 `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\dual-key-remap.vbs`
-
-      ```vbs
-      CreateObject("Wscript.Shell").Run "schtasks /run /tn dual-key-remap-elevated", 0, True
-      ```
-
-   4. 当前手动启动即可，之后便开机自启
-
-5. 安装[WSL2](https://docs.microsoft.com/en-us/windows/wsl/install)
+4. 安装[WSL2](https://docs.microsoft.com/en-us/windows/wsl/install)
 
    ```sh
    # in windows cmd on administrator mode
@@ -148,15 +136,15 @@
    wsl.exe --install
    ```
 
-6. 限制 WSL2 [内存使用](https://github.com/microsoft/WSL/issues/4166#issuecomment-526725261)，`%USERPROFILE%\.wslconfig`
+5. 配置 WSL2 [内存使用](https://github.com/microsoft/WSL/issues/4166#issuecomment-526725261)，`%USERPROFILE%\.wslconfig`
 
    ```ini
    [wsl2]
-   memory=4GB
+   memory=6GB
    swap=0
    ```
 
-7. 配置 WSL 开发环境, [init.sh](init.sh)中包含我 linux 开发环境全套配置, 可以很方便的进行分发
+6. 配置 WSL 开发环境, [init.sh](init.sh)中包含我 linux 开发环境全套配置, 可以很方便的进行分发
 
    ```sh
    # in wsl
@@ -182,15 +170,10 @@
    3. vscode 配置 `nvim.exe` 路径
 
 ## Others
+
 - 安装[Fork](https://git-fork.com/)
 
-- 安装[SwitchHosts](https://github.com/oldj/SwitchHosts/releases)
-
 - 安装[Postman](https://www.postman.com/downloads/)
-
-- 安装[Navicat](## "祖安人自有祖安的方法搞到手")
-
-- 安装[ARDM](https://github.com/qishibo/AnotherRedisDesktopManager/releases)
 
 ## Language
 

@@ -5,13 +5,6 @@
     {
       "command": {
         "action": "sendInput",
-        "input": "\u001b[74;6u"
-      },
-      "keys": "ctrl+shift+j"
-    },
-    {
-      "command": {
-        "action": "sendInput",
         "input": "\u001b[70;6u"
       },
       "keys": "ctrl+shift+f"
@@ -19,9 +12,9 @@
     {
       "command": {
         "action": "sendInput",
-        "input": "\u001bI"
+        "input": "\u001b[74;6u"
       },
-      "keys": "ctrl+i"
+      "keys": "ctrl+shift+j"
     },
     {
       "command": {
@@ -33,9 +26,9 @@
     {
       "command": {
         "action": "sendInput",
-        "input": "\u001b[83;6u"
+        "input": "\u001bI"
       },
-      "keys": "ctrl+shift+s"
+      "keys": "ctrl+i"
     },
     {
       "command": {
@@ -43,6 +36,13 @@
         "input": "\u001b[13;7u"
       },
       "keys": "ctrl+alt+enter"
+    },
+    {
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[83;6u"
+      },
+      "keys": "ctrl+shift+s"
     },
     {
       "command": {
@@ -89,23 +89,9 @@
     {
       "command": {
         "action": "sendInput",
-        "input": "\u001b[85;6u"
-      },
-      "keys": "ctrl+shift+u"
-    },
-    {
-      "command": {
-        "action": "sendInput",
         "input": "\u001b[80;6u"
       },
       "keys": "ctrl+shift+p"
-    },
-    {
-      "command": {
-        "action": "sendInput",
-        "input": "\u001b[90;6u"
-      },
-      "keys": "ctrl+shift+z"
     }
   ],
   "confirmCloseAllTabs": false,
@@ -118,7 +104,7 @@
       "colorScheme": "Afterglow",
       "font": {
         "face": "NerdCodeProPlus",
-        "size": 10,
+        "size": 12,
         "weight": "normal"
       },
       "opacity": 50,
@@ -128,28 +114,31 @@
     },
     "list": [
       {
-        "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+        "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
         "hidden": false,
-        "name": "Windows PowerShell"
+        "name": "PowerShell",
+        "source": "Windows.Terminal.PowershellCore"
       },
       {
-        "commandline": "wsl ~ -d Arch -- tmux new-session -s WSL || tmux attach -t WSL",
+        "commandline": "wsl ~ -- tmux new-session -s WSL || tmux attach -t WSL",
         "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
         "hidden": false,
-        "name": "WSL Arch Linux"
+        "icon": "C:\\Users\\heachxiong\\Pictures\\archlinux.png",
+        "name": "Arch Linux",
+        "source": "Windows.Terminal.Wsl"
       },
       {
         "commandline": "ssh -t -o ServerAliveInterval=60 -i C:\\Users\\heachxiong\\.ssh\\Ubuntu20HK.pem -p50000 ubuntu@43.134.204.157 sh -c 'tmux new-session -s CVM-HK || tmux attach -t CVM-HK'",
-        "guid": "{3c4de342-38b7-51cf-b940-2309a097f518}",
+        "guid": "{a453ae62-4e3d-5e58-b989-0a998ec441b8}",
         "hidden": false,
-        "name": "CVM Ubuntu"
+        "icon": "C:\\Users\\heachxiong\\Pictures\\tencentcloud.ico",
+        "name": "Ubuntu on Cloud"
       },
       {
         "commandline": "%SystemRoot%\\System32\\cmd.exe",
         "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
         "hidden": false,
-        "name": "\u547d\u4ee4\u63d0\u793a\u7b26"
+        "name": "Command Prompt"
       },
       {
         "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
@@ -158,13 +147,18 @@
         "source": "Windows.Terminal.Azure"
       },
       {
-        "guid": "{e4bba8f6-3ae8-522b-9864-f1b2f82a8329}",
+        "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+        "hidden": false,
+        "name": "Windows PowerShell"
+      },
+      {
+        "guid": "{f3383c4e-4f35-552d-b344-8702f9e6fa71}",
         "hidden": false,
         "name": "Developer Command Prompt for VS 2022",
         "source": "Windows.Terminal.VisualStudio"
       },
       {
-        "guid": "{70164ad2-1faf-5225-9856-f3d3842c9fa7}",
+        "guid": "{7d6a2d78-9820-5a75-bcca-56eb9bd5c68a}",
         "hidden": false,
         "name": "Developer PowerShell for VS 2022",
         "source": "Windows.Terminal.VisualStudio"
@@ -200,6 +194,29 @@
       "selectionBackground": "#303030",
       "white": "#D0D0D0",
       "yellow": "#E5B567"
+    },
+    {
+      "background": "#0D1926",
+      "black": "#000000",
+      "blue": "#7A7AB8",
+      "brightBlack": "#262626",
+      "brightBlue": "#BDBDDB",
+      "brightCyan": "#BDDBDB",
+      "brightGreen": "#BDDBBD",
+      "brightPurple": "#DBBDDB",
+      "brightRed": "#DBBDBD",
+      "brightWhite": "#FFFFFF",
+      "brightYellow": "#DBDBBD",
+      "cursorColor": "#D9E6F2",
+      "cyan": "#7AB8B8",
+      "foreground": "#D9E6F2",
+      "green": "#7AB87A",
+      "name": "Blazer",
+      "purple": "#B87AB8",
+      "red": "#B87A7A",
+      "selectionBackground": "#C1DDFF",
+      "white": "#D9D9D9",
+      "yellow": "#B8B87A"
     },
     {
       "background": "#0C0C0C",
