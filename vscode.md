@@ -71,8 +71,8 @@
 | `Alt`+`R`                        | 搜索时是否使用正则引擎                |
 | `Ctrl`+`F`                       | 搜索当前文件内容                      |
 | `Ctrl`+`H`                       | 替换当前文件内容                      |
-| `Shift`+`Ctrl`+`F`               | 搜索目录所有文件内容                  |
-| `Shift`+`Ctrl`+`H`               | 替換目录所有文件內容                  |
+| `Ctrl`+`Shift`+`F`               | 搜索目录所有文件内容                  |
+| `Ctrl`+`Shift`+`H`               | 替換目录所有文件內容                  |
 
 ## 快速编辑
 
@@ -82,8 +82,8 @@
 | `Ctrl`+`O`         | 临时执行一次普通模式命令 |
 | `Ctrl`+`D`         | 左移本行，普通模式`<`    |
 | `Ctrl`+`T`         | 右移本行，普通模式`>`    |
-| `Shift`+`Ctrl`+`J` | 下移本行                 |
-| `Shift`+`Ctrl`+`K` | 上移本行                 |
+| `Ctrl`+`Shift`+`J` | 下移本行                 |
+| `Ctrl`+`Shift`+`K` | 上移本行                 |
 | `Ctrl`+`J`         | 插入下行                 |
 | `Ctrl`+`H`         | 删除光标前字符           |
 | `Ctrl`+`W`         | 删除光标前单词           |
@@ -91,10 +91,10 @@
 | `Ctrl`+`K`         | 删除光标后文本           |
 | `Ctrl`+`L`         | 右移一个词               |
 | `Ctrl`+`Z`         | 撤销，普通模式`u`        |
-| `Shift`+`Ctrl`+`Z` | 重做，普通模式`Ctrl`+`R` |
+| `Ctrl`+`Shift`+`Z` | 重做，普通模式`Ctrl`+`R` |
 | `Ctrl`+`N`         | 选中下个匹配词并添加光标 |
-| `Shift`+`Ctrl`+`N` | 选中上个匹配词并添加光标 |
-| `Shift`+`Ctrl`+`L` | 选中所有匹配词并添加光标 |
+| `Ctrl`+`Shift`+`N` | 选中上个匹配词并添加光标 |
+| `Ctrl`+`Shift`+`L` | 选中所有匹配词并添加光标 |
 | `mi`\|`ma`         | 多光标插入前/后(Visual)  |
 
 ## 普通模式
@@ -161,7 +161,7 @@
 | `F2`               | 重命名符号              |
 | `Ctrl`+`.`         | 代码行为                |
 | `Ctrl`+`/`         | 注释本行代码            |
-| `Shift`+`Ctrl`+`O` | 搜索本地标签            |
+| `Ctrl`+`Shift`+`O` | 搜索本地标签            |
 | `Ctrl`+`T`         | 搜索全局标签            |
 | `gd`               | 跳转定义或声明          |
 | `gr`               | 跳转引用                |
@@ -181,10 +181,10 @@
 | `Ctrl`+`K` `r`        | 搜索最近访问文件   |
 | `Ctrl`+`P`            | 搜索项目文件       |
 | `Ctrl`+`S`            | 保存               |
-| `Shift`+`Ctrl`+`S`    | 另存为             |
+| `Ctrl`+`Shift`+`S`    | 另存为             |
 | `Ctrl`+`K` `s`        | 保存所有           |
-| `Shift`+`Ctrl`+`W`    | 关闭当前文件       |
-| `Shift`+`Ctrl`+`T`    | 重开关闭的 Editor  |
+| `Ctrl`+`Shift`+`W`    | 关闭当前文件       |
+| `Ctrl`+`Shift`+`T`    | 重开关闭的 Editor  |
 | `Ctrl`+`K` `u`        | 关闭组中已保存文件 |
 | `Ctrl`+`K` `w`        | 关闭组中所有文件   |
 | `Ctrl`+`K` `Ctrl`+`W` | 关闭所有文件       |
@@ -206,12 +206,12 @@
 | 按键               | 作用                           |
 | ------------------ | ------------------------------ |
 | `F1`               | 开关 Side Bar                  |
-| `Shift`+`Ctrl`+`E` | Explorer-Outline-Todo-Timeline |
-| `Shift`+`Ctrl`+`G` | Git VCS                        |
-| `Shift`+`Ctrl`+`D` | Debugger                       |
-| `Shift`+`Ctrl`+`M` | Problem                        |
-| `Shift`+`Ctrl`+`U` | Output                         |
-| `Shift`+`Ctrl`+`Y` | Debug Consol                   |
+| `Ctrl`+`Shift`+`E` | Explorer-Outline-Todo-Timeline |
+| `Ctrl`+`Shift`+`G` | Git VCS                        |
+| `Ctrl`+`Shift`+`D` | Debugger                       |
+| `Ctrl`+`Shift`+`M` | Problem                        |
+| `Ctrl`+`Shift`+`U` | Output                         |
+| `Ctrl`+`Shift`+`Y` | Debug Consol                   |
 | `Ctrl`+`` ` ``     | Terminal                       |
 
 ## 其他按键或命令
@@ -226,7 +226,7 @@
 | `Alt`+`R`          | 快速运行单个代码文件       |
 | `Alt`+`T`          | 切换鼠标悬停翻译           |
 | `Alt`+`Shift`+`T`  | 翻译选中文本/替换翻译      |
-| `Shift`+`Ctrl`+`P` | 搜索 VSCode 命令           |
+| `Ctrl`+`Shift`+`P` | 搜索 VSCode 命令           |
 | Calculator         | 计算器                     |
 | VSCodeCounter      | 项目代码统计               |
 
@@ -234,10 +234,10 @@
 
 | 按键               | 作用                        |
 | ------------------ | --------------------------- |
-| `Shift`+`Ctrl`+`V` | Markdown 预览（当前 Group） |
+| `Ctrl`+`Shift`+`V` | Markdown 预览（当前 Group） |
 | `Ctrl`+`K` `V`     | Markdown 预览（切分 Group） |
-| `Shift`+`Ctrl`+`]` | 标题(uplevel)               |
-| `Shift`+`Ctrl`+`[` | 标题(downlevel)             |
+| `Ctrl`+`Shift`+`]` | 标题(uplevel)               |
+| `Ctrl`+`Shift`+`[` | 标题(downlevel)             |
 | `Ctrl`+`B`         | 粗体                        |
 | `Ctrl`+`I`         | 斜体                        |
 | `Alt`+`C`          | 确认 task                   |
