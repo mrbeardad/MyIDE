@@ -1112,7 +1112,7 @@ main "$@"
 #     "MattesGroeger/vim-bookmarks",
 #     event = "BufRead",
 #     setup = function()
-#       vim.g.bookmark_sign = ""
+#       vim.g.bookmark_sign = ""
 #       vim.g.bookmark_annotation_sign = ""
 #       vim.g.bookmark_display_annotation = 1
 #       vim.g.bookmark_no_default_key_mappings = 1
@@ -1283,9 +1283,21 @@ main "$@"
 #       require("colorizer").setup()
 #     end,
 #   },
+#   { 'rcarriga/nvim-notify',
+#     config = function()
+#       local notify = require("notify")
+#       notify.setup({
+#         stages = "slide",
+#       })
+#       vim.notify = notify
+#     end
+#   }
 # }
 # 
-# map("c", "<C-a>", "<C-b>", { noremap = true })
+# --------------------------------------------------------------------------------
+# -- key bindings
+# --------------------------------------------------------------------------------
+# map("c", "<C-a>", "<C-b>")
 # map("", ";", "<CMD>HopChar2<CR>")
 # map("", ",", "<CMD>HopLineStartMW<CR>")
 # 
@@ -1300,6 +1312,7 @@ main "$@"
 # map("c", "<M-W>", "\\<\\><Left><Left>")
 # map("c", "<M-r>", "\\v")
 # map("c", "<M-c>", "\\C")
+# map("n", "<C-S-F>", "<CMD>Telescope live_grep<CR>")
 # 
 # map("n", "<", "<<")
 # map("n", ">", ">>")
