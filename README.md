@@ -35,7 +35,11 @@
 ## [WSL](wsl.md)
 
 1. 安装[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)及其配置[settings.json](wt/settings.json)
-2. 安装[PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.3)
+2. 安装[PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.3)与[Oh My Posh](https://ohmyposh.dev/docs/installation/windows)
+   ```pwsh
+   # nvim $PROFILE
+   oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/powerlevel10k_rainbow.omp.json" | Invoke-Expression
+   ```
 3. 创建启动脚本`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\wt_quake.vbs`从而开机即可使用快捷键`` win+` ``来开启或关闭终端
 
    ```vbs
