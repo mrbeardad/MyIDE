@@ -13,42 +13,48 @@
 
 ## [Windows](windows.md)
 
-1. 更新驱动程序
-2. 安装[Chrome 浏览器](https://www.google.cn/chrome/)，并登录 Google 账户以同步配置
-3. 安装[7-Zip 压缩包工具](https://www.7-zip.org/)
-4. 安装常用软件
-
-   - [搜狗输入法](https://pinyin.sogou.com/)
+1. 安装[Chocolatey 包管理器](https://chocolatey.org/install)
+2. 使用包管理器安装：
+   ```pwsh
+   # in admin cmd
+   choco install -y make rust go python3 nodejs flutter androidstudio
+   ```
+3. 使用微软商店安装
+   - Windows Terminal
+   - PowerShell
+   - oh-my-posh
+   - Microsoft PowerToys
+4. 使用浏览器安装
+   - [Google Chrome](https://www.google.cn/chrome/)
+   - [7-Zip](https://www.7-zip.org/)
+   - [Sogou IME](https://pinyin.sogou.com/)
    - [TIM](https://tim.qq.com)
-   - [微信](https://pc.weixin.qq.com/?lang=zh_CN)
-   - [腾讯会议](https://meeting.tencent.com/download-center.html)
-   - [QQ 音乐](https://y.qq.com/download/index.html)
-   - [Office 办公套件](https://www.office.com/)
-   - [PowerToys 工具集](https://github.com/microsoft/PowerToys/releases)
-
+   - [WeChat](https://pc.weixin.qq.com/?lang=zh_CN)
+   - [WeMeeting](https://meeting.tencent.com/download-center.html)
+   - [QQ Music](https://y.qq.com/download/index.html)
+   - [Office](https://www.office.com/)
+   - [Fork](https://git-fork.com/)
+   - [Postman](https://www.postman.com/downloads/)
+   - [VSCode](https://code.visualstudio.com/download)
+   - [Neovim](https://github.com/neovim/neovim/releases/)
 5. 系统设置
-6. 下载[NerdCodePro 字体](fonts/)
-7. 下载[鼠标主题](https://zhutix.com/tag/cursors/)
-8. 下载[TranslucentTB 透明任务栏](https://www.microsoft.com/zh-cn/p/translucenttb/9pf4kz2vn4w9?activetab=pivot:overviewtab)
-9. 安装[XMeters 资源监测器](https://entropy6.com/xmeters/)
-
-## [WSL](wsl.md)
-
-1. 安装[Windows Terminal](https://www.microsoft.com/zh-cn/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)及其配置[settings.json](wt/settings.json)
-2. 安装[PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.3)与[Oh My Posh](https://ohmyposh.dev/docs/installation/windows)
+6. 安装[NerdCodePro 字体](fonts/)
+7. 安装[鼠标主题](https://zhutix.com/tag/cursors/)
+8. [配置 Windows Terminal](wt/settings.json)
+9. 配置 PowerShell
    ```pwsh
    # nvim $PROFILE
    oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/powerlevel10k_rainbow.omp.json" | Invoke-Expression
    ```
-3. 创建启动脚本`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\wt_quake.vbs`从而开机即可使用快捷键`` win+` ``来开启或关闭终端
-
+10. 创建启动脚本`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\wt_quake.vbs`从而开机即可使用快捷键`` win+` ``来开启或关闭终端
    ```vbs
    CreateObject("Wscript.Shell").Run "pwsh -c Start-Process wt.exe -WindowStyle Hidden", 0, True
    ```
+11. 安装[dual-key-remap](https://github.com/ililim/dual-key-remap/releases)以映射 CapsLock 键为“单击时为 Esc，组合时为 Ctrl”
 
-4. 安装[dual-key-remap](https://github.com/ililim/dual-key-remap/releases)以映射 CapsLock 键为“单击时为 Esc，组合时为 Ctrl”
+## [WSL](wsl.md)
 
-5. 安装[WSL2](https://docs.microsoft.com/en-us/windows/wsl/install)
+1. 安装 WSL2
 
    ```sh
    # in windows cmd on administrator mode
@@ -56,7 +62,7 @@
    wsl.exe --update
    ```
 
-6. 配置 WSL2 [内存使用](https://github.com/microsoft/WSL/issues/4166#issuecomment-526725261)，`%USERPROFILE%\.wslconfig`
+2. 配置 WSL2 [内存使用](https://github.com/microsoft/WSL/issues/4166#issuecomment-526725261)，`%USERPROFILE%\.wslconfig`
 
    ```ini
    [wsl2]
@@ -64,7 +70,7 @@
    swap=0
    ```
 
-7. 配置 WSL 开发环境, [init.sh](init.sh)中包含我 linux 开发环境全套配置, 可以很方便的进行分发
+3. 配置 WSL 开发环境, [init.sh](init.sh)中包含我 linux 开发环境全套配置, 可以很方便的进行分发
 
    ```sh
    # in wsl
@@ -82,18 +88,12 @@
 
 ## [VSCode](vscode.md)
 
-1. 安装[VSCode](https://code.visualstudio.com/download)，登录账户并同步[配置](vscode/)。
+1. [配置 VSCode](vscode/)
 
 2. 安装[NeoVim](https://github.com/neovim/neovim/releases/)到`C:\Program Files\Neovim\`，然后
    1. 安装配置目录[vscode-neovim](vscode/vscode-neovim/)到`C:\Program Files\Neovim\vscode-neovim`
    2. vscode 配置 `init.vim` 路径
    3. vscode 配置 `nvim.exe` 路径
-
-## Others
-
-- 安装[Fork](https://git-fork.com/)
-
-- 安装[Postman](https://www.postman.com/downloads/)
 
 ## Language
 
