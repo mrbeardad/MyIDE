@@ -41,9 +41,13 @@
 6. 安装[NerdCodePro 字体](fonts/)
 7. 安装[鼠标主题](https://zhutix.com/tag/cursors/)
 8. [配置 Windows Terminal](wt/settings.json)
-9. 配置 PowerShell
+9. [配置 PowerShell]
    ```pwsh
-   # nvim $PROFILE
+   # in pwsh
+   Install-Module PSReadLine
+   Install-Module PSFzf
+   
+   # edit $PROFILE
    oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/powerlevel10k_rainbow.omp.json" | Invoke-Expression
    ```
 10. 创建启动脚本`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\wt_quake.vbs`从而开机即可使用快捷键`` win+` ``来开启或关闭终端
