@@ -56,8 +56,7 @@
 
 1. 安装 WSL2
 
-   ```sh
-   # in windows cmd on administrator mode
+   ```pwsh
    wsl.exe --install
    wsl.exe --update
    ```
@@ -90,7 +89,7 @@
 
 1. [配置 VSCode](vscode/)
 
-2. 安装[NeoVim](https://github.com/neovim/neovim/releases/)到`C:\Program Files\Neovim\`，然后
+2. 配置 vscode-neovim
    1. 安装配置目录[vscode-neovim](vscode/vscode-neovim/)到`C:\Program Files\Neovim\vscode-neovim`
    2. vscode 配置 `init.vim` 路径
    3. vscode 配置 `nvim.exe` 路径
