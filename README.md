@@ -111,7 +111,7 @@
 > 2. 设置代理软件可接受局域网代理请求
 > 3. Windows Host IP 由/etc/resolv.conf 可知
 
-## [VSCode-Neovim](vscode-neovim.md)
+## VSCode-Neovim
 
 > [VSCode 与 Neovim 操作手册](vscode-neovim.md)
 
