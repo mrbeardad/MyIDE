@@ -19,10 +19,10 @@
       }
     }
   },
+  "editor.unfoldOnClickAfterEndOfLine": true,
   "editor.smoothScrolling": true,
   "editor.tabCompletion": "onlySnippets",
-  "editor.unfoldOnClickAfterEndOfLine": true,
-  "editor.cursorSmoothCaretAnimation": true,
+  "editor.cursorSmoothCaretAnimation": "on",
   "editor.cursorSurroundingLines": 7,
   "editor.fontFamily": "NerdCodeProPlus",
   "editor.minimap.enabled": false,
@@ -35,14 +35,9 @@
   "editor.suggest.snippetsPreventQuickSuggestions": false,
 
   "explorer.confirmDelete": false,
-  "explorer.excludeGitIgnore": true,
 
   "files.hotExit": "off",
   "files.insertFinalNewline": true,
-  "files.watcherExclude": {
-    // "**/build/*/**": true,
-    "**/.next/*/**": true
-  },
 
   "search.showLineNumbers": true,
   "search.smartCase": true,
@@ -91,10 +86,9 @@
 
   "security.workspace.trust.enabled": false,
 
-  "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
-  "vscode-neovim.neovimExecutablePaths.win32": "C:\\Program Files\\Neovim\\bin\\nvim.exe",
-  "vscode-neovim.neovimInitVimPaths.linux": "/home/beardad/.vscode-neovim/init.vim",
-  "vscode-neovim.neovimInitVimPaths.win32": "C:\\Program Files\\Neovim\\vscode-neovim\\init.vim",
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
 
   "path-intellisense.autoSlashAfterDirectory": true,
   "path-intellisense.showHiddenFiles": true,
@@ -172,47 +166,70 @@
   "todo-tree.general.statusBar": "none",
   "todo-tree.highlights.useColourScheme": true,
   "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
-  "todo-tree.general.tags": ["TODO:", "FIXME:", "BUG:", "NOTE:", "WARN:", "HACK:", "XXX:"],
+  "todo-tree.general.tags": [
+    "TODO",
+    "PERF",
+    "OPTIM",
+    "FIX",
+    "FIXIT",
+    "FIXME",
+    "BUG",
+    "NOTE",
+    "WARN",
+    "WARNING",
+    "XXX",
+    "HACK"
+  ],
+  "todo-tree.general.tagGroups": {
+    "PERF": ["PERF", "OPTIM"],
+    "FIX": ["FIX", "FIXIT", "FIXME", "BUG"],
+    "WARN": ["WARNING", "XXX"]
+  },
   "todo-tree.highlights.customHighlight": {
-    "TODO:": {
-      "icon": "check-circle-fill",
+    "TODO": {
+      "foreground": "#1a1b26",
+      "background": "#0db9d7",
+      "fontStyle": "italic",
+      "icon": "check-circle",
       "iconColour": "#0db9d7",
-      "rulerColour": "#0db9d7",
-      "background": "#0db9d7"
+      "gutterIcon": true
     },
-    "FIXME:": {
-      "icon": "flame",
-      "iconColour": "#e0af68",
-      "rulerColour": "#e0af68",
-      "background": "#e0af68"
+    "PERF": {
+      "foreground": "#1a1b26",
+      "background": "#bb9af7",
+      "fontStyle": "italic",
+      "icon": "stopwatch",
+      "iconColour": "#bb9af7",
+      "gutterIcon": true
     },
-    "BUG:": {
+    "FIX": {
+      "foreground": "#ddd",
+      "background": "#db4b4b",
+      "fontStyle": "italic",
       "icon": "bug",
       "iconColour": "#db4b4b",
-      "rulerColour": "#db4b4b",
-      "background": "#db4b4b"
+      "gutterIcon": true
     },
-    "NOTE:": {
+    "NOTE": {
+      "foreground": "#1a1b26",
+      "background": "#1abc9c",
+      "fontStyle": "italic",
       "icon": "note",
-      "iconColour": "#10b981",
-      "rulerColour": "#10b981",
-      "background": "#10b981"
+      "iconColour": "#1abc9c"
     },
-    "WARN:": {
+    "WARN": {
+      "foreground": "#1a1b26",
+      "background": "#e0af68",
+      "fontStyle": "italic",
       "icon": "alert",
-      "iconColour": "#eed49f",
-      "rulerColour": "#eed49f",
-      "background": "#eed49f"
+      "iconColour": "#e0af68"
     },
-    "HACK:": {
-      "icon": "tools",
-      "iconColour": "#eed49f",
-      "rulerColour": "#eed49f",
-      "background": "#eed49f",
-      "foreground": "#000000"
-    },
-    "XXX:": {
-      "icon": "$(close)"
+    "HACK": {
+      "foreground": "#1a1b26",
+      "background": "#e0af68",
+      "fontStyle": "italic",
+      "icon": "flame",
+      "iconColour": "#e0af68"
     }
   },
 
@@ -220,8 +237,6 @@
     "**/.gitignore",
     "**/.git/**",
     "**/.vscode/**",
-    "**/node_modules/**",
-    "**/build/**",
     "**/vendor/**",
     "**/third_party/**",
     "**/3rd_party/**"
@@ -941,7 +956,6 @@
   },
   "git.detectSubmodules": false,
   "window.commandCenter": true,
-  "redhat.telemetry.enabled": true,
   "python.formatting.yapfArgs": [
     "--style={based_on_style: google, column_limit: 120, indent_width: 4}"
   ],
@@ -957,5 +971,11 @@
     "editor.suggestSelection": "first",
     "editor.tabCompletion": "onlySnippets",
     "editor.wordBasedSuggestions": false
+  },
+  "dart.showInspectorNotificationsForWidgetErrors": false,
+  "dart.debugExternalPackageLibraries": false,
+  "dart.debugSdkLibraries": false,
+  "[python]": {
+    "editor.formatOnType": true
   }
 }

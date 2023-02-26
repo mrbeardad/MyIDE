@@ -5,47 +5,17 @@
   // In other mode, map control keys to neovim-map(vscode-neovim.send) or vscode-command by vscode keybind,
   // and map normal keys to neovim-map or vscode-command(VSCodeNotify) by neovim init.vim
 
-  // 屏幕滚动
-  // ctrl+d: scroll page down
   {
-    "key": "ctrl+d",
-    "command": "editorScroll",
-    "args": {
-      "to": "down",
-      "by": "halfPage",
-      "revealCursor": false,
-      "value": 1
-    },
-    "when": "textInputFocus && neovim.mode != insert"
+    "key": "ctrl+h",
+    "command": "editor.action.startFindReplaceAction",
+    "when": "editorTextFocus && neovim.mode == normal"
   },
-  // ctrl+u: scroll page up
   {
-    "key": "ctrl+u",
-    "command": "editorScroll",
-    "args": {
-      "to": "up",
-      "by": "halfPage",
-      "revealCursor": false,
-      "value": 1
-    },
-    "when": "textInputFocus && neovim.mode != insert"
-  },
-
-  // 全文搜索
-  // ctrl+f: find content
-  {
-    "key": "ctrl+f",
+    "key": "ctrl+h",
     "command": "vscode-neovim.send",
-    "args": "<C-F>",
-    "when": "editorFocus && neovim.mode == visual"
+    "args": "<C-H>",
+    "when": "editorTextFocus && neovim.mode == visual"
   },
-  {
-    "key": "ctrl+f",
-    "command": "-vscode-neovim.ctrl-f"
-  },
-
-  // 快速编辑
-  // jj/jk: escape
   {
     "key": "j",
     "command": "vscode-neovim.compositeEscape1",
@@ -58,29 +28,20 @@
     "when": "editorTextFocus && neovim.mode == insert",
     "args": "k"
   },
-  // ctrl+shift+j: shift the line to the down
   {
     "key": "ctrl+shift+j",
     "command": "editor.action.moveLinesDownAction",
     "when": "editorTextFocus && !editorReadonly"
   },
-  // ctrl+shift+k: shift the line to the up
   {
     "key": "ctrl+shift+k",
     "command": "editor.action.moveLinesUpAction",
     "when": "editorTextFocus && !editorReadonly"
   },
-  // ctrl+j: insert line below
   {
     "key": "ctrl+j",
     "command": "editor.action.insertLineAfter",
     "when": "editorTextFocus && !editorReadonly"
-  },
-  // ctrl+w: delete word left
-  {
-    "key": "ctrl+w",
-    "command": "cjkWordHandler.deleteWordStartLeft",
-    "when": "editorTextFocus && neovim.mode == insert"
   },
   {
     "key": "ctrl+w",
@@ -90,99 +51,100 @@
     "key": "ctrl+w",
     "command": "-workbench.action.closeActiveEditor"
   },
-  // ctrl+l: right a word
   {
     "key": "ctrl+l",
-    "command": "cursorWordRight",
+    "command": "vscode-neovim.send",
+    "args": "<Esc>ea",
     "when": "editorTextFocus && neovim.mode == insert"
   },
-  // ctrl+z: undo
   {
     "key": "ctrl+z",
-    "command": "undo"
+    "command": "vscode-neovim.send",
+    "args": "<C-Z>",
+    "when": "editorTextFocus && neovim.mode == insert"
   },
-  // ctrl+r: redo
   {
-    "key": "ctrl+r",
-    "command": "redo",
-    "when": "editorTextFocus && neovim.mode != insert"
+    "key": "ctrl+shift+z",
+    "command": "vscode-neovim.send",
+    "args": "<C-S-Z>",
+    "when": "editorTextFocus && neovim.mode == insert"
   },
-  // ctrl+n: add a cursor on the next word
   {
     "key": "ctrl+n",
     "command": "editor.action.addSelectionToNextFindMatch",
-    "when": "editorFocus && !suggestWidgetVisible"
+    "when": "editorFocus && !suggestWidgetVisible && !CodeActionMenuVisible && neovim.mode != visual"
   },
   {
     "key": "ctrl+n",
     "command": "vscode-neovim.send",
     "args": "<C-N>",
-    "when": "editorTextFocus && neovim.mode == visual"
+    "when": "editorFocus && !suggestWidgetVisible && !CodeActionMenuVisible && neovim.mode == visual"
   },
-  // ctrl+shift+n: add a cursor on the previous word
+  {
+    "key": "ctrl+n",
+    "command": "-workbench.action.files.newUntitledFile"
+  },
   {
     "key": "ctrl+shift+n",
     "command": "editor.action.addSelectionToPreviousFindMatch",
-    "when": "editorFocus"
+    "when": "editorFocus && neovim.mode != visual"
   },
   {
     "key": "ctrl+shift+n",
     "command": "vscode-neovim.send",
     "args": "<C-S-N>",
-    "when": "editorTextFocus && neovim.mode == visual"
+    "when": "editorFocus && neovim.mode == visual"
   },
-  // ctrl+shift+l: add a cursor on all match word
+  {
+    "key": "ctrl+shift+l",
+    "command": "editor.action.selectHighlights",
+    "when": "editorFocus && neovim.mode != visual"
+  },
   {
     "key": "ctrl+shift+l",
     "command": "vscode-neovim.send",
     "args": "<C-S-L>",
     "when": "editorTextFocus && neovim.mode == visual"
   },
-
-  // 复制粘贴
-  // ctrl+c: copy text
   {
-    "key": "ctrl+C",
+    "key": "ctrl+c",
     "command": "editor.action.clipboardCopyAction",
     "when": "editorHasSelection"
   },
+  {
+    "key": "ctrl+v",
+    "command": "markdown.extension.editing.paste",
+    "when": "editorTextFocus && editorLangId =~ /^markdown$|^rmd$|^qmd$/"
+  },
 
-  // 文件操作
-  // ctrl+k o: open file
+  {
+    "key": "ctrl+i",
+    "command": "editor.action.triggerSuggest",
+    "when": "editorTextFocus && neovim.mode == insert && !suggestWidgetVisible && editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+i",
+    "command": "hideSuggestWidget",
+    "when": "editorTextFocus && neovim.mode == insert && suggestWidgetVisible && textInputFocus"
+  },
+  {
+    "key": "alt+i",
+    "command": "editor.action.insertSnippet",
+    "when": "editorTextFocus"
+  },
   {
     "key": "ctrl+k o",
     "command": "workbench.action.files.openFile",
     "when": "true"
   },
   {
-    "key": "ctrl+o",
-    "command": "-workbench.action.files.openFile",
-    "when": "true"
-  },
-  // ctrl+k n: new file
-  {
     "key": "ctrl+k n",
     "command": "workbench.action.files.newUntitledFile"
   },
   {
-    "key": "ctrl+n",
-    "command": "-workbench.action.files.newUntitledFile"
-  },
-  // ctrl+k r: open rencent file
-  {
     "key": "ctrl+k r",
     "command": "workbench.action.openRecent"
   },
-  {
-    "key": "ctrl+r",
-    "command": "-workbench.action.openRecent"
-  },
-  {
-    "key": "ctrl+r",
-    "command": "-workbench.action.reloadWindow",
-    "when": "isDevelopment"
-  },
-  // tab/shift+tab: switch file editor
   {
     "key": "tab",
     "command": "workbench.action.focusFirstEditorGroup",
@@ -198,7 +160,6 @@
     "command": "workbench.action.focusPreviousGroup",
     "when": "editorTextFocus && neovim.mode != insert"
   },
-  //  ctrl+shift+w: close file
   {
     "key": "ctrl+shift+w",
     "command": "workbench.action.closeActiveEditor"
@@ -212,48 +173,21 @@
     "key": "ctrl+shift+w",
     "command": "-workbench.action.closeWindow"
   },
-  // ctrl+k: delete all char to the right of the cursor
-  // Define after all other ctrl+k prefix keybinds!
   {
+    // NOTE: Define after all other ctrl+k prefix keybinds!
     "key": "ctrl+k",
     "command": "deleteAllRight",
     "when": "editorTextFocus && neovim.mode == insert"
   },
-
-  // 界面元素
-  // f1: toggle side bar
   {
     "key": "f1",
     "command": "workbench.action.toggleSidebarVisibility"
   },
-  // ctrl+shift+g: vcs
   {
     "key": "ctrl+shift+g",
     "command": "workbench.view.scm",
     "when": "workbench.scm.active"
   },
-
-  // 语言服务
-  // ctrl+i: toggle suggest widget
-  {
-    "key": "ctrl+i",
-    "command": "editor.action.triggerSuggest",
-    "when": "editorTextFocus && neovim.mode == insert && !suggestWidgetVisible && editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
-  },
-  {
-    "key": "ctrl+i",
-    "command": "hideSuggestWidget",
-    "when": "editorTextFocus && neovim.mode == insert && suggestWidgetVisible && textInputFocus"
-  },
-  // alt+i: search snippet
-  {
-    "key": "alt+i",
-    "command": "editor.action.insertSnippet",
-    "when": "editorTextFocus"
-  },
-
-  // 其他按键
-  // alt+e: open active file in explorer
   {
     "key": "alt+e",
     "command": "revealFileInOS",
@@ -264,16 +198,8 @@
     "command": "remote-wsl.revealInExplorer",
     "when": "editorFocus && remoteName == 'wsl'"
   },
-  // alt+t: toggle translator capture word
   {
     "key": "alt+t",
     "command": "translator.toggleCaptureWord"
-  },
-  // alt+shift+t: replace text with translation
-  {
-    "key": "alt+shift+t",
-    "command": "vscode-neovim.send",
-    "args": "<M-T>",
-    "when": "editorFocus && neovim.mode == visual"
   }
 ]
