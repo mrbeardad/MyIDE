@@ -1,63 +1,84 @@
-# 开发环境搭建
+<div align="center">
 
-<!-- vim-markdown-toc GFM -->
+# MyIDE
 
-- [开发环境搭建](#开发环境搭建)
+✨ A guideline for configuring your IDE (vscode and vim/neovim) and your development environment on Windows (WindowsTerminal, PowerShell) and Linux (wsl, tmux, zsh).
+
+![open_issues](https://img.shields.io/github/issues/mrbeardad/MyIDE?style=for-the-badge)
+![lisence](https://img.shields.io/github/license/mrbeardad/MyIDE?style=for-the-badge)
+![stars](https://img.shields.io/github/stars/mrbeardad/MyIDE?style=for-the-badge)
+![tag](https://img.shields.io/gitlab/v/tag/mrbeardad/MyIDE?style=for-the-badge)
+![last_commit](https://img.shields.io/github/last-commit/mrbeardad/MyIDE?style=for-the-badge)
+
+:page_facing_up:[中文文档](README-zh.md)
+
+</div>
+
+---
+
+- [MyIDE](#myide)
   - [Windows](#windows)
   - [WSL](#wsl)
   - [VSCode-Neovim](#vscode-neovim)
-  - [Language](#language)
-
-<!-- vim-markdown-toc -->
+  - [Language Tools](#language-tools)
 
 ## Windows
 
-> [Windows 操作手册](windows.md)
+<div align="center">
 
-1. 安装[Chocolatey 包管理器](https://chocolatey.org/install)
-2. 使用包管理器安装：
+ScreenShots
 
-   ```pwsh
-   # in admin
-   choco install -y sudo 7zip make rust go python3 nodejs flutter
+![desktop](images/desktop.png)
+![wt_and_ps](images/wt_and_ps.png)
+
+</div>
+
+> [Windows Keybindings](windows.md)
+
+1. Install apps by [Chocolatey](https://chocolatey.org/install)
+
+   ```cmd
+   :: in admin
+   choco install -y 7zip googlechrome git-fork llvm rust go java python3 nodejs flutter
    ```
 
-   > Tips: 国内 choco 安装大型软件会很慢（如 go 等编程语言），建议用浏览器去官网下载安装包
+   > Tips: This is my choice, choose your preferred apps
 
-3. 使用微软商店安装
-   - Windows Terminal
-   - PowerShell
-   - Microsoft PowerToys
-4. 使用浏览器安装
-   - [Google Chrome](https://www.google.cn/chrome/)
-   - [Sogou IME](https://pinyin.sogou.com/)
-   - [TIM](https://tim.qq.com)
-   - [WeChat](https://pc.weixin.qq.com/?lang=zh_CN)
-   - [WeMeeting](https://meeting.tencent.com/download-center.html)
-   - [QQ Music](https://y.qq.com/download/index.html)
-   - [Office](https://www.office.com/)
-   - [Fork](https://git-fork.com/)
-   - [Postman](https://www.postman.com/downloads/)
-5. 安装[NerdCodeProPlus font](fonts/)
-6. 配置 .gitconfig
+2. Install apps by Microsoft Store
+   1. Windows Terminal
+   2. PowerShell
+   3. PowerToys
+3. Install [NerdCodeProPlus font](./fonts/)
+4. Configure `%USERPROFILE%\.gitconfig`
 
-   ```conf
+   ```toml
    [user]
-     name = Heache Bear
-     email = mrbeardad@qq.com
+     name = Your Name
+     email = user@email.com
    [merge]
      tool = vimdiff
    [mergetool "vimdiff"]
      path = nvim
    ```
 
-7. 配置 .ssh
-8. [配置 Windows Terminal](wt/settings.json)
-9. [配置 PowerShell](ps/Microsoft.PowerShell_profile.ps1)
+5. Configure `%USERPROFILE%\.ssh\config`
+
+   ```conf
+   Host github.com
+      HostName github.com
+      Port 22
+      User git
+      IdentitiesOnly yes
+      IdentityFile ~/.ssh/github.key
+   ```
+
+6. Configure Windows Terminal [settings.json](wt/settings.json)
+7. Configure PowerShell [$PROFILE](ps/Microsoft.PowerShell_profile.ps1)
 
    ```pwsh
    # install dependencies before copy config file
    choco install fzf
+   cargo install lsd
    Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
    Install-Module PSReadLine
    Install-Module PSFzf
@@ -66,76 +87,104 @@
    Install-Module git-aliases -AllowClobber
    ```
 
-10. 安装[dual-key-remap](https://github.com/ililim/dual-key-remap/releases)以映射 CapsLock 键为“单击时为 Esc，组合时为 Ctrl”，注意根据文档[设置管理员权限](https://github.com/ililim/dual-key-remap#administrator-access)，否则在提权窗口中无法使用
-11. 创建启动脚本`%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\wt_quake.vbs`从而开机即可使用快捷键`` win+` ``来开启或关闭终端
+   > Tips: You can refer to the usage of [zsh](wsl.md)
 
-    ```vbs
-    CreateObject("Wscript.Shell").Run "pwsh -c Start-Process wt.exe -WindowStyle Hidden", 0, True
-    ```
+8. Install [dual-key-remap](https://github.com/ililim/dual-key-remap) to remap CapsLock to Escape when pressed alone and Ctrl when pressed with other keys.
 
-12. 系统设置
-13. 安装[鼠标主题](https://zhutix.com/tag/cursors/)
+   > Tips: Don't forget to [enable administrator access](https://github.com/ililim/dual-key-remap#administrator-access) or else it doesn't work on administrator applications.
+
+9. Set your system by press `Win`+`I`
+
+10. Install the [cursor theme](https://zhutix.com/tag/cursors/) you like
 
 ## WSL
 
-> [WSL 操作手册](wsl.md)
+<div align="center">
 
-1. 安装 WSL2
+ScreenShots
 
-   ```pwsh
-   wsl.exe --install
-   wsl.exe --update
+![tmux](images/tmux.png)
+![zsh_tig](images/zsh_tig.png)
+![zsh_ranger](images/zsh_ranger.png)
+![btop](images/btop.png)
+
+</div>
+
+> [WSL Keybindings](wsl.md)
+
+1. Install WSL2
+
+   ```cmd
+   :: in admin
+   wsl --install
+   wsl --update
    ```
 
-2. 安装 [ArchWSL](https://wsldl-pg.github.io/ArchW-docs/How-to-Setup/)
+2. Install [ArchWSL](https://wsldl-pg.github.io/ArchW-docs/How-to-Setup/)
 
-3. 配置 WSL2 [内存使用](https://github.com/microsoft/WSL/issues/4166#issuecomment-526725261)，`%USERPROFILE%\.wslconfig`
+   > Tips: ArchWSL is optional, if you like ArchLinux, you can set it as the default distro for wsl by `wsl -s Arch`, or you can just use ubuntu.
 
-   ```ini
+3. Limit the [memory usage](https://github.com/microsoft/WSL/issues/4166#issuecomment-526725261) of WSL2, create file `%UserProfile%\.wslconfig` with following content
+
+   ```toml
    [wsl2]
    memory=6GB
    swap=0
    ```
 
-4. 配置 WSL 开发环境, [init.sh](init.sh)中包含我 linux 开发环境全套配置, 可以很方便的进行分发
+4. Execute the shell script in wsl to configure all the things
 
    ```sh
-   # in wsl
    curl -Lo init.sh https://github.com/mrbeardad/MyIDE/raw/master/init.sh
-   ./init.sh # 直接执行，不要`bash init.sh`
+   # execute it directly, don't `bash ./init.sh`
+   ./init.sh
    ```
 
-> TIPS: WSL2 访问 Windows 宿主机的代理软件，需要：
->
-> 1. 添加防火墙规则，允许宿主机某端口可被访问
-> 2. 设置代理软件可接受局域网代理请求
-> 3. Windows Host IP 由/etc/resolv.conf 可知
+   > Tips: You can open [init.sh](init.sh) to have a look, all configuretion is at the end of script, You can extract thme alone.
 
 ## VSCode-Neovim
 
-> [VSCode 与 Neovim 操作手册](vscode-neovim.md)
+<div align="center">
 
-1. 安装[Visual Studio](https://visualstudio.microsoft.com/vs/)
+ScreenShots
 
-   > Tips: 安装时勾选 git 和 clang 选项 ，安装完成后将 CMake/bin 与 Llvm/x64/bin （注意是 64 位版本）加入环境变量，后续会需要。
+![vim_home](images/vim_home.png)
+![vim_plugins](images/vim_plugins.png)
+![vim_ide](images/vim_ide.png)
+![vsc_ide](images/vsc_ide.png)
 
-2. 安装[Neovim](https://github.com/neovim/neovim/releases/)与[配置](./neovim/)
+</div>
 
-   1. 安装[LunarVim](https://www.lunarvim.org/docs/master/installation)
-   2. 复制[config.lua](./neovim/config.lua)到`%LOCALAPPDATA%\lvim\`下
-   3. 复制[init.vim](./neovim/init.vim)到`%LOCALAPPDATA%\nvim\`下
-   4. 启动`nvim`自动安装插件
+> [VSCode-Neovim Keybindings](vscode-neovim.md)
 
-   > Tips: 安装插件需要访问 github
+1. Install VSCode and Neovim
 
-3. 安装[VSCode](https://code.visualstudio.com/download)与[配置](./vscode/)
+   ```cmd
+   choco install neovim --pre
+   choco install vscode make
+   cargo install ripgrep
+   ```
 
-   1. 复制[lastSyncextensions.json](vscode/lastSyncextensions.json)到`%APPDATA%\Code\User\sync\extensions\`下
-   2. 复制[settings.json](vscode/settings.json)与[keybindings.json](vscode/keybindings.json)到`%APPDATA%\Code\User`下
+2. Install [Visual Studio](https://visualstudio.microsoft.com/vs/)
 
-   > Tips: VSCode 的配置依赖 Neovim 的配置
+   > Tips: VS is optional, for myself, I just want to get the git, cmake and llvm-clang within it, don't forget to add CMake/bin and Llvm/**x64**/bin to system %PATH%
 
-## Language
+3. Configure Neovim
+
+   1. Install [LunarVim](https://www.lunarvim.org/docs/master/installation)
+   2. Copy [config.lua](./neovim/config.lua) to `%LOCALAPPDATA%\lvim\`
+   3. Copy [init.vim](./neovim/init.vim) to `%LOCALAPPDATA%\nvim\`
+   4. Run `nvim.exe` to install plugins automatically
+
+4. Configure VSCode
+
+   1. Copy [lastSyncextensions.json](vscode/lastSyncextensions.json) to `%APPDATA%\Code\User\sync\extensions\`
+   2. Copy [settings.json](vscode/settings.json) and [keybindings.json](vscode/keybindings.json) to `%APPDATA%\Code\User`
+   3. Launch VSCode to install plugins automatically
+
+   > Tips: VSCode's config is depend on Neovim's config
+
+## Language Tools
 
 | Lang     | Language Server | Linter         | Formatter    | Syntax | Snippets | Debugger | Build    | Doc     | Test    | Prof       |
 | -------- | --------------- | -------------- | ------------ | ------ | -------- | -------- | -------- | ------- | ------- | ---------- |

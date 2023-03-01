@@ -11,10 +11,11 @@ if !exists('g:vscode')
 else
   set noswapfile
   set nobackup
-  set shadafile=NONE
+  set undofile
   set ignorecase
   set smartcase
 
+  " disable builtin plugins
   let disabled_plugins = [
     \ "2html_plugin",
     \ "getscript",
@@ -39,28 +40,31 @@ else
     exe 'let g:loaded_'.plugin.' = 1'
   endfor
 
-  " init plugins
+  " init custom plugins
   let g:matchup_matchparen_enabled = 0
   let g:matchup_surround_enabled = 1
+  let g:asterisk#keeppos = 1
 
-  " load plugins
-  function s:load_plugin(plugin)
-    exe 'set rtp+='.$LUNARVIM_RUNTIME_DIR.'\site\pack\lazy\opt\'.a:plugin
-  endf
-  call s:load_plugin('hop.nvim')
-  call s:load_plugin('vim-matchup')
-  call s:load_plugin('vim-visual-star-search')
-  call s:load_plugin('vim-cool')
-  call s:load_plugin('vim-expand-region')
-  call s:load_plugin('vim-repeat')
-  call s:load_plugin('vim-textobj-user')
-  call s:load_plugin('vim-textobj-entire')
-  call s:load_plugin('vim-textobj-indent')
-  call s:load_plugin('vim-textobj-line')
-  call s:load_plugin('vim-textobj-parameter')
-  call s:load_plugin('vim-surround')
+  " load custom plugins
+  let enabled_plugins = [
+    \ 'hop.nvim',
+    \ 'vim-matchup',
+    \ 'vim-asterisk',
+    \ 'vim-cool',
+    \ 'vim-expand-region',
+    \ 'vim-repeat',
+    \ 'vim-textobj-user',
+    \ 'vim-textobj-entire',
+    \ 'vim-textobj-indent',
+    \ 'vim-textobj-line',
+    \ 'vim-textobj-parameter',
+    \ 'vim-surround',
+  \ ]
+  for plugin in enabled_plugins
+    exe 'set rtp+='.$LUNARVIM_RUNTIME_DIR.'\site\pack\lazy\opt\'.plugin
+  endfor
 
-  " config plugins
+  " config custom plugins and set keymaps
   lua << EOF
     require('hop').setup()
     vim.keymap.set('', 'f', function()
@@ -95,20 +99,19 @@ else
     vim.keymap.set('', ',', function()
       require("hop").hint_lines({ multi_windows = true })
     end)
-    vim.keymap.set("n", "cw", function()
-      local prefix = '"_dw'
+
+    vim.keymap.set('n', '<Insert>', function()
       local len = string.len(vim.api.nvim_get_current_line())
       local col = vim.api.nvim_win_get_cursor(0)[2]
-      if col + 1 == len then
-        return prefix .. "a"
+      vim.g.fuck = col
+      if col + 1 == len and col + 1 ~= vim.b.pos_col_before_cw then
+        return 'a'
       else
-        return prefix .. "i"
+        return 'i'
       end
     end, { expr = true })
 EOF
-  nnoremap <expr> n 'Nn'[v:searchforward]
-  nnoremap <expr> N 'nN'[v:searchforward]
-  nnoremap <silent><C-L> :nohlsearch<CR>
+
   nnoremap mm <cmd>call VSCodeNotify('bookmarks.toggle')<CR>
   nnoremap mi <cmd>call VSCodeNotify('bookmarks.toggleLabeled')<CR>
   nnoremap mn <cmd>call VSCodeNotify('bookmarks.jumpToNext')<CR>
@@ -119,6 +122,17 @@ EOF
   nnoremap mC <cmd>call VSCodeNotify('bookmarks.clearFromAllFiles')<CR>
   nnoremap [c <cmd>call VSCodeNotify('workbench.action.editor.previousChange')<CR><Cmd>call VSCodeNotify('workbench.action.compareEditor.previousChange')<CR>
   nnoremap ]c <cmd>call VSCodeNotify('workbench.action.editor.nextChange')<CR><Cmd>call VSCodeNotify('workbench.action.compareEditor.nextChange')<CR>
+  map *   <Plug>(asterisk-*)
+  map #   <Plug>(asterisk-#)
+  map g*  <Plug>(asterisk-g*)
+  map g#  <Plug>(asterisk-g#)
+  map z*  <Plug>(asterisk-z*)
+  map gz* <Plug>(asterisk-gz*)
+  map z#  <Plug>(asterisk-z#)
+  map gz# <Plug>(asterisk-gz#)
+  nnoremap <expr> n 'Nn'[v:searchforward]
+  nnoremap <expr> N 'nN'[v:searchforward]
+  nnoremap <silent><C-L> :nohl<CR>
   vmap v <Plug>(expand_region_expand)
   vmap V <Plug>(expand_region_shrink)
   vnoremap <C-H> <cmd>call VSCodeNotifyVisual('editor.action.startFindReplaceAction', 1)<CR><Esc>
@@ -129,7 +143,11 @@ EOF
   vnoremap <C-N> <cmd>call VSCodeNotifyVisual('editor.action.addSelectionToNextFindMatch', 1)<CR><Esc>
   vnoremap <C-S-N> <cmd>call VSCodeNotifyVisual('editor.action.addSelectionToPreviousFindMatch', 1)<CR><Esc>
   vnoremap <C-S-L> <cmd>call VSCodeNotifyVisual('editor.action.selectHighlights', 1)<CR>
+  vmap I mi
+  vmap A ma
   nnoremap c "_c
+  nmap cw <cmd>let b:pos_col_before_cw=getpos('.')[2]<CR>"_dw<Insert>
+  nmap cW <cmd>let b:pos_col_before_cw=getpos('.')[2]<CR>"_dW<Insert>
   nnoremap s "_s
   nnoremap S i<CR><Esc>
   nnoremap Y y$
@@ -138,15 +156,15 @@ EOF
   nnoremap zP "0P
   nnoremap zo <cmd>put =@0<CR>
   nnoremap zO <cmd>put! =@0<CR>
-  nnoremap <Space><Space> <cmd>let @+ = @0<CR>
-  nnoremap <Space>y "+y
-  vnoremap <Space>y "+y
-  nnoremap <Space>Y "+y$
-  nnoremap <Space>p "+p
-  vnoremap <Space>p "+p
-  nnoremap <Space>P "+P
-  nnoremap <Space>o <cmd>put =@+<CR>
-  nnoremap <Space>O <cmd>put! =@+<CR>
+  nnoremap zg <cmd>let @+ = @0<CR>
+  nnoremap gy "+y
+  vnoremap gy "+y
+  nnoremap gY "+y$
+  nnoremap gp "+p
+  vnoremap gp "+p
+  nnoremap gP "+P
+  nnoremap go <cmd>put =@+<CR>
+  nnoremap gO <cmd>put! =@+<CR>
   nnoremap <Space>by <cmd>%y +<CR>
   nnoremap <Space>bp <cmd>%d<CR>"+P
   nnoremap gr <cmd>call VSCodeNotify('editor.action.goToReferences')<CR>

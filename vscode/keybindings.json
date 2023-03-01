@@ -114,7 +114,7 @@
   {
     "key": "ctrl+v",
     "command": "markdown.extension.editing.paste",
-    "when": "editorTextFocus && editorLangId =~ /^markdown$|^rmd$|^qmd$/"
+    "when": "editorTextFocus && editorLangId =~ /^markdown$|^rmd$|^qmd$/ && neovim.mode == insert"
   },
 
   {

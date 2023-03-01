@@ -306,8 +306,6 @@ neovim_conf() {
   # ~/.config/lvim/bin/nvim --headless \
   #   -c 'autocmd User PackerComplete quitall' \
   #   -c 'PackerSync'
-  ask_user "Do you want use lvim instead of nvim all the time? Means to copy ~/.config/lvim/bin/nvim to /usr/local/bin" &&
-    sudo cp ~/.config/lvim/bin/nvim /usr/local/bin/nvim
 }
 
 lang_shell() {
@@ -989,16 +987,6 @@ main "$@"
 # __GITCONFIG_END
 
 # __CONFIG_LUA
-# local M = {}
-# 
-# local function map(mode, lhs, rhs, opts)
-#   local options = { noremap = true }
-#   if opts then
-#     options = vim.tbl_extend("force", options, opts)
-#   end
-#   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-# end
-# 
 # --------------------------------------------------------------------------------
 # -- vim options
 # --------------------------------------------------------------------------------
@@ -1022,13 +1010,15 @@ main "$@"
 #   group = group,
 #   callback = function()
 #     vim.opt_local.cursorline = false
-#     vim.opt_local.relativenumber = false
+#     if vim.bo.buftype ~= "nofile" and vim.bo.buftype ~= "help" then
+#       vim.opt_local.relativenumber = false
+#     end
 #   end,
 # })
 # vim.api.nvim_create_autocmd("WinEnter", {
 #   group = group,
 #   callback = function()
-#     if vim.bo.filetype ~= "alpha" then
+#     if vim.bo.buftype ~= "nofile" and vim.bo.buftype ~= "help" then
 #       vim.opt_local.cursorline = true
 #       vim.opt_local.relativenumber = true
 #     end
@@ -1045,74 +1035,141 @@ main "$@"
 # lvim.builtin.lualine.sections.lualine_z = {
 #   { " %c  %l/%L", type = "stl" },
 # }
-# lvim.builtin.treesitter.auto_install = true
 # lvim.builtin.treesitter.matchup.enable = true
 # lvim.builtin.treesitter.rainbow.enable = true
-# lvim.format_on_save.enabled = true
 # lvim.builtin.terminal.open_mapping = "<C-Space>" -- ctrl+`
 # lvim.builtin.nvimtree.setup.view.mappings.list = {
-#   { key = { "<Tab>" }, action = "" },
-#   { key = { "l", "<CR>" }, action = "edit", mode = "n" },
-#   { key = "h", action = "close_node" },
+#   { key = { "<Tab>" },     action = "" },
+#   { key = { "l", "<CR>" }, action = "edit",      mode = "n" },
+#   { key = "h",             action = "close_node" },
 # }
+# lvim.builtin.telescope.defaults.layout_config.center = { width = 0.75 }
 # lvim.builtin.telescope.defaults.mappings = {
 #   i = {
 #     ["<Esc>"] = require("telescope.actions").close,
 #   },
 # }
-#
+# lvim.builtin.gitsigns.opts.on_attach = function(bufnr)
+#   local gs = package.loaded.gitsigns
+#   vim.keymap.set('n', ']c', function()
+#     if vim.wo.diff then return ']c' end
+#     vim.schedule(function() gs.next_hunk() end)
+#     return '<Ignore>'
+#   end, { expr = true, buffer = bufnr })
+#   vim.keymap.set('n', '[c', function()
+#     if vim.wo.diff then return '[c' end
+#     vim.schedule(function() gs.prev_hunk() end)
+#     return '<Ignore>'
+#   end, { expr = true, buffer = bufnr })
+# end
+# lvim.format_on_save.enabled = true
+# 
 # --------------------------------------------------------------------------------
 # -- custom plugins
 # --------------------------------------------------------------------------------
+# local disabled_plugins = {
+#   "2html_plugin",
+#   "getscript",
+#   "getscriptPlugin",
+#   "gzip",
+#   "logipat",
+#   "netrw",
+#   "netrwPlugin",
+#   "netrwSettings",
+#   "netrwFileHandlers",
+#   "matchit",
+#   "tar",
+#   "tarPlugin",
+#   "rrhelper",
+#   "spellfile_plugin",
+#   "vimball",
+#   "vimballPlugin",
+#   "zip",
+#   "zipPlugin",
+# }
+# for _, plugin in pairs(disabled_plugins) do
+#   vim.g["loaded_" .. plugin] = 1
+# end
 # lvim.plugins = {
 #   {
 #     "petertriho/nvim-scrollbar",
-#     config = function()
-#       require("scrollbar").setup()
-#     end,
+#     event = "BufRead",
+#     config = true,
 #   },
 #   {
 #     "karb94/neoscroll.nvim",
 #     event = "WinScrolled",
 #     config = function()
 #       require("neoscroll").setup()
-#     end,
-#   },
-#   {
-#     "rhysd/clever-f.vim",
-#     keys = { "f", "F", "t", "T" },
-#     setup = function()
-#       vim.g.clever_f_smart_case = 1
-#       vim.g.clever_f_fix_key_direction = 1
-#       vim.g.clever_f_across_no_line = 1
+#       vim.keymap.set({ "n", "v" }, "z<CR>", "zt", { remap = true })
 #     end,
 #   },
 #   {
 #     "phaazon/hop.nvim",
-#     cmd = "Hop*",
-#     config = function()
-#       require("hop").setup()
+#     event = "BufRead",
+#     init = function()
+#       vim.keymap.set('', 'f', function()
+#         require("hop").hint_char1({
+#           direction = require("hop.hint").HintDirection.AFTER_CURSOR,
+#           current_line_only = true
+#         })
+#       end)
+#       vim.keymap.set('', 'F', function()
+#         require("hop").hint_char1({
+#           direction = require("hop.hint").HintDirection.BEFORE_CURSOR,
+#           current_line_only = true
+#         })
+#       end)
+#       vim.keymap.set('', 't', function()
+#         require("hop").hint_char1({
+#           direction = require("hop.hint").HintDirection.AFTER_CURSOR,
+#           current_line_only = true,
+#           hint_offset = -1
+#         })
+#       end)
+#       vim.keymap.set('', 'T', function()
+#         require("hop").hint_char1({
+#           direction = require("hop.hint").HintDirection.BEFORE_CURSOR,
+#           current_line_only = true,
+#           hint_offset = 1
+#         })
+#       end)
+#       vim.keymap.set('', ';', function()
+#         require("hop").hint_char2()
+#       end)
+#       vim.keymap.set('', ',', function()
+#         require("hop").hint_lines({ multi_windows = true })
+#       end)
 #     end,
+#     config = true
 #   },
 #   {
 #     "andymass/vim-matchup",
-#     event = "CursorMoved",
-#     setup = function()
+#     event = "BufRead",
+#     init = function()
 #       vim.g.matchup_surround_enabled = 1
+#       vim.g.matchup_transmute_enabled = 1
 #       vim.g.matchup_matchparen_offscreen = { method = "popup" }
 #     end,
 #   },
 #   {
+#     "p00f/nvim-ts-rainbow",
+#     event = "BufRead"
+#   },
+#   {
+#     "norcalli/nvim-colorizer.lua",
+#     event = "BufRead",
+#     config = true,
+#   },
+#   {
 #     "ethanholz/nvim-lastplace",
 #     event = "BufRead",
-#     config = function()
-#       require("nvim-lastplace").setup()
-#     end,
+#     config = true,
 #   },
 #   {
 #     "MattesGroeger/vim-bookmarks",
 #     event = "BufRead",
-#     setup = function()
+#     init = function()
 #       vim.g.bookmark_sign = ""
 #       vim.g.bookmark_annotation_sign = ""
 #       vim.g.bookmark_display_annotation = 1
@@ -1120,17 +1177,15 @@ main "$@"
 #       vim.g.bookmark_auto_save_file = join_paths(get_cache_dir(), "vim-bookmarks")
 #     end,
 #     config = function()
-#       vim.cmd([[hi link BookmarkSign TodoSignTODO]])
-#       vim.cmd([[hi link BookmarkAnnotationSign TodoSignTODO]])
-#       vim.api.nvim_set_keymap("n", "mm", "<Plug>BookmarkToggle", { noremap = false })
-#       vim.api.nvim_set_keymap("n", "mi", "<Plug>BookmarkAnnotate", { noremap = false })
-#       vim.api.nvim_set_keymap("n", "mn", "<Plug>BookmarkNext", { noremap = false })
-#       vim.api.nvim_set_keymap("n", "mp", "<Plug>BookmarkPrev", { noremap = false })
-#       vim.api.nvim_set_keymap("n", "mc", "<Plug>BookmarkClear", { noremap = false })
-#       vim.api.nvim_set_keymap("n", "mC", "<Plug>BookmarkClearAll", { noremap = false })
-#       vim.api.nvim_set_keymap("n", "mjj", "<Plug>BookmarkMoveDown", { noremap = false })
-#       vim.api.nvim_set_keymap("n", "mkk", "<Plug>BookmarkMoveUp", { noremap = false })
-#       vim.api.nvim_set_keymap("n", "mg", "<Plug>BookmarkMoveToLine", { noremap = false })
+#       vim.keymap.set("n", "mm", "<Plug>BookmarkToggle", { remap = true })
+#       vim.keymap.set("n", "mi", "<Plug>BookmarkAnnotate", { remap = true })
+#       vim.keymap.set("n", "mn", "<Plug>BookmarkNext", { remap = true })
+#       vim.keymap.set("n", "mp", "<Plug>BookmarkPrev", { remap = true })
+#       vim.keymap.set("n", "mc", "<Plug>BookmarkClear", { remap = true })
+#       vim.keymap.set("n", "mC", "<Plug>BookmarkClearAll", { remap = true })
+#       vim.keymap.set("n", "mj", "<Plug>BookmarkMoveDown", { remap = true })
+#       vim.keymap.set("n", "mk", "<Plug>BookmarkMoveUp", { remap = true })
+#       vim.keymap.set("n", "mg", "<Plug>BookmarkMoveToLine", { remap = true })
 #     end,
 #   },
 #   {
@@ -1138,13 +1193,13 @@ main "$@"
 #     keys = { "ml", "mL" },
 #     config = function()
 #       require("telescope").load_extension("vim_bookmarks")
-#       vim.api.nvim_set_keymap("n", "ml", "<CMD>Telescope vim_bookmarks current_file<CR>", { noremap = true })
-#       vim.api.nvim_set_keymap("n", "mL", "<CMD>Telescope vim_bookmarks all<CR>", { noremap = true })
+#       vim.keymap.set("n", "ml", "<cmd>Telescope vim_bookmarks current_file<CR>")
+#       vim.keymap.set("n", "mL", "<cmd>Telescope vim_bookmarks all<CR>")
 #     end,
 #   },
 #   {
 #     "bronson/vim-visual-star-search",
-#     keys = { { "v", "*" }, { "v", "#" }, { "v", "g*" }, { "v", "g#" } },
+#     keys = { { "*", mode = "v" }, { "#", mode = "v" } },
 #   },
 #   {
 #     "romainl/vim-cool",
@@ -1152,137 +1207,126 @@ main "$@"
 #   },
 #   {
 #     "mg979/vim-visual-multi",
-#     keys = { "<C-n>", { "v", "<C-n>" }, "<C-S-L>", { "v", "<C-S-L>" }, "ma", { "v", "ma" } },
-#     setup = function()
+#     keys = { "<C-N>", { "<C-N>", mode = "v" }, "<C-S-L>", { "<C-S-L>", mode = "v" }, "ma", { "ma", mode = "v" } },
+#     init = function()
+#       vim.g.VM_set_statusline = 0
 #       vim.cmd([[
 #         " VM will override <BS>
 #         function! VM_Start()
-#           iunmap <buffer><Bs>
+#           iunmap <buffer><BS>
 #         endf
 #         function! VM_Exit()
 #           exe 'inoremap <buffer><expr><BS> v:lua.MPairs.autopairs_bs('.bufnr().')'
 #         endf
-#       ]])
+#        ]])
 #     end,
 #     config = function()
-#       vim.api.nvim_set_keymap("n", "<C-S-L>", "<Plug>(VM-Select-All)", {})
-#       vim.api.nvim_set_keymap("v", "<C-S-L>", "<Plug>(VM-Visual-All)", {})
-#       vim.api.nvim_set_keymap("n", "ma", "<Plug>(VM-Add-Cursor-At-Pos)", {})
-#       vim.api.nvim_set_keymap("v", "ma", "<Plug>(VM-Visual-Add)", {})
+#       vim.keymap.set("n", "<C-S-L>", "<Plug>(VM-Select-All)", { remap = true })
+#       vim.keymap.set("v", "<C-S-L>", "<Plug>(VM-Visual-All)", { remap = true })
+#       vim.keymap.set("n", "ma", "<Plug>(VM-Add-Cursor-At-Pos)", { remap = true })
+#       vim.keymap.set("v", "ma", "<Plug>(VM-Visual-Add)", { remap = true })
 #     end,
 #   },
 #   {
 #     "terryma/vim-expand-region",
-#     keys = { { "v", "v" }, { "v", "V" } },
+#     keys = { { "v", mode = "v" }, { "V", mode = "v" } },
 #     config = function()
-#       vim.api.nvim_set_keymap("v", "v", "<Plug>(expand_region_expand)", {})
-#       vim.api.nvim_set_keymap("v", "V", "<Plug>(expand_region_shrink)", {})
+#       vim.keymap.set("v", "v", "<Plug>(expand_region_expand)", { remap = true })
+#       vim.keymap.set("v", "V", "<Plug>(expand_region_shrink)", { remap = true })
 #     end,
+#   },
+#   {
+#     "tpope/vim-repeat",
 #   },
 #   {
 #     "kana/vim-textobj-user",
 #   },
 #   {
 #     "kana/vim-textobj-entire",
+#     keys = { "c", "d", "y" },
 #   },
 #   {
 #     "kana/vim-textobj-indent",
+#     keys = { "c", "d", "y" },
 #   },
 #   {
 #     "kana/vim-textobj-line",
+#     keys = { "c", "d", "y" },
 #   },
 #   {
 #     "sgur/vim-textobj-parameter",
-#   },
-#   {
-#     "tpope/vim-repeat",
+#     keys = { "c", "d", "y" },
 #   },
 #   {
 #     "tpope/vim-surround",
 #     keys = { "c", "d", "y" },
 #   },
 #   {
-#     "j-hui/fidget.nvim",
-#     event = "BufRead",
-#     config = function()
-#       require("fidget").setup()
-#     end,
-#   },
-#   {
 #     "ray-x/lsp_signature.nvim",
 #     event = "BufRead",
 #     config = function()
-#       local attach = require("lvim.lsp").common_on_attach
-#       require("lvim.lsp").common_on_attach = function(client, bufnr)
-#         require("lsp_signature").on_attach({
-#           doc_lines = 10,
-#           floating_window = true,
-#           floating_window_above_cur_line = false,
-#           hint_enable = false,
-#           hint_prefix = " ",
-#           extra_trigger_chars = { "(", "," },
-#         })
-#         attach(client, bufnr)
-#       end
+#       require('lsp_signature').setup({
+#         hint_prefix = " ",
+#       })
 #     end,
 #   },
 #   {
-#     "tamago324/cmp-zsh",
-#     config = function()
-#       vim.list_extend(lvim.builtin.cmp.sources, { { name = "zsh" } })
-#       require("cmp_zsh").setup({
-#         filetype = { "sh", "zsh" },
-#       })
+#     "benfowler/telescope-luasnip.nvim",
+#     lazy = true,
+#     init = function()
+#       vim.keymap.set({ "n", "i" }, "<M-i>", "<cmd>lua require'telescope'.extensions.luasnip.luasnip{}<CR>")
 #     end,
-#     requires = { "Shougo/deol.nvim" },
+#     config = function()
+#       require('telescope').load_extension('luasnip')
+#     end
 #   },
 #   {
 #     "simrat39/symbols-outline.nvim",
-#     cmd = "SymbolsOutline*",
-#     config = function()
-#       require("symbols-outline").setup()
+#     cmd = "SymbolsOutline",
+#     init = function()
+#       lvim.builtin.which_key.mappings["S"] = { "<cmd>SymbolsOutline<CR>", "SymbolsOutline" }
 #     end,
+#     config = function()
+#       require("symbols-outline").setup({
+#         width = 20,
+#       })
+#     end
+#   },
+#   {
+#     "folke/trouble.nvim",
+#     cmd = { "TroubleToggle" },
+#     init = function()
+#       lvim.builtin.which_key.mappings["t"] = {
+#         name = "Trouble",
+#         d = { "<cmd>TroubleToggle workspace_diagnostics<CR>", "Diagnostics" },
+#         t = { "<cmd>TodoTrouble<CR>", "TODOs" }
+#       }
+#       lvim.lsp.buffer_mappings.normal_mode['gd'] = { function() vim.cmd("Trouble lsp_definitions") end,
+#         "Goto definitions" }
+#       lvim.lsp.buffer_mappings.normal_mode['gr'] = { function() vim.cmd("Trouble lsp_references") end, "Goto references" }
+#       lvim.lsp.buffer_mappings.normal_mode['gI'] = { function() vim.cmd("Trouble lsp_implementations") end,
+#         "Goto implementations" }
+#       vim.keymap.set("n", "<M-LeftMouse>", "<LeftMouse><cmd>Trouble lsp_definitions<CR>")
+#     end,
+#     config = true,
 #   },
 #   {
 #     "folke/todo-comments.nvim",
+#     event = "BufRead",
 #     config = function()
 #       require("todo-comments").setup()
 #     end,
 #   },
 #   {
 #     "mbbill/undotree",
-#     cmd = { "Undotree*" },
-#   },
-#   {
-#     "folke/trouble.nvim",
-#     cmd = { "Trouble*" },
-#     config = function()
-#       require("trouble").setup()
-#       lvim.builtin.which_key.mappings["t"] = {
-#         name = "Trouble",
-#         t = { "<cmd>TroubleToggle<cr>", "trouble" },
-#         w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "workspace" },
-#         d = { "<cmd>TroubleToggle document_diagnostics<cr>", "document" },
-#         q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
-#         l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
-#         r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
-#       }
-#     end,
+#     cmd = { "UndotreeToggle" },
+#     init = function()
+#       lvim.builtin.which_key.mappings["u"] = { "<cmd>UndotreeToggle<CR>", "UndoTree" }
+#     end
 #   },
 #   {
 #     "stevearc/dressing.nvim",
-#     config = function()
-#       require("dressing").setup()
-#     end,
-#   },
-#   {
-#     "p00f/nvim-ts-rainbow",
-#   },
-#   {
-#     "norcalli/nvim-colorizer.lua",
-#     config = function()
-#       require("colorizer").setup()
-#     end,
+#     config = true,
 #   },
 #   { 'rcarriga/nvim-notify',
 #     config = function()
@@ -1292,83 +1336,85 @@ main "$@"
 #       })
 #       vim.notify = notify
 #     end
+#   },
+#   {
+#     'voldikss/vim-translator',
+#     keys = { { "<M-t>", mode = { "n", "v" } } },
+#     init = function()
+#       vim.g.translator_default_engines = { 'bing', 'haici' }
+#     end,
+#     config = function()
+#       vim.keymap.set("n", "<M-t>", "<Plug>TranslateW")
+#       vim.keymap.set("v", "<M-t>", "<Plug>TranslateWV")
+#     end
 #   }
 # }
 # 
 # --------------------------------------------------------------------------------
 # -- key bindings
 # --------------------------------------------------------------------------------
-# map("c", "<C-a>", "<C-b>")
-# map("", ";", "<CMD>HopChar2<CR>")
-# map("", ",", "<CMD>HopLineStartMW<CR>")
+# vim.keymap.set("c", "<C-A>", "<C-B>")
 # 
 # -- HACK: terminal map ctrl+i to alt+shift+i
-# map("n", "<M-I>", "<C-i>")
-# map("n", "]g", "<CMD>Gitsigns next_hunk<CR>")
-# map("n", "[g", "<CMD>Gitsigns prev_hunk<CR>")
+# vim.keymap.set("n", "<M-I>", "<C-I>")
 # 
-# map("n", "n", "'Nn'[v:searchforward]", { expr = true })
-# map("n", "N", "'nN'[v:searchforward]", { expr = true })
-# map("n", "<C-l>", "<CMD>nohl<CR><C-l>")
-# map("c", "<M-W>", "\\<\\><Left><Left>")
-# map("c", "<M-r>", "\\v")
-# map("c", "<M-c>", "\\C")
-# map("n", "<C-S-F>", "<CMD>Telescope live_grep<CR>")
+# vim.keymap.set("n", "n", "'Nn'[v:searchforward]", { expr = true })
+# vim.keymap.set("n", "N", "'nN'[v:searchforward]", { expr = true })
+# vim.keymap.set("n", "<C-L>", "<cmd>nohl<CR><C-L>")
+# vim.keymap.set("c", "<M-w>", "\\<\\><Left><Left>")
+# vim.keymap.set("c", "<M-r>", "\\v")
+# vim.keymap.set("c", "<M-c>", "\\C")
+# vim.keymap.set("n", "<C-S-F>", "<cmd>Telescope live_grep<CR>")
 # 
-# map("n", "<", "<<")
-# map("n", ">", ">>")
-# map("i", "<C-S-J>", "<CMD>m .+1<CR><Cmd>normal ==<CR>")
-# map("n", "<C-S-J>", "<CMD>m .+1<CR><Cmd>normal ==<CR>")
-# map("i", "<C-S-K>", "<CMD>m .-2<CR><Cmd>normal ==<CR>")
-# map("n", "<C-S-K>", "<CMD>m .-2<CR><Cmd>normal ==<CR>")
-# map("i", "<C-j>", "<End><CR>")
-# map("n", "<C-j>", "<CMD>put =repeat(nr2char(10), v:count1)<CR>")
-# map("i", "<C-k>", "repeat('<Del>', strchars(getline('.')) - getcurpos()[2] + 1)", { expr = true })
-# map("c", "<C-k>", "repeat('<Del>', strchars(getcmdline()) - getcmdpos() + 1)", { expr = true })
-# map("i", "<C-l>", "<CMD>call C_Right()<CR><Right>")
-# map("c", "<C-l>", "<C-Right>")
-# map("i", "<C-z>", "<CMD>undo<CR>")
-# map("i", "<C-S-z>", "<CMD>redo<CR>")
+# vim.keymap.set("i", "jk", "<Esc>")
+# vim.keymap.set("n", "<", "<<")
+# vim.keymap.set("n", ">", ">>")
+# vim.keymap.set("i", "<C-S-J>", "<cmd>m .+1<CR><Cmd>normal ==<CR>")
+# vim.keymap.set("n", "<C-S-J>", "<cmd>m .+1<CR><Cmd>normal ==<CR>")
+# vim.keymap.set("i", "<C-S-K>", "<cmd>m .-2<CR><Cmd>normal ==<CR>")
+# vim.keymap.set("n", "<C-S-K>", "<cmd>m .-2<CR><Cmd>normal ==<CR>")
+# vim.keymap.set("i", "<C-J>", "<End><CR>")
+# vim.keymap.set("n", "<C-J>", "<cmd>put =repeat(nr2char(10), v:count1)<CR>")
+# vim.keymap.set("i", "<C-K>", "repeat('<Del>', strchars(getline('.')) - getcurpos()[2] + 1)", { expr = true })
+# vim.keymap.set("c", "<C-K>", "repeat('<Del>', strchars(getcmdline()) - getcmdpos() + 1)", { expr = true })
+# vim.keymap.set("i", "<C-L>", "<Esc>ea")
+# vim.keymap.set("c", "<C-L>", "<C-Right>")
+# vim.keymap.set("i", "<C-Z>", "<cmd>undo<CR>")
+# vim.keymap.set("i", "<C-S-z>", "<cmd>redo<CR>")
 # 
-# map("n", "S", "i<CR><Esc>")
+# vim.keymap.set("n", "c", '"_c')
+# vim.keymap.set("n", "s", '"_s')
+# vim.keymap.set("n", "S", "i<CR><Esc>")
 # 
-# map("i", "<C-v>", "<C-r>+")
-# map("n", "Y", "y$")
-# map("v", "=p", '"0p')
-# map("n", "=p", '"0p')
-# map("n", "=P", '"0P')
-# map("n", "=o", "<CMD>put =@0<CR>")
-# map("n", "=O", "<CMD>put! =@0<CR>")
-# map("v", "<Space>y", '"+y')
-# map("v", "<Space>p", '"+p')
-# lvim.builtin.which_key.mappings["<Space>"] = { "<CMD>let @+ = @0<CR>", "Copy Register 0 to Clipboard" }
-# lvim.builtin.which_key.mappings["y"] = { '"+y', "Yank to Clipboard" }
-# lvim.builtin.which_key.mappings["Y"] = { '"+y$', "Yank All Right to Clipboard" }
-# lvim.builtin.which_key.mappings["p"] = { '"+p', "Paste Clipboard After Cursor" }
-# lvim.builtin.which_key.mappings["P"] = { '"+P', "Paste Clipboard Before Cursor" }
-# lvim.builtin.which_key.mappings["o"] = { "<CMD>put =@+<CR>", "Paste Clipboard to Next Line" }
-# lvim.builtin.which_key.mappings["O"] = { "<CMD>put! =@+<CR>", "Paste Clipboard to Previous Line" }
-# lvim.builtin.which_key.mappings["by"] = { "<CMD>%y +<CR>", "Yank Whole Buffer to Clipboard" }
-# lvim.builtin.which_key.mappings["bp"] = { '<CMD>%d<CR>"+P', "Patse Clipboard to Whole Buffer" }
+# vim.keymap.set("i", "<C-V>", "<C-R>+")
+# vim.keymap.set("n", "Y", '"0y$')
+# vim.keymap.set("n", "zp", '"0p')
+# vim.keymap.set("v", "zp", '"0p')
+# vim.keymap.set("n", "zP", '"0P')
+# vim.keymap.set("n", "zo", "<cmd>put =@0<CR>")
+# vim.keymap.set("n", "zO", "<cmd>put! =@0<CR>")
+# lvim.builtin.which_key.mappings["<Space>"] = { '<cmd>let @+ = @0<CR>', "Copy last yank to clipboard" }
+# lvim.builtin.which_key.mappings["y"] = { '"+y', "Yank" }
+# lvim.builtin.which_key.vmappings["y"] = { '"+y', "Yank" }
+# lvim.builtin.which_key.mappings["Y"] = { '"+y$', "Yank EOL" }
+# lvim.builtin.which_key.mappings["p"] = { '"+p', "Paste (after)" }
+# lvim.builtin.which_key.vmappings["p"] = { '"+p', "Paste" }
+# lvim.builtin.which_key.mappings["P"] = { '"+P', "Paste (before)" }
+# lvim.builtin.which_key.mappings["o"] = { '<cmd>put =@+<CR>', "Paste (next line)" }
+# lvim.builtin.which_key.mappings["O"] = { '<cmd>put =@+<CR>', "Paste (previous line)" }
+# lvim.builtin.which_key.mappings["by"] = { "<cmd>%y +<CR>", "Yank whole buffer to clipboard" }
+# lvim.builtin.which_key.mappings["bp"] = { '<cmd>%d<CR>"+P', "Patse clipboard to whole buffer" }
 # 
 # lvim.builtin.cmp.confirm_opts.select = true
 # local cmp = require("cmp")
 # local luasnip = require("luasnip")
 # local lccm = require("lvim.core.cmp").methods
-# lvim.builtin.cmp.mapping["<C-j>"] = nil
-# lvim.builtin.cmp.mapping["<C-k>"] = nil
-# lvim.builtin.cmp.mapping["<C-f>"] = nil
-# lvim.builtin.cmp.mapping["<C-d>"] = nil
-# lvim.builtin.cmp.mapping["<C-d>"] = nil
-# lvim.builtin.cmp.mapping["<C-e>"] = cmp.mapping.scroll_docs(2)
-# lvim.builtin.cmp.mapping["<C-y>"] = cmp.mapping.scroll_docs(-2)
-# lvim.builtin.cmp.mapping["<CR>"] = cmp.mapping(function(fallback)
-#   if cmp.visible() then
-#     cmp.confirm(lvim.builtin.cmp.confirm_opts)
-#   else
-#     fallback()
-#   end
-# end)
+# lvim.builtin.cmp.mapping["<C-J>"] = nil
+# lvim.builtin.cmp.mapping["<C-K>"] = nil
+# lvim.builtin.cmp.mapping["<C-D>"] = nil
+# lvim.builtin.cmp.mapping["<C-F>"] = nil
+# lvim.builtin.cmp.mapping["<C-E>"] = cmp.mapping.scroll_docs(4)
+# lvim.builtin.cmp.mapping["<C-Y>"] = cmp.mapping.scroll_docs( -4)
 # lvim.builtin.cmp.mapping["<M-I>"] = cmp.mapping(function()
 #   if cmp.visible() then
 #     cmp.abort()
@@ -1378,84 +1424,96 @@ main "$@"
 # end)
 # lvim.builtin.cmp.mapping["<Tab>"] = cmp.mapping(function(fallback)
 #   if cmp.visible() then
-#     if luasnip.expandable() and cmp.get_active_entry() == nil then
-#       luasnip.expand()
-#     else
-#       cmp.confirm(lvim.builtin.cmp.confirm_opts)
+#     local confirm_opts = vim.deepcopy(lvim.builtin.cmp.confirm_opts) -- avoid mutating the original opts below
+#     local is_insert_mode = function()
+#       return vim.api.nvim_get_mode().mode:sub(1, 1) == "i"
 #     end
-#   elseif luasnip.expandable() then
-#     luasnip.expand()
-#   elseif lccm.jumpable() then
+#     if is_insert_mode() then -- prevent overwriting brackets
+#       confirm_opts.behavior = require("cmp.types.cmp").ConfirmBehavior.Insert
+#     end
+#     if cmp.confirm(confirm_opts) then
+#       return -- success, exit early
+#     end
+#   elseif luasnip.expand_or_locally_jumpable() then
+#     luasnip.expand_or_jump()
+#   elseif lccm.jumpable(1) then
 #     luasnip.jump(1)
-#   elseif lccm.check_backspace() then
+#   elseif lccm.has_words_before() then
+#     -- cmp.complete()
 #     fallback()
-#   elseif lccm.is_emmet_active() then
-#     return vim.fn["cmp#complete"]()
 #   else
 #     fallback()
 #   end
 # end, { "i", "s" })
+# vim.keymap.set({ "n", "i" }, "<M-F>", '<cmd>lua require("lvim.lsp.utils").format()<CR>')
+# vim.keymap.set("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>")
+# vim.keymap.set("n", "<M-.>", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+# vim.keymap.set("n", "<C-.>", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+# vim.keymap.set("n", "<C-_>", "gcc", { remap = true })
+# vim.keymap.set("v", "<C-_>", "<Plug>(comment_toggle_linewise_visual)", { remap = true })
+# vim.keymap.set("i", "<C-_>", "<cmd>normal gcc<CR>")
+# vim.keymap.set("n", "<C-S-O>", "<cmd>Telescope lsp_document_symbols<CR>")
+# vim.keymap.set("n", "<C-T>", "<cmd>Telescope lsp_workspace_symbols<CR>")
+# vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
+# vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 # 
-# map("n", "<M-F>", '<CMD>lua require("lvim.lsp.utils").format({timeout_ms= 2000})<CR>')
-# map("i", "<M-F>", '<CMD>lua require("lvim.lsp.utils").format({timeout_ms= 2000})<CR>')
-# map("n", "<F2>", "<CMD>lua vim.lsp.buf.rename()<CR>")
-# map("n", "<M-.>", "<CMD>lua vim.lsp.buf.code_action()<CR>")
-# map("n", "<C-.>", "<CMD>lua vim.lsp.buf.code_action()<CR>")
-# map("n", "<C-_>", "gcc", { noremap = false })
-# map("v", "<C-_>", "<Plug>(comment_toggle_linewise_visual)", { noremap = false })
-# map("i", "<C-_>", "<CMD>normal gcc<CR>")
-# map("n", "<C-S-O>", "<CMD>Telescope lsp_document_symbols<CR>")
-# map("n", "<C-t>", "<CMD>Telescope lsp_workspace_symbols<CR>")
-# map("n", "<M-LeftMouse>", "<LeftMouse><CMD>lua vim.lsp.buf.definition()<CR>")
-# map("n", "[e", "<CMD>lua vim.diagnostic.goto_prev()<CR>")
-# map("n", "]e", "<CMD>lua vim.diagnostic.goto_next()<CR>")
+# lvim.keys.normal_mode["<C-K>"] = false
+# lvim.builtin.which_key.mappings["/"] = nil
+# lvim.builtin.which_key.mappings["c"] = nil
+# lvim.builtin.which_key.mappings["f"] = nil
+# lvim.builtin.which_key.mappings["h"] = nil
+# lvim.builtin.which_key.mappings["w"] = nil
+# lvim.builtin.which_key.mappings["b<Tab>"] = { ":try | b# | catch | endtry<CR>", "Switch" }
+# lvim.builtin.which_key.mappings["bs"] = { "<cmd>Telescope buffers<CR>", "Search" }
+# lvim.builtin.which_key.mappings["bP"] = { "<cmd>BufferLineTogglePin<CR>", "Pin" }
+# lvim.builtin.which_key.mappings["bw"] = { "<cmd>noautocmd w<CR>", "Save without format" }
+# lvim.builtin.which_key.mappings["bW"] = nil
+# lvim.builtin.which_key.mappings["bd"] = { "<cmd>BufferKill<CR>", "Delete" }
+# vim.keymap.set("n", "H", "<cmd>BufferLineCyclePrev<CR>")
+# vim.keymap.set("n", "L", "<cmd>BufferLineCycleNext<CR>")
+# vim.keymap.set("n", "<C-K><C-O>", "<cmd>Telescope projects<CR>")
+# vim.keymap.set("n", "<C-K>o", ":e <C-R>=fnamemodify(expand('%:p'), ':p:h')<CR>/")
+# vim.keymap.set("n", "<C-K>n", "<cmd>enew<CR>")
+# vim.keymap.set("n", "<C-K>r", "<cmd>Telescope oldfiles<CR>")
+# vim.keymap.set("n", "<C-P>", "<cmd>Telescope find_files hidden=true<CR>")
+# vim.keymap.set("n", "<C-S>", "<cmd>w<CR>")
+# vim.keymap.set("n", "<C-S-S>", ":saveas <C-R>=fnamemodify('.',':p')<CR>")
+# vim.keymap.set("n", "<C-K>s", "<cmd>wa<CR>")
+# vim.keymap.set("n", "<C-K>u", "<cmd>set noconfirm<CR>:try | %bd | catch | endtry<CR><cmd>set confirm<CR>",
+#   { silent = true })
+# vim.keymap.set("n", "<C-K>w", "<cmd>%bd<CR>")
+# vim.keymap.set("n", "<Tab>", "<cmd>wincmd w<CR>")
+# vim.keymap.set("n", "<S-Tab>", "<cmd>wincmd W<CR>")
+# vim.keymap.set("n", "<C-W>z", function()
+#   local cur_win = vim.api.nvim_get_current_win()
+#   vim.api.nvim_set_var("non_float_total", 0)
+#   vim.cmd("windo if &buftype != 'nofile' | let g:non_float_total += 1 | endif")
+#   vim.api.nvim_set_current_win(cur_win or 0)
+#   if vim.api.nvim_get_var("non_float_total") == 1 then
+#     if vim.fn.tabpagenr("$") == 1 then
+#       return
+#     end
+#     vim.cmd("tabclose")
+#   else
+#     local last_cursor = vim.api.nvim_win_get_cursor(0)
+#     vim.cmd("tabedit %:p")
+#     vim.api.nvim_win_set_cursor(0, last_cursor)
+#   end
+# end)
+# lvim.builtin.which_key.mappings["q"] = { "<cmd>call SmartClose()<CR>", "Quit" }
 # 
-# lvim.builtin.which_key.mappings["<Tab>"] = { ":try | b# | catch | endtry<CR>", "Switch Buffer" }
-# lvim.keys.normal_mode["<C-k>"] = false
-# map("n", "L", "<CMD>BufferLineCycleNext<CR>")
-# map("n", "H", "<CMD>BufferLineCyclePrev<CR>")
-# map("n", "<C-k><C-o>", "<CMD>Telescope projects<CR>")
-# map("n", "<C-k>o", ":e <C-r>=fnamemodify(expand('%:p'), ':p:h')<CR>/")
-# map("n", "<C-k>n", "<CMD>enew<CR>")
-# map("n", "<C-k>r", "<CMD>Telescope oldfiles<CR>")
-# map("n", "<C-p>", "<CMD>Telescope find_files<CR>")
-# map("n", "<C-s>", "<CMD>w<CR>")
-# map("n", "<C-S-S>", ":saveas <C-r>=fnamemodify('.',':p')<CR>")
-# map("n", "<C-k>s", "<CMD>wa<CR>")
-# map("n", "<C-k>x", "<CMD>BufferKill<CR>")
-# map("n", "<C-k>u", ":try | %bd | catch | endtry<CR>")
-# map("n", "<C-k>w", "<CMD>%bd<CR>")
-# map("n", "<Tab>", "<CMD>wincmd w<CR>")
-# map("n", "<S-Tab>", "<CMD>wincmd W<CR>")
-# map("n", "<C-w>z", "<CMD>lua require('config').zoom_current_window()<CR>")
-# lvim.builtin.which_key.mappings["q"] = { "<CMD>call SmartClose()<CR>", "Quit" }
+# vim.keymap.set("n", "<C-S-E>", "<cmd>NvimTreeFindFile<CR>")
+# vim.keymap.set("n", "<C-S-M>", "<cmd>Trouble workspace_diagnostics<CR>")
+# vim.keymap.set("n", "<C-S-U>", "<cmd>lua require('telescope').extensions.notify.notify()<CR>")
 # 
-# map("n", "<C-S-E>", "<CMD>NvimTreeFindFile<CR>")
-# map("n", "<C-S-M>", "<CMD>Trouble workspace_diagnostics<CR>")
-# map("n", "<C-S-U>", "<CMD>lua require('telescope').extensions.notify.notify()<CR>")
-# lvim.builtin.which_key.mappings["a"] = {
-#   name = "Application",
-#   o = { "<CMD>SymbolsOutline<CR>", "Outline" },
-#   t = { "<CMD>TodoTrouble<CR>", "TODO" },
-#   u = { "<CMD>UndotreeToggle<CR>", "UndoTree" },
-# }
+# vim.keymap.set("n", "<M-e>", "<cmd>call Open_file_in_explorer()<CR>")
+# vim.keymap.set("n", "<M-z>", "<cmd>let &wrap=!&wrap<CR>")
+# vim.keymap.set("n", "<C-S-P>", "<cmd>Telescope commands<CR>")
+# vim.keymap.set("n", "<C-K><C-S>", "<cmd>Telescope keymaps<CR>")
 # 
-# map("n", "<M-e>", "<CMD>call Open_file_in_explorer()<CR>")
-# map("n", "<M-z>", "<CMD>let &wrap=!&wrap<CR>")
-# map("n", "<C-S-P>", "<CMD>Telescope commands<CR>")
-# map("n", "<C-k><C-s>", "<CMD>Telescope keymaps<CR>")
+# lvim.builtin.which_key.mappings["sT"] = { "<cmd>TodoTelescope<CR>", "TODOs" }
 # 
 # vim.cmd([[
-# function! C_Right() abort
-#   let left_text = getline('.')[getcurpos()[2]-1:]
-#   if left_text =~ '^\W*\s+$'
-#     normal $ge
-#   elseif left_text =~ '^\W*$'
-#     normal $
-#   else
-#     normal e
-#   endif
-# endf
 # function! SmartClose() abort
 #   if &bt ==# 'nofile' || &bt ==# 'quickfix'
 #     quit
@@ -1505,22 +1563,4 @@ main "$@"
 # endf
 # ]])
 # 
-# function M.zoom_current_window()
-#   local cur_win = vim.api.nvim_get_current_win()
-#   vim.api.nvim_set_var("non_float_total", 0)
-#   vim.cmd("windo if &buftype != 'nofile' | let g:non_float_total += 1 | endif")
-#   vim.api.nvim_set_current_win(cur_win or 0)
-#   if vim.api.nvim_get_var("non_float_total") == 1 then
-#     if vim.fn.tabpagenr("$") == 1 then
-#       return
-#     end
-#     vim.cmd("tabclose")
-#   else
-#     local last_cursor = vim.api.nvim_win_get_cursor(0)
-#     vim.cmd("tabedit %:p")
-#     vim.api.nvim_win_set_cursor(0, last_cursor)
-#   end
-# end
-# 
-# return M
 # __CONFIG_LUA_END
