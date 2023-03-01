@@ -7,7 +7,7 @@
 ![open_issues](https://img.shields.io/github/issues/mrbeardad/MyIDE?style=for-the-badge)
 ![lisence](https://img.shields.io/github/license/mrbeardad/MyIDE?style=for-the-badge)
 ![stars](https://img.shields.io/github/stars/mrbeardad/MyIDE?style=for-the-badge)
-![tag](https://img.shields.io/gitlab/v/tag/mrbeardad/MyIDE?style=for-the-badge)
+![tag](https://img.shields.io/github/v/tag/mrbeardad/MyIDE?style=for-the-badge)
 ![last_commit](https://img.shields.io/github/last-commit/mrbeardad/MyIDE?style=for-the-badge)
 
 :page_facing_up:[中文文档](README-zh.md)
