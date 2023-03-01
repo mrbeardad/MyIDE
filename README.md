@@ -4,11 +4,11 @@
 
 ✨ A guideline for configuring your IDE (vscode and vim/neovim) and your development environment on Windows (WindowsTerminal, PowerShell) and Linux (wsl, tmux, zsh).
 
-![open_issues](https://img.shields.io/github/issues/mrbeardad/MyIDE?style=for-the-badge)
-![lisence](https://img.shields.io/github/license/mrbeardad/MyIDE?style=for-the-badge)
-![stars](https://img.shields.io/github/stars/mrbeardad/MyIDE?style=for-the-badge)
+![lisence](https://img.shields.io/github/license/mrbeardad/MyIDE?style=for-the-badge&color=brightgreen)
+![stars](https://img.shields.io/github/stars/mrbeardad/MyIDE?style=for-the-badge&color=yellow)
+![open_issues](https://img.shields.io/github/issues/mrbeardad/MyIDE?style=for-the-badge&color=orange)
 ![tag](https://img.shields.io/github/v/tag/mrbeardad/MyIDE?style=for-the-badge)
-![last_commit](https://img.shields.io/github/last-commit/mrbeardad/MyIDE?style=for-the-badge)
+![last_commit](https://img.shields.io/github/last-commit/mrbeardad/MyIDE?style=for-the-badge&color=blueviolet)
 
 :page_facing_up:[中文文档](README-zh.md)
 

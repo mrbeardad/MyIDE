@@ -4,11 +4,11 @@
 
 ✨ 一份帮助你搭建并配置你的开发环境的指南，或者叫笔记，包括 WindowsTerminal, PowerShell, wsl, tmux, zsh, neovim and vscode
 
-![open_issues](https://img.shields.io/github/issues/mrbeardad/MyIDE?style=for-the-badge)
-![lisence](https://img.shields.io/github/license/mrbeardad/MyIDE?style=for-the-badge)
-![stars](https://img.shields.io/github/stars/mrbeardad/MyIDE?style=for-the-badge)
-![tag](https://img.shields.io/gitlab/v/tag/mrbeardad/MyIDE?style=for-the-badge)
-![last_commit](https://img.shields.io/github/last-commit/mrbeardad/MyIDE?style=for-the-badge)
+![lisence](https://img.shields.io/github/license/mrbeardad/MyIDE?style=for-the-badge&color=brightgreen)
+![stars](https://img.shields.io/github/stars/mrbeardad/MyIDE?style=for-the-badge&color=yellow)
+![open_issues](https://img.shields.io/github/issues/mrbeardad/MyIDE?style=for-the-badge&color=orange)
+![tag](https://img.shields.io/github/v/tag/mrbeardad/MyIDE?style=for-the-badge)
+![last_commit](https://img.shields.io/github/last-commit/mrbeardad/MyIDE?style=for-the-badge&color=blueviolet)
 
 </div>
 
