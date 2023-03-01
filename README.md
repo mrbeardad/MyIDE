@@ -35,19 +35,18 @@ ScreenShots
 
 > [Windows Keybindings](windows.md)
 
-1. Install apps by [Chocolatey](https://chocolatey.org/install)
+1. Install apps by Microsoft Store
+   1. Windows Terminal
+   2. PowerShell
+   3. PowerToys
+2. Install apps by [Scoop](https://scoop.sh/#/)
 
    ```cmd
-   :: in admin
-   choco install -y 7zip googlechrome git-fork llvm rust go java python3 nodejs flutter
+   scoop install -y 7zip googlechrome
    ```
 
    > Tips: This is my choice, choose your preferred apps
 
-2. Install apps by Microsoft Store
-   1. Windows Terminal
-   2. PowerShell
-   3. PowerToys
 3. Install [NerdCodeProPlus font](./fonts/)
 4. Configure `%USERPROFILE%\.gitconfig`
 
@@ -77,8 +76,7 @@ ScreenShots
 
    ```pwsh
    # install dependencies before copy config file
-   choco install fzf
-   cargo install lsd
+   scoop install lsd fzf
    Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
    Install-Module PSReadLine
    Install-Module PSFzf
@@ -114,8 +112,8 @@ ScreenShots
 
 1. Install WSL2
 
-   ```cmd
-   :: in admin
+   ```pwsh
+   # in admin
    wsl --install
    wsl --update
    ```
@@ -135,6 +133,7 @@ ScreenShots
 4. Execute the shell script in wsl to configure all the things
 
    ```sh
+   # in wsl
    curl -Lo init.sh https://github.com/mrbeardad/MyIDE/raw/master/init.sh
    # execute it directly, don't `bash ./init.sh`
    ./init.sh
@@ -160,14 +159,12 @@ ScreenShots
 1. Install VSCode and Neovim
 
    ```cmd
-   choco install neovim --pre
-   choco install vscode make
-   cargo install ripgrep
+   scoop install vscode neovim-nightly make ripgrep git fork llvm rust go python nodejs flutter
    ```
 
 2. Install [Visual Studio](https://visualstudio.microsoft.com/vs/)
 
-   > Tips: VS is optional, for myself, I just want to get the git, cmake and llvm-clang within it, don't forget to add CMake/bin and Llvm/**x64**/bin to system %PATH%
+   > Tips: VS is optional, for myself, I just want to get the git, cmake and llvm-clang within it (check additional options) instead of installing them by scoop , don't forget to add CMake/bin and Llvm/**x64**/bin to system %PATH% manually
 
 3. Configure Neovim
 

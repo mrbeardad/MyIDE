@@ -33,19 +33,18 @@ ScreenShots
 
 > [Windows 操作手册](windows.md)
 
-1. 使用[Chocolatey](https://chocolatey.org/install)安装：
-
-   ```pwsh
-   # in admin
-   choco install -y 7zip googlechrome git-fork llvm rust go java python3 nodejs flutter
-   ```
-
-   > Tips: 国内 choco 安装软件会很慢，建议用浏览器去官网下载安装包
-
-2. 使用微软商店安装
+1. 使用微软商店安装
    - Windows Terminal
    - PowerShell
    - PowerToys
+2. 使用[Scoop](https://scoop.sh/#/)安装：
+
+   ```pwsh
+   scoop install -y 7zip googlechrome
+   ```
+
+   > Tips: 国内 scoop 安装软件会很慢，建议用浏览器去官网下载安装包
+
 3. 使用浏览器安装
    - [Google Chrome](https://www.google.cn/chrome/)
    - [Sogou IME](https://pinyin.sogou.com/)
@@ -85,8 +84,7 @@ ScreenShots
 
    ```pwsh
    # install dependencies before copy config file
-   choco install fzf
-   cargo install lsd
+   scoop install lsd fzf
    Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
    Install-Module PSReadLine
    Install-Module PSFzf
@@ -122,8 +120,9 @@ ScreenShots
 1. 安装 WSL2
 
    ```pwsh
-   wsl.exe --install
-   wsl.exe --update
+   # in admin
+   wsl --install
+   wsl --update
    ```
 
 2. 安装 [ArchWSL](https://wsldl-pg.github.io/ArchW-docs/How-to-Setup/)
@@ -143,7 +142,8 @@ ScreenShots
    ```sh
    # in wsl
    curl -Lo init.sh https://github.com/mrbeardad/MyIDE/raw/master/init.sh
-   ./init.sh # 直接执行，不要`bash init.sh`
+   # 直接执行，不要 `bash init.sh`
+   ./init.sh
    ```
 
 > TIPS: WSL2 访问 Windows 宿主机的代理软件，需要：
@@ -167,20 +167,26 @@ ScreenShots
 
 > [VSCode 与 Neovim 操作手册](vscode-neovim.md)
 
-1. 安装[Visual Studio](https://visualstudio.microsoft.com/vs/)
+1. 安装 VSCode 与 Neovim
 
-   > Tips: 安装时勾选 git 和 clang 选项 ，安装完成后将 CMake/bin 与 Llvm/x64/bin （注意是 64 位版本）加入环境变量，后续会需要。
+   ```cmd
+   scoop install vscode neovim-nightly make ripgrep git fork llvm rust go python nodejs flutter
+   ```
 
-2. 安装[Neovim](https://github.com/neovim/neovim/releases/)与[配置](./neovim/)
+2. 安装[Visual Studio](https://visualstudio.microsoft.com/vs/)
+
+   > Tips: VS 是可选的，但安装 VS 可以勾选额外选项来安装 git、cmake、和 llvm/clang 工具链而不用 scoop 安装了。记得安装完成后将 CMake/bin 与 Llvm/**x64**/bin （注意是 64 位版本）加入环境变量，后续会需要。
+
+3. 安装[Neovim](https://github.com/neovim/neovim/releases/)与[配置](./neovim/)
 
    1. 安装[LunarVim](https://www.lunarvim.org/docs/master/installation)
    2. 复制[config.lua](./neovim/config.lua)到`%LOCALAPPDATA%\lvim\`下
    3. 复制[init.vim](./neovim/init.vim)到`%LOCALAPPDATA%\nvim\`下
    4. 启动`nvim`自动安装插件
 
-   > Tips: 安装插件需要访问 github
+   > Tips: 安装插件需要访问 github，记得开代理
 
-3. 安装[VSCode](https://code.visualstudio.com/download)与[配置](./vscode/)
+4. 安装[VSCode](https://code.visualstudio.com/download)与[配置](./vscode/)
 
    1. 复制[lastSyncextensions.json](vscode/lastSyncextensions.json)到`%APPDATA%\Code\User\sync\extensions\`下
    2. 复制[settings.json](vscode/settings.json)与[keybindings.json](vscode/keybindings.json)到`%APPDATA%\Code\User`下
