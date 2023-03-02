@@ -101,10 +101,9 @@ else
     end)
 
     vim.keymap.set('n', '<Insert>', function()
-      local len = string.len(vim.api.nvim_get_current_line())
       local col = vim.api.nvim_win_get_cursor(0)[2]
       vim.g.fuck = col
-      if col + 1 == len and col + 1 ~= vim.b.pos_col_before_cw then
+      if col + 1 ~= vim.b.pos_col_before_cw then
         return 'a'
       else
         return 'i'

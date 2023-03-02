@@ -576,9 +576,8 @@ vim.keymap.set('i', '<C-S-Z>', '<cmd>redo<CR>')
 
 vim.keymap.set('n', 'c', '"_c')
 vim.keymap.set('n', '<Insert>', function()
-  local len = string.len(vim.api.nvim_get_current_line())
   local col = vim.api.nvim_win_get_cursor(0)[2]
-  if col + 1 == len and col + 1 ~= vim.b.pos_col_before_cw then
+  if col + 1 ~= vim.b.pos_col_before_cw then
     return 'a'
   else
     return 'i'
@@ -781,3 +780,4 @@ function! Open_file_in_explorer() abort
   endif
 endf
 ]])
+
