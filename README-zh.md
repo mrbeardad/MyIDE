@@ -83,7 +83,7 @@ ScreenShots
 8. 配置 PowerShell[$PROFILE](ps/Microsoft.PowerShell_profile.ps1)
 
    ```pwsh
-   # install dependencies before copy config file
+   # 在拷贝配置文件前先执行命令以安装依赖
    scoop install lsd fzf
    Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
    Install-Module PSReadLine
@@ -93,7 +93,7 @@ ScreenShots
    Install-Module git-aliases -AllowClobber
    ```
 
-   > Tips: PowerShell 被配置的像 [zsh in wsl](wsl.md)
+   > Tips: PowerShell 被配置的像 [zsh](wsl.md)
 
 9. 安装 [dual-key-remap](https://github.com/ililim/dual-key-remap/releases) 以映射 CapsLock 键为 Esc（单击）或 Ctrl（与其他按键一起按）
 
@@ -120,7 +120,7 @@ ScreenShots
 1. 安装 WSL2
 
    ```pwsh
-   # in admin
+   # 管理员权限
    wsl --install
    wsl --update
    ```
@@ -190,6 +190,7 @@ ScreenShots
 
    1. 复制[lastSyncextensions.json](vscode/lastSyncextensions.json)到`%APPDATA%\Code\User\sync\extensions\`下
    2. 复制[settings.json](vscode/settings.json)与[keybindings.json](vscode/keybindings.json)到`%APPDATA%\Code\User`下
+   3. 启动 VSCode 自动安装插件
 
    > Tips: VSCode 的配置依赖 Neovim 的配置
 

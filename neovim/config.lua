@@ -780,4 +780,3 @@ function! Open_file_in_explorer() abort
   endif
 endf
 ]])
-

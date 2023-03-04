@@ -9,6 +9,7 @@ let $LUNARVIM_BASE_DIR = $LUNARVIM_RUNTIME_DIR.'\lvim'
 if !exists('g:vscode')
   exe 'luafile '.$LUNARVIM_BASE_DIR.'\init.lua'
 else
+  set shadafile=NONE
   set noswapfile
   set nobackup
   set undofile
