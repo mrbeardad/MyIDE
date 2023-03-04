@@ -179,7 +179,7 @@ ScreenShots
 
 3. 安装[Neovim](https://github.com/neovim/neovim/releases/)与[配置](./neovim/)
 
-   1. 安装[LunarVim](https://www.lunarvim.org/docs/master/installation)
+   1. 安装最新版(Nightly)的[LunarVim](https://www.lunarvim.org/docs/master/installation)
    2. 复制[config.lua](./neovim/config.lua)到`%LOCALAPPDATA%\lvim\`下
    3. 复制[init.vim](./neovim/init.vim)到`%LOCALAPPDATA%\nvim\`下
    4. 启动`nvim`自动安装插件
