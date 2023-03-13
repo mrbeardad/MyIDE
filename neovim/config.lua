@@ -774,7 +774,7 @@ endf
 
 function! Open_file_in_explorer() abort
   if has('win32') || has('wsl')
-    call jobstart('explorer.exe .')
+    call jobstart('explorer.exe '.expand('%:p:h'))
   elseif has('unix')
     call jobstart('xdg-open .')
   endif

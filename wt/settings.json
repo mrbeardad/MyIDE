@@ -85,6 +85,13 @@
         "input": "\u001bI"
       },
       "keys": "ctrl+i"
+    },
+    {
+      "command": {
+        "action": "newTab",
+        "commandline": "btop"
+      },
+      "keys": "ctrl+shift+t"
     }
   ],
   "confirmCloseAllTabs": false,
