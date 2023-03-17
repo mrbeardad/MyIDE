@@ -88,6 +88,13 @@
     },
     {
       "command": {
+        "action": "sendInput",
+        "input": "\u001c"
+      },
+      "keys": "ctrl+`"
+    },
+    {
+      "command": {
         "action": "newTab",
         "commandline": "btop"
       },

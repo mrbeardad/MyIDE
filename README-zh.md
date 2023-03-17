@@ -37,16 +37,10 @@ ScreenShots
    - Windows Terminal
    - PowerShell
    - PowerToys
-2. 使用[Scoop](https://scoop.sh/#/)安装：
-
-   ```pwsh
-   scoop install -y 7zip googlechrome
-   ```
-
-   > Tips: 国内 scoop 安装软件会很慢，建议用浏览器去官网下载安装包
-
-3. 使用浏览器安装
+   - TranslucentTB
+2. 使用浏览器安装
    - [Google Chrome](https://www.google.cn/chrome/)
+   - [7-zip](https://7-zip.org/download.html)
    - [Sogou IME](https://pinyin.sogou.com/)
    - [TIM](https://tim.qq.com)
    - [WeChat](https://pc.weixin.qq.com/?lang=zh_CN)
@@ -55,6 +49,7 @@ ScreenShots
    - [Office](https://www.office.com/)
    - [Fork](https://git-fork.com/)
    - [Postman](https://www.postman.com/downloads/)
+3. 安装[Scoop](https://scoop.sh/#/)
 4. 安装[NerdCodeProPlus font](fonts/)
 5. 配置 `%USERPROFILE%\.gitconfig`
 
@@ -170,12 +165,14 @@ ScreenShots
 1. 安装 VSCode 与 Neovim
 
    ```cmd
-   scoop install vscode neovim-nightly make ripgrep git fork llvm rust go python nodejs flutter
+   scoop install vscode neovim-nightly ripgrep git fork make cmake llvm rust go python nodejs flutter
    ```
+
+   > Tips: 国内下载如 llvm 这些大型安装包会比较慢，记得开代理。llvm 之后的安装包是可选的。
 
 2. 安装[Visual Studio](https://visualstudio.microsoft.com/vs/)
 
-   > Tips: VS 是可选的，但安装 VS 可以勾选额外选项来安装 git、cmake、和 llvm/clang 工具链而不用 scoop 安装了。记得安装完成后将 CMake/bin 与 Llvm/**x64**/bin （注意是 64 位版本）加入环境变量，后续会需要。
+   > Tips: 安装 VS 时可以勾选额外选项来安装 git、cmake、和 llvm/clang 而不用 scoop 安装了。记得安装完成后将 CMake/bin 与 Llvm/**x64**/bin （注意是 64 位版本）加入环境变量，后续会需要。
 
 3. 安装[Neovim](https://github.com/neovim/neovim/releases/)与[配置](./neovim/)
 
@@ -196,15 +193,15 @@ ScreenShots
 
 ## Language Tools
 
-| Lang     | Language Server | Linter         | Formatter    | Syntax | Snippets | Debugger | Build    | Doc     | Test    | Prof       |
-| -------- | --------------- | -------------- | ------------ | ------ | -------- | -------- | -------- | ------- | ------- | ---------- |
-| C++      | clangd          | clang-tidy     | clang-format | -      | -        | lldb     | CMake    | Doxygen | gtest   | gperftools |
-| Go       | gopls           | golangci-lint  | gofmt        | -      | -        | delve    | go-build | swag    | testify | go-prof    |
-| Python   | pyright         | pylint, flake8 | yapf         | -      | -        | -        | -        | -       | -       | -          |
-| JS       | tsserver        | eslint         | eslint       | -      | -        | -        | -        | -       | -       | -          |
-| HTML     | -               | tidy           | prettier     | -      | -        | -        | -        | -       | -       | -          |
-| CSS      | -               | stylelint      | prettier     | -      | -        | -        | -        | -       | -       | -          |
-| Markdown | -               | markdownlint   | prettier     | -      | -        | -        | -        | -       | -       | -          |
+| Lang       | Language Server | Linter        | Formatter    | Syntax | Snippets | Debugger | Build    | Doc     | Test    | Prof       |
+| ---------- | --------------- | ------------- | ------------ | ------ | -------- | -------- | -------- | ------- | ------- | ---------- |
+| C++        | clangd          | clang-tidy    | clang-format | -      | -        | lldb     | CMake    | Doxygen | gtest   | gperftools |
+| Go         | gopls           | golangci-lint | gofmt        | -      | -        | delve    | go-build | swag    | testify | go-prof    |
+| Python     | pyright         | ruff          | ruff         | -      | -        | -        | -        | -       | -       | -          |
+| JavaScript | tsserver        | eslint        | eslint       | -      | -        | -        | -        | -       | -       | -          |
+| HTML       | -               | tidy          | prettier     | -      | -        | -        | -        | -       | -       | -          |
+| CSS        | -               | stylelint     | prettier     | -      | -        | -        | -        | -       | -       | -          |
+| Markdown   | -               | markdownlint  | prettier     | -      | -        | -        | -        | -       | -       | -          |
 
 Other references:
 

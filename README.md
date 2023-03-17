@@ -36,9 +36,10 @@ ScreenShots
 > [Windows Keybindings](windows.md)
 
 1. Install apps by Microsoft Store
-   1. Windows Terminal
-   2. PowerShell
-   3. PowerToys
+   - Windows Terminal
+   - PowerShell
+   - PowerToys
+   - TranslucentTB
 2. Install apps by [Scoop](https://scoop.sh/#/)
 
    ```cmd
@@ -159,12 +160,14 @@ ScreenShots
 1. Install VSCode and Neovim
 
    ```cmd
-   scoop install vscode neovim-nightly make ripgrep git fork llvm rust go python nodejs flutter
+   scoop install vscode neovim-nightly ripgrep git fork make cmake llvm rust go python nodejs flutter
    ```
+
+   > Tips: The packages after llvm are optional.
 
 2. Install [Visual Studio](https://visualstudio.microsoft.com/vs/)
 
-   > Tips: VS is optional, for myself, I just want to get the git, cmake and llvm-clang within it (check additional options) instead of installing them by scoop , don't forget to add CMake/bin and Llvm/**x64**/bin to system %PATH% manually
+   > Tips: You can install git, cmake and llvm-clang within vs by checking additional options instead of installing them by scoop , don't forget to add CMake/bin and Llvm/**x64**/bin to system %PATH% manually
 
 3. Configure Neovim
 
@@ -183,15 +186,15 @@ ScreenShots
 
 ## Language Tools
 
-| Lang     | Language Server | Linter         | Formatter    | Syntax | Snippets | Debugger | Build    | Doc     | Test    | Prof       |
-| -------- | --------------- | -------------- | ------------ | ------ | -------- | -------- | -------- | ------- | ------- | ---------- |
-| C++      | clangd          | clang-tidy     | clang-format | -      | -        | lldb     | CMake    | Doxygen | gtest   | gperftools |
-| Go       | gopls           | golangci-lint  | gofmt        | -      | -        | delve    | go-build | swag    | testify | go-prof    |
-| Python   | pyright         | pylint, flake8 | yapf         | -      | -        | -        | -        | -       | -       | -          |
-| JS       | tsserver        | eslint         | eslint       | -      | -        | -        | -        | -       | -       | -          |
-| HTML     | -               | tidy           | prettier     | -      | -        | -        | -        | -       | -       | -          |
-| CSS      | -               | stylelint      | prettier     | -      | -        | -        | -        | -       | -       | -          |
-| Markdown | -               | markdownlint   | prettier     | -      | -        | -        | -        | -       | -       | -          |
+| Lang       | Language Server | Linter        | Formatter    | Syntax | Snippets | Debugger | Build    | Doc     | Test    | Prof       |
+| ---------- | --------------- | ------------- | ------------ | ------ | -------- | -------- | -------- | ------- | ------- | ---------- |
+| C++        | clangd          | clang-tidy    | clang-format | -      | -        | lldb     | CMake    | Doxygen | gtest   | gperftools |
+| Go         | gopls           | golangci-lint | gofmt        | -      | -        | delve    | go-build | swag    | testify | go-prof    |
+| Python     | pyright         | ruff          | ruff         | -      | -        | -        | -        | -       | -       | -          |
+| JavaScript | tsserver        | eslint        | eslint       | -      | -        | -        | -        | -       | -       | -          |
+| HTML       | -               | tidy          | prettier     | -      | -        | -        | -        | -       | -       | -          |
+| CSS        | -               | stylelint     | prettier     | -      | -        | -        | -        | -       | -       | -          |
+| Markdown   | -               | markdownlint  | prettier     | -      | -        | -        | -        | -       | -       | -          |
 
 Other references:
 

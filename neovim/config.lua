@@ -51,13 +51,26 @@ require('tokyonight').setup({
 })
 local colors_palette = require('tokyonight.colors').setup()
 lvim.format_on_save.enabled = true
+require("lvim.lsp.null-ls.linters").setup({
+  { name = 'ruff' },
+  { name = 'eslint_d' },
+  { name = 'markdownlint' },
+  { name = 'sqlfluff',    args = { "--dialect", "mysql" } },
+  { name = 'shellcheck' },
+})
+require("lvim.lsp.null-ls.formatters").setup({
+  { name = 'ruff' },
+  { name = 'eslint_d' },
+  { name = 'prettier', filetypes = { "css", "scss", "less", "html", "json", "jsonc", "yaml", "markdown", "markdown.mdx", "graphql", "handlebars" } },
+  { name = 'sqlfluff' },
+  { name = 'shfmt' },
+})
 lvim.builtin.cmp.confirm_opts.select = true
 lvim.builtin.bufferline.options.always_show_bufferline = true
 lvim.builtin.lualine.sections.lualine_y = { { 'fileformat' }, { 'encoding' } }
 lvim.builtin.lualine.sections.lualine_z = { { ' %c  %l/%L', type = 'stl' } }
 lvim.builtin.treesitter.matchup.enable = true
 lvim.builtin.treesitter.rainbow.enable = true
-lvim.builtin.terminal.open_mapping = '<C-Space>' -- ctrl+`
 lvim.builtin.nvimtree.setup.view.mappings.list = {
   { key = '<Tab>',         action = '' },
   { key = { 'l', '<CR>' }, action = 'edit',      mode = 'n' },
