@@ -35,6 +35,7 @@
   "editor.suggest.snippetsPreventQuickSuggestions": false,
 
   "explorer.confirmDelete": false,
+  "explorer.sortOrderLexicographicOptions": "unicode",
 
   "files.hotExit": "off",
   "files.insertFinalNewline": true,
@@ -48,11 +49,9 @@
   },
 
   "git.autofetch": true,
-  "gitlens.statusBar.enabled": false,
-  "gitlens.codeLens.authors.enabled": false,
-  "gitlens.codeLens.recentChange.enabled": false,
-  "gitlens.advanced.repositorySearchDepth": 1,
-  "gitlens.blame.ignoreWhitespace": true,
+  "git.confirmSync": false,
+  "git.detectSubmodules": false,
+  "git.ignoreRebaseWarning": true,
 
   "workbench.startupEditor": "none",
   "workbench.list.smoothScrolling": true,
@@ -75,12 +74,15 @@
   "workbench.view.alwaysShowHeaderActions": true,
   "workbench.editor.pinnedTabSizing": "compact",
   "workbench.editor.revealIfOpen": true,
+
+  "window.commandCenter": true,
   "window.enableMenuBarMnemonics": false,
 
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.defaultProfile.linux": "bash",
   "terminal.integrated.sendKeybindingsToShell": true,
+  "terminal.integrated.mouseWheelScrollSensitivity": 0.2,
 
   "problems.showCurrentInStatus": true,
 
@@ -90,11 +92,7 @@
     "asvetliakov.vscode-neovim": 1
   },
 
-  "path-intellisense.autoSlashAfterDirectory": true,
-  "path-intellisense.showHiddenFiles": true,
-
   "C_Cpp.intelliSenseEngine": "Disabled",
-  "clangd.path": "c:\\Users\\heachxiong\\AppData\\Roaming\\Code\\User\\globalStorage\\llvm-vs-code-extensions.vscode-clangd\\install\\14.0.3\\clangd_14.0.3\\bin\\clangd.exe",
   "clangd.arguments": [
     "--enable-config",
     "--clang-tidy",
@@ -103,15 +101,34 @@
   ],
   "cmake.configureOnOpen": false,
   "cmake.statusbar.visibility": "icon",
+  "cmake.ignoreCMakeListsMissing": true,
   "doxdocgen.generic.useGitUserEmail": true,
   "doxdocgen.generic.useGitUserName": true,
 
   "go.toolsManagement.autoUpdate": true,
   "go.lintTool": "golangci-lint",
 
-  "python.analysis.completeFunctionParens": true,
+  "dart.showInspectorNotificationsForWidgetErrors": false,
+  "dart.debugExternalPackageLibraries": false,
+  "dart.debugSdkLibraries": false,
+  "[dart]": {
+    "editor.formatOnType": true,
+    "editor.selectionHighlight": false,
+    "editor.wordBasedSuggestions": false
+  },
+
+  "python.linting.flake8Enabled": true,
   "python.linting.pylintEnabled": true,
-  "python.formatting.provider": "yapf",
+  "python.analysis.completeFunctionParens": true,
+  "python.analysis.inlayHints.functionReturnTypes": true,
+  "python.analysis.inlayHints.variableTypes": true,
+  "python.analysis.typeCheckingMode": "strict",
+  "python.analysis.inlayHints.pytestParameters": true,
+  "python.analysis.autoImportCompletions": true,
+  "python.formatting.provider": "black",
+  "[python]": {
+    "editor.formatOnType": true
+  },
 
   "prettier.printWidth": 100,
   "eslint.format.enable": false,
@@ -138,12 +155,20 @@
   "css.format.enable": false,
   "less.format.enable": false,
   "scss.format.enable": false,
+
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "MarkdownPaste.path": "${fileDirname}/images",
   "markdown-preview-enhanced.enableExtendedTableSyntax": true,
   "markdown-preview-enhanced.previewTheme": "solarized-dark.css",
   "markdown-preview-enhanced.breakOnSingleNewLine": false,
+
+  "gitlens.statusBar.enabled": false,
+  "gitlens.codeLens.authors.enabled": false,
+  "gitlens.codeLens.recentChange.enabled": false,
+  "gitlens.advanced.repositorySearchDepth": 1,
+  "gitlens.blame.ignoreWhitespace": true,
 
   "leetcode.endpoint": "leetcode-cn",
   "leetcode.workspaceFolder": "/home/beardad/.leetcode",
@@ -152,13 +177,7 @@
   "leetcode.hint.commandShortcut": false,
   "leetcode.hint.commentDescription": false,
 
-  "remote.SSH.remotePlatform": {
-    "9.134.13.22": "linux",
-    "152.136.188.178": "linux",
-    "beardad.top": "linux"
-  },
-
-  "translator.captureWord": false,
+  "translator.captureWord": true,
 
   "todo-tree.filtering.ignoreGitSubmodules": true,
   "todo-tree.filtering.useBuiltInExcludes": "file and search excludes",
@@ -210,12 +229,12 @@
       "iconColour": "#db4b4b",
       "gutterIcon": true
     },
-    "NOTE": {
+    "HACK": {
       "foreground": "#1a1b26",
-      "background": "#1abc9c",
+      "background": "#e0af68",
       "fontStyle": "italic",
-      "icon": "note",
-      "iconColour": "#1abc9c"
+      "icon": "flame",
+      "iconColour": "#e0af68"
     },
     "WARN": {
       "foreground": "#1a1b26",
@@ -224,12 +243,12 @@
       "icon": "alert",
       "iconColour": "#e0af68"
     },
-    "HACK": {
+    "NOTE": {
       "foreground": "#1a1b26",
-      "background": "#e0af68",
+      "background": "#1abc9c",
       "fontStyle": "italic",
-      "icon": "flame",
-      "iconColour": "#e0af68"
+      "icon": "note",
+      "iconColour": "#1abc9c"
     }
   },
 
@@ -953,29 +972,5 @@
       "blockComments": [],
       "blockStrings": []
     }
-  },
-  "git.detectSubmodules": false,
-  "window.commandCenter": true,
-  "python.formatting.yapfArgs": [
-    "--style={based_on_style: google, column_limit: 120, indent_width: 4}"
-  ],
-  "explorer.sortOrderLexicographicOptions": "unicode",
-  "terminal.integrated.mouseWheelScrollSensitivity": 0.2,
-  "git.confirmSync": false,
-  "[dart]": {
-    "editor.formatOnSave": true,
-    "editor.formatOnType": true,
-    "editor.rulers": [80],
-    "editor.selectionHighlight": false,
-    "editor.suggest.snippetsPreventQuickSuggestions": false,
-    "editor.suggestSelection": "first",
-    "editor.tabCompletion": "onlySnippets",
-    "editor.wordBasedSuggestions": false
-  },
-  "dart.showInspectorNotificationsForWidgetErrors": false,
-  "dart.debugExternalPackageLibraries": false,
-  "dart.debugSdkLibraries": false,
-  "[python]": {
-    "editor.formatOnType": true
   }
 }

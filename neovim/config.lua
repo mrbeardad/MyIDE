@@ -51,19 +51,23 @@ require('tokyonight').setup({
 })
 local colors_palette = require('tokyonight.colors').setup()
 lvim.format_on_save.enabled = true
-require("lvim.lsp.null-ls.linters").setup({
-  { name = 'ruff' },
+require('lvim.lsp.null-ls.linters').setup({
+  { name = 'golangci_lint' },
   { name = 'eslint_d' },
-  { name = 'markdownlint' },
-  { name = 'sqlfluff',    args = { "--dialect", "mysql" } },
+  { name = 'pylint' },
+  { name = 'flake8' },
   { name = 'shellcheck' },
+  { name = 'sqlfluff',     args = { '--dialect', 'mysql' } },
+  { name = 'markdownlint' },
+  { name = 'tidy' },
+  { name = 'stylelint' },
 })
-require("lvim.lsp.null-ls.formatters").setup({
-  { name = 'ruff' },
+require('lvim.lsp.null-ls.formatters').setup({
   { name = 'eslint_d' },
-  { name = 'prettier', filetypes = { "css", "scss", "less", "html", "json", "jsonc", "yaml", "markdown", "markdown.mdx", "graphql", "handlebars" } },
-  { name = 'sqlfluff' },
+  { name = 'black' },
+  { name = 'prettier', filetypes = { 'css', 'scss', 'less', 'html', 'json', 'jsonc', 'yaml', 'markdown', 'markdown.mdx', 'graphql', 'handlebars' } },
   { name = 'shfmt' },
+  { name = 'sqlfluff' },
 })
 lvim.builtin.cmp.confirm_opts.select = true
 lvim.builtin.bufferline.options.always_show_bufferline = true
