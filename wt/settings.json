@@ -12,23 +12,16 @@
     {
       "command": {
         "action": "sendInput",
+        "input": "\u001b[77;6u"
+      },
+      "keys": "ctrl+shift+m"
+    },
+    {
+      "command": {
+        "action": "sendInput",
         "input": "\u001b[85;6u"
       },
       "keys": "ctrl+shift+u"
-    },
-    {
-      "command": {
-        "action": "sendInput",
-        "input": "\u001b[79;6u"
-      },
-      "keys": "ctrl+shift+o"
-    },
-    {
-      "command": {
-        "action": "sendInput",
-        "input": "\u001b[80;6u"
-      },
-      "keys": "ctrl+shift+p"
     },
     {
       "command": {
@@ -40,6 +33,13 @@
     {
       "command": {
         "action": "sendInput",
+        "input": "\u001bI"
+      },
+      "keys": "ctrl+i"
+    },
+    {
+      "command": {
+        "action": "sendInput",
         "input": "\u001b[70;6u"
       },
       "keys": "ctrl+shift+f"
@@ -47,9 +47,23 @@
     {
       "command": {
         "action": "sendInput",
+        "input": "\u001b[79;6u"
+      },
+      "keys": "ctrl+shift+o"
+    },
+    {
+      "command": {
+        "action": "sendInput",
         "input": "\u001b[74;6u"
       },
       "keys": "ctrl+shift+j"
+    },
+    {
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[80;6u"
+      },
+      "keys": "ctrl+shift+p"
     },
     {
       "command": {
@@ -71,20 +85,6 @@
         "input": "\u001b[90;6u"
       },
       "keys": "ctrl+shift+z"
-    },
-    {
-      "command": {
-        "action": "sendInput",
-        "input": "\u001b[77;6u"
-      },
-      "keys": "ctrl+shift+m"
-    },
-    {
-      "command": {
-        "action": "sendInput",
-        "input": "\u001bI"
-      },
-      "keys": "ctrl+i"
     },
     {
       "command": {
@@ -113,10 +113,12 @@
         "size": 11.0,
         "weight": "normal"
       },
+      "intenseTextStyle": "all",
       "opacity": 50,
       "padding": "0, 0, 0, 0",
       "scrollbarState": "hidden",
-      "useAcrylic": true
+      "useAcrylic": true,
+      "useAtlasEngine": false
     },
     "list": [
       {
