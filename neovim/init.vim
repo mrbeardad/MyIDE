@@ -145,6 +145,7 @@ EOF
   vnoremap <C-S-L> <cmd>call VSCodeNotifyVisual('editor.action.selectHighlights', 1)<CR>
   vmap I mi
   vmap A ma
+  vnoremap c "_c
   nnoremap c "_c
   nmap cw <cmd>let b:pos_col_before_cw=getpos('.')[2]<CR>"_dw<Insert>
   nmap cW <cmd>let b:pos_col_before_cw=getpos('.')[2]<CR>"_dW<Insert>

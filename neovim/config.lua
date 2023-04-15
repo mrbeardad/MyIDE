@@ -591,6 +591,7 @@ vim.keymap.set('c', '<C-L>', '<C-Right>')
 vim.keymap.set('i', '<C-Z>', '<cmd>undo<CR>')
 vim.keymap.set('i', '<C-S-Z>', '<cmd>redo<CR>')
 
+vim.keymap.set('v', 'c', '"_c')
 vim.keymap.set('n', 'c', '"_c')
 vim.keymap.set('n', '<Insert>', function()
   local col = vim.api.nvim_win_get_cursor(0)[2]
