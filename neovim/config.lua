@@ -65,7 +65,11 @@ require('lvim.lsp.null-ls.linters').setup({
 require('lvim.lsp.null-ls.formatters').setup({
   { name = 'eslint_d' },
   { name = 'black' },
-  { name = 'prettier', filetypes = { 'css', 'scss', 'less', 'html', 'json', 'jsonc', 'yaml', 'markdown', 'markdown.mdx', 'graphql', 'handlebars' } },
+  {
+    name = 'prettier',
+    filetypes = { 'css', 'scss', 'less', 'html', 'json', 'jsonc', 'yaml', 'markdown',
+      'markdown.mdx', 'graphql', 'handlebars' }
+  },
   { name = 'shfmt' },
   { name = 'sqlfluff' },
 })
@@ -75,10 +79,12 @@ lvim.builtin.lualine.sections.lualine_y = { { 'fileformat' }, { 'encoding' } }
 lvim.builtin.lualine.sections.lualine_z = { { ' %c  %l/%L', type = 'stl' } }
 lvim.builtin.treesitter.matchup.enable = true
 lvim.builtin.treesitter.rainbow.enable = true
-lvim.builtin.nvimtree.setup.view.mappings.list = {
-  { key = '<Tab>',         action = '' },
-  { key = { 'l', '<CR>' }, action = 'edit',      mode = 'n' },
-  { key = 'h',             action = 'close_node' },
+lvim.builtin.nvimtree.setup.view.mappings = {
+  list = {
+    { key = '<Tab>',         action = '' },
+    { key = { 'l', '<CR>' }, action = 'edit',      mode = 'n' },
+    { key = 'h',             action = 'close_node' },
+  }
 }
 lvim.builtin.telescope.defaults.layout_config.center = { width = 0.75 }
 lvim.builtin.telescope.defaults.mappings = {
@@ -222,7 +228,7 @@ lvim.plugins = {
     end,
     config = function()
       vim.cmd('highlight MatchParen gui=italic,bold guifg=' .. colors_palette.orange
-      .. ' guibg=' .. colors_palette.fg_gutter)
+        .. ' guibg=' .. colors_palette.fg_gutter)
     end
   },
   {
@@ -261,7 +267,8 @@ lvim.plugins = {
     lazy = true,
     init = function()
       require('which-key').register({
-        l = { '<cmd>lua require("telescope").extensions.vim_bookmarks.current_file()<CR>', 'List bookmarks in current file', },
+        l = { '<cmd>lua require("telescope").extensions.vim_bookmarks.current_file()<CR>',
+          'List bookmarks in current file', },
         L = { '<cmd>lua require("telescope").extensions.vim_bookmarks.all()<CR>', 'List all bookmarks', },
       }, { prefix = 'm' })
     end,
@@ -353,7 +360,8 @@ lvim.plugins = {
   },
   {
     'mg979/vim-visual-multi',
-    keys = { { 'I', mode = 'v' }, { 'A', mode = 'v' }, { '<C-N>', mode = { 'n', 'v' } }, { '<C-S-L>', mode = { 'n', 'v' } } },
+    keys = { { 'I', mode = 'v' }, { 'A', mode = 'v' }, { '<C-N>', mode = { 'n', 'v' } },
+      { '<C-S-L>', mode = { 'n', 'v' } } },
     dependencies = { 'nvim-autopairs' }, -- autopairs lazy loading when InsertEnter could override VM backspace
     init = function()
       vim.g.VM_leader = '<Space>m'
@@ -642,7 +650,7 @@ lvim.builtin.cmp.mapping['<C-K>'] = nil
 lvim.builtin.cmp.mapping['<C-D>'] = nil
 lvim.builtin.cmp.mapping['<C-F>'] = nil
 lvim.builtin.cmp.mapping['<C-E>'] = cmp.mapping.scroll_docs(4)
-lvim.builtin.cmp.mapping['<C-Y>'] = cmp.mapping.scroll_docs( -4)
+lvim.builtin.cmp.mapping['<C-Y>'] = cmp.mapping.scroll_docs(-4)
 lvim.builtin.cmp.mapping['<M-I>'] = cmp.mapping(function()
   if cmp.visible() then
     cmp.abort()

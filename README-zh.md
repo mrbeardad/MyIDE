@@ -39,17 +39,17 @@ ScreenShots
    - PowerToys
    - TranslucentTB
 2. 使用浏览器安装
-   - [Google Chrome](https://www.google.cn/chrome/)
-   - [7-zip](https://7-zip.org/download.html)
    - [Sogou IME](https://pinyin.sogou.com/)
    - [TIM](https://tim.qq.com)
    - [WeChat](https://pc.weixin.qq.com/?lang=zh_CN)
    - [WeMeeting](https://meeting.tencent.com/download-center.html)
    - [QQ Music](https://y.qq.com/download/index.html)
-   - [Office](https://www.office.com/)
-   - [Fork](https://git-fork.com/)
-   - [Postman](https://www.postman.com/downloads/)
-3. 安装[Scoop](https://scoop.sh/#/)
+3. 使用[Scoop-cn](https://github.com/duzyn/scoop-cn)安装
+
+   ```pwsh
+   scoop install scoop-cn/7zip scoop-cn/git scoop-cn/aria2 scoop-cn/clash
+   ```
+
 4. 安装[NerdCodeProPlus font](fonts/)
 5. 配置 `%USERPROFILE%\.gitconfig`
 
@@ -92,7 +92,7 @@ ScreenShots
 
 9. 安装 [dual-key-remap](https://github.com/ililim/dual-key-remap/releases) 以映射 CapsLock 键为 Esc（单击）或 Ctrl（与其他按键一起按）
 
-   > Tips: 注意根据文档[设置管理员权限启动](https://github.com/ililim/dual-key-remap#administrator-access)，否则在提权窗口中无法使用
+> Tips: 注意根据文档[设置管理员权限启动](https://github.com/ililim/dual-key-remap#administrator-access)，否则在提权窗口中无法使用
 
 10. 系统设置 `Win`+`I`
 11. 选一个你喜欢的[鼠标主题](https://zhutix.com/tag/cursors/)
@@ -165,18 +165,16 @@ ScreenShots
 1. 安装 VSCode 与 Neovim
 
    ```cmd
-   scoop install vscode neovim-nightly ripgrep git fork make cmake llvm rust go python nodejs flutter
+   scoop install vscode neovim ripgrep make cmake rust go python nodejs flutter
    ```
-
-   > Tips: 国内下载如 llvm 这些大型安装包会比较慢，记得开代理。llvm 之后的安装包是可选的。
 
 2. 安装[Visual Studio](https://visualstudio.microsoft.com/vs/)
 
-   > Tips: 安装 VS 时可以勾选额外选项来安装 git、cmake、和 llvm/clang 而不用 scoop 安装了。记得安装完成后将 CMake/bin 与 Llvm/**x64**/bin （注意是 64 位版本）加入环境变量，后续会需要。
+   > Tips: 安装时取消勾选 git 和 cmake（用 scoop 安装），同事勾选上 clang
 
 3. 安装[Neovim](https://github.com/neovim/neovim/releases/)与[配置](./neovim/)
 
-   1. 安装最新版(Nightly)的[LunarVim](https://www.lunarvim.org/docs/master/installation)
+   1. 安装 1.3 版本的[LunarVim](https://www.lunarvim.org/docs/installation)
    2. 复制[config.lua](./neovim/config.lua)到`%LOCALAPPDATA%\lvim\`下
    3. 复制[init.vim](./neovim/init.vim)到`%LOCALAPPDATA%\nvim\`下
    4. 启动`nvim`自动安装插件

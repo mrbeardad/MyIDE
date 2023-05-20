@@ -43,10 +43,8 @@ ScreenShots
 2. Install apps by [Scoop](https://scoop.sh/#/)
 
    ```cmd
-   scoop install -y 7zip googlechrome
+   scoop install -y 7zip git aria2
    ```
-
-   > Tips: This is my choice, choose your preferred apps
 
 3. Install [NerdCodeProPlus font](./fonts/)
 4. Configure `%USERPROFILE%\.gitconfig`
@@ -86,7 +84,7 @@ ScreenShots
    Install-Module git-aliases -AllowClobber
    ```
 
-   > Tips: You can refer to the usage of [zsh](wsl.md)
+   > Tips: The keybindings refer to [zsh](wsl.md)
 
 8. Install [dual-key-remap](https://github.com/ililim/dual-key-remap) to remap CapsLock to Escape when pressed alone and Ctrl when pressed with other keys.
 
@@ -160,18 +158,18 @@ ScreenShots
 1. Install VSCode and Neovim
 
    ```cmd
-   scoop install vscode neovim-nightly ripgrep git fork make cmake llvm rust go python nodejs flutter
+   scoop install vscode neovim ripgrep make cmake rust go python nodejs flutter
    ```
 
-   > Tips: The packages after llvm are optional.
+   > Tips: The packages after make are optional.
 
 2. Install [Visual Studio](https://visualstudio.microsoft.com/vs/)
 
-   > Tips: You can install git, cmake and llvm-clang within vs by checking additional options instead of installing them by scoop , don't forget to add CMake/bin and Llvm/**x64**/bin to system %PATH% manually
+   > Tips: Uncheck the git and cmake option, and check the option of clang.
 
 3. Configure Neovim
 
-   1. Install nightly version of [LunarVim](https://www.lunarvim.org/docs/master/installation)
+   1. Install 1.3 version of [LunarVim](https://www.lunarvim.org/docs/installation)
    2. Copy [config.lua](./neovim/config.lua) to `%LOCALAPPDATA%\lvim\`
    3. Copy [init.vim](./neovim/init.vim) to `%LOCALAPPDATA%\nvim\`
    4. Run `nvim.exe` to install plugins automatically
