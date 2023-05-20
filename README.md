@@ -158,14 +158,17 @@ ScreenShots
 1. Install VSCode and Neovim
 
    ```cmd
-   scoop install vscode neovim ripgrep make cmake rust go python nodejs flutter
+   scoop install vscode neovim ripgrep make rust go python nodejs flutter
    ```
 
    > Tips: The packages after make are optional.
 
 2. Install [Visual Studio](https://visualstudio.microsoft.com/vs/)
 
-   > Tips: Uncheck the git and cmake option, and check the option of clang.
+   > Tips: Check the option of clang and add
+   > `C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\Llvm\x64\bin` and
+   > `C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin`
+   > to environment variable `PATH`
 
 3. Configure Neovim
 

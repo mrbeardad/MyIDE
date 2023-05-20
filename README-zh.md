@@ -165,12 +165,15 @@ ScreenShots
 1. 安装 VSCode 与 Neovim
 
    ```cmd
-   scoop install vscode neovim ripgrep make cmake rust go python nodejs flutter
+   scoop install vscode neovim ripgrep make rust go python nodejs flutter
    ```
 
 2. 安装[Visual Studio](https://visualstudio.microsoft.com/vs/)
 
-   > Tips: 安装时取消勾选 git 和 cmake（用 scoop 安装），同事勾选上 clang
+   > Tips: 勾选 clang 选项，同时将
+   > `C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\Llvm\x64\bin` 与
+   > `C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin`
+   > 加入到环境变量`PATH`
 
 3. 安装[Neovim](https://github.com/neovim/neovim/releases/)与[配置](./neovim/)
 
