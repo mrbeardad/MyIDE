@@ -172,7 +172,7 @@ ScreenShots
 
 3. Configure Neovim
 
-   1. Install 1.3 version of [LunarVim](https://www.lunarvim.org/docs/installation)
+   1. Install nightly version of [LunarVim](https://www.lunarvim.org/docs/master/installation)
    2. Copy [config.lua](./neovim/config.lua) to `%LOCALAPPDATA%\lvim\`
    3. Copy [init.vim](./neovim/init.vim) to `%LOCALAPPDATA%\nvim\`
    4. Run `nvim.exe` to install plugins automatically

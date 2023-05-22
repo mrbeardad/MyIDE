@@ -1,3 +1,8 @@
+-- Read the docs: https://www.lunarvim.org/docs/configuration
+-- Video Tutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
+-- Forum: https://www.reddit.com/r/lunarvim/
+-- Discord: https://discord.com/invite/Xb9B4Ny
+
 --------------------------------------------------------------------------------
 -- vim options
 --------------------------------------------------------------------------------
@@ -18,8 +23,8 @@ vim.opt.listchars = 'tab:→ ,eol:↵,trail:·,extends:↷,precedes:↶'
 vim.opt.relativenumber = true
 vim.opt.timeoutlen = 500
 vim.opt.wildignorecase = true
-vim.opt.cursorline = true
 -- Cursorline highlighting control, only have it on in the active buffer
+vim.opt.cursorline = true
 local autogroup_cursorline = vim.api.nvim_create_augroup('CursorLineControl', { clear = true })
 vim.api.nvim_create_autocmd('WinLeave', {
   group = autogroup_cursorline,
@@ -39,6 +44,15 @@ vim.api.nvim_create_autocmd('WinEnter', {
     end
   end,
 })
+-- Enable powershell as your default shell
+vim.opt.shell = "pwsh.exe -NoLogo"
+vim.opt.shellcmdflag =
+"-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+vim.cmd [[
+		let &shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+		let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+		set shellquote= shellxquote=
+  ]]
 
 --------------------------------------------------------------------------------
 -- lvim options
@@ -79,13 +93,34 @@ lvim.builtin.lualine.sections.lualine_y = { { 'fileformat' }, { 'encoding' } }
 lvim.builtin.lualine.sections.lualine_z = { { ' %c  %l/%L', type = 'stl' } }
 lvim.builtin.treesitter.matchup.enable = true
 lvim.builtin.treesitter.rainbow.enable = true
-lvim.builtin.nvimtree.setup.view.mappings = {
-  list = {
-    { key = '<Tab>',         action = '' },
-    { key = { 'l', '<CR>' }, action = 'edit',      mode = 'n' },
-    { key = 'h',             action = 'close_node' },
+lvim.builtin.nvimtree.setup.on_attach = function(bufnr)
+  local api = require "nvim-tree.api"
+
+  local function telescope_find_files(_)
+    require("lvim.core.nvimtree").start_telescope "find_files"
+  end
+
+  local function opts(desc)
+    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+
+  api.config.mappings.default_on_attach(bufnr)
+
+  vim.keymap.del('n', '<Tab>', { buffer = bufnr })
+
+  local useful_keys = {
+    ["l"] = { api.node.open.edit, opts "Open" },
+    ["o"] = { api.node.open.edit, opts "Open" },
+    ["<CR>"] = { api.node.open.edit, opts "Open" },
+    ["v"] = { api.node.open.vertical, opts "Open: Vertical Split" },
+    ["h"] = { api.node.navigate.parent_close, opts "Close Directory" },
+    ["C"] = { api.tree.change_root_to_node, opts "CD" },
+    ["<C-F>"] = { telescope_find_files, opts "Telescope Find File" },
+    ["<Tab>"] = {},
   }
-}
+
+  require("lvim.keymappings").load_mode("n", useful_keys)
+end
 lvim.builtin.telescope.defaults.layout_config.center = { width = 0.75 }
 lvim.builtin.telescope.defaults.mappings = {
   i = { ['<Esc>'] = require('telescope.actions').close, },
@@ -234,7 +269,9 @@ lvim.plugins = {
   {
     'ethanholz/nvim-lastplace',
     event = 'BufRead',
-    config = true,
+    config = function()
+      require('nvim-lastplace').setup({})
+    end,
   },
   {
     'MattesGroeger/vim-bookmarks',
