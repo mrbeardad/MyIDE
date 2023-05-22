@@ -116,7 +116,6 @@ lvim.builtin.nvimtree.setup.on_attach = function(bufnr)
     ["h"] = { api.node.navigate.parent_close, opts "Close Directory" },
     ["C"] = { api.tree.change_root_to_node, opts "CD" },
     ["<C-F>"] = { telescope_find_files, opts "Telescope Find File" },
-    ["<Tab>"] = {},
   }
 
   require("lvim.keymappings").load_mode("n", useful_keys)
@@ -718,7 +717,7 @@ lvim.builtin.cmp.mapping['<Tab>'] = cmp.mapping(function(fallback)
     fallback()
   end
 end, { 'i', 's' })
-vim.keymap.set({ 'n', 'i' }, '<M-F>', '<cmd>lua require("lvim.lsp.utils").format()<CR>')
+vim.keymap.set({ 'n', 'i' }, '<M-F>', '<cmd>lua require("lvim.lsp.utils").format({timeout=750})<CR>')
 vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<CR>')
 vim.keymap.set('n', '<M-.>', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 vim.keymap.set('n', '<C-.>', '<cmd>lua vim.lsp.buf.code_action()<CR>')
