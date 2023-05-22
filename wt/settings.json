@@ -33,16 +33,9 @@
     {
       "command": {
         "action": "sendInput",
-        "input": "\u001bI"
+        "input": "\u001b[74;6u"
       },
-      "keys": "ctrl+i"
-    },
-    {
-      "command": {
-        "action": "sendInput",
-        "input": "\u001b[70;6u"
-      },
-      "keys": "ctrl+shift+f"
+      "keys": "ctrl+shift+j"
     },
     {
       "command": {
@@ -54,9 +47,16 @@
     {
       "command": {
         "action": "sendInput",
-        "input": "\u001b[74;6u"
+        "input": "\u001b[70;6u"
       },
-      "keys": "ctrl+shift+j"
+      "keys": "ctrl+shift+f"
+    },
+    {
+      "command": {
+        "action": "sendInput",
+        "input": "\u001bI"
+      },
+      "keys": "ctrl+i"
     },
     {
       "command": {
@@ -75,6 +75,13 @@
     {
       "command": {
         "action": "sendInput",
+        "input": "\u001c"
+      },
+      "keys": "ctrl+`"
+    },
+    {
+      "command": {
+        "action": "sendInput",
         "input": "\u001b[76;6u"
       },
       "keys": "ctrl+shift+l"
@@ -88,17 +95,24 @@
     },
     {
       "command": {
-        "action": "sendInput",
-        "input": "\u001c"
-      },
-      "keys": "ctrl+`"
-    },
-    {
-      "command": {
         "action": "newTab",
         "commandline": "btop"
       },
       "keys": "ctrl+shift+t"
+    },
+    {
+      "command": {
+        "action": "splitPane",
+        "split": "down"
+      },
+      "keys": "alt+shift+s"
+    },
+    {
+      "command": {
+        "action": "splitPane",
+        "split": "right"
+      },
+      "keys": "alt+shift+v"
     }
   ],
   "confirmCloseAllTabs": false,
@@ -117,8 +131,7 @@
       "opacity": 50,
       "padding": "0, 0, 0, 0",
       "scrollbarState": "hidden",
-      "useAcrylic": true,
-      "useAtlasEngine": false
+      "useAcrylic": true
     },
     "list": [
       {
@@ -134,12 +147,6 @@
         "name": "HK CVM"
       },
       {
-        "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-        "hidden": false,
-        "name": "Windows PowerShell"
-      },
-      {
         "commandline": "%SystemRoot%\\System32\\cmd.exe",
         "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
         "hidden": false,
@@ -152,13 +159,18 @@
         "source": "Windows.Terminal.Azure"
       },
       {
-        "guid": "{86bf08a1-e652-564a-bf7f-152ee43d6de9}",
+        "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+        "hidden": false,
+        "name": "Windows PowerShell"
+      },
+      {
+        "guid": "{9743f4fc-bd86-59dd-b51c-83d71e8d73e3}",
         "hidden": false,
         "name": "Developer Command Prompt for VS 2022",
         "source": "Windows.Terminal.VisualStudio"
       },
       {
-        "guid": "{1dacc3ab-ba7d-5253-95fe-9b47ac7889fa}",
+        "guid": "{ea7b1177-5712-550f-bebf-a5c68314cfb3}",
         "hidden": false,
         "name": "Developer PowerShell for VS 2022",
         "source": "Windows.Terminal.VisualStudio"
@@ -380,3 +392,5 @@
   "trimBlockSelection": true,
   "useAcrylicInTabRow": true
 }
+
+
