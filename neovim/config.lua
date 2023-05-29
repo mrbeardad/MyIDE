@@ -532,6 +532,7 @@ lvim.plugins = {
     config = function()
       require('symbols-outline').setup({
         width = 20,
+        autofold_depth = 1,
       })
     end
   },
@@ -763,6 +764,7 @@ which_key_register({
   z = { '<cmd>ZoomWindow<CR>', 'Zoom window' }
 }, { prefix = '<C-W>' })
 lvim.builtin.which_key.mappings['q'] = { '<cmd>call SmartClose()<CR>', 'Quit' }
+lvim.builtin.which_key.mappings['Q'] = { '<cmd>qa<CR>', 'Quit All' }
 
 vim.keymap.set('n', '<C-S-E>', '<cmd>NvimTreeFindFile<CR>')
 vim.keymap.set('n', '<C-S-M>', '<cmd>Trouble workspace_diagnostics<CR>')

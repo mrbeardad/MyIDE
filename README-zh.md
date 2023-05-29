@@ -34,8 +34,9 @@ ScreenShots
 > [Windows 操作手册](windows.md)
 
 1. 使用微软商店安装
-   - Windows Terminal
    - PowerShell
+   - Windows Terminal
+   - VSCode
    - PowerToys
    - TranslucentTB
 2. 使用浏览器安装
@@ -49,6 +50,8 @@ ScreenShots
    ```pwsh
    scoop install scoop-cn/7zip scoop-cn/git scoop-cn/aria2 scoop-cn/clash
    ```
+
+   > Tips: 如果你用微软商店或scoop安装软件，不要忘记关闭软件自带的自动更新
 
 4. 安装[NerdCodeProPlus font](fonts/)
 5. 配置 `%USERPROFILE%\.gitconfig`
@@ -162,11 +165,13 @@ ScreenShots
 
 > [VSCode 与 Neovim 操作手册](vscode-neovim.md)
 
-1. 安装 VSCode 与 Neovim
+1. 安装 Neovim 与依赖
 
    ```cmd
-   scoop install vscode neovim ripgrep make rust go python nodejs flutter
+   scoop install neovim-nightly ripgrep make python nodejs rust go flutter
    ```
+
+   > Tips: nodejs 之后的包都是可选的
 
 2. 安装[Visual Studio](https://visualstudio.microsoft.com/vs/)
 

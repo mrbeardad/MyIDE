@@ -36,8 +36,9 @@ ScreenShots
 > [Windows Keybindings](windows.md)
 
 1. Install apps by Microsoft Store
-   - Windows Terminal
    - PowerShell
+   - Windows Terminal
+   - VSCode
    - PowerToys
    - TranslucentTB
 2. Install apps by [Scoop](https://scoop.sh/#/)
@@ -45,6 +46,8 @@ ScreenShots
    ```cmd
    scoop install -y 7zip git aria2
    ```
+
+   > Tips: Don't forget to disable app self-update when you install it by microsoft store or scoop
 
 3. Install [NerdCodeProPlus font](./fonts/)
 4. Configure `%USERPROFILE%\.gitconfig`
@@ -155,13 +158,13 @@ ScreenShots
 
 > [VSCode-Neovim Keybindings](vscode-neovim.md)
 
-1. Install VSCode and Neovim
+1. Install Neovim and dependencies
 
    ```cmd
-   scoop install vscode neovim ripgrep make rust go python nodejs flutter
+   scoop install neovim-nightly ripgrep make rust go python nodejs flutter
    ```
 
-   > Tips: The packages after make are optional.
+   > Tips: The packages after nodejs are optional.
 
 2. Install [Visual Studio](https://visualstudio.microsoft.com/vs/)
 
