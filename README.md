@@ -161,7 +161,7 @@ ScreenShots
 1. Install Neovim and dependencies
 
    ```cmd
-   scoop install neovim-nightly ripgrep make rust go python nodejs flutter
+   scoop install neovim-nightly ripgrep make python nodejs rustup go flutter
    ```
 
    > Tips: The packages after nodejs are optional.

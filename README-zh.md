@@ -168,7 +168,7 @@ ScreenShots
 1. 安装 Neovim 与依赖
 
    ```cmd
-   scoop install neovim-nightly ripgrep make python nodejs rust go flutter
+   scoop install neovim-nightly ripgrep make python nodejs rustup go flutter
    ```
 
    > Tips: nodejs 之后的包都是可选的
