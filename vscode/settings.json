@@ -88,6 +88,10 @@
 
   "security.workspace.trust.enabled": false,
 
+  "remote.SSH.remotePlatform": {
+    "43.134.204.157": "linux"
+  },
+
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
   },
@@ -112,23 +116,25 @@
   "dart.debugExternalPackageLibraries": false,
   "dart.debugSdkLibraries": false,
   "[dart]": {
-    "editor.formatOnType": true,
-    "editor.selectionHighlight": false,
-    "editor.wordBasedSuggestions": false
+    "editor.formatOnType": true
   },
 
-  "python.linting.flake8Enabled": true,
-  "python.linting.pylintEnabled": true,
+  "python.languageServer": "Pylance",
+  "python.terminal.executeInFileDir": true,
   "python.analysis.completeFunctionParens": true,
   "python.analysis.inlayHints.functionReturnTypes": true,
   "python.analysis.inlayHints.variableTypes": true,
-  "python.analysis.typeCheckingMode": "strict",
   "python.analysis.inlayHints.pytestParameters": true,
   "python.analysis.autoImportCompletions": true,
   "python.formatting.provider": "black",
   "[python]": {
-    "editor.formatOnType": true
+    "editor.formatOnType": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true,
+      "source.organizeImports": true
+    }
   },
+  "jupyter.widgetScriptSources": ["jsdelivr.com", "unpkg.com"],
 
   "prettier.printWidth": 100,
   "eslint.format.enable": false,
@@ -179,12 +185,15 @@
 
   "translator.captureWord": true,
 
+  "todo-tree.general.showActivityBarBadge": true,
+  "todo-tree.general.statusBar": "total",
+  "todo-tree.tree.flat": true,
+  "todo-tree.tree.groupedByTag": true,
   "todo-tree.filtering.ignoreGitSubmodules": true,
   "todo-tree.filtering.useBuiltInExcludes": "file and search excludes",
   "todo-tree.general.showIconsInsteadOfTagsInStatusBar": true,
-  "todo-tree.general.statusBar": "none",
   "todo-tree.highlights.useColourScheme": true,
-  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS):",
   "todo-tree.general.tags": [
     "TODO",
     "PERF",

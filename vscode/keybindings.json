@@ -174,7 +174,7 @@
     "command": "-workbench.action.closeWindow"
   },
   {
-    // NOTE: Define after all other ctrl+k prefix keybinds!
+    // WARN: Define after all other ctrl+k prefix keybinds!
     "key": "ctrl+k",
     "command": "deleteAllRight",
     "when": "editorTextFocus && neovim.mode == insert"

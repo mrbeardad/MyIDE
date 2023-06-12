@@ -190,15 +190,15 @@ ScreenShots
 
 ## Language Tools
 
-| Lang       | Language Server | Linter         | Formatter    | Syntax | Snippets | Debugger | Build    | Doc     | Test    | Prof       |
-| ---------- | --------------- | -------------- | ------------ | ------ | -------- | -------- | -------- | ------- | ------- | ---------- |
-| C++        | clangd          | clang-tidy     | clang-format | -      | -        | lldb     | CMake    | Doxygen | gtest   | gperftools |
-| Go         | gopls           | golangci-lint  | gofmt        | -      | -        | delve    | go-build | swag    | testify | go-prof    |
-| Python     | pyright         | pylint, flake8 | black        | -      | -        | -        | -        | -       | -       | -          |
-| JavaScript | tsserver        | eslint         | eslint       | -      | -        | -        | -        | -       | -       | -          |
-| HTML       | -               | tidy           | prettier     | -      | -        | -        | -        | -       | -       | -          |
-| CSS        | -               | stylelint      | prettier     | -      | -        | -        | -        | -       | -       | -          |
-| Markdown   | -               | markdownlint   | prettier     | -      | -        | -        | -        | -       | -       | -          |
+| Lang       | Language Server | Linter        | Formatter    | Syntax | Snippets | Debugger | Build    | Doc     | Test    | Prof       |
+| ---------- | --------------- | ------------- | ------------ | ------ | -------- | -------- | -------- | ------- | ------- | ---------- |
+| C++        | clangd          | clang-tidy    | clang-format | -      | -        | lldb     | CMake    | Doxygen | gtest   | gperftools |
+| Go         | gopls           | golangci-lint | gofmt        | -      | -        | delve    | go-build | swag    | testify | go-prof    |
+| Python     | pyright         | ruff          | black        | -      | -        | -        | -        | -       | -       | -          |
+| JavaScript | tsserver        | eslint        | eslint       | -      | -        | -        | -        | -       | -       | -          |
+| HTML       | -               | tidy          | prettier     | -      | -        | -        | -        | -       | -       | -          |
+| CSS        | -               | stylelint     | prettier     | -      | -        | -        | -        | -       | -       | -          |
+| Markdown   | -               | markdownlint  | prettier     | -      | -        | -        | -        | -       | -       | -          |
 
 Other references:
 
