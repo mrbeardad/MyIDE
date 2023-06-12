@@ -68,8 +68,7 @@ lvim.format_on_save.enabled = true
 require('lvim.lsp.null-ls.linters').setup({
   { name = 'golangci_lint' },
   { name = 'eslint_d' },
-  { name = 'pylint' },
-  { name = 'flake8' },
+  { name = 'ruff' },
   { name = 'shellcheck' },
   { name = 'sqlfluff',     args = { '--dialect', 'mysql' } },
   { name = 'markdownlint' },
