@@ -51,15 +51,13 @@ ScreenShots
    scoop install scoop-cn/7zip scoop-cn/git scoop-cn/aria2 scoop-cn/clash
    ```
 
-   > Tips: 如果你用微软商店或 scoop 安装软件，不要忘记关闭软件自带的自动更新
-
 4. 安装[NerdCodeProPlus font](fonts/)
 5. 配置 `%USERPROFILE%\.gitconfig`
 
    ```conf
    [user]
-     name = Heache Bear
-     email = mrbeardad@qq.com
+     name = Your Name
+     email = user@email.com
    [merge]
      tool = vimdiff
    [mergetool "vimdiff"]
@@ -95,9 +93,10 @@ ScreenShots
 
 9. 安装 [dual-key-remap](https://github.com/ililim/dual-key-remap/releases) 以映射 CapsLock 键为 Esc（单击）或 Ctrl（与其他按键一起按）
 
-> Tips: 注意根据文档[设置管理员权限启动](https://github.com/ililim/dual-key-remap#administrator-access)，否则在提权窗口中无法使用
+   > Tips: 注意根据文档[设置管理员权限启动](https://github.com/ililim/dual-key-remap#administrator-access)，否则在提权窗口中无法使用
 
 10. 系统设置 `Win`+`I`
+
 11. 选一个你喜欢的[鼠标主题](https://zhutix.com/tag/cursors/)
 
 ## WSL
@@ -175,7 +174,7 @@ ScreenShots
 
 2. 安装[Visual Studio](https://visualstudio.microsoft.com/vs/)
 
-   > Tips: 勾选 clang 选项，同时将
+   > Tips: 勾选 clang 和 cmake 选项，同时将
    > `C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\Llvm\x64\bin` 与
    > `C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin`
    > 加入到环境变量`PATH`
@@ -204,7 +203,7 @@ ScreenShots
 | C++        | clangd          | clang-tidy    | clang-format | -      | -        | lldb     | CMake    | Doxygen | gtest   | gperftools |
 | Go         | gopls           | golangci-lint | gofmt        | -      | -        | delve    | go-build | swag    | testify | go-prof    |
 | Python     | pyright         | ruff          | black        | -      | -        | -        | -        | -       | -       | -          |
-| JavaScript | tsserver        | eslint        | eslint       | -      | -        | -        | -        | -       | -       | -          |
+| JavaScript | tsserver        | eslint        | prettier     | -      | -        | -        | -        | -       | -       | -          |
 | HTML       | -               | tidy          | prettier     | -      | -        | -        | -        | -       | -       | -          |
 | CSS        | -               | stylelint     | prettier     | -      | -        | -        | -        | -       | -       | -          |
 | Markdown   | -               | markdownlint  | prettier     | -      | -        | -        | -        | -       | -       | -          |

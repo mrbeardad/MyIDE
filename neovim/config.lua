@@ -76,13 +76,8 @@ require('lvim.lsp.null-ls.linters').setup({
   { name = 'stylelint' },
 })
 require('lvim.lsp.null-ls.formatters').setup({
-  { name = 'eslint_d' },
+  { name = 'prettier' },
   { name = 'black' },
-  {
-    name = 'prettier',
-    filetypes = { 'css', 'scss', 'less', 'html', 'json', 'jsonc', 'yaml', 'markdown',
-      'markdown.mdx', 'graphql', 'handlebars' }
-  },
   { name = 'shfmt' },
   { name = 'sqlfluff' },
 })
@@ -92,6 +87,7 @@ lvim.builtin.lualine.sections.lualine_y = { { 'fileformat' }, { 'encoding' } }
 lvim.builtin.lualine.sections.lualine_z = { { ' %c  %l/%L', type = 'stl' } }
 lvim.builtin.treesitter.matchup.enable = true
 lvim.builtin.treesitter.rainbow.enable = true
+lvim.builtin.treesitter.autotag.enable = true
 lvim.builtin.nvimtree.setup.on_attach = function(bufnr)
   local api = require "nvim-tree.api"
 
@@ -498,6 +494,10 @@ lvim.plugins = {
   },
   {
     'p00f/nvim-ts-rainbow',
+    event = 'BufRead'
+  },
+  {
+    'windwp/nvim-ts-autotag',
     event = 'BufRead'
   },
   {

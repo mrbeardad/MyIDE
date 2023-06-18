@@ -47,8 +47,6 @@ ScreenShots
    scoop install -y 7zip git aria2
    ```
 
-   > Tips: Don't forget to disable app self-update when you install it by microsoft store or scoop
-
 3. Install [NerdCodeProPlus font](./fonts/)
 4. Configure `%USERPROFILE%\.gitconfig`
 
@@ -168,7 +166,7 @@ ScreenShots
 
 2. Install [Visual Studio](https://visualstudio.microsoft.com/vs/)
 
-   > Tips: Check the option of clang and add
+   > Tips: Check the option of clang and cmake and add
    > `C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\Llvm\x64\bin` and
    > `C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin`
    > to environment variable `PATH`
@@ -195,7 +193,7 @@ ScreenShots
 | C++        | clangd          | clang-tidy    | clang-format | -      | -        | lldb     | CMake    | Doxygen | gtest   | gperftools |
 | Go         | gopls           | golangci-lint | gofmt        | -      | -        | delve    | go-build | swag    | testify | go-prof    |
 | Python     | pyright         | ruff          | black        | -      | -        | -        | -        | -       | -       | -          |
-| JavaScript | tsserver        | eslint        | eslint       | -      | -        | -        | -        | -       | -       | -          |
+| JavaScript | tsserver        | eslint        | prettier     | -      | -        | -        | -        | -       | -       | -          |
 | HTML       | -               | tidy          | prettier     | -      | -        | -        | -        | -       | -       | -          |
 | CSS        | -               | stylelint     | prettier     | -      | -        | -        | -        | -       | -       | -          |
 | Markdown   | -               | markdownlint  | prettier     | -      | -        | -        | -        | -       | -       | -          |
