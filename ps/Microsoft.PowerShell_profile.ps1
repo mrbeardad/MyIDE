@@ -30,6 +30,7 @@ Function ... {Set-Location -Path ..\..}
 Function l {lsd -lah --group-dirs first $args}
 Function l. {lsd -lhd --group-dirs first .*}
 Function ll {lsd -lh --group-dirs first}
+Function e {explorer .}
 
 Import-Module git-aliases -DisableNameChecking
 Import-Module posh-git
@@ -65,7 +66,7 @@ Function ProxyEnable {
   $env:HTTP_PROXY="http://127.0.0.1:7890"
   $env:ALL_PROXY="http://127.0.0.1:7890"
 }
-Function ProxyDisanable {
+Function ProxyDisable {
   $env:HTTPS_PROXY=""
   $env:HTTP_PROXY=""
   $env:ALL_PROXY=""
