@@ -48,7 +48,7 @@ ScreenShots
 3. 使用[Scoop-cn](https://github.com/duzyn/scoop-cn)安装
 
    ```pwsh
-   scoop install scoop-cn/7zip scoop-cn/git scoop-cn/aria2 scoop-cn/clash
+   scoop install 7zip git aria2 clash
    ```
 
 4. 安装[NerdCodeProPlus font](fonts/)
@@ -81,7 +81,7 @@ ScreenShots
    ```pwsh
    # 在拷贝配置文件前先执行命令以安装依赖
    scoop install lsd fzf
-   Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
+   scoop install https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/oh-my-posh.json
    Install-Module PSReadLine
    Install-Module PSFzf
    Install-Module ZLocation
@@ -170,7 +170,7 @@ ScreenShots
    scoop install neovim-nightly ripgrep make python nodejs rustup go flutter
    ```
 
-   > Tips: nodejs 之后的包都是可选的
+   > Tips: rustup 及之后的包都是可选的
 
 2. 安装[Visual Studio](https://visualstudio.microsoft.com/vs/)
 

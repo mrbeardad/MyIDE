@@ -77,7 +77,7 @@ ScreenShots
    ```pwsh
    # install dependencies before copy config file
    scoop install lsd fzf
-   Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
+   scoop install https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/oh-my-posh.json
    Install-Module PSReadLine
    Install-Module PSFzf
    Install-Module ZLocation
@@ -162,7 +162,7 @@ ScreenShots
    scoop install neovim-nightly ripgrep make python nodejs rustup go flutter
    ```
 
-   > Tips: The packages after nodejs are optional.
+   > Tips: The packages after rustup (include) are optional.
 
 2. Install [Visual Studio](https://visualstudio.microsoft.com/vs/)
 
