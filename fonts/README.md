@@ -1,6 +1,8 @@
 # NerdCodeProPlus
 
-This font is a combination of three glyphs pathed fonts from [nerd-fonts](https://github.com/ryanoasis/nerd-fonts/)
+This font is a combination of two font families from [nerd-fonts](https://github.com/ryanoasis/nerd-fonts/)
 
-- Regular Style is `SauceCodePro Nerd Font SemiBold Italic`
-- _Italic_ Style is `IBMPlex Nerd Font SemiBold Italic`
+- Regular style is `SauceCodePro Nerd Font Italic`
+- **Bold** style is `SauceCodePro Nerd Font Bold Italic`
+- _Italic_ Style is `SpaceMono Nerd Font Italic`
+- **_Bold Italic_** Style is `SpaceMono Nerd Font Bold Italic`
