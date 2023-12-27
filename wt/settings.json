@@ -7,66 +7,47 @@
       "command": { "action": "globalSummon", "name": "_quake" }
     },
     {
-      "keys": "alt+s",
-      "command": {
-        "action": "splitPane",
-        "split": "down"
-      }
+      "keys": "alt+shift+v",
+      "command": { "action": "splitPane", "split": "vertical" }
     },
     {
-      "keys": "alt+v",
-      "command": {
-        "action": "splitPane",
-        "split": "right"
-      }
+      "keys": "alt+shift+s",
+      "command": { "action": "splitPane", "split": "horizontal" }
     },
     {
-      "keys": "alt+t",
-      "command": {
-        "action": "newTab",
-        "commandline": "btop"
-      }
+      "keys": "alt+shift+z",
+      "command": "togglePaneZoom"
     },
     {
-      "keys": "ctrl+shift+f",
-      "command": {
-        "action": "sendInput",
-        "input": "\u001b[70;6u"
-      }
-    },
-    {
-      "keys": "ctrl+shift+o",
-      "command": {
-        "action": "sendInput",
-        "input": "\u001b[79;6u"
-      }
+      "keys": "ctrl+shift+t",
+      "command": { "action": "newTab", "commandline": "btop" }
     },
     {
       "keys": "ctrl+i",
       "command": {
         "action": "sendInput",
-        "input": "\u001b[73;6u"
+        "input": "\u001b[73;4u" // <A-I>
       }
     },
     {
-      "keys": "ctrl+shift+m",
+      "keys": "ctrl+enter",
       "command": {
         "action": "sendInput",
-        "input": "\u001b[77;6u"
+        "input": "\u001b[13;5u"
       }
     },
     {
-      "keys": "ctrl+shift+u",
+      "keys": "shift+enter",
       "command": {
         "action": "sendInput",
-        "input": "\u001b[85;6u"
+        "input": "\u001b[13;2u"
       }
     },
     {
       "keys": "ctrl+`",
       "command": {
         "action": "sendInput",
-        "input": "\u001c"
+        "input": "\u001b[96;3u" // <A-`>
       }
     }
   ],
@@ -84,9 +65,9 @@
       },
       "font": {
         "face": "NerdCodePro",
-        "size": 12
+        "size": 11
       },
-      "useAtlasEngine": true,
+      // "useAtlasEngine": true, // Not yet mature
       "intenseTextStyle": "all",
       "padding": "0, 0, 0, 0",
       "scrollbarState": "hidden",

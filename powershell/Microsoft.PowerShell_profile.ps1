@@ -2,14 +2,12 @@
 # PSReadLine
 # =============
 # Show different cursor shape in different vi mode
+$env:PoshDefaultCursorShape = "`e[3 q" # blinking underscore, used in prompt theme
 $OnViModeChange = {
   if ($args[0] -eq "Command") {
     Write-Host -NoNewLine "`e[1 q" # blinking block
   } else {
-    # If you want to change insert mode cursor shape, do not forget to change the escape keys in oh-my-posh theme,
-    # I've added the escape keys in the status segment of the theme to reset cursor shape, otherwise, the cursor shape
-    # will be overwritten in many cases.
-    Write-Host -NoNewLine "`e[3 q" # blinking underscore
+    Write-Host -NoNewLine $env:PoshDefaultCursorShape 
   }
 }
 $env:EDITOR = "nvim"
@@ -130,6 +128,7 @@ function .. { Set-Location -Path .. }
 function ... { Set-Location -Path ..\.. }
 function l { lsd -lAg --group-directories-first @args }
 function tree { lsd --tree @args }
+function du { gdu @args }
 function ch { cht -Q @args }
 Set-Alias lg lazygit
 
@@ -166,3 +165,4 @@ function proxy {
 # =============
 # Import oh-my-posh after PSReadline to ensure transient_prompt works properly in vi mode
 oh-my-posh init pwsh --config "$HOME\Documents\PowerShell\base16_bear.omp.json" | Invoke-Expression
+

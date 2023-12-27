@@ -26,9 +26,7 @@
   - [PowerShell](#powershell)
     - [Installation](#installation-2)
     - [Usage](#usage-2)
-  - [WSL](#wsl)
   - [VSCode-Neovim](#vscode-neovim)
-  - [Language Tools](#language-tools)
 
 ## Desktop
 
@@ -68,6 +66,10 @@
 | `Win`+`Right` | Snap window right               |
 | `Alt`+`Tab`   | Switch window                   |
 | `Alt`+`F4`    | Close window                    |
+| `Win`+`D`     | Show/Hide desktop               |
+| `Win`+`,`     | Peek desktop                    |
+| `Win`+`L`     | Lock desktop                    |
+| `Win`+`;`     | Emoji                           |
 | `Alt`+`Space` | Search somthing (PowerToys Run) |
 
 ## Terminal
@@ -84,6 +86,8 @@
 
 - Configure Windows Terminal by pressing `Ctrl`+`Shift`+`,` in terminal window, then overwrite the settings with the [settings.json](./wt/settings.json).
 
+- (Optional) Set Windows Terminal to high performance graphics usage.
+
 > Tips:
 >
 > 1. All colorschemes are adjusted to fit both light and dark theme of system.
@@ -91,19 +95,21 @@
 
 ### Usage
 
-| Shortcut            | Description                                               |
-| ------------------- | --------------------------------------------------------- |
-| `Win`+`` ` ``       | Toggle quake (dropdown) window                            |
-| `Alt`+`S`           | Horizontally split the pane                               |
-| `Alt`+`V`           | Vertically split the pane                                 |
-| `Alt`+`Left`        | Move focus left                                           |
-| `Alt`+`Right`       | Move focus right                                          |
-| `Alt`+`Up`          | Move focus up                                             |
-| `Alt`+`Down`        | Move focus down                                           |
-| `MouseSelect`       | Copy                                                      |
-| `Alt`+`MouseSelect` | Copy block area                                           |
-| `Ctrl`+`Shift`+`V`  | Paste                                                     |
-| `Alt`+`T`           | New tab with [btop](https://github.com/aristocratos/btop) |
+| Shortcut               | Description                                               |
+| ---------------------- | --------------------------------------------------------- |
+| `Win`+`` ` ``          | Toggle quake (dropdown) window                            |
+| `Ctrl`+`Shift`+`{num}` | New tab with profile `{num}`                              |
+| `Ctrl`+`Shift`+`T`     | New tab with [btop](https://github.com/aristocratos/btop) |
+| `Ctrl`+`Shift`+`W`     | Close tab                                                 |
+| `Alt`+`Shift`+`s`      | Horizontally split the pane                               |
+| `Alt`+`Shift`+`v`      | Vertically split the pane                                 |
+| `Alt`+`Left`           | Move focus left                                           |
+| `Alt`+`Right`          | Move focus right                                          |
+| `Alt`+`Up`             | Move focus up                                             |
+| `Alt`+`Down`           | Move focus down                                           |
+| `MouseSelect`          | Copy                                                      |
+| `Alt`+`MouseSelect`    | Copy block area                                           |
+| `Ctrl`+`Shift`+`V`     | Paste                                                     |
 
 ## PowerShell
 
@@ -122,7 +128,7 @@
 - Install the required tools via scoop
 
   ```pwsh
-  scoop install 7zip git aria2 fzf fd ripgrep bat lsd lazygit btop cht tokei
+  scoop install 7zip git aria2 fzf fd ripgrep bat lsd lazygit btop cht tokei gdu
   ```
 
 - Insall PowerShell modules
@@ -136,8 +142,6 @@
 
 - Configure PowerShell [`$PROFILE`](ps/Microsoft.PowerShell_profile.ps1) by execute `notepad $PROFILE` in PowerShell command line,
   then overwrite the profile with the [profile.ps1](./ps/Microsoft.PowerShell_profile.ps1)
-
-- Put the [base16_bear theme](./powershell/base16_bear.omp.json) to `%USERPROFILE%\Documents\PowerShell\base16_bear.omp.json`
 
 - Configure `%USERPROFILE%\.gitconfig`
 
@@ -160,31 +164,39 @@
      IdentityFile ~/.ssh/key.pem
   ```
 
+- You could find the document for wsl configuration section at [here](https://github.com/mrbeardad/MyIDE/tree/d0302ad521fb73f6d099e46bdc4a65ab0626d564?tab=readme-ov-file#wsl)
+
 ### Usage
 
-| Shortcut   | Description                                                                |
-| ---------- | -------------------------------------------------------------------------- |
-| `Esc`      | Vi mode, `v` in vi mode means open `$EDITOR` to edit command               |
-| `Ctrl`+`A` | Move to the start of the line                                              |
-| `Ctrl`+`E` | Move to the end of the line                                                |
-| `Ctrl`+`H` | Delete character left                                                      |
-| `Ctrl`+`W` | Delete word left                                                           |
-| `Ctrl`+`U` | Delete all left                                                            |
-| `Ctrl`+`K` | Delete all right                                                           |
-| `Ctrl`+`Z` | Undo                                                                       |
-| `Ctrl`+`Y` | Redo                                                                       |
-| `Tab`      | Complete command or arguments                                              |
-| `Ctrl`+`P` | Last command history with current prefix                                   |
-| `Ctrl`+`N` | Next command history with current prefix                                   |
-| `Ctrl`+`R` | Fuzzy search command history                                               |
-| `Alt`+`A`  | Fuzzy search command argument history                                      |
-| `Ctrl`+`T` | Fuzzy search files in current directory                                    |
-| `Alt`+`C`  | Fuzzy search directories in current directory                              |
-| `z` `name` | Jump to a rencently worked directory whose path contaion `name`            |
-| `f`        | Fuzzy search text of files in current directory an open `$EDITOR`          |
-| `l`        | List files                                                                 |
-| `ch`       | Search for a cheat sheet on [cheat.sh](https://github.com/chubin/cheat.sh) |
-| `tokei`    | Count code                                                                 |
+| Shortcut   | Description                                                  |
+| ---------- | ------------------------------------------------------------ |
+| `Esc`      | Vi mode, `v` in vi mode means open `$EDITOR` to edit command |
+| `Ctrl`+`A` | Move to the start of the line                                |
+| `Ctrl`+`E` | Move to the end of the line                                  |
+| `Ctrl`+`H` | Delete character left                                        |
+| `Ctrl`+`W` | Delete word left                                             |
+| `Ctrl`+`U` | Delete all left                                              |
+| `Ctrl`+`K` | Delete all right                                             |
+| `Ctrl`+`Z` | Undo                                                         |
+| `Ctrl`+`Y` | Redo                                                         |
+| `Tab`      | Complete command or arguments                                |
+| `Ctrl`+`P` | Last command history with current prefix                     |
+| `Ctrl`+`N` | Next command history with current prefix                     |
+| `Ctrl`+`R` | Fuzzy search command history                                 |
+| `Alt`+`A`  | Fuzzy search command argument history                        |
+| `Ctrl`+`T` | Fuzzy search files in current directory                      |
+| `Alt`+`C`  | Fuzzy search directories in current directory                |
+
+| Utils   | Description                                                                |
+| ------- | -------------------------------------------------------------------------- |
+| `z`     | Jump to a rencently worked directory whose path contaion the search key    |
+| `f`     | Fuzzy search text of files in current directory an open `$EDITOR`          |
+| `l`     | List files                                                                 |
+| `tree`  | List files as tree                                                         |
+| `du`    | Disk usage analysis                                                        |
+| `ch`    | Search for a cheat sheet on [cheat.sh](https://github.com/chubin/cheat.sh) |
+| `tokei` | Count code                                                                 |
+| `proxy` | Show/Set/Enable/Disable proxy address                                      |
 
 | Git Aliases | Git subcommand | Description                                                                                              |
 | ----------- | -------------- | -------------------------------------------------------------------------------------------------------- |
@@ -258,110 +270,46 @@
 > 2. You could use my [config.yml](./lazygit/config.yml) if you choose lazygit, put it to `%APPDATA%\lazygit\config.yml`
 > 3. Highly recommended for this [blog post](https://nvie.com/posts/a-successful-git-branching-model/) about git flow.
 
-<!-- TODO: zellij -->
-
-## WSL
-
-<div align="center">
-
-ScreenShots
-
-![tmux](images/tmux.png)
-![zsh_tig](images/zsh_tig.png)
-![zsh_ranger](images/zsh_ranger.png)
-![btop](images/btop.png)
-
-</div>
-
-1. Install WSL2
-
-   ```pwsh
-   # in admin
-   wsl --install
-   wsl --update
-   ```
-
-2. Install [ArchWSL](https://wsldl-pg.github.io/ArchW-docs/How-to-Setup/)
-
-   > Tips: ArchWSL is optional, if you like ArchLinux, you can set it as the default distro for wsl by `wsl -s Arch`, or you can just use ubuntu.
-
-3. Limit the [memory usage](https://github.com/microsoft/WSL/issues/4166#issuecomment-526725261) of WSL2, create file `%UserProfile%\.wslconfig` with following content
-
-   ```toml
-   [wsl2]
-   memory=6GB
-   swap=0
-   ```
-
-4. Execute the shell script in wsl to configure all the things
-
-   ```sh
-   # in wsl
-   curl -Lo init.sh https://github.com/mrbeardad/MyIDE/raw/master/init.sh
-   # execute it directly, don't `bash ./init.sh`
-   ./init.sh
-   ```
-
-   > Tips: You can open [init.sh](init.sh) to have a look, all configuretion is at the end of script, You can extract thme alone.
-
 ## VSCode-Neovim
 
 <div align="center">
 
-ScreenShots
-
-![vim_home](images/vim_home.png)
-![vim_plugins](images/vim_plugins.png)
-![vim_ide](images/vim_ide.png)
-![vsc_ide](images/vsc_ide.png)
+![neovim](images/neovim.png)
 
 </div>
 
-> [VSCode-Neovim Keybindings](vscode-neovim.md)
+1. Install [Visual Studio](https://apps.microsoft.com/detail/XPDCFJDKLZJLP8?hl=en-US&gl=US) for C/C++ compiler and cmake, or you can install gcc and make instead.
 
-1. Install Neovim and dependencies
-
-   ```cmd
-   scoop install neovim-nightly ripgrep make python nodejs rustup go flutter
-   ```
-
-   > Tips: The packages after rustup (include) are optional.
-
-2. Install [Visual Studio](https://visualstudio.microsoft.com/vs/)
-
-   > Tips: Check the option of clang and cmake and add
+   > Tips: Check the install option of clang and cmake, add
    > `C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\Llvm\x64\bin` and
    > `C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin`
-   > to environment variable `PATH`
+   > to environment variable `PATH` after installation.
+
+2. Install Neovim
+
+   ```pwsh
+   # use --skip to skip hash check
+   scoop install neovim-nightly --skip
+   ```
 
 3. Configure Neovim
 
-   1. Install nightly version of [LunarVim](https://www.lunarvim.org/docs/master/installation)
-   2. Copy [config.lua](./neovim/config.lua) to `%LOCALAPPDATA%\lvim\`
-   3. Copy [init.vim](./neovim/init.vim) to `%LOCALAPPDATA%\nvim\`
-   4. Run `nvim.exe` to install plugins automatically
+   ```pwsh
+   # required
+   Move-Item $env:LOCALAPPDATA\nvim $env:LOCALAPPDATA\nvim.bak
+   # optional but recommended
+   Move-Item $env:LOCALAPPDATA\nvim-data $env:LOCALAPPDATA\nvim-data.bak
+   # clone
+   git clone https://github.com/mrbeardad/nvim $env:LOCALAPPDATA\nvim
+   # start and install plugins
+   nvim
+   ```
 
-4. Configure VSCode
+4. Install [VSCode](https://apps.microsoft.com/detail/XP9KHM4BK9FZ7Q?hl=en-US&gl=US)
 
-   1. Copy [lastSyncextensions.json](vscode/lastSyncextensions.json) to `%APPDATA%\Code\User\sync\extensions\`
-   2. Copy [settings.json](vscode/settings.json) and [keybindings.json](vscode/keybindings.json) to `%APPDATA%\Code\User`
-   3. Launch VSCode to install plugins automatically
+5. Configure VSCode
 
-   > Tips: VSCode's config is depend on Neovim's config
+   1. This is my [settings.json](vscode/settings.json) and [keybindings.json](vscode/keybindings.json), you could copy them to `%APPDATA%\Code\User` optionally
+   2. This is my [lastSyncextensions.json](vscode/lastSyncextensions.json), you could copy it to `%APPDATA%\Code\User\sync\extensions\`
 
-## Language Tools
-
-| Lang       | Language Server | Linter        | Formatter    | Syntax | Snippets | Debugger | Build    | Doc     | Test    | Prof       |
-| ---------- | --------------- | ------------- | ------------ | ------ | -------- | -------- | -------- | ------- | ------- | ---------- |
-| C++        | clangd          | clang-tidy    | clang-format | -      | -        | lldb     | CMake    | Doxygen | gtest   | gperftools |
-| Go         | gopls           | golangci-lint | gofmt        | -      | -        | delve    | go-build | swag    | testify | go-prof    |
-| Python     | pyright         | ruff          | black        | -      | -        | -        | -        | -       | -       | -          |
-| JavaScript | tsserver        | eslint        | prettier     | -      | -        | -        | -        | -       | -       | -          |
-| HTML       | -               | tidy          | prettier     | -      | -        | -        | -        | -       | -       | -          |
-| CSS        | -               | stylelint     | prettier     | -      | -        | -        | -        | -       | -       | -          |
-| Markdown   | -               | markdownlint  | prettier     | -      | -        | -        | -        | -       | -       | -          |
-
-Other references:
-
-- [Language Server](https://microsoft.github.io/language-server-protocol/implementors/servers/)
-- [Awesome Linters](https://github.com/caramelomartins/awesome-linters)
+6. **For more detail about configuration and usage of vscode and neovim, see [mrbeardad/nvim](https://github.com/mrbeardad/nvim)**

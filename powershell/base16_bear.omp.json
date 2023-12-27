@@ -301,22 +301,6 @@
           "template": "  {{ .Full }} "
         },
         {
-          "type": "julia",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#ffffff",
-          "background": "#4063D8",
-          "template": "  {{ .Full }} "
-        },
-        {
-          "type": "julia",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#ffffff",
-          "background": "#4063D8",
-          "template": "  {{ .Full }} "
-        },
-        {
           "type": "lua",
           "style": "powerline",
           "powerline_symbol": "",
@@ -445,7 +429,7 @@
           "background": "#f5a834",
           "foreground": "#100e23",
           "powerline_symbol": "",
-          "template": " ui5 {{ .Full }} ",
+          "template": "  ui5 {{ .Full }} ",
           "style": "powerline",
           "type": "ui5tooling"
         },
@@ -550,7 +534,10 @@
         {
           "type": "status",
           "style": "plain",
-          "template": "\u001b[3 q {{ if ne .Code 0 }}<lightRed>❯</><red>❯</>{{ else }}<lightBlue>❯</><lightCyan>❯</>{{ end }}",
+          "templates": [
+            "{{ if .Env.PoshDefaultCursorShape }}{{ .Env.PoshDefaultCursorShape }}{{ end }}",
+            " {{ if ne .Code 0 }}<lightRed>❯</><red>❯</>{{ else }}<lightBlue>❯</><lightCyan>❯</>{{ end }}"
+          ],
           "properties": {
             "always_enabled": true
           }
