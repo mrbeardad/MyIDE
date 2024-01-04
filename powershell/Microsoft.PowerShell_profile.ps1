@@ -44,6 +44,7 @@ RegisterGit gst "status --short --branch --show-stash --ahead-behind"
 RegisterGit ga "add"
 RegisterGit gaa "add --all"
 RegisterGit gau "add --update"
+RegisterGit gcln "clean"
 RegisterGit grs "restore"
 RegisterGit gsta "stash push"
 RegisterGit gstl "stash list"
@@ -127,7 +128,7 @@ Set-Alias f Invoke-PsFzfRipgrep
 function .. { Set-Location -Path .. }
 function ... { Set-Location -Path ..\.. }
 function l { lsd -lAg --group-directories-first @args }
-function tree { lsd --tree @args }
+function tree { lsd -A --tree --group-directories-first -I .git @args }
 function du { gdu @args }
 function ch { cht -Q @args }
 Set-Alias lg lazygit
@@ -165,4 +166,8 @@ function proxy {
 # =============
 # Import oh-my-posh after PSReadline to ensure transient_prompt works properly in vi mode
 oh-my-posh init pwsh --config "$HOME\Documents\PowerShell\base16_bear.omp.json" | Invoke-Expression
-
+# The integrated terminal in neovim and vscode has bug with unicode
+if ($env:NVIM -or $env:VSCODE_INJECTION) {
+  oh-my-posh toggle sysinfo
+  oh-my-posh toggle time
+}

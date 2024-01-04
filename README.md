@@ -144,6 +144,8 @@
 - Configure PowerShell [`$PROFILE`](ps/Microsoft.PowerShell_profile.ps1) by execute `notepad $PROFILE` in PowerShell command line,
   then overwrite the profile with the [profile.ps1](./ps/Microsoft.PowerShell_profile.ps1)
 
+- Copy the [prompt theme](./powershell/base16_bear.omp.json) to `%USERPROFILE%\Documents\PowerShell\base16_bear.omp.json`
+
 - Configure `%USERPROFILE%\.gitconfig`
 
   ```toml

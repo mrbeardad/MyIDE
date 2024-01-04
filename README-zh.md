@@ -141,6 +141,8 @@
 
 - 在 PowerShell 中执行`notepad $PROFILE`来更改配置文件，这是我的 [profile.ps1](./ps/Microsoft.PowerShell_profile.ps1) 你可以参考
 
+- 复制[提示符主题](./powershell/base16_bear.omp.json)到`%USERPROFILE%\Documents\PowerShell\base16_bear.omp.json`
+
 - 配置 `%USERPROFILE%\.gitconfig`
 
   ```toml

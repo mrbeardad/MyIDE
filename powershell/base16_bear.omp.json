@@ -9,15 +9,9 @@
       "alignment": "left",
       "segments": [
         {
-          "type": "text",
-          "style": "plain",
-          "foreground": "darkGray",
-          "template": "╭─"
-        },
-        {
           "type": "os",
           "style": "diamond",
-          "leading_diamond": "",
+          "leading_diamond": "<darkGray,transparent>╭─</>",
           "trailing_diamond": "",
           "foreground": "white",
           "background": "cyan",
@@ -117,7 +111,7 @@
           "powerline_symbol": "",
           "foreground": "#000000",
           "background": "#9ec3f0",
-          "template": " ﴃ {{ .EnvironmentName }}"
+          "template": " 󰠅 {{ .EnvironmentName }}"
         },
         {
           "type": "azfunc",
@@ -304,8 +298,8 @@
           "type": "lua",
           "style": "powerline",
           "powerline_symbol": "",
-          "foreground": "white",
-          "background": "blue",
+          "foreground": "#ffffff",
+          "background": "#000081",
           "template": "  {{ .Full }} "
         },
         {
@@ -526,15 +520,10 @@
       "alignment": "left",
       "segments": [
         {
-          "type": "text",
-          "foreground": "darkGray",
-          "style": "plain",
-          "template": "╰─"
-        },
-        {
           "type": "status",
           "style": "plain",
           "templates": [
+            "<darkGray>╰─</>",
             "{{ if .Env.PoshDefaultCursorShape }}{{ .Env.PoshDefaultCursorShape }}{{ end }}",
             " {{ if ne .Code 0 }}<lightRed>❯</><red>❯</>{{ else }}<lightBlue>❯</><lightCyan>❯</>{{ end }}"
           ],
