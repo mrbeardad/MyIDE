@@ -1,205 +1,116 @@
 [
-  // https://github.com/vscode-neovim/vscode-neovim#-how-it-works
-  // In insert mode, map control keys to vscode-command by vscode-keybind,
-  // and map normal keys to vscode-command by also vscode keybind.
-  // In other mode, map control keys to neovim-map(vscode-neovim.send) or vscode-command by vscode keybind,
-  // and map normal keys to neovim-map or vscode-command(VSCodeNotify) by neovim init.vim
-
+  // Explorer
   {
-    "key": "ctrl+h",
-    "command": "editor.action.startFindReplaceAction",
-    "when": "editorTextFocus && neovim.mode == normal"
+    "key": "l",
+    "command": "list.toggleExpand",
+    "when": "listFocus && !inputFocus"
   },
   {
-    "key": "ctrl+h",
-    "command": "vscode-neovim.send",
-    "args": "<C-H>",
-    "when": "editorTextFocus && neovim.mode == visual"
+    "key": "shift+y",
+    "command": "copyFilePath",
+    "when": "listFocus && !inputFocus"
   },
   {
-    "key": "j",
-    "command": "vscode-neovim.compositeEscape1",
-    "when": "editorTextFocus && neovim.mode == insert",
-    "args": "j"
-  },
-  {
-    "key": "k",
-    "command": "vscode-neovim.compositeEscape2",
-    "when": "editorTextFocus && neovim.mode == insert",
-    "args": "k"
-  },
-  {
-    "key": "ctrl+shift+j",
-    "command": "editor.action.moveLinesDownAction",
-    "when": "editorTextFocus && !editorReadonly"
-  },
-  {
-    "key": "ctrl+shift+k",
-    "command": "editor.action.moveLinesUpAction",
-    "when": "editorTextFocus && !editorReadonly"
-  },
-  {
-    "key": "ctrl+j",
-    "command": "editor.action.insertLineAfter",
-    "when": "editorTextFocus && !editorReadonly"
-  },
-  {
-    "key": "ctrl+w",
-    "command": "-workbench.action.closeGroup"
-  },
-  {
-    "key": "ctrl+w",
-    "command": "-workbench.action.closeActiveEditor"
-  },
-  {
-    "key": "ctrl+l",
-    "command": "vscode-neovim.send",
-    "args": "<Esc>ea",
-    "when": "editorTextFocus && neovim.mode == insert"
-  },
-  {
-    "key": "ctrl+z",
-    "command": "vscode-neovim.send",
-    "args": "<C-Z>",
-    "when": "editorTextFocus && neovim.mode == insert"
-  },
-  {
-    "key": "ctrl+shift+z",
-    "command": "vscode-neovim.send",
-    "args": "<C-S-Z>",
-    "when": "editorTextFocus && neovim.mode == insert"
-  },
-  {
-    "key": "ctrl+n",
-    "command": "editor.action.addSelectionToNextFindMatch",
-    "when": "editorFocus && !suggestWidgetVisible && !CodeActionMenuVisible && neovim.mode != visual"
-  },
-  {
-    "key": "ctrl+n",
-    "command": "vscode-neovim.send",
-    "args": "<C-N>",
-    "when": "editorFocus && !suggestWidgetVisible && !CodeActionMenuVisible && neovim.mode == visual"
-  },
-  {
-    "key": "ctrl+n",
-    "command": "-workbench.action.files.newUntitledFile"
-  },
-  {
-    "key": "ctrl+shift+n",
-    "command": "editor.action.addSelectionToPreviousFindMatch",
-    "when": "editorFocus && neovim.mode != visual"
-  },
-  {
-    "key": "ctrl+shift+n",
-    "command": "vscode-neovim.send",
-    "args": "<C-S-N>",
-    "when": "editorFocus && neovim.mode == visual"
-  },
-  {
-    "key": "ctrl+shift+l",
-    "command": "editor.action.selectHighlights",
-    "when": "editorFocus && neovim.mode != visual"
-  },
-  {
-    "key": "ctrl+shift+l",
-    "command": "vscode-neovim.send",
-    "args": "<C-S-L>",
-    "when": "editorTextFocus && neovim.mode == visual"
-  },
-  {
-    "key": "ctrl+c",
-    "command": "editor.action.clipboardCopyAction",
-    "when": "editorHasSelection"
-  },
-  {
-    "key": "ctrl+v",
-    "command": "markdown.extension.editing.paste",
-    "when": "editorTextFocus && editorLangId =~ /^markdown$|^rmd$|^qmd$/ && neovim.mode == insert"
-  },
-
-  {
-    "key": "ctrl+i",
-    "command": "editor.action.triggerSuggest",
-    "when": "editorTextFocus && neovim.mode == insert && !suggestWidgetVisible && editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
-  },
-  {
-    "key": "ctrl+i",
-    "command": "hideSuggestWidget",
-    "when": "editorTextFocus && neovim.mode == insert && suggestWidgetVisible && textInputFocus"
-  },
-  {
-    "key": "alt+i",
-    "command": "editor.action.insertSnippet",
-    "when": "editorTextFocus"
-  },
-  {
-    "key": "ctrl+k o",
-    "command": "workbench.action.files.openFile",
-    "when": "true"
-  },
-  {
-    "key": "ctrl+k n",
-    "command": "workbench.action.files.newUntitledFile"
-  },
-  {
-    "key": "ctrl+k r",
-    "command": "workbench.action.openRecent"
+    "key": "shift+o",
+    "command": "revealFileInOS",
+    "when": "listFocus && !inputFocus"
   },
   {
     "key": "tab",
-    "command": "workbench.action.focusFirstEditorGroup",
-    "when": "explorerViewletFocus"
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "!editorTextFocus && !inputFocus"
   },
+  // Windows
   {
     "key": "tab",
     "command": "workbench.action.focusNextGroup",
-    "when": "editorTextFocus && neovim.mode != insert"
+    "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
   },
   {
     "key": "shift+tab",
     "command": "workbench.action.focusPreviousGroup",
-    "when": "editorTextFocus && neovim.mode != insert"
+    "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
+  },
+  // Files
+  {
+    "key": "ctrl+shift+r",
+    "command": "workbench.action.openRecent"
+  },
+  // Search
+  {
+    "key": "alt+w",
+    "command": "vscode-neovim.send-cmdline",
+    "args": "<A-w>",
+    "when": "neovim.init && neovim.mode == 'cmdline'"
   },
   {
-    "key": "ctrl+shift+w",
-    "command": "workbench.action.closeActiveEditor"
+    "key": "alt+c",
+    "command": "vscode-neovim.send-cmdline",
+    "args": "<A-c>",
+    "when": "neovim.init && neovim.mode == 'cmdline'"
   },
   {
-    "key": "ctrl+shift+w",
-    "command": "workbench.action.closeGroup",
-    "when": "activeEditorGroupEmpty && multipleEditorGroups"
+    "key": "alt+r",
+    "command": "vscode-neovim.send-cmdline",
+    "args": "<A-r>",
+    "when": "neovim.init && neovim.mode == 'cmdline'"
+  },
+  // Scroll
+  {
+    "key": "alt+f",
+    "command": "scrollRight"
   },
   {
-    "key": "ctrl+shift+w",
-    "command": "-workbench.action.closeWindow"
+    "key": "alt+b",
+    "command": "scrollLeft"
+  },
+  // Motion
+  {
+    "key": "alt+h",
+    "command": "cursorLeft",
+    "when": "textInputFocus"
   },
   {
-    // WARN: Define after all other ctrl+k prefix keybinds!
-    "key": "ctrl+k",
-    "command": "deleteAllRight",
-    "when": "editorTextFocus && neovim.mode == insert"
+    "key": "alt+l",
+    "command": "cursorRight",
+    "when": "textInputFocus"
+  },
+  // Operation
+  {
+    "key": "alt+j",
+    "command": "editor.action.moveLinesDownAction",
+    "when": "editorTextFocus && !editorReadonly"
   },
   {
-    "key": "f1",
-    "command": "workbench.action.toggleSidebarVisibility"
+    "key": "alt+k",
+    "command": "editor.action.moveLinesUpAction",
+    "when": "editorTextFocus && !editorReadonly"
   },
+  // Language
+  {
+    "key": "ctrl+n",
+    "command": "editor.action.triggerSuggest",
+    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible && neovim.init && neovim.mode == 'insert'"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "editor.action.triggerSuggest",
+    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible && neovim.init && neovim.mode == 'insert'"
+  },
+  {
+    "key": "j",
+    "command": "editor.action.scrollDownHover",
+    "when": "editorHoverFocused"
+  },
+  {
+    "key": "k",
+    "command": "editor.action.scrollUpHover",
+    "when": "editorHoverFocused"
+  },
+  // UI
   {
     "key": "ctrl+shift+g",
     "command": "workbench.view.scm",
     "when": "workbench.scm.active"
-  },
-  {
-    "key": "alt+e",
-    "command": "revealFileInOS",
-    "when": "editorFocus"
-  },
-  {
-    "key": "alt+e",
-    "command": "remote-wsl.revealInExplorer",
-    "when": "editorFocus && remoteName == 'wsl'"
-  },
-  {
-    "key": "alt+t",
-    "command": "translator.toggleCaptureWord"
   }
 ]
