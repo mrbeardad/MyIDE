@@ -18,14 +18,14 @@
 
 - [MyIDE](#myide)
   - [Desktop](#desktop)
-    - [Installation](#installation)
-    - [Usage](#usage)
+    - [Desktop Installation](#desktop-installation)
+    - [Desktop Usage](#desktop-usage)
   - [Terminal](#terminal)
-    - [Installation](#installation-1)
-    - [Usage](#usage-1)
+    - [Terminal Installation](#terminal-installation)
+    - [Terminal Usage](#terminal-usage)
   - [PowerShell](#powershell)
-    - [Installation](#installation-2)
-    - [Usage](#usage-2)
+    - [PowerShell Installation](#powershell-installation)
+    - [PowerShell Usage](#powershell-usage)
   - [VSCode-Neovim](#vscode-neovim)
 
 ## Desktop
@@ -36,7 +36,7 @@
 
 </div>
 
-### Installation
+### Desktop Installation
 
 - Install [TranslucentTB](https://apps.microsoft.com/detail/9PF4KZ2VN4W9?hl=en-US&gl=US) : A lightweight utility that makes the Windows taskbar transparent.
 
@@ -54,7 +54,7 @@
 
 - Press `Win`+`I` and check if there are any settings that need to be changed.
 
-### Usage
+### Desktop Usage
 
 | Shortcut      | Descript                        |
 | ------------- | ------------------------------- |
@@ -80,11 +80,11 @@
 
 </div>
 
-### Installation
+### Terminal Installation
 
 - Install [Windows Terminal](https://apps.microsoft.com/detail/9N0DX20HK701?hl=en-us&gl=US)
 
-- Configure Windows Terminal by pressing `Ctrl`+`Shift`+`,` in terminal window, then overwrite the settings with the [settings.json](./wt/settings.json).
+- Configure Windows Terminal by pressing `Ctrl`+`Shift`+`,` in terminal window, you could refer to my [settings.json](./wt/settings.json).
 
 - (Optional) Set Windows Terminal to high performance graphics usage.
 
@@ -93,7 +93,7 @@
 > 1. All colorschemes are adjusted to fit both light and dark theme of system.
 > 2. The font is set to NerdCodePro that mentioned above, change it if you don't want to use it.
 
-### Usage
+### Terminal Usage
 
 | Shortcut               | Description                                               |
 | ---------------------- | --------------------------------------------------------- |
@@ -110,6 +110,7 @@
 | `MouseSelect`          | Copy                                                      |
 | `Alt`+`MouseSelect`    | Copy block area                                           |
 | `Ctrl`+`Shift`+`V`     | Paste                                                     |
+| `Ctrl`+`Shift`+`F`     | Search                                                    |
 
 ## PowerShell
 
@@ -119,7 +120,7 @@
 
 </div>
 
-### Installation
+### PowerShell Installation
 
 - Install [PowerShell](https://apps.microsoft.com/detail/9MZ1SNWT0N5D?hl=en-us&gl=US)
 
@@ -127,13 +128,13 @@
 
 - Install the required tools via scoop
 
-  ```pwsh
-  scoop install 7zip git aria2 fzf fd ripgrep bat lsd lazygit btop cht tokei gdu
+  ```ps1
+  scoop install 7zip git aria2 fzf fd ripgrep bat lsd lazygit btop cht tokei gdu everything
   ```
 
 - Insall PowerShell modules
 
-  ```pwsh
+  ```ps1
   scoop install oh-my-posh
   Install-Module posh-git
   Install-Module PSFzf
@@ -153,9 +154,9 @@
     editor = nvim
   ```
 
-- Configure `%USERPROFILE%\.ssh\config`, thus you can push and pull from github via ssh with url `git@github.com:user/repo`.
+- Configure `%USERPROFILE%\.ssh\config`, thus you can push and pull from github via ssh with url `git@github.com:user/repo`. Of course, you need to add your own ssh public key to github first
 
-  ```conf
+  ```txt
   Host github.com
      HostName github.com
      Port 22
@@ -164,9 +165,9 @@
      IdentityFile ~/.ssh/key.pem
   ```
 
-- You could find the document for wsl configuration section at [here](https://github.com/mrbeardad/MyIDE/tree/d0302ad521fb73f6d099e46bdc4a65ab0626d564?tab=readme-ov-file#wsl)
+- You could find the document for wsl configuration section at [here](https://github.com/mrbeardad/MyIDE/tree/d0302ad521fb73f6d099e46bdc4a65ab0626d564?tab=readme-ov-file#wsl), the dotfiles in wsl/linux is still in the repo.
 
-### Usage
+### PowerShell Usage
 
 | Shortcut   | Description                                                  |
 | ---------- | ------------------------------------------------------------ |
@@ -204,6 +205,7 @@
 | `ga`        | `add`          | Update changes from workspace to index                                                                   |
 | `gaa`       | `add`          | Update all changes from workspace to index                                                               |
 | `gau`       | `add`          | Update all changes from workspace to index exclude untracked files                                       |
+| `gcln`      | `clean`        | Clean all untracked files                                                                                |
 | `grs`       | `restore`      | Restore workspace from index **(default)** or a commit                                                   |
 | `gstl`      | `stash`        | Show stashes                                                                                             |
 | `gsta`      | `stash`        | Stash all changes in workspace and index                                                                 |
@@ -216,7 +218,7 @@
 | `grlg`      | `reflog`       | Show commits of HEAD history, revision form like `@{1}`                                                  |
 | `gd`        | `diff`         | Show changes **(default between workspace and index)**                                                   |
 | `gdt`       | `difftool`     | Show changes **(default between workspace and index)** by `nvim`                                         |
-| `gmt`       | `mergetool`    | Resolve conflicts by `nvim`                                                                              |
+| `gmt`       | `mergetool`    | Resolve conflicts by `nvim`, or you can use `gco --ours` or `gco --theirs`                               |
 | `gm`        | `merge`        | Merge a commit to HEAD, and do not allow fast forward                                                    |
 | `gmc`       | `merge`        | Continue merge                                                                                           |
 | `gms`       | `merge`        | Skip current patch and continue merge                                                                    |
@@ -287,14 +289,14 @@
 
 2. Install Neovim
 
-   ```pwsh
-   # use --skip to skip hash check
+   ```ps1
+   # use --skip to skip hash check since there is some problem in scoop's neovim-nightly package
    scoop install neovim-nightly --skip
    ```
 
 3. Configure Neovim
 
-   ```pwsh
+   ```ps1
    # required
    Move-Item $env:LOCALAPPDATA\nvim $env:LOCALAPPDATA\nvim.bak
    # optional but recommended
