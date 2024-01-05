@@ -6,14 +6,14 @@
     "when": "listFocus && !inputFocus"
   },
   {
-    "key": "shift+y",
+    "key": "c",
     "command": "copyFilePath",
-    "when": "listFocus && !inputFocus"
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
-    "key": "shift+o",
+    "key": "o",
     "command": "revealFileInOS",
-    "when": "listFocus && !inputFocus"
+    "when": "filesExplorerFocus && !inputFocus"
   },
   {
     "key": "tab",
@@ -30,11 +30,6 @@
     "key": "shift+tab",
     "command": "workbench.action.focusPreviousGroup",
     "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
-  },
-  // Files
-  {
-    "key": "ctrl+shift+r",
-    "command": "workbench.action.openRecent"
   },
   // Search
   {
@@ -64,18 +59,19 @@
     "key": "alt+b",
     "command": "scrollLeft"
   },
-  // Motion
-  {
-    "key": "alt+h",
-    "command": "cursorLeft",
-    "when": "textInputFocus"
-  },
-  {
-    "key": "alt+l",
-    "command": "cursorRight",
-    "when": "textInputFocus"
-  },
   // Operation
+  {
+    "key": "alt+d",
+    "command": "vscode-neovim.send",
+    "args": "<A-d>",
+    "when": "editorTextFocus && neovim.init"
+  },
+  {
+    "key": "alt+c",
+    "command": "vscode-neovim.send",
+    "args": "<A-c>",
+    "when": "editorTextFocus && neovim.init && (neovim.mode == 'normal' || neovim.mode == 'visual')"
+  },
   {
     "key": "alt+j",
     "command": "editor.action.moveLinesDownAction",
@@ -96,16 +92,6 @@
     "key": "ctrl+p",
     "command": "editor.action.triggerSuggest",
     "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible && neovim.init && neovim.mode == 'insert'"
-  },
-  {
-    "key": "j",
-    "command": "editor.action.scrollDownHover",
-    "when": "editorHoverFocused"
-  },
-  {
-    "key": "k",
-    "command": "editor.action.scrollUpHover",
-    "when": "editorHoverFocused"
   },
   // UI
   {
