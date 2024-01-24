@@ -161,8 +161,8 @@
 
   ```txt
   Host github.com
-     HostName github.com
-     Port 22
+     Hostname ssh.github.com
+     Port 443
      User git
      IdentitiesOnly yes
      IdentityFile ~/.ssh/key.pem

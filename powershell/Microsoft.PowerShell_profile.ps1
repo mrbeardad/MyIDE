@@ -22,8 +22,6 @@ Set-PSReadlineKeyHandler -ViMode Insert -Key Tab -Function MenuComplete
 Set-PSReadLineOption -HistorySearchCursorMovesToEnd
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+p -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+n -Function HistorySearchForward
-Set-PSReadLineKeyHandler -ViMode Insert -Key UpArrow -Function HistorySearchBackward
-Set-PSReadLineKeyHandler -ViMode Insert -Key DownArrow -Function HistorySearchForward
 
 # =============
 # posh-git
