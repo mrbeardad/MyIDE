@@ -106,6 +106,7 @@
 | `Alt`+`Up`             | 聚焦上边                                                   |
 | `Alt`+`Down`           | 聚焦下边                                                   |
 | `MouseSelect`          | 复制                                                       |
+| `Shift`+`MouseSelect`  | 增量复制                                                   |
 | `Alt`+`MouseSelect`    | 块区域复制                                                 |
 | `Ctrl`+`Shift`+`V`     | 粘贴                                                       |
 | `Ctrl`+`Shift`+`F`     | 搜索                                                       |
@@ -180,8 +181,8 @@
 | `Ctrl`+`Z` | 撤销                                    |
 | `Ctrl`+`Y` | 重做                                    |
 | `Tab`      | 补全                                    |
-| `Ctrl`+`P` | 上条历史命令                            |
-| `Ctrl`+`N` | 下条历史命令                            |
+| `Ctrl`+`P` | 上条匹配当前输入的历史命令              |
+| `Ctrl`+`N` | 下条匹配当前输入的历史命令              |
 | `Ctrl`+`R` | 模糊搜索历史命令                        |
 | `Alt`+`A`  | 模糊搜索历史命令参数                    |
 | `Ctrl`+`T` | 模糊搜索文件                            |

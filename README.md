@@ -108,6 +108,7 @@
 | `Alt`+`Up`             | Move focus up                                             |
 | `Alt`+`Down`           | Move focus down                                           |
 | `MouseSelect`          | Copy                                                      |
+| `Shift`+`MouseSelect`  | Incremental Copy                                          |
 | `Alt`+`MouseSelect`    | Copy block area                                           |
 | `Ctrl`+`Shift`+`V`     | Paste                                                     |
 | `Ctrl`+`Shift`+`F`     | Search                                                    |
@@ -183,7 +184,7 @@
 | `Ctrl`+`Z` | Undo                                                         |
 | `Ctrl`+`Y` | Redo                                                         |
 | `Tab`      | Complete command or arguments                                |
-| `Ctrl`+`P` | Last command history with current prefix                     |
+| `Ctrl`+`P` | Previous command history with current prefix                 |
 | `Ctrl`+`N` | Next command history with current prefix                     |
 | `Ctrl`+`R` | Fuzzy search command history                                 |
 | `Alt`+`A`  | Fuzzy search command argument history                        |
