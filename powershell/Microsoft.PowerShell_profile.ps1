@@ -165,7 +165,7 @@ function proxy {
 # Import oh-my-posh after PSReadline to ensure transient_prompt works properly in vi mode
 oh-my-posh init pwsh --config "$HOME\Documents\PowerShell\base16_bear.omp.json" | Invoke-Expression
 # The integrated terminal in neovim and vscode has bug with unicode
-if ($env:NVIM -or $env:VSCODE_INJECTION) {
+if ($env:NVIM -or $env:VSCODE_GIT_IPC_HANDLE) {
   oh-my-posh toggle sysinfo
   oh-my-posh toggle time
 }
