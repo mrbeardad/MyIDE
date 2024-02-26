@@ -86,17 +86,16 @@
   {
     "key": "ctrl+n",
     "command": "editor.action.triggerSuggest",
-    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible && neovim.init && neovim.mode == 'insert'"
+    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible && !editorHasSelection && neovim.init && neovim.mode == 'insert'"
   },
   {
     "key": "ctrl+p",
     "command": "editor.action.triggerSuggest",
     "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible && neovim.init && neovim.mode == 'insert'"
   },
-  // UI
   {
-    "key": "ctrl+shift+g",
-    "command": "workbench.view.scm",
-    "when": "workbench.scm.active"
+    "key": "tab",
+    "command": "-acceptSelectedSuggestion",
+    "when": "suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && textInputFocus"
   }
 ]
