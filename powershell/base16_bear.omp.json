@@ -87,45 +87,23 @@
           "powerline_symbol": "",
           "foreground": "#E8EAEE",
           "background": "#1E9748",
-          "template": "   cmake {{ .Full }} "
+          "template": "  cmake {{ .Full }} "
         },
         {
-          "type": "dart",
+          "type": "xmake",
           "style": "powerline",
           "powerline_symbol": "",
-          "foreground": "#ffffff",
-          "background": "#06A4CE",
-          "template": "  {{ .Full }} "
+          "foreground": "#e0f2f1",
+          "background": "#22a079",
+          "template": "  xmake {{ .Full }} "
         },
         {
-          "type": "deno",
-          "style": "plain",
-          "foreground": "#3C82F6",
-          "template": "  {{ .Full }} "
-        },
-        {
-          "type": "docker",
+          "type": "rust",
           "style": "powerline",
           "powerline_symbol": "",
-          "foreground": "#000000",
-          "background": "#0B59E7",
-          "template": "  {{ .Context }} "
-        },
-        {
-          "type": "dotnet",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#000000",
-          "background": "#00ffff",
-          "template": "  {{ .Full }} "
-        },
-        {
-          "type": "flutter",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#ffffff",
-          "background": "#06A4CE",
-          "template": "  {{ .Full }} "
+          "foreground": "#193549",
+          "background": "#99908a",
+          "template": "  {{ .Full }} "
         },
         {
           "type": "go",
@@ -136,28 +114,42 @@
           "template": "  {{ .Full }} "
         },
         {
-          "type": "haskell",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#906cff",
-          "background": "#100e23",
-          "template": "  {{ .Full }}"
-        },
-        {
-          "background": "#a7cae1",
-          "foreground": "#100e23",
-          "powerline_symbol": "",
-          "template": " Helm {{ .Version }}",
-          "style": "powerline",
-          "type": "helm"
-        },
-        {
-          "type": "java",
+          "type": "node",
           "style": "powerline",
           "powerline_symbol": "",
           "foreground": "#ffffff",
-          "background": "#4063D8",
-          "template": "  {{ .Full }}"
+          "background": "#6CA35E",
+          "template": "  {{ .Full }} "
+        },
+        {
+          "type": "deno",
+          "style": "plain",
+          "foreground": "#3C82F6",
+          "template": "  {{ .Full }} "
+        },
+        {
+          "type": "dart",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "#ffffff",
+          "background": "#06A4CE",
+          "template": "  {{ .Full }} "
+        },
+        {
+          "type": "flutter",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "#ffffff",
+          "background": "#06A4CE",
+          "template": "  {{ .Full }} "
+        },
+        {
+          "type": "python",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "#100e23",
+          "background": "#906cff",
+          "template": "  {{ .Full }} "
         },
         {
           "type": "lua",
@@ -168,12 +160,28 @@
           "template": "  {{ .Full }} "
         },
         {
-          "type": "node",
+          "type": "dotnet",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "#000000",
+          "background": "#00ffff",
+          "template": "  {{ .Full }} "
+        },
+        {
+          "type": "haskell",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "#906cff",
+          "background": "#100e23",
+          "template": "  {{ .Full }}"
+        },
+        {
+          "type": "java",
           "style": "powerline",
           "powerline_symbol": "",
           "foreground": "#ffffff",
-          "background": "#6CA35E",
-          "template": "  {{ .Full }} "
+          "background": "#4063D8",
+          "template": "  {{ .Full }}"
         },
         {
           "type": "perl",
@@ -192,14 +200,6 @@
           "template": "  {{ .Full }} "
         },
         {
-          "type": "python",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#100e23",
-          "background": "#906cff",
-          "template": "  {{ .Full }} "
-        },
-        {
           "type": "r",
           "style": "powerline",
           "powerline_symbol": "",
@@ -214,14 +214,6 @@
           "foreground": "#ffffff",
           "background": "#4063D8",
           "template": "  {{ .Full }}"
-        },
-        {
-          "type": "rust",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#193549",
-          "background": "#99908a",
-          "template": "  {{ .Full }} "
         },
         {
           "type": "swift",
@@ -240,14 +232,6 @@
           "properties": {
             "http_timeout": 2000
           }
-        },
-        {
-          "type": "xmake",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#e0f2f1",
-          "background": "#22a079",
-          "template": " xmake v{{ .Full }} "
         },
         {
           "type": "executiontime",
