@@ -90,14 +90,6 @@
           "template": "  cmake {{ .Full }} "
         },
         {
-          "type": "xmake",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#e0f2f1",
-          "background": "#22a079",
-          "template": "  xmake {{ .Full }} "
-        },
-        {
           "type": "rust",
           "style": "powerline",
           "powerline_symbol": "",
@@ -114,34 +106,20 @@
           "template": "  {{ .Full }} "
         },
         {
-          "type": "node",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#ffffff",
-          "background": "#6CA35E",
-          "template": "  {{ .Full }} "
-        },
-        {
-          "type": "deno",
-          "style": "plain",
-          "foreground": "#3C82F6",
-          "template": "  {{ .Full }} "
-        },
-        {
-          "type": "dart",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#ffffff",
-          "background": "#06A4CE",
-          "template": "  {{ .Full }} "
-        },
-        {
           "type": "flutter",
           "style": "powerline",
           "powerline_symbol": "",
           "foreground": "#ffffff",
           "background": "#06A4CE",
           "template": "  {{ .Full }} "
+        },
+        {
+          "type": "node",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "#ffffff",
+          "background": "#6CA35E",
+          "template": "  {{ .Full }} "
         },
         {
           "type": "python",
@@ -222,16 +200,6 @@
           "foreground": "#ffffff",
           "background": "#f6553c",
           "template": "  {{ .Full }} "
-        },
-        {
-          "type": "unity",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#111111",
-          "background": "#ffffff",
-          "properties": {
-            "http_timeout": 2000
-          }
         },
         {
           "type": "executiontime",

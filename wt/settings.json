@@ -42,19 +42,11 @@
         "action": "sendInput",
         "input": "\u001b[13;2u"
       }
-    },
-    {
-      "keys": "ctrl+`",
-      "command": {
-        "action": "sendInput",
-        "input": "\u001b[96;3u" // <A-`>
-      }
     }
   ],
   "copyOnSelect": true,
   "multiLinePasteWarning": false,
   "tabSwitcherMode": "mru",
-  "useAcrylicInTabRow": true,
   "theme": "system",
   "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
   "profiles": {
@@ -67,7 +59,7 @@
         "face": "NerdCodePro",
         "size": 11
       },
-      // "useAtlasEngine": true, // Not yet mature
+      "useAtlasEngine": false, // Not yet mature
       "intenseTextStyle": "all",
       "padding": "0, 0, 0, 0",
       "scrollbarState": "hidden",

@@ -8,7 +8,6 @@
   "editor.renderWhitespace": "all",
   "editor.rulers": [100],
   "editor.smoothScrolling": true,
-  "editor.tabCompletion": "on",
   "editor.tabSize": 2,
   "editor.unfoldOnClickAfterEndOfLine": true,
   "editor.cursorSmoothCaretAnimation": "on",
@@ -16,7 +15,6 @@
   "editor.fontFamily": "NerdCodePro",
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
-  "editor.inlineSuggest.enabled": true,
   "editor.quickSuggestions": {
     "comments": "on",
     "strings": "on"
@@ -24,6 +22,7 @@
   "editor.suggest.preview": true,
   "editor.suggest.snippetsPreventQuickSuggestions": false,
   "editor.suggestSelection": "recentlyUsed",
+  "editor.tabCompletion": "onlySnippets",
 
   "files.insertFinalNewline": true,
 
@@ -94,10 +93,8 @@
     "w",
     // all above are default keys
     "e",
-    "l",
-    "k"
-    // "v",
-    // "z"
+    "k",
+    "n"
   ],
   "vscode-neovim.ctrlKeysForNormalMode": [
     "a",
@@ -118,7 +115,7 @@
     "w",
     "x",
     "y",
-    "z",
+    // "z",
     "/",
     "]",
     "right",
@@ -126,15 +123,10 @@
     "up",
     "down",
     "backspace",
-    "delete"
+    "delete",
+    "n"
   ],
 
-  "clangd.arguments": [
-    "--enable-config",
-    "--clang-tidy",
-    "--completion-style=detailed",
-    "--function-arg-placeholders=0"
-  ],
   "cmake.configureOnOpen": false,
   "cmake.ignoreCMakeListsMissing": true,
   "cmake.options.statusBarVisibility": "icon",

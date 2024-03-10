@@ -12,133 +12,133 @@ OPTION_AUTO_YES=
 PROMPT_INFORMATION=
 
 usage() {
-  echo "Usage: init.sh [-h|-u|-y]"
-  echo ""
-  echo "Options:"
-  echo "  -h    Print this help message"
-  echo "  -u    Update configuration segements in this script file"
-  echo "  -y    Automatically answer yes to all questions"
+	echo "Usage: init.sh [-h|-u|-y]"
+	echo ""
+	echo "Options:"
+	echo "  -h    Print this help message"
+	echo "  -u    Update configuration segements in this script file"
+	echo "  -y    Automatically answer yes to all questions"
 }
 
 parse_arguments() {
-  declare option
-  while getopts "huy" option; do
-    case "$option" in
-    "h")
-      usage
-      exit 0
-      ;;
-    "u")
-      OPTION_UPDATE_CONFIG=1
-      ;;
-    "y")
-      OPTION_AUTO_YES=1
-      ;;
-    "?")
-      usage
-      exit 1
-      ;;
-    esac
-  done
+	declare option
+	while getopts "huy" option; do
+		case "$option" in
+		"h")
+			usage
+			exit 0
+			;;
+		"u")
+			OPTION_UPDATE_CONFIG=1
+			;;
+		"y")
+			OPTION_AUTO_YES=1
+			;;
+		"?")
+			usage
+			exit 1
+			;;
+		esac
+	done
 }
 
 get_config() {
-  if [[ $# -ne 1 ]]; then
-    echo -e "\e[31mget_config()\e[m: usage: get_config CONFIG_LABEL" >&2
-    return 1
-  fi
+	if [[ $# -ne 1 ]]; then
+		echo -e "\e[31mget_config()\e[m: usage: get_config CONFIG_LABEL" >&2
+		return 1
+	fi
 
-  sed -n "/^#\s*$1$/,/^#\s*$1_END$/p" "$CONFIG_FILE" | sed -e'1d' -e'$d' -e's/^# \?//'
+	sed -n "/^#\s*$1$/,/^#\s*$1_END$/p" "$CONFIG_FILE" | sed -e'1d' -e'$d' -e's/^# \?//'
 }
 
 set_config() {
-  if [[ $# -ne 2 ]]; then
-    echo -e "\e[31mset_config()\e[m: usage: set_config CONFIG_LABEL /path/to/config_file" >&2
-    return 1
-  fi
+	if [[ $# -ne 2 ]]; then
+		echo -e "\e[31mset_config()\e[m: usage: set_config CONFIG_LABEL /path/to/config_file" >&2
+		return 1
+	fi
 
-  if [[ "$(get_config "$1")" == "$(<"$2")" ]]; then
-    return
-  fi
+	if [[ "$(get_config "$1")" == "$(<"$2")" ]]; then
+		return
+	fi
 
-  echo "update configuration segement $1"
+	echo "update configuration segement $1"
 
-  # Redirect operation execute before simple command, so bash will truncate file before read it
-  CONTENT=$(sed "/^#\s*$1$/,/^#\s*$1_END$/c# $1\n# $1_END" "$CONFIG_FILE" |
-    sed "/^#\s*$1$/r$2" |
-    sed "/^#\s*$1$/,/^#\s*$1_END$/s/^/# /" |
-    sed -e"/^# # $1$/s/^# //" -e"/^# # $1_END$/s/^# //")
-  echo "$CONTENT" >"$CONFIG_FILE"
+	# Redirect operation execute before simple command, so bash will truncate file before read it
+	CONTENT=$(sed "/^#\s*$1$/,/^#\s*$1_END$/c# $1\n# $1_END" "$CONFIG_FILE" |
+		sed "/^#\s*$1$/r$2" |
+		sed "/^#\s*$1$/,/^#\s*$1_END$/s/^/# /" |
+		sed -e"/^# # $1$/s/^# //" -e"/^# # $1_END$/s/^# //")
+	echo "$CONTENT" >"$CONFIG_FILE"
 }
 
 ask_user() {
-  if [[ $# -ne 1 ]]; then
-    echo -e "\e[31mask_user()\e[m: usage: ask_user 'prompt message'" >&2
-    return 1
-  fi
+	if [[ $# -ne 1 ]]; then
+		echo -e "\e[31mask_user()\e[m: usage: ask_user 'prompt message'" >&2
+		return 1
+	fi
 
-  if [[ "$OPTION_AUTO_YES" = 1 ]]; then
-    return 0
-  fi
+	if [[ "$OPTION_AUTO_YES" = 1 ]]; then
+		return 0
+	fi
 
-  declare USER_ANSWER
-  read -rn 1 -p "$1 (Y/n): " USER_ANSWER
+	declare USER_ANSWER
+	read -rn 1 -p "$1 (Y/n): " USER_ANSWER
 
-  if [[ "${USER_ANSWER,}" == y ]]; then
-    return 0
-  else
-    return 1
-  fi
+	if [[ "${USER_ANSWER,}" == y ]]; then
+		return 0
+	else
+		return 1
+	fi
 }
 
 sudo_without_passwd() {
-  ask_user "Do you want to execute 'sudo' without password?" || return 0
-  case "$OS_RELEASE" in
-  "Arch Linux")
-    echo "%wheel ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/wheel
-    ;;
-  "Ubuntu")
-    echo "%sudo ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/sudo
-    ;;
-  esac
+	ask_user "Do you want to execute 'sudo' without password?" || return 0
+	case "$OS_RELEASE" in
+	"Arch Linux")
+		echo "%wheel ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/wheel
+		;;
+	"Ubuntu")
+		echo "%sudo ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/sudo
+		;;
+	esac
 }
 
 change_mirror_source() {
-  case "$OS_RELEASE" in
-  "Arch Linux")
-    sudo sed -i '/^Include = /s/^.*$/Server = https:\/\/mirrors.tencent.com\/archlinux\/$repo\/os\/$arch/' /etc/pacman.conf
-    echo -e '\n[archlinuxcn]\nServer = https://mirrors.tencent.com/archlinuxcn/$arch' |
-      sudo tee -a /etc/pacman.conf
-    sudo pacman-key --init
-    sudo pacman-key --populate
-    sudo pacman -Sy archlinux-keyring archlinuxcn-keyring
-    sudo pacman -Su yay base-devel openssh
-    ;;
-  "Ubuntu")
-    sudo apt -y install git curl gpg
-    ask_user "Do you want to change apt mirror source to tencent cloud?" || return 0
-    sudo curl -Lo /etc/apt/sources.list http://mirrors.cloud.tencent.com/repo/ubuntu20_sources.list
-    sudo apt update
-    sudo apt -y upgrade
-    ask_user "Do you want yo upgrade to ubuntu22.04 STL?" || return 0
-    sudo do-release-upgrade -d
-    ;;
-  esac
+	case "$OS_RELEASE" in
+	"Arch Linux")
+		sudo sed -i '/^Include = /s/^.*$/Server = https:\/\/mirrors.tencent.com\/archlinux\/$repo\/os\/$arch/' /etc/pacman.conf
+		echo -e '\n[archlinuxcn]\nServer = https://mirrors.tencent.com/archlinuxcn/$arch' |
+			sudo tee -a /etc/pacman.conf
+		sudo pacman-key --init
+		sudo pacman-key --populate
+		sudo pacman -Sy archlinux-keyring archlinuxcn-keyring
+		sudo pacman -Su yay base-devel openssh
+		;;
+	"Ubuntu")
+		sudo apt -y install git curl gpg
+		ask_user "Do you want to change apt mirror source to tencent cloud?" || return 0
+		sudo curl -Lo /etc/apt/sources.list http://mirrors.cloud.tencent.com/repo/ubuntu20_sources.list
+		sudo apt update
+		sudo apt -y upgrade
+		ask_user "Do you want yo upgrade to ubuntu22.04 STL?" || return 0
+		sudo do-release-upgrade -d
+		;;
+	esac
 }
 
 prerequisites() {
-  case "$OS_RELEASE" in
-  "Arch Linux")
-    yay -S cargo go python-pip pnpm
-    ;;
-  "Ubuntu")
-    curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-    sudo apt -y install golang cargo python3-pip python-is-python3 nodejs
-    ;;
-  esac
+	case "$OS_RELEASE" in
+	"Arch Linux")
+		yay -S cargo go python-pip pnpm
+		;;
+	"Ubuntu")
+		curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+		sudo apt -y install golang cargo python3-pip python-is-python3 nodejs
+		;;
+	esac
 
-  ask_user "Do you want to config cargo registry to utsc cloud mirror?" &&
-    mkdir -p ~/.cargo && cat >~/.cargo/config <<EOF
+	ask_user "Do you want to config cargo registry to utsc cloud mirror?" &&
+		mkdir -p ~/.cargo && cat >~/.cargo/config <<EOF
 [source.crates-io]
 registry = "https://github.com/rust-lang/crates.io-index"
 replace-with = 'ustc'
@@ -146,44 +146,42 @@ replace-with = 'ustc'
 registry = "git://mirrors.ustc.edu.cn/crates.io-index"
 EOF
 
-  ask_user "Do you want to set GOPROXY to tencent cloud mirror?" &&
-    go env -w GOPROXY=https://mirrors.tencent.com/go/,direct
-  go env -w GOPATH="$HOME"/.go/ GOBIN="$HOME"/.local/bin/ GOSUMDB=sum.golang.google.cn
+	ask_user "Do you want to set GOPROXY to tencent cloud mirror?" &&
+		go env -w GOPROXY=https://mirrors.tencent.com/go/,direct
+	go env -w GOPATH="$HOME"/.go/ GOBIN="$HOME"/.local/bin/ GOSUMDB=sum.golang.google.cn
 
-  ask_user "Do you want to config pip index-url to tencent cloud mirror?" &&
-    pip config set global.index-url https://mirrors.tencent.com/pypi/simple
+	ask_user "Do you want to config pip index-url to tencent cloud mirror?" &&
+		pip config set global.index-url https://mirrors.tencent.com/pypi/simple
 
-  ask_user "Do you want to config npm registry to tencent cloud mirror?" &&
-    npm config set registry http://mirrors.tencent.com/npm/
-  npm config set prefix ~/.local
-  npm config set global-bin-dir ~/.local/bin
-  npm install pnpm -g
+	ask_user "Do you want to config npm registry to tencent cloud mirror?" &&
+		npm config set registry http://mirrors.tencent.com/npm/
+	npm config set prefix ~/.local
+	npm config set global-bin-dir ~/.local/bin
+	npm install pnpm -g
 }
 
 ssh_and_git_config() {
-  # only for myself
-  if [[ "$USER" == beardad ]]; then
-    get_config __GITCONFIG >~/.gitconfig
-    mkdir -p ~/.ssh/
-    get_config __SSH_CONFIG >~/.ssh/config
-  fi
+	# only for myself
+	if [[ "$USER" == beardad ]]; then
+		get_config __GITCONFIG >~/.gitconfig
+		mkdir -p ~/.ssh/
+		get_config __SSH_CONFIG >~/.ssh/config
+	fi
 }
 
 install_docker() {
-  case "$OS_RELEASE" in
-  "Arch Linux")
-    yay -S docker
-    ;;
-  "Ubuntu")
-    ask_user "Do you want to install docker from tencent cloud mirror" || return
-    curl -fsSL https://mirrors.cloud.tencent.com/docker-ce/linux/ubuntu/gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/docker-ce-archive-keyring.gpg
-    echo "deb [arch=amd64] https://mirrors.cloud.tencent.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker-ce.list
-    sudo apt update
-    sudo apt -y install docker-ce docker-ce-cli containerd.io
-    ;;
-  esac
-  sudo mkdir -p /etc/docker
-  cat <<EOF | sudo tee /etc/docker/daemon.json
+	case "$OS_RELEASE" in
+	"Arch Linux") ;;
+	"Ubuntu")
+		ask_user "Do you want to install docker from tencent cloud mirror" || return
+		curl -fsSL https://mirrors.cloud.tencent.com/docker-ce/linux/ubuntu/gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/docker-ce-archive-keyring.gpg
+		echo "deb [arch=amd64] https://mirrors.cloud.tencent.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker-ce.list
+		sudo apt update
+		sudo apt -y install docker-ce docker-ce-cli containerd.io
+		;;
+	esac
+	sudo mkdir -p /etc/docker
+	cat <<EOF | sudo tee /etc/docker/daemon.json
 {
   "registry-mirrors": [
     "https://hub-mirror.c.163.com",
@@ -194,248 +192,248 @@ EOF
 }
 
 tmux_conf() {
-  case "$OS_RELEASE" in
-  "Arch Linux")
-    yay -S tmux
-    ;;
-  "Ubuntu")
-    sudo apt -y install tmux tmux-plugin-manager
-    ;;
-  esac
-  [[ -e ~/.tmux.conf ]] && mv ~/.tmux.conf{,.bak}
-  get_config __TMUX_CONF >~/.tmux.conf
-  PROMPT_INFORMATION="$PROMPT_INFORMATION$(echo -e "\e[32m======>\e[33m tmux:\e[m Don't forget to pressing 'Alt+W I' in tmux to install plugin")"
+	case "$OS_RELEASE" in
+	"Arch Linux")
+		yay -S tmux
+		;;
+	"Ubuntu")
+		sudo apt -y install tmux tmux-plugin-manager
+		;;
+	esac
+	[[ -e ~/.tmux.conf ]] && mv ~/.tmux.conf{,.bak}
+	get_config __TMUX_CONF >~/.tmux.conf
+	PROMPT_INFORMATION="$PROMPT_INFORMATION$(echo -e "\e[32m======>\e[33m tmux:\e[m Don't forget to pressing 'Alt+W I' in tmux to install plugin")"
 }
 
 zsh_conf() {
-  case "$OS_RELEASE" in
-  "Arch Linux")
-    yay -S zsh zsh-syntax-highlighting zsh-autosuggestions autojump fzf fd
-    ;;
-  "Ubuntu")
-    sudo apt -y install zsh zsh-syntax-highlighting zsh-autosuggestions autojump fzf
-    cargo install fd
-    ;;
-  esac
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
-  [[ -e ~/.zshrc ]] && mv ~/.zshrc{,.bak}
-  get_config __ZSHRC >~/.zshrc
-  cat >~/.config/proxy <<EOF
+	case "$OS_RELEASE" in
+	"Arch Linux")
+		yay -S zsh zsh-syntax-highlighting zsh-autosuggestions autojump fzf fd
+		;;
+	"Ubuntu")
+		sudo apt -y install zsh zsh-syntax-highlighting zsh-autosuggestions autojump fzf
+		cargo install fd
+		;;
+	esac
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+	[[ -e ~/.zshrc ]] && mv ~/.zshrc{,.bak}
+	get_config __ZSHRC >~/.zshrc
+	cat >~/.config/proxy <<EOF
 #!/bin/bash
 sed -n '/^nameserver/{s/^nameserver\s*\([0-9.]*\)\s*$/\1:7890/; p}' /etc/resolv.conf
 EOF
-  chmod +x ~/.config/proxy
-  PROMPT_INFORMATION="$PROMPT_INFORMATION$(echo -e "\e[32m======>\e[33m zsh:\e[m You may want to custom your zsh prompt theme and enable proxy prompt by modify ~/.p10k.zsh")"
+	chmod +x ~/.config/proxy
+	PROMPT_INFORMATION="$PROMPT_INFORMATION$(echo -e "\e[32m======>\e[33m zsh:\e[m You may want to custom your zsh prompt theme and enable proxy prompt by modify ~/.p10k.zsh")"
 }
 
 ranger_conf() {
-  case "$OS_RELEASE" in
-  "Arch Linux")
-    yay -S ranger
-    ;;
-  "Ubuntu")
-    sudo apt -y install ranger
-    ;;
-  esac
-  mkdir -p ~/.config/ranger/
-  [[ -e ~/.config/ranger/commands.py ]] && mv ~/.config/ranger/commands.py{,.bak}
-  get_config __RANGER >~/.config/ranger/commands.py
-  [[ -e ~/.config/ranger/rc.conf ]] && mv ~/.config/ranger/rc.conf{,.bak}
-  cat >~/.config/ranger/rc.conf <<EOF
+	case "$OS_RELEASE" in
+	"Arch Linux")
+		yay -S ranger
+		;;
+	"Ubuntu")
+		sudo apt -y install ranger
+		;;
+	esac
+	mkdir -p ~/.config/ranger/
+	[[ -e ~/.config/ranger/commands.py ]] && mv ~/.config/ranger/commands.py{,.bak}
+	get_config __RANGER >~/.config/ranger/commands.py
+	[[ -e ~/.config/ranger/rc.conf ]] && mv ~/.config/ranger/rc.conf{,.bak}
+	cat >~/.config/ranger/rc.conf <<EOF
 map <C-f> fzf_select
 set show_hidden true
 EOF
 }
 
 htop_conf() {
-  case "$OS_RELEASE" in
-  "Arch Linux")
-    yay -S htop-vim
-    ;;
-  "Ubuntu")
-    sudo apt -y install btop libncursesw5-dev autoconf automake libtool
-    git clone --depth=1 https://github.com/KoffeinFlummi/htop-vim ~/.local/share/htop-vim
-    (
-      cd ~/.local/share/htop-vim
-      ./autogen.sh && ./configure && make
-      cp ./htop ~/.local/bin/
-    )
-    ;;
-  esac
-  mkdir -p ~/.config/htop/
-  [[ -e ~/.config/htop/htoprc ]] && mv ~/.config/htop/htoprc{,.bak}
-  get_config __HTOPRC >~/.config/htop/htoprc
+	case "$OS_RELEASE" in
+	"Arch Linux")
+		yay -S htop-vim
+		;;
+	"Ubuntu")
+		sudo apt -y install btop libncursesw5-dev autoconf automake libtool
+		git clone --depth=1 https://github.com/KoffeinFlummi/htop-vim ~/.local/share/htop-vim
+		(
+			cd ~/.local/share/htop-vim
+			./autogen.sh && ./configure && make
+			cp ./htop ~/.local/bin/
+		)
+		;;
+	esac
+	mkdir -p ~/.config/htop/
+	[[ -e ~/.config/htop/htoprc ]] && mv ~/.config/htop/htoprc{,.bak}
+	get_config __HTOPRC >~/.config/htop/htoprc
 }
 
 tig_conf() {
-  case "$OS_RELEASE" in
-  "Arch Linux")
-    yay -S tig
-    ;;
-  "Ubuntu")
-    sudo apt -y install git tig
-    ;;
-  esac
-  [[ -e ~/.tigrc ]] && mv ~/.tigrc{,.bak}
-  get_config __TIGRC >~/.tigrc
+	case "$OS_RELEASE" in
+	"Arch Linux")
+		yay -S tig
+		;;
+	"Ubuntu")
+		sudo apt -y install git tig
+		;;
+	esac
+	[[ -e ~/.tigrc ]] && mv ~/.tigrc{,.bak}
+	get_config __TIGRC >~/.tigrc
 }
 
 neovim_conf() {
-  case "$OS_RELEASE" in
-  "Arch Linux")
-    yay -S neovim unzip stylua ripgrep
-    ;;
-  "Ubuntu")
-    sudo add-apt-repository ppa:neovim-ppa/unstable
-    sudo apt update
-    sudo apt -y install neovim unzip
-    cargo install stylua
-    ;;
-  esac
+	case "$OS_RELEASE" in
+	"Arch Linux")
+		yay -S neovim unzip stylua ripgrep
+		;;
+	"Ubuntu")
+		sudo add-apt-repository ppa:neovim-ppa/unstable
+		sudo apt update
+		sudo apt -y install neovim unzip
+		cargo install stylua
+		;;
+	esac
 
-  curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
-  unzip -p /tmp/win32yank.zip win32yank.exe >~/.local/bin/win32yank.exe
-  chmod +x ~/.local/bin/win32yank.exe
+	curl -Lo /tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
+	unzip -p /tmp/win32yank.zip win32yank.exe >~/.local/bin/win32yank.exe
+	chmod +x ~/.local/bin/win32yank.exe
 
-  bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+	bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 
-  get_config __CONFIG_LUA >~/.config/lvim/config.lua
-  # rm -fr ~/.config/lvim/
-  # git clone https://github.com/mrbeardad/MyLunarVim ~/.config/lvim
-  # ~/.config/lvim/bin/nvim --headless \
-  #   -c 'autocmd User PackerComplete quitall' \
-  #   -c 'PackerSync'
+	get_config __CONFIG_LUA >~/.config/lvim/config.lua
+	# rm -fr ~/.config/lvim/
+	# git clone https://github.com/mrbeardad/MyLunarVim ~/.config/lvim
+	# ~/.config/lvim/bin/nvim --headless \
+	#   -c 'autocmd User PackerComplete quitall' \
+	#   -c 'PackerSync'
 }
 
 lang_shell() {
-  case "$OS_RELEASE" in
-  "Arch Linux")
-    yay -S shellcheck shfmt
-    ;;
-  "Ubuntu")
-    sudo apt -y install shellcheck
-    go install mvdan.cc/sh/v3/cmd/shfmt@latest
-    ;;
-  esac
+	case "$OS_RELEASE" in
+	"Arch Linux")
+		yay -S shellcheck shfmt
+		;;
+	"Ubuntu")
+		sudo apt -y install shellcheck
+		go install mvdan.cc/sh/v3/cmd/shfmt@latest
+		;;
+	esac
 }
 
 lang_cpp() {
-  case "$OS_RELEASE" in
-  "Arch Linux")
-    yay -S clang lldb lld \
-      cmake cmake-format doxygen gtest gperftools graphviz plantuml \
-      boost source-highlight
-    ;;
-  "Ubuntu")
-    sudo apt -y install clang lldb lld clangd clang-tidy clang-format cppcheck \
-      cmake doxygen graphviz plantuml google-perftools \
-      libboost-all-dev libgtest-dev libsource-highlight-dev
-    pip install cmake_format
-    ;;
-  esac
+	case "$OS_RELEASE" in
+	"Arch Linux")
+		yay -S clang lldb lld \
+			cmake cmake-format doxygen gtest gperftools graphviz plantuml \
+			boost source-highlight
+		;;
+	"Ubuntu")
+		sudo apt -y install clang lldb lld clangd clang-tidy clang-format cppcheck \
+			cmake doxygen graphviz plantuml google-perftools \
+			libboost-all-dev libgtest-dev libsource-highlight-dev
+		pip install cmake_format
+		;;
+	esac
 }
 
 lang_go() {
-  case "$OS_RELEASE" in
-  "Arch Linux")
-    yay -S gopls golangci-lint
-    ;;
-  "Ubuntu")
-    go install golang.org/x/tools/gopls@latest
-    go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
-    ;;
-  esac
-  go install github.com/google/pprof@latest
+	case "$OS_RELEASE" in
+	"Arch Linux")
+		yay -S gopls golangci-lint
+		;;
+	"Ubuntu")
+		go install golang.org/x/tools/gopls@latest
+		go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+		;;
+	esac
+	go install github.com/google/pprof@latest
 }
 
 lang_py() {
-  case "$OS_RELEASE" in
-  "Arch Linux")
-    yay -S python-pylint yapf
-    ;;
-  "Ubuntu")
-    pip install pylint yapf
-    ;;
-  esac
+	case "$OS_RELEASE" in
+	"Arch Linux")
+		yay -S python-pylint yapf
+		;;
+	"Ubuntu")
+		pip install pylint yapf
+		;;
+	esac
 }
 
 lang_web() {
-  case "$OS_RELEASE" in
-  "Arch Linux")
-    yay -S eslint htmlhint stylelint nodejs-markdownlint-cli tidy prettier
-    ;;
-  "Ubuntu")
-    sudo apt install -y tidy
-    pnpm install -g eslint htmlhint stylelint markdownlint-cli prettier
-    ;;
-  esac
+	case "$OS_RELEASE" in
+	"Arch Linux")
+		yay -S eslint htmlhint stylelint nodejs-markdownlint-cli tidy prettier
+		;;
+	"Ubuntu")
+		sudo apt install -y tidy
+		pnpm install -g eslint htmlhint stylelint markdownlint-cli prettier
+		;;
+	esac
 }
 
 other_cli_tools() {
-  case "$OS_RELEASE" in
-  "Arch Linux")
-    yay -S lsd neofetch cloc ncdu cmatrix socat
-    ;;
-  "Ubuntu")
-    sudo apt -y install neofetch cloc ncdu gnupg nmap socat cmatrix
-    cargo install lsd
-    ;;
-  esac
-  git clone --recurse-submodules https://github.com/mrbeardad/SeeCheatSheets ~/.cheat
-  mkdir -p ~/.cheat/src/build
-  (
-    cd ~/.cheat/src/build
-    cmake -D CMAKE_BUILD_TYPE=Release ..
-    cmake --build . -t see
-    cp ./see ~/.local/bin/
-  )
+	case "$OS_RELEASE" in
+	"Arch Linux")
+		yay -S lsd neofetch cloc ncdu cmatrix socat
+		;;
+	"Ubuntu")
+		sudo apt -y install neofetch cloc ncdu gnupg nmap socat cmatrix
+		cargo install lsd
+		;;
+	esac
+	git clone --recurse-submodules https://github.com/mrbeardad/SeeCheatSheets ~/.cheat
+	mkdir -p ~/.cheat/src/build
+	(
+		cd ~/.cheat/src/build
+		cmake -D CMAKE_BUILD_TYPE=Release ..
+		cmake --build . -t see
+		cp ./see ~/.local/bin/
+	)
 }
 
 main() {
-  OS_RELEASE=$(sed -n 's/^NAME="\(.*\)"/\1/p' /etc/os-release)
-  parse_arguments "$@"
-  if [[ "$OPTION_UPDATE_CONFIG" == "1" ]]; then
-    if [[ -d "$WIN_HOME" ]]; then
-      cp -uv "$WIN_HOME"/AppData/Roaming/Code/User/{settings.json,keybindings.json} ./vscode/
-      cp -uv "$WIN_HOME"/AppData/Roaming/Code/User/sync/extensions/lastSyncextensions.json ./vscode/
-      cp -uv "/mnt/c/Program Files/Neovim/vscode-neovim/init.vim" ./vscode/vscode-neovim/
-      cp -uv "$WIN_HOME"/AppData/Local/Packages/Microsoft.WindowsTerminal_*/LocalState/settings.json wt/settings.json
-    fi
-    set_config __TMUX_CONF ~/.tmux.conf
-    set_config __ZSHRC ~/.zshrc
-    set_config __RANGER ~/.config/ranger/commands.py
-    set_config __HTOPRC ~/.config/htop/htoprc
-    set_config __TIGRC ~/.tigrc
-    set_config __CONFIG_LUA ~/.config/lvim/config.lua
-    set_config __GITCONFIG ~/.gitconfig
-    set_config __SSH_CONFIG ~/.ssh/config
-  else
-    cd "$(dirname "$0")"
-    mkdir -p ~/.local/bin/
-    mkdir -p ~/.local/share/
-    mkdir -p ~/.config/
+	OS_RELEASE=$(sed -n 's/^NAME="\(.*\)"/\1/p' /etc/os-release)
+	parse_arguments "$@"
+	if [[ "$OPTION_UPDATE_CONFIG" == "1" ]]; then
+		if [[ -d "$WIN_HOME" ]]; then
+			cp -uv "$WIN_HOME"/AppData/Roaming/Code/User/{settings.json,keybindings.json} ./vscode/
+			cp -uv "$WIN_HOME"/AppData/Roaming/Code/User/sync/extensions/lastSyncextensions.json ./vscode/
+			cp -uv "/mnt/c/Program Files/Neovim/vscode-neovim/init.vim" ./vscode/vscode-neovim/
+			cp -uv "$WIN_HOME"/AppData/Local/Packages/Microsoft.WindowsTerminal_*/LocalState/settings.json wt/settings.json
+		fi
+		set_config __TMUX_CONF ~/.tmux.conf
+		set_config __ZSHRC ~/.zshrc
+		set_config __RANGER ~/.config/ranger/commands.py
+		set_config __HTOPRC ~/.config/htop/htoprc
+		set_config __TIGRC ~/.tigrc
+		set_config __CONFIG_LUA ~/.config/lvim/config.lua
+		set_config __GITCONFIG ~/.gitconfig
+		set_config __SSH_CONFIG ~/.ssh/config
+	else
+		cd "$(dirname "$0")"
+		mkdir -p ~/.local/bin/
+		mkdir -p ~/.local/share/
+		mkdir -p ~/.config/
 
-    sudo_without_passwd
-    change_mirror_source
-    prerequisites
-    ssh_and_git_config
-    install_docker
-    tmux_conf
-    zsh_conf
-    ranger_conf
-    htop_conf
-    tig_conf
-    neovim_conf
-    lang_shell
-    lang_cpp
-    lang_go
-    lang_py
-    lang_web
-    other_cli_tools
+		sudo_without_passwd
+		change_mirror_source
+		prerequisites
+		ssh_and_git_config
+		install_docker
+		tmux_conf
+		zsh_conf
+		ranger_conf
+		htop_conf
+		tig_conf
+		neovim_conf
+		lang_shell
+		lang_cpp
+		lang_go
+		lang_py
+		lang_web
+		other_cli_tools
 
-    echo "$PROMPT_INFORMATION"
-  fi
+		echo "$PROMPT_INFORMATION"
+	fi
 }
 
 main "$@"
@@ -1024,7 +1022,7 @@ main "$@"
 #     end
 #   end,
 # })
-# 
+#
 # --------------------------------------------------------------------------------
 # -- lvim options
 # --------------------------------------------------------------------------------
@@ -1063,7 +1061,7 @@ main "$@"
 #   end, { expr = true, buffer = bufnr })
 # end
 # lvim.format_on_save.enabled = true
-# 
+#
 # --------------------------------------------------------------------------------
 # -- custom plugins
 # --------------------------------------------------------------------------------
@@ -1349,15 +1347,15 @@ main "$@"
 #     end
 #   }
 # }
-# 
+#
 # --------------------------------------------------------------------------------
 # -- key bindings
 # --------------------------------------------------------------------------------
 # vim.keymap.set("c", "<C-A>", "<C-B>")
-# 
+#
 # -- HACK: terminal map ctrl+i to alt+shift+i
 # vim.keymap.set("n", "<M-I>", "<C-I>")
-# 
+#
 # vim.keymap.set("n", "n", "'Nn'[v:searchforward]", { expr = true })
 # vim.keymap.set("n", "N", "'nN'[v:searchforward]", { expr = true })
 # vim.keymap.set("n", "<C-L>", "<cmd>nohl<CR><C-L>")
@@ -1365,7 +1363,7 @@ main "$@"
 # vim.keymap.set("c", "<M-r>", "\\v")
 # vim.keymap.set("c", "<M-c>", "\\C")
 # vim.keymap.set("n", "<C-S-F>", "<cmd>Telescope live_grep<CR>")
-# 
+#
 # vim.keymap.set("i", "jk", "<Esc>")
 # vim.keymap.set("n", "<", "<<")
 # vim.keymap.set("n", ">", ">>")
@@ -1381,11 +1379,11 @@ main "$@"
 # vim.keymap.set("c", "<C-L>", "<C-Right>")
 # vim.keymap.set("i", "<C-Z>", "<cmd>undo<CR>")
 # vim.keymap.set("i", "<C-S-z>", "<cmd>redo<CR>")
-# 
+#
 # vim.keymap.set("n", "c", '"_c')
 # vim.keymap.set("n", "s", '"_s')
 # vim.keymap.set("n", "S", "i<CR><Esc>")
-# 
+#
 # vim.keymap.set("i", "<C-V>", "<C-R>+")
 # vim.keymap.set("n", "Y", '"0y$')
 # vim.keymap.set("n", "zp", '"0p')
@@ -1404,7 +1402,7 @@ main "$@"
 # lvim.builtin.which_key.mappings["O"] = { '<cmd>put =@+<CR>', "Paste (previous line)" }
 # lvim.builtin.which_key.mappings["by"] = { "<cmd>%y +<CR>", "Yank whole buffer to clipboard" }
 # lvim.builtin.which_key.mappings["bp"] = { '<cmd>%d<CR>"+P', "Patse clipboard to whole buffer" }
-# 
+#
 # lvim.builtin.cmp.confirm_opts.select = true
 # local cmp = require("cmp")
 # local luasnip = require("luasnip")
@@ -1456,7 +1454,7 @@ main "$@"
 # vim.keymap.set("n", "<C-T>", "<cmd>Telescope lsp_workspace_symbols<CR>")
 # vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 # vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>")
-# 
+#
 # lvim.keys.normal_mode["<C-K>"] = false
 # lvim.builtin.which_key.mappings["/"] = nil
 # lvim.builtin.which_key.mappings["c"] = nil
@@ -1501,18 +1499,18 @@ main "$@"
 #   end
 # end)
 # lvim.builtin.which_key.mappings["q"] = { "<cmd>call SmartClose()<CR>", "Quit" }
-# 
+#
 # vim.keymap.set("n", "<C-S-E>", "<cmd>NvimTreeFindFile<CR>")
 # vim.keymap.set("n", "<C-S-M>", "<cmd>Trouble workspace_diagnostics<CR>")
 # vim.keymap.set("n", "<C-S-U>", "<cmd>lua require('telescope').extensions.notify.notify()<CR>")
-# 
+#
 # vim.keymap.set("n", "<M-e>", "<cmd>call Open_file_in_explorer()<CR>")
 # vim.keymap.set("n", "<M-z>", "<cmd>let &wrap=!&wrap<CR>")
 # vim.keymap.set("n", "<C-S-P>", "<cmd>Telescope commands<CR>")
 # vim.keymap.set("n", "<C-K><C-S>", "<cmd>Telescope keymaps<CR>")
-# 
+#
 # lvim.builtin.which_key.mappings["sT"] = { "<cmd>TodoTelescope<CR>", "TODOs" }
-# 
+#
 # vim.cmd([[
 # function! SmartClose() abort
 #   if &bt ==# 'nofile' || &bt ==# 'quickfix'
@@ -1553,7 +1551,7 @@ main "$@"
 #     quit
 #   endif
 # endf
-# 
+#
 # function! Open_file_in_explorer() abort
 #   if has('win32') || has('wsl')
 #     call jobstart('explorer.exe .')
@@ -1562,5 +1560,5 @@ main "$@"
 #   endif
 # endf
 # ]])
-# 
+#
 # __CONFIG_LUA_END
