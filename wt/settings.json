@@ -57,9 +57,9 @@
       },
       "font": {
         "face": "NerdCodePro",
-        "size": 11
+        "size": 10
       },
-      "useAtlasEngine": false, // Not yet mature
+      // "useAtlasEngine": false, // Not yet mature
       "intenseTextStyle": "all",
       "padding": "0, 0, 0, 0",
       "scrollbarState": "hidden",
