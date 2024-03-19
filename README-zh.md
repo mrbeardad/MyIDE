@@ -280,13 +280,11 @@
 
 </div>
 
-1. 安装 [Visual Studio](https://apps.microsoft.com/detail/XPDCFJDKLZJLP8?hl=en-US&gl=US)，因为需要它的 C/C++编译器，当然你也可以安装 gcc 和 make 来代替
+1. 安装 C/C++ 编译器
 
-   > 小贴士:
-   > 记得勾选 clang 和 cmake 选项，并且将
-   > `C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\Llvm\x64\bin` 和
-   > `C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin`
-   > 加到 `PATH` 环境变量中
+   ```ps1
+   scoop install mingw-mstorsjo-llvm-ucrt cmake
+   ```
 
 2. 安装 Neovim
 

@@ -283,12 +283,11 @@
 
 </div>
 
-1. Install [Visual Studio](https://apps.microsoft.com/detail/XPDCFJDKLZJLP8?hl=en-US&gl=US) for C/C++ compiler and cmake, or you can install gcc and make instead.
+1. Install C/C++ compiler
 
-   > Tips: Check the install option of clang and cmake, add
-   > `C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\Llvm\x64\bin` and
-   > `C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin`
-   > to environment variable `PATH` after installation.
+   ```ps1
+   scoop install mingw-mstorsjo-llvm-ucrt cmake
+   ```
 
 2. Install Neovim
 
