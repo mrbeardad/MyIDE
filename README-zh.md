@@ -128,7 +128,7 @@
 - 用 scoop 安装常用的工具
 
   ```ps1
-  scoop install 7zip git aria2 fzf fd ripgrep bat lsd lazygit btop cht tokei gdu everything
+  scoop install 7zip git aria2 fzf fd ripgrep bat lsd lazygit btop cht tokei gdu everything sysinternals
   ```
 
 - 安装 PowerShell 模块

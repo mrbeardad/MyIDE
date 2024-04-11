@@ -130,7 +130,7 @@
 - Install the required tools via scoop
 
   ```ps1
-  scoop install 7zip git aria2 fzf fd ripgrep bat lsd lazygit btop cht tokei gdu everything
+  scoop install 7zip git aria2 fzf fd ripgrep bat lsd lazygit btop cht tokei gdu everything sysinternals
   ```
 
 - Insall PowerShell modules
