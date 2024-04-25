@@ -130,7 +130,8 @@
 - Install the required tools via scoop
 
   ```ps1
-  scoop install 7zip git aria2 fzf fd ripgrep bat lsd lazygit btop cht tokei gdu everything sysinternals
+  scoop install 7zip git aria2
+  scoop install lsd fzf fd ripgrep bat sed gawk lazygit btop cht tokei gdu everything sysinternals
   ```
 
 - Insall PowerShell modules
@@ -197,8 +198,8 @@
 | `f`     | Fuzzy search text of files in current directory an open `$EDITOR`          |
 | `l`     | List files                                                                 |
 | `tree`  | List files as tree                                                         |
-| `du`    | Disk usage analysis                                                        |
-| `ch`    | Search for a cheat sheet on [cheat.sh](https://github.com/chubin/cheat.sh) |
+| `gdu`   | Disk usage analysis                                                        |
+| `cht`   | Search for a cheat sheet on [cheat.sh](https://github.com/chubin/cheat.sh) |
 | `tokei` | Count code                                                                 |
 | `proxy` | Show/Set/Enable/Disable proxy address                                      |
 

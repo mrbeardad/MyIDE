@@ -128,7 +128,8 @@
 - 用 scoop 安装常用的工具
 
   ```ps1
-  scoop install 7zip git aria2 fzf fd ripgrep bat lsd lazygit btop cht tokei gdu everything sysinternals
+  scoop install 7zip git aria2
+  scoop install lsd fzf fd ripgrep bat sed gawk lazygit btop cht tokei gdu everything sysinternals
   ```
 
 - 安装 PowerShell 模块
@@ -194,8 +195,8 @@
 | `f`      | 模糊搜索文本并用`$EDITOR`打开文件                           |
 | `l`      | 列出目录文件                                                |
 | `tree`   | 列出目录结构                                                |
-| `du`     | 磁盘使用情况                                                |
-| `ch`     | 搜索帮助信息 [cheat.sh](https://github.com/chubin/cheat.sh) |
+| `gdu`    | 磁盘使用情况                                                |
+| `cht`    | 搜索帮助信息 [cheat.sh](https://github.com/chubin/cheat.sh) |
 | `tokei`  | 项目代码统计                                                |
 | `proxy`  | 设置代理                                                    |
 

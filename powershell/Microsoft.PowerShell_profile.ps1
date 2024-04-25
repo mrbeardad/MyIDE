@@ -16,6 +16,7 @@ Set-PsReadLineOption -EditMode Vi
 Set-PSReadLineOption -ViModeIndicator Script -ViModeChangeHandler $OnViModeChange
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+a -Function BeginningOfLine
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+e -Function EndOfLine
+Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+h -Function BackwardDeleteChar
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+w -Function BackwardKillWord
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+k -Function KillLine
 Set-PSReadlineKeyHandler -ViMode Insert -Key Tab -Function MenuComplete
@@ -127,8 +128,6 @@ function .. { Set-Location -Path .. }
 function ... { Set-Location -Path ..\.. }
 function l { lsd -lAg --group-directories-first @args }
 function tree { lsd -A --tree --group-directories-first -I .git @args }
-function du { gdu @args }
-function ch { cht -Q @args }
 Set-Alias lg lazygit
 
 $env:DefaultProxyAddress = "127.0.0.1:7890"
