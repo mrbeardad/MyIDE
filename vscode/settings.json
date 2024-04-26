@@ -1,6 +1,10 @@
 {
+  "settingsSync.ignoredSettings": ["workbench.colorTheme"],
+
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": "active",
+  "editor.hover.delay": 100,
+  "editor.hover.hidingDelay": 0,
   "editor.lineNumbers": "relative",
   "editor.linkedEditing": true,
   "editor.multiCursorModifier": "ctrlCmd",
@@ -8,7 +12,7 @@
   "editor.renderWhitespace": "all",
   "editor.rulers": [100],
   "editor.smoothScrolling": true,
-  "editor.tabSize": 2,
+  "editor.tabSize": 4,
   "editor.unfoldOnClickAfterEndOfLine": true,
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.cursorSurroundingLines": 5,
@@ -82,7 +86,7 @@
 
   "vscode-neovim.ctrlKeysForInsertMode": [
     "a",
-    "c",
+    // "c",
     "d",
     "h",
     "j",
@@ -99,7 +103,7 @@
   "vscode-neovim.ctrlKeysForNormalMode": [
     "a",
     "b",
-    "c",
+    // "c",
     "d",
     "e",
     "f",
@@ -127,6 +131,10 @@
     "n"
   ],
 
+  "cmake.pinnedCommands": [
+    "workbench.action.tasks.configureTaskRunner",
+    "workbench.action.tasks.runTask"
+  ],
   "cmake.configureOnOpen": false,
   "cmake.ignoreCMakeListsMissing": true,
   "cmake.options.statusBarVisibility": "icon",
@@ -142,6 +150,7 @@
   "go.inlayHints.parameterNames": true,
   "go.inlayHints.rangeVariableTypes": true,
   "go.lintTool": "golangci-lint",
+  "go.toolsManagement.autoUpdate": true,
 
   "[dart]": {
     "editor.formatOnType": true
@@ -270,5 +279,6 @@
       "icon": "note",
       "iconColour": "#1abc9c"
     }
-  }
+  },
+  "settingsSync.ignoredExtensions": ["johnstoncode.svn-scm"]
 }

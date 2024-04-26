@@ -82,6 +82,18 @@
     "command": "editor.action.moveLinesUpAction",
     "when": "editorTextFocus && !editorReadonly"
   },
+  {
+    "key": "ctrl+shift+n",
+    "command": "vscode-neovim.send",
+    "args": "<C-S-n>",
+    "when": "editorTextFocus && neovim.init"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "vscode-neovim.send",
+    "args": "<C-S-l>",
+    "when": "editorTextFocus && neovim.init"
+  },
   // Language
   {
     "key": "ctrl+n",
