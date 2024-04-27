@@ -30,6 +30,20 @@
       }
     },
     {
+      "keys": "ctrl+shift+j",
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[74;5u"
+      }
+    },
+    {
+      "keys": "ctrl+shift+k",
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[75;5u"
+      }
+    },
+    {
       "keys": "ctrl+enter",
       "command": {
         "action": "sendInput",

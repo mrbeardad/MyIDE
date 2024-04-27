@@ -33,6 +33,10 @@
   },
   // Search
   {
+    "key": "ctrl+k ctrl+r",
+    "command": "workbench.action.openRecent"
+  },
+  {
     "key": "alt+w",
     "command": "vscode-neovim.send-cmdline",
     "args": "<A-w>",
@@ -49,15 +53,6 @@
     "command": "vscode-neovim.send-cmdline",
     "args": "<A-r>",
     "when": "neovim.init && neovim.mode == 'cmdline'"
-  },
-  // Scroll
-  {
-    "key": "alt+f",
-    "command": "scrollRight"
-  },
-  {
-    "key": "alt+b",
-    "command": "scrollLeft"
   },
   // Operation
   {
@@ -83,15 +78,26 @@
     "when": "editorTextFocus && !editorReadonly"
   },
   {
-    "key": "ctrl+shift+n",
+    "key": "ctrl+shift+j",
     "command": "vscode-neovim.send",
-    "args": "<C-S-n>",
-    "when": "editorTextFocus && neovim.init"
+    "args": "<C-S-J>",
+    "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
+  },
+  {
+    "key": "ctrl+shift+k",
+    "command": "vscode-neovim.send",
+    "args": "<C-S-K>",
+    "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
+  },
+  {
+    "key": "ctrl+shift+n",
+    "command": "editor.action.moveSelectionToNextFindMatch",
+    "when": "editorTextFocus"
   },
   {
     "key": "ctrl+shift+l",
     "command": "vscode-neovim.send",
-    "args": "<C-S-l>",
+    "args": "<C-S-L>",
     "when": "editorTextFocus && neovim.init"
   },
   // Language
@@ -109,11 +115,5 @@
     "key": "tab",
     "command": "-acceptSelectedSuggestion",
     "when": "suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && textInputFocus"
-  },
-  // UI
-  {
-    "key": "alt+oem_3",
-    "command": "workbench.action.terminal.toggleTerminal",
-    "when": "terminal.active"
   }
 ]

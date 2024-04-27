@@ -156,6 +156,8 @@
     email = username@email.com
   [core]
     editor = nvim
+  [diff]
+    tool = nvimdiff
   ```
 
 - Configure `%USERPROFILE%\.ssh\config`, thus you can push and pull from github via ssh with url `git@github.com:user/repo`. Of course, you need to add your own ssh public key to github first

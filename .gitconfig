@@ -3,3 +3,5 @@
   name = Heache Bear
 [core]
   editor = nvim
+[diff]
+  tool = nvimdiff

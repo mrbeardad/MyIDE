@@ -1,0 +1,49 @@
+" UI and highlight
+set vsvim_controlchars
+set relativenumber
+
+" Buffers
+nnoremap H :vsc Window.PreviousTab<CR>
+nnoremap L :vsc Window.NextTab<CR>
+nnoremap <C-W>q :vsc Window.CloseDocumentWindow<CR>
+
+" Windows
+
+
+" Search
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+nnoremap <Esc> :nohl<CR><Esc>
+nnoremap # *NN
+nnoremap g# g*NN
+
+" Motion
+inoremap <C-A> <Home>
+inoremap <C-E> <End>
+nnoremap ]e :vsc View.NextError<CR>
+nnoremap [e :vsc View.PreviousError<CR>
+
+" Operation
+set expandtab
+set clipboard=unnamed
+nnoremap < <<
+nnoremap > >>
+nnoremap ]<Space> :put =<CR>k
+nnoremap [<Space> :put! =<CR>j
+inoremap <C-U> <C-O>:vsc Edit.DeleteToBOL<CR>
+inoremap <C-K> <C-O>:vsc Edit.DeleteToEOL<CR>
+inoremap <C-D> <Del>
+inoremap <C-J> <End><CR>
+
+" Yank
+nnoremap Y y$
+nnoremap gp o<Esc>p
+nnoremap gP O<Esc>p
+xnoremap zp "0p
+nnoremap zp "0p
+nnoremap zP "0P
+nnoremap zgp o<Esc>"0p
+nnoremap zgP O<Esc>"0p
+
