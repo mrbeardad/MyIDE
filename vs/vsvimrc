@@ -7,9 +7,6 @@ nnoremap H :vsc Window.PreviousTab<CR>
 nnoremap L :vsc Window.NextTab<CR>
 nnoremap <C-W>q :vsc Window.CloseDocumentWindow<CR>
 
-" Windows
-
-
 " Search
 set incsearch
 set hlsearch
@@ -18,20 +15,33 @@ set smartcase
 nnoremap <Esc> :nohl<CR><Esc>
 nnoremap # *NN
 nnoremap g# g*NN
+nnoremap gd :vsc Edit.GoToDefinition<CR>
+nnoremap gy :vsc Edit.GoToTypeDefinition<CR>
+nnoremap gr :vsc Edit.GoToReference<CR>
+nnoremap gi :vsc Edit.GoToImplementation<CR>
 
 " Motion
-inoremap <C-A> <Home>
+inoremap <C-A> <C-O>^
 inoremap <C-E> <End>
 nnoremap ]e :vsc View.NextError<CR>
 nnoremap [e :vsc View.PreviousError<CR>
+nnoremap ]t :vsc View.NextTask<CR>
+nnoremap [t :vsc View.PreviousTask<CR>
+nnoremap ]c :vsc Diff.NextDifference<CR>
+nnoremap [c :vsc Diff.PreviousDifference<CR>
+nnoremap ]g :vsc VisualSVN.NextDifference<CR>
+nnoremap [g :vsc VisualSVN.PreviousDifference<CR>
 
 " Operation
 set expandtab
 set clipboard=unnamed
 nnoremap < <<
 nnoremap > >>
+xnoremap < <gv
+xnoremap > >gv
 nnoremap ]<Space> :put =<CR>k
 nnoremap [<Space> :put! =<CR>j
+inoremap <C-W> <C-O>:vsc Edit.WordDeleteToStart<CR>
 inoremap <C-U> <C-O>:vsc Edit.DeleteToBOL<CR>
 inoremap <C-K> <C-O>:vsc Edit.DeleteToEOL<CR>
 inoremap <C-D> <Del>
@@ -47,3 +57,7 @@ nnoremap zP "0P
 nnoremap zgp o<Esc>"0p
 nnoremap zgP O<Esc>"0p
 
+" Repeat
+nmap <C-J> <C-A-Down>
+nmap <C-N> <C-A-N>
+xmap <C-N> <C-A-N>
