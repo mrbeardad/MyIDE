@@ -17,7 +17,7 @@ nnoremap # *NN
 nnoremap g# g*NN
 nnoremap gd :vsc Edit.GoToDefinition<CR>
 nnoremap gy :vsc Edit.GoToTypeDefinition<CR>
-nnoremap gr :vsc Edit.GoToReference<CR>
+nnoremap gr :vsc Edit.FindAllReferences<CR>
 nnoremap gi :vsc Edit.GoToImplementation<CR>
 
 " Motion
