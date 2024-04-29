@@ -1,6 +1,7 @@
 " UI and highlight
 set vsvim_controlchars
 set relativenumber
+set scrolloff=4
 
 " Buffers
 nnoremap H :vsc Window.PreviousTab<CR>
