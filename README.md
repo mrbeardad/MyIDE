@@ -99,6 +99,7 @@
 | ---------------------- | --------------------------------------------------------- |
 | `Win`+`` ` ``          | Toggle quake (dropdown) window                            |
 | `Ctrl`+`Shift`+`{num}` | New tab with profile `{num}`                              |
+| `Ctrl`+`Shift`+`D`     | Duplication current tab                                   |
 | `Ctrl`+`Shift`+`T`     | New tab with [btop](https://github.com/aristocratos/btop) |
 | `Ctrl`+`Shift`+`W`     | Close tab                                                 |
 | `Alt`+`Shift`+`s`      | Horizontally split the pane                               |
@@ -131,7 +132,9 @@
 
   ```ps1
   scoop install 7zip git aria2
-  scoop install lsd fzf fd ripgrep bat sed gawk lazygit btop cht tokei gdu everything sysinternals
+  scoop install uutils-coreutils zoxide lsd bat sed ripgrep fd fzf gdu tokei lazygit btop cht everything sysinternals
+  # cp ./bat/config ~/AppData/Roaming/bat/config
+  # cp ./lazygit/config.yml ~/AppData/Local/lazygit/config.yml
   ```
 
 - Insall PowerShell modules
@@ -140,7 +143,6 @@
   scoop install oh-my-posh
   Install-Module posh-git
   Install-Module PSFzf
-  Install-Module ZLocation
   ```
 
 - Configure PowerShell [`$PROFILE`](ps/Microsoft.PowerShell_profile.ps1) by execute `notepad $PROFILE` in PowerShell command line,
@@ -194,16 +196,21 @@
 | `Ctrl`+`T` | Fuzzy search files in current directory                      |
 | `Alt`+`C`  | Fuzzy search directories in current directory                |
 
-| Utils   | Description                                                                |
-| ------- | -------------------------------------------------------------------------- |
-| `z`     | Jump to a rencently worked directory whose path contaion the search key    |
-| `f`     | Fuzzy search text of files in current directory an open `$EDITOR`          |
-| `l`     | List files                                                                 |
-| `tree`  | List files as tree                                                         |
-| `gdu`   | Disk usage analysis                                                        |
-| `cht`   | Search for a cheat sheet on [cheat.sh](https://github.com/chubin/cheat.sh) |
-| `tokei` | Count code                                                                 |
-| `proxy` | Show/Set/Enable/Disable proxy address                                      |
+| Utils            | Description                                                                |
+| ---------------- | -------------------------------------------------------------------------- |
+| `e`              | Explorer                                                                   |
+| `l`/`tree` (lsd) | List files                                                                 |
+| `z`/`zi`         | Change directory by path or keyword                                        |
+| `bat`            | Print file content with highlight                                          |
+| `head`           | Print only the first few lines                                             |
+| `tail`           | Print only the last few lines                                              |
+| `sed`            | Content raw filter                                                         |
+| `cut`            | Content column filter                                                      |
+| `f`              | Fuzzy search text of files in current directory an open `$EDITOR`          |
+| `gdu`            | Disk usage analysis                                                        |
+| `tokei`          | Count code                                                                 |
+| `cht`            | Search for a cheat sheet on [cheat.sh](https://github.com/chubin/cheat.sh) |
+| `proxy`          | Show/Set/Enable/Disable proxy address                                      |
 
 | Git Aliases | Git subcommand | Description                                                                                              |
 | ----------- | -------------- | -------------------------------------------------------------------------------------------------------- |

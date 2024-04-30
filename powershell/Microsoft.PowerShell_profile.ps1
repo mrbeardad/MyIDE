@@ -38,7 +38,6 @@ function RegisterGit {
   Register-ArgumentCompleter -CommandName $args[0] -ScriptBlock $tab
 }
 
-Set-Alias g git
 RegisterGit gst "status --short --branch --show-stash --ahead-behind"
 RegisterGit ga "add"
 RegisterGit gaa "add --all"
@@ -124,10 +123,34 @@ Set-Alias f Invoke-PsFzfRipgrep
 # =============
 # Utils
 # =============
-function .. { Set-Location -Path .. }
-function ... { Set-Location -Path ..\.. }
+function e { if ($args.Length -gt 0) { explorer @args } else { explorer . } }
 function l { lsd -lAg --group-directories-first @args }
 function tree { lsd -A --tree --group-directories-first -I .git @args }
+Invoke-Expression (& { (zoxide init powershell | Out-String) })
+function .. { Set-Location -Path .. }
+function ... { Set-Location -Path ..\.. }
+function .... { Set-Location -Path ..\..\.. }
+
+function sed {
+  begin { $content = @() }
+  process { $content += $input }
+  end {
+    $content = $content -join "`n"
+    Write-Output $content | sed.exe -r @args
+  }
+}
+function cut {
+  begin { $content = @() }
+  process { $content += $input }
+  end {
+    $content = $content -join "`n"
+    if ($args.Where({$_ -like "-d*"}).Length -gt 0) {
+      Write-Output $content | cut.exe @args
+    } else {
+      Write-Output $content | cut.exe -w @args 
+    }
+  }
+}
 Set-Alias lg lazygit
 
 $env:DefaultProxyAddress = "127.0.0.1:7890"
