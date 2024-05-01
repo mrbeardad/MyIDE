@@ -132,7 +132,7 @@
 
   ```ps1
   scoop install 7zip git aria2
-  scoop install uutils-coreutils zoxide lsd bat sed ripgrep fd fzf gdu tokei lazygit btop cht everything sysinternals
+  scoop install uutils-coreutils zoxide lsd bat sed gawk ripgrep fd fzf gdu tokei lazygit btop cht everything sysinternals
   # cp ./bat/config ~/AppData/Roaming/bat/config
   # cp ./lazygit/config.yml ~/AppData/Local/lazygit/config.yml
   ```
@@ -196,21 +196,22 @@
 | `Ctrl`+`T` | Fuzzy search files in current directory                      |
 | `Alt`+`C`  | Fuzzy search directories in current directory                |
 
-| Utils            | Description                                                                |
-| ---------------- | -------------------------------------------------------------------------- |
-| `e`              | Explorer                                                                   |
-| `l`/`tree` (lsd) | List files                                                                 |
-| `z`/`zi`         | Change directory by path or keyword                                        |
-| `bat`            | Print file content with highlight                                          |
-| `head`           | Print only the first few lines                                             |
-| `tail`           | Print only the last few lines                                              |
-| `sed`            | Content raw filter                                                         |
-| `cut`            | Content column filter                                                      |
-| `f`              | Fuzzy search text of files in current directory an open `$EDITOR`          |
-| `gdu`            | Disk usage analysis                                                        |
-| `tokei`          | Count code                                                                 |
-| `cht`            | Search for a cheat sheet on [cheat.sh](https://github.com/chubin/cheat.sh) |
-| `proxy`          | Show/Set/Enable/Disable proxy address                                      |
+| Utils      | Description                                                                |
+| ---------- | -------------------------------------------------------------------------- |
+| `e`        | Explorer                                                                   |
+| `l`/`tree` | List files                                                                 |
+| `z`/`zi`   | Change directory by path or keyword                                        |
+| `bat`      | Print file content with highlight                                          |
+| `head`     | Print only the first few lines                                             |
+| `tail`     | Print only the last few lines                                              |
+| `sed`      | Text raw filter                                                            |
+| `cut`      | Text column filter                                                         |
+| `awk`      | Text operator                                                              |
+| `f`        | Fuzzy search text of files in current directory an open `$EDITOR`          |
+| `gdu`      | Disk usage analysis                                                        |
+| `tokei`    | Count code                                                                 |
+| `cht`      | Search for a cheat sheet on [cheat.sh](https://github.com/chubin/cheat.sh) |
+| `proxy`    | Show/Set/Enable/Disable proxy address                                      |
 
 | Git Aliases | Git subcommand | Description                                                                                              |
 | ----------- | -------------- | -------------------------------------------------------------------------------------------------------- |

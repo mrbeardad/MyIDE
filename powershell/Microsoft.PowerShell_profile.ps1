@@ -130,15 +130,8 @@ Invoke-Expression (& { (zoxide init powershell | Out-String) })
 function .. { Set-Location -Path .. }
 function ... { Set-Location -Path ..\.. }
 function .... { Set-Location -Path ..\..\.. }
+Set-Alias lg lazygit
 
-# function sed {
-#   begin { $content = @() }
-#   process { $content += $input }
-#   end {
-#     $content = $content -join "`n"
-#     Write-Output $content | sed.exe -r @args
-#   }
-# }
 # function cut {
 #   begin { $content = @() }
 #   process { $content += $input }
@@ -151,7 +144,6 @@ function .... { Set-Location -Path ..\..\.. }
 #     }
 #   }
 # }
-Set-Alias lg lazygit
 
 $env:DefaultProxyAddress = "127.0.0.1:7890"
 function proxy {

@@ -97,6 +97,7 @@
 | ---------------------- | ---------------------------------------------------------- |
 | `Win`+`` ` ``          | 下拉或收起终端                                             |
 | `Ctrl`+`Shift`+`{num}` | 用第`{num}`个 profile 新建 Tab                             |
+| `Ctrl`+`Shift`+`D`     | 重复当前 Tab                                               |
 | `Ctrl`+`Shift`+`T`     | 新建 Tab 执行 [btop](https://github.com/aristocratos/btop) |
 | `Ctrl`+`Shift`+`W`     | 关闭 Tab                                                   |
 | `Alt`+`Shift`+`s`      | 水平切分                                                   |
@@ -129,7 +130,9 @@
 
   ```ps1
   scoop install 7zip git aria2
-  scoop install lsd fzf fd ripgrep bat sed gawk lazygit btop cht tokei gdu everything sysinternals
+  scoop install uutils-coreutils zoxide lsd bat sed gawk ripgrep fd fzf gdu tokei lazygit btop cht everything sysinternals
+  # cp ./bat/config ~/AppData/Roaming/bat/config
+  # cp ./lazygit/config.yml ~/AppData/Local/lazygit/config.yml
   ```
 
 - 安装 PowerShell 模块
@@ -138,7 +141,6 @@
   scoop install oh-my-posh
   Install-Module posh-git
   Install-Module PSFzf
-  Install-Module ZLocation
   ```
 
 - 在 PowerShell 中执行`notepad $PROFILE`来更改配置文件，这是我的 [profile.ps1](./ps/Microsoft.PowerShell_profile.ps1) 你可以参考
@@ -153,6 +155,8 @@
     email = username@email.com
   [core]
     editor = nvim
+  [diff]
+    tool = nvimdiff
   ```
 
 - 配置 `%USERPROFILE%\.ssh\config`，如此你便可通过形如`git@github.com:user/repo`的 ssh url 来 push 或 pull github 仓库了。当然，你需要先将你自己的 ssh 公钥添加到 github
@@ -189,16 +193,22 @@
 | `Ctrl`+`T` | 模糊搜索文件                            |
 | `Alt`+`C`  | 模糊搜索目录并跳转                      |
 
-| 实用命令 | 描述                                                        |
-| -------- | ----------------------------------------------------------- |
-| `z`      | 跳转到最近进入过的且名字包含参数的目录                      |
-| `f`      | 模糊搜索文本并用`$EDITOR`打开文件                           |
-| `l`      | 列出目录文件                                                |
-| `tree`   | 列出目录结构                                                |
-| `gdu`    | 磁盘使用情况                                                |
-| `cht`    | 搜索帮助信息 [cheat.sh](https://github.com/chubin/cheat.sh) |
-| `tokei`  | 项目代码统计                                                |
-| `proxy`  | 设置代理                                                    |
+| 实用命令   | 描述                                                        |
+| ---------- | ----------------------------------------------------------- |
+| `e`        | 资源管理器                                                  |
+| `l`/`tree` | 文件列表                                                    |
+| `z`/`zi`   | 通过路径或关键字跳转目录                                    |
+| `bat`      | 打印文件内容                                                |
+| `head`     | 打印前几行                                                  |
+| `tail`     | 打印后几行                                                  |
+| `sed`      | 行过滤                                                      |
+| `cut`      | 列过滤                                                      |
+| `awk`      | 文本处理语言                                                |
+| `f`        | 模糊搜索文本并用`$EDITOR`打开文件                           |
+| `gdu`      | 磁盘使用情况                                                |
+| `tokei`    | 项目代码统计                                                |
+| `cht`      | 搜索帮助信息 [cheat.sh](https://github.com/chubin/cheat.sh) |
+| `proxy`    | 设置代理                                                    |
 
 | Git Aliases | Git subcommand | Description                                                                                              |
 | ----------- | -------------- | -------------------------------------------------------------------------------------------------------- |
