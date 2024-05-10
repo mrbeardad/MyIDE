@@ -1,5 +1,5 @@
 " UI and highlight
-set vsvim_controlchars
+set number
 set relativenumber
 set scrolloff=4
 
