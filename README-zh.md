@@ -300,8 +300,7 @@
 2. 安装 Neovim
 
    ```ps1
-   # use --skip to skip hash check since there is some problem in scoop's neovim-nightly package
-   scoop install neovim-nightly --skip
+   scoop install neovim
    ```
 
 3. 配置 Neovim
