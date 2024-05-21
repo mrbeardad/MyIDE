@@ -126,11 +126,21 @@ Set-Alias f Invoke-PsFzfRipgrep
 function e { if ($args.Length -gt 0) { explorer @args } else { explorer . } }
 function l { lsd -lAg --group-directories-first @args }
 function tree { lsd -A --tree --group-directories-first -I .git @args }
-Invoke-Expression (& { (zoxide init powershell | Out-String) })
 function .. { Set-Location -Path .. }
 function ... { Set-Location -Path ..\.. }
 function .... { Set-Location -Path ..\..\.. }
+Invoke-Expression (& { (zoxide init powershell | Out-String) })
 Set-Alias lg lazygit
+
+# Get .gitignore template, e.g.: `gi cpp,windows` write a template to ./.gitignore
+function gi {
+  param(
+    [Parameter(Mandatory=$true)]
+    [string[]]$list
+  )
+  $params = ($list | ForEach-Object { [uri]::EscapeDataString($_) }) -join ","
+  Invoke-WebRequest -Uri "https://www.toptal.com/developers/gitignore/api/$params" | select -ExpandProperty content | Out-File -FilePath $(Join-Path -path $pwd -ChildPath ".gitignore") -Encoding ascii
+}
 
 # function cut {
 #   begin { $content = @() }

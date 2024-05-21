@@ -129,7 +129,7 @@
 - 用 scoop 安装常用的工具
 
   ```ps1
-  scoop install 7zip git aria2
+  scoop install 7zip git # aria2
   scoop install uutils-coreutils zoxide lsd bat sed gawk ripgrep fd fzf gdu tokei lazygit btop cht everything sysinternals
   # cp ./bat/config ~/AppData/Roaming/bat/config
   # cp ./lazygit/config.yml ~/AppData/Local/lazygit/config.yml
