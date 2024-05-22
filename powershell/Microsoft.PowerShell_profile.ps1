@@ -129,7 +129,6 @@ function tree { lsd -A --tree --group-directories-first -I .git @args }
 function .. { Set-Location -Path .. }
 function ... { Set-Location -Path ..\.. }
 function .... { Set-Location -Path ..\..\.. }
-Invoke-Expression (& { (zoxide init powershell | Out-String) })
 Set-Alias lg lazygit
 
 # Get .gitignore template, e.g.: `gi cpp,windows` write a template to ./.gitignore
@@ -193,3 +192,9 @@ if ($env:NVIM -or $env:VSCODE_GIT_IPC_HANDLE) {
   oh-my-posh toggle sysinfo
   oh-my-posh toggle time
 }
+
+# =============
+# Zoxide
+# =============
+# Import after oh-my-posh
+Invoke-Expression (& { (zoxide init powershell | Out-String) })
