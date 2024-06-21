@@ -133,11 +133,7 @@ Set-Alias lg lazygit
 
 # Get .gitignore template, e.g.: `gi cpp,windows` write a template to ./.gitignore
 function gig {
-  param(
-    [Parameter(Mandatory=$true)]
-    [string[]]$list
-  )
-  $params = ($list | ForEach-Object { [uri]::EscapeDataString($_) }) -join ","
+  $params = ($args | ForEach-Object { [uri]::EscapeDataString($_) }) -join ","
   Invoke-WebRequest -Uri "https://www.toptal.com/developers/gitignore/api/$params" | select -ExpandProperty content | Out-File -FilePath $(Join-Path -path $pwd -ChildPath ".gitignore") -Encoding ascii
 }
 
