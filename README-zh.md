@@ -276,7 +276,7 @@
 | `gsu`       | `submodule`    | Init and update submodules to expected version. To modify submodule,                                     |
 | `gsd`       | `submodule`    | Delete a submodule                                                                                       |
 | `lg`        |                | Open [Lazygit](https://github.com/jesseduffield/lazygit)                                                 |
-| `gi`        |                | Create a .gitignore template for you, .e.g `gi c++,windows`                                              |
+| `gig`       |                | Create a .gitignore template for you, .e.g `gig c++,windows`                                             |
 
 > 小贴士:
 >

@@ -132,7 +132,7 @@ function .... { Set-Location -Path ..\..\.. }
 Set-Alias lg lazygit
 
 # Get .gitignore template, e.g.: `gi cpp,windows` write a template to ./.gitignore
-function gi {
+function gig {
   param(
     [Parameter(Mandatory=$true)]
     [string[]]$list
