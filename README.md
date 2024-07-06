@@ -84,35 +84,32 @@
 
 - Install [Windows Terminal](https://apps.microsoft.com/detail/9N0DX20HK701?hl=en-us&gl=US)
 
-- Configure Windows Terminal by pressing `Ctrl`+`Shift`+`,` in terminal window, you could refer to my [settings.json](./wt/settings.json).
-
-- (Optional) Set Windows Terminal to high performance graphics usage.
+- Configure Windows Terminal by pressing `Ctrl`+`Shift`+`,` in terminal window, you could refer to my [**settings.json**](./wt/settings.json).
 
 > Tips:
 >
-> 1. All colorschemes are adjusted to fit both light and dark theme of system.
-> 2. The font is set to NerdCodePro that mentioned above, change it if you don't want to use it.
+> - All colorschemes are adjusted to fit both light and dark theme of system.
+> - The font is set to NerdCodePro that mentioned above, change it if you don't want to use it.
 
 ### Terminal Usage
 
-| Shortcut               | Description                                               |
-| ---------------------- | --------------------------------------------------------- |
-| `Win`+`` ` ``          | Toggle quake (dropdown) window                            |
-| `Ctrl`+`Shift`+`{num}` | New tab with profile `{num}`                              |
-| `Ctrl`+`Shift`+`D`     | Duplication current tab                                   |
-| `Ctrl`+`Shift`+`T`     | New tab with [btop](https://github.com/aristocratos/btop) |
-| `Ctrl`+`Shift`+`W`     | Close tab                                                 |
-| `Alt`+`Shift`+`s`      | Horizontally split the pane                               |
-| `Alt`+`Shift`+`v`      | Vertically split the pane                                 |
-| `Alt`+`Left`           | Move focus left                                           |
-| `Alt`+`Right`          | Move focus right                                          |
-| `Alt`+`Up`             | Move focus up                                             |
-| `Alt`+`Down`           | Move focus down                                           |
-| `MouseSelect`          | Copy                                                      |
-| `Shift`+`MouseSelect`  | Incremental Copy                                          |
-| `Alt`+`MouseSelect`    | Copy block area                                           |
-| `Ctrl`+`Shift`+`V`     | Paste                                                     |
-| `Ctrl`+`Shift`+`F`     | Search                                                    |
+| Shortcut               | Description                    |
+| ---------------------- | ------------------------------ |
+| `Win`+`` ` ``          | Toggle quake (dropdown) window |
+| `Ctrl`+`Shift`+`{num}` | New tab with profile `{num}`   |
+| `Ctrl`+`Shift`+`D`     | Duplication current tab        |
+| `Ctrl`+`Shift`+`W`     | Close tab                      |
+| `Alt`+`Shift`+`S`      | Horizontally split the pane    |
+| `Alt`+`Shift`+`V`      | Vertically split the pane      |
+| `Alt`+`Left`           | Move focus left                |
+| `Alt`+`Right`          | Move focus right               |
+| `Alt`+`Up`             | Move focus up                  |
+| `Alt`+`Down`           | Move focus down                |
+| `MouseSelect`          | Copy                           |
+| `Shift`+`MouseSelect`  | Incremental Copy               |
+| `Alt`+`MouseSelect`    | Copy block area                |
+| `Ctrl`+`Shift`+`V`     | Paste                          |
+| `Ctrl`+`Shift`+`F`     | Search                         |
 
 ## PowerShell
 
@@ -133,8 +130,12 @@
   ```ps1
   scoop install 7zip git # aria2
   scoop install uutils-coreutils zoxide lsd bat sed gawk ripgrep fd fzf gdu tokei lazygit btop cht everything sysinternals
-  # cp ./bat/config ~/AppData/Roaming/bat/config
-  # cp ./lazygit/config.yml ~/AppData/Local/lazygit/config.yml
+  # (Optional) The following commands apply the config for above tools
+  # For 7zip, you can click the menu Tools > Options > 7-zip in 7-zip Window to add 7-zip into Explorer context menu
+  cp .\bat\config ~\AppData\Roaming\bat\config
+  cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
+  cp .\bat\config ~\AppData\Roaming\Everything\Everything.ini
+  .\sysinternals\ProcessExplorerColumnSet.reg
   ```
 
 - Insall PowerShell modules
@@ -145,10 +146,10 @@
   Install-Module PSFzf
   ```
 
-- Configure PowerShell [`$PROFILE`](ps/Microsoft.PowerShell_profile.ps1) by execute `notepad $PROFILE` in PowerShell command line,
-  then overwrite the profile with the [profile.ps1](./ps/Microsoft.PowerShell_profile.ps1)
+- Configure PowerShell by executing `notepad $PROFILE` in PowerShell command line,
+  you could refer to my [**profile.ps1**](./ps/Microsoft.PowerShell_profile.ps1)
 
-- Copy the [prompt theme](./powershell/base16_bear.omp.json) to `%USERPROFILE%\Documents\PowerShell\base16_bear.omp.json`
+- Copy the theme file [**base16_bear.omp.json**](./powershell/base16_bear.omp.json) into `%USERPROFILE%\Documents\PowerShell`
 
 - Configure `%USERPROFILE%\.gitconfig`
 
@@ -198,7 +199,6 @@
 
 | Utils      | Description                                                                |
 | ---------- | -------------------------------------------------------------------------- |
-| `e`        | Explorer                                                                   |
 | `l`/`tree` | List files                                                                 |
 | `z`/`zi`   | Change directory by path or keyword                                        |
 | `bat`      | Print file content with highlight                                          |
@@ -279,13 +279,12 @@
 | `gsu`       | `submodule`    | Init and update submodules to expected version. To modify submodule,                                     |
 | `gsd`       | `submodule`    | Delete a submodule                                                                                       |
 | `lg`        |                | Open [Lazygit](https://github.com/jesseduffield/lazygit)                                                 |
-| `gig`       |                | Create a .gitignore template for you, .e.g `gig c++,windows`                                             |
+| `gig`       |                | Create a .gitignore template for you, .e.g `gig c++ windows`                                             |
 
 > Tips:
 >
-> 1. You don't need to remenber all the git aliases, use your favorite git UI tool instead, such as lazygit, fork or gitkraken. The git aliases list above is just to tell you the basic git operations you should know.
-> 2. You could use my [config.yml](./lazygit/config.yml) if you choose lazygit, put it to `%APPDATA%\lazygit\config.yml`
-> 3. Highly recommended for this [blog post](https://nvie.com/posts/a-successful-git-branching-model/) about git flow.
+> - You don't need to remenber all the git aliases, use your favorite git UI tool instead, such as lazygit, fork or gitkraken. The git aliases list above is just to tell you the basic git operations you should know.
+> - Highly recommended for this [blog post](https://nvie.com/posts/a-successful-git-branching-model/) about git flow.
 
 ## VSCode-Neovim
 
@@ -327,4 +326,4 @@
    1. This is my [settings.json](vscode/settings.json) and [keybindings.json](vscode/keybindings.json), you could copy them to `%APPDATA%\Code\User` optionally
    2. This is my [lastSyncextensions.json](vscode/lastSyncextensions.json), you could copy it to `%APPDATA%\Code\User\sync\extensions\`
 
-6. **For more detail about configuration and usage of vscode and neovim, see [mrbeardad/nvim](https://github.com/mrbeardad/nvim)**
+6. **For more detail about configuration and usage of vscode and neovim, refer to [mrbeardad/nvim](https://github.com/mrbeardad/nvim)**

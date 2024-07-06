@@ -17,13 +17,15 @@ nnoremap <Esc> :nohl<CR><Esc>
 nnoremap # *NN
 nnoremap g# g*NN
 nnoremap gd :vsc Edit.GoToDefinition<CR>
-nnoremap gy :vsc Edit.GoToTypeDefinition<CR>
+nnoremap gt :vsc Edit.GoToTypeDefinition<CR>
 nnoremap gr :vsc Edit.FindAllReferences<CR>
 nnoremap gi :vsc Edit.GoToImplementation<CR>
 
 " Motion
 inoremap <C-A> <C-O>^
 inoremap <C-E> <End>
+nnoremap <C-O> :vsc View.NavigateBackward<CR>
+nnoremap <C-I> :vsc View.NavigateForward<CR>
 nnoremap ]e :vsc View.NextError<CR>
 nnoremap [e :vsc View.PreviousError<CR>
 nnoremap ]t :vsc View.NextTask<CR>

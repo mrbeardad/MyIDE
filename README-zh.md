@@ -82,35 +82,34 @@
 
 - 安装 [Windows Terminal](https://apps.microsoft.com/detail/9N0DX20HK701?hl=en-us&gl=US)
 
-- 打开 Windows Terminal 然后按 `Ctrl`+`Shift`+`,` 打开配置文件，这是我的[settings.json](./wt/settings.json) 你可以参考
+- 打开 Windows Terminal 然后按 `Ctrl`+`Shift`+`,` 打开配置文件，这是我的[**settings.json**](./wt/settings.json) 你可以参考
 
 - （可选）系统显示设置将 Windows Terminal 设置为高性能
 
 > 小贴士:
 >
-> 1. 所有颜色主题都被调整了以适配系统浅色主题
-> 2. 字体被设置为上面提到的 NerdCodePro，如果你不想使用改字体记得修改配置
+> - 所有颜色主题都被调整了以适配系统浅色主题
+> - 字体被设置为上面提到的 NerdCodePro，如果你不想使用改字体记得修改配置
 
 ### 终端使用
 
-| 快捷键                 | 描述                                                       |
-| ---------------------- | ---------------------------------------------------------- |
-| `Win`+`` ` ``          | 下拉或收起终端                                             |
-| `Ctrl`+`Shift`+`{num}` | 用第`{num}`个 profile 新建 Tab                             |
-| `Ctrl`+`Shift`+`D`     | 重复当前 Tab                                               |
-| `Ctrl`+`Shift`+`T`     | 新建 Tab 执行 [btop](https://github.com/aristocratos/btop) |
-| `Ctrl`+`Shift`+`W`     | 关闭 Tab                                                   |
-| `Alt`+`Shift`+`s`      | 水平切分                                                   |
-| `Alt`+`Shift`+`v`      | 垂直切分                                                   |
-| `Alt`+`Left`           | 聚焦左边                                                   |
-| `Alt`+`Right`          | 聚焦右边                                                   |
-| `Alt`+`Up`             | 聚焦上边                                                   |
-| `Alt`+`Down`           | 聚焦下边                                                   |
-| `MouseSelect`          | 复制                                                       |
-| `Shift`+`MouseSelect`  | 增量复制                                                   |
-| `Alt`+`MouseSelect`    | 块区域复制                                                 |
-| `Ctrl`+`Shift`+`V`     | 粘贴                                                       |
-| `Ctrl`+`Shift`+`F`     | 搜索                                                       |
+| 快捷键                 | 描述                           |
+| ---------------------- | ------------------------------ |
+| `Win`+`` ` ``          | 下拉或收起终端                 |
+| `Ctrl`+`Shift`+`{num}` | 用第`{num}`个 profile 新建 Tab |
+| `Ctrl`+`Shift`+`D`     | 重复当前 Tab                   |
+| `Ctrl`+`Shift`+`W`     | 关闭 Tab                       |
+| `Alt`+`Shift`+`s`      | 水平切分                       |
+| `Alt`+`Shift`+`v`      | 垂直切分                       |
+| `Alt`+`Left`           | 聚焦左边                       |
+| `Alt`+`Right`          | 聚焦右边                       |
+| `Alt`+`Up`             | 聚焦上边                       |
+| `Alt`+`Down`           | 聚焦下边                       |
+| `MouseSelect`          | 复制                           |
+| `Shift`+`MouseSelect`  | 增量复制                       |
+| `Alt`+`MouseSelect`    | 块区域复制                     |
+| `Ctrl`+`Shift`+`V`     | 粘贴                           |
+| `Ctrl`+`Shift`+`F`     | 搜索                           |
 
 ## PowerShell
 
@@ -131,8 +130,11 @@
   ```ps1
   scoop install 7zip git # aria2
   scoop install uutils-coreutils zoxide lsd bat sed gawk ripgrep fd fzf gdu tokei lazygit btop cht everything sysinternals
-  # cp ./bat/config ~/AppData/Roaming/bat/config
-  # cp ./lazygit/config.yml ~/AppData/Local/lazygit/config.yml
+  # （可选）以下命令将配置上面安装的工具
+  cp .\bat\config ~\AppData\Roaming\bat\config
+  cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
+  cp .\bat\config ~\AppData\Roaming\Everything\Everything.ini
+  .\sysinternals\ProcessExplorerColumnSet.reg
   ```
 
 - 安装 PowerShell 模块
@@ -143,9 +145,9 @@
   Install-Module PSFzf
   ```
 
-- 在 PowerShell 中执行`notepad $PROFILE`来更改配置文件，这是我的 [profile.ps1](./ps/Microsoft.PowerShell_profile.ps1) 你可以参考
+- 在 PowerShell 中执行`notepad $PROFILE`来更改配置文件，这是我的 [**profile.ps1**](./ps/Microsoft.PowerShell_profile.ps1) 你可以参考
 
-- 复制[提示符主题](./powershell/base16_bear.omp.json)到`%USERPROFILE%\Documents\PowerShell\base16_bear.omp.json`
+- 复制主题文件 [base16_bear.omp.json](./powershell/base16_bear.omp.json) 到 `%USERPROFILE%\Documents\PowerShell\base16_bear.omp.json`
 
 - 配置 `%USERPROFILE%\.gitconfig`
 
@@ -195,7 +197,6 @@
 
 | 实用命令   | 描述                                                        |
 | ---------- | ----------------------------------------------------------- |
-| `e`        | 资源管理器                                                  |
 | `l`/`tree` | 文件列表                                                    |
 | `z`/`zi`   | 通过路径或关键字跳转目录                                    |
 | `bat`      | 打印文件内容                                                |
@@ -280,9 +281,8 @@
 
 > 小贴士:
 >
-> 1. 你无需记住所有 git 别名，使用你喜欢的 git ui 工具即可，比如 lazygit、fork 或 gitkraken 等。列出这么多 git 别名的目的在于告诉你哪些 git 基础操作是你应该知道的
-> 2. 如果你使用 Lazygit，这里是我的[config.yml](./lazygit/config.yml) 你可以参考
-> 3. 强烈推荐 [这篇博文](https://nvie.com/posts/a-successful-git-branching-model/) 描述了 git flow
+> - 你无需记住所有 git 别名，使用你喜欢的 git ui 工具即可，比如 lazygit、fork 或 gitkraken 等。列出这么多 git 别名的目的在于告诉你哪些 git 基础操作是你应该知道的
+> - 强烈推荐 [这篇博文](https://nvie.com/posts/a-successful-git-branching-model/) 描述了 git flow
 
 ## VSCode-Neovim
 

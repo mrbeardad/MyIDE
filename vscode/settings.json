@@ -1,5 +1,9 @@
 {
-  "settingsSync.ignoredSettings": ["workbench.colorTheme"],
+  "settingsSync.ignoredSettings": [
+    "workbench.colorTheme",
+    "editor.minimap.scale"
+  ],
+  "settingsSync.ignoredExtensions": ["johnstoncode.svn-scm"],
 
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": "active",
@@ -12,13 +16,12 @@
   "editor.renderWhitespace": "all",
   "editor.rulers": [100],
   "editor.smoothScrolling": true,
-  "editor.tabSize": 4,
   "editor.unfoldOnClickAfterEndOfLine": true,
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.cursorSurroundingLines": 5,
   "editor.fontFamily": "NerdCodePro",
   "editor.formatOnSave": true,
-  "editor.minimap.enabled": false,
+  "editor.minimap.autohide": true,
   "editor.quickSuggestions": {
     "comments": "on",
     "strings": "on"
@@ -47,7 +50,7 @@
       "editorWidget.background": "#e0eff1bb"
     }
   },
-  "workbench.colorTheme": "Noctis Sereno",
+  "workbench.colorTheme": "Noctis Hibernus",
   "workbench.preferredDarkColorTheme": "Noctis Sereno",
   "workbench.preferredHighContrastColorTheme": "Noctis Sereno",
   "workbench.preferredHighContrastLightColorTheme": "Noctis Hibernus",
@@ -59,15 +62,16 @@
   "workbench.editor.revealIfOpen": true,
 
   "window.autoDetectColorScheme": true,
+  "window.openFilesInNewWindow": "default",
 
   "explorer.confirmDelete": false,
   "explorer.excludeGitIgnore": true,
 
-  "search.exclude": {
-    "**/third_party": true,
-    "**/3rd_party": true,
-    "**/vendor": true
-  },
+  // "search.exclude": {
+  //   "**/third_party": true,
+  //   "**/3rd_party": true,
+  //   "**/vendor": true
+  // },
   "search.showLineNumbers": true,
   "search.smartCase": true,
 
@@ -169,7 +173,6 @@
   "python.analysis.inlayHints.functionReturnTypes": true,
   "python.analysis.inlayHints.pytestParameters": true,
   "python.analysis.inlayHints.variableTypes": true,
-  "python.terminal.executeInFileDir": true,
   "jupyter.widgetScriptSources": ["jsdelivr.com", "unpkg.com"],
 
   "javascript.format.enable": false,
@@ -199,6 +202,7 @@
   "gitlens.graph.layout": "editor",
   "gitlens.blame.ignoreWhitespace": true,
   "gitlens.statusBar.enabled": false,
+  "gitlens.launchpad.indicator.enabled": false,
   "gitlens.graph.minimap.additionalTypes": [
     "stashes",
     "tags",
@@ -279,6 +283,5 @@
       "icon": "note",
       "iconColour": "#1abc9c"
     }
-  },
-  "settingsSync.ignoredExtensions": ["johnstoncode.svn-scm"]
+  }
 }

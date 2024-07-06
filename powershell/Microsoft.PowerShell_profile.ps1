@@ -123,7 +123,6 @@ Set-Alias f Invoke-PsFzfRipgrep
 # =============
 # Utils
 # =============
-function e { if ($args.Length -gt 0) { explorer @args } else { explorer . } }
 function l { lsd -lAg --group-directories-first @args }
 function tree { lsd -A --tree --group-directories-first -I .git @args }
 function .. { Set-Location -Path .. }

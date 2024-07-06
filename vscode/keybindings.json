@@ -20,6 +20,16 @@
     "command": "workbench.action.focusActiveEditorGroup",
     "when": "!editorTextFocus && !inputFocus"
   },
+  {
+    "key": "ctrl+p",
+    "command": "-list.focusUp",
+    "when": "listFocus && !inputFocus"
+  },
+  {
+    "key": "ctrl+k o",
+    "command": "workbench.action.files.openFile",
+    "when": "true"
+  },
   // Windows
   {
     "key": "tab",
@@ -33,7 +43,7 @@
   },
   // Search
   {
-    "key": "ctrl+k ctrl+r",
+    "key": "ctrl+k r",
     "command": "workbench.action.openRecent"
   },
   {
@@ -54,7 +64,20 @@
     "args": "<A-r>",
     "when": "neovim.init && neovim.mode == 'cmdline'"
   },
+  // Motions
+  {
+    "key": "enter",
+    "command": "vscode-neovim.send",
+    "args": "<CR>",
+    "when": "editorTextFocus && neovim.init && (neovim.mode == 'normal' || neovim.mode == 'visual')"
+  },
   // Operation
+  {
+    "key": "ctrl+k",
+    "command": "vscode-neovim.send",
+    "args": "<C-K>",
+    "when": "editorTextFocus && neovim.ctrlKeysInsert.k && neovim.init && neovim.mode == 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'"
+  },
   {
     "key": "alt+d",
     "command": "vscode-neovim.send",

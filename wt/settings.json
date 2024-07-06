@@ -8,25 +8,21 @@
     },
     {
       "keys": "alt+shift+v",
-      "command": { "action": "splitPane", "split": "vertical" }
+      "command": { "action": "splitPane", "split": "right" }
     },
     {
       "keys": "alt+shift+s",
-      "command": { "action": "splitPane", "split": "horizontal" }
+      "command": { "action": "splitPane", "split": "right" }
     },
     {
       "keys": "alt+shift+z",
       "command": "togglePaneZoom"
     },
     {
-      "keys": "ctrl+shift+t",
-      "command": { "action": "newTab", "commandline": "btop" }
-    },
-    {
       "keys": "ctrl+i",
       "command": {
         "action": "sendInput",
-        "input": "\u001b[73;4u" // <A-I>
+        "input": "\u001b[73;4u" // <M-I>
       }
     },
     {
@@ -44,6 +40,13 @@
       }
     },
     {
+      "keys": "ctrl+shift+l",
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[76;5u"
+      }
+    },
+    {
       "keys": "ctrl+enter",
       "command": {
         "action": "sendInput",
@@ -55,6 +58,13 @@
       "command": {
         "action": "sendInput",
         "input": "\u001b[13;2u"
+      }
+    },
+    {
+      "keys": "ctrl+`",
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[96;3u" // <M-`>
       }
     }
   ],
@@ -73,7 +83,6 @@
         "face": "NerdCodePro",
         "size": 10
       },
-      // "useAtlasEngine": false, // Not yet mature
       "intenseTextStyle": "all",
       "padding": "0, 0, 0, 0",
       "scrollbarState": "hidden",
@@ -89,7 +98,8 @@
       {
         "name": "Cloud Virtual Machine",
         "guid": "{a453ae62-4e3d-5e58-b989-0a998ec441b8}",
-        "commandline": "ssh -t -o ServerAliveInterval=60 ubuntu@43.134.204.157 sh -c 'tmux new-session -s Ubuntu || tmux attach -t Ubuntu'"
+        "commandline": "ssh -t -o ServerAliveInterval=60 ubuntu@43.134.204.157 sh -c 'tmux new-session -s Ubuntu || tmux attach -t Ubuntu'",
+        "hidden": true
       },
       {
         "name": "Windows PowerShell",
