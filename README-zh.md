@@ -123,13 +123,13 @@
 
 - 安装 [PowerShell](https://apps.microsoft.com/detail/9MZ1SNWT0N5D?hl=en-us&gl=US)
 
-- 安装 [scoop-cn](https://github.com/duzyn/scoop-cn?tab=readme-ov-file#%E5%AE%89%E8%A3%85-scoop-%E5%92%8C-scoop-cn%E6%8E%A8%E8%8D%90)：一款 Windows 下好用包管理器的国内镜像
+- 安装 [scoop-proxy-cn](https://github.com/lzwme/scoop-proxy-cn)：一款 Windows 下好用包管理器的国内镜像
 
 - 用 scoop 安装常用的工具
 
   ```ps1
   scoop install 7zip git # aria2
-  scoop install uutils-coreutils zoxide lsd bat sed gawk ripgrep fd fzf gdu tokei lazygit btop cht everything sysinternals
+  scoop install scoop-search uutils-coreutils zoxide lsd bat sed gawk ripgrep fd fzf gdu tokei lazygit btop cht everything sysinternals
   # （可选）以下命令将配置上面安装的工具
   cp .\bat\config ~\AppData\Roaming\bat\config
   cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
