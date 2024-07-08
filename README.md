@@ -131,7 +131,8 @@
   scoop install 7zip git # aria2
   scoop install uutils-coreutils zoxide lsd bat sed gawk ripgrep fd fzf gdu tokei lazygit btop cht everything sysinternals
   # (Optional) The following commands apply the config for above tools
-  # For 7zip, you can click the menu Tools > Options > 7-zip in 7-zip Window to add 7-zip into Explorer context menu
+  # For 7zip and Everything, you can click the menu Tools > Options in window to add them into Explorer context menu
+  # For context menu of Neovim, refer to ./nvim/ directory
   cp .\bat\config ~\AppData\Roaming\bat\config
   cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
   cp .\bat\config ~\AppData\Roaming\Everything\Everything.ini

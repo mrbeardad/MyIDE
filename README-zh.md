@@ -131,6 +131,7 @@
   scoop install 7zip git # aria2
   scoop install scoop-search uutils-coreutils zoxide lsd bat sed gawk ripgrep fd fzf gdu tokei lazygit btop cht everything sysinternals
   # （可选）以下命令将配置上面安装的工具
+  # 7-zip 和 Everything 的右键菜单需要在应用窗口中的 Tools > Options 中设置，Neovim 的右键菜单参考 ./nvim/ 目录
   cp .\bat\config ~\AppData\Roaming\bat\config
   cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
   cp .\bat\config ~\AppData\Roaming\Everything\Everything.ini
