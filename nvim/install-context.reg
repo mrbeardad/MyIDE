@@ -1,0 +1,25 @@
+Windows Registry Editor Version 5.00
+
+; when you right click a file
+[HKEY_CURRENT_USER\SOFTWARE\Classes\*\shell\Neovim]
+@="Open with Neovim"
+"Icon"="C:\\Users\\A\\scoop\\apps\\neovim\\current\\share\\nvim\\runtime\\neovim.ico"
+
+[HKEY_CURRENT_USER\SOFTWARE\Classes\*\shell\Neovim\command]
+@="\"C:\\Users\\A\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe\" nvim \"%1\""
+
+; when you right click a folder
+[HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\shell\Neovim]
+@="Open with Neovim"
+"Icon"="C:\\Users\\A\\scoop\\apps\\neovim\\current\\share\\nvim\\runtime\\neovim.ico"
+
+[HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\shell\Neovim\command]
+@="\"C:\\Users\\A\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe\" nvim \"%1\""
+
+; when you right click a background
+[HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\Background\shell\Neovim]
+@="Open with Neovim"
+"Icon"="C:\\Users\\A\\scoop\\apps\\neovim\\current\\share\\nvim\\runtime\\neovim.ico"
+
+[HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\Background\shell\Neovim\command]
+@="\"C:\\Users\\A\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe\" nvim \"%V\""

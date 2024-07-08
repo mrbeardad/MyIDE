@@ -128,20 +128,22 @@
 - 用 scoop 安装常用的工具
 
   ```ps1
+  # 必要安装
   scoop install 7zip git # aria2
-  scoop install scoop-search uutils-coreutils zoxide lsd bat sed gawk ripgrep fd fzf gdu tokei lazygit btop cht everything sysinternals
-  # （可选）以下命令将配置上面安装的工具
-  # 7-zip 和 Everything 的右键菜单需要在应用窗口中的 Tools > Options 中设置，Neovim 的右键菜单参考 ./nvim/ 目录
+  # 可选安装（推荐）
+  scoop install scoop-search uutils-coreutils cht sed gawk gdu tokei lazygit btop everything sysinternals
   cp .\bat\config ~\AppData\Roaming\bat\config
   cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
   cp .\bat\config ~\AppData\Roaming\Everything\Everything.ini
   .\sysinternals\ProcessExplorerColumnSet.reg
+  # 7-zip 和 Everything 的右键菜单需要在应用窗口中的 Tools > Options 中设置
+  # Neovim 的右键菜单参考 ./nvim/install-context.reg
   ```
 
 - 安装 PowerShell 模块
 
   ```ps1
-  scoop install oh-my-posh
+  scoop install oh-my-posh zoxide lsd bat ripgrep fd fzf
   Install-Module posh-git
   Install-Module PSFzf
   ```

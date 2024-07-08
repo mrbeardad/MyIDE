@@ -128,21 +128,22 @@
 - Install the required tools via scoop
 
   ```ps1
+  # required
   scoop install 7zip git # aria2
-  scoop install uutils-coreutils zoxide lsd bat sed gawk ripgrep fd fzf gdu tokei lazygit btop cht everything sysinternals
-  # (Optional) The following commands apply the config for above tools
-  # For 7zip and Everything, you can click the menu Tools > Options in window to add them into Explorer context menu
-  # For context menu of Neovim, refer to ./nvim/ directory
+  # optional but recommended
+  scoop install uutils-coreutils cht sed gawk gdu tokei lazygit btop everything sysinternals
   cp .\bat\config ~\AppData\Roaming\bat\config
   cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
-  cp .\bat\config ~\AppData\Roaming\Everything\Everything.ini
+  cp .\everything\Everything.ini ~\AppData\Roaming\Everything\Everything.ini
   .\sysinternals\ProcessExplorerColumnSet.reg
+  # To add 7zip and everything to explorer context menu, open app window and click the menu Tools > Options
+  # To add `open with neovim in terminal`, refer to ./nvim/install-context.reg
   ```
 
 - Insall PowerShell modules
 
   ```ps1
-  scoop install oh-my-posh
+  scoop install oh-my-posh zoxide lsd bat ripgrep fd fzf
   Install-Module posh-git
   Install-Module PSFzf
   ```

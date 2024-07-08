@@ -1,0 +1,10 @@
+Windows Registry Editor Version 5.00
+
+; when you right click a file
+[-HKEY_CURRENT_USER\SOFTWARE\Classes\*\shell\Neovim]
+
+; when you right click a folder
+[-HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\shell\Neovim]
+
+; when you right click a background
+[-HKEY_CURRENT_USER\SOFTWARE\Classes\Directory\Background\shell\Neovim]
