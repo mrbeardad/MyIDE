@@ -131,11 +131,12 @@
   # 必要安装
   scoop install 7zip git # aria2
   # 可选安装（推荐）
-  scoop install scoop-search uutils-coreutils cht sed gawk gdu tokei lazygit btop everything sysinternals
+  scoop install scoop-search cht gdu tokei lazygit btop everything sysinternals
   cp .\bat\config ~\AppData\Roaming\bat\config
   cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
   cp .\bat\config ~\AppData\Roaming\Everything\Everything.ini
   .\sysinternals\ProcessExplorerColumnSet.reg
+  # 将 %USERPROFILE%\scoop\apps\git\current\user\bin 加到环境变量 PATH 通常挺有用
   # 7-zip 和 Everything 的右键菜单需要在应用窗口中的 Tools > Options 中设置
   # Neovim 的右键菜单参考 ./nvim/install-context.reg
   ```

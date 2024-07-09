@@ -12,7 +12,7 @@
     },
     {
       "keys": "alt+shift+s",
-      "command": { "action": "splitPane", "split": "right" }
+      "command": { "action": "splitPane", "split": "down" }
     },
     {
       "keys": "alt+shift+z",

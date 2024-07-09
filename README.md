@@ -131,11 +131,12 @@
   # required
   scoop install 7zip git # aria2
   # optional but recommended
-  scoop install uutils-coreutils cht sed gawk gdu tokei lazygit btop everything sysinternals
+  scoop install cht gdu tokei lazygit btop everything sysinternals
   cp .\bat\config ~\AppData\Roaming\bat\config
   cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
   cp .\everything\Everything.ini ~\AppData\Roaming\Everything\Everything.ini
   .\sysinternals\ProcessExplorerColumnSet.reg
+  # Adding %USERPROFILE%\scoop\apps\git\current\user\bin to PATH is useful
   # To add 7zip and everything to explorer context menu, open app window and click the menu Tools > Options
   # To add `open with neovim in terminal`, refer to ./nvim/install-context.reg
   ```
