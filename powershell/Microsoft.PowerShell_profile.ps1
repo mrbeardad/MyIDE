@@ -149,17 +149,15 @@ function gig {
 #   }
 # }
 
-$env:DefaultProxyAddress = "127.0.0.1:7890"
+$env:DefaultProxyAddress = "http://127.0.0.1:7890"
 function proxy {
   if (-not $args[0]) {
     echo "HTTPS_PROXY: $env:HTTPS_PROXY"
     echo "HTTP_PROXY: $env:HTTP_PROXY"
-    echo "ALL_PROXY: $env:ALL_PROXY"
   } elseif ($args[0] -eq "enable") {
     if ($env:DefaultProxyAddress) {
       $env:HTTPS_PROXY=$env:DefaultProxyAddress
       $env:HTTP_PROXY=$env:DefaultProxyAddress
-      $env:ALL_PROXY=$env:DefaultProxyAddress
       echo "set proxy to $env:DefaultProxyAddress"
     } else {
       echo "`$env:DefaultProxyAddress is empty"
@@ -167,12 +165,10 @@ function proxy {
   } elseif ($args[0] -eq "disable") {
     $env:HTTPS_PROXY=""
     $env:HTTP_PROXY=""
-    $env:ALL_PROXY=""
     echo "disabled proxy"
   } else {
     $env:HTTPS_PROXY=$args[0]
     $env:HTTP_PROXY=$args[0]
-    $env:ALL_PROXY=$args[0]
     echo "set proxy to $($args[0])"
   }
 }
