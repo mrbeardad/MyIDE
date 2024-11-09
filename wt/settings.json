@@ -29,10 +29,13 @@
       "opacity": 40,
       "useAcrylic": true,
       "padding": "0",
-      "scrollbarState": "hidden",
+      "scrollbarState": "visible",
       "unfocusedAppearance": {
         "opacity": 80
-      }
+      },
+      "autoMarkPrompts": true,
+      "showMarksOnScrollbar": true,
+      "experimental.repositionCursorWithMouse": true
     },
     "list": [
       {
@@ -41,18 +44,18 @@
         "source": "Windows.Terminal.PowershellCore"
       },
       {
-        "guid": "{573f97a4-8cb9-423c-9d41-f16f0586a05a}",
-        "name": "PowerShell for VS 2022",
-        "icon": "ms-appx:///ProfileIcons/vs-pwsh.png",
-        "commandline": "pwsh.exe -NoExit -Command \"& \"\"\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\Launch-VsDevShell.ps1\"\"\"\""
-      },
-      {
         "guid": "{65763c91-38c0-4789-98e0-fed2a0247aa6}",
         "name": "PowerShell for Administrators",
         "icon": "ms-appx:///ProfileIcons/pwsh-preview.png",
         "commandline": "pwsh.exe",
         "startingDirectory": "%USERPROFILE%",
         "elevate": true
+      },
+      {
+        "guid": "{573f97a4-8cb9-423c-9d41-f16f0586a05a}",
+        "name": "PowerShell for VS 2022",
+        "icon": "ms-appx:///ProfileIcons/vs-pwsh.png",
+        "commandline": "pwsh.exe -NoExit -Command \"& \"\"\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\Launch-VsDevShell.ps1\"\"\"\""
       },
       {
         "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
