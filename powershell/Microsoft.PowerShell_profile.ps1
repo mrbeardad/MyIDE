@@ -130,7 +130,7 @@ function ... { Set-Location -Path ..\.. }
 function .... { Set-Location -Path ..\..\.. }
 Set-Alias lg lazygit
 
-# Get .gitignore template, e.g.: `gi cpp,windows` write a template to ./.gitignore
+# Get .gitignore template, e.g.: `gig cpp,windows` write a template to ./.gitignore
 function gig {
   $params = ($args | ForEach-Object { [uri]::EscapeDataString($_) }) -join ","
   Invoke-WebRequest -Uri "https://www.toptal.com/developers/gitignore/api/$params" | select -ExpandProperty content | Out-File -FilePath $(Join-Path -path $pwd -ChildPath ".gitignore") -Encoding ascii
@@ -178,10 +178,32 @@ function proxy {
 # =============
 # Import oh-my-posh after PSReadline to ensure transient_prompt works properly in vi mode
 oh-my-posh init pwsh --config "$HOME\Documents\PowerShell\base16_bear.omp.json" | Invoke-Expression
-# The integrated terminal in neovim and vscode has bug with unicode
-if ($env:NVIM -or $env:VSCODE_GIT_IPC_HANDLE) {
-  oh-my-posh toggle sysinfo
-  oh-my-posh toggle time
+# Enable shell integration marks for Windows Terminal
+$Global:__OriginalPrompt = $function:Prompt
+function Global:__Terminal-Get-LastExitCode {
+  if ($? -eq $True) { return 0 }
+  $LastHistoryEntry = $(Get-History -Count 1)
+  $IsPowerShellError = $Error[0].InvocationInfo.HistoryId -eq $LastHistoryEntry.Id
+  if ($IsPowerShellError) { return -1 }
+  return $LastExitCode
+}
+function prompt {
+  $gle = $(__Terminal-Get-LastExitCode);
+  $LastHistoryEntry = $(Get-History -Count 1)
+  if ($Global:__LastHistoryId -ne -1) {
+    if ($LastHistoryEntry.Id -eq $Global:__LastHistoryId) {
+      $out += "`e]133;D`a"
+    } else {
+      $out += "`e]133;D;$gle`a"
+    }
+  }
+  $loc = $($executionContext.SessionState.Path.CurrentLocation);
+  $out += "`e]133;A$([char]07)";
+  $out += "`e]9;9;`"$loc`"$([char]07)";
+  $out += $Global:__OriginalPrompt.Invoke(); # <-- This line adds the original prompt back
+  $out += "`e]133;B$([char]07)";
+  $Global:__LastHistoryId = $LastHistoryEntry.Id
+  return $out
 }
 
 # =============

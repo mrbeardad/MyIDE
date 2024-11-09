@@ -36,12 +36,7 @@
             "style": "full",
             "home_icon": " ",
             "folder_icon": " ",
-            "folder_separator_icon": " ",
-            "mapped_locations": {
-              "~/AppData/Roaming": "󱑠 ",
-              "~/AppData/Local": " ",
-              "~/AppData/Local/Temp": " "
-            }
+            "folder_separator_icon": " "
           }
         },
         {
@@ -208,7 +203,7 @@
           "background": "darkGray",
           "leading_diamond": "<transparent,background></>",
           "trailing_diamond": "",
-          "template": " 󰔚 {{ .FormattedMs }}",
+          "template": "   {{ .FormattedMs }}",
           "properties": {
             "style": "austin",
             "threshold": 0

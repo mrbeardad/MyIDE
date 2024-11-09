@@ -42,35 +42,31 @@
 
 - 安装 [PowerToys](https://apps.microsoft.com/detail/XP89DCGQ3K6VLD?hl=en-us&gl=US)：一个包含许多实用工具的集合
 
-- 安装 [Snipaste](https://apps.microsoft.com/detail/9P1WXPKB68KX?hl=en-us&gl=US)：一个非常好用的截图工具，比 QQ 截图还好用
+- 安装 [Snipaste](https://apps.microsoft.com/detail/9P1WXPKB68KX?hl=en-us&gl=US)：一个非常好用的截图工具
 
-- 安装 [Captura](https://github.com/MathewSachin/Captura)：一个录屏工具，内置了捕获屏幕、光标、按键、扬声器、摄像头等功能
+- 安装一款 [Nerd 字体](https://www.nerdfonts.com/font-downloads)：Nerd 字体包含了许多常用图标和符号，被许多命令行程序使用
 
-- 安装 [dual-key-remap](https://github.com/ililim/dual-key-remap)：重新映射`CapsLock`这个占据键盘黄金位置的鸡肋按键，使其单击时为`Escape`，组合键时为`Ctrl`。记得为它[开启管理员权限](https://github.com/ililim/dual-key-remap#administrator-access)，否则映射在具有管理员权限的窗口内无效
+- 安装一款你喜欢的 [鼠标主题](https://zhutix.com/tag/cursors/)
 
-- 安装一款 [nerd 字体](https://www.nerdfonts.com/font-downloads)：Nerd 字体包含了许多常用图标和符号，被许多命令行程序使用。你也可以选择使用这块字体 [NerdCodePro](./fonts/)，我将两款 nerd 字体合并成一个，如此一来 regular 和 italic 就是完全不同的两款字体，非常 cool。
-
-- 安装一款 [鼠标主题](https://zhutix.com/tag/cursors/)：你也不想你的光标看上去平平无奇吧
-
-- `Win`+`I` 打开设置面板，挨着一个个看看有啥需要设置的
+- `Win`+`I` 打开设置面板看看有什么需要设置的
 
 ### 桌面使用
 
-| 快捷键        | 描述           |
-| ------------- | -------------- |
-| `Win`+`E`     | 文件管理器     |
-| `Win`+`{num}` | 启动任务栏软件 |
-| `Win`+`Up`    | 最大化窗口     |
-| `Win`+`Down`  | 最小化窗口     |
-| `Win`+`Left`  | 固定到左半屏   |
-| `Win`+`Right` | 固定到右半屏   |
-| `Alt`+`Tab`   | 切换窗口       |
-| `Alt`+`F4`    | 关闭窗口       |
-| `Win`+`D`     | 显示桌面       |
-| `Win`+`,`     | 预览桌面       |
-| `Win`+`L`     | 锁屏           |
-| `Win`+`;`     | Emoji          |
-| `Alt`+`Space` | PowerToys Run  |
+| 快捷键            | 描述           |
+| ----------------- | -------------- |
+| `Win`+`E`         | 文件管理器     |
+| `Win`+`{num}`     | 启动任务栏软件 |
+| `Win`+`Up`        | 最大化窗口     |
+| `Win`+`Down`      | 最小化窗口     |
+| `Win`+`Left`      | 固定到左半屏   |
+| `Win`+`Right`     | 固定到右半屏   |
+| `Alt`+`Tab`       | 切换窗口       |
+| `Alt`+`F4`        | 关闭窗口       |
+| `Win`+`D`         | 显示桌面       |
+| `Win`+`,`         | 预览桌面       |
+| `Win`+`L`         | 锁屏           |
+| `Win`+`;`         | Emoji          |
+| `Win`+`Shift`+`?` | 快捷键帮助     |
 
 ## 终端
 
@@ -86,12 +82,10 @@
 
 - 打开 Windows Terminal 然后按 `Ctrl`+`Shift`+`,` 打开配置文件，这是我的[**settings.json**](./wt/settings.json) 你可以参考
 
-- （可选）系统显示设置将 Windows Terminal 设置为高性能
-
 > 小贴士:
 >
 > - 所有颜色主题都被调整了以适配系统浅色主题
-> - 字体被设置为上面提到的 NerdCodePro，如果你不想使用改字体记得修改配置
+> - 配置中的字体设置为`SauceCodePro`
 
 ### 终端使用
 
@@ -101,8 +95,9 @@
 | `Ctrl`+`Shift`+`{num}` | 用第`{num}`个 profile 新建 Tab |
 | `Ctrl`+`Shift`+`D`     | 重复当前 Tab                   |
 | `Ctrl`+`Shift`+`W`     | 关闭 Tab                       |
-| `Alt`+`Shift`+`s`      | 水平切分                       |
-| `Alt`+`Shift`+`v`      | 垂直切分                       |
+| `Alt`+`Shift`+`S`      | 水平切分                       |
+| `Alt`+`Shift`+`V`      | 垂直切分                       |
+| `Alt`+`Shift`+`Z`      | 缩放面板                       |
 | `Alt`+`Left`           | 聚焦左边                       |
 | `Alt`+`Right`          | 聚焦右边                       |
 | `Alt`+`Up`             | 聚焦上边                       |
@@ -125,19 +120,20 @@
 
 - 安装 [PowerShell](https://apps.microsoft.com/detail/9MZ1SNWT0N5D?hl=en-us&gl=US)
 
-- 安装 [scoop-proxy-cn](https://github.com/lzwme/scoop-proxy-cn)：一款 Windows 下好用包管理器的国内镜像
+- 安装 [scoop-proxy-cn](https://github.com/lzwme/scoop-proxy-cn)：一款 Windows 下好用的包管理器的国内镜像
 
 - 用 scoop 安装常用的工具
 
   ```ps1
   # 必要安装
   scoop install 7zip git # aria2
+
   # 可选安装（推荐）
-  scoop install scoop-search cht gdu tokei lazygit btop everything sysinternals
-  cp .\bat\config ~\AppData\Roaming\bat\config
-  cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
-  cp .\bat\config ~\AppData\Roaming\Everything\Everything.ini
-  .\sysinternals\ProcessExplorerColumnSet.reg
+  scoop install scoop-search cht tokei lazygit everything sysinternals
+  # cp .\bat\config ~\AppData\Roaming\bat\config
+  # cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
+  # cp .\everything\Everything.ini ~\AppData\Roaming\Everything\Everything.ini
+  # .\sysinternals\ProcessExplorerColumnSet.reg
   # 将 %USERPROFILE%\scoop\apps\git\current\user\bin 加到环境变量 PATH 通常挺有用
   # 7-zip 和 Everything 的右键菜单需要在应用窗口中的 Tools > Options 中设置
   # Neovim 的右键菜单参考 ./nvim/install-context.reg
@@ -178,7 +174,7 @@
      IdentityFile ~/.ssh/key.pem
   ```
 
-- 有关 WSL 的配置在[这里](https://github.com/mrbeardad/MyIDE/tree/d0302ad521fb73f6d099e46bdc4a65ab0626d564?tab=readme-ov-file#wsl)，WSL/Linux 的 dotfiles 仍在仓库中，你可以自行查看参考
+> 有关 WSL 的配置在[这里](https://github.com/mrbeardad/MyIDE/tree/d0302ad521fb73f6d099e46bdc4a65ab0626d564?tab=readme-ov-file#wsl)，WSL/Linux 的 dotfiles 仍在仓库中，你可以自行查看参考
 
 ### PowerShell 使用
 
@@ -288,7 +284,7 @@
 > 小贴士:
 >
 > - 你无需记住所有 git 别名，使用你喜欢的 git ui 工具即可，比如 lazygit、fork 或 gitkraken 等。列出这么多 git 别名的目的在于告诉你哪些 git 基础操作是你应该知道的
-> - 强烈推荐 [这篇博文](https://nvie.com/posts/a-successful-git-branching-model/) 描述了 git flow
+> - 推荐 [这篇博文](https://nvie.com/posts/a-successful-git-branching-model/) 描述了 git flow
 
 ## VSCode-Neovim
 
@@ -298,19 +294,13 @@
 
 </div>
 
-1. 安装 C/C++ 编译器
+1. 安装 Neovim 和 C/C++ 工具链
 
    ```ps1
-   scoop install mingw-mstorsjo-llvm-ucrt cmake
+   scoop install neovim mingw-mstorsjo-llvm-ucrt cmake
    ```
 
-2. 安装 Neovim
-
-   ```ps1
-   scoop install neovim
-   ```
-
-3. 配置 Neovim
+2. 配置 Neovim
 
    ```ps1
    # required
@@ -323,11 +313,11 @@
    nvim
    ```
 
-4. 安装 [VSCode](https://apps.microsoft.com/detail/XP9KHM4BK9FZ7Q?hl=en-US&gl=US)
+3. 安装 [VSCode](https://apps.microsoft.com/detail/XP9KHM4BK9FZ7Q?hl=en-US&gl=US)
 
-5. 配置 VSCode
+4. 配置 VSCode
 
    1. 这是我的 [settings.json](vscode/settings.json) 和 [keybindings.json](vscode/keybindings.json)，你可以复制到 `%APPDATA%\Code\User`
    2. 这是我的 [lastSyncextensions.json](vscode/lastSyncextensions.json)，你可以复制到 `%APPDATA%\Code\User\sync\extensions\`
 
-6. **更多关于 vscode 和 neovim 的配置与使用，见[mrbeardad/nvim](https://github.com/mrbeardad/nvim)**
+5. **更多关于 vscode 和 neovim 的配置与使用，见[mrbeardad/nvim](https://github.com/mrbeardad/nvim)**

@@ -3,7 +3,7 @@
     "workbench.colorTheme",
     "editor.minimap.scale"
   ],
-  "settingsSync.ignoredExtensions": ["johnstoncode.svn-scm"],
+  "settingsSync.ignoredExtensions": ["johnstoncode.svn-scm", "vue.volar"],
 
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": "active",
@@ -19,7 +19,7 @@
   "editor.unfoldOnClickAfterEndOfLine": true,
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.cursorSurroundingLines": 5,
-  "editor.fontFamily": "NerdCodePro",
+  "editor.fontFamily": "SauceCodePro Nerd Font",
   "editor.formatOnSave": true,
   "editor.minimap.autohide": true,
   "editor.quickSuggestions": {
@@ -30,6 +30,16 @@
   "editor.suggest.snippetsPreventQuickSuggestions": false,
   "editor.suggestSelection": "recentlyUsed",
   "editor.tabCompletion": "onlySnippets",
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "string",
+        "settings": {
+          "fontStyle": "italic"
+        }
+      }
+    ]
+  },
 
   "files.insertFinalNewline": true,
 
@@ -50,7 +60,6 @@
       "editorWidget.background": "#e0eff1bb"
     }
   },
-  "workbench.colorTheme": "Noctis Hibernus",
   "workbench.preferredDarkColorTheme": "Noctis Sereno",
   "workbench.preferredHighContrastColorTheme": "Noctis Sereno",
   "workbench.preferredHighContrastLightColorTheme": "Noctis Hibernus",
@@ -67,11 +76,6 @@
   "explorer.confirmDelete": false,
   "explorer.excludeGitIgnore": true,
 
-  // "search.exclude": {
-  //   "**/third_party": true,
-  //   "**/3rd_party": true,
-  //   "**/vendor": true
-  // },
   "search.showLineNumbers": true,
   "search.smartCase": true,
 
@@ -142,7 +146,6 @@
   "cmake.configureOnOpen": false,
   "cmake.ignoreCMakeListsMissing": true,
   "cmake.options.statusBarVisibility": "icon",
-  "cmake.showOptionsMovedNotification": false,
   "doxdocgen.generic.useGitUserEmail": true,
   "doxdocgen.generic.useGitUserName": true,
 
@@ -196,19 +199,22 @@
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "markdown.copyFiles.destination": {
+    "**/*.md": "${documentWorkspaceFolder}/images/${fileName}"
+  },
 
   "git.autofetch": true,
   "git.confirmSync": false,
   "gitlens.graph.layout": "editor",
   "gitlens.blame.ignoreWhitespace": true,
   "gitlens.statusBar.enabled": false,
-  "gitlens.launchpad.indicator.enabled": false,
   "gitlens.graph.minimap.additionalTypes": [
     "stashes",
     "tags",
     "localBranches",
     "remoteBranches"
   ],
+  "gitlens.launchpad.indicator.enabled": false,
 
   "todo-tree.general.showActivityBarBadge": true,
   "todo-tree.tree.flat": true,

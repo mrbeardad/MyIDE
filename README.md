@@ -44,33 +44,29 @@
 
 - Install [Snipaste](https://apps.microsoft.com/detail/9P1WXPKB68KX?hl=en-us&gl=US) : Offers powerful yet easy-to-use snipping, pasting and image annotating functionalities.
 
-- Install [Captura](https://github.com/MathewSachin/Captura) : Capture screen, audio, cursor, mouse clicks and keystrokes.
+- Install a [Nerd Font](https://www.nerdfonts.com/font-downloads) : A patched font within high number of icons.
 
-- Install [dual-key-remap](https://github.com/ililim/dual-key-remap) : Remap CapsLock to Escape when pressed alone and Ctrl when pressed with other keys. Don't forget to [enable administrator access](https://github.com/ililim/dual-key-remap#administrator-access) or else it doesn't work on administrator applications.
-
-- Install a [nerd font](https://www.nerdfonts.com/font-downloads) : A patched font within high number of icons. I've merged two font families into one called [NerdCodePro](./fonts/), so font engines will use different font on regular and italic style.
-
-- Install a [cursor theme](https://zhutix.com/tag/cursors/) you'd like.
+- Install a [Cursor Theme](https://zhutix.com/tag/cursors/) you'd like.
 
 - Press `Win`+`I` and check if there are any settings that need to be changed.
 
 ### Desktop Usage
 
-| Shortcut      | Descript                        |
-| ------------- | ------------------------------- |
-| `Win`+`E`     | Explorer                        |
-| `Win`+`{num}` | Launch app on taskbar           |
-| `Win`+`Up`    | Maximize window                 |
-| `Win`+`Down`  | Minimize window                 |
-| `Win`+`Left`  | Snap window left                |
-| `Win`+`Right` | Snap window right               |
-| `Alt`+`Tab`   | Switch window                   |
-| `Alt`+`F4`    | Close window                    |
-| `Win`+`D`     | Show/Hide desktop               |
-| `Win`+`,`     | Peek desktop                    |
-| `Win`+`L`     | Lock desktop                    |
-| `Win`+`;`     | Emoji                           |
-| `Alt`+`Space` | Search somthing (PowerToys Run) |
+| Shortcut          | Descript              |
+| ----------------- | --------------------- |
+| `Win`+`E`         | Explorer              |
+| `Win`+`{num}`     | Launch app on taskbar |
+| `Win`+`Up`        | Maximize window       |
+| `Win`+`Down`      | Minimize window       |
+| `Win`+`Left`      | Snap window left      |
+| `Win`+`Right`     | Snap window right     |
+| `Alt`+`Tab`       | Switch window         |
+| `Alt`+`F4`        | Close window          |
+| `Win`+`D`         | Show/Hide desktop     |
+| `Win`+`,`         | Peek desktop          |
+| `Win`+`L`         | Lock desktop          |
+| `Win`+`;`         | Emoji                 |
+| `Win`+`Shift`+`?` | Shortcut help         |
 
 ## Terminal
 
@@ -89,7 +85,7 @@
 > Tips:
 >
 > - All colorschemes are adjusted to fit both light and dark theme of system.
-> - The font is set to NerdCodePro that mentioned above, change it if you don't want to use it.
+> - The font family is set to `SauceCodePro`
 
 ### Terminal Usage
 
@@ -101,6 +97,7 @@
 | `Ctrl`+`Shift`+`W`     | Close tab                      |
 | `Alt`+`Shift`+`S`      | Horizontally split the pane    |
 | `Alt`+`Shift`+`V`      | Vertically split the pane      |
+| `Alt`+`Shift`+`Z`      | Toggle the pane zoom           |
 | `Alt`+`Left`           | Move focus left                |
 | `Alt`+`Right`          | Move focus right               |
 | `Alt`+`Up`             | Move focus up                  |
@@ -128,14 +125,15 @@
 - Install the required tools via scoop
 
   ```ps1
-  # required
+  # Required
   scoop install 7zip git # aria2
-  # optional but recommended
-  scoop install cht gdu tokei lazygit btop everything sysinternals
-  cp .\bat\config ~\AppData\Roaming\bat\config
-  cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
-  cp .\everything\Everything.ini ~\AppData\Roaming\Everything\Everything.ini
-  .\sysinternals\ProcessExplorerColumnSet.reg
+
+  # Optional but recommended
+  scoop install cht tokei lazygit everything sysinternals
+  # cp .\bat\config ~\AppData\Roaming\bat\config
+  # cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
+  # cp .\everything\Everything.ini ~\AppData\Roaming\Everything\Everything.ini
+  # .\sysinternals\ProcessExplorerColumnSet.reg
   # Adding %USERPROFILE%\scoop\apps\git\current\user\bin to PATH is useful
   # To add 7zip and everything to explorer context menu, open app window and click the menu Tools > Options
   # To add `open with neovim in terminal`, refer to ./nvim/install-context.reg
@@ -177,7 +175,7 @@
      IdentityFile ~/.ssh/key.pem
   ```
 
-- You could find the document for wsl configuration section at [here](https://github.com/mrbeardad/MyIDE/tree/d0302ad521fb73f6d099e46bdc4a65ab0626d564?tab=readme-ov-file#wsl), the dotfiles in wsl/linux is still in the repo.
+> You could find the document for WSL configuration section [here](https://github.com/mrbeardad/MyIDE/tree/d0302ad521fb73f6d099e46bdc4a65ab0626d564?tab=readme-ov-file#wsl), the dotfiles for WSL/Linux is still in the repository.
 
 ### PowerShell Usage
 
@@ -211,7 +209,6 @@
 | `cut`      | Text column filter                                                         |
 | `awk`      | Text operator                                                              |
 | `f`        | Fuzzy search text of files in current directory an open `$EDITOR`          |
-| `gdu`      | Disk usage analysis                                                        |
 | `tokei`    | Count code                                                                 |
 | `cht`      | Search for a cheat sheet on [cheat.sh](https://github.com/chubin/cheat.sh) |
 | `proxy`    | Show/Set/Enable/Disable proxy address                                      |
@@ -297,19 +294,13 @@
 
 </div>
 
-1. Install C/C++ compiler
+1. Install Neovim and C/C++ toolchains
 
    ```ps1
-   scoop install mingw-mstorsjo-llvm-ucrt cmake
+   scoop install neovim mingw-mstorsjo-llvm-ucrt cmake
    ```
 
-2. Install Neovim
-
-   ```ps1
-   scoop install neovim
-   ```
-
-3. Configure Neovim
+2. Configure Neovim
 
    ```ps1
    # required
@@ -322,11 +313,11 @@
    nvim
    ```
 
-4. Install [VSCode](https://apps.microsoft.com/detail/XP9KHM4BK9FZ7Q?hl=en-US&gl=US)
+3. Install [VSCode](https://apps.microsoft.com/detail/XP9KHM4BK9FZ7Q?hl=en-US&gl=US)
 
-5. Configure VSCode
+4. Configure VSCode
 
    1. This is my [settings.json](vscode/settings.json) and [keybindings.json](vscode/keybindings.json), you could copy them to `%APPDATA%\Code\User` optionally
    2. This is my [lastSyncextensions.json](vscode/lastSyncextensions.json), you could copy it to `%APPDATA%\Code\User\sync\extensions\`
 
-6. **For more detail about configuration and usage of vscode and neovim, refer to [mrbeardad/nvim](https://github.com/mrbeardad/nvim)**
+5. **For more detail about configuration and usage of vscode and neovim, refer to [mrbeardad/nvim](https://github.com/mrbeardad/nvim)**
