@@ -20,16 +20,17 @@
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.cursorSurroundingLines": 5,
   "editor.fontFamily": "SauceCodePro Nerd Font",
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "editor.minimap.autohide": true,
   "editor.quickSuggestions": {
     "comments": "on",
     "strings": "on"
   },
+  "editor.acceptSuggestionOnEnter": "off",
   "editor.suggest.preview": true,
   "editor.suggest.snippetsPreventQuickSuggestions": false,
   "editor.suggestSelection": "recentlyUsed",
-  "editor.tabCompletion": "onlySnippets",
+  "editor.tabCompletion": "on",
   "editor.tokenColorCustomizations": {
     "textMateRules": [
       {
@@ -289,5 +290,5 @@
       "icon": "note",
       "iconColour": "#1abc9c"
     }
-  }
+  },
 }
