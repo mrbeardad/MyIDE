@@ -25,12 +25,12 @@
       },
       "cursorShape": "underscore",
       "intenseTextStyle": "all",
-      "opacity": 40,
+      "opacity": 50,
       "useAcrylic": true,
       "padding": "0",
       "scrollbarState": "visible",
       "unfocusedAppearance": {
-        "opacity": 80
+        "opacity": 90
       },
       "autoMarkPrompts": true,
       "showMarksOnScrollbar": true,
