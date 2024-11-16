@@ -145,6 +145,7 @@
   scoop install oh-my-posh zoxide lsd bat ripgrep fd fzf
   Install-Module posh-git
   Install-Module PSFzf
+  Install-Module GuiCompletion
   ```
 
 - 在 PowerShell 中执行`notepad $PROFILE`来更改配置文件，这是我的 [**profile.ps1**](./ps/Microsoft.PowerShell_profile.ps1) 你可以参考
@@ -207,11 +208,11 @@
 | `sed`      | 行过滤                                                      |
 | `cut`      | 列过滤                                                      |
 | `awk`      | 文本处理语言                                                |
-| `f`        | 模糊搜索文本并用`$EDITOR`打开文件                           |
+| `fg`       | 模糊搜索文本并用`$EDITOR`打开文件                           |
 | `gdu`      | 磁盘使用情况                                                |
 | `tokei`    | 项目代码统计                                                |
 | `cht`      | 搜索帮助信息 [cheat.sh](https://github.com/chubin/cheat.sh) |
-| `proxy`    | 设置代理                                                    |
+| `px`       | 设置代理                                                    |
 
 | Git Aliases | Git subcommand | Description                                                                                              |
 | ----------- | -------------- | -------------------------------------------------------------------------------------------------------- |

@@ -145,6 +145,7 @@
   scoop install oh-my-posh zoxide lsd bat ripgrep fd fzf
   Install-Module posh-git
   Install-Module PSFzf
+  Install-Module GuiCompletion
   ```
 
 - Configure PowerShell by executing `notepad $PROFILE` in PowerShell command line,
@@ -208,10 +209,10 @@
 | `sed`      | Text raw filter                                                            |
 | `cut`      | Text column filter                                                         |
 | `awk`      | Text operator                                                              |
-| `f`        | Fuzzy search text of files in current directory an open `$EDITOR`          |
+| `fg`       | Fuzzy search text of files in current directory an open `$EDITOR`          |
 | `tokei`    | Count code                                                                 |
 | `cht`      | Search for a cheat sheet on [cheat.sh](https://github.com/chubin/cheat.sh) |
-| `proxy`    | Show/Set/Enable/Disable proxy address                                      |
+| `px`       | Show/Set/Enable/Disable proxy address                                      |
 
 | Git Aliases | Git subcommand | Description                                                                                              |
 | ----------- | -------------- | -------------------------------------------------------------------------------------------------------- |

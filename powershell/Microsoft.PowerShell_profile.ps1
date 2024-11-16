@@ -19,10 +19,43 @@ Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+e -Function EndOfLine
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+h -Function BackwardDeleteChar
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+w -Function BackwardKillWord
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+k -Function KillLine
-Set-PSReadlineKeyHandler -ViMode Insert -Key Tab -Function MenuComplete
+Set-PSReadLineKeyHandler -ViMode Insert -Key Tab -Function MenuComplete
 Set-PSReadLineOption -HistorySearchCursorMovesToEnd
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+p -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+n -Function HistorySearchForward
+
+$PSStyle.Formatting.FormatAccent = "`e[92;1m" # bold bright green
+$PSStyle.Formatting.ErrorAccent = "`e[91;1m" # bold bright red
+Set-PSReadLineOption -Colors @{
+  Comment="`e[90;3m" # italic bright black
+  Keyword="`e[95;1m" # bold bright magenta
+  Operator="`e[97;1m" # bright white
+  Parameter="`e[97;1m" # bright white
+  String="`e[36;3m" # italic cyan
+  Variable="`e[96m" # bright cyan
+}
+
+# =============
+# GuiCompletion
+# =============
+# Lazy load when press Tab
+Set-PSReadLineKeyHandler -ViMode Insert -Key Tab -ScriptBlock { 
+  if ($GuiCompletionConfig -eq $null) {
+    Install-GuiCompletion
+    $GuiCompletionConfig.Colors = @{
+      TextColor="Gray";
+      BackColor="Black";
+      SelectedTextColor="White";
+      SelectedBackColor="DarkGray";
+      BorderTextColor="DarkCyan";
+      BorderBackColor="Black";
+      BorderColor="DarkBlue";
+      FilterColor="DarkYellow"
+    }
+    $GuiCompletionConfig.DoubleBorder = $false
+  }
+  Invoke-GuiCompletion 
+}
 
 # =============
 # posh-git
@@ -102,8 +135,9 @@ RegisterGit gsa "submodule add"
 RegisterGit gsu "submodule update --init --recursive"
 RegisterGit gsd "submodule deinit"
 
+# Do not import posh-git to optimaize the startup time, thus only tab completion of registered command are available
 # Import posh-git after aliases
-Import-Module posh-git
+# Import-Module posh-git
 
 # Remove aliases after import posh-git
 Remove-Alias gc -Force -ErrorAction SilentlyContinue
@@ -118,7 +152,8 @@ Remove-Alias gp -Force -ErrorAction SilentlyContinue
 $env:FZF_CTRL_T_COMMAND = "fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
 $env:FZF_ALT_C_COMMAND = "fd --type d --strip-cwd-prefix --hidden --follow --exclude .git"
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
-Set-Alias f Invoke-PsFzfRipgrep
+Set-Alias fg Invoke-PsFzfRipgrep
+Set-Alias fs Invoke-FuzzyScoop
 
 # =============
 # Utils
@@ -136,42 +171,27 @@ function gig {
   Invoke-WebRequest -Uri "https://www.toptal.com/developers/gitignore/api/$params" | select -ExpandProperty content | Out-File -FilePath $(Join-Path -path $pwd -ChildPath ".gitignore") -Encoding ascii
 }
 
-# function cut {
-#   begin { $content = @() }
-#   process { $content += $input }
-#   end {
-#     $content = $content -join "`n"
-#     if ($args.Where({$_ -like "-d*"}).Length -gt 0) {
-#       Write-Output $content | cut.exe @args
-#     } else {
-#       Write-Output $content | cut.exe -w @args 
-#     }
-#   }
-# }
-
 $env:DefaultProxyAddress = "http://127.0.0.1:7890"
 function proxy {
-  if (-not $args[0]) {
-    echo "HTTPS_PROXY: $env:HTTPS_PROXY"
-    echo "HTTP_PROXY: $env:HTTP_PROXY"
-  } elseif ($args[0] -eq "enable") {
+  if ($args[0] -eq "enable") {
     if ($env:DefaultProxyAddress) {
-      $env:HTTPS_PROXY=$env:DefaultProxyAddress
       $env:HTTP_PROXY=$env:DefaultProxyAddress
+      $env:HTTPS_PROXY=$env:DefaultProxyAddress
       echo "set proxy to $env:DefaultProxyAddress"
     } else {
       echo "`$env:DefaultProxyAddress is empty"
     }
   } elseif ($args[0] -eq "disable") {
-    $env:HTTPS_PROXY=""
     $env:HTTP_PROXY=""
+    $env:HTTPS_PROXY=""
     echo "disabled proxy"
+  } elseif ($env:HTTP_PROXY.Length -gt 0) {
+    proxy disable
   } else {
-    $env:HTTPS_PROXY=$args[0]
-    $env:HTTP_PROXY=$args[0]
-    echo "set proxy to $($args[0])"
+    proxy enable
   }
 }
+Set-Alias px proxy
 
 # =============
 # Oh My Posh

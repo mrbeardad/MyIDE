@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
-  "version": 2,
+  "version": 3,
   "final_space": true,
   "console_title_template": "{{ .Folder }}",
   "blocks": [
@@ -15,7 +15,11 @@
           "trailing_diamond": "",
           "foreground": "white",
           "background": "cyan",
-          "template": " {{ .Icon }} "
+          "template": " {{ .Icon }} ",
+          "cache": {
+            "duration": "168h",
+            "strategy": "session"
+          }
         },
         {
           "type": "root",
@@ -23,7 +27,11 @@
           "powerline_symbol": "",
           "foreground": "lightYellow",
           "background": "lightRed",
-          "template": " 󰒃 "
+          "template": " 󰒃 ",
+          "cache": {
+            "duration": "168h",
+            "strategy": "session"
+          }
         },
         {
           "type": "path",
@@ -37,6 +45,9 @@
             "home_icon": " ",
             "folder_icon": " ",
             "folder_separator_icon": " "
+          },
+          "cache": {
+            "duration": "none"
           }
         },
         {
@@ -74,15 +85,10 @@
             "rebase_icon": " ",
             "cherry_pick_icon": " ",
             "revert_icon": " "
+          },
+          "cache": {
+            "duration": "none"
           }
-        },
-        {
-          "type": "cmake",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#E8EAEE",
-          "background": "#1E9748",
-          "template": "  cmake {{ .Full }} "
         },
         {
           "type": "rust",
@@ -93,20 +99,20 @@
           "template": "  {{ .Full }} "
         },
         {
+          "type": "dotnet",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "#000000",
+          "background": "#00ffff",
+          "template": "  {{ .Full }} "
+        },
+        {
           "type": "go",
           "style": "powerline",
           "powerline_symbol": "",
           "foreground": "#ffffff",
           "background": "#7FD5EA",
           "template": "  {{ .Full }} "
-        },
-        {
-          "type": "flutter",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#ffffff",
-          "background": "#06A4CE",
-          "template": "  {{ .Full }} "
         },
         {
           "type": "node",
@@ -131,70 +137,6 @@
           "foreground": "#ffffff",
           "background": "#000081",
           "template": "  {{ .Full }} "
-        },
-        {
-          "type": "dotnet",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#000000",
-          "background": "#00ffff",
-          "template": "  {{ .Full }} "
-        },
-        {
-          "type": "haskell",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#906cff",
-          "background": "#100e23",
-          "template": "  {{ .Full }}"
-        },
-        {
-          "type": "java",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#ffffff",
-          "background": "#4063D8",
-          "template": "  {{ .Full }}"
-        },
-        {
-          "type": "perl",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#ffffff",
-          "background": "#4063D8",
-          "template": "  {{ .Full }}"
-        },
-        {
-          "type": "php",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#ffffff",
-          "background": "#4063D8",
-          "template": "  {{ .Full }} "
-        },
-        {
-          "type": "r",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "blue",
-          "background": "lightWhite",
-          "template": " R {{ .Full }} "
-        },
-        {
-          "type": "ruby",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#ffffff",
-          "background": "#4063D8",
-          "template": "  {{ .Full }}"
-        },
-        {
-          "type": "swift",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "#ffffff",
-          "background": "#f6553c",
-          "template": "  {{ .Full }} "
         },
         {
           "type": "executiontime",
@@ -232,9 +174,9 @@
           "foreground": "white",
           "background": "magenta",
           "templates": [
-            "{{ if .Env.HTTP_PROXY }} 󰒍 {{ .Env.HTTP_PROXY }} {{ end }}",
-            "{{ if .Env.HTTPS_PROXY }} 󰒍 {{ .Env.HTTPS_PROXY }} {{ end }}",
-            "{{ if .Env.ALL_PROXY }} 󰒍 {{ .Env.ALL_PROXY }} {{ end }}"
+            "{{ if .Env.HTTP_PROXY }}  {{ .Env.HTTP_PROXY }} {{ end }}",
+            "{{ if .Env.HTTPS_PROXY }}  {{ {{ .Env.HTTPS_PROXY }} {{ end }}",
+            "{{ if .Env.ALL_PROXY }}  {{ {{ .Env.ALL_PROXY }} {{ end }}"
           ],
           "templates_logic": "first_match"
         },
