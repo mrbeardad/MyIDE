@@ -2,13 +2,17 @@
 # PSReadLine
 # =============
 # blinking underscore, and prompt command start, this will be used in prompt theme
-$env:PoshDefaultCursorShape = "`e[3 q`e]133;B`a" 
+$Global:PsReadLineViMode = "i"
+$PsReadLineViInsertModeCursor = "`e[3 q" # blinking underline
+$PsReadLineViNormalModeCursor = "`e[1 q" # blinking block
 # Show different cursor shape in different vi mode
 $OnViModeChange = {
-  if ($args[0] -eq "Command") {
-    Write-Host -NoNewLine "`e[1 q" # blinking block
+  if ($args[0] -ne "Command") {
+    Write-Host -NoNewLine $PsReadLineViInsertModeCursor
+    $Global:PsReadLineViMode = "i"
   } else {
-    Write-Host -NoNewLine $env:PoshDefaultCursorShape 
+    Write-Host -NoNewLine $PsReadLineViNormalModeCursor
+    $Global:PsReadLineViMode = "n"
   }
 }
 $env:EDITOR = "nvim"
@@ -211,6 +215,20 @@ Set-Alias px Set-Proxy
 # =============
 # Import oh-my-posh after PSReadline to ensure transient_prompt works properly in vi mode
 oh-my-posh init pwsh --config "$HOME\Documents\PowerShell\base16_bear.omp.json" | Invoke-Expression
+# Shell integration https://learn.microsoft.com/en-us/windows/terminal/tutorials/shell-integration#how-does-this-work
+$Global:__OriginalPrompt = $function:Prompt
+function prompt {
+  # place at beginning of function to avoid oh-my-posh get the wrong last error code
+  $out += $Global:__OriginalPrompt.Invoke();
+  $out = "`e]133;A$([char]07)" + $out;
+  $out += "`e]133;B$([char]07)";
+  if ($Global:PsReadLineViMode -eq "i") {
+    $out += "`e[3 q"
+  } else {
+    $out += "`e[1 q"
+  }
+  return $out
+}
 
 # =============
 # Zoxide

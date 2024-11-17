@@ -2,8 +2,10 @@
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "version": 3,
   "shell_integration": true,
-  "final_space": true,
+  "enable_cursor_positioning": true,
+  "pwd": "osc99",
   "console_title_template": "{{ .Folder }}",
+  "final_space": true,
   "blocks": [
     {
       "type": "prompt",
@@ -18,7 +20,7 @@
           "background": "cyan",
           "template": " {{ .Icon }} ",
           "cache": {
-            "duration": "168h",
+            "duration": "infinite",
             "strategy": "session"
           }
         },
@@ -30,7 +32,7 @@
           "background": "lightRed",
           "template": " 󰒃 ",
           "cache": {
-            "duration": "168h",
+            "duration": "infinite",
             "strategy": "session"
           }
         },
@@ -46,9 +48,6 @@
             "home_icon": " ",
             "folder_icon": " ",
             "folder_separator_icon": " "
-          },
-          "cache": {
-            "duration": "none"
           }
         },
         {
@@ -86,9 +85,6 @@
             "rebase_icon": " ",
             "cherry_pick_icon": " ",
             "revert_icon": " "
-          },
-          "cache": {
-            "duration": "none"
           }
         },
         {
@@ -205,8 +201,7 @@
           "style": "plain",
           "templates": [
             "<darkGray>╰─</>",
-            " {{ if ne .Code 0 }}<lightRed>❯</><red>❯</>{{ else }}<lightBlue>❯</><lightCyan>❯</>{{ end }}",
-            "{{ if .Env.PoshDefaultCursorShape }}{{ .Env.PoshDefaultCursorShape }}{{ end }}"
+            " {{ if ne .Code 0 }}<lightRed>❯</><red>❯</>{{ else }}<lightBlue>❯</><lightCyan>❯</>{{ end }}"
           ],
           "properties": {
             "always_enabled": true
