@@ -41,23 +41,21 @@ Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+n -Function HistorySearchForwa
 # =============
 # GuiCompletion
 # =============
-# Lazy load when press Tab
+$LazyLoadProfile = [PowerShell]::Create()
+[void]$LazyLoadProfile.AddScript(@'
+  Import-Module PSCompletions
+'@)
+$LazyLoadProfileRunspace = [RunspaceFactory]::CreateRunspace()
+$LazyLoadProfile.Runspace = $LazyLoadProfileRunspace
+$LazyLoadProfileRunspace.Open()
+$null = Register-ObjectEvent -InputObject $LazyLoadProfile -EventName InvocationStateChanged -Action {
+  Import-Module PSCompletions
+  $LazyLoadProfile.Dispose()
+  $LazyLoadProfileRunspace.Close()
+  $LazyLoadProfileRunspace.Dispose()
+}
 Set-PSReadLineKeyHandler -ViMode Insert -Key Tab -ScriptBlock { 
-  if ($GuiCompletionConfig -eq $null) {
-    Install-GuiCompletion
-    $GuiCompletionConfig.Colors = @{
-      TextColor="Gray";
-      BackColor="Black";
-      SelectedTextColor="White";
-      SelectedBackColor="DarkGray";
-      BorderTextColor="DarkCyan";
-      BorderBackColor="Black";
-      BorderColor="DarkBlue";
-      FilterColor="DarkYellow"
-    }
-    $GuiCompletionConfig.DoubleBorder = $false
-  }
-  Invoke-GuiCompletion 
+  [void]$LazyLoadProfile.BeginInvoke()
 }
 
 # =============
@@ -88,6 +86,10 @@ Set-PSReadLineKeyHandler -ViMode Insert -Key Alt-a -ScriptBlock {
   if ((Get-Module -Name PSFzf) -eq $null) { LazyImportPSFzf }
   Invoke-FzfPsReadlineHandlerHistoryArgs
 }
+# Set-PSReadLineKeyHandler -ViMode Insert -Key Tab -ScriptBlock {
+#   if ((Get-Module -Name PSFzf) -eq $null) { LazyImportPSFzf }
+#   Invoke-FzfTabCompletion
+# }
 
 # =============
 # posh-git
@@ -104,6 +106,10 @@ function RegisterGit {
   Register-ArgumentCompleter -CommandName $args[0] -ScriptBlock $tab
 }
 
+Register-ArgumentCompleter -CommandName git -ScriptBlock {
+  param($wordToComplete, $commandAst, $cursorPosition)
+  Expand-GitCommand "$commandAst.ToString()"
+}
 RegisterGit gst "status --short --branch --show-stash --ahead-behind"
 RegisterGit ga "add"
 RegisterGit gaa "add --all"
