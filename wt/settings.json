@@ -24,7 +24,7 @@
         "face": "SauceCodePro Nerd Font"
       },
       "cursorShape": "underscore",
-      "intenseTextStyle": "all",
+      "intenseTextStyle": "bold",
       "opacity": 50,
       "useAcrylic": true,
       "padding": "0",
@@ -398,14 +398,16 @@
       "keys": "alt+shift+v",
       "command": {
         "action": "splitPane",
-        "split": "right"
+        "split": "right",
+        "splitMode": "duplicate"
       }
     },
     {
       "keys": "alt+shift+s",
       "command": {
         "action": "splitPane",
-        "split": "down"
+        "split": "down",
+        "splitMode": "duplicate"
       }
     },
     {
@@ -463,3 +465,4 @@
     }
   ]
 }
+
