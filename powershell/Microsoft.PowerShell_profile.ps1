@@ -1,8 +1,9 @@
 # =============
 # PSReadLine
 # =============
+# blinking underscore, and prompt command start, this will be used in prompt theme
+$env:PoshDefaultCursorShape = "`e[3 q`e]133;B`a" 
 # Show different cursor shape in different vi mode
-$env:PoshDefaultCursorShape = "`e[3 q" # blinking underscore, used in prompt theme
 $OnViModeChange = {
   if ($args[0] -eq "Command") {
     Write-Host -NoNewLine "`e[1 q" # blinking block
@@ -14,26 +15,24 @@ $env:EDITOR = "nvim"
 Set-Alias vi nvim
 Set-PsReadLineOption -EditMode Vi
 Set-PSReadLineOption -ViModeIndicator Script -ViModeChangeHandler $OnViModeChange
-Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+a -Function BeginningOfLine
-Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+e -Function EndOfLine
-Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+h -Function BackwardDeleteChar
-Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+w -Function BackwardKillWord
-Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+k -Function KillLine
-Set-PSReadLineKeyHandler -ViMode Insert -Key Tab -Function MenuComplete
 Set-PSReadLineOption -HistorySearchCursorMovesToEnd
-Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+p -Function HistorySearchBackward
-Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+n -Function HistorySearchForward
-
-$PSStyle.Formatting.FormatAccent = "`e[92;1m" # bold bright green
-$PSStyle.Formatting.ErrorAccent = "`e[91;1m" # bold bright red
 Set-PSReadLineOption -Colors @{
   Comment="`e[90;3m" # italic bright black
   Keyword="`e[95;1m" # bold bright magenta
   Operator="`e[97;1m" # bright white
   Parameter="`e[97;1m" # bright white
   String="`e[36;3m" # italic cyan
+  Type="`e[33m" # yellow
   Variable="`e[96m" # bright cyan
 }
+Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+a -Function BeginningOfLine
+Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+e -Function EndOfLine
+Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+h -Function BackwardDeleteChar
+Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+w -Function BackwardKillWord
+Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+k -Function KillLine
+Set-PSReadLineKeyHandler -ViMode Insert -Key Tab -Function MenuComplete
+Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+p -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+n -Function HistorySearchForward
 
 # =============
 # GuiCompletion
@@ -58,10 +57,40 @@ Set-PSReadLineKeyHandler -ViMode Insert -Key Tab -ScriptBlock {
 }
 
 # =============
+# PSFzf
+# =============
+$env:FZF_CTRL_T_COMMAND = "fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
+$env:FZF_ALT_C_COMMAND = "fd --type d --strip-cwd-prefix --hidden --follow --exclude .git"
+function LazyImportPSFzf {
+  Set-PsFzfOption -EnableFd -EnableAliasFuzzyScoop `
+    -PSReadlineChordProvider 'Ctrl+t' `
+    -PSReadlineChordReverseHistory 'Ctrl+r' `
+    -PSReadlineChordSetLocation 'Alt-c' `
+    -PSReadlineChordReverseHistoryArgs 'Alt-a'
+}
+Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+t -ScriptBlock {
+  if ((Get-Module -Name PSFzf) -eq $null) { LazyImportPSFzf }
+  Invoke-FzfPsReadlineHandlerProvider
+}
+Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+r -ScriptBlock {
+  if ((Get-Module -Name PSFzf) -eq $null) { LazyImportPSFzf }
+  Invoke-FzfPsReadlineHandlerHistory
+}
+Set-PSReadLineKeyHandler -ViMode Insert -Key Alt-c -ScriptBlock {
+  if ((Get-Module -Name PSFzf) -eq $null) { LazyImportPSFzf }
+  Invoke-FzfPsReadlineHandlerSetLocation
+}
+Set-PSReadLineKeyHandler -ViMode Insert -Key Alt-a -ScriptBlock {
+  if ((Get-Module -Name PSFzf) -eq $null) { LazyImportPSFzf }
+  Invoke-FzfPsReadlineHandlerHistoryArgs
+}
+
+# =============
 # posh-git
 # =============
 function RegisterGit {
-  Invoke-Expression -Command "function global:$($args[0]) { git $($args[1]) @args }"
+  Invoke-Expression -Command "function global:Invoke-Git_$($args[0]) { git $($args[1]) @args }"
+  Invoke-Expression -Command "Set-Alias -Force -Scope Global $($args[0]) Invoke-Git_$($args[0])"
   $tab = [Scriptblock]::Create("
     param(`$wordToComplete, `$commandAst, `$cursorPosition)
     `$cmdline = `$commandAst.ToString().Replace(`"$($args[0])`", `"`")
@@ -135,25 +164,8 @@ RegisterGit gsa "submodule add"
 RegisterGit gsu "submodule update --init --recursive"
 RegisterGit gsd "submodule deinit"
 
-# Do not import posh-git to optimaize the startup time, thus only tab completion of registered command are available
-# Import posh-git after aliases
+# Uncomment to get full function of posh-git but make powershell slower
 # Import-Module posh-git
-
-# Remove aliases after import posh-git
-Remove-Alias gc -Force -ErrorAction SilentlyContinue
-Remove-Alias gcb -Force -ErrorAction SilentlyContinue
-Remove-Alias gl -Force -ErrorAction SilentlyContinue
-Remove-Alias gm -Force -ErrorAction SilentlyContinue
-Remove-Alias gp -Force -ErrorAction SilentlyContinue
-
-# =============
-# PSFzf
-# =============
-$env:FZF_CTRL_T_COMMAND = "fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
-$env:FZF_ALT_C_COMMAND = "fd --type d --strip-cwd-prefix --hidden --follow --exclude .git"
-Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
-Set-Alias fg Invoke-PsFzfRipgrep
-Set-Alias fs Invoke-FuzzyScoop
 
 # =============
 # Utils
@@ -168,66 +180,47 @@ Set-Alias lg lazygit
 # Get .gitignore template, e.g.: `gig cpp,windows` write a template to ./.gitignore
 function gig {
   $params = ($args | ForEach-Object { [uri]::EscapeDataString($_) }) -join ","
-  Invoke-WebRequest -Uri "https://www.toptal.com/developers/gitignore/api/$params" | select -ExpandProperty content | Out-File -FilePath $(Join-Path -path $pwd -ChildPath ".gitignore") -Encoding ascii
+  Invoke-WebRequest -Uri "https://www.toptal.com/developers/gitignore/api/$params" |
+    Select-Object -ExpandProperty content |
+    Out-File -FilePath $(Join-Path -path $pwd -ChildPath ".gitignore") -Encoding ascii
 }
 
-$env:DefaultProxyAddress = "http://127.0.0.1:7890"
-function proxy {
-  if ($args[0] -eq "enable") {
-    if ($env:DefaultProxyAddress) {
-      $env:HTTP_PROXY=$env:DefaultProxyAddress
-      $env:HTTPS_PROXY=$env:DefaultProxyAddress
-      echo "set proxy to $env:DefaultProxyAddress"
-    } else {
-      echo "`$env:DefaultProxyAddress is empty"
-    }
-  } elseif ($args[0] -eq "disable") {
-    $env:HTTP_PROXY=""
-    $env:HTTPS_PROXY=""
-    echo "disabled proxy"
+function Set-Proxy {
+  param(
+    [uri]$proxyAddress
+  )
+
+  if ($proxyAddress -ne $null) {
+    $env:HTTP_PROXY=$proxyAddress
+    $env:HTTPS_PROXY=$proxyAddress
+    $env:ALL_PROXY=$proxyAddress
   } elseif ($env:HTTP_PROXY.Length -gt 0) {
-    proxy disable
+    $env:HTTP_PROXY=''
+    $env:HTTPS_PROXY=''
+    $env:ALL_PROXY=''
   } else {
-    proxy enable
+    $env:HTTP_PROXY='http://127.0.0.1:7890'
+    $env:HTTPS_PROXY='http://127.0.0.1:7890'
+    $env:ALL_PROXY='http://127.0.0.1:7890'
   }
 }
-Set-Alias px proxy
+Set-Alias px Set-Proxy
 
 # =============
 # Oh My Posh
 # =============
 # Import oh-my-posh after PSReadline to ensure transient_prompt works properly in vi mode
 oh-my-posh init pwsh --config "$HOME\Documents\PowerShell\base16_bear.omp.json" | Invoke-Expression
-# Enable shell integration marks for Windows Terminal
-$Global:__OriginalPrompt = $function:Prompt
-function Global:__Terminal-Get-LastExitCode {
-  if ($? -eq $True) { return 0 }
-  $LastHistoryEntry = $(Get-History -Count 1)
-  $IsPowerShellError = $Error[0].InvocationInfo.HistoryId -eq $LastHistoryEntry.Id
-  if ($IsPowerShellError) { return -1 }
-  return $LastExitCode
-}
-function prompt {
-  $gle = $(__Terminal-Get-LastExitCode);
-  $LastHistoryEntry = $(Get-History -Count 1)
-  if ($Global:__LastHistoryId -ne -1) {
-    if ($LastHistoryEntry.Id -eq $Global:__LastHistoryId) {
-      $out += "`e]133;D`a"
-    } else {
-      $out += "`e]133;D;$gle`a"
-    }
-  }
-  $loc = $($executionContext.SessionState.Path.CurrentLocation);
-  $out += "`e]133;A$([char]07)";
-  $out += "`e]9;9;`"$loc`"$([char]07)";
-  $out += $Global:__OriginalPrompt.Invoke(); # <-- This line adds the original prompt back
-  $out += "`e]133;B$([char]07)";
-  $Global:__LastHistoryId = $LastHistoryEntry.Id
-  return $out
-}
 
 # =============
 # Zoxide
 # =============
 # Import after oh-my-posh
-Invoke-Expression (& { (zoxide init powershell | Out-String) })
+function z {
+  Invoke-Expression (& { (zoxide init powershell | Out-String) })
+  & $Function:__zoxide_z @args
+}
+function zi {
+  Invoke-Expression (& { (zoxide init powershell | Out-String) })
+  & $Function:__zoxide_zi @args
+}

@@ -1,6 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "version": 3,
+  "shell_integration": true,
   "final_space": true,
   "console_title_template": "{{ .Folder }}",
   "blocks": [
@@ -204,8 +205,8 @@
           "style": "plain",
           "templates": [
             "<darkGray>╰─</>",
-            "{{ if .Env.PoshDefaultCursorShape }}{{ .Env.PoshDefaultCursorShape }}{{ end }}",
-            " {{ if ne .Code 0 }}<lightRed>❯</><red>❯</>{{ else }}<lightBlue>❯</><lightCyan>❯</>{{ end }}"
+            " {{ if ne .Code 0 }}<lightRed>❯</><red>❯</>{{ else }}<lightBlue>❯</><lightCyan>❯</>{{ end }}",
+            "{{ if .Env.PoshDefaultCursorShape }}{{ .Env.PoshDefaultCursorShape }}{{ end }}"
           ],
           "properties": {
             "always_enabled": true

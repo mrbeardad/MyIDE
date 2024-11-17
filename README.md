@@ -199,20 +199,16 @@
 | `Ctrl`+`T` | Fuzzy search files in current directory                      |
 | `Alt`+`C`  | Fuzzy search directories in current directory                |
 
-| Utils      | Description                                                                |
-| ---------- | -------------------------------------------------------------------------- |
-| `l`/`tree` | List files                                                                 |
-| `z`/`zi`   | Change directory by path or keyword                                        |
-| `bat`      | Print file content with highlight                                          |
-| `head`     | Print only the first few lines                                             |
-| `tail`     | Print only the last few lines                                              |
-| `sed`      | Text raw filter                                                            |
-| `cut`      | Text column filter                                                         |
-| `awk`      | Text operator                                                              |
-| `fg`       | Fuzzy search text of files in current directory an open `$EDITOR`          |
-| `tokei`    | Count code                                                                 |
-| `cht`      | Search for a cheat sheet on [cheat.sh](https://github.com/chubin/cheat.sh) |
-| `px`       | Show/Set/Enable/Disable proxy address                                      |
+| Utils         | Description                                                                |
+| ------------- | -------------------------------------------------------------------------- |
+| `l`           | List files (requrie lsd)                                                   |
+| `tree`        | List files as tree (require lsd)                                           |
+| `z`           | Change to directory by fuzzy name (require zoxide)                         |
+| `zi`          | Change to directory by fuzzy name interactively (require zoxide)           |
+| `zoxide edit` | Adjust priority of directories                                             |
+| `tokei`       | Count code                                                                 |
+| `cht`         | Search for a cheat sheet on [cheat.sh](https://github.com/chubin/cheat.sh) |
+| `px`          | Show/Set/Enable/Disable proxy address                                      |
 
 | Git Aliases | Git subcommand | Description                                                                                              |
 | ----------- | -------------- | -------------------------------------------------------------------------------------------------------- |
