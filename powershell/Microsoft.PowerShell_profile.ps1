@@ -43,18 +43,41 @@ Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+n -Function HistorySearchForwa
 # =============
 # PSFzf
 # =============
-$FZF_HEIGHT = "50%"
-$env:FZF_DEFAULT_OPTS = "--height=$FZF_HEIGHT --layout=reverse"
+$env:FZF_DEFAULT_OPTS = "--height=50% --layout=reverse"
 $env:FZF_CTRL_T_COMMAND = "fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
 $env:FZF_ALT_C_COMMAND = "fd --type d --strip-cwd-prefix --hidden --follow --exclude .git"
 # Refer to https://github.com/kelleyma49/PSFzf/issues/202#issuecomment-2495321758
 function SetCursorPostion {
+  param(
+    [int]$MinHeight = 3
+  )
   $rawUI = (Get-Host).UI.RawUI
-  if ($FZF_HEIGHT.EndsWith("%")) {
-    $FzfHeight = [int]($rawUI.BufferSize.Height * $FZF_HEIGHT.TrimEnd('%') / 100)
+  $matchs = [regex]::Matches($env:FZF_DEFAULT_OPTS, '--height=~?(\d+)(%?)').Groups
+  if ($null -eq $matchs) {
+    # if no --height option, set height to full screen
+    $fzfHeight = $rawUI.BufferSize.Height
+  } elseif ($matchs[2].Length -eq 0) {
+    # if set --height without %, set as the fixed height but at least 6
+    $fzfHeight = [int]$matchs[1].Value
+    if ($fzfHeight -lt $MinHeight) {
+      $fzfHeight = $MinHeight
+    }
   } else {
-    $FzfHeight = $rawUI.BufferSize.Height - $FZF_HEIGHT
+    # if set --height with %, we need to considar --min-height
+    $fzfHeight = [Math]::Truncate(($rawUI.BufferSize.Height - 1) * [int]$matchs[1].Value / 100)
+    $fzfMinHeight = [regex]::Matches($env:FZF_DEFAULT_OPTS, '--min-height=(\d+)').Groups
+    if ($null -eq $fzfMinHeight) {
+      $fzfMinHeight = 10
+    } elseif ([int]$fzfMinHeight[1].Value -lt $MinHeight) {
+      $fzfMinHeight = $MinHeight
+    } else {
+      $fzfMinHeight = [int]$fzfMinHeight[1].Value
+    }
+    if ($fzfHeight -lt $fzfMinHeight) {
+      $fzfHeight = $fzfMinHeight
+    }
   }
+
   $Global:RepairedCursorPosition = $rawUI.CursorPosition
   if ($Global:RepairedCursorPosition.Y -ge ($rawUI.BufferSize.Height - $FzfHeight)) {
     # If the curosr position is too low to display Fzf UI, the prompt line will be shifted
@@ -81,7 +104,7 @@ Set-PSReadLineKeyHandler -ViMode Insert -Key Alt-a -ScriptBlock {
   Invoke-FzfPsReadlineHandlerHistoryArgs
 }
 Set-PSReadLineKeyHandler -ViMode Insert -Key Tab -ScriptBlock {
-  SetCursorPostion
+  SetCursorPostion 6
   Invoke-FzfTabCompletion
 }
 Set-Alias fs Invoke-FuzzyScoop
