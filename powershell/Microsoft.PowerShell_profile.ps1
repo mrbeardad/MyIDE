@@ -43,7 +43,7 @@ Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+n -Function HistorySearchForwa
 # =============
 # PSFzf
 # =============
-$env:FZF_DEFAULT_OPTS = "--height=50% --layout=reverse"
+$env:FZF_DEFAULT_OPTS = "--height=50% --layout=reverse --info=right --scrollbar='▐'"
 $env:FZF_CTRL_T_COMMAND = "fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
 $env:FZF_ALT_C_COMMAND = "fd --type d --strip-cwd-prefix --hidden --follow --exclude .git"
 # Refer to https://github.com/kelleyma49/PSFzf/issues/202#issuecomment-2495321758

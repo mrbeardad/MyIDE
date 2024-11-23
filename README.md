@@ -145,7 +145,6 @@
   scoop install oh-my-posh zoxide lsd bat ripgrep fd fzf
   Install-Module posh-git
   Install-Module PSFzf
-  Install-Module GuiCompletion
   ```
 
 - Configure PowerShell by executing `notepad $PROFILE` in PowerShell command line,
