@@ -20,6 +20,8 @@ Set-Alias vi nvim
 Set-PsReadLineOption -EditMode Vi
 Set-PSReadLineOption -ViModeIndicator Script -ViModeChangeHandler $OnViModeChange
 Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+$PSStyle.Formatting.FormatAccent = "`e[92;1m"
+$PSStyle.Formatting.ErrorAccent = "`e[91;1m"
 Set-PSReadLineOption -Colors @{
   Comment="`e[90;3m" # italic bright black
   Keyword="`e[95;1m" # bold bright magenta
@@ -39,32 +41,14 @@ Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+p -Function HistorySearchBackw
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+n -Function HistorySearchForward
 
 # =============
-# GuiCompletion
-# =============
-$LazyLoadProfile = [PowerShell]::Create()
-[void]$LazyLoadProfile.AddScript(@'
-  Import-Module PSCompletions
-'@)
-$LazyLoadProfileRunspace = [RunspaceFactory]::CreateRunspace()
-$LazyLoadProfile.Runspace = $LazyLoadProfileRunspace
-$LazyLoadProfileRunspace.Open()
-$null = Register-ObjectEvent -InputObject $LazyLoadProfile -EventName InvocationStateChanged -Action {
-  Import-Module PSCompletions
-  $LazyLoadProfile.Dispose()
-  $LazyLoadProfileRunspace.Close()
-  $LazyLoadProfileRunspace.Dispose()
-}
-Set-PSReadLineKeyHandler -ViMode Insert -Key Tab -ScriptBlock { 
-  [void]$LazyLoadProfile.BeginInvoke()
-}
-
-# =============
 # PSFzf
 # =============
+$env:FZF_DEFAULT_OPTS = "--height=20 --layout=reverse"
 $env:FZF_CTRL_T_COMMAND = "fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
 $env:FZF_ALT_C_COMMAND = "fd --type d --strip-cwd-prefix --hidden --follow --exclude .git"
 function LazyImportPSFzf {
   Set-PsFzfOption -EnableFd -EnableAliasFuzzyScoop `
+    -TabExpansion `
     -PSReadlineChordProvider 'Ctrl+t' `
     -PSReadlineChordReverseHistory 'Ctrl+r' `
     -PSReadlineChordSetLocation 'Alt-c' `
@@ -86,10 +70,10 @@ Set-PSReadLineKeyHandler -ViMode Insert -Key Alt-a -ScriptBlock {
   if ((Get-Module -Name PSFzf) -eq $null) { LazyImportPSFzf }
   Invoke-FzfPsReadlineHandlerHistoryArgs
 }
-# Set-PSReadLineKeyHandler -ViMode Insert -Key Tab -ScriptBlock {
-#   if ((Get-Module -Name PSFzf) -eq $null) { LazyImportPSFzf }
-#   Invoke-FzfTabCompletion
-# }
+Set-PSReadLineKeyHandler -ViMode Insert -Key Tab -ScriptBlock {
+  if ((Get-Module -Name PSFzf) -eq $null) { LazyImportPSFzf }
+  Invoke-FzfTabCompletion
+}
 
 # =============
 # posh-git
@@ -174,9 +158,6 @@ RegisterGit gsa "submodule add"
 RegisterGit gsu "submodule update --init --recursive"
 RegisterGit gsd "submodule deinit"
 
-# Uncomment to get full function of posh-git but make powershell slower
-# Import-Module posh-git
-
 # =============
 # Utils
 # =============
@@ -229,9 +210,9 @@ function prompt {
   $out = "`e]133;A$([char]07)" + $out;
   $out += "`e]133;B$([char]07)";
   if ($Global:PsReadLineViMode -eq "i") {
-    $out += "`e[3 q"
+    $out += $PsReadLineViInsertModeCursor
   } else {
-    $out += "`e[1 q"
+    $out += $PsReadLineViNormalModeCursor
   }
   return $out
 }
