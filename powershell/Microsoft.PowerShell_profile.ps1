@@ -43,37 +43,48 @@ Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+n -Function HistorySearchForwa
 # =============
 # PSFzf
 # =============
-$env:FZF_DEFAULT_OPTS = "--height=20 --layout=reverse"
+$FZF_HEIGHT = "50%"
+$env:FZF_DEFAULT_OPTS = "--height=$FZF_HEIGHT --layout=reverse"
 $env:FZF_CTRL_T_COMMAND = "fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
 $env:FZF_ALT_C_COMMAND = "fd --type d --strip-cwd-prefix --hidden --follow --exclude .git"
-function LazyImportPSFzf {
-  Set-PsFzfOption -EnableFd -EnableAliasFuzzyScoop `
-    -TabExpansion `
-    -PSReadlineChordProvider 'Ctrl+t' `
-    -PSReadlineChordReverseHistory 'Ctrl+r' `
-    -PSReadlineChordSetLocation 'Alt-c' `
-    -PSReadlineChordReverseHistoryArgs 'Alt-a'
+# Refer to https://github.com/kelleyma49/PSFzf/issues/202#issuecomment-2495321758
+function SetCursorPostion {
+  $rawUI = (Get-Host).UI.RawUI
+  if ($FZF_HEIGHT.EndsWith("%")) {
+    $FzfHeight = [int]($rawUI.BufferSize.Height * $FZF_HEIGHT.TrimEnd('%') / 100)
+  } else {
+    $FzfHeight = $rawUI.BufferSize.Height - $FZF_HEIGHT
+  }
+  $Global:RepairedCursorPosition = $rawUI.CursorPosition
+  if ($Global:RepairedCursorPosition.Y -ge ($rawUI.BufferSize.Height - $FzfHeight)) {
+    # If the curosr position is too low to display Fzf UI, the prompt line will be shifted
+    $Global:RepairedCursorPosition.Y = $rawUI.BufferSize.Height - $FzfHeight
+    $Global:RepairedCursorPosition.X = 0
+  } else {
+    $Global:RepairedCursorPosition = $null
+  }
 }
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+t -ScriptBlock {
-  if ((Get-Module -Name PSFzf) -eq $null) { LazyImportPSFzf }
+  SetCursorPostion
   Invoke-FzfPsReadlineHandlerProvider
 }
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+r -ScriptBlock {
-  if ((Get-Module -Name PSFzf) -eq $null) { LazyImportPSFzf }
+  SetCursorPostion
   Invoke-FzfPsReadlineHandlerHistory
 }
 Set-PSReadLineKeyHandler -ViMode Insert -Key Alt-c -ScriptBlock {
-  if ((Get-Module -Name PSFzf) -eq $null) { LazyImportPSFzf }
+  SetCursorPostion
   Invoke-FzfPsReadlineHandlerSetLocation
 }
 Set-PSReadLineKeyHandler -ViMode Insert -Key Alt-a -ScriptBlock {
-  if ((Get-Module -Name PSFzf) -eq $null) { LazyImportPSFzf }
+  SetCursorPostion
   Invoke-FzfPsReadlineHandlerHistoryArgs
 }
 Set-PSReadLineKeyHandler -ViMode Insert -Key Tab -ScriptBlock {
-  if ((Get-Module -Name PSFzf) -eq $null) { LazyImportPSFzf }
+  SetCursorPostion
   Invoke-FzfTabCompletion
 }
+Set-Alias fs Invoke-FuzzyScoop
 
 # =============
 # posh-git
@@ -213,6 +224,12 @@ function prompt {
     $out += $PsReadLineViInsertModeCursor
   } else {
     $out += $PsReadLineViNormalModeCursor
+  }
+  if ($null -ne $Global:RepairedCursorPosition) {
+    $promptHeight = $out.Split("`n").Count
+    $Global:RepairedCursorPosition.Y -= $promptHeight
+    (Get-Host).UI.RawUI.CursorPosition = $Global:RepairedCursorPosition
+    $Global:RepairedCursorPosition = $null
   }
   return $out
 }
