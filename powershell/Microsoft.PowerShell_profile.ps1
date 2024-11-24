@@ -57,7 +57,7 @@ function SetCursorPostion {
     # if no --height option, set height to full screen
     $fzfHeight = $rawUI.BufferSize.Height
   } elseif ($matchs[2].Length -eq 0) {
-    # if set --height without %, set as the fixed height but at least 6
+    # if set --height without %, set as the fixed height but at least 3
     $fzfHeight = [int]$matchs[1].Value
     if ($fzfHeight -lt $MinHeight) {
       $fzfHeight = $MinHeight
@@ -104,7 +104,7 @@ Set-PSReadLineKeyHandler -ViMode Insert -Key Alt-a -ScriptBlock {
   Invoke-FzfPsReadlineHandlerHistoryArgs
 }
 Set-PSReadLineKeyHandler -ViMode Insert -Key Tab -ScriptBlock {
-  SetCursorPostion 6
+  SetCursorPostion
   Invoke-FzfTabCompletion
 }
 Set-Alias fs Invoke-FuzzyScoop
