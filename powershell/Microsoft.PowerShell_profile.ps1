@@ -58,33 +58,22 @@ function SetCursorPostion {
     $fzfHeight = $rawUI.BufferSize.Height
   } elseif ($matchs[2].Length -eq 0) {
     # if set --height without %, set as the fixed height but at least 3
-    $fzfHeight = [int]$matchs[1].Value
-    if ($fzfHeight -lt $MinHeight) {
-      $fzfHeight = $MinHeight
-    }
+    $fzfHeight = [Math]::Max([int]$matchs[1].Value, $MinHeight)
   } else {
     # if set --height with %, we need to considar --min-height
-    $fzfHeight = [Math]::Truncate(($rawUI.BufferSize.Height - 1) * [int]$matchs[1].Value / 100)
     $fzfMinHeight = [regex]::Matches($env:FZF_DEFAULT_OPTS, '--min-height=(\d+)').Groups
     if ($null -eq $fzfMinHeight) {
       $fzfMinHeight = 10
-    } elseif ([int]$fzfMinHeight[1].Value -lt $MinHeight) {
-      $fzfMinHeight = $MinHeight
     } else {
-      $fzfMinHeight = [int]$fzfMinHeight[1].Value
+      $fzfMinHeight = [Math]::Max([int]$fzfMinHeight[1].Value, $MinHeight)
     }
-    if ($fzfHeight -lt $fzfMinHeight) {
-      $fzfHeight = $fzfMinHeight
-    }
+    $fzfHeight = [Math]::Max([Math]::Truncate(($rawUI.BufferSize.Height - 1) * [int]$matchs[1].Value / 100), $fzfMinHeight)
   }
 
   $Global:RepairedCursorPosition = $rawUI.CursorPosition
   if ($Global:RepairedCursorPosition.Y -ge ($rawUI.BufferSize.Height - $FzfHeight)) {
     # If the curosr position is too low to display Fzf UI, the prompt line will be shifted
-    $Global:RepairedCursorPosition.Y = $rawUI.BufferSize.Height - $FzfHeight
-    $Global:RepairedCursorPosition.X = 0
-  } else {
-    $Global:RepairedCursorPosition = $null
+    $Global:RepairedCursorPosition.Y = $rawUI.BufferSize.Height - $FzfHeight - 1
   }
 }
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+t -ScriptBlock {
@@ -201,6 +190,7 @@ function .. { Set-Location -Path .. }
 function ... { Set-Location -Path ..\.. }
 function .... { Set-Location -Path ..\..\.. }
 Set-Alias lg lazygit
+Set-Alias gmm Get-Member
 
 # Get .gitignore template, e.g.: `gig cpp,windows` write a template to ./.gitignore
 function gig {
@@ -239,18 +229,28 @@ oh-my-posh init pwsh --config "$HOME\Documents\PowerShell\base16_bear.omp.json" 
 # Shell integration https://learn.microsoft.com/en-us/windows/terminal/tutorials/shell-integration#how-does-this-work
 $Global:__OriginalPrompt = $function:Prompt
 function prompt {
-  # place at beginning of function to avoid oh-my-posh get the wrong last error code
-  $out += $Global:__OriginalPrompt.Invoke();
-  $out = "`e]133;A$([char]07)" + $out;
-  $out += "`e]133;B$([char]07)";
+  # Place at beginning of function to avoid oh-my-posh get the wrong last error code
+  $out = $Global:__OriginalPrompt.Invoke()[0];
+
+  # Remove the "FTCS_COMMAND_START" from transient prompt
+  if ($out[-1] -eq "`b") {
+    return $out -replace "`e]133;B`a", ''
+  }
+
+  # Add carriage then "FTCS_COMMAND_START" into primary prompt
+  $out = ($out -replace "`n","`r`n") + "`e]133;B`a";
+
+  # Reset the cursor to the correct shape
   if ($Global:PsReadLineViMode -eq "i") {
     $out += $PsReadLineViInsertModeCursor
   } else {
     $out += $PsReadLineViNormalModeCursor
   }
+
+  # Repair the cursor position after PSReadline key handler
   if ($null -ne $Global:RepairedCursorPosition) {
-    $promptHeight = $out.Split("`n").Count
-    $Global:RepairedCursorPosition.Y -= $promptHeight
+    $Global:RepairedCursorPosition.X = 0
+    $Global:RepairedCursorPosition.Y -= 1 # my prompt has 2 line
     (Get-Host).UI.RawUI.CursorPosition = $Global:RepairedCursorPosition
     $Global:RepairedCursorPosition = $null
   }

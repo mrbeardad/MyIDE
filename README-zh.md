@@ -129,7 +129,7 @@
   scoop install 7zip git # aria2
 
   # 可选安装（推荐）
-  scoop install scoop-search cht tokei lazygit everything sysinternals
+  scoop install fastfetch cht tokei lazygit everything sysinternals
   # cp .\bat\config ~\AppData\Roaming\bat\config
   # cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
   # cp .\everything\Everything.ini ~\AppData\Roaming\Everything\Everything.ini

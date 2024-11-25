@@ -129,8 +129,7 @@
   scoop install 7zip git # aria2
 
   # Optional but recommended
-  scoop install cht tokei lazygit everything sysinternals
-  # cp .\bat\config ~\AppData\Roaming\bat\config
+  scoop install fastfetch cht tokei lazygit everything sysinternals
   # cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
   # cp .\everything\Everything.ini ~\AppData\Roaming\Everything\Everything.ini
   # .\sysinternals\ProcessExplorerColumnSet.reg
