@@ -43,7 +43,7 @@ Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+n -Function HistorySearchForwa
 # =============
 # PSFzf
 # =============
-$env:FZF_DEFAULT_OPTS = "--height=50% --layout=reverse --info=right --scrollbar='▐'"
+$env:FZF_DEFAULT_OPTS = "--height=50% --min-height=8 --layout=reverse --info=right --scrollbar='▐'"
 $env:FZF_CTRL_T_COMMAND = "fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
 $env:FZF_ALT_C_COMMAND = "fd --type d --strip-cwd-prefix --hidden --follow --exclude .git"
 # Refer to https://github.com/kelleyma49/PSFzf/issues/202#issuecomment-2495321758
@@ -79,22 +79,27 @@ function SetCursorPostion {
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+t -ScriptBlock {
   SetCursorPostion
   Invoke-FzfPsReadlineHandlerProvider
+  $Global:RepairedCursorPosition = $null
 }
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+r -ScriptBlock {
   SetCursorPostion
   Invoke-FzfPsReadlineHandlerHistory
+  $Global:RepairedCursorPosition = $null
 }
 Set-PSReadLineKeyHandler -ViMode Insert -Key Alt-c -ScriptBlock {
   SetCursorPostion
   Invoke-FzfPsReadlineHandlerSetLocation
+  $Global:RepairedCursorPosition = $null
 }
 Set-PSReadLineKeyHandler -ViMode Insert -Key Alt-a -ScriptBlock {
   SetCursorPostion
   Invoke-FzfPsReadlineHandlerHistoryArgs
+  $Global:RepairedCursorPosition = $null
 }
 Set-PSReadLineKeyHandler -ViMode Insert -Key Tab -ScriptBlock {
   SetCursorPostion
   Invoke-FzfTabCompletion
+  $Global:RepairedCursorPosition = $null
 }
 Set-Alias fs Invoke-FuzzyScoop
 
@@ -232,13 +237,13 @@ function prompt {
   # Place at beginning of function to avoid oh-my-posh get the wrong last error code
   $out = $Global:__OriginalPrompt.Invoke()[0];
 
-  # Remove the "FTCS_COMMAND_START" from transient prompt
+  # Transient prompt
   if ($out[-1] -eq "`b") {
-    return $out -replace "`e]133;B`a", ''
+    return $out
   }
 
-  # Add carriage then "FTCS_COMMAND_START" into primary prompt
-  $out = ($out -replace "`n","`r`n") + "`e]133;B`a";
+  # Replace \n to \r\n to avoid some bug
+  $out = $out -replace "`n", "`r`n"
 
   # Reset the cursor to the correct shape
   if ($Global:PsReadLineViMode -eq "i") {
@@ -252,7 +257,6 @@ function prompt {
     $Global:RepairedCursorPosition.X = 0
     $Global:RepairedCursorPosition.Y -= 1 # my prompt has 2 line
     (Get-Host).UI.RawUI.CursorPosition = $Global:RepairedCursorPosition
-    $Global:RepairedCursorPosition = $null
   }
   return $out
 }
