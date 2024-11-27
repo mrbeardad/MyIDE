@@ -70,6 +70,7 @@ function SetCursorPostion {
     $fzfHeight = [Math]::Max([Math]::Truncate(($rawUI.BufferSize.Height - 1) * [int]$matchs[1].Value / 100), $fzfMinHeight)
   }
 
+  $Global:PositionBeforePsfzf = $rawUI.CursorPosition
   $Global:RepairedCursorPosition = $rawUI.CursorPosition
   if ($Global:RepairedCursorPosition.Y -ge ($rawUI.BufferSize.Height - $FzfHeight)) {
     # If the curosr position is too low to display Fzf UI, the prompt line will be shifted
@@ -243,6 +244,7 @@ function prompt {
   }
 
   # Replace \n to \r\n to avoid some bug
+  # $out = $out -replace "`n", "`r`n"
   $out = $out -replace "`n", "`r`n"
 
   # Reset the cursor to the correct shape
@@ -254,10 +256,13 @@ function prompt {
 
   # Repair the cursor position after PSReadline key handler
   if ($null -ne $Global:RepairedCursorPosition) {
+    $rawUI = (Get-Host).UI.RawUI
+    $promptAndCommandHeight = $Global:PositionBeforePsfzf.Y - $rawUI.CursorPosition.Y
     $Global:RepairedCursorPosition.X = 0
-    $Global:RepairedCursorPosition.Y -= 1 # my prompt has 2 line
-    (Get-Host).UI.RawUI.CursorPosition = $Global:RepairedCursorPosition
+    $Global:RepairedCursorPosition.Y -= $promptAndCommandHeight
+    $rawUI.CursorPosition = $Global:RepairedCursorPosition
   }
+
   return $out
 }
 
