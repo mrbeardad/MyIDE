@@ -16,7 +16,7 @@ $OnViModeChange = {
   }
 }
 $env:EDITOR = "nvim"
-Set-Alias vi nvim
+Set-Alias v nvim
 Set-PsReadLineOption -EditMode Vi
 Set-PSReadLineOption -ViModeIndicator Script -ViModeChangeHandler $OnViModeChange
 Set-PSReadLineOption -HistorySearchCursorMovesToEnd
@@ -47,60 +47,25 @@ $env:FZF_DEFAULT_OPTS = "--height=50% --min-height=8 --layout=reverse --info=rig
 $env:FZF_CTRL_T_COMMAND = "fd --type f --strip-cwd-prefix --hidden --follow --exclude .git"
 $env:FZF_ALT_C_COMMAND = "fd --type d --strip-cwd-prefix --hidden --follow --exclude .git"
 # Refer to https://github.com/kelleyma49/PSFzf/issues/202#issuecomment-2495321758
-function SetCursorPostion {
-  param(
-    [int]$MinHeight = 3
-  )
-  $rawUI = (Get-Host).UI.RawUI
-  $matchs = [regex]::Matches($env:FZF_DEFAULT_OPTS, '--height=~?(\d+)(%?)').Groups
-  if ($null -eq $matchs) {
-    # if no --height option, set height to full screen
-    $fzfHeight = $rawUI.BufferSize.Height
-  } elseif ($matchs[2].Length -eq 0) {
-    # if set --height without %, set as the fixed height but at least 3
-    $fzfHeight = [Math]::Max([int]$matchs[1].Value, $MinHeight)
-  } else {
-    # if set --height with %, we need to considar --min-height
-    $fzfMinHeight = [regex]::Matches($env:FZF_DEFAULT_OPTS, '--min-height=(\d+)').Groups
-    if ($null -eq $fzfMinHeight) {
-      $fzfMinHeight = 10
-    } else {
-      $fzfMinHeight = [Math]::Max([int]$fzfMinHeight[1].Value, $MinHeight)
-    }
-    $fzfHeight = [Math]::Max([Math]::Truncate(($rawUI.BufferSize.Height - 1) * [int]$matchs[1].Value / 100), $fzfMinHeight)
-  }
-
-  $Global:PositionBeforePsfzf = $rawUI.CursorPosition
-  $Global:RepairedCursorPosition = $rawUI.CursorPosition
-  if ($Global:RepairedCursorPosition.Y -ge ($rawUI.BufferSize.Height - $FzfHeight)) {
-    # If the curosr position is too low to display Fzf UI, the prompt line will be shifted
-    $Global:RepairedCursorPosition.Y = $rawUI.BufferSize.Height - $FzfHeight - 1
-  }
-}
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+t -ScriptBlock {
-  SetCursorPostion
+  $Global:CursorTopBeforePSFzf = [Console]::CursorTop
   Invoke-FzfPsReadlineHandlerProvider
-  $Global:RepairedCursorPosition = $null
 }
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+r -ScriptBlock {
-  SetCursorPostion
+  $Global:CursorTopBeforePSFzf = [Console]::CursorTop
   Invoke-FzfPsReadlineHandlerHistory
-  $Global:RepairedCursorPosition = $null
 }
 Set-PSReadLineKeyHandler -ViMode Insert -Key Alt-c -ScriptBlock {
-  SetCursorPostion
+  $Global:CursorTopBeforePSFzf = [Console]::CursorTop
   Invoke-FzfPsReadlineHandlerSetLocation
-  $Global:RepairedCursorPosition = $null
 }
 Set-PSReadLineKeyHandler -ViMode Insert -Key Alt-a -ScriptBlock {
-  SetCursorPostion
+  $Global:CursorTopBeforePSFzf = [Console]::CursorTop
   Invoke-FzfPsReadlineHandlerHistoryArgs
-  $Global:RepairedCursorPosition = $null
 }
 Set-PSReadLineKeyHandler -ViMode Insert -Key Tab -ScriptBlock {
-  SetCursorPostion
+  $Global:CursorTopBeforePSFzf = [Console]::CursorTop
   Invoke-FzfTabCompletion
-  $Global:RepairedCursorPosition = $null
 }
 Set-Alias fs Invoke-FuzzyScoop
 
@@ -243,10 +208,6 @@ function prompt {
     return $out
   }
 
-  # Replace \n to \r\n to avoid some bug
-  # $out = $out -replace "`n", "`r`n"
-  $out = $out -replace "`n", "`r`n"
-
   # Reset the cursor to the correct shape
   if ($Global:PsReadLineViMode -eq "i") {
     $out += $PsReadLineViInsertModeCursor
@@ -254,13 +215,13 @@ function prompt {
     $out += $PsReadLineViNormalModeCursor
   }
 
-  # Repair the cursor position after PSReadline key handler
-  if ($null -ne $Global:RepairedCursorPosition) {
-    $rawUI = (Get-Host).UI.RawUI
-    $promptAndCommandHeight = $Global:PositionBeforePsfzf.Y - $rawUI.CursorPosition.Y
-    $Global:RepairedCursorPosition.X = 0
-    $Global:RepairedCursorPosition.Y -= $promptAndCommandHeight
-    $rawUI.CursorPosition = $Global:RepairedCursorPosition
+  # Repair the cursor position and console mode after PSFzf
+  # $Global:CursorTopBeforePSFzfInvokePromptHack = [Console]::CursorTop
+  # $Global:CursorTopBeforePSFzfInvokePromptHack = $null
+  if ($null -ne $Global:CursorTopBeforePSFzfInvokePromptHack) {
+    [Console]::SetCursorPosition(0, $Global:CursorTopBeforePSFzfInvokePromptHack - ($Global:CursorTopBeforePSFzf - [Console]::CursorTop))
+    $Global:Kernel32 ??= Add-Type -Name 'Kernel32' -Namespace 'Win32' -PassThru -MemberDefinition '[DllImport("kernel32.dll", SetLastError = true)] public static extern IntPtr GetStdHandle(int nStdHandle); [DllImport("kernel32.dll", SetLastError = true)] public static extern bool GetConsoleMode(IntPtr hConsoleHandle, out uint lpMode); [DllImport("kernel32.dll", SetLastError = true)] public static extern bool SetConsoleMode(IntPtr hConsoleHandle, uint lpMode);'
+    $Global:Kernel32::SetConsoleMode($Global:Kernel32::GetStdHandle(-11), 0x7) | Out-Null
   }
 
   return $out
