@@ -85,7 +85,7 @@
 > Tips:
 >
 > - All colorschemes are adjusted to fit both light and dark theme of system.
-> - The font family is set to `SauceCodePro`
+> - The font family is set to `SauceCodePro Nerd Font`
 
 ### Terminal Usage
 
@@ -122,28 +122,23 @@
 
 - Install [Scoop](https://scoop.sh/): A package manager to install apps in command line.
 
-- Install the required tools via scoop
+- Install the required tools and PowerShell modules
 
   ```ps1
   # Required
   scoop install 7zip git # aria2
-
-  # Optional but recommended
-  scoop install fastfetch cht tokei lazygit everything sysinternals
-  # cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
-  # cp .\everything\Everything.ini ~\AppData\Roaming\Everything\Everything.ini
-  # .\sysinternals\ProcessExplorerColumnSet.reg
-  # Adding %USERPROFILE%\scoop\apps\git\current\user\bin to PATH is useful
-  # To add 7zip and everything to explorer context menu, open app window and click the menu Tools > Options
-  # To add `open with neovim in terminal`, refer to ./nvim/install-context.reg
-  ```
-
-- Insall PowerShell modules
-
-  ```ps1
   scoop install oh-my-posh zoxide lsd bat ripgrep fd fzf
   Install-Module posh-git
   Install-Module PSFzf
+
+  # Optional but recommended
+  scoop install fastfetch cht tokei lazygit everything sysinternals
+  cp .\bat\config ~\AppData\Roaming\bat\config
+  cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
+  .\sysinternals\ProcessExplorerColumnSet.reg
+  ~\scoop\apps\7zip\current\install-context.reg
+  ~\scoop\apps\everything\current\install-context.reg
+  # Adding %USERPROFILE%\scoop\apps\git\current\user\bin to PATH is useful
   ```
 
 - Configure PowerShell by executing `notepad $PROFILE` in PowerShell command line,

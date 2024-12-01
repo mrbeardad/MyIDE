@@ -85,7 +85,7 @@
 > 小贴士:
 >
 > - 所有颜色主题都被调整了以适配系统浅色主题
-> - 配置中的字体设置为`SauceCodePro`
+> - 配置中的字体设置为`SauceCodePro Nerd Font`
 
 ### 终端使用
 
@@ -122,29 +122,40 @@
 
 - 安装 [scoop-proxy-cn](https://github.com/lzwme/scoop-proxy-cn)：一款 Windows 下好用的包管理器的国内镜像
 
-- 用 scoop 安装常用的工具
+- 安装必要工具和 PowerShell 模块
 
   ```ps1
   # 必要安装
   scoop install 7zip git # aria2
-
-  # 可选安装（推荐）
-  scoop install fastfetch cht tokei lazygit everything sysinternals
-  # cp .\bat\config ~\AppData\Roaming\bat\config
-  # cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
-  # cp .\everything\Everything.ini ~\AppData\Roaming\Everything\Everything.ini
-  # .\sysinternals\ProcessExplorerColumnSet.reg
-  # 将 %USERPROFILE%\scoop\apps\git\current\user\bin 加到环境变量 PATH 通常挺有用
-  # 7-zip 和 Everything 的右键菜单需要在应用窗口中的 Tools > Options 中设置
-  # Neovim 的右键菜单参考 ./nvim/install-context.reg
-  ```
-
-- 安装 PowerShell 模块
-
-  ```ps1
   scoop install oh-my-posh zoxide lsd bat ripgrep fd fzf
   Install-Module posh-git
   Install-Module PSFzf
+
+  # 可选安装（推荐）
+  scoop install fastfetch cht tokei lazygit everything sysinternals
+  cp .\bat\config ~\AppData\Roaming\bat\config
+  cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
+  .\sysinternals\ProcessExplorerColumnSet.reg
+  ~\scoop\apps\7zip\current\install-context.reg
+  ~\scoop\apps\everything\current\install-context.reg
+  # 将 %USERPROFILE%\scoop\apps\git\current\user\bin 加到环境变量 PATH 通常挺有用
+
+  scoop install go
+  go env -w GOPROXY=https://mirrors.aliyun.com/goproxy/,direct GOSUMDB=sum.golang.google.cn GOBIN=$HOME\go\bin
+
+  scoop install rustup
+  mkdir ~\.cargo
+  echo @"[source.crates-io]
+  replace-with = 'aliyun'
+  [source.aliyun]
+  registry = "sparse+https://mirrors.aliyun.com/crates.io-index/"
+  "@ >> ~\.cargo\config
+  
+  scoop install nodejs
+  npm config set registry https://registry.npmmirror.com
+  
+  scoop install python
+  pip config set global.index-url http://mirrors.aliyun.com/pypi/simple/
   ```
 
 - 在 PowerShell 中执行`notepad $PROFILE`来更改配置文件，这是我的 [**profile.ps1**](./ps/Microsoft.PowerShell_profile.ps1) 你可以参考

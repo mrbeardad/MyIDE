@@ -161,6 +161,7 @@ function .. { Set-Location -Path .. }
 function ... { Set-Location -Path ..\.. }
 function .... { Set-Location -Path ..\..\.. }
 Set-Alias lg lazygit
+Set-Alias ig git-igitt
 Set-Alias gmm Get-Member
 
 # Get .gitignore template, e.g.: `gig cpp,windows` write a template to ./.gitignore
@@ -197,7 +198,6 @@ Set-Alias px Set-Proxy
 # =============
 # Import oh-my-posh after PSReadline to ensure transient_prompt works properly in vi mode
 oh-my-posh init pwsh --config "$HOME\Documents\PowerShell\base16_bear.omp.json" | Invoke-Expression
-# Shell integration https://learn.microsoft.com/en-us/windows/terminal/tutorials/shell-integration#how-does-this-work
 $Global:__OriginalPrompt = $function:Prompt
 function prompt {
   # Place at beginning of function to avoid oh-my-posh get the wrong last error code
