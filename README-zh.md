@@ -145,7 +145,8 @@
 
   scoop install rustup
   mkdir ~\.cargo
-  echo @"[source.crates-io]
+  echo @"
+  [source.crates-io]
   replace-with = 'aliyun'
   [source.aliyun]
   registry = "sparse+https://mirrors.aliyun.com/crates.io-index/"
