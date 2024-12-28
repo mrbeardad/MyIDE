@@ -84,6 +84,10 @@ function RegisterGit {
   Register-ArgumentCompleter -CommandName $args[0] -ScriptBlock $tab
 }
 
+# Import before $PROFILE in order to override the alias in it
+Import-Module Microsoft.PowerShell.Management
+Set-Alias gmm Get-Member
+
 Register-ArgumentCompleter -CommandName git -ScriptBlock {
   param($wordToComplete, $commandAst, $cursorPosition)
   Expand-GitCommand "$commandAst.ToString()"
@@ -162,7 +166,6 @@ function ... { Set-Location -Path ..\.. }
 function .... { Set-Location -Path ..\..\.. }
 Set-Alias lg lazygit
 Set-Alias ig git-igitt
-Set-Alias gmm Get-Member
 
 # Get .gitignore template, e.g.: `gig cpp,windows` write a template to ./.gitignore
 function gig {
@@ -192,6 +195,43 @@ function Set-Proxy {
   }
 }
 Set-Alias px Set-Proxy
+
+function Send-Notify {
+  param (
+    [Parameter(Position=0)]
+    [string]$Title,
+    [Parameter(Position=1)]
+    [string]$Message = ""
+  )
+  $notify = @"
+& {
+`$Title = "$Title"
+`$Message = "$Message"
+
+"@ + @'
+[String] $SendingApp = "{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe"
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
+[Windows.UI.Notifications.ToastNotification, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null
+[Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime] | Out-Null
+$template = @"
+<toast>
+    <visual>
+        <binding template="ToastText02">
+            <text id="1">$($Title)</text>
+            <text id="2">$($Message)</text>
+        </binding>
+    </visual>
+</toast>
+"@
+$xml = New-Object Windows.Data.Xml.Dom.XmlDocument
+$xml.LoadXml($template)
+$toast = New-Object Windows.UI.Notifications.ToastNotification $xml
+[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($SendingApp).Show($toast)
+}
+'@ 
+  powershell -Command $notify
+}
+Set-Alias notify Send-Notify
 
 # =============
 # Oh My Posh
