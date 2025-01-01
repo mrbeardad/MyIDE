@@ -42,6 +42,8 @@
 
 - Install [PowerToys](https://apps.microsoft.com/detail/XP89DCGQ3K6VLD?hl=en-us&gl=US) : A set of utilities for power users to tune and streamline their Windows experience for greater productivity.
 
+- Install [Sysinternals](https://apps.microsoft.com/detail/9p7knl5rwt25) : A set of utilities for monitor the system and process information and behavior, here's my [Process Explorer Column Set](./sysinternals/ProcessExplorerColumnSet.reg)
+
 - Install [Snipaste](https://apps.microsoft.com/detail/9P1WXPKB68KX?hl=en-us&gl=US) : Offers powerful yet easy-to-use snipping, pasting and image annotating functionalities.
 
 - Install a [Nerd Font](https://www.nerdfonts.com/font-downloads) : A patched font within high number of icons.
@@ -132,10 +134,9 @@
   Install-Module PSFzf
 
   # Optional but recommended
-  scoop install fastfetch cht tokei lazygit everything sysinternals
+  scoop install fastfetch cht tokei lazygit everything
   cp .\bat\config ~\AppData\Roaming\bat\config
   cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
-  .\sysinternals\ProcessExplorerColumnSet.reg
   ~\scoop\apps\7zip\current\install-context.reg
   ~\scoop\apps\everything\current\install-context.reg
   # Adding %USERPROFILE%\scoop\apps\git\current\user\bin to PATH is useful
@@ -202,6 +203,7 @@
 | `tokei`       | Count code                                                                 |
 | `cht`         | Search for a cheat sheet on [cheat.sh](https://github.com/chubin/cheat.sh) |
 | `px`          | Show/Set/Enable/Disable proxy address                                      |
+| `notify`      | Show Windows notification popup, e.g. `notify "Title" "Body"`              |
 
 | Git Aliases | Git subcommand | Description                                                                                              |
 | ----------- | -------------- | -------------------------------------------------------------------------------------------------------- |

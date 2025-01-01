@@ -42,6 +42,8 @@
 
 - 安装 [PowerToys](https://apps.microsoft.com/detail/XP89DCGQ3K6VLD?hl=en-us&gl=US)：一个包含许多实用工具的集合
 
+- 安装 [Sysinternals](https://apps.microsoft.com/detail/9p7knl5rwt25)：一个包含许多用于监控系统或进程的信息或行为的工具的集合，这是我的 [Process Explorer Column Set](./sysinternals/ProcessExplorerColumnSet.reg)
+
 - 安装 [Snipaste](https://apps.microsoft.com/detail/9P1WXPKB68KX?hl=en-us&gl=US)：一个非常好用的截图工具
 
 - 安装一款 [Nerd 字体](https://www.nerdfonts.com/font-downloads)：Nerd 字体包含了许多常用图标和符号，被许多命令行程序使用
@@ -132,10 +134,9 @@
   Install-Module PSFzf
 
   # 可选安装（推荐）
-  scoop install fastfetch cht tokei lazygit everything sysinternals
+  scoop install fastfetch cht tokei lazygit everything
   cp .\bat\config ~\AppData\Roaming\bat\config
   cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
-  .\sysinternals\ProcessExplorerColumnSet.reg
   ~\scoop\apps\7zip\current\install-context.reg
   ~\scoop\apps\everything\current\install-context.reg
   # 将 %USERPROFILE%\scoop\apps\git\current\user\bin 加到环境变量 PATH 通常挺有用
@@ -151,10 +152,10 @@
   [source.aliyun]
   registry = "sparse+https://mirrors.aliyun.com/crates.io-index/"
   "@ >> ~\.cargo\config
-  
+
   scoop install nodejs
   npm config set registry https://registry.npmmirror.com
-  
+
   scoop install python
   pip config set global.index-url http://mirrors.aliyun.com/pypi/simple/
   ```
@@ -219,6 +220,7 @@
 | `tokei`       | 项目代码统计                                                |
 | `cht`         | 搜索帮助信息 [cheat.sh](https://github.com/chubin/cheat.sh) |
 | `px`          | 设置代理                                                    |
+| `notify`      | 系统通知弹窗, e.g. `notify "Title" "Body"`                  |
 
 | Git Aliases | Git subcommand | Description                                                                                              |
 | ----------- | -------------- | -------------------------------------------------------------------------------------------------------- |
