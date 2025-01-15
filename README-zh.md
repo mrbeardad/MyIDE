@@ -36,17 +36,17 @@
 
 ### 桌面安装
 
-- 打开设置界面安装中文语言包，并设置微软中文输入法，执行[xhup.reg](./ime/xhup.reg)安装小鹤双拼
+- 首先打开设置界面安装中文语言包，并设置微软中文输入法，执行[xhup.reg](./ime/xhup.reg)安装小鹤双拼
 
-- 安装 [TranslucentTB](https://apps.microsoft.com/detail/9PF4KZ2VN4W9?hl=en-US&gl=US)：一个轻量的任务栏透明化工具
+- [TranslucentTB](https://apps.microsoft.com/detail/9PF4KZ2VN4W9) : 一个轻量级实用程序，使 Windows 任务栏在 Windows 10 和 Windows 11 上半透明/透明。
 
-- 安装 [PowerToys](https://apps.microsoft.com/detail/XP89DCGQ3K6VLD?hl=en-us&gl=US)：一个包含许多实用工具的集合
+- [PowerToys](https://apps.microsoft.com/detail/XP89DCGQ3K6VLD) : 一组实用程序，供高级用户调整和简化他们的 Windows 体验，以提高生产力。这里列出了一些 [PowerToy Run 第三方插件](https://github.com/microsoft/PowerToys/blob/main/doc/thirdPartyRunPlugins.md)。
 
-- 安装 [Sysinternals](https://apps.microsoft.com/detail/9p7knl5rwt25)：一个包含许多用于监控系统或进程的信息或行为的工具的集合，这是我的 [Process Explorer Column Set](./sysinternals/ProcessExplorerColumnSet.reg)
+- [Sysinternals](https://apps.microsoft.com/detail/9p7knl5rwt25) : 一组 Sysinternals 实用程序，包括 Process Explorer、Process Monitor、Sysmon、Autoruns、ProcDump、所有 PsTools 等等。这是我的 [Process Explorer Column Set](./sysinternals/ProcessExplorerColumnSet.reg)。
 
-- 安装 [Snipaste](https://apps.microsoft.com/detail/9P1WXPKB68KX?hl=en-us&gl=US)：一个非常好用的截图工具
+- [PixPin](https://apps.microsoft.com/detail/xp89f3cgsrzhc7) : 拥有截图贴图相关的一系列功能，包括截图，长截图，截动图，贴图，OCR 等。
 
-- 安装一款 [Nerd 字体](https://www.nerdfonts.com/font-downloads)：Nerd 字体包含了许多常用图标和符号，被许多命令行程序使用
+- [Nerd Font](https://www.nerdfonts.com/font-downloads) : 一系列带有大量图标的字体。我的选择是 [Source Code Pro](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/SourceCodePro).
 
 - 安装一款你喜欢的 [鼠标主题](https://zhutix.com/tag/cursors/)
 
@@ -80,7 +80,7 @@
 
 ### 终端安装
 
-- 安装 [Windows Terminal](https://apps.microsoft.com/detail/9N0DX20HK701?hl=en-us&gl=US)
+- 安装 [Windows Terminal](https://apps.microsoft.com/detail/9N0DX20HK701)
 
 - 打开 Windows Terminal 然后按 `Ctrl`+`Shift`+`,` 打开配置文件，这是我的[**settings.json**](./wt/settings.json) 你可以参考
 
@@ -120,7 +120,7 @@
 
 ### PowerShell 安装
 
-- 安装 [PowerShell](https://apps.microsoft.com/detail/9MZ1SNWT0N5D?hl=en-us&gl=US)
+- 安装 [PowerShell](https://apps.microsoft.com/detail/9MZ1SNWT0N5D)
 
 - 安装 [scoop-proxy-cn](https://github.com/lzwme/scoop-proxy-cn)：一款 Windows 下好用的包管理器的国内镜像
 
@@ -322,7 +322,7 @@
    nvim
    ```
 
-3. 安装 [VSCode](https://apps.microsoft.com/detail/XP9KHM4BK9FZ7Q?hl=en-US&gl=US)
+3. 安装 [VSCode](https://apps.microsoft.com/detail/XP9KHM4BK9FZ7Q)
 
 4. 配置 VSCode
 

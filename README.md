@@ -38,15 +38,15 @@
 
 ### Desktop Installation
 
-- Install [TranslucentTB](https://apps.microsoft.com/detail/9PF4KZ2VN4W9?hl=en-US&gl=US) : A lightweight utility that makes the Windows taskbar transparent.
+- [TranslucentTB](https://apps.microsoft.com/detail/9PF4KZ2VN4W9) : A lightweight utility that makes the Windows taskbar translucent/transparent on Windows 10 and Windows 11.
 
-- Install [PowerToys](https://apps.microsoft.com/detail/XP89DCGQ3K6VLD?hl=en-us&gl=US) : A set of utilities for power users to tune and streamline their Windows experience for greater productivity.
+- [PowerToys](https://apps.microsoft.com/detail/XP89DCGQ3K6VLD) : A set of utilities for power users to tune and streamline their Windows experience for greater productivity. There's some [Third-Party plugins for PowerToy Run](https://github.com/microsoft/PowerToys/blob/main/doc/thirdPartyRunPlugins.md).
 
-- Install [Sysinternals](https://apps.microsoft.com/detail/9p7knl5rwt25) : A set of utilities for monitor the system and process information and behavior, here's my [Process Explorer Column Set](./sysinternals/ProcessExplorerColumnSet.reg)
+- [Sysinternals](https://apps.microsoft.com/detail/9p7knl5rwt25) : A bundle of the Sysinternals utilities including Process Explorer, Process Monitor, Sysmon, Autoruns, ProcDump, all of the PsTools, and many more. Here's my [Process Explorer Column Set](./sysinternals/ProcessExplorerColumnSet.reg)
 
-- Install [Snipaste](https://apps.microsoft.com/detail/9P1WXPKB68KX?hl=en-us&gl=US) : Offers powerful yet easy-to-use snipping, pasting and image annotating functionalities.
+- [PixPin](https://apps.microsoft.com/detail/xp89f3cgsrzhc7) : A series of functions related to screenshot textures, including screenshots, long screenshots, cropped images, textures, OCR, etc
 
-- Install a [Nerd Font](https://www.nerdfonts.com/font-downloads) : A patched font within high number of icons.
+- [Nerd Font](https://www.nerdfonts.com/font-downloads) : A series of fonts that been pathed with high number of icons. My choice is [Source Code Pro](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/SourceCodePro).
 
 - Install a [Cursor Theme](https://zhutix.com/tag/cursors/) you'd like.
 
@@ -80,7 +80,7 @@
 
 ### Terminal Installation
 
-- Install [Windows Terminal](https://apps.microsoft.com/detail/9N0DX20HK701?hl=en-us&gl=US)
+- Install [Windows Terminal](https://apps.microsoft.com/detail/9N0DX20HK701)
 
 - Configure Windows Terminal by pressing `Ctrl`+`Shift`+`,` in terminal window, you could refer to my [**settings.json**](./wt/settings.json).
 
@@ -120,7 +120,7 @@
 
 ### PowerShell Installation
 
-- Install [PowerShell](https://apps.microsoft.com/detail/9MZ1SNWT0N5D?hl=en-us&gl=US)
+- Install [PowerShell](https://apps.microsoft.com/detail/9MZ1SNWT0N5D)
 
 - Install [Scoop](https://scoop.sh/): A package manager to install apps in command line.
 
@@ -305,7 +305,7 @@
    nvim
    ```
 
-3. Install [VSCode](https://apps.microsoft.com/detail/XP9KHM4BK9FZ7Q?hl=en-US&gl=US)
+3. Install [VSCode](https://apps.microsoft.com/detail/XP9KHM4BK9FZ7Q)
 
 4. Configure VSCode
 
