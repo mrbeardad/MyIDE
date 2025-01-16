@@ -86,7 +86,7 @@ function RegisterGit {
 
 # Import before $PROFILE in order to override the alias in it
 Import-Module Microsoft.PowerShell.Management
-Set-Alias gmm Get-Member
+Set-Alias gmb Get-Member
 
 Register-ArgumentCompleter -CommandName git -ScriptBlock {
   param($wordToComplete, $commandAst, $cursorPosition)
