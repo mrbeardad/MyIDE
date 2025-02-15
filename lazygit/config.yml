@@ -4,6 +4,7 @@ gui:
   nerdFontsVersion: "3"
   showBranchCommitHash: true
   filterMode: fuzzy
+  screenMode: half
 git:
   merging:
     args: --no-ff

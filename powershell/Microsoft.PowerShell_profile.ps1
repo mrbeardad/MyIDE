@@ -164,7 +164,7 @@ function tree { lsd -A --tree --group-directories-first -I .git @args }
 function .. { Set-Location -Path .. }
 function ... { Set-Location -Path ..\.. }
 function .... { Set-Location -Path ..\..\.. }
-Set-Alias lg lazygit
+function lg { lazygit log @args }
 Set-Alias ig git-igitt
 
 # Get .gitignore template, e.g.: `gig cpp,windows` write a template to ./.gitignore
