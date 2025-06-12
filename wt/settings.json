@@ -54,7 +54,7 @@
         "guid": "{573f97a4-8cb9-423c-9d41-f16f0586a05a}",
         "name": "PowerShell for VS 2022",
         "icon": "ms-appx:///ProfileIcons/vs-pwsh.png",
-        "commandline": "pwsh.exe -NoExit -Command \"& \"\"\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\Launch-VsDevShell.ps1\"\"\" -Arch amd64\""
+        "commandline": "pwsh.exe -NoExit -Command \"& \"\"\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\Launch-VsDevShell.ps1\"\"\" -Arch amd64 -SkipAutomaticLocation\""
       },
       {
         "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
