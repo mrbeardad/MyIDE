@@ -46,7 +46,7 @@
 
 - [PixPin](https://apps.microsoft.com/detail/xp89f3cgsrzhc7) : 拥有截图贴图相关的一系列功能，包括截图，长截图，截动图，贴图，OCR 等。
 
-- [Nerd Font](https://www.nerdfonts.com/font-downloads) : 一系列带有大量图标的字体。我的选择是 [Source Code Pro](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/SourceCodePro).
+- [Nerd Font](https://www.nerdfonts.com/font-downloads) : 一系列带有大量图标的字体。我的选择是 [Source Code Pro](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/SourceCodePro)。
 
 - 安装一款你喜欢的 [鼠标主题](https://zhutix.com/tag/cursors/)
 
@@ -54,21 +54,26 @@
 
 ### 桌面使用
 
-| 快捷键            | 描述           |
-| ----------------- | -------------- |
-| `Win`+`E`         | 文件管理器     |
-| `Win`+`{num}`     | 启动任务栏软件 |
-| `Win`+`Up`        | 最大化窗口     |
-| `Win`+`Down`      | 最小化窗口     |
-| `Win`+`Left`      | 固定到左半屏   |
-| `Win`+`Right`     | 固定到右半屏   |
-| `Alt`+`Tab`       | 切换窗口       |
-| `Alt`+`F4`        | 关闭窗口       |
-| `Win`+`D`         | 显示桌面       |
-| `Win`+`,`         | 预览桌面       |
-| `Win`+`L`         | 锁屏           |
-| `Win`+`;`         | Emoji          |
-| `Win`+`Shift`+`?` | 快捷键帮助     |
+| 快捷键            | 描述             |
+| ----------------- | ---------------- |
+| `Win`+`E`         | 文件管理器       |
+| `Win`+`{num}`     | 启动任务栏软件   |
+| `Win`+`↑`         | 最大化窗口       |
+| `Win`+`↓`         | 最小化窗口       |
+| `Win`+`←`         | 固定到左半屏     |
+| `Win`+`→`         | 固定到右半屏     |
+| `Alt`+`Tab`       | 切换窗口         |
+| `Alt`+`F4`        | 关闭窗口         |
+| `Win`+`D`         | 显示桌面         |
+| `Win`+`,`         | 预览桌面         |
+| `Win`+`L`         | 锁屏             |
+| `Win`+`Ctrl`+`D`  | 新建虚拟桌面     |
+| `Win`+`Ctrl`+`→`  | 切换右虚拟桌面   |
+| `Win`+`Ctrl`+`←`  | 切换左边虚拟桌面 |
+| `Win`+`;`         | Emoji            |
+| `Win`+`+`         | 放大             |
+| `Win`+`-`         | 缩小             |
+| `Win`+`Shift`+`?` | 快捷键帮助       |
 
 ## 终端
 

@@ -58,16 +58,21 @@
 | ----------------- | --------------------- |
 | `Win`+`E`         | Explorer              |
 | `Win`+`{num}`     | Launch app on taskbar |
-| `Win`+`Up`        | Maximize window       |
-| `Win`+`Down`      | Minimize window       |
-| `Win`+`Left`      | Snap window left      |
-| `Win`+`Right`     | Snap window right     |
+| `Win`+`↑`         | Maximize window       |
+| `Win`+`↓`         | Minimize window       |
+| `Win`+`←`         | Snap window left      |
+| `Win`+`→`         | Snap window right     |
 | `Alt`+`Tab`       | Switch window         |
 | `Alt`+`F4`        | Close window          |
 | `Win`+`D`         | Show/Hide desktop     |
 | `Win`+`,`         | Peek desktop          |
 | `Win`+`L`         | Lock desktop          |
+| `Win`+`Ctrl`+`D`  | New virtual desktop   |
+| `Win`+`Ctrl`+`→`  | Right virtual desktop |
+| `Win`+`Ctrl`+`←`  | Left virtual desktop  |
 | `Win`+`;`         | Emoji                 |
+| `Win`+`+`         | Zoom in               |
+| `Win`+`-`         | Zoom out              |
 | `Win`+`Shift`+`?` | Shortcut help         |
 
 ## Terminal
