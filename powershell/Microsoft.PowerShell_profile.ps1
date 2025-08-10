@@ -68,6 +68,7 @@ Set-PSReadLineKeyHandler -ViMode Insert -Key Tab -ScriptBlock {
   Invoke-FzfTabCompletion
 }
 Set-Alias fs Invoke-FuzzyScoop
+Set-Alias fkill Invoke-FuzzyKillProcess
 
 # =============
 # posh-git
