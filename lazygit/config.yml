@@ -1,10 +1,9 @@
 gui:
-  timeFormat: "06-01-02 15:04"
-  shortTimeFormat: "15:04"
-  nerdFontsVersion: "3"
+  timeFormat: 06-01-02 15:04
+  shortTimeFormat: 15:04
+  nerdFontsVersion: 3
   showBranchCommitHash: true
   filterMode: fuzzy
-  screenMode: half
 git:
   merging:
     args: --no-ff
@@ -14,3 +13,4 @@ git:
     showWholeGraph: true
 update:
   method: never
+

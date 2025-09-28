@@ -385,84 +385,111 @@
     }
   ],
 
+  // Keybindings
+  "keybindings": [
+    {
+      "id": "User.globalSummon.A1BA4FE8",
+      "keys": "win+`"
+    },
+    {
+      "id": "Terminal.DuplicatePaneRight",
+      "keys": "alt+shift+v"
+    },
+    {
+      "id": "Terminal.DuplicatePaneDown",
+      "keys": "alt+shift+s"
+    },
+    {
+      "id": "Terminal.TogglePaneZoom",
+      "keys": "alt+shift+z"
+    },
+    {
+      "id": "User.sendInput.5E6DE1FB",
+      "keys": "ctrl+`"
+    },
+    {
+      "id": "User.sendInput.B502FD5",
+      "keys": "ctrl+i"
+    },
+    {
+      "id": "User.sendInput.92D09E76",
+      "keys": "ctrl+shift+j"
+    },
+    {
+      "id": "User.sendInput.217D92D8",
+      "keys": "ctrl+shift+k"
+    },
+    {
+      "id": "User.sendInput.A930BBDA",
+      "keys": "ctrl+shift+l"
+    },
+    {
+      "id": "User.sendInput.F8A79DCB",
+      "keys": "ctrl+enter"
+    },
+    {
+      "id": "User.sendInput.8882FD6D",
+      "keys": "shift+enter"
+    }
+  ],
+
   // Actions
   "actions": [
     {
-      "keys": "win+`",
       "command": {
         "action": "globalSummon",
         "name": "_quake"
-      }
+      },
+      "id": "User.globalSummon.A1BA4FE8"
     },
     {
-      "keys": "alt+shift+v",
-      "command": {
-        "action": "splitPane",
-        "split": "right",
-        "splitMode": "duplicate"
-      }
-    },
-    {
-      "keys": "alt+shift+s",
-      "command": {
-        "action": "splitPane",
-        "split": "down",
-        "splitMode": "duplicate"
-      }
-    },
-    {
-      "keys": "alt+shift+z",
-      "command": "togglePaneZoom"
-    },
-    {
-      "keys": "ctrl+`",
       "command": {
         "action": "sendInput",
         "input": "\u001b[96;3u"
-      }
+      },
+      "id": "User.sendInput.5E6DE1FB"
     },
     {
-      "keys": "ctrl+i",
       "command": {
         "action": "sendInput",
         "input": "\u001b[73;4u"
-      }
+      },
+      "id": "User.sendInput.B502FD5"
     },
     {
-      "keys": "ctrl+shift+j",
       "command": {
         "action": "sendInput",
         "input": "\u001b[74;5u"
-      }
+      },
+      "id": "User.sendInput.92D09E76"
     },
     {
-      "keys": "ctrl+shift+k",
       "command": {
         "action": "sendInput",
         "input": "\u001b[75;5u"
-      }
+      },
+      "id": "User.sendInput.217D92D8"
     },
     {
-      "keys": "ctrl+shift+l",
       "command": {
         "action": "sendInput",
         "input": "\u001b[76;5u"
-      }
+      },
+      "id": "User.sendInput.A930BBDA"
     },
     {
-      "keys": "ctrl+enter",
       "command": {
         "action": "sendInput",
         "input": "\u001b[13;5u"
-      }
+      },
+      "id": "User.sendInput.F8A79DCB"
     },
     {
-      "keys": "shift+enter",
       "command": {
         "action": "sendInput",
         "input": "\u001b[13;2u"
-      }
+      },
+      "id": "User.sendInput.8882FD6D"
     }
   ]
 }
-

@@ -27,6 +27,7 @@
     - [PowerShell Installation](#powershell-installation)
     - [PowerShell Usage](#powershell-usage)
   - [VSCode-Neovim](#vscode-neovim)
+  - [Miscellaneous](#miscellaneous)
 
 ## Desktop
 
@@ -41,8 +42,6 @@
 - [TranslucentTB](https://apps.microsoft.com/detail/9PF4KZ2VN4W9) : A lightweight utility that makes the Windows taskbar translucent/transparent on Windows 10 and Windows 11.
 
 - [PowerToys](https://apps.microsoft.com/detail/XP89DCGQ3K6VLD) : A set of utilities for power users to tune and streamline their Windows experience for greater productivity. There's some [Third-Party plugins for PowerToy Run](https://github.com/microsoft/PowerToys/blob/main/doc/thirdPartyRunPlugins.md).
-
-- [Sysinternals](https://apps.microsoft.com/detail/9p7knl5rwt25) : A bundle of the Sysinternals utilities including Process Explorer, Process Monitor, Sysmon, Autoruns, ProcDump, all of the PsTools, and many more. Here's my [Process Explorer Column Set](./sysinternals/ProcessExplorerColumnSet.reg)
 
 - [PixPin](https://apps.microsoft.com/detail/xp89f3cgsrzhc7) : A series of functions related to screenshot textures, including screenshots, long screenshots, cropped images, textures, OCR, etc
 
@@ -71,6 +70,7 @@
 | `Win`+`Ctrl`+`→`  | Right virtual desktop |
 | `Win`+`Ctrl`+`←`  | Left virtual desktop  |
 | `Win`+`;`         | Emoji                 |
+| `Win`+`V`         | Clipboard history     |
 | `Win`+`+`         | Zoom in               |
 | `Win`+`-`         | Zoom out              |
 | `Win`+`Shift`+`?` | Shortcut help         |
@@ -139,16 +139,14 @@
   Install-Module PSFzf
 
   # Optional but recommended
-  scoop install fastfetch cht tokei lazygit everything
-  cp .\bat\config ~\AppData\Roaming\bat\config
-  cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
   ~\scoop\apps\7zip\current\install-context.reg
-  ~\scoop\apps\everything\current\install-context.reg
-  # Adding %USERPROFILE%\scoop\apps\git\current\user\bin to PATH is useful
+  [System.Environment]::SetEnvironmentVariable('Path',"${env:GIT_INSTALL_ROOT}\user\bin;$([System.Environment]::GetEnvironmentVariable('Path', 'User'))", 'User')
   ```
 
 - Configure PowerShell by executing `notepad $PROFILE` in PowerShell command line,
-  you could refer to my [**profile.ps1**](./ps/Microsoft.PowerShell_profile.ps1)
+  you could refer to my [**profile.ps1**](./powershell/Microsoft.PowerShell_profile.ps1)
+
+> Tips: I've patched PSFzf thus it could work together with my profile, you can view [the patch here](https://github.com/kelleyma49/PSFzf/compare/master...mrbeardad:PSFzf:dev)
 
 - Copy the theme file [**base16_bear.omp.json**](./powershell/base16_bear.omp.json) into `%USERPROFILE%\Documents\PowerShell`
 
@@ -294,7 +292,7 @@
 1. Install Neovim and C/C++ toolchains
 
    ```ps1
-   scoop install neovim mingw-mstorsjo-llvm-ucrt cmake
+   scoop install neovim mingw cmake
    ```
 
 2. Configure Neovim
@@ -318,3 +316,59 @@
    2. This is my [lastSyncextensions.json](vscode/lastSyncextensions.json), you could copy it to `%APPDATA%\Code\User\sync\extensions\`
 
 5. **For more detail about configuration and usage of vscode and neovim, refer to [mrbeardad/nvim](https://github.com/mrbeardad/nvim)**
+
+## Miscellaneous
+
+> Most of the tools below could be installed by `scoop`
+
+```ps1
+scoop install fastfetch cht tokei lazygit everything-alpha
+cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
+~\scoop\apps\everything-alpha\current\install-context.reg
+```
+
+- [fastfetch](https://github.com/fastfetch-cli/fastfetch): A maintained, feature-rich and performance oriented, neofetch like system information tool.
+
+- [cht](https://github.com/tpanj/cht.exe): The only cheat sheet you need
+
+- [tokei](https://github.com/XAMPPRocky/tokei): Count your code, quickly.
+
+- [lazygit](https://github.com/jesseduffield/lazygit): Simple terminal UI for git commands
+
+- [Everything](https://www.voidtools.com/): Locate files and folders by name instantly.
+
+- [dual-key-remap](https://github.com/ililim/dual-key-remap): Remap any key to any other two keys on Windows 🔥. Remap CapsLock to both Ctrl and Escape! (It's like xcape for windows!)
+
+- [huorong](https://www.huorong.cn/): The easiest way to shutdown Windows Defender
+
+- [Clash Nyanpasu](https://github.com/libnyanpasu/clash-nyanpasu): A Clash (proxy client) GUI based on Tauri.
+
+  > Tips: You may also need [geoip](https://github.com/Loyalsoldier/geoip) and [clash-rules](https://github.com/Loyalsoldier/clash-rules).
+
+- [Sysinternals](https://apps.microsoft.com/detail/9p7knl5rwt25) : Sysinternals Suite is a bundle of the Sysinternals utilities including Process Explorer, Process Monitor, Sysmon, Autoruns, ProcDump, all of the PsTools, and many more.
+
+  > Tips: My [Process Explorer Column Set](./sysinternals/ProcessExplorerColumnSet.reg)。
+
+- [ImHex](https://github.com/WerWolv/ImHex): A Hex Editor for Reverse Engineers, Programmers and people who value their retinas when working at 3 AM.
+
+- [petools](https://github.com/petoolse/petools): Portable executable (PE) manipulation toolkit.
+
+  > Tips: Launch petools and check on the option `PE Editor > Register Shell Extension`, then you can right click exe/dll file and load into PE Editor without launch whole PE Tools.
+
+- [RisohEditor](https://github.com/katahiromz/RisohEditor): Another free Win32 resource editor
+
+- [Dependencies](https://github.com/lucasg/Dependencies): A rewrite of the old legacy software "depends.exe" in C# for Windows devs to troubleshoot dll load dependencies issues.
+
+- [ILSpy](https://github.com/icsharpcode/ILSpy): .NET Decompiler with support for PDB generation, ReadyToRun, Metadata (&more) - cross-platform!
+
+- [IDA](https://hex-rays.com/): IDA is the leading tool for binary analysis, trusted by top cybersecurity teams for reverse engineering and malware defense. Simplify complex binaries and boost your security processes with its advanced analysis features.
+
+- [Cheat Engine](https://github.com/cheat-engine/cheat-engine): A development environment focused on modding
+
+- [WireShark](https://www.wireshark.org/): The world's leading network protocol analyzer. Wireshark lets you dive deep into your network traffic - free and open source.
+
+- [Fiddler Everywhere](https://www.telerik.com/fiddler/fiddler-everywhere): Fiddler Everywhere enables you to capture, analyze, modify, and replay web traffic, including SignalR, WebSockets, MessagePack, SSE, gRPC, Protobuf. It allows you to intercept and inspect HTTP requests, responses, headers, cookies, and payloads with unparalleled visibility, enabling precise diagnosis and prompt resolution of network-related issues.
+  > Tips:
+  >
+  > - You need a tool, such as `EnableLoopback.exe`, to enable capturing the uwp app network. The tool is installed within [Fiddler Classic](https://www.telerik.com/fiddler/fiddler-classic), Clash Nyanpasu aslo conatins it.
+  > - Trust CA Certificate in the Machine Store instead of User Store, or else some connection could fail
