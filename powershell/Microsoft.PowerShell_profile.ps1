@@ -265,6 +265,11 @@ function prompt {
     $Global:Kernel32::SetConsoleMode($Global:Kernel32::GetStdHandle(-11), 0x7) | Out-Null
   }
 
+  # Make .NET's current directory follow PowerShell's current directory, if possible.
+  if ($PWD.Provider.Name -eq 'FileSystem') {
+    [System.IO.Directory]::SetCurrentDirectory($PWD)
+  }
+
   return $out
 }
 
