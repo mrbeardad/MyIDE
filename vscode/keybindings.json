@@ -25,11 +25,6 @@
     "command": "-list.focusUp",
     "when": "listFocus && !inputFocus"
   },
-  {
-    "key": "ctrl+k o",
-    "command": "workbench.action.files.openFile",
-    "when": "true"
-  },
   // Windows
   {
     "key": "tab",
@@ -41,28 +36,14 @@
     "command": "workbench.action.focusPreviousGroup",
     "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
   },
-  // Search
+  // Scroll
   {
-    "key": "ctrl+k r",
-    "command": "workbench.action.openRecent"
+    "key": "alt+f",
+    "command": "scrollRight"
   },
   {
-    "key": "alt+w",
-    "command": "vscode-neovim.send-cmdline",
-    "args": "<A-w>",
-    "when": "neovim.init && neovim.mode == 'cmdline'"
-  },
-  {
-    "key": "alt+c",
-    "command": "vscode-neovim.send-cmdline",
-    "args": "<A-c>",
-    "when": "neovim.init && neovim.mode == 'cmdline'"
-  },
-  {
-    "key": "alt+r",
-    "command": "vscode-neovim.send-cmdline",
-    "args": "<A-r>",
-    "when": "neovim.init && neovim.mode == 'cmdline'"
+    "key": "alt+b",
+    "command": "scrollLeft"
   },
   // Motions
   {
@@ -72,6 +53,16 @@
     "when": "editorTextFocus && neovim.init && (neovim.mode == 'normal' || neovim.mode == 'visual')"
   },
   // Operation
+  {
+    "key": "ctrl+k ctrl+r",
+    "command": "workbench.action.openRecent"
+  },
+  {
+    "key": "ctrl+k ctrl+k",
+    "command": "bookmarks.toggle",
+    "when": "editorTextFocus"
+  },
+  // Any shortcut with prefix ctrl+k should put before this key
   {
     "key": "ctrl+k",
     "command": "vscode-neovim.send",
@@ -100,6 +91,7 @@
     "command": "editor.action.moveLinesUpAction",
     "when": "editorTextFocus && !editorReadonly"
   },
+  // Multi Cursor Edit
   {
     "key": "ctrl+shift+j",
     "command": "vscode-neovim.send",
@@ -114,8 +106,9 @@
   },
   {
     "key": "ctrl+shift+n",
-    "command": "editor.action.moveSelectionToNextFindMatch",
-    "when": "editorTextFocus"
+    "command": "vscode-neovim.send",
+    "args": "<C-S-N>",
+    "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
   },
   {
     "key": "ctrl+shift+l",
@@ -134,6 +127,7 @@
     "command": "editor.action.triggerSuggest",
     "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible && neovim.init && neovim.mode == 'insert'"
   },
+
   // {
   //   "key": "tab",
   //   "command": "-acceptSelectedSuggestion",

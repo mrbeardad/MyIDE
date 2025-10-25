@@ -420,6 +420,10 @@
       "keys": "ctrl+shift+k"
     },
     {
+      "id": "User.sendInput.A931BBDA",
+      "keys": "ctrl+shift+n"
+    },
+    {
       "id": "User.sendInput.A930BBDA",
       "keys": "ctrl+shift+l"
     },
@@ -459,7 +463,7 @@
     {
       "command": {
         "action": "sendInput",
-        "input": "\u001b[74;5u"
+        "input": "\u001b[74;3u"
       },
       "id": "User.sendInput.92D09E76"
     },
@@ -469,6 +473,13 @@
         "input": "\u001b[75;5u"
       },
       "id": "User.sendInput.217D92D8"
+    },
+    {
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[110;6u"
+      },
+      "id": "User.sendInput.A931BBDA"
     },
     {
       "command": {
