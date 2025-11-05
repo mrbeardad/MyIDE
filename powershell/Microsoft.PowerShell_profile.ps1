@@ -234,6 +234,37 @@ $toast = New-Object Windows.UI.Notifications.ToastNotification $xml
 }
 Set-Alias notify Send-Notify
 
+function Get-Hash {
+  [CmdletBinding()]
+  param (
+    [Parameter(Mandatory, ValueFromPipeline)]
+    [string]$Value,
+
+    [Parameter()]
+    [ValidateSet('sha1', 'sha256', 'sha384', 'sha512', 'md5')]
+    [string]$Algorithm = 'sha256',
+
+    [Parameter()]
+    [ValidateSet('hex', 'base64')]
+    [string]$Format = 'hex'
+  )
+
+  $hasher = [System.Security.Cryptography.HashAlgorithm]::Create($Algorithm) 
+  $bytes = $hasher.ComputeHash([System.Text.Encoding]::UTF8.GetBytes($Value))
+
+  switch ($Format) {
+    "hex" { 
+      [System.BitConverter]::ToString($bytes).Replace('-', '').ToLowerInvariant()
+    }
+    "base64" {
+      [System.Convert]::ToBase64String($bytes)
+    }
+    Default {
+      [System.BitConverter]::ToString($bytes).Replace('-', '').ToLowerInvariant()
+    }
+  }
+}
+
 # =============
 # Oh My Posh
 # =============
