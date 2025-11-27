@@ -49,23 +49,34 @@ $env:FZF_ALT_C_COMMAND = "fd --type d --strip-cwd-prefix --hidden --follow --exc
 # Refer to https://github.com/kelleyma49/PSFzf/issues/202#issuecomment-2495321758
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+t -ScriptBlock {
   $Global:CursorTopBeforePSFzf = [Console]::CursorTop
+  LazyInitPsFzf
   Invoke-FzfPsReadlineHandlerProvider
 }
 Set-PSReadLineKeyHandler -ViMode Insert -Key Ctrl+r -ScriptBlock {
   $Global:CursorTopBeforePSFzf = [Console]::CursorTop
+  LazyInitPsFzf
   Invoke-FzfPsReadlineHandlerHistory
 }
 Set-PSReadLineKeyHandler -ViMode Insert -Key Alt-c -ScriptBlock {
   $Global:CursorTopBeforePSFzf = [Console]::CursorTop
+  LazyInitPsFzf
   Invoke-FzfPsReadlineHandlerSetLocation
 }
 Set-PSReadLineKeyHandler -ViMode Insert -Key Alt-a -ScriptBlock {
   $Global:CursorTopBeforePSFzf = [Console]::CursorTop
+  LazyInitPsFzf
   Invoke-FzfPsReadlineHandlerHistoryArgs
 }
 Set-PSReadLineKeyHandler -ViMode Insert -Key Tab -ScriptBlock {
   $Global:CursorTopBeforePSFzf = [Console]::CursorTop
+  LazyInitPsFzf
   Invoke-FzfTabCompletion
+}
+function LazyInitPsFzf {
+  if ($null -eq $Global:InitedPsFzf) {
+    $Global:InitedPsFzf = 1
+    Set-PsFzfOption -TabCompletionPreviewWindow 'right|down|hidden'
+  }
 }
 Set-Alias fs Invoke-FuzzyScoop
 Set-Alias fkill Invoke-FuzzyKillProcess
