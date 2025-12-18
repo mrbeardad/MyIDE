@@ -17,15 +17,18 @@ nnoremap <Esc> :nohl<CR><Esc>
 nnoremap # *NN
 nnoremap g# g*NN
 nnoremap gd :vsc Edit.GoToDefinition<CR>
-nnoremap gt :vsc Edit.GoToTypeDefinition<CR>
+nnoremap gy :vsc Edit.GoToTypeDefinition<CR>
 nnoremap gr :vsc Edit.FindAllReferences<CR>
-nnoremap gi :vsc Edit.GoToImplementation<CR>
 
 " Motion
+nnoremap ; gS:vsc Tools.InvokePeasyMotionTwoCharJump<CR>
+xnoremap ; gS:vsc Tools.InvokePeasyMotionTwoCharJump<CR>
 inoremap <C-A> <C-O>^
 inoremap <C-E> <End>
 nnoremap <C-O> :vsc View.NavigateBackward<CR>
+xnoremap <C-O> :vsc View.NavigateBackward<CR>
 nnoremap <C-I> :vsc View.NavigateForward<CR>
+xnoremap <C-I> :vsc View.NavigateForward<CR>
 nnoremap ]e :vsc View.NextError<CR>
 nnoremap [e :vsc View.PreviousError<CR>
 nnoremap ]t :vsc View.NextTask<CR>
@@ -48,7 +51,6 @@ inoremap <C-W> <C-O>:vsc Edit.WordDeleteToStart<CR>
 inoremap <C-U> <C-O>:vsc Edit.DeleteToBOL<CR>
 inoremap <C-K> <C-O>:vsc Edit.DeleteToEOL<CR>
 inoremap <C-D> <Del>
-inoremap <C-J> <End><CR>
 
 " Yank
 nnoremap Y y$
@@ -58,7 +60,9 @@ xnoremap zp "0p
 nnoremap zp "0p
 nnoremap zP "0P
 nnoremap zgp o<Esc>"0p
+nnoremap gzp o<Esc>"0p
 nnoremap zgP O<Esc>"0p
+nnoremap gzP O<Esc>"0p
 
 " Repeat
 nmap <C-J> <C-A-Down>
