@@ -43,7 +43,7 @@
           "foreground": "white",
           "background": "blue",
           "template": " {{ path .Path .Location }} ",
-          "properties": {
+          "options": {
             "style": "full",
             "home_icon": " ",
             "folder_icon": " ",
@@ -70,7 +70,7 @@
             "{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}",
             "{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}"
           ],
-          "properties": {
+          "options": {
             "fetch_upstream_icon": true,
             "fetch_status": true,
             "branch_icon": "",
@@ -143,7 +143,7 @@
           "leading_diamond": "<transparent,background></>",
           "trailing_diamond": "",
           "template": "   {{ .FormattedMs }}",
-          "properties": {
+          "options": {
             "style": "austin",
             "threshold": 0
           }
@@ -185,7 +185,7 @@
           "leading_diamond": "",
           "trailing_diamond": "",
           "template": "  {{ .CurrentDate | date .Format }}",
-          "properties": {
+          "options": {
             "time_format": "15:04:05"
           }
         }
@@ -203,7 +203,7 @@
             "<darkGray>╰─</>",
             " {{ if ne .Code 0 }}<lightRed>❯</><red>❯</>{{ else }}<lightBlue>❯</><lightCyan>❯</>{{ end }}"
           ],
-          "properties": {
+          "options": {
             "always_enabled": true
           }
         }
