@@ -49,7 +49,6 @@ nnoremap ]<Space> :put =<CR>k
 nnoremap [<Space> :put! =<CR>j
 inoremap <C-W> <C-O>:vsc Edit.WordDeleteToStart<CR>
 inoremap <C-U> <C-O>:vsc Edit.DeleteToBOL<CR>
-inoremap <C-K> <C-O>:vsc Edit.DeleteToEOL<CR>
 inoremap <C-D> <Del>
 
 " Yank

@@ -1,15 +1,5 @@
 /* Visual Studio Settings File */
 {
-  "languages.cpp.intelliSense.references.maxFindReferencesThreads": 14,
-  "languages.cpp.intelliSense.browsingNavigation.wholeCodebaseSemanticIndex.maximumWorkerThreads": 28,
-  "languages.cpp.intelliSense.maximumCachedTranslationUnits": 15,
-  "languages.fSharpInteractive.general.wordWrapVisualGlyphs": false,
-  "languages.hlsl.general.wordWrapVisualGlyphs": false,
-  "languages.memory.general.wordWrapVisualGlyphs": false,
-  "languages.register.general.wordWrapVisualGlyphs": false,
-  "languages.vbScript.general.wordWrapVisualGlyphs": false,
-  "languages.xml.general.wordWrapVisualGlyphs": false,
-  "languages.defaults.general.wordWrapVisualGlyphs": true,
   "environment.documents.showMiscFileProject": true,
   "environment.documents.saveWithSpecificEncoding": true,
   "environment.documents.saveEncoding": "utf-8;65001",
@@ -52,7 +42,9 @@
       "arguments": "/k \"\"%VSAPPIDDIR%\\..\\Tools\\VsDevCmd.bat\""
     }
   ],
-  "projectsAndSolutions.locations.newProjectOrSolution": "C:\\Users\\beardad\\source\\",
+  "environment.documents.checkForConsistentLineEndings": false,
+  "projectsAndSolutions.locations.newProjectOrSolution": "C:\\Users\\A\\source\\",
+  "sourceControl.gitSettings.defaultRepositoryPath": "C:\\Users\\A\\source\\",
   "textEditor.general.audioCues": true,
   "textEditor.general.clickToGoToDefinitionModifierKey": "alt",
   "textEditor.general.display.visibleWhitespace": true,
@@ -64,15 +56,14 @@
     "intellicode"
   ],
   "textEditor.codeCompletions.preferences.showCodeCompletionsWhileInDebugMode": true,
+  "debugging.general.outputToImmediateWindow": true,
+  "languages.defaults.scrollbars.verticalScrollBarMode": "map",
   "languages.cpp.intelliSense.quickInfo.enableQISizeAlignmentAllSymbols": true,
   "languages.cpp.intelliSense.quickInfo.onlineHelpSearchProvider": "https://www.google.com/search?q={0}",
   "languages.cpp.intelliSense.completionList.insertNewlineOnEnter": true,
   "languages.cpp.intelliSense.inlayHints.renderHints": true,
   "languages.cpp.intelliSense.inlayHints.hideAutoKeyword": false,
   "languages.cpp.codeStyle.formatting.general.autoIndentOnTab": true,
-  "languages.cpp.codeStyle.formatting.general.defaultFormattingStyle": "visual_studio",
-  "debugging.general.outputToImmediateWindow": true,
-  "sourceControl.gitSettings.defaultRepositoryPath": "C:\\Users\\beardad\\source\\",
-  "languages.defaults.scrollbars.verticalScrollBarMode": "map",
-  "environment.documents.checkForConsistentLineEndings": false
+  "languages.cpp.codeStyle.formatting.general.defaultFormattingStyle": "visual_studio"
 }
+
