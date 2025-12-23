@@ -367,8 +367,7 @@ cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
 
 - [WireShark](https://www.wireshark.org/): The world's leading network protocol analyzer. Wireshark lets you dive deep into your network traffic - free and open source.
 
-- [Fiddler Everywhere](https://www.telerik.com/fiddler/fiddler-everywhere): Fiddler Everywhere enables you to capture, analyze, modify, and replay web traffic, including SignalR, WebSockets, MessagePack, SSE, gRPC, Protobuf. It allows you to intercept and inspect HTTP requests, responses, headers, cookies, and payloads with unparalleled visibility, enabling precise diagnosis and prompt resolution of network-related issues.
+- [reqable](https://reqable.com/en-US/): Advanced API Debugging Proxy and REST Client. Reqable = Fiddler + Charles + Postman, make your debugging faster and easier.
   > Tips:
   >
   > - You need a tool, such as `EnableLoopback.exe`, to enable capturing the uwp app network. The tool is installed within [Fiddler Classic](https://www.telerik.com/fiddler/fiddler-classic), Clash Nyanpasu aslo conatins it.
-  > - Trust CA Certificate in the Machine Store instead of User Store, or else some connection could fail
