@@ -244,7 +244,7 @@
 | `grlg`      | `reflog`       | Show commits of HEAD history, revision form like `@{1}`                                                  |
 | `gd`        | `diff`         | Show changes **(default between workspace and index)**                                                   |
 | `gdt`       | `difftool`     | Show changes **(default between workspace and index)** by `nvim`                                         |
-| `gmt`       | `mergetool`    | Resolve conflicts by `nvim`, or you can use `gco --ours` or `gco --theirs`                               |
+| `gmt`       | `mergetool`    | Resolve conflicts by `nvim`, or you can use `gco --ours .` or `gco --theirs .`                           |
 | `gm`        | `merge`        | Merge a commit to HEAD, and do not allow fast forward                                                    |
 | `gmc`       | `merge`        | Continue merge                                                                                           |
 | `gms`       | `merge`        | Skip current patch and continue merge                                                                    |
@@ -309,7 +309,7 @@
 1. 安装 Neovim 和 C/C++ 工具链
 
    ```ps1
-   scoop install neovim mingw cmake
+   scoop install neovim mingw
    ```
 
 2. 配置 Neovim
@@ -384,9 +384,8 @@ cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
 
 - [WireShark](https://www.wireshark.org/): 世界领先的网络协议分析器。
 
-- [Fiddler Everywhere](https://www.telerik.com/fiddler/fiddler-everywhere): Fiddler Everywhere 使您能够捕获，分析，修改和重放网络流量，包括 SignalR， WebSockets, MessagePack， SSE, gRPC, Protobuf。它允许您以无与伦比的可见性拦截和检查 HTTP 请求、响应、标头、cookie 和有效负载，从而实现对网络相关问题的精确诊断和及时解决。
+- [reqable](https://reqable.com/en-US/): 高级 API 调试代理和 REST 客户端。Reqable=Fiddler+Charles+Postman，让您的调试更快更容易。
 
   > Tips:
   >
   > - 为了捕获 UWP APP 的流量你需要一个工具来解开 UWP APP 不能访问 Loopback 的限制，即`EnableLoopback.exe`, [Fiddler Classic](https://www.telerik.com/fiddler/fiddler-classic) 和 Clash Nyanpasu 都包含有该工具
-  > - 点击 `Trust CA Certificate in the Machine Store` 而非 `User Store`，不然有些 HTTPS 流量捕获不到

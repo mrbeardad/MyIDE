@@ -227,7 +227,7 @@
 | `grlg`      | `reflog`       | Show commits of HEAD history, revision form like `@{1}`                                                  |
 | `gd`        | `diff`         | Show changes **(default between workspace and index)**                                                   |
 | `gdt`       | `difftool`     | Show changes **(default between workspace and index)** by `nvim`                                         |
-| `gmt`       | `mergetool`    | Resolve conflicts by `nvim`, or you can use `gco --ours` or `gco --theirs`                               |
+| `gmt`       | `mergetool`    | Resolve conflicts by `nvim`, or you can use `gco --ours .` or `gco --theirs .`                           |
 | `gm`        | `merge`        | Merge a commit to HEAD, and do not allow fast forward                                                    |
 | `gmc`       | `merge`        | Continue merge                                                                                           |
 | `gms`       | `merge`        | Skip current patch and continue merge                                                                    |
@@ -292,7 +292,7 @@
 1. Install Neovim and C/C++ toolchains
 
    ```ps1
-   scoop install neovim mingw cmake
+   scoop install neovim mingw
    ```
 
 2. Configure Neovim

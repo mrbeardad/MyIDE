@@ -25,17 +25,13 @@
     "command": "-list.focusUp",
     "when": "listFocus && !inputFocus"
   },
-  // Windows
+
+  // Search
   {
-    "key": "tab",
-    "command": "workbench.action.focusNextGroup",
-    "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
+    "key": "ctrl+k ctrl+r",
+    "command": "workbench.action.openRecent"
   },
-  {
-    "key": "shift+tab",
-    "command": "workbench.action.focusPreviousGroup",
-    "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
-  },
+
   // Scroll
   {
     "key": "alt+f",
@@ -45,40 +41,18 @@
     "key": "alt+b",
     "command": "scrollLeft"
   },
-  // Motions
-  {
-    "key": "enter",
-    "command": "vscode-neovim.send",
-    "args": "<CR>",
-    "when": "editorTextFocus && neovim.init && (neovim.mode == 'normal' || neovim.mode == 'visual')"
-  },
-  // Operation
-  {
-    "key": "ctrl+k ctrl+r",
-    "command": "workbench.action.openRecent"
-  },
-  {
-    "key": "ctrl+k ctrl+k",
-    "command": "bookmarks.toggle",
-    "when": "editorTextFocus"
-  },
-  // Any shortcut with prefix ctrl+k should put before this key
-  {
-    "key": "ctrl+k",
-    "command": "vscode-neovim.send",
-    "args": "<C-K>",
-    "when": "editorTextFocus && neovim.ctrlKeysInsert.k && neovim.init && neovim.mode == 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'"
-  },
+
+  // Operation: Delete
   {
     "key": "alt+d",
     "command": "vscode-neovim.send",
-    "args": "<A-d>",
+    "args": "<M-d>",
     "when": "editorTextFocus && neovim.init"
   },
   {
     "key": "alt+c",
     "command": "vscode-neovim.send",
-    "args": "<A-c>",
+    "args": "<M-c>",
     "when": "editorTextFocus && neovim.init && (neovim.mode == 'normal' || neovim.mode == 'visual')"
   },
   {
@@ -91,17 +65,12 @@
     "command": "editor.action.moveLinesUpAction",
     "when": "editorTextFocus && !editorReadonly"
   },
-  // Multi Cursor Edit
+
+  // Operation: Multiple Cursor Edit
   {
     "key": "ctrl+shift+j",
     "command": "vscode-neovim.send",
     "args": "<C-S-J>",
-    "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
-  },
-  {
-    "key": "ctrl+shift+k",
-    "command": "vscode-neovim.send",
-    "args": "<C-S-K>",
     "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
   },
   {
@@ -116,7 +85,8 @@
     "args": "<C-S-L>",
     "when": "editorTextFocus && neovim.init"
   },
-  // Language
+
+  // LSP
   {
     "key": "ctrl+n",
     "command": "editor.action.triggerSuggest",
@@ -128,9 +98,41 @@
     "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible && neovim.init && neovim.mode == 'insert'"
   },
 
-  // {
-  //   "key": "tab",
-  //   "command": "-acceptSelectedSuggestion",
-  //   "when": "suggestWidgetHasFocusedSuggestion && suggestWidgetVisible && textInputFocus"
-  // }
+  // Copilot
+  {
+    "key": "tab",
+    "command": "-vscode-neovim.send",
+    "when": "neovim.init && neovim.recording || editorTextFocus && neovim.init && neovim.mode != 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'"
+  },
+  {
+    "key": "tab",
+    "command": "vscode-neovim.send",
+    "when": "neovim.init && neovim.recording || editorTextFocus && neovim.init && neovim.mode != 'insert' && editorLangId not in 'neovim.editorLangIdExclusions' && !inlineEditIsVisible",
+    "args": "<Tab>"
+  },
+  {
+    "key": "escape",
+    "command": "-vscode-neovim.escape",
+    "when": "editorTextFocus && neovim.init && !dirtyDiffVisible && !findWidgetVisible && !inReferenceSearchEditor && !markersNavigationVisible && !notebookCellFocused && !notificationCenterVisible && !parameterHintsVisible && !referenceSearchVisible && neovim.mode == 'normal' && editorLangId not in 'neovim.editorLangIdExclusions'"
+  },
+  {
+    "key": "escape",
+    "command": "vscode-neovim.escape",
+    "when": "editorTextFocus && neovim.init && !dirtyDiffVisible && !findWidgetVisible && !inReferenceSearchEditor && !markersNavigationVisible && !notebookCellFocused && !notificationCenterVisible && !parameterHintsVisible && !referenceSearchVisible && neovim.mode == 'normal' && editorLangId not in 'neovim.editorLangIdExclusions' && !inlineEditIsVisible"
+  },
+
+  // Misc
+  {
+    "key": "ctrl+k ctrl+k",
+    "command": "bookmarks.toggle",
+    "when": "editorTextFocus"
+  },
+
+  // Any shortcut with prefix ctrl+k should put before this key
+  {
+    "key": "ctrl+k",
+    "command": "vscode-neovim.send",
+    "args": "<C-K>",
+    "when": "editorTextFocus && neovim.ctrlKeysInsert.k && neovim.init && neovim.mode == 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'"
+  }
 ]

@@ -14,14 +14,14 @@
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.renderControlCharacters": true,
   "editor.renderWhitespace": "all",
-  "editor.rulers": [100],
+  "editor.rulers": [120],
   "editor.smoothScrolling": true,
   "editor.unfoldOnClickAfterEndOfLine": true,
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.cursorSurroundingLines": 5,
   "editor.fontFamily": "SauceCodePro Nerd Font",
-  "editor.formatOnSave": false,
-  "editor.minimap.autohide": true,
+  "editor.formatOnSave": true,
+  "editor.minimap.autohide": "mouseover",
   "editor.quickSuggestions": {
     "comments": "on",
     "strings": "on"
@@ -41,8 +41,6 @@
       }
     ]
   },
-
-  "files.insertFinalNewline": true,
 
   "workbench.list.smoothScrolling": true,
   "workbench.productIconTheme": "fluent-icons",
@@ -75,15 +73,40 @@
   "window.openFilesInNewWindow": "default",
 
   "explorer.confirmDelete": false,
-  "explorer.excludeGitIgnore": true,
+
+  "outline.collapseItems": "alwaysCollapse",
+  "outline.showTypeParameters": false,
+  "outline.showVariables": false,
 
   "search.showLineNumbers": true,
   "search.smartCase": true,
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "**/third_party": true,
+    "**/vendor": true,
+    "**/venv/": true,
+    "**/build": true,
+    "**/dist": true,
+    "**/out": true,
+    "**/output": true,
+    "**/release": true,
+    "**/releases": true,
+    "**/static": true,
+    "**/target": true,
+    "**/CHANGELOG": true,
+    "**/CHANGELOG.*": true,
+    "**/*.min.*": true,
+    "**/*.map": true,
+    "**/*.{asar,3ds,3g2,3gp,7z,a,aac,adp,ai,aif,aiff,alz,ape,apk,ar,arj,asf,au,avi,bak,baml,bh,bin,bk,bmp,btif,bz2,bzip2,cab,caf,cgm,class,cmx,cpio,cr2,csv,cur,dat,dcm,deb,dex,djvu,dll,dmg,dng,doc,docm,docx,dot,dotm,dra,DS_Store,dsk,dts,dtshd,dvb,dwg,dxf,ecelp4800,ecelp7470,ecelp9600,egg,eol,eot,epub,exe,f4v,fbs,fh,fla,flac,fli,flv,fpx,fst,fvt,g3,gif,graffle,gz,gzip,h261,h263,h264,icns,ico,ief,img,ipa,iso,jar,jpeg,jpg,jpgv,jpm,jxr,key,ktx,lha,lib,lvp,lz,lzh,lzma,lzo,m3u,m4a,m4v,mar,mdi,mht,mid,midi,mj2,mka,mkv,mmr,mng,mobi,mov,movie,mp3,mp4,mp4a,mpeg,mpg,mpga,mxu,nef,npx,numbers,o,oga,ogg,ogv,otf,pages,pbm,pcx,pdb,pdf,pea,pgm,pic,png,pnm,pot,potm,potx,ppa,ppam,ppm,pps,ppsm,ppsx,ppt,pptm,pptx,psd,pya,pyc,pyo,pyv,qt,rar,ras,raw,resources,rgb,rip,rlc,rmf,rmvb,rtf,rz,s3m,s7z,scpt,sgi,shar,sil,sketch,slk,smv,so,sub,swf,tar,tbz,tbz2,tga,tgz,thmx,tif,tiff,tlz,ttc,ttf,txz,udf,uvh,uvi,uvm,uvp,uvs,uvu,viv,vob,war,wav,wax,wbmp,wdp,weba,webm,webp,whl,wim,wm,wma,wmv,wmx,woff,woff2,wvx,xbm,xif,xla,xlam,xls,xlsb,xlsm,xlsx,xlt,xltm,xltx,xm,xmind,xpi,xpm,xwd,xz,z,zip,zipx}": true
+  },
 
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.cursorBlinking": true,
-  "terminal.integrated.mouseWheelScrollSensitivity": 0.2,
+  "terminal.integrated.mouseWheelScrollSensitivity": 0.5,
   "terminal.integrated.sendKeybindingsToShell": true,
+  "terminal.integrated.suggest.enabled": false,
 
   "problems.showCurrentInStatus": true,
 
@@ -93,57 +116,14 @@
     "asvetliakov.vscode-neovim": 1
   },
 
-  "vscode-neovim.ctrlKeysForInsertMode": [
-    "a",
-    // "c",
-    "d",
-    "h",
-    "j",
-    "o",
-    "r",
-    "t",
-    "u",
-    "w",
-    // all above are default keys
-    "e",
-    "k",
-    "n"
-  ],
-  "vscode-neovim.ctrlKeysForNormalMode": [
-    "a",
-    "b",
-    // "c",
-    "d",
-    "e",
-    "f",
-    "h",
-    "i",
-    "j",
-    "l",
-    "o",
-    "r",
-    // "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    // "z",
-    "/",
-    "]",
-    "right",
-    "left",
-    "up",
-    "down",
-    "backspace",
-    "delete",
-    "n"
-  ],
+  // prettier-ignore
+  "vscode-neovim.ctrlKeysForInsertMode": ["w", "a", "e", "o", "h", "u", "d", "k", "r", "n"],
+  // prettier-ignore
+  "vscode-neovim.ctrlKeysForNormalMode": ["w", "d", "u", "b", "o", "i", "a", "x", "v", "r", "j", "n"],
 
-  "cmake.pinnedCommands": [
-    "workbench.action.tasks.configureTaskRunner",
-    "workbench.action.tasks.runTask"
-  ],
+  "[cpp]": {
+    "editor.formatOnSave": false
+  },
   "cmake.configureOnOpen": false,
   "cmake.ignoreCMakeListsMissing": true,
   "cmake.options.statusBarVisibility": "icon",
@@ -160,12 +140,6 @@
   "go.lintTool": "golangci-lint",
   "go.toolsManagement.autoUpdate": true,
 
-  "[dart]": {
-    "editor.formatOnType": true
-  },
-  "dart.devToolsBrowser": "default",
-  "dart.debugExternalPackageLibraries": true,
-
   "[python]": {
     "editor.codeActionsOnSave": {
       "source.fixAll": "explicit",
@@ -180,7 +154,6 @@
   "jupyter.widgetScriptSources": ["jsdelivr.com", "unpkg.com"],
 
   "javascript.format.enable": false,
-  "javascript.inlayHints.enumMemberValues.enabled": true,
   "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
   "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
   "javascript.inlayHints.variableTypes.enabled": true,
@@ -191,11 +164,11 @@
   "typescript.inlayHints.variableTypes.enabled": true,
   "eslint.format.enable": false,
 
-  "json.format.enable": false,
   "html.format.enable": false,
   "css.format.enable": false,
   "less.format.enable": false,
   "scss.format.enable": false,
+  "json.format.enable": false,
 
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -203,6 +176,8 @@
   "markdown.copyFiles.destination": {
     "**/*.md": "${documentWorkspaceFolder}/images/${fileName}"
   },
+
+  "protobuf.autoDetection.enabled": false,
 
   "git.autofetch": true,
   "git.confirmSync": false,
@@ -217,22 +192,15 @@
   ],
   "gitlens.launchpad.indicator.enabled": false,
 
-  "todo-tree.general.showActivityBarBadge": true,
-  "todo-tree.tree.flat": true,
-  "todo-tree.tree.groupedByTag": true,
-  "todo-tree.tree.tagsOnly": true,
-  "todo-tree.filtering.ignoreGitSubmodules": true,
   "todo-tree.filtering.useBuiltInExcludes": "file and search excludes",
-  "todo-tree.highlights.useColourScheme": true,
-  "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS):",
   "todo-tree.general.tags": [
     "TODO",
     "PERF",
-    "OPTIM",
-    "FIX",
-    "FIXIT",
+    "OPTIMIZE",
     "FIXME",
+    "FIX",
     "BUG",
+    "REMOVE",
     "NOTE",
     "WARN",
     "WARNING",
@@ -240,55 +208,60 @@
     "HACK"
   ],
   "todo-tree.general.tagGroups": {
-    "PERF": ["PERF", "OPTIM"],
-    "FIX": ["FIX", "FIXIT", "FIXME", "BUG"],
+    "PERF": ["OPTIMIZE"],
+    "FIXME": ["FIX", "BUG"],
     "WARN": ["WARNING", "XXX"]
   },
   "todo-tree.highlights.customHighlight": {
     "TODO": {
+      "icon": "check-circle",
+      "fontStyle": "italic",
       "foreground": "#1a1b26",
       "background": "#0db9d7",
-      "fontStyle": "italic",
-      "icon": "check-circle",
-      "iconColour": "#0db9d7",
-      "gutterIcon": true
+      "iconColour": "#0db9d7"
     },
     "PERF": {
+      "icon": "stopwatch",
+      "fontStyle": "italic",
       "foreground": "#1a1b26",
       "background": "#bb9af7",
-      "fontStyle": "italic",
-      "icon": "stopwatch",
-      "iconColour": "#bb9af7",
-      "gutterIcon": true
+      "iconColour": "#bb9af7"
     },
-    "FIX": {
+    "FIXME": {
+      "icon": "bug",
+      "fontStyle": "italic",
       "foreground": "#ddd",
       "background": "#db4b4b",
+      "iconColour": "#db4b4b"
+    },
+    "REMOVE": {
+      "icon": "trash",
       "fontStyle": "italic",
-      "icon": "bug",
-      "iconColour": "#db4b4b",
-      "gutterIcon": true
+      "foreground": "#ddd",
+      "background": "#db4b4b",
+      "iconColour": "#db4b4b"
     },
     "HACK": {
+      "icon": "flame",
+      "fontStyle": "italic",
       "foreground": "#1a1b26",
       "background": "#e0af68",
-      "fontStyle": "italic",
-      "icon": "flame",
       "iconColour": "#e0af68"
     },
     "WARN": {
+      "icon": "alert",
+      "fontStyle": "italic",
       "foreground": "#1a1b26",
       "background": "#e0af68",
-      "fontStyle": "italic",
-      "icon": "alert",
       "iconColour": "#e0af68"
     },
     "NOTE": {
+      "icon": "note",
+      "fontStyle": "italic",
       "foreground": "#1a1b26",
       "background": "#1abc9c",
-      "fontStyle": "italic",
-      "icon": "note",
       "iconColour": "#1abc9c"
     }
   },
+  "chat.viewSessions.orientation": "stacked"
 }

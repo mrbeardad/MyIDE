@@ -38,49 +38,172 @@
     },
     "list": [
       {
-        "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
         "name": "PowerShell",
+        "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
         "source": "Windows.Terminal.PowershellCore"
       },
       {
-        "guid": "{65763c91-38c0-4789-98e0-fed2a0247aa6}",
         "name": "PowerShell for Administrators",
-        "icon": "ms-appx:///ProfileIcons/pwsh-preview.png",
+        "guid": "{65763c91-38c0-4789-98e0-fed2a0247aa6}",
         "commandline": "pwsh.exe",
+        "icon": "ms-appx:///ProfileIcons/pwsh-preview.png",
         "startingDirectory": "%USERPROFILE%",
         "elevate": true
       },
       {
+        "name": "PowerShell for VS 2026",
         "guid": "{573f97a4-8cb9-423c-9d41-f16f0586a05a}",
-        "name": "PowerShell for VS 2022",
-        "icon": "ms-appx:///ProfileIcons/vs-pwsh.png",
-        "commandline": "pwsh.exe -NoExit -Command \"& \"\"\"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\Launch-VsDevShell.ps1\"\"\" -Arch amd64 -SkipAutomaticLocation\""
+        "commandline": "pwsh.exe -NoExit -Command \"& \"\"\"C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\Tools\\Launch-VsDevShell.ps1\"\"\" -Arch amd64 -SkipAutomaticLocation\"",
+        "icon": "ms-appx:///ProfileIcons/vs-pwsh.png"
       },
       {
-        "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
         "name": "Command Prompt",
+        "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
         "commandline": "%SystemRoot%\\System32\\cmd.exe"
       },
       {
-        "guid": "{5bad30ef-9025-4a38-aae7-6a2699a84c2b}",
+        "name": "Developer Command Prompt for VS 18",
+        "guid": "{d6bce265-26d2-5515-8b8a-9b966c2f6060}",
+        "source": "Windows.Terminal.VisualStudio"
+      },
+      {
         "name": "Git Bash",
-        "icon": "%GIT_INSTALL_ROOT%\\usr\\share\\git\\git-for-windows.ico",
+        "guid": "{5bad30ef-9025-4a38-aae7-6a2699a84c2b}",
         "commandline": "bash.exe -li",
+        "icon": "%GIT_INSTALL_ROOT%\\usr\\share\\git\\git-for-windows.ico",
         "startingDirectory": "%USERPROFILE%"
       },
       {
-        "guid": "{a453ae62-4e3d-5e58-b989-0a998ec441b8}",
         "name": "Cloud Virtual Machine",
+        "guid": "{a453ae62-4e3d-5e58-b989-0a998ec441b8}",
         "commandline": "ssh -t -o ServerAliveInterval=60 ubuntu@43.134.204.157 sh -c 'tmux new-session -s Ubuntu || tmux attach -t Ubuntu'",
         "hidden": true
       },
       {
-        "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
         "name": "Azure Cloud Shell",
-        "source": "Windows.Terminal.Azure"
+        "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}"
       }
     ]
   },
+
+  // Keybindings
+  "keybindings": [
+    {
+      "id": "User.globalSummon.A1BA4FE8",
+      "keys": "win+`"
+    },
+    {
+      "id": "Terminal.DuplicatePaneRight",
+      "keys": "alt+shift+v"
+    },
+    {
+      "id": "Terminal.DuplicatePaneDown",
+      "keys": "alt+shift+s"
+    },
+    {
+      "id": "Terminal.TogglePaneZoom",
+      "keys": "alt+shift+z"
+    },
+    {
+      "id": "User.sendInput.5E6DE1FB",
+      "keys": "ctrl+`"
+    },
+    {
+      "id": "User.sendInput.B502FD5",
+      "keys": "ctrl+i"
+    },
+    {
+      "id": "User.sendInput.92D09E76",
+      "keys": "ctrl+shift+j"
+    },
+    {
+      "id": "User.sendInput.217D92D8",
+      "keys": "ctrl+shift+k"
+    },
+    {
+      "id": "User.sendInput.A931BBDA",
+      "keys": "ctrl+shift+n"
+    },
+    {
+      "id": "User.sendInput.A930BBDA",
+      "keys": "ctrl+shift+l"
+    },
+    {
+      "id": "User.sendInput.F8A79DCB",
+      "keys": "ctrl+enter"
+    },
+    {
+      "id": "User.sendInput.8882FD6D",
+      "keys": "shift+enter"
+    }
+  ],
+
+  // Actions
+  "actions": [
+    {
+      "command": {
+        "action": "globalSummon",
+        "name": "_quake"
+      },
+      "id": "User.globalSummon.A1BA4FE8"
+    },
+    {
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[96;3u"
+      },
+      "id": "User.sendInput.5E6DE1FB"
+    },
+    {
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[73;4u"
+      },
+      "id": "User.sendInput.B502FD5"
+    },
+    {
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[74;3u"
+      },
+      "id": "User.sendInput.92D09E76"
+    },
+    {
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[75;5u"
+      },
+      "id": "User.sendInput.217D92D8"
+    },
+    {
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[110;6u"
+      },
+      "id": "User.sendInput.A931BBDA"
+    },
+    {
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[76;5u"
+      },
+      "id": "User.sendInput.A930BBDA"
+    },
+    {
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[13;5u"
+      },
+      "id": "User.sendInput.F8A79DCB"
+    },
+    {
+      "command": {
+        "action": "sendInput",
+        "input": "\u001b[13;2u"
+      },
+      "id": "User.sendInput.8882FD6D"
+    }
+  ],
 
   // Schemes
   "schemes": [
@@ -382,125 +505,6 @@
       "selectionBackground": "#CBD9E3",
       "white": "#2C363C",
       "yellow": "#944927"
-    }
-  ],
-
-  // Keybindings
-  "keybindings": [
-    {
-      "id": "User.globalSummon.A1BA4FE8",
-      "keys": "win+`"
-    },
-    {
-      "id": "Terminal.DuplicatePaneRight",
-      "keys": "alt+shift+v"
-    },
-    {
-      "id": "Terminal.DuplicatePaneDown",
-      "keys": "alt+shift+s"
-    },
-    {
-      "id": "Terminal.TogglePaneZoom",
-      "keys": "alt+shift+z"
-    },
-    {
-      "id": "User.sendInput.5E6DE1FB",
-      "keys": "ctrl+`"
-    },
-    {
-      "id": "User.sendInput.B502FD5",
-      "keys": "ctrl+i"
-    },
-    {
-      "id": "User.sendInput.92D09E76",
-      "keys": "ctrl+shift+j"
-    },
-    {
-      "id": "User.sendInput.217D92D8",
-      "keys": "ctrl+shift+k"
-    },
-    {
-      "id": "User.sendInput.A931BBDA",
-      "keys": "ctrl+shift+n"
-    },
-    {
-      "id": "User.sendInput.A930BBDA",
-      "keys": "ctrl+shift+l"
-    },
-    {
-      "id": "User.sendInput.F8A79DCB",
-      "keys": "ctrl+enter"
-    },
-    {
-      "id": "User.sendInput.8882FD6D",
-      "keys": "shift+enter"
-    }
-  ],
-
-  // Actions
-  "actions": [
-    {
-      "command": {
-        "action": "globalSummon",
-        "name": "_quake"
-      },
-      "id": "User.globalSummon.A1BA4FE8"
-    },
-    {
-      "command": {
-        "action": "sendInput",
-        "input": "\u001b[96;3u"
-      },
-      "id": "User.sendInput.5E6DE1FB"
-    },
-    {
-      "command": {
-        "action": "sendInput",
-        "input": "\u001b[73;4u"
-      },
-      "id": "User.sendInput.B502FD5"
-    },
-    {
-      "command": {
-        "action": "sendInput",
-        "input": "\u001b[74;3u"
-      },
-      "id": "User.sendInput.92D09E76"
-    },
-    {
-      "command": {
-        "action": "sendInput",
-        "input": "\u001b[75;5u"
-      },
-      "id": "User.sendInput.217D92D8"
-    },
-    {
-      "command": {
-        "action": "sendInput",
-        "input": "\u001b[110;6u"
-      },
-      "id": "User.sendInput.A931BBDA"
-    },
-    {
-      "command": {
-        "action": "sendInput",
-        "input": "\u001b[76;5u"
-      },
-      "id": "User.sendInput.A930BBDA"
-    },
-    {
-      "command": {
-        "action": "sendInput",
-        "input": "\u001b[13;5u"
-      },
-      "id": "User.sendInput.F8A79DCB"
-    },
-    {
-      "command": {
-        "action": "sendInput",
-        "input": "\u001b[13;2u"
-      },
-      "id": "User.sendInput.8882FD6D"
     }
   ]
 }
