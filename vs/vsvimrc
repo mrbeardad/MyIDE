@@ -35,8 +35,8 @@ nnoremap ]t :vsc View.NextTask<CR>
 nnoremap [t :vsc View.PreviousTask<CR>
 nnoremap ]c :vsc Diff.NextDifference<CR>
 nnoremap [c :vsc Diff.PreviousDifference<CR>
-nnoremap ]g :vsc VisualSVN.NextDifference<CR>
-nnoremap [g :vsc VisualSVN.PreviousDifference<CR>
+nnoremap ]h :vsc VisualSVN.NextDifference<CR>
+nnoremap [h :vsc VisualSVN.PreviousDifference<CR>
 
 " Operation
 set expandtab
