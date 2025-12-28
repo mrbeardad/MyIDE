@@ -276,6 +276,23 @@ function Get-Hash {
   }
 }
 
+function Import-VsDevShell {
+  $Choices = Get-ChildItem 'C:\Program Files\Microsoft Visual Studio\*\*\Common7\Tools\Launch-VsDevShell.ps1'
+  if ($null -eq $Choices) {
+    Write-Host "Does not found Launch-VsDevShell.ps1"
+  } elseif ($Choices.GetType().Name -eq 'FileInfo' ) {
+    . $Choices[0].FullName -Arch amd64 -SkipAutomaticLocation
+  } else {
+    Write-Host ""
+    for ($i = 0; $i -lt $Choices.Count; $i++) {
+      Write-Host ("  [{0}] {1}" -f ($i+1), $Choices[$i])
+    }
+
+    [int]$index = Read-Host "`nChoose which version of Visual Studio to load"
+    . $Choices[$index-1].FullName -Arch amd64 -SkipAutomaticLocation
+  }
+}
+
 # =============
 # Oh My Posh
 # =============
