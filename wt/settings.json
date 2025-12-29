@@ -29,9 +29,9 @@
       "useAcrylic": true,
       "padding": "0",
       "scrollbarState": "visible",
-      "unfocusedAppearance": {
-        "opacity": 90
-      },
+      // "unfocusedAppearance": {
+      //   "opacity": 90
+      // },
       "autoMarkPrompts": true,
       "showMarksOnScrollbar": true,
       "experimental.repositionCursorWithMouse": true
@@ -132,59 +132,61 @@
       },
       "id": "User.globalSummon.A1BA4FE8"
     },
+    // input: "\x1b[{UpperCase}:{modifier}u"
+    // modifier: 1=shift 2=alt 4=ctrl but neovim has its own ideas :-)
     {
       "command": {
         "action": "sendInput",
-        "input": "\u001b[96;3u"
+        "input": "\u001b[96;3u" // <M-`>
       },
       "id": "User.sendInput.5E6DE1FB"
     },
     {
       "command": {
         "action": "sendInput",
-        "input": "\u001b[73;4u"
+        "input": "\u001b[73;3u" // <M-I>
       },
       "id": "User.sendInput.B502FD5"
     },
     {
       "command": {
         "action": "sendInput",
-        "input": "\u001b[74;3u"
+        "input": "\u001b[74;3u" // <M-J>
       },
       "id": "User.sendInput.92D09E76"
     },
     {
       "command": {
         "action": "sendInput",
-        "input": "\u001b[75;5u"
+        "input": "\u001b[75;5u" // <C-S-K>
       },
       "id": "User.sendInput.217D92D8"
     },
     {
       "command": {
         "action": "sendInput",
-        "input": "\u001b[110;6u"
+        "input": "\u001b[78;5u" // <C-S-N>
       },
       "id": "User.sendInput.A931BBDA"
     },
     {
       "command": {
         "action": "sendInput",
-        "input": "\u001b[76;5u"
+        "input": "\u001b[76;5u" // <C-S-L>
       },
       "id": "User.sendInput.A930BBDA"
     },
     {
       "command": {
         "action": "sendInput",
-        "input": "\u001b[13;5u"
+        "input": "\u001b[13;5u" // <C-CR>
       },
       "id": "User.sendInput.F8A79DCB"
     },
     {
       "command": {
         "action": "sendInput",
-        "input": "\u001b[13;2u"
+        "input": "\u001b[13;2u" // <S-CR>
       },
       "id": "User.sendInput.8882FD6D"
     }
