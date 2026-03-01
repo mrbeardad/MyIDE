@@ -160,6 +160,11 @@
     editor = nvim
   [diff]
     tool = nvimdiff
+  [pull]
+    rebase = true
+    autoStash = true
+  [merge]
+    ff = false
   ```
 
 - Configure `%USERPROFILE%\.ssh\config`, thus you can push and pull from github via ssh with url `git@github.com:user/repo`. Of course, you need to add your own ssh public key to github first

@@ -5,3 +5,8 @@
   editor = nvim
 [diff]
   tool = nvimdiff
+[pull]
+  rebase = true
+  autoStash = true
+[merge]
+  ff = false

@@ -177,6 +177,12 @@
     editor = nvim
   [diff]
     tool = nvimdiff
+  [pull]
+    rebase = true
+    autoStash = true
+  [merge]
+    ff = false
+
   ```
 
 - 配置 `%USERPROFILE%\.ssh\config`，如此你便可通过形如`git@github.com:user/repo`的 ssh url 来 push 或 pull github 仓库了。当然，你需要先将你自己的 ssh 公钥添加到 github
