@@ -311,7 +311,6 @@
 3. Install [VSCode](https://apps.microsoft.com/detail/XP9KHM4BK9FZ7Q)
 
 4. Configure VSCode
-
    1. This is my [settings.json](vscode/settings.json) and [keybindings.json](vscode/keybindings.json), you could copy them to `%APPDATA%\Code\User` optionally
    2. This is my [lastSyncextensions.json](vscode/lastSyncextensions.json), you could copy it to `%APPDATA%\Code\User\sync\extensions\`
 
@@ -341,7 +340,7 @@ cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
 
 - [huorong](https://www.huorong.cn/): The easiest way to shutdown Windows Defender
 
-- [Clash Nyanpasu](https://github.com/libnyanpasu/clash-nyanpasu): A Clash (proxy client) GUI based on Tauri.
+- [Clash Verge Rev](https://github.com/clash-verge-rev/clash-verge-rev): A Clash (proxy client) GUI based on Tauri.
 
   > Tips: You may also need [geoip](https://github.com/Loyalsoldier/geoip) and [clash-rules](https://github.com/Loyalsoldier/clash-rules).
 

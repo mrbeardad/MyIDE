@@ -328,7 +328,6 @@
 3. 安装 [VSCode](https://apps.microsoft.com/detail/XP9KHM4BK9FZ7Q)
 
 4. 配置 VSCode
-
    1. 这是我的 [settings.json](vscode/settings.json) 和 [keybindings.json](vscode/keybindings.json)，你可以复制到 `%APPDATA%\Code\User`
    2. 这是我的 [lastSyncextensions.json](vscode/lastSyncextensions.json)，你可以复制到 `%APPDATA%\Code\User\sync\extensions\`
 
@@ -358,7 +357,7 @@ cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
 
 - [huorong](https://www.huorong.cn/): 关闭 Windows Defender 最简单的方法
 
-- [Clash Nyanpasu](https://github.com/libnyanpasu/clash-nyanpasu): Clash 客户端（代理软件）
+- [Clash Verge Rev](https://github.com/clash-verge-rev/clash-verge-rev): Clash 客户端（代理软件）
 
   > Tips: 你可能同时需要 [geoip](https://github.com/Loyalsoldier/geoip) 和 [clash-rules](https://github.com/Loyalsoldier/clash-rules).
 
