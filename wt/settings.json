@@ -40,7 +40,9 @@
       {
         "name": "PowerShell",
         "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-        "source": "Windows.Terminal.PowershellCore"
+        "commandline": "pwsh.exe",
+        "icon": "ms-appx:///ProfileIcons/pwsh.png",
+        "startingDirectory": "%USERPROFILE%"
       },
       {
         "name": "PowerShell for Administrators",

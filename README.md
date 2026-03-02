@@ -41,7 +41,7 @@
 
 - [TranslucentTB](https://apps.microsoft.com/detail/9PF4KZ2VN4W9) : A lightweight utility that makes the Windows taskbar translucent/transparent on Windows 10 and Windows 11.
 
-- [PowerToys](https://apps.microsoft.com/detail/XP89DCGQ3K6VLD) : A set of utilities for power users to tune and streamline their Windows experience for greater productivity. There's some [Third-Party plugins for PowerToy Run](https://github.com/microsoft/PowerToys/blob/main/doc/thirdPartyRunPlugins.md).
+- [PowerToys](https://learn.microsoft.com/en-us/windows/powertoys/install) : A set of utilities for power users to tune and streamline their Windows experience for greater productivity. There's some [Third-Party plugins for PowerToy Run](https://github.com/microsoft/PowerToys/blob/main/doc/thirdPartyRunPlugins.md).
 
 - [PixPin](https://apps.microsoft.com/detail/xp89f3cgsrzhc7) : A series of functions related to screenshot textures, including screenshots, long screenshots, cropped images, textures, OCR, etc
 
@@ -125,7 +125,9 @@
 
 ### PowerShell Installation
 
-- Install [PowerShell](https://apps.microsoft.com/detail/9MZ1SNWT0N5D)
+- Install [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows)
+
+> Tips: Do not install PowerShell from MS Store since the packaged Powershell app will case some issues because of app permission
 
 - Install [Scoop](https://scoop.sh/): A package manager to install apps in command line.
 

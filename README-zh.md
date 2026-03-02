@@ -41,7 +41,7 @@
 
 - [TranslucentTB](https://apps.microsoft.com/detail/9PF4KZ2VN4W9) : 一个轻量级实用程序，使 Windows 任务栏在 Windows 10 和 Windows 11 上半透明/透明。
 
-- [PowerToys](https://apps.microsoft.com/detail/XP89DCGQ3K6VLD) : 一组实用程序，供高级用户调整和简化他们的 Windows 体验，以提高生产力。这里列出了一些 [PowerToy Run 第三方插件](https://github.com/microsoft/PowerToys/blob/main/doc/thirdPartyRunPlugins.md)。
+- [PowerToys](https://learn.microsoft.com/en-us/windows/powertoys/install) : 一组实用程序，供高级用户调整和简化他们的 Windows 体验，以提高生产力。这里列出了一些 [PowerToy Run 第三方插件](https://github.com/microsoft/PowerToys/blob/main/doc/thirdPartyRunPlugins.md)。
 
 - [PixPin](https://apps.microsoft.com/detail/xp89f3cgsrzhc7) : 拥有截图贴图相关的一系列功能，包括截图，长截图，截动图，贴图，OCR 等。
 
@@ -125,7 +125,9 @@
 
 ### PowerShell 安装
 
-- 安装 [PowerShell](https://apps.microsoft.com/detail/9MZ1SNWT0N5D)
+- 安装 [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows)
+
+> Tips: 不要从微软商店下载 PowerShell，Packaged PowerShell App 因为权限问题可能会导致一些问题
 
 - 安装 [scoop-proxy-cn](https://github.com/lzwme/scoop-proxy-cn)：一款 Windows 下好用的包管理器的国内镜像
 
