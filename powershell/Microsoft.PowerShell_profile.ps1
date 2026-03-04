@@ -290,6 +290,9 @@ function Import-VsDevShell {
 
     [int]$index = Read-Host "`nChoose which version of Visual Studio to load"
     . $Choices[$index-1].FullName -Arch amd64 -SkipAutomaticLocation
+    if (Get-Item ($env:VSINSTALLDIR + "\VC\Tools\Llvm\x64\bin")) {
+      $env:PATH = $env:PATH +";"+ $env:VSINSTALLDIR + "\VC\Tools\Llvm\x64\bin"
+    }
   }
 }
 
