@@ -97,16 +97,6 @@
     "command": "editor.action.triggerSuggest",
     "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible && neovim.init && neovim.mode == 'insert'"
   },
-  {
-    "key": "ctrl+e",
-    "command": "hideSuggestWidget",
-    "when": "suggestWidgetVisible && textInputFocus"
-  },
-  {
-    "key": "ctrl+e",
-    "command": "editor.action.inlineSuggest.hide",
-    "when": "inlineEditIsVisible || inlineSuggestionVisible"
-  },
 
   // Copilot
   {
@@ -144,5 +134,15 @@
     "command": "vscode-neovim.send",
     "args": "<C-K>",
     "when": "editorTextFocus && neovim.ctrlKeysInsert.k && neovim.init && neovim.mode == 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'"
+  },
+  {
+    "key": "ctrl+e",
+    "command": "hideSuggestWidget",
+    "when": "suggestWidgetVisible && textInputFocus"
+  },
+  {
+    "key": "ctrl+e",
+    "command": "editor.action.inlineSuggest.hide",
+    "when": "inlineEditIsVisible || inlineSuggestionVisible"
   }
 ]
