@@ -153,6 +153,7 @@
     {
       "type": "prompt",
       "alignment": "right",
+      "overflow": "hide",
       "segments": [
         {
           "type": "sysinfo",
@@ -189,8 +190,7 @@
             "time_format": "15:04:05"
           }
         }
-      ],
-      "overflow": "break"
+      ]
     },
     {
       "type": "prompt",
