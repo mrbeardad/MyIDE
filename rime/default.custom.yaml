@@ -1,14 +1,3 @@
-customization:
-  distribution_code_name: Weasel
-  distribution_version: 0.17.4
-  generator: "Rime::SwitcherSettings"
-  modified_time: "Sat Mar 21 12:32:23 2026"
-  rime_version: 1.13.1
 patch:
-  "menu/page_size": 8
-  schema_list:
-    - { schema: double_pinyin_flypy }
-    - { schema: rime_ice }
-    - { schema: melt_eng }
-  "switcher/hotkeys":
+  switcher/hotkeys:
     - F4
