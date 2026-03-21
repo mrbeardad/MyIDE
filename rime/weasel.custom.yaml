@@ -5,6 +5,7 @@ customization:
   modified_time: "Sat Mar 21 10:33:01 2026"
   rime_version: 1.13.1
 patch:
+  show_notifications_time: 500
   "style/color_scheme": win11_light
   "style/color_scheme_dark": win11_dark
   preset_color_schemes/win11_light:
@@ -27,4 +28,3 @@ patch:
     hilited_mark_color: 0xFFC24C
     hilited_candidate_back_color: 0x383838
     shadow_color: 0x20000000
-
