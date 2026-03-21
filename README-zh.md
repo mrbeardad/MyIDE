@@ -37,7 +37,9 @@
 
 ### 桌面安装
 
-- 首先打开设置界面安装中文语言包，并设置微软中文输入法，执行[xhup.reg](./ime/xhup.reg)安装小鹤双拼
+- 输入法
+  - 打开设置界面安装中文语言包，并设置微软中文输入法，执行[xhup.reg](./ime/xhup.reg)安装小鹤双拼
+  - 或者使用基于 rime 的[雾凇拼音](https://github.com/iDvel/rime-ice) + [easy-en](https://github.com/BlindingDark/rime-easy-en), [rime](./rime/) 目标包含我的个人配置
 
 - [TranslucentTB](https://apps.microsoft.com/detail/9PF4KZ2VN4W9) : 一个轻量级实用程序，使 Windows 任务栏在 Windows 10 和 Windows 11 上半透明/透明。
 

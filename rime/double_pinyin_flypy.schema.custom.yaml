@@ -1,0 +1,3 @@
+patch:
+  "switches/@0": { name: ascii_mode, states: [A, "中"] }
+  "switches/@1": { name: ascii_punct, states: ["$", "¥"] }
