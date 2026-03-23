@@ -2,21 +2,24 @@ patch:
   speller/algebra:
     __patch:
       #- 模糊音                                  # 这里启用后，本文件末尾可配置具体条目
-      - wanxiang_algebra:/pro/小鹤双拼 # 可选输入方案名称：自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
-      - wanxiang_algebra:/pro/间接辅助 #辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
+      - wanxiang_algebra:/pro/小鹤双拼             # 可选输入方案名称：自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
+      - wanxiang_algebra:/pro/间接辅助            #辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
       #- 自然码提权                               #本文件末尾，有自然码和小鹤的可以用
-  ##########################以上格式受指令初始化控制，最好保持格式不变，如果发生变更请不要使用指令修改相关数据#####################################
+##########################以上格式受指令初始化控制，最好保持格式不变，如果发生变更请不要使用指令修改相关数据#####################################
   #通过下面的设置可以让你自己的文件引入而与仓库custom_phrase.txt不同，防止更新时被仓库文件覆盖
   #custom_phrase/user_dict: custom_phrasexx    # 这里改成什么就需要手动创建同名的 custom_phrasexx.txt 文件在用户目录，这个文件主要用于置顶，编码为自定义编码的词汇
   #translator/packs/+:
-  #- userxx                                  #导入根目录下名称为userxx.dict.yaml的自定义固定词典，编码要与固定词库一致，编码权重都不要少，形如姓名、专有名词公司名称等等
-  #下面是候选数量，未来7890分别代表1234声，请候选长度不要大于6避免冲突
+    #- userxx                                  #导入根目录下名称为userxx.dict.yaml的自定义固定词典，编码要与固定词库一致，编码权重都不要少，形如姓名、专有名词公司名称等等
+    #下面是候选数量，未来7890分别代表1234声，请候选长度不要大于6避免冲突
   menu/page_size: 6
 
-  super_comment: # 超级注释模块，子项配置 true 开启，false 关闭
-    candidate_length: 2 # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理
-    corrector_type: "〔comment〕" # 随意更换左右括号，比如"〔comment〕" 不加括号为无括号，comment占位不能动
-    chaifen: "〔chaifen〕" # 随意更换左右括号，比如"〔chaifen〕" 不加括号为无括号，chaifen占位不能动
+  switches/@0/reset: 1
+  switches/@1/reset: 1
+
+  super_comment:                  # 超级注释模块，子项配置 true 开启，false 关闭
+    candidate_length: 2           # 候选词辅助码提醒的生效长度，0为关闭  但同时清空其它，应当使用上面开关来处理
+    corrector_type: "〔comment〕"  # 随意更换左右括号，比如"〔comment〕" 不加括号为无括号，comment占位不能动
+    chaifen: "〔chaifen〕"         # 随意更换左右括号，比如"〔chaifen〕" 不加括号为无括号，chaifen占位不能动
     cand_type:
       user_phrase: "⁺"
       sentence: "∞"
@@ -25,55 +28,49 @@ patch:
       user_table: ""
       completion: ""
       abbrev: ""
+      predict: "›"
       fallback: "~"
 
   super_processor:
     enable_backspace_limit: true # 开启/关闭退格限制
-    enable_seg_loop: true # 开启/关闭分词符（'）循环
-    enable_tone_fallback: true # 启用声调回退
-    enable_predict_space: true # 启用联想空格打断，直接上屏空格并清空联想，对齐大厂
-    kp_number_mode: auto # 小键盘模式 (auto / compose)
-    limit_repeated: "8,40" #格式："最大重复声母数,最大候选字数"
-    select_character: "[,]" # 开启以词定字，自动拆解第一位上屏首字，第二位上屏尾字
+    enable_seg_loop: true        # 开启/关闭分词符（'）循环
+    enable_tone_fallback: true   # 启用声调回退
+    enable_predict_space: false   # 启用联想空格打断，直接上屏空格并清空联想，对齐大厂，如果用原生librime-predict这个还有用留着
+    kp_number_mode: auto         # 小键盘模式 (auto / compose)
+    limit_repeated: "8,40"       #格式："最大重复声母数,最大候选字数"
+    select_character: "[,]"      # 开启以词定字，自动拆解第一位上屏首字，第二位上屏尾字
     # 下面这些写法都支持：
     # select_character: "[,]"                      # [ 上屏首字，] 上屏尾字（推荐）
     # select_character: "bracketleft, bracketright"  # [ 上屏首字，] 上屏尾字（英文全拼）
 
-  # 下面这个快解除注释后就能用预测，下载地址：https://cnb.cool/amzxyz/rime-wanxiang/-/releases/download/model/wanxiang-lts-zh-hans-predict.db
-  #'engine/processors/@before 0': predictor
-  #'engine/translators/@before 0': predict_translator
-  #switches/+:
-  #  - name: prediction
-  #    states: [ 预测关, 预测开 ]
-  #predictor:
-  #  db: wanxiang-lts-zh-hans-predict.db
-  #  max_candidates: 10
-  #  max_iterations: 1
-  switches/@3:
-    name: emoji
-    states: [表情开, 表情关]
-  switches/@8:
-    options: [tone_display, full_pinyin, raw_input]
-    states: [有声调, 无声调, 原编码]
-    reset: 0
+  user_predict:
+    db_name: lua/predict         # 数据库名称（默认 predict，将生成 predict.userdb 文件夹）
+    max_candidates: 10           # 屏幕最多显示的联想词数量
+    max_predictions: 5           # 连续触发预测的最高次数限制
+    expiry_days: 90              # 绝对寿命（天）：不命中则物理销毁
+    activation_days: 7           # 激活期限（天）：冷冻期内输入第2次转正
+    max_memory_branches: 15      # 分支上限：单前缀最多保留15个后续预测
+    decay_rate: 0.85             # 衰减率：单日时间权重打 85 折
+    enable_predict_space: false   # true: 联想时按空格上屏空格; false: 默认行为（根据输入法设定选词等）一般手机开电脑关
+    context_timeout: 5000         # 上文超时时间毫秒
 
   super_replacer:
     db_name: lua/replacer
     delimiter: "|"
     comment_format: "〔%s〕"
-    chain: true #true表示流水线作业，上一个option产出交给下一个处理，典型的s2t>t2hk=s2hk，false就是并行，直接用text转换
+    chain: true   #true表示流水线作业，上一个option产出交给下一个处理，典型的s2t>t2hk=s2hk，false就是并行，直接用text转换
     rules:
       # 场景1：输入 '哈哈' -> 变成 '1.哈哈 2.😄'
-      - option: emoji # 开关名称与上面开关名称保持一致
-        mode: append # 新增候选append 替换原候选replace 替换注释comment 简码模式abbrev匹配输入编码置顶词组
-        comment_mode: none # 注释模式: "append"(原候选注释继承), "text"(原候选文本放在注释), "none"(空，默认)
-        tags: [abc] # 生效的tag
-        prefix: "_em_" # 前缀用于区分同一个数据库的不同用途数据
+      - option: emoji           # 开关名称与上面开关名称保持一致
+        mode: append            # 新增候选append 替换原候选replace 替换注释comment 简码模式abbrev匹配输入编码置顶词组
+        comment_mode: none      # 注释模式: "append"(原候选注释继承), "text"(原候选文本放在注释), "none"(空，默认)
+        tags: [abc]             # 生效的tag
+        prefix: "_em_"          # 前缀用于区分同一个数据库的不同用途数据
         files:
           - lua/data/emoji.txt
       # 场景2：输入 'hello' -> 显示 'hello 〔你好 | 哈喽〕'
       - option: chinese_english
-        mode: append # <--- 添加注释模式
+        mode: append        # <--- 添加注释模式
         comment_mode: none
         tags: [abc]
         prefix: "_en_"
@@ -82,43 +79,43 @@ patch:
           - lua/data/chinese_english.txt
       # 场景3：用于常驻的直接替换 option: true
       - option: true
-        mode: append # <--- 新增候选模式
+        mode: append         # <--- 新增候选模式
         comment_mode: none
         tags: [abc]
         prefix: "_ot_"
         files:
           - lua/data/others.txt
       # 场景4：用于简繁转换的直接替换
-      - option: [s2t, s2hk, s2tw] #后面依赖这条流水线有一个开关为true这条流水线就能工作
-        mode: replace # <--- 替换原候选模式
+      - option: [ s2t, s2hk, s2tw ]   #后面依赖这条流水线有一个开关为true这条流水线就能工作
+        mode: replace         # <--- 替换原候选模式
         comment_mode: append
-        sentence: true # <--- 句子级别替换
+        sentence: true        # <--- 句子级别替换
         tags: [abc]
         prefix: "_s2t_"
         files:
           - lua/data/STCharacters.txt
           - lua/data/STPhrases.txt
       - option: s2hk
-        mode: replace # <--- 替换原候选模式
+        mode: replace         # <--- 替换原候选模式
         comment_mode: append
-        sentence: true # <--- 句子级别替换
+        sentence: true        # <--- 句子级别替换
         tags: [abc]
         prefix: "_s2hk_"
         files:
           - lua/data/HKVariants.txt
       - option: s2tw
-        mode: replace # <--- 替换原候选模式
+        mode: replace         # <--- 替换原候选模式
         comment_mode: append
-        sentence: true # <--- 句子级别替换
+        sentence: true        # <--- 句子级别替换
         tags: [abc]
         prefix: "_s2tw_"
         files:
           - lua/data/TWVariants.txt
-      - option: abbrev # 对应上面开关名称
+      - option: abbrev      # 对应上面开关名称
         mode: abbrev
         tags: [abc]
         prefix: "_abbr_"
-        abbrev_rule: "1,6"
+        abbrev_rule: "1,6"  
         # 前置数量1，前置位置6,数量说的是你维护得数据库编码后面分割了几个词前几个要前置显示,位置说的是你要前置到第二候选还是第几
         # 然后空码或只有英文等自定义词组的时候直接全部兜底显示,这个新的设计简化的应用层面,我们只需要维护一个数据库即可.
         files:
@@ -142,7 +139,7 @@ patch:
   # 这个设计真正的兼容了简繁转换与字符集过滤的矛盾，还能满足用户多种自定义需求，你可以在开关增加类别，并在charset下面新增option类去选择按照字区去过滤，等多种组合方式
   charset:
     - option: charset_filter
-      base: a #可以填入多个类别如aj
+      base: a  #可以填入多个类别如aj
       addlist:
         - "诶濛硷氽尛躝〇冇吔咗囧屌鲶芶咲畑垅𰻝𰻞"
       blacklist: []
@@ -160,8 +157,11 @@ patch:
       blacklist: []
 
   super_tips:
-    db_name: "lua/tips" # 可选字段，不写的话默认使用 "lua/tips"，相对路径
-    tips_key: "comma" # key英文单词不清楚去default找
+    db_name: "lua/tips"  # 可选字段，不写的话默认使用 "lua/tips"，相对路径
+    tips_key: "comma"    # key英文单词不清楚去default找
+    files:                       # 自定义数据文件列表（可选，不配置则使用默认文件）
+      - lua/data/tips_show.txt   # 仍可保留默认文件
+      #- lua/data/my_tips.txt     # 用户自定义文件
     disabled_types:
       - "禁用类型A"
       - "禁用类型B"
@@ -273,90 +273,90 @@ patch:
   #trigger只能设置为单符号，因为按下一次锁定第一候选，按下映射开始包裹符号pro用户不能设置为/
   #两个字符可以不用|默认前后分割，需要明确区分前后的使用|分割，可以有一侧为空，不可以使用多个||
   paired_symbols:
-    trigger: "\\" #(注意反斜杠这是转义写法\\使用时\单反斜杠即可)
+    trigger: "\\"  #(注意反斜杠这是转义写法\\使用时\单反斜杠即可)
     symkey:
       # ===== 基本括号与引号 =====
-      a: "[]" # 方括号
-      b: "【】" # 黑方头括号
-      c: "❲❳" # 双大括号 / 装饰括号
-      d: "〔〕" # 方头括号
-      e: "⟮⟯" # 小圆括号 / 装饰括号
-      f: "⟦⟧" # 双方括号 / 数学集群括号
-      g: "「」" # 直角引号
+      a: "[]"        # 方括号
+      b: "【】"       # 黑方头括号
+      c: "❲❳"        # 双大括号 / 装饰括号
+      d: "〔〕"       # 方头括号
+      e: "⟮⟯"        # 小圆括号 / 装饰括号
+      f: "⟦⟧"        # 双方括号 / 数学集群括号
+      g: "「」"       # 直角引号
       # h: 预留用于 Markdown 一级标题
-      i: "『』" # 双直角引号
-      j: "<>" # 尖括号
-      k: "《》" # 书名号（双）
-      l: "〈〉" # 书名号（单）
-      m: "‹›" # 法文单书名号
-      n: "«»" # 法文双书名号
-      o: "⦅⦆" # 白圆括号
-      p: "⦇⦈" # 白方括号
-      q: "()" # 圆括号
-      r: "〖〗" # 花括号扩展 / 装饰括号
-      s: "［］" # 全角方括号
-      t: "⟨⟩" # 数学角括号
-      u: "〈〉" # 数学尖括号
-      v: "❰❱" # 装饰角括号
-      w: "（）" # 全角圆括号
-      x: "｛｝" # 全角花括号
-      y: "⟪⟫" # 双角括号
-      z: "{}" # 花括号
+      i: "『』"       # 双直角引号
+      j: "<>"        # 尖括号
+      k: "《》"       # 书名号（双）
+      l: "〈〉"       # 书名号（单）
+      m: "‹›"        # 法文单书名号
+      n: "«»"        # 法文双书名号
+      o: "⦅⦆"        # 白圆括号
+      p: "⦇⦈"        # 白方括号
+      q: "()"        # 圆括号
+      r: "〖〗"        # 花括号扩展 / 装饰括号
+      s: "［］"       # 全角方括号
+      t: "⟨⟩"        # 数学角括号
+      u: "〈〉"        # 数学尖括号
+      v: "❰❱"        # 装饰角括号
+      w: "（）"       # 全角圆括号
+      x: "｛｝"       # 全角花括号
+      y: "⟪⟫"       # 双角括号
+      z: "{}"        # 花括号
 
       # ===== 扩展括号族 / 引号 =====
-      dy: "''" # 英文单引号
-      sy: '""' # 英文双引号
-      zs: "“”" # 中文弯双引号
-      zd: "‘’" # 中文弯单引号
-      fy: "``" # 反引号
+      dy: "''"        # 英文单引号
+      sy: "\"\""      # 英文双引号
+      zs: "“”"        # 中文弯双引号
+      zd: "‘’"        # 中文弯单引号
+      fy: "``"        # 反引号
 
       # ===== 双字母括号族 =====
-      aa: "〚〛" # 双中括号
-      bb: "〘〙" # 双中括号（小）
-      cc: "〚〛" # 双中括号（重复，可用于 Lua 匹配）
-      dd: "❨❩" # 小圆括号装饰
-      ee: "❪❫" # 小圆括号装饰
-      ff: "❬❭" # 小尖括号装饰
-      gg: "⦉⦊" # 双弯方括号
-      ii: "⦍⦎" # 双弯方括号
-      jj: "⦏⦐" # 双弯方括号
-      kk: "⦑⦒" # 双弯方括号
-      ll: "❮❯" # 小尖括号装饰
-      mm: "⌈⌉" # 上取整 / 数学符号
-      nn: "⌊⌋" # 下取整 / 数学符号
-      oo: "⦗⦘" # 双方括号装饰（补齐）
-      pp: "⦙⦚" # 双方括号装饰（补齐）
-      qq: "⟬⟭" # 小双角括号
-      rr: "❴❵" # 花括号装饰
-      ss: "⌜⌝" # 数学上角符号
-      tt: "⌞⌟" # 数学下角符号
-      uu: "⸢⸣" # 装饰方括号
-      vv: "⸤⸥" # 装饰方括号
-      ww: "﹁﹂" # 中文书名号 / 注释引号
-      xx: "﹃﹄" # 中文书名号 / 注释引号
-      yy: "⌠⌡" # 数学 / 程序符号
-      zz: "⟅⟆" # 数学 / 装饰括号
+      aa: "〚〛"      # 双中括号
+      bb: "〘〙"      # 双中括号（小）
+      cc: "〚〛"      # 双中括号（重复，可用于 Lua 匹配）
+      dd: "❨❩"      # 小圆括号装饰
+      ee: "❪❫"      # 小圆括号装饰
+      ff: "❬❭"      # 小尖括号装饰
+      gg: "⦉⦊"      # 双弯方括号
+      ii: "⦍⦎"      # 双弯方括号
+      jj: "⦏⦐"      # 双弯方括号
+      kk: "⦑⦒"      # 双弯方括号
+      ll: "❮❯"      # 小尖括号装饰
+      mm: "⌈⌉"      # 上取整 / 数学符号
+      nn: "⌊⌋"      # 下取整 / 数学符号
+      oo: "⦗⦘"      # 双方括号装饰（补齐）
+      pp: "⦙⦚"      # 双方括号装饰（补齐）
+      qq: "⟬⟭"      # 小双角括号
+      rr: "❴❵"      # 花括号装饰
+      ss: "⌜⌝"      # 数学上角符号
+      tt: "⌞⌟"      # 数学下角符号
+      uu: "⸢⸣"      # 装饰方括号
+      vv: "⸤⸥"      # 装饰方括号
+      ww: "﹁﹂"      # 中文书名号 / 注释引号
+      xx: "﹃﹄"      # 中文书名号 / 注释引号
+      yy: "⌠⌡"      # 数学 / 程序符号
+      zz: "⟅⟆"      # 数学 / 装饰括号
 
       # ===== Markdown / 标记 =====
-      md: "**|**" # Markdown 粗体
-      jc: "**|**" # 加粗
-      it: "__|__" # 斜体
-      st: "~~|~~" # 删除线
-      eq: "==|==" # 高亮
-      ln: "`|`" # 行内代码
-      cb: "```|```" # 代码块
-      qt: "> |" # 引用
-      ul: "- |" # 无序列表项
-      ol: "1. |" # 有序列表项
-      lk: "[|](url)" # 链接
-      im: "![|](img)" # 图片
-      h: "# |" # 一级标题
-      hh: "## |" # 二级标题
-      hhh: "### |" # 三级标题
-      hhhh: "#### |" # 四级标题
-      sp: "\\|" # 反斜杠转义
-      br: "|  " # 换行
-      cm: "<!--|-->" # 注释
+      md: "**|**"       # Markdown 粗体
+      jc: "**|**"       # 加粗
+      it: "__|__"       # 斜体
+      st: "~~|~~"       # 删除线
+      eq: "==|=="       # 高亮
+      ln: "`|`"         # 行内代码
+      cb: "```|```"     # 代码块
+      qt: "> |"         # 引用
+      ul: "- |"         # 无序列表项
+      ol: "1. |"        # 有序列表项
+      lk: "[|](url)"    # 链接
+      im: "![|](img)"   # 图片
+      h: "# |"          # 一级标题
+      hh: "## |"        # 二级标题
+      hhh: "### |"      # 三级标题
+      hhhh: "#### |"    # 四级标题
+      sp: "\\|"         # 反斜杠转义
+      br: "|  "         # 换行
+      cm: "<!--|-->"    # 注释
 
       # ===== 运算与标记符 =====
       pl: "++"
@@ -379,12 +379,12 @@ patch:
   #  icon: "icons/zhong.ico"
   #  ascii_icon: "icons/ying.ico"
 
-  super_sequence: # Lua 配置：手动排序的快捷键 super_sequence.lua，不要用方向键，各种冲突，一定要避免冲突
+  super_sequence:  # Lua 配置：手动排序的快捷键 super_sequence.lua，不要用方向键，各种冲突，一定要避免冲突
     db_name: "lua/sequence"
-    up: "Control+j" # 上移
-    down: "Control+k" # 下移
+    up: "Control+j"    # 上移
+    down: "Control+k"  # 下移
     reset: "Control+l" # 重置
-    pin: "Control+p" # 置顶
+    pin: "Control+p"   # 置顶
 
   #开启自动无词频造词（默认已经开了）
   #add_user_dict/enable_auto_phrase: true
@@ -402,7 +402,7 @@ patch:
     - derive/^(.*?)(\d?);(jb|wq|aq|av|dn|xh|bv|jz|hm|sn|cd|iw|xl|ak|zy|fy|uz|yx|wb|wr|yw|dz|qz|ms|at|xf|gi|gn|or|ux|ww|nw|fs|qk|rl|cq|sw|jv|cy|sq|dd|fp|ae|ix|td|ep|ar|wm|pd|et|yz|eh|ct|os|hx|zq|ew|fm|ab|kc|tf|fx|we|sz|wx|bq|ic|ez|bs|ej|oh|ps|pw|fr|pq|au|wc|wp|dt|qf|zc|vx|im|br|mw|un|qb|fi|zm|vn|oz|kt|rq|ay|fn|yc|um|eq|eu|cz|yq|tq|oi|ek|az|fv|zx|ut|vz|ry|ac|ws|af|qv|ea|qj|al|ol|on|sx|ap|df|eg|rz|ey|em|ag|hi|iz|ki|xz|xj|ad|ft|pt|op|vt|oj|kn|pr|hq|eb|ev|cx|zd|am|ov|oq|ym|ef|ot|mr|rd|sy|oc|rc|oe|fq|cn|ok|rn|bp|yv|uc|wk|oy|bt|je|ow|xg|jj|rw|pp|ja|wt|lf|xe|wy|kx|sm|qe|fw|gc|xa|cw|zn|tn|cc|jo|md|sd|ql|kq|it|bd|sc|wv|fc|dw|ob|vm|ed|jl|xo|fl|gq|gt|of|pv|wd|qa|xk|yd|fe|og|iq|oa|uq|om|xv|mv|as|ox|km|zt|od|ht|el|hn|st|wn|mt|wi|tz|aj|yg|bw|jf|jg|kz|es|xb|ax|rt|gx|bb|qo|yf|ex|rx|tt|us|qg|pe|zw|mp|qh|rm|hc|np|jh|cm|yl|eo|ra|vc|aw|tw|fk|gm|ec|be|vq|fd|jk|in)$/$1$3/
     - derive/^(.*?)(\d?);.*?,(jb|wq|aq|av|dn|xh|bv|jz|hm|sn|cd|iw|xl|ak|zy|fy|uz|yx|wb|wr|yw|dz|qz|ms|at|xf|gi|gn|or|ux|ww|nw|fs|qk|rl|cq|sw|jv|cy|sq|dd|fp|ae|ix|td|ep|ar|wm|pd|et|yz|eh|ct|os|hx|zq|ew|fm|ab|kc|tf|fx|we|sz|wx|bq|ic|ez|bs|ej|oh|ps|pw|fr|pq|au|wc|wp|dt|qf|zc|vx|im|br|mw|un|qb|fi|zm|vn|oz|kt|rq|ay|fn|yc|um|eq|eu|cz|yq|tq|oi|ek|az|fv|zx|ut|vz|ry|ac|ws|af|qv|ea|qj|al|ol|on|sx|ap|df|eg|rz|ey|em|ag|hi|iz|ki|xz|xj|ad|ft|pt|op|vt|oj|kn|pr|hq|eb|ev|cx|zd|am|ov|oq|ym|ef|ot|mr|rd|sy|oc|rc|oe|fq|cn|ok|rn|bp|yv|uc|wk|oy|bt|je|ow|xg|jj|rw|pp|ja|wt|lf|xe|wy|kx|sm|qe|fw|gc|xa|cw|zn|tn|cc|jo|md|sd|ql|kq|it|bd|sc|wv|fc|dw|ob|vm|ed|jl|xo|fl|gq|gt|of|pv|wd|qa|xk|yd|fe|og|iq|oa|uq|om|xv|mv|as|ox|km|zt|od|ht|el|hn|st|wn|mt|wi|tz|aj|yg|bw|jf|jg|kz|es|xb|ax|rt|gx|bb|qo|yf|ex|rx|tt|us|qg|pe|zw|mp|qh|rm|hc|np|jh|cm|yl|eo|ra|vc|aw|tw|fk|gm|ec|be|vq|fd|jk|in)$/$1$3/
 
-模糊音:
+模糊音: 
   __append:
     # n - l
     - derive/^l/n
@@ -434,3 +434,4 @@ patch:
     # s - sh
     - derive/^s([^h]*)/sh$1
     - derive/^sh/s
+
