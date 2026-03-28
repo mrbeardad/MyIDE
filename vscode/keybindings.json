@@ -1,148 +1,135 @@
 [
-  // Explorer
   {
-    "key": "l",
-    "command": "list.toggleExpand",
-    "when": "listFocus && !inputFocus"
+    "key": "ctrl+shift+a",
+    "command": "editor.action.selectAll",
+    "when": "editorTextFocus"
   },
   {
-    "key": "c",
-    "command": "copyFilePath",
-    "when": "filesExplorerFocus && !inputFocus"
+    "key": "ctrl+a",
+    "command": "cursorHome",
+    "when": "editorTextFocus && !editorHasSelection"
   },
   {
-    "key": "o",
-    "command": "revealFileInOS",
-    "when": "filesExplorerFocus && !inputFocus"
+    "key": "ctrl+a",
+    "command": "cursorHomeSelect",
+    "when": "editorTextFocus && editorHasSelection"
   },
   {
-    "key": "tab",
-    "command": "workbench.action.focusActiveEditorGroup",
-    "when": "!editorTextFocus && !inputFocus"
+    "key": "ctrl+e",
+    "command": "cursorEnd",
+    "when": "editorTextFocus && !editorHasSelection"
   },
   {
-    "key": "ctrl+p",
-    "command": "-list.focusUp",
-    "when": "listFocus && !inputFocus"
-  },
-
-  // Search
-  {
-    "key": "ctrl+k ctrl+r",
-    "command": "workbench.action.openRecent"
-  },
-
-  // Scroll
-  {
-    "key": "alt+f",
-    "command": "scrollRight"
+    "key": "ctrl+e",
+    "command": "cursorEndSelect",
+    "when": "editorTextFocus && editorHasSelection"
   },
   {
-    "key": "alt+b",
-    "command": "scrollLeft"
-  },
-
-  // Operation: Delete
-  {
-    "key": "alt+d",
-    "command": "vscode-neovim.send",
-    "args": "<M-d>",
-    "when": "editorTextFocus && neovim.init"
+    "key": "ctrl+j",
+    "command": "editor.action.joinLines",
+    "when": "editorTextFocus"
   },
   {
-    "key": "alt+c",
-    "command": "vscode-neovim.send",
-    "args": "<M-c>",
-    "when": "editorTextFocus && neovim.init && (neovim.mode == 'normal' || neovim.mode == 'visual')"
+    "key": "f3",
+    "command": "editor.action.nextSelectionMatchFindAction",
+    "when": "editorFocus"
   },
   {
-    "key": "alt+j",
-    "command": "editor.action.moveLinesDownAction",
-    "when": "editorTextFocus && !editorReadonly"
+    "key": "ctrl+f3",
+    "command": "-editor.action.nextSelectionMatchFindAction",
+    "when": "editorFocus"
   },
   {
-    "key": "alt+k",
-    "command": "editor.action.moveLinesUpAction",
-    "when": "editorTextFocus && !editorReadonly"
-  },
-
-  // Operation: Multiple Cursor Edit
-  {
-    "key": "ctrl+shift+j",
-    "command": "vscode-neovim.send",
-    "args": "<C-S-J>",
-    "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
+    "key": "shift+f3",
+    "command": "editor.action.previousSelectionMatchFindAction",
+    "when": "editorFocus"
   },
   {
-    "key": "ctrl+shift+n",
-    "command": "vscode-neovim.send",
-    "args": "<C-S-N>",
-    "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
+    "key": "ctrl+shift+f3",
+    "command": "-editor.action.previousSelectionMatchFindAction",
+    "when": "editorFocus"
   },
-  {
-    "key": "ctrl+shift+l",
-    "command": "vscode-neovim.send",
-    "args": "<C-S-L>",
-    "when": "editorTextFocus && neovim.init"
-  },
-
-  // LSP
-  {
-    "key": "ctrl+n",
-    "command": "editor.action.triggerSuggest",
-    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible && !editorHasSelection && neovim.init && neovim.mode == 'insert'"
-  },
-  {
-    "key": "ctrl+p",
-    "command": "editor.action.triggerSuggest",
-    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible && neovim.init && neovim.mode == 'insert'"
-  },
-
-  // Copilot
-  {
-    "key": "tab",
-    "command": "-vscode-neovim.send",
-    "when": "neovim.init && neovim.recording || editorTextFocus && neovim.init && neovim.mode != 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'"
-  },
-  {
-    "key": "tab",
-    "command": "vscode-neovim.send",
-    "when": "neovim.init && neovim.recording || editorTextFocus && neovim.init && neovim.mode != 'insert' && editorLangId not in 'neovim.editorLangIdExclusions' && !inlineEditIsVisible",
-    "args": "<Tab>"
-  },
-  {
-    "key": "escape",
-    "command": "-vscode-neovim.escape",
-    "when": "editorTextFocus && neovim.init && !dirtyDiffVisible && !findWidgetVisible && !inReferenceSearchEditor && !markersNavigationVisible && !notebookCellFocused && !notificationCenterVisible && !parameterHintsVisible && !referenceSearchVisible && neovim.mode == 'normal' && editorLangId not in 'neovim.editorLangIdExclusions'"
-  },
-  {
-    "key": "escape",
-    "command": "vscode-neovim.escape",
-    "when": "editorTextFocus && neovim.init && !dirtyDiffVisible && !findWidgetVisible && !inReferenceSearchEditor && !markersNavigationVisible && !notebookCellFocused && !notificationCenterVisible && !parameterHintsVisible && !referenceSearchVisible && neovim.mode == 'normal' && editorLangId not in 'neovim.editorLangIdExclusions' && !inlineEditIsVisible"
-  },
-
-  // Misc
   {
     "key": "ctrl+k ctrl+k",
     "command": "bookmarks.toggle",
     "when": "editorTextFocus"
   },
-
-  // Any shortcut with prefix ctrl+k should put before this key
   {
-    "key": "ctrl+k",
-    "command": "vscode-neovim.send",
-    "args": "<C-K>",
-    "when": "editorTextFocus && neovim.ctrlKeysInsert.k && neovim.init && neovim.mode == 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'"
+    "key": "ctrl+alt+k",
+    "command": "-bookmarks.toggle",
+    "when": "editorTextFocus"
   },
   {
-    "key": "ctrl+e",
-    "command": "hideSuggestWidget",
-    "when": "suggestWidgetVisible && textInputFocus"
-  },
-  {
-    "key": "ctrl+e",
-    "command": "editor.action.inlineSuggest.hide",
-    "when": "inlineEditIsVisible || inlineSuggestionVisible"
+    "key": "ctrl+shift+b",
+    "command": "chatgpt.sidebarView.focus"
   }
+
+  // --------------
+  // Workbench
+  // --------------
+  // ctrl+q
+  // ctrl+shift+e
+  // ctrl+shift+f
+  // ctrl+shift+g
+  // ctrl+shift+d
+  // ctrl+shift+m
+  // ctrl+shift+u
+  // ctrl+shift+y
+  // ctrl+`
+  // --------------
+  // Editor
+  // --------------
+  // ctrl+nums
+  // ctrl+tab
+  // ctrl+n
+  // ctrl+w
+  // ctrl+shit+t
+  // ctrl+s
+  // ctrl+alt+arrow
+  // alt+arrow
+  // --------------
+  // Search
+  // --------------
+  // ctrl+f
+  // f3
+  // shift+f3
+  // ctrl+shift+f
+  // ctrl+shift+o
+  // ctrl+t
+  // ctrl+p
+  // ctrl+r
+  // --------------
+  // Motion
+  // --------------
+  // arrow      (shift+arrow)
+  // ctrl+left  (ctrl+shift+left)
+  // ctrl+right (ctrl+shift+right)
+  // ctrl+a     (ctrl+a)
+  // ctrl+e     (ctrl+e)
+  //            (ctrl+shift+up)
+  //            (ctrl+shift+down)
+  //            (ctrl+l)
+  //            (ctrl+shift+a)
+  // --------------
+  // Action
+  // --------------
+  // ctrl+[
+  // ctrl+]
+  // ctrl+enter
+  // ctrl+shift+enter
+  // ctrl+j
+  // --------------
+  // Repeat
+  // --------------
+  // ctrl+c
+  // ctrl+x
+  // ctrl+v
+  // alt+shift+up
+  // alt+shift+down
+  // ctrl+z
+  // ctrl+shift+z
+  // ctrl+alt+up
+  // ctrl+alt+down
+  // ctrl+d
+  // ctrl+shift+l
 ]

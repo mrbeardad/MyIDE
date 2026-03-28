@@ -1,35 +1,18 @@
 {
-  "settingsSync.ignoredSettings": [
-    "workbench.colorTheme",
-    "editor.minimap.scale"
-  ],
+  "settingsSync.ignoredSettings": ["workbench.colorTheme", "editor.minimap.scale"],
   "settingsSync.ignoredExtensions": ["johnstoncode.svn-scm", "vue.volar"],
 
+  "editor.autoIndentOnPaste": true,
   "editor.bracketPairColorization.enabled": true,
+  "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.guides.bracketPairs": "active",
   "editor.hover.delay": 100,
-  "editor.hover.hidingDelay": 0,
-  "editor.lineNumbers": "relative",
+  "editor.hover.hidingDelay": 100,
   "editor.linkedEditing": true,
-  "editor.multiCursorModifier": "ctrlCmd",
   "editor.renderControlCharacters": true,
   "editor.renderWhitespace": "all",
-  "editor.rulers": [120],
+  "editor.rulers": [100],
   "editor.smoothScrolling": true,
-  "editor.unfoldOnClickAfterEndOfLine": true,
-  "editor.cursorSmoothCaretAnimation": "on",
-  "editor.cursorSurroundingLines": 5,
-  "editor.fontFamily": "SauceCodePro Nerd Font",
-  "editor.formatOnSave": true,
-  "editor.minimap.autohide": "mouseover",
-  "editor.quickSuggestions": {
-    "comments": "on",
-    "strings": "on"
-  },
-  "editor.acceptSuggestionOnEnter": "off",
-  "editor.suggest.preview": true,
-  "editor.suggest.snippetsPreventQuickSuggestions": false,
-  "editor.suggestSelection": "recentlyUsed",
   "editor.tabCompletion": "on",
   "editor.tokenColorCustomizations": {
     "textMateRules": [
@@ -41,6 +24,20 @@
       }
     ]
   },
+  "editor.unfoldOnClickAfterEndOfLine": true,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.cursorSurroundingLines": 5,
+  "editor.fontFamily": "SauceCodePro Nerd Font",
+  "editor.formatOnSave": true,
+  "editor.minimap.autohide": "mouseover",
+  "editor.acceptSuggestionOnEnter": "off",
+  "editor.quickSuggestions": {
+    "comments": "on",
+    "strings": "on"
+  },
+  "editor.suggest.preview": true,
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  "editor.suggestSelection": "recentlyUsed",
 
   "workbench.list.smoothScrolling": true,
   "workbench.productIconTheme": "fluent-icons",
@@ -59,34 +56,31 @@
       "editorWidget.background": "#e0eff1bb"
     }
   },
+  "workbench.iconTheme": "material-icon-theme",
   "workbench.preferredDarkColorTheme": "Noctis Sereno",
   "workbench.preferredHighContrastColorTheme": "Noctis Sereno",
   "workbench.preferredHighContrastLightColorTheme": "Noctis Hibernus",
   "workbench.preferredLightColorTheme": "Noctis Hibernus",
-  "workbench.iconTheme": "material-icon-theme",
   "workbench.tree.expandMode": "doubleClick",
   "workbench.view.alwaysShowHeaderActions": true,
-  "workbench.editor.pinnedTabSizing": "compact",
+  "workbench.editor.defaultBinaryEditor": "hexEditor.hexedit",
+  "workbench.editor.pinnedTabsOnSeparateRow": true,
   "workbench.editor.revealIfOpen": true,
+  "workbench.settings.alwaysShowAdvancedSettings": true,
 
   "window.autoDetectColorScheme": true,
-  "window.openFilesInNewWindow": "default",
 
   "explorer.confirmDelete": false,
-
   "outline.collapseItems": "alwaysCollapse",
-  "outline.showTypeParameters": false,
-  "outline.showVariables": false,
 
-  "search.showLineNumbers": true,
-  "search.smartCase": true,
   "search.exclude": {
+    "**/.git": true,
     "**/node_modules": true,
     "**/bower_components": true,
     "**/*.code-search": true,
     "**/third_party": true,
     "**/vendor": true,
-    "**/venv/": true,
+    "**/venv": true,
     "**/build": true,
     "**/dist": true,
     "**/out": true,
@@ -94,6 +88,7 @@
     "**/release": true,
     "**/releases": true,
     "**/static": true,
+    "**/.cache": true,
     "**/target": true,
     "**/CHANGELOG": true,
     "**/CHANGELOG.*": true,
@@ -101,6 +96,10 @@
     "**/*.map": true,
     "**/*.{asar,3ds,3g2,3gp,7z,a,aac,adp,ai,aif,aiff,alz,ape,apk,ar,arj,asf,au,avi,bak,baml,bh,bin,bk,bmp,btif,bz2,bzip2,cab,caf,cgm,class,cmx,cpio,cr2,csv,cur,dat,dcm,deb,dex,djvu,dll,dmg,dng,doc,docm,docx,dot,dotm,dra,DS_Store,dsk,dts,dtshd,dvb,dwg,dxf,ecelp4800,ecelp7470,ecelp9600,egg,eol,eot,epub,exe,f4v,fbs,fh,fla,flac,fli,flv,fpx,fst,fvt,g3,gif,graffle,gz,gzip,h261,h263,h264,icns,ico,ief,img,ipa,iso,jar,jpeg,jpg,jpgv,jpm,jxr,key,ktx,lha,lib,lvp,lz,lzh,lzma,lzo,m3u,m4a,m4v,mar,mdi,mht,mid,midi,mj2,mka,mkv,mmr,mng,mobi,mov,movie,mp3,mp4,mp4a,mpeg,mpg,mpga,mxu,nef,npx,numbers,o,oga,ogg,ogv,otf,pages,pbm,pcx,pdb,pdf,pea,pgm,pic,png,pnm,pot,potm,potx,ppa,ppam,ppm,pps,ppsm,ppsx,ppt,pptm,pptx,psd,pya,pyc,pyo,pyv,qt,rar,ras,raw,resources,rgb,rip,rlc,rmf,rmvb,rtf,rz,s3m,s7z,scpt,sgi,shar,sil,sketch,slk,smv,so,sub,swf,tar,tbz,tbz2,tga,tgz,thmx,tif,tiff,tlz,ttc,ttf,txz,udf,uvh,uvi,uvm,uvp,uvs,uvu,viv,vob,war,wav,wax,wbmp,wdp,weba,webm,webp,whl,wim,wm,wma,wmv,wmx,woff,woff2,wvx,xbm,xif,xla,xlam,xls,xlsb,xlsm,xlsx,xlt,xltm,xltx,xm,xmind,xpi,xpm,xwd,xz,z,zip,zipx}": true
   },
+  "search.showLineNumbers": true,
+  "search.smartCase": true,
+
+  "debug.toolBarLocation": "commandCenter",
 
   "terminal.integrated.copyOnSelection": true,
   "terminal.integrated.cursorBlinking": true,
@@ -112,85 +111,71 @@
 
   "security.workspace.trust.enabled": false,
 
-  "extensions.experimental.affinity": {
-    "asvetliakov.vscode-neovim": 1
-  },
-
-  // prettier-ignore
-  "vscode-neovim.ctrlKeysForInsertMode": ["w", "a", "e", "o", "h", "u", "d", "k", "r", "n"],
-  // prettier-ignore
-  "vscode-neovim.ctrlKeysForNormalMode": ["w", "d", "u", "b", "o", "i", "a", "x", "v", "r", "j", "n"],
-
-  "[cpp]": {
-    "editor.formatOnSave": false
-  },
-  "cmake.configureOnOpen": false,
-  "cmake.ignoreCMakeListsMissing": true,
-  "cmake.options.statusBarVisibility": "icon",
-  "doxdocgen.generic.useGitUserEmail": true,
-  "doxdocgen.generic.useGitUserName": true,
-
-  "go.inlayHints.assignVariableTypes": true,
-  "go.inlayHints.compositeLiteralFields": true,
-  "go.inlayHints.compositeLiteralTypes": true,
-  "go.inlayHints.constantValues": true,
-  "go.inlayHints.functionTypeParameters": true,
-  "go.inlayHints.parameterNames": true,
-  "go.inlayHints.rangeVariableTypes": true,
-  "go.lintTool": "golangci-lint",
-  "go.toolsManagement.autoUpdate": true,
-
-  "[python]": {
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "explicit",
-      "source.organizeImports": "explicit"
-    }
-  },
-  "python.analysis.autoImportCompletions": true,
-  "python.analysis.completeFunctionParens": true,
-  "python.analysis.inlayHints.functionReturnTypes": true,
-  "python.analysis.inlayHints.pytestParameters": true,
-  "python.analysis.inlayHints.variableTypes": true,
-  "jupyter.widgetScriptSources": ["jsdelivr.com", "unpkg.com"],
-
-  "javascript.format.enable": false,
-  "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
-  "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
-  "javascript.inlayHints.variableTypes.enabled": true,
-  "typescript.format.enable": false,
-  "typescript.inlayHints.enumMemberValues.enabled": true,
-  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
-  "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
-  "typescript.inlayHints.variableTypes.enabled": true,
-  "eslint.format.enable": false,
-
-  "html.format.enable": false,
-  "css.format.enable": false,
-  "less.format.enable": false,
-  "scss.format.enable": false,
-  "json.format.enable": false,
-
-  "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "markdown.copyFiles.destination": {
-    "**/*.md": "${documentWorkspaceFolder}/images/${fileName}"
-  },
-
-  "protobuf.autoDetection.enabled": false,
-
   "git.autofetch": true,
   "git.confirmSync": false,
   "gitlens.graph.layout": "editor",
   "gitlens.blame.ignoreWhitespace": true,
   "gitlens.statusBar.enabled": false,
-  "gitlens.graph.minimap.additionalTypes": [
-    "stashes",
-    "tags",
-    "localBranches",
-    "remoteBranches"
-  ],
+  "gitlens.graph.minimap.additionalTypes": ["stashes", "tags", "localBranches", "remoteBranches"],
   "gitlens.launchpad.indicator.enabled": false,
+  "gitlens.views.commits.showStashes": true,
+  "gitlens.views.scm.grouped.hiddenViews": {
+    "commits": false,
+    "worktrees": true,
+    "branches": false,
+    "remotes": false,
+    "stashes": true,
+    "tags": false,
+    "contributors": false,
+    "repositories": true,
+    "fileHistory": false,
+    "launchpad": false,
+    "searchAndCompare": false
+  },
+  "gitlens.views.showRelativeDateMarkers": false,
+  "gitlens.views.commits.avatars": false,
+  "gitlens.views.commits.showBranchComparison": false,
+  "gitlens.views.commits.pullRequests.showForBranches": false,
+  "gitlens.views.commits.pullRequests.enabled": false,
+  "gitlens.views.scm.grouped.views": {
+    "commits": true,
+    "branches": true,
+    "remotes": true,
+    "stashes": true,
+    "tags": true,
+    "worktrees": true,
+    "contributors": true,
+    "fileHistory": false,
+    "repositories": true,
+    "searchAndCompare": true,
+    "launchpad": false
+  },
+
+  "C_Cpp.intelliSenseEngine": "disabled",
+  "cmake.copyCompileCommands": "${workspaceFolder}/compile_commands.json",
+  "cmake.configureOnOpen": false,
+  "cmake.ignoreCMakeListsMissing": true,
+  "cmake.options.statusBarVisibility": "icon",
+  "cmake.format.allowOptionalArgumentIndentation": true,
+
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.completeFunctionParens": true,
+  "python.analysis.inlayHints.functionReturnTypes": true,
+  "python.analysis.inlayHints.pytestParameters": true,
+  "python.analysis.inlayHints.variableTypes": true,
+  "python.useEnvironmentsExtension": false,
+
+  "[markdown]": {
+    "outline.collapseItems": "alwaysExpand"
+  },
+  "markdown.copyFiles.destination": {
+    "**/*.md": "${documentWorkspaceFolder}/images/${fileName}"
+  },
+
+  "evenBetterToml.formatter.columnWidth": 100,
+
+  "protobuf.formatOnSave": true,
+  "protobuf.autoDetection.enabled": false,
 
   "todo-tree.filtering.useBuiltInExcludes": "file and search excludes",
   "todo-tree.general.tags": [
@@ -263,5 +248,68 @@
       "iconColour": "#1abc9c"
     }
   },
-  "chat.viewSessions.orientation": "stacked"
+
+  "chat.viewSessions.orientation": "stacked",
+  "oaicopilot.models": [
+    {
+      "id": "__provider__modelscope",
+      "owned_by": "modelscope",
+      "baseUrl": "https://api-inference.modelscope.cn/v1/",
+      "apiMode": "openai"
+    },
+    {
+      "id": "Qwen/Qwen3.5-397B-A17B",
+      "owned_by": "modelscope",
+      "baseUrl": "https://api-inference.modelscope.cn/v1/",
+      "context_length": 256000,
+      "apiMode": "openai"
+    },
+    {
+      "id": "moonshotai/Kimi-K2.5",
+      "owned_by": "modelscope",
+      "baseUrl": "https://api-inference.modelscope.cn/v1/",
+      "context_length": 256000,
+      "apiMode": "openai"
+    },
+    {
+      "id": "ZhipuAI/GLM-5",
+      "owned_by": "modelscope",
+      "baseUrl": "https://api-inference.modelscope.cn/v1/",
+      "context_length": 256000,
+      "apiMode": "openai"
+    },
+    {
+      "id": "MiniMax/MiniMax-M2.5",
+      "owned_by": "modelscope",
+      "baseUrl": "https://api-inference.modelscope.cn/v1/",
+      "context_length": 204800,
+      "apiMode": "openai"
+    },
+    {
+      "id": "__provider__aliyun",
+      "owned_by": "aliyun",
+      "baseUrl": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "apiMode": "openai"
+    },
+    {
+      "id": "qwen3-coder-480b-a35b-instruct",
+      "owned_by": "aliyun",
+      "baseUrl": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "context_length": 258000,
+      "apiMode": "openai"
+    },
+    {
+      "id": "__provider__z.ai",
+      "owned_by": "z.ai",
+      "baseUrl": "https://open.bigmodel.cn/api/paas/v4/",
+      "apiMode": "openai"
+    },
+    {
+      "id": "glm-4.7",
+      "owned_by": "z.ai",
+      "baseUrl": "https://open.bigmodel.cn/api/paas/v4/",
+      "context_length": 200000,
+      "apiMode": "openai"
+    }
+  ]
 }
