@@ -113,50 +113,49 @@
 
   "git.autofetch": true,
   "git.confirmSync": false,
-  "gitlens.graph.layout": "editor",
-  "gitlens.blame.ignoreWhitespace": true,
   "gitlens.statusBar.enabled": false,
+  "gitlens.graph.layout": "editor",
   "gitlens.graph.minimap.additionalTypes": ["stashes", "tags", "localBranches", "remoteBranches"],
   "gitlens.launchpad.indicator.enabled": false,
-  "gitlens.views.commits.showStashes": true,
-  "gitlens.views.scm.grouped.hiddenViews": {
-    "commits": false,
-    "worktrees": true,
-    "branches": false,
-    "remotes": false,
-    "stashes": true,
-    "tags": false,
-    "contributors": false,
-    "repositories": true,
-    "fileHistory": false,
-    "launchpad": false,
-    "searchAndCompare": false
-  },
-  "gitlens.views.showRelativeDateMarkers": false,
-  "gitlens.views.commits.avatars": false,
-  "gitlens.views.commits.showBranchComparison": false,
-  "gitlens.views.commits.pullRequests.showForBranches": false,
-  "gitlens.views.commits.pullRequests.enabled": false,
   "gitlens.views.scm.grouped.views": {
-    "commits": true,
     "branches": true,
     "remotes": true,
     "stashes": true,
     "tags": true,
-    "worktrees": true,
-    "contributors": true,
-    "fileHistory": false,
+    "fileHistory": true,
     "repositories": true,
     "searchAndCompare": true,
-    "launchpad": false
+    "launchpad": true
   },
+  "gitlens.views.scm.grouped.hiddenViews": {
+    "commits": true,
+    "worktrees": true,
+    "branches": false,
+    "remotes": false,
+    "stashes": false,
+    "tags": false,
+    "contributors": true,
+    "repositories": true,
+    "fileHistory": false,
+    "launchpad": true,
+    "searchAndCompare": true
+  },
+  "gitlens.views.branches.showStashes": true,
+  "gitlens.ai.enabled": false,
+  "gitlens.blame.ignoreWhitespace": true,
 
   "C_Cpp.intelliSenseEngine": "disabled",
+  "clangd.path": "c:\\Users\\beardad\\AppData\\Roaming\\Code\\User\\globalStorage\\llvm-vs-code-extensions.vscode-clangd\\install\\22.1.0\\clangd_22.1.0\\bin\\clangd.exe",
   "cmake.copyCompileCommands": "${workspaceFolder}/compile_commands.json",
-  "cmake.configureOnOpen": false,
-  "cmake.ignoreCMakeListsMissing": true,
   "cmake.options.statusBarVisibility": "icon",
   "cmake.format.allowOptionalArgumentIndentation": true,
+
+  "js/ts.inlayHints.enumMemberValues.enabled": true,
+  "js/ts.inlayHints.functionLikeReturnTypes.enabled": true,
+  "js/ts.inlayHints.parameterNames.enabled": "literals",
+  "js/ts.inlayHints.parameterTypes.enabled": true,
+  "js/ts.inlayHints.propertyDeclarationTypes.enabled": true,
+  "js/ts.inlayHints.variableTypes.enabled": true,
 
   "python.analysis.autoImportCompletions": true,
   "python.analysis.completeFunctionParens": true,
@@ -178,74 +177,39 @@
   "protobuf.autoDetection.enabled": false,
 
   "todo-tree.filtering.useBuiltInExcludes": "file and search excludes",
-  "todo-tree.general.tags": [
-    "TODO",
-    "PERF",
-    "OPTIMIZE",
-    "FIXME",
-    "FIX",
-    "BUG",
-    "REMOVE",
-    "NOTE",
-    "WARN",
-    "WARNING",
-    "XXX",
-    "HACK"
-  ],
-  "todo-tree.general.tagGroups": {
-    "PERF": ["OPTIMIZE"],
-    "FIXME": ["FIX", "BUG"],
-    "WARN": ["WARNING", "XXX"]
-  },
+  "todo-tree.tree.hideTreeWhenEmpty": true,
+  "todo-tree.tree.flat": true,
+  "todo-tree.tree.tagsOnly": true,
   "todo-tree.highlights.customHighlight": {
-    "TODO": {
-      "icon": "check-circle",
-      "fontStyle": "italic",
-      "foreground": "#1a1b26",
-      "background": "#0db9d7",
-      "iconColour": "#0db9d7"
+    "BUG": {
+      "icon": "bug",
+      "foreground": "#ddd",
+      "background": "#db4b4b",
+      "iconColour": "#db4b4b"
     },
-    "PERF": {
-      "icon": "stopwatch",
-      "fontStyle": "italic",
+    "FIXME": {
+      "icon": "tools",
       "foreground": "#1a1b26",
       "background": "#bb9af7",
       "iconColour": "#bb9af7"
     },
-    "FIXME": {
-      "icon": "bug",
-      "fontStyle": "italic",
-      "foreground": "#ddd",
-      "background": "#db4b4b",
-      "iconColour": "#db4b4b"
-    },
-    "REMOVE": {
-      "icon": "trash",
-      "fontStyle": "italic",
-      "foreground": "#ddd",
-      "background": "#db4b4b",
-      "iconColour": "#db4b4b"
+    "TODO": {
+      "icon": "check-circle",
+      "foreground": "#1a1b26",
+      "background": "#0db9d7",
+      "iconColour": "#0db9d7"
     },
     "HACK": {
       "icon": "flame",
-      "fontStyle": "italic",
       "foreground": "#1a1b26",
       "background": "#e0af68",
       "iconColour": "#e0af68"
     },
-    "WARN": {
+    "XXX": {
       "icon": "alert",
-      "fontStyle": "italic",
       "foreground": "#1a1b26",
       "background": "#e0af68",
       "iconColour": "#e0af68"
-    },
-    "NOTE": {
-      "icon": "note",
-      "fontStyle": "italic",
-      "foreground": "#1a1b26",
-      "background": "#1abc9c",
-      "iconColour": "#1abc9c"
     }
   },
 

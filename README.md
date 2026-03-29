@@ -376,4 +376,4 @@ cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
 - [reqable](https://reqable.com/en-US/): Advanced API Debugging Proxy and REST Client. Reqable = Fiddler + Charles + Postman, make your debugging faster and easier.
   > Tips:
   >
-  > - You need a tool, such as `EnableLoopback.exe`, to enable capturing the uwp app network. The tool is installed within [Fiddler Classic](https://www.telerik.com/fiddler/fiddler-classic), Clash Nyanpasu aslo conatins it.
+  > - You need a tool, such as `EnableLoopback.exe`, to enable capturing the uwp app network. Clash Verge Rev aslo conatins it.

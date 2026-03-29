@@ -397,4 +397,4 @@ cp .\lazygit\config.yml ~\AppData\Local\lazygit\config.yml
 
   > Tips:
   >
-  > - 为了捕获 UWP APP 的流量你需要一个工具来解开 UWP APP 不能访问 Loopback 的限制，即`EnableLoopback.exe`, [Fiddler Classic](https://www.telerik.com/fiddler/fiddler-classic) 和 Clash Nyanpasu 都包含有该工具
+  > - 为了捕获 UWP APP 的流量你需要一个工具来解开 UWP APP 不能访问 Loopback 的限制，即`EnableLoopback.exe`, Clash Verge Rev 包含有该工具
