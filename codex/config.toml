@@ -1,0 +1,13 @@
+model = "gpt-5.4"
+model_reasoning_effort = "medium"
+sandbox_mode = "workspace-write"
+
+[tui]
+status_line = ["model-with-reasoning", "context-remaining", "current-dir", "project-root", "git-branch", "weekly-limit"]
+
+[windows]
+sandbox = "unelevated"
+
+[sandbox_workspace_write]
+network_access = true
+

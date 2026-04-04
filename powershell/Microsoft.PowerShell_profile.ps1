@@ -1,3 +1,7 @@
+if ($host.Name -eq 'InternalHost') {
+  # stop reading any further profiles
+  return
+}
 # =============
 # PSReadLine
 # =============
