@@ -3,11 +3,17 @@ model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"
 
 [tui]
-status_line = ["model-with-reasoning", "context-remaining", "current-dir", "project-root", "git-branch", "weekly-limit"]
+status_line = ["model-with-reasoning", "context-remaining", "current-dir", "project-root", "weekly-limit"]
 
 [windows]
 sandbox = "unelevated"
 
 [sandbox_workspace_write]
 network_access = true
+
+[projects.'\\?\C:\Users\beardad\AppData\Local\nvim']
+trust_level = "trusted"
+
+[projects.'C:\Users\beardad\.codex']
+trust_level = "trusted"
 
