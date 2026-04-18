@@ -51,43 +51,6 @@
           }
         },
         {
-          "type": "git",
-          "style": "powerline",
-          "powerline_symbol": "",
-          "foreground": "black",
-          "background": "green",
-          "background_templates": [
-            "{{ if or (.Working.Changed) (.Staging.Changed) }}lightYellow{{ end }}",
-            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}lightRed{{ end }}",
-            "{{ if gt .Ahead 0 }}lightMagenta{{ end }}",
-            "{{ if gt .Behind 0 }}lightMagenta{{ end }}"
-          ],
-          "templates": [
-            " {{ url .UpstreamIcon .UpstreamURL }}",
-            " {{ .HEAD }}",
-            "{{ if .BranchStatus }} {{ .BranchStatus }}{{ end }}",
-            "{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}",
-            "{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}",
-            "{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}"
-          ],
-          "options": {
-            "fetch_upstream_icon": true,
-            "fetch_status": true,
-            "branch_icon": "",
-            "branch_identical_icon": "≡",
-            "branch_gone_icon": "󰦎",
-            "branch_ahead_icon": "↑",
-            "branch_behind_icon": "↓",
-            "commit_icon": "",
-            "no_commits_icon": "󰂕 ",
-            "tag_icon": " ",
-            "merge_icon": " ",
-            "rebase_icon": " ",
-            "cherry_pick_icon": " ",
-            "revert_icon": " "
-          }
-        },
-        {
           "type": "rust",
           "style": "powerline",
           "powerline_symbol": "",

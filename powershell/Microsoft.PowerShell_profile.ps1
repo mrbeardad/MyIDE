@@ -304,7 +304,12 @@ function Import-VsDevShell {
 # Oh My Posh
 # =============
 # Import oh-my-posh after PSReadline to ensure transient_prompt works properly in vi mode
-oh-my-posh init pwsh --config "$HOME\Documents\PowerShell\base16_bear.omp.json" | Invoke-Expression
+$ompConfig = if ($env:TERM_PROGRAM -eq 'vscode') {
+  "$HOME\Documents\PowerShell\base16_bear_vscode.omp.json"
+} else {
+  "$HOME\Documents\PowerShell\base16_bear.omp.json"
+}
+oh-my-posh init pwsh --config $ompConfig | Invoke-Expression
 $Global:__OriginalPrompt = $function:Prompt
 function prompt {
   # Place at beginning of function to avoid oh-my-posh get the wrong last error code
