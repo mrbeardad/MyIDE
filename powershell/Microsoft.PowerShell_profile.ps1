@@ -1,5 +1,4 @@
-if ($host.Name -eq 'InternalHost') {
-  # stop reading any further profiles
+if ($host.Name -eq 'InternalHost' -or $env:CODEX_SHELL) {
   return
 }
 # =============
@@ -196,7 +195,7 @@ function Set-Proxy {
     [uri]$proxyAddress
   )
 
-  if ($proxyAddress -ne $null) {
+  if ($null -ne $proxyAddress) {
     $env:HTTP_PROXY=$proxyAddress
     $env:HTTPS_PROXY=$proxyAddress
     $env:ALL_PROXY=$proxyAddress
