@@ -1,6 +1,7 @@
-model = "gpt-5.4"
+model = "gpt-5.5"
 model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"
+personality = "pragmatic"
 
 [tui]
 status_line = ["model-with-reasoning", "context-remaining", "current-dir", "project-root", "weekly-limit"]
@@ -16,4 +17,32 @@ trust_level = "trusted"
 
 [projects.'C:\Users\beardad\.codex']
 trust_level = "trusted"
+
+[projects.'c:\users\beardad\source\electron-vite-vue']
+trust_level = "trusted"
+
+[mcp_servers.openaiDeveloperDocs]
+url = "https://developers.openai.com/mcp"
+
+[marketplaces.openai-bundled]
+last_updated = "2026-05-11T13:28:24Z"
+source_type = "local"
+source = '\\?\C:\Users\beardad\.codex\.tmp\bundled-marketplaces\openai-bundled'
+
+[marketplaces.openai-primary-runtime]
+last_updated = "2026-05-11T13:30:28Z"
+source_type = "local"
+source = '\\?\C:\Users\beardad\.cache\codex-runtimes\codex-primary-runtime\plugins\openai-primary-runtime'
+
+[plugins."browser-use@openai-bundled"]
+enabled = true
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
 
